@@ -2,6 +2,7 @@ const express = require('express');
 const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
+const { isDriveApiConfigured, uploadToGoogleDrive } = require('./googleDrive');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -44,8 +45,8 @@ function sanitizeFolderName(name) {
   return name.trim().replace(/[/\\?%*:|"<>]/g, '_');
 }
 
-function syncFileToCloudStorage({ filePath, targetClass, subject, studentName, originalName }) {
-  if (!filePath || !fs.existsSync(filePath)) return;
+async function syncFileToCloudStorage({ filePath, targetClass, subject, studentName, originalName, mimeType }) {
+  if (!filePath || !fs.existsSync(filePath)) return null;
 
   const cleanClass = sanitizeFolderName(targetClass);
   const cleanSubject = sanitizeFolderName(subject);
@@ -53,7 +54,27 @@ function syncFileToCloudStorage({ filePath, targetClass, subject, studentName, o
   const cleanOriginal = sanitizeFolderName(originalName);
 
   const formattedFileName = `${cleanStudent}_${cleanOriginal}`;
+  let driveResult = null;
 
+  // 1. Tải lên trực tiếp Google Drive qua Google Drive API (Hoạt động trên cả Render.com và Máy Mac)
+  if (isDriveApiConfigured()) {
+    try {
+      driveResult = await uploadToGoogleDrive({
+        filePath,
+        fileName: formattedFileName,
+        targetClass: cleanClass,
+        subject: cleanSubject,
+        mimeType
+      });
+      if (driveResult) {
+        console.log(`[Google Drive API] ✅ Đã lưu file "${formattedFileName}" lên Google Drive!`);
+      }
+    } catch (apiErr) {
+      console.error('[Google Drive API Lỗi]:', apiErr.message);
+    }
+  }
+
+  // 2. Đồng bộ vào ứng dụng Google Drive / OneDrive Desktop cục bộ trên máy Mac (nếu có)
   CLOUD_SYNC_ROOTS.forEach(cloud => {
     try {
       const parentDir = path.dirname(cloud.path);
@@ -71,6 +92,8 @@ function syncFileToCloudStorage({ filePath, targetClass, subject, studentName, o
       console.error(`[Cloud Sync - ${cloud.name} Lỗi]:`, err.message);
     }
   });
+
+  return driveResult;
 }
 
 // Cấu hình lưu trữ Multer
@@ -611,8 +634,9 @@ app.post('/api/assignments', upload.single('attachment'), (req, res) => {
       targetClass: cleanTargetClass,
       subject: cleanSubject,
       studentName: 'DE_BAI',
-      originalName: decodeFileName(req.file.originalname)
-    });
+      originalName: decodeFileName(req.file.originalname),
+      mimeType: req.file.mimetype
+    }).catch(e => console.error("Cloud sync assignment error:", e));
   }
 
   db.assignments.unshift(newAssignment);
@@ -734,8 +758,9 @@ app.post('/api/submissions', upload.single('submissionFile'), (req, res) => {
       targetClass: targetClassName,
       subject: targetSubjectName,
       studentName: studentDisplayName,
-      originalName: fileData.originalName
-    });
+      originalName: fileData.originalName,
+      mimeType: req.file.mimetype
+    }).catch(e => console.error("Cloud sync submission error:", e));
   }
 
   if (existingIndex >= 0) {
@@ -825,7 +850,12 @@ app.get('/api/cloud-sync-status', (req, res) => {
       isAvailable
     };
   });
-  res.json({ cloudSyncs: status });
+  res.json({ 
+    cloudSyncs: status,
+    googleDriveApi: {
+      configured: isDriveApiConfigured()
+    }
+  });
 });
 
 app.post('/api/open-cloud-folder', (req, res) => {

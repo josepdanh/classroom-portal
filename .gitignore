@@ -3,3 +3,8 @@ cloudflared
 .DS_Store
 uploads/*
 !uploads/.gitkeep
+.env
+google-credentials.json
+service-account.json
+credentials.json
+*.key.json
