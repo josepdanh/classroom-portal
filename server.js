@@ -2,6 +2,7 @@ const express = require('express');
 const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
+const os = require('os');
 const { isDriveApiConfigured, uploadToGoogleDrive, setupAndShareSubjectFolder } = require('./googleDrive');
 
 const app = express();
@@ -122,6 +123,8 @@ app.use(express.static(path.join(__dirname, 'public'), {
     res.set('Cache-Control', 'no-cache, no-store, must-revalidate');
   }
 }));
+// Cho phép truy cập và xem file tải lên trong thư mục uploads
+app.use('/uploads', express.static(UPLOAD_DIR));
 
 // Dữ liệu mẫu (Seed Data)
 const initialData = {
@@ -895,6 +898,61 @@ app.get('/api/download/:filename', (req, res) => {
   }
 
   res.download(filePath, downloadName);
+});
+
+// 8b. Xem nội dung file trực tiếp trên Web (Xem Inline / Preview)
+app.get('/api/raw-file/:filename', (req, res) => {
+  const { filename } = req.params;
+  const filePath = path.join(UPLOAD_DIR, filename);
+
+  if (!fs.existsSync(filePath)) {
+    return res.status(404).send("Tệp tin không tồn tại trên hệ thống.");
+  }
+
+  res.sendFile(filePath);
+});
+
+// 8c. Đọc nội dung file dạng văn bản / mã nguồn để hiển thị trực tiếp
+app.get('/api/file-text/:filename', (req, res) => {
+  const { filename } = req.params;
+  const filePath = path.join(UPLOAD_DIR, filename);
+
+  if (!fs.existsSync(filePath)) {
+    return res.status(404).json({ error: "Tệp tin không tồn tại." });
+  }
+
+  try {
+    const content = fs.readFileSync(filePath, 'utf8');
+    res.json({ success: true, content, size: fs.statSync(filePath).size });
+  } catch (err) {
+    res.status(500).json({ error: "Không thể đọc nội dung văn bản: " + err.message });
+  }
+});
+
+// 8d. API lấy URL công khai hỗ trợ xem trước Office & Google Docs
+app.get('/api/server-info', (req, res) => {
+  let tunnelUrl = process.env.PUBLIC_URL || '';
+  if (!tunnelUrl) {
+    try {
+      const taskLogPath = path.join(os.homedir(), '.gemini/antigravity/brain/5342ff79-e5cb-4601-9053-9b81109b3f8b/.system_generated/tasks/task-74.log');
+      if (fs.existsSync(taskLogPath)) {
+        const logContent = fs.readFileSync(taskLogPath, 'utf8');
+        const matches = logContent.match(/https:\/\/[a-zA-Z0-9.-]*\.trycloudflare\.com/g);
+        if (matches && matches.length > 0) {
+          tunnelUrl = matches[matches.length - 1];
+        }
+      }
+    } catch (e) {}
+  }
+  
+  const host = req.get('host');
+  const protocol = req.protocol;
+  const currentOrigin = `${protocol}://${host}`;
+  
+  res.json({
+    currentOrigin,
+    publicUrl: tunnelUrl || currentOrigin
+  });
 });
 
 // 9. API Trạng thái & Mở thư mục đám mây trên máy Mac

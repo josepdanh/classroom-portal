@@ -603,9 +603,14 @@
 
           <div id="single-grade-file-box" class="hidden">
             <span class="font-semibold text-slate-800">File đính kèm: </span>
-            <a id="single-grade-file" class="inline-flex items-center gap-1.5 px-3 py-1 bg-white border border-slate-300 rounded-lg text-xs font-medium text-slate-700 hover:bg-slate-100">
-              <i class="fa-solid fa-download text-indigo-500"></i> <span id="single-grade-filename"></span>
-            </a>
+            <div class="inline-flex items-center gap-2 mt-1 flex-wrap">
+              <button type="button" id="btn-single-grade-preview" class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg text-xs font-semibold shadow-sm transition">
+                <i class="fa-solid fa-eye"></i> Xem trực tiếp trên Web
+              </button>
+              <a id="single-grade-file" class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white border border-slate-300 rounded-lg text-xs font-medium text-slate-700 hover:bg-slate-100 transition">
+                <i class="fa-solid fa-download text-indigo-500"></i> <span id="single-grade-filename"></span>
+              </a>
+            </div>
           </div>
         </div>
 
@@ -665,6 +670,107 @@
     </div>
   </div>
 
+  <!-- ================= MODAL XEM TRỰC TIẾP FILE TRÊN WEB (FILE PREVIEWER) ================= -->
+  <div id="modal-file-preview" onclick="if(event.target === this) closeFilePreview()" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-md hidden items-center justify-center p-2 sm:p-4 transition-all">
+    <div class="bg-white rounded-2xl shadow-2xl w-full max-w-6xl h-[92vh] flex flex-col overflow-hidden border border-slate-200">
+      <!-- Preview Header -->
+      <div class="px-5 py-3 bg-slate-900 text-white flex items-center justify-between gap-3 shrink-0">
+        <div class="flex items-center gap-3 min-w-0">
+          <div id="preview-file-icon" class="w-10 h-10 rounded-xl bg-slate-800 text-indigo-400 flex items-center justify-center text-xl shrink-0">
+            <i class="fa-solid fa-file"></i>
+          </div>
+          <div class="min-w-0">
+            <div class="flex items-center gap-2">
+              <h3 id="preview-file-title" class="font-bold text-sm sm:text-base text-slate-100 truncate max-w-xs sm:max-w-md md:max-w-xl">Tên tệp tin</h3>
+              <span id="preview-file-size" class="px-2 py-0.5 rounded-full text-[11px] font-semibold bg-slate-800 text-slate-300 shrink-0">0 MB</span>
+            </div>
+            <p id="preview-file-subtitle" class="text-xs text-slate-400 mt-0.5">Trình xem trực tiếp trên Web (Không cần tải về)</p>
+          </div>
+        </div>
+
+        <!-- Action Controls -->
+        <div class="flex items-center gap-2 shrink-0">
+          <!-- Office Viewer Source Switcher (chỉ hiện khi xem PPTX, DOCX, XLSX) -->
+          <div id="preview-office-switcher" class="hidden items-center bg-slate-800 p-0.5 rounded-xl text-xs">
+            <button id="btn-viewer-office" type="button" onclick="switchOfficeViewer('ms')" class="px-2.5 py-1 rounded-lg font-medium transition bg-indigo-600 text-white shadow-xs">Microsoft Office</button>
+            <button id="btn-viewer-google" type="button" onclick="switchOfficeViewer('google')" class="px-2.5 py-1 rounded-lg font-medium transition text-slate-300 hover:text-white">Google Docs</button>
+          </div>
+
+          <!-- Tải xuống -->
+          <a id="btn-preview-download" href="#" class="px-3 py-1.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-semibold shadow-xs transition flex items-center gap-1.5" title="Tải file về máy">
+            <i class="fa-solid fa-download"></i> <span class="hidden sm:inline">Tải về</span>
+          </a>
+
+          <!-- Mở thẻ mới -->
+          <a id="btn-preview-newtab" href="#" target="_blank" class="p-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white text-xs transition" title="Mở trực tiếp trong thẻ mới">
+            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+          </a>
+
+          <!-- Nút Đóng -->
+          <button onclick="closeFilePreview()" class="w-8 h-8 rounded-xl bg-slate-800 hover:bg-rose-600 text-slate-300 hover:text-white transition flex items-center justify-center text-lg font-bold">
+            &times;
+          </button>
+        </div>
+      </div>
+
+      <!-- Preview Body Container -->
+      <div id="preview-container" class="flex-1 bg-slate-100 relative overflow-hidden flex items-center justify-center">
+        <!-- Loading Spinner -->
+        <div id="preview-loading" class="absolute inset-0 bg-slate-100/90 flex flex-col items-center justify-center z-10 gap-3">
+          <div class="w-10 h-10 border-4 border-indigo-200 border-t-indigo-600 rounded-full animate-spin"></div>
+          <div class="text-sm font-medium text-slate-600">Đang tải và chuẩn bị tài liệu xem trực tiếp...</div>
+        </div>
+
+        <!-- Frame Iframe Viewer (cho PDF, Office, Docs) -->
+        <iframe id="preview-iframe" class="w-full h-full border-0 hidden" onload="document.getElementById('preview-loading').classList.add('hidden')"></iframe>
+
+        <!-- Image Viewer -->
+        <div id="preview-image-box" class="w-full h-full p-4 flex items-center justify-center overflow-auto hidden bg-slate-900/40">
+          <img id="preview-image" src="" alt="Preview" class="max-w-full max-h-full object-contain rounded-xl shadow-lg">
+        </div>
+
+        <!-- Video Player -->
+        <div id="preview-video-box" class="w-full h-full p-4 flex items-center justify-center hidden bg-black">
+          <video id="preview-video" controls class="max-w-full max-h-full rounded-xl shadow-lg"></video>
+        </div>
+
+        <!-- Audio Player -->
+        <div id="preview-audio-box" class="w-full h-full p-8 flex flex-col items-center justify-center hidden bg-slate-900 text-white gap-4">
+          <div class="w-20 h-20 rounded-2xl bg-indigo-600 flex items-center justify-center text-3xl shadow-lg">
+            <i class="fa-solid fa-music"></i>
+          </div>
+          <div id="preview-audio-name" class="font-bold text-lg text-slate-200">Tên file âm thanh</div>
+          <audio id="preview-audio" controls class="w-full max-w-md"></audio>
+        </div>
+
+        <!-- Code / Text Viewer -->
+        <div id="preview-code-box" class="w-full h-full p-4 hidden flex-col overflow-hidden bg-slate-900 text-slate-100">
+          <div class="flex items-center justify-between pb-2 border-b border-slate-800 text-xs text-slate-400">
+            <span id="preview-code-lang">Mã nguồn / Văn bản</span>
+            <button onclick="copyPreviewCode()" class="px-2.5 py-1 bg-slate-800 hover:bg-slate-700 rounded-lg text-slate-300 hover:text-white transition flex items-center gap-1">
+              <i class="fa-regular fa-copy"></i> Sao chép
+            </button>
+          </div>
+          <pre class="flex-1 overflow-auto p-4 text-xs font-mono bg-slate-950/60 rounded-xl mt-2 select-text leading-relaxed"><code id="preview-code-content"></code></pre>
+        </div>
+
+        <!-- Unsupported / Fallback Box -->
+        <div id="preview-unsupported-box" class="p-8 text-center hidden flex-col items-center justify-center gap-4 max-w-md">
+          <div class="w-16 h-16 rounded-2xl bg-amber-50 text-amber-600 flex items-center justify-center text-3xl">
+            <i class="fa-solid fa-file-zipper"></i>
+          </div>
+          <div>
+            <h4 class="font-bold text-slate-800 text-base">Định dạng tệp tin nén hoặc đặc biệt</h4>
+            <p class="text-xs text-slate-500 mt-1">Trình duyệt không hỗ trợ xem trực tiếp định dạng này. Bạn có thể tải file về để mở trên máy tính.</p>
+          </div>
+          <a id="btn-unsupported-download" href="#" class="px-5 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold rounded-xl text-sm shadow-md transition flex items-center gap-2">
+            <i class="fa-solid fa-download"></i> Tải Về Mở Trên Máy
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- ================= JAVASCRIPT LOGIC ================= -->
   <script>
     let currentUser = null;
@@ -673,6 +779,228 @@
     let currentViewingAssignmentId = null;
     let teacherSelectedClass = 'ALL';
     let availableClasses = [];
+
+    // ================= XEM TRỰC TIẾP FILE TRÊN WEB (FILE PREVIEWER) =================
+    let currentPreviewState = {
+      filename: '',
+      originalName: '',
+      publicUrl: '',
+      size: 0
+    };
+
+    async function previewFile(filename, originalName, size = 0) {
+      if (!filename) return;
+
+      currentPreviewState = { filename, originalName: originalName || filename, size };
+
+      // Cập nhật tiêu đề và kích thước file
+      document.getElementById('preview-file-title').textContent = originalName || filename;
+      document.getElementById('preview-file-size').textContent = size ? formatBytes(size) : '';
+
+      const downloadUrl = `/api/download/${filename}?name=${encodeURIComponent(originalName || filename)}`;
+      const rawUrl = `/api/raw-file/${filename}`;
+
+      document.getElementById('btn-preview-download').href = downloadUrl;
+      document.getElementById('btn-preview-newtab').href = rawUrl;
+      document.getElementById('btn-unsupported-download').href = downloadUrl;
+
+      // Reset các khung hiển thị
+      hideAllPreviewContainers();
+      document.getElementById('preview-loading').classList.remove('hidden');
+      document.getElementById('preview-office-switcher').classList.add('hidden');
+
+      // Lấy URL công khai hỗ trợ xem trước Office & Google Docs
+      let publicUrl = window.location.origin;
+      try {
+        const res = await fetch('/api/server-info');
+        if (res.ok) {
+          const info = await res.json();
+          if (info.publicUrl) publicUrl = info.publicUrl;
+        }
+      } catch (e) {}
+      currentPreviewState.publicUrl = publicUrl;
+
+      const ext = (originalName || filename).split('.').pop().toLowerCase();
+      setPreviewFileIcon(ext);
+
+      // 1. Ảnh (PNG, JPG, JPEG, GIF, WEBP, SVG)
+      if (['png', 'jpg', 'jpeg', 'gif', 'webp', 'svg', 'bmp'].includes(ext)) {
+        const imgBox = document.getElementById('preview-image-box');
+        const img = document.getElementById('preview-image');
+        img.src = rawUrl;
+        img.onload = () => {
+          document.getElementById('preview-loading').classList.add('hidden');
+          imgBox.classList.remove('hidden');
+        };
+        img.onerror = () => showPreviewFallback();
+      }
+      // 2. Video (MP4, WEBM, MOV)
+      else if (['mp4', 'webm', 'ogg', 'mov'].includes(ext)) {
+        const vidBox = document.getElementById('preview-video-box');
+        const vid = document.getElementById('preview-video');
+        vid.src = rawUrl;
+        document.getElementById('preview-loading').classList.add('hidden');
+        vidBox.classList.remove('hidden');
+      }
+      // 3. Âm thanh (MP3, WAV, M4A)
+      else if (['mp3', 'wav', 'm4a', 'aac', 'ogg'].includes(ext)) {
+        const audBox = document.getElementById('preview-audio-box');
+        const aud = document.getElementById('preview-audio');
+        document.getElementById('preview-audio-name').textContent = originalName || filename;
+        aud.src = rawUrl;
+        document.getElementById('preview-loading').classList.add('hidden');
+        audBox.classList.remove('hidden');
+      }
+      // 4. File PDF (Trình xem PDF tích hợp của trình duyệt cực chuẩn)
+      else if (ext === 'pdf') {
+        const iframe = document.getElementById('preview-iframe');
+        iframe.src = rawUrl;
+        iframe.classList.remove('hidden');
+      }
+      // 5. Tài liệu Office (PowerPoint PPTX, Word DOCX, Excel XLSX)
+      else if (['pptx', 'ppt', 'docx', 'doc', 'xlsx', 'xls'].includes(ext)) {
+        document.getElementById('preview-office-switcher').classList.remove('hidden');
+        document.getElementById('preview-office-switcher').classList.add('flex');
+        switchOfficeViewer('ms'); // Mặc định mở bằng Microsoft Office Viewer
+      }
+      // 6. Mã nguồn & Văn bản (Python, C++, JS, HTML, CSS, JSON, TXT, MD...)
+      else if (['txt', 'py', 'js', 'json', 'html', 'css', 'cpp', 'c', 'h', 'java', 'sql', 'sh', 'md', 'xml', 'log'].includes(ext)) {
+        try {
+          const res = await fetch(`/api/file-text/${filename}`);
+          const data = await res.json();
+          if (res.ok && data.content !== undefined) {
+            document.getElementById('preview-code-lang').textContent = `Mã nguồn / Văn bản (.${ext})`;
+            document.getElementById('preview-code-content').textContent = data.content;
+            document.getElementById('preview-loading').classList.add('hidden');
+            document.getElementById('preview-code-box').classList.remove('hidden');
+            document.getElementById('preview-code-box').classList.add('flex');
+          } else {
+            showPreviewFallback();
+          }
+        } catch (e) {
+          showPreviewFallback();
+        }
+      }
+      // 7. Định dạng khác (ZIP, RAR...)
+      else {
+        showPreviewFallback();
+      }
+
+      document.getElementById('modal-file-preview').classList.remove('hidden');
+      document.getElementById('modal-file-preview').classList.add('flex');
+    }
+
+    function switchOfficeViewer(engine) {
+      const { filename, publicUrl } = currentPreviewState;
+      const filePublicUrl = `${publicUrl}/uploads/${filename}`;
+      const iframe = document.getElementById('preview-iframe');
+      const btnMs = document.getElementById('btn-viewer-office');
+      const btnGoogle = document.getElementById('btn-viewer-google');
+
+      document.getElementById('preview-loading').classList.remove('hidden');
+      iframe.classList.remove('hidden');
+
+      if (engine === 'ms') {
+        btnMs.className = "px-2.5 py-1 rounded-lg font-medium transition bg-indigo-600 text-white shadow-xs";
+        btnGoogle.className = "px-2.5 py-1 rounded-lg font-medium transition text-slate-300 hover:text-white";
+        iframe.src = `https://view.officeapps.live.com/op/embed.aspx?src=${encodeURIComponent(filePublicUrl)}`;
+      } else {
+        btnGoogle.className = "px-2.5 py-1 rounded-lg font-medium transition bg-indigo-600 text-white shadow-xs";
+        btnMs.className = "px-2.5 py-1 rounded-lg font-medium transition text-slate-300 hover:text-white";
+        iframe.src = `https://docs.google.com/viewer?url=${encodeURIComponent(filePublicUrl)}&embedded=true`;
+      }
+    }
+
+    function hideAllPreviewContainers() {
+      const iframe = document.getElementById('preview-iframe');
+      if (iframe) { iframe.classList.add('hidden'); iframe.src = 'about:blank'; }
+
+      const imgBox = document.getElementById('preview-image-box');
+      if (imgBox) imgBox.classList.add('hidden');
+
+      const vidBox = document.getElementById('preview-video-box');
+      const vid = document.getElementById('preview-video');
+      if (vidBox) vidBox.classList.add('hidden');
+      if (vid) { vid.pause(); vid.src = ''; }
+
+      const audBox = document.getElementById('preview-audio-box');
+      const aud = document.getElementById('preview-audio');
+      if (audBox) audBox.classList.add('hidden');
+      if (aud) { aud.pause(); aud.src = ''; }
+
+      const codeBox = document.getElementById('preview-code-box');
+      if (codeBox) { codeBox.classList.add('hidden'); codeBox.classList.remove('flex'); }
+
+      const unsupBox = document.getElementById('preview-unsupported-box');
+      if (unsupBox) { unsupBox.classList.add('hidden'); unsupBox.classList.remove('flex'); }
+    }
+
+    function showPreviewFallback() {
+      document.getElementById('preview-loading').classList.add('hidden');
+      hideAllPreviewContainers();
+      const unsupBox = document.getElementById('preview-unsupported-box');
+      if (unsupBox) {
+        unsupBox.classList.remove('hidden');
+        unsupBox.classList.add('flex');
+      }
+    }
+
+    function closeFilePreview() {
+      hideAllPreviewContainers();
+      const modal = document.getElementById('modal-file-preview');
+      if (modal) {
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+      }
+    }
+
+    function copyPreviewCode() {
+      const code = document.getElementById('preview-code-content').textContent;
+      navigator.clipboard.writeText(code).then(() => {
+        showToast("Đã sao chép nội dung vào bộ nhớ tạm!", "success");
+      });
+    }
+
+    function setPreviewFileIcon(ext) {
+      const iconElem = document.getElementById('preview-file-icon');
+      if (!iconElem) return;
+      let iconHtml = '<i class="fa-solid fa-file"></i>';
+      let color = 'text-indigo-400';
+
+      if (['pptx', 'ppt'].includes(ext)) {
+        iconHtml = '<i class="fa-solid fa-file-powerpoint"></i>';
+        color = 'text-orange-500';
+      } else if (['docx', 'doc'].includes(ext)) {
+        iconHtml = '<i class="fa-solid fa-file-word"></i>';
+        color = 'text-blue-500';
+      } else if (['xlsx', 'xls', 'csv'].includes(ext)) {
+        iconHtml = '<i class="fa-solid fa-file-excel"></i>';
+        color = 'text-emerald-500';
+      } else if (ext === 'pdf') {
+        iconHtml = '<i class="fa-solid fa-file-pdf"></i>';
+        color = 'text-rose-500';
+      } else if (['png', 'jpg', 'jpeg', 'gif', 'webp'].includes(ext)) {
+        iconHtml = '<i class="fa-solid fa-file-image"></i>';
+        color = 'text-purple-400';
+      } else if (['mp4', 'mov', 'webm'].includes(ext)) {
+        iconHtml = '<i class="fa-solid fa-file-video"></i>';
+        color = 'text-cyan-400';
+      } else if (['txt', 'py', 'js', 'json', 'html', 'css', 'cpp'].includes(ext)) {
+        iconHtml = '<i class="fa-solid fa-file-code"></i>';
+        color = 'text-amber-400';
+      } else if (['zip', 'rar', '7z'].includes(ext)) {
+        iconHtml = '<i class="fa-solid fa-file-zipper"></i>';
+        color = 'text-yellow-500';
+      }
+
+      iconElem.className = `w-10 h-10 rounded-xl bg-slate-800 ${color} flex items-center justify-center text-xl shrink-0`;
+      iconElem.innerHTML = iconHtml;
+    }
+
+    // Đóng popup xem trước khi bấm phím ESC
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeFilePreview();
+    });
 
     // ================= QUẢN LÝ PHIÊN ĐĂNG NHẬP (SESSION & REMEMBER ME) =================
     function saveSessionUser(user, remember = null) {
@@ -1369,9 +1697,14 @@
               <div class="flex items-center gap-4 text-xs text-slate-500 pt-1 flex-wrap">
                 <span><i class="fa-regular fa-clock mr-1 text-slate-400"></i>Hạn nộp: <b class="text-slate-700">${dueText}</b></span>
                 ${asm.attachment ? `
-                  <a href="/api/download/${asm.attachment.filename}?name=${encodeURIComponent(asm.attachment.originalName)}" class="text-indigo-600 hover:underline inline-flex items-center gap-1 font-medium">
-                    <i class="fa-solid fa-paperclip"></i> Đề bài: ${escapeHtml(asm.attachment.originalName)}
-                  </a>
+                  <div class="inline-flex items-center gap-2">
+                    <button type="button" onclick="previewFile('${asm.attachment.filename}', '${escapeHtml(asm.attachment.originalName)}', ${asm.attachment.size || 0})" class="text-indigo-600 hover:text-indigo-800 font-medium inline-flex items-center gap-1 hover:underline">
+                      <i class="fa-solid fa-eye"></i> Đề bài: ${escapeHtml(asm.attachment.originalName)}
+                    </button>
+                    <a href="/api/download/${asm.attachment.filename}?name=${encodeURIComponent(asm.attachment.originalName)}" class="text-slate-400 hover:text-indigo-600" title="Tải về máy">
+                      <i class="fa-solid fa-download"></i>
+                    </a>
+                  </div>
                 ` : ''}
               </div>
             </div>
@@ -1528,7 +1861,16 @@
 
             const parts = [];
             if (sub.content) parts.push(`<span class="text-slate-600 truncate block max-w-xs" title="${escapeHtml(sub.content)}">"${escapeHtml(sub.content)}"</span>`);
-            if (sub.file) parts.push(`<a href="/api/download/${sub.file.filename}?name=${encodeURIComponent(sub.file.originalName)}" class="text-indigo-600 font-medium hover:underline inline-flex items-center gap-1 text-xs"><i class="fa-solid fa-file-arrow-down"></i> ${escapeHtml(sub.file.originalName)}</a>`);
+            if (sub.file) parts.push(`
+              <div class="flex items-center gap-1.5 flex-wrap">
+                <button type="button" onclick="previewFile('${sub.file.filename}', '${escapeHtml(sub.file.originalName)}', ${sub.file.size || 0})" class="px-2 py-0.5 bg-indigo-50 hover:bg-indigo-100 text-indigo-700 font-semibold rounded-lg text-xs transition inline-flex items-center gap-1 border border-indigo-200 shadow-xs">
+                  <i class="fa-solid fa-eye"></i> Xem trực tiếp
+                </button>
+                <a href="/api/download/${sub.file.filename}?name=${encodeURIComponent(sub.file.originalName)}" class="text-slate-500 hover:text-indigo-600 font-medium hover:underline inline-flex items-center gap-1 text-xs" title="Tải về máy">
+                  <i class="fa-solid fa-download"></i> ${escapeHtml(sub.file.originalName)}
+                </a>
+              </div>
+            `);
             if (sub.link) parts.push(`<a href="${escapeHtml(sub.link)}" target="_blank" class="text-teal-600 hover:underline inline-flex items-center gap-1 text-xs"><i class="fa-solid fa-arrow-up-right-from-square"></i> Liên kết</a>`);
             
             submissionInfo = parts.join('<br>') || '<span class="text-slate-400">Không có tệp/văn bản</span>';
@@ -1581,6 +1923,10 @@
         fileBox.classList.remove('hidden');
         fileElem.href = `/api/download/${sub.file.filename}?name=${encodeURIComponent(sub.file.originalName)}`;
         fileNameElem.textContent = `${sub.file.originalName} (${formatBytes(sub.file.size)})`;
+        const btnPreview = document.getElementById('btn-single-grade-preview');
+        if (btnPreview) {
+          btnPreview.onclick = () => previewFile(sub.file.filename, sub.file.originalName, sub.file.size);
+        }
       } else {
         fileBox.classList.add('hidden');
       }
@@ -1729,10 +2075,30 @@
             </div>
 
             ${asm.attachment ? `
-              <div class="mb-4">
-                <a href="/api/download/${asm.attachment.filename}?name=${encodeURIComponent(asm.attachment.originalName)}" class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-slate-50 hover:bg-indigo-50 border border-slate-200 text-xs font-semibold text-slate-700 hover:text-indigo-600 transition">
-                  <i class="fa-solid fa-file-pdf text-rose-500"></i> Đề bài đính kèm: ${escapeHtml(asm.attachment.originalName)} (${formatBytes(asm.attachment.size)})
+              <div class="mb-4 flex items-center gap-2 flex-wrap">
+                <button type="button" onclick="previewFile('${asm.attachment.filename}', '${escapeHtml(asm.attachment.originalName)}', ${asm.attachment.size || 0})" class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-indigo-50 hover:bg-indigo-100 border border-indigo-200 text-xs font-semibold text-indigo-700 transition">
+                  <i class="fa-solid fa-eye text-indigo-500"></i> Xem đề bài: ${escapeHtml(asm.attachment.originalName)} (${formatBytes(asm.attachment.size)})
+                </button>
+                <a href="/api/download/${asm.attachment.filename}?name=${encodeURIComponent(asm.attachment.originalName)}" class="p-1.5 rounded-xl border border-slate-200 text-slate-500 hover:text-indigo-600 hover:bg-slate-50 text-xs transition" title="Tải đề bài về máy">
+                  <i class="fa-solid fa-download"></i>
                 </a>
+              </div>
+            ` : ''}
+
+            ${sub && sub.file ? `
+              <div class="mb-3 p-3 bg-slate-50 border border-slate-200 rounded-xl flex items-center justify-between gap-3 flex-wrap">
+                <div class="flex items-center gap-2 text-xs text-slate-700">
+                  <i class="fa-solid fa-file-lines text-indigo-500"></i>
+                  <span>Bài làm đã nộp: <b>${escapeHtml(sub.file.originalName)}</b> (${formatBytes(sub.file.size)})</span>
+                </div>
+                <div class="flex items-center gap-2">
+                  <button type="button" onclick="previewFile('${sub.file.filename}', '${escapeHtml(sub.file.originalName)}', ${sub.file.size || 0})" class="px-2.5 py-1 bg-indigo-50 hover:bg-indigo-100 text-indigo-700 font-semibold rounded-lg text-xs transition inline-flex items-center gap-1 border border-indigo-200">
+                    <i class="fa-solid fa-eye"></i> Xem bài nộp
+                  </button>
+                  <a href="/api/download/${sub.file.filename}?name=${encodeURIComponent(sub.file.originalName)}" class="px-2.5 py-1 bg-white hover:bg-slate-100 text-slate-600 font-semibold rounded-lg text-xs transition inline-flex items-center gap-1 border border-slate-200">
+                    <i class="fa-solid fa-download"></i> Tải về
+                  </a>
+                </div>
               </div>
             ` : ''}
 
