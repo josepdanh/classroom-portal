@@ -318,7 +318,7 @@ app.post('/api/auth/register', (req, res) => {
     dob: cleanDob,
     email: email && email.includes('@') ? email.trim().toLowerCase() : undefined,
     role: role,
-    className: role === 'student' ? (className ? className.trim().toUpperCase() : 'C08TK01') : undefined,
+    className: role === 'student' ? (className ? className.trim().toUpperCase() : 'T15MG02') : undefined,
     subject: role === 'teacher' ? (subject ? subject.trim() : 'Tin học') : undefined,
     status: userStatus,
     createdAt: new Date().toISOString()
@@ -563,7 +563,7 @@ app.post('/api/admin/users/:id/convert-to-student', (req, res) => {
   }
 
   target.role = 'student';
-  target.className = className ? className.trim().toUpperCase() : 'C08TK01';
+  target.className = className ? className.trim().toUpperCase() : 'T15MG02';
   delete target.subject;
   target.status = 'ACTIVE';
 
