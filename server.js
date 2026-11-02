@@ -2,7 +2,7 @@ const express = require('express');
 const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
-const { isDriveApiConfigured, uploadToGoogleDrive } = require('./googleDrive');
+const { isDriveApiConfigured, uploadToGoogleDrive, setupAndShareSubjectFolder } = require('./googleDrive');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -235,7 +235,7 @@ app.post('/api/auth/login', (req, res) => {
 
 // 1b. Đăng ký tài khoản mới (Giáo viên hoặc Học sinh)
 app.post('/api/auth/register', (req, res) => {
-  const { username, password, name, role, className, subject } = req.body;
+  const { username, password, name, role, className, subject, email } = req.body;
   if (!username || !password || !name || !role) {
     return res.status(400).json({ message: "Vui lòng điền đầy đủ các thông tin bắt buộc." });
   }
@@ -256,6 +256,7 @@ app.post('/api/auth/register', (req, res) => {
     username: username.trim(),
     password: password.trim(),
     name: name.trim(),
+    email: email && email.includes('@') ? email.trim().toLowerCase() : undefined,
     role: role,
     className: role === 'student' ? (className ? className.trim().toUpperCase() : 'C08TK') : undefined,
     subject: role === 'teacher' ? (subject ? subject.trim() : 'Tin học') : undefined,
@@ -325,7 +326,7 @@ app.get('/api/subjects', (req, res) => {
   res.json({ subjects });
 });
 
-app.post('/api/subjects', (req, res) => {
+app.post('/api/subjects', async (req, res) => {
   const { className, name, teacherId } = req.body;
   if (!className || !name || !name.trim() || !teacherId) {
     return res.status(400).json({ message: "Vui lòng chọn lớp, nhập tên môn học và xác nhận tài khoản giáo viên." });
@@ -351,23 +352,61 @@ app.post('/api/subjects', (req, res) => {
     return res.status(400).json({ message: `Bạn đã tạo môn "${cleanSubjectName}" cho lớp ${cleanClassName} rồi!` });
   }
 
+  // Tự động tạo thư mục và chia sẻ quyền truy cập Google Drive nếu giáo viên có email
+  let driveInfo = null;
+  if (isDriveApiConfigured() && teacher.email) {
+    try {
+      driveInfo = await setupAndShareSubjectFolder({
+        targetClass: cleanClassName,
+        subject: cleanSubjectName,
+        teacherEmail: teacher.email
+      });
+    } catch (e) {
+      console.error("[Subject Drive Setup Error]:", e.message);
+    }
+  }
+
   const newSubject = {
     id: `subj_${Date.now()}`,
     name: cleanSubjectName,
     className: cleanClassName,
     teacherId: teacher.id,
     teacherName: teacher.name,
+    teacherEmail: teacher.email || null,
+    driveFolderId: driveInfo ? driveInfo.subjectFolderId : null,
+    driveLink: driveInfo ? driveInfo.driveLink : null,
     createdAt: new Date().toISOString()
   };
 
   db.subjects.push(newSubject);
   writeDatabase(db);
 
+  let successMsg = `Đã tạo môn học "${cleanSubjectName}" cho lớp ${cleanClassName} thành công!`;
+  if (teacher.email) {
+    successMsg += ` Thư mục môn học đã được tự động cấp quyền truy cập trên Google Drive tới email: ${teacher.email}`;
+  }
+
   res.json({ 
     success: true, 
-    message: `Đã tạo môn học "${cleanSubjectName}" cho lớp ${cleanClassName} thành công!`, 
+    message: successMsg, 
     subject: newSubject 
   });
+});
+
+// Endpoint cho phép giáo viên cập nhật email Google của mình
+app.post('/api/teacher/update-email', (req, res) => {
+  const { teacherId, email } = req.body;
+  if (!teacherId || !email || !email.includes('@')) {
+    return res.status(400).json({ message: "Vui lòng nhập địa chỉ email Google hợp lệ." });
+  }
+  const db = readDatabase();
+  const teacher = db.users.find(u => u.id === teacherId && u.role === 'teacher');
+  if (!teacher) {
+    return res.status(404).json({ message: "Không tìm thấy tài khoản giáo viên." });
+  }
+  teacher.email = email.trim().toLowerCase();
+  writeDatabase(db);
+  res.json({ success: true, message: `Đã lưu email Google: ${teacher.email}`, email: teacher.email });
 });
 
 app.delete('/api/subjects/:id', (req, res) => {

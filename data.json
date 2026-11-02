@@ -8,7 +8,8 @@
       "role": "teacher",
       "subject": "Tin học",
       "isAdmin": true,
-      "status": "ACTIVE"
+      "status": "ACTIVE",
+      "email": "josepdanh@gmail.com"
     },
     {
       "id": "u_C08TK0101",
@@ -234,6 +235,25 @@
       "teacherId": "u_teacher_danh",
       "teacherName": "Thầy Nguyễn Công Danh",
       "createdAt": "2026-11-02T08:00:00.000Z"
+    },
+    {
+      "id": "subj_1793618424088",
+      "name": "Thiết Kế Đồ Họa 2D",
+      "className": "C09TK",
+      "teacherId": "u_teacher_danh",
+      "teacherName": "Thầy Nguyễn Công Danh",
+      "createdAt": "2026-11-02T11:20:24.088Z"
+    },
+    {
+      "id": "subj_1793618443229",
+      "name": "Typography",
+      "className": "T14TK01",
+      "teacherId": "u_teacher_danh",
+      "teacherName": "Thầy Nguyễn Công Danh",
+      "teacherEmail": "josepdanh@gmail.com",
+      "driveFolderId": "1xahcgOj8_Yi2X_3TI9yg8RSVbIVAaclk",
+      "driveLink": "https://drive.google.com/drive/folders/1xahcgOj8_Yi2X_3TI9yg8RSVbIVAaclk",
+      "createdAt": "2026-11-02T11:20:43.229Z"
     }
   ],
   "submissions": [

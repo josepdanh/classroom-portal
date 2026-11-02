@@ -4,9 +4,9 @@ const path = require('path');
 
 // Đường dẫn file credentials local nếu có
 const LOCAL_CREDENTIALS_FILE = path.join(__dirname, 'google-credentials.json');
+const DEFAULT_ROOT_FOLDER_ID = "1mRpNuDLrSuOR1VVG6Z-KCEi0q-HqJOji";
 
 let driveClient = null;
-let rootFolderId = process.env.GOOGLE_DRIVE_ROOT_FOLDER_ID || null;
 
 /**
  * Khởi tạo Google Drive API Client
@@ -129,7 +129,7 @@ async function uploadToGoogleDrive({ filePath, fileName, targetClass, subject, m
     const cleanSubject = (subject || 'MonHoc').trim();
 
     // 1. Thư mục gốc (nếu có ROOT_FOLDER_ID thì tạo bên trong đó, nếu không tạo ở root của Drive)
-    let parentFolderId = process.env.GOOGLE_DRIVE_ROOT_FOLDER_ID || null;
+    let parentFolderId = process.env.GOOGLE_DRIVE_ROOT_FOLDER_ID || DEFAULT_ROOT_FOLDER_ID;
 
     // 2. Tìm hoặc tạo Thư mục cha: [Tên Lớp]
     const classFolderId = await findOrCreateFolder(drive, cleanClass, parentFolderId);
@@ -169,8 +169,59 @@ async function uploadToGoogleDrive({ filePath, fileName, targetClass, subject, m
   }
 }
 
+/**
+ * Tự động tạo thư mục Môn học trong Lớp và chia sẻ quyền chỉnh sửa cho Giáo viên qua Email
+ */
+async function setupAndShareSubjectFolder({ targetClass, subject, teacherEmail }) {
+  const drive = initDriveClient();
+  if (!drive) return null;
+
+  try {
+    const cleanClass = (targetClass || 'Chung').trim();
+    const cleanSubject = (subject || 'MonHoc').trim();
+    const rootId = process.env.GOOGLE_DRIVE_ROOT_FOLDER_ID || DEFAULT_ROOT_FOLDER_ID;
+
+    // 1. Thư mục lớp bên trong EduClass_BaiTap
+    const classFolderId = await findOrCreateFolder(drive, cleanClass, rootId);
+
+    // 2. Thư mục môn bên trong Thư mục lớp
+    const subjectFolderId = await findOrCreateFolder(drive, cleanSubject, classFolderId);
+
+    // 3. Nếu giáo viên có cung cấp email Google, tự động phân quyền truy cập
+    let permissionId = null;
+    if (teacherEmail && teacherEmail.includes('@')) {
+      try {
+        const perm = await drive.permissions.create({
+          fileId: subjectFolderId,
+          sendNotificationEmail: true,
+          requestBody: {
+            role: 'writer',
+            type: 'user',
+            emailAddress: teacherEmail.trim().toLowerCase()
+          }
+        });
+        permissionId = perm.data.id;
+        console.log(`[Google Drive API] ✅ Đã tự động cấp quyền truy cập thư mục môn "${cleanSubject}" cho giáo viên: ${teacherEmail}`);
+      } catch (permErr) {
+        console.error(`[Google Drive API] Lỗi cấp quyền cho ${teacherEmail}:`, permErr.message);
+      }
+    }
+
+    return {
+      classFolderId,
+      subjectFolderId,
+      driveLink: `https://drive.google.com/drive/folders/${subjectFolderId}`,
+      permissionId
+    };
+  } catch (err) {
+    console.error('[Google Drive API] Lỗi setup và chia sẻ thư mục:', err.message);
+    return null;
+  }
+}
+
 module.exports = {
   initDriveClient,
   isDriveApiConfigured,
-  uploadToGoogleDrive
+  uploadToGoogleDrive,
+  setupAndShareSubjectFolder
 };
