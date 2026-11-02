@@ -1015,37 +1015,30 @@
 
       const cls = targetClass || (document.getElementById('create-target-class') ? document.getElementById('create-target-class').value : teacherSelectedClass);
 
-      let classSubjects = [];
+      // CHỈ LẤY CÁC MÔN HỌC DO CHÍNH GIÁO VIÊN HIỆN TẠI TẠO CHO LỚP NÀY
+      let myClassSubjects = [];
       try {
-        const res = await fetch(`/api/subjects?className=${encodeURIComponent(cls || 'ALL')}`);
+        const res = await fetch(`/api/subjects?className=${encodeURIComponent(cls || 'ALL')}&teacherId=${encodeURIComponent(currentUser.id)}`);
         const data = await res.json();
-        classSubjects = data.subjects || [];
+        myClassSubjects = data.subjects || [];
       } catch (e) {
-        classSubjects = teacherSubjectsList.filter(s => s.className.toUpperCase() === (cls || '').toUpperCase());
+        myClassSubjects = teacherSubjectsList.filter(s => s.className.toUpperCase() === (cls || '').toUpperCase() && s.teacherId === currentUser.id);
       }
 
-      if (classSubjects.length > 0) {
-        select.innerHTML = classSubjects.map(s => {
-          const isMine = s.teacherId === currentUser.id;
-          const badge = isMine ? '⭐ Môn của bạn' : (s.teacherName || 'Giáo viên');
-          return `<option value="${escapeHtml(s.name)}">${escapeHtml(s.name)} (${badge})</option>`;
+      if (myClassSubjects.length > 0) {
+        select.innerHTML = myClassSubjects.map(s => {
+          return `<option value="${escapeHtml(s.name)}">📘 ${escapeHtml(s.name)}</option>`;
         }).join('') + `<option value="__CUSTOM__">✍️ Nhập môn học khác...</option>`;
 
-        // Ưu tiên chọn môn của chính giáo viên nếu có
-        const mySub = classSubjects.find(s => s.teacherId === currentUser.id);
-        if (mySub) {
-          select.value = mySub.name;
-        } else {
-          select.selectedIndex = 0;
-        }
+        select.selectedIndex = 0;
 
-        if (hint) hint.innerHTML = `<span class="text-indigo-600 font-medium"><i class="fa-solid fa-list-check mr-1"></i>Lớp <b>${cls}</b> có <b>${classSubjects.length}</b> môn học đã tạo. Chọn môn ở trên hoặc nhập môn khác.</span>`;
+        if (hint) hint.innerHTML = `<span class="text-indigo-600 font-medium"><i class="fa-solid fa-book-bookmark mr-1"></i>Bạn có <b>${myClassSubjects.length}</b> môn học tại lớp <b>${cls}</b>.</span>`;
       } else {
         select.innerHTML = `
-          <option value="">-- Lớp này chưa có môn học nào --</option>
+          <option value="">-- Bạn chưa tạo môn nào cho lớp ${escapeHtml(cls)} --</option>
           <option value="__CUSTOM__" selected>✍️ Nhập môn học mới cho lớp...</option>
         `;
-        if (hint) hint.innerHTML = `<span class="text-amber-600"><i class="fa-solid fa-circle-info mr-1"></i>Lớp <b>${cls}</b> chưa có môn nào. Bạn hãy bấm <b>"+ Tạo môn mới"</b> hoặc chọn <b>Nhập môn học mới</b>.</span>`;
+        if (hint) hint.innerHTML = `<span class="text-amber-600"><i class="fa-solid fa-circle-info mr-1"></i>Bạn chưa tạo môn học nào ở lớp <b>${cls}</b>. Hãy bấm <b>"+ Tạo môn mới"</b> để thêm môn của bạn.</span>`;
       }
 
       handleSubjectSelectChange();
