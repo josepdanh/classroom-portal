@@ -17,7 +17,7 @@
       "password": "12345",
       "name": "C08TK0101",
       "role": "student",
-      "className": "C08TK",
+      "className": "C08TK01",
       "status": "ACTIVE"
     },
     {
@@ -26,7 +26,7 @@
       "password": "12345",
       "name": "C08TK0102",
       "role": "student",
-      "className": "C08TK",
+      "className": "C08TK01",
       "status": "ACTIVE"
     },
     {
@@ -35,7 +35,7 @@
       "password": "12345",
       "name": "C08TK0104",
       "role": "student",
-      "className": "C08TK",
+      "className": "C08TK01",
       "status": "ACTIVE"
     },
     {
@@ -44,7 +44,7 @@
       "password": "12345",
       "name": "C08TK0105",
       "role": "student",
-      "className": "C08TK",
+      "className": "C08TK01",
       "status": "ACTIVE"
     },
     {
@@ -53,7 +53,7 @@
       "password": "12345",
       "name": "C08TK0106",
       "role": "student",
-      "className": "C08TK",
+      "className": "C08TK01",
       "status": "ACTIVE"
     },
     {
@@ -62,7 +62,7 @@
       "password": "12345",
       "name": "C08TK0107",
       "role": "student",
-      "className": "C08TK",
+      "className": "C08TK01",
       "status": "ACTIVE"
     },
     {
@@ -71,7 +71,7 @@
       "password": "12345",
       "name": "C08TK0108",
       "role": "student",
-      "className": "C08TK",
+      "className": "C08TK01",
       "status": "ACTIVE"
     },
     {
@@ -80,7 +80,7 @@
       "password": "12345",
       "name": "C08TK0109",
       "role": "student",
-      "className": "C08TK",
+      "className": "C08TK01",
       "status": "ACTIVE"
     },
     {
@@ -89,7 +89,7 @@
       "password": "12345",
       "name": "C08TK0110",
       "role": "student",
-      "className": "C08TK",
+      "className": "C08TK01",
       "status": "ACTIVE"
     },
     {
@@ -98,7 +98,7 @@
       "password": "12345",
       "name": "C08TK0111",
       "role": "student",
-      "className": "C08TK",
+      "className": "C08TK01",
       "status": "ACTIVE"
     },
     {
@@ -107,7 +107,7 @@
       "password": "12345",
       "name": "C08TK0112",
       "role": "student",
-      "className": "C08TK",
+      "className": "C08TK01",
       "status": "ACTIVE"
     },
     {
@@ -116,7 +116,7 @@
       "password": "12345",
       "name": "C08TK0113",
       "role": "student",
-      "className": "C08TK",
+      "className": "C08TK01",
       "status": "ACTIVE"
     },
     {
@@ -125,7 +125,7 @@
       "password": "12345",
       "name": "C08TK0114",
       "role": "student",
-      "className": "C08TK",
+      "className": "C08TK01",
       "status": "ACTIVE"
     },
     {
@@ -134,7 +134,7 @@
       "password": "12345",
       "name": "C08TK0115",
       "role": "student",
-      "className": "C08TK",
+      "className": "C08TK01",
       "status": "ACTIVE"
     },
     {
@@ -143,7 +143,7 @@
       "password": "12345",
       "name": "C08TK0117",
       "role": "student",
-      "className": "C08TK",
+      "className": "C08TK01",
       "status": "ACTIVE"
     },
     {
@@ -152,7 +152,7 @@
       "password": "12345",
       "name": "C08TK0118",
       "role": "student",
-      "className": "C08TK",
+      "className": "C08TK01",
       "status": "ACTIVE"
     },
     {
@@ -161,7 +161,7 @@
       "password": "12345",
       "name": "C08TK0119",
       "role": "student",
-      "className": "C08TK",
+      "className": "C08TK01",
       "status": "ACTIVE"
     },
     {
@@ -170,7 +170,7 @@
       "password": "12345",
       "name": "C08TK0120",
       "role": "student",
-      "className": "C08TK",
+      "className": "C08TK01",
       "status": "ACTIVE"
     },
     {
@@ -179,7 +179,7 @@
       "password": "12345",
       "name": "C08TK0123",
       "role": "student",
-      "className": "C08TK",
+      "className": "C08TK01",
       "status": "ACTIVE"
     },
     {
@@ -188,7 +188,7 @@
       "password": "12345",
       "name": "C08TK0124",
       "role": "student",
-      "className": "C08TK",
+      "className": "C08TK01",
       "status": "ACTIVE"
     },
     {
@@ -221,17 +221,15 @@
     "L09TK01",
     "C08TK01",
     "C09TK01",
-    "C10TK01",
-    "C08TK",
-    "C09TK"
+    "C10TK01"
   ],
   "assignments": [
     {
       "id": "asm_1793609039129",
       "title": "Làm bài báo cáo về 10 nguyên lý chuyển động trong motion graphics",
       "description": "Làm file ppt",
-      "targetClass": "C08TK",
-      "subject": "Motion Graphics",
+      "targetClass": "C08TK01",
+      "subject": "Xử Lý Kỹ Xảo với After Effects",
       "dueDate": "2026-11-04T06:00",
       "createdAt": "2026-11-02T08:43:59.129Z",
       "attachment": null,
@@ -239,22 +237,6 @@
     }
   ],
   "subjects": [
-    {
-      "id": "subj_motion_graphics",
-      "name": "Motion Graphics",
-      "className": "C08TK",
-      "teacherId": "u_teacher_danh",
-      "teacherName": "Thầy Nguyễn Công Danh",
-      "createdAt": "2026-11-02T08:00:00.000Z"
-    },
-    {
-      "id": "subj_1793618424088",
-      "name": "Thiết Kế Đồ Họa 2D",
-      "className": "C09TK",
-      "teacherId": "u_teacher_danh",
-      "teacherName": "Thầy Nguyễn Công Danh",
-      "createdAt": "2026-11-02T11:20:24.088Z"
-    },
     {
       "id": "subj_1793618443229",
       "name": "Typography",
@@ -276,6 +258,17 @@
       "driveFolderId": "1fCkA0aAz260f3OXPMyofDogdWnhBJlQX",
       "driveLink": "https://drive.google.com/drive/folders/1fCkA0aAz260f3OXPMyofDogdWnhBJlQX",
       "createdAt": "2026-11-02T11:27:43.236Z"
+    },
+    {
+      "id": "subj_1793620227358",
+      "name": "Xử Lý Kỹ Xảo với After Effects",
+      "className": "C08TK01",
+      "teacherId": "u_teacher_danh",
+      "teacherName": "Thầy Nguyễn Công Danh",
+      "teacherEmail": "josepdanh@gmail.com",
+      "driveFolderId": "1w2Ys0M7e9U727IvBOEmnEWZczSJEwpRU",
+      "driveLink": "https://drive.google.com/drive/folders/1w2Ys0M7e9U727IvBOEmnEWZczSJEwpRU",
+      "createdAt": "2026-11-02T11:50:27.358Z"
     }
   ],
   "submissions": [

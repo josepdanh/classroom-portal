@@ -139,11 +139,9 @@
               <option value="T15TK01">Lớp T15TK01</option>
               <option value="T15TK02">Lớp T15TK02</option>
               <option value="L09TK01">Lớp L09TK01</option>
-              <option value="C08TK01">Lớp C08TK01</option>
+              <option value="C08TK01" selected>Lớp C08TK01</option>
               <option value="C09TK01">Lớp C09TK01</option>
               <option value="C10TK01">Lớp C10TK01</option>
-              <option value="C08TK" selected>Lớp C08TK</option>
-              <option value="C09TK">Lớp C09TK</option>
             </select>
           </div>
 
@@ -323,7 +321,7 @@
         <div class="flex items-center gap-2 flex-wrap">
           <div class="bg-white/15 backdrop-blur-sm px-3.5 py-2 rounded-xl text-xs sm:text-sm flex items-center gap-2 border border-white/20">
             <i class="fa-solid fa-users text-emerald-200"></i>
-            <span>Lớp: <b id="student-current-class-badge" class="font-bold underline">C08TK</b></span>
+            <span>Lớp: <b id="student-current-class-badge" class="font-bold underline">C08TK01</b></span>
           </div>
           <button onclick="promptChangeStudentClass()" class="px-3.5 py-2 bg-white text-teal-800 hover:bg-teal-50 font-semibold rounded-xl text-xs transition shadow-sm flex items-center gap-1.5">
             <i class="fa-solid fa-arrows-rotate"></i> Chọn / Đổi Lớp Khác
@@ -954,9 +952,9 @@
       } else {
         document.getElementById('view-teacher').classList.add('hidden');
         document.getElementById('view-student').classList.remove('hidden');
-        document.getElementById('student-welcome-text').textContent = `Lớp ${currentUser.className || 'C08TK'} - Chúc bạn hoàn thành bài tập thật tốt!`;
+        document.getElementById('student-welcome-text').textContent = `Lớp ${currentUser.className || 'C08TK01'} - Chúc bạn hoàn thành bài tập thật tốt!`;
         const classBadge = document.getElementById('student-current-class-badge');
-        if (classBadge) classBadge.textContent = currentUser.className || 'C08TK';
+        if (classBadge) classBadge.textContent = currentUser.className || 'C08TK01';
         loadClasses();
         loadStudentData();
       }
@@ -1004,7 +1002,7 @@
       if (selectCreate) {
         let html = `<option value="ALL">-- Tất cả các lớp (Toàn trường) --</option>`;
         availableClasses.forEach(cls => {
-          const isSelected = (teacherSelectedClass === cls || cls === 'C08TK') ? 'selected' : '';
+          const isSelected = (teacherSelectedClass === cls || cls === 'C08TK01') ? 'selected' : '';
           html += `<option value="${cls}" ${isSelected}>Lớp ${escapeHtml(cls)}</option>`;
         });
         selectCreate.innerHTML = html;
@@ -1013,10 +1011,10 @@
       // 2. Dropdown cho Học sinh chọn lớp khi đăng ký
       const selectReg = document.getElementById('reg-class');
       if (selectReg && availableClasses.length > 0) {
-        const curVal = selectReg.value || 'C08TK';
+        const curVal = selectReg.value || 'C08TK01';
         let html = '';
         availableClasses.forEach(cls => {
-          const isSel = (cls === curVal || cls === 'C08TK') ? 'selected' : '';
+          const isSel = (cls === curVal || cls === 'C08TK01') ? 'selected' : '';
           html += `<option value="${cls}" ${isSel}>Lớp ${escapeHtml(cls)}</option>`;
         });
         selectReg.innerHTML = html;
@@ -1027,7 +1025,7 @@
       if (selectSubjClass && availableClasses.length > 0) {
         let html = '';
         availableClasses.forEach(cls => {
-          const isSel = (teacherSelectedClass === cls || cls === 'C08TK') ? 'selected' : '';
+          const isSel = (teacherSelectedClass === cls || cls === 'C08TK01') ? 'selected' : '';
           html += `<option value="${cls}" ${isSel}>Lớp ${escapeHtml(cls)}</option>`;
         });
         selectSubjClass.innerHTML = html;
@@ -1215,7 +1213,7 @@
     // Học sinh tự đổi hoặc chọn lớp học
     async function promptChangeStudentClass() {
       if (!currentUser || currentUser.role !== 'student') return;
-      const current = currentUser.className || 'C08TK';
+      const current = currentUser.className || 'C08TK01';
       
       const classListText = availableClasses.join(', ');
       const chosen = prompt(
@@ -2064,7 +2062,7 @@
     }
 
     async function adminConvertToStudent(userId, userName) {
-      const targetClass = prompt(`Chuyển tài khoản "${userName}" thành Học sinh. Vui lòng nhập tên lớp học:`, "C08TK");
+      const targetClass = prompt(`Chuyển tài khoản "${userName}" thành Học sinh. Vui lòng nhập tên lớp học:`, "C08TK01");
       if (targetClass === null) return;
 
       try {
