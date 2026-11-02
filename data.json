@@ -6,7 +6,9 @@
       "password": "12345679",
       "name": "Thầy Nguyễn Công Danh",
       "role": "teacher",
-      "subject": "Tin học"
+      "subject": "Tin học",
+      "isAdmin": true,
+      "status": "ACTIVE"
     },
     {
       "id": "u_C08TK0101",
@@ -14,7 +16,8 @@
       "password": "12345",
       "name": "C08TK0101",
       "role": "student",
-      "className": "C08TK"
+      "className": "C08TK",
+      "status": "ACTIVE"
     },
     {
       "id": "u_C08TK0102",
@@ -22,7 +25,8 @@
       "password": "12345",
       "name": "C08TK0102",
       "role": "student",
-      "className": "C08TK"
+      "className": "C08TK",
+      "status": "ACTIVE"
     },
     {
       "id": "u_C08TK0104",
@@ -30,7 +34,8 @@
       "password": "12345",
       "name": "C08TK0104",
       "role": "student",
-      "className": "C08TK"
+      "className": "C08TK",
+      "status": "ACTIVE"
     },
     {
       "id": "u_C08TK0105",
@@ -38,7 +43,8 @@
       "password": "12345",
       "name": "C08TK0105",
       "role": "student",
-      "className": "C08TK"
+      "className": "C08TK",
+      "status": "ACTIVE"
     },
     {
       "id": "u_C08TK0106",
@@ -46,7 +52,8 @@
       "password": "12345",
       "name": "C08TK0106",
       "role": "student",
-      "className": "C08TK"
+      "className": "C08TK",
+      "status": "ACTIVE"
     },
     {
       "id": "u_C08TK0107",
@@ -54,7 +61,8 @@
       "password": "12345",
       "name": "C08TK0107",
       "role": "student",
-      "className": "C08TK"
+      "className": "C08TK",
+      "status": "ACTIVE"
     },
     {
       "id": "u_C08TK0108",
@@ -62,7 +70,8 @@
       "password": "12345",
       "name": "C08TK0108",
       "role": "student",
-      "className": "C08TK"
+      "className": "C08TK",
+      "status": "ACTIVE"
     },
     {
       "id": "u_C08TK0109",
@@ -70,7 +79,8 @@
       "password": "12345",
       "name": "C08TK0109",
       "role": "student",
-      "className": "C08TK"
+      "className": "C08TK",
+      "status": "ACTIVE"
     },
     {
       "id": "u_C08TK0110",
@@ -78,7 +88,8 @@
       "password": "12345",
       "name": "C08TK0110",
       "role": "student",
-      "className": "C08TK"
+      "className": "C08TK",
+      "status": "ACTIVE"
     },
     {
       "id": "u_C08TK0111",
@@ -86,7 +97,8 @@
       "password": "12345",
       "name": "C08TK0111",
       "role": "student",
-      "className": "C08TK"
+      "className": "C08TK",
+      "status": "ACTIVE"
     },
     {
       "id": "u_C08TK0112",
@@ -94,7 +106,8 @@
       "password": "12345",
       "name": "C08TK0112",
       "role": "student",
-      "className": "C08TK"
+      "className": "C08TK",
+      "status": "ACTIVE"
     },
     {
       "id": "u_C08TK0113",
@@ -102,7 +115,8 @@
       "password": "12345",
       "name": "C08TK0113",
       "role": "student",
-      "className": "C08TK"
+      "className": "C08TK",
+      "status": "ACTIVE"
     },
     {
       "id": "u_C08TK0114",
@@ -110,7 +124,8 @@
       "password": "12345",
       "name": "C08TK0114",
       "role": "student",
-      "className": "C08TK"
+      "className": "C08TK",
+      "status": "ACTIVE"
     },
     {
       "id": "u_C08TK0115",
@@ -118,7 +133,8 @@
       "password": "12345",
       "name": "C08TK0115",
       "role": "student",
-      "className": "C08TK"
+      "className": "C08TK",
+      "status": "ACTIVE"
     },
     {
       "id": "u_C08TK0117",
@@ -126,7 +142,8 @@
       "password": "12345",
       "name": "C08TK0117",
       "role": "student",
-      "className": "C08TK"
+      "className": "C08TK",
+      "status": "ACTIVE"
     },
     {
       "id": "u_C08TK0118",
@@ -134,7 +151,8 @@
       "password": "12345",
       "name": "C08TK0118",
       "role": "student",
-      "className": "C08TK"
+      "className": "C08TK",
+      "status": "ACTIVE"
     },
     {
       "id": "u_C08TK0119",
@@ -142,7 +160,8 @@
       "password": "12345",
       "name": "C08TK0119",
       "role": "student",
-      "className": "C08TK"
+      "className": "C08TK",
+      "status": "ACTIVE"
     },
     {
       "id": "u_C08TK0120",
@@ -150,7 +169,8 @@
       "password": "12345",
       "name": "C08TK0120",
       "role": "student",
-      "className": "C08TK"
+      "className": "C08TK",
+      "status": "ACTIVE"
     },
     {
       "id": "u_C08TK0123",
@@ -158,7 +178,8 @@
       "password": "12345",
       "name": "C08TK0123",
       "role": "student",
-      "className": "C08TK"
+      "className": "C08TK",
+      "status": "ACTIVE"
     },
     {
       "id": "u_C08TK0124",
@@ -166,7 +187,8 @@
       "password": "12345",
       "name": "C08TK0124",
       "role": "student",
-      "className": "C08TK"
+      "className": "C08TK",
+      "status": "ACTIVE"
     }
   ],
   "classes": [

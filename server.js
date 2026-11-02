@@ -124,6 +124,13 @@ app.post('/api/auth/login', (req, res) => {
     return res.status(401).json({ message: "Tài khoản hoặc mật khẩu không chính xác." });
   }
 
+  // KIỂM TRA TRẠNG THÁI DUYỆT TÀI KHOẢN TỪ ADMIN
+  if (user.status === 'PENDING') {
+    return res.status(403).json({ 
+      message: "Tài khoản của bạn đang ở trạng thái CHỜ PHÊ DUYỆT từ Quản trị viên (Thầy Nguyễn Công Danh). Vui lòng liên hệ thầy hoặc quay lại sau!" 
+    });
+  }
+
   const { password: _, ...userInfo } = user;
   return res.json({ success: true, user: userInfo });
 });
@@ -141,21 +148,32 @@ app.post('/api/auth/register', (req, res) => {
     return res.status(400).json({ message: "Tên đăng nhập này đã tồn tại, vui lòng chọn tên khác." });
   }
 
+  // BẢO VỆ CHỐNG HỌC SINH MẠO DANH GIÁO VIÊN:
+  // Nếu đăng ký vai trò Giáo viên -> BẮT BUỘC trạng thái PENDING chờ Thầy Nguyễn Công Danh phê duyệt!
+  const isTeacher = (role === 'teacher');
+  const userStatus = isTeacher ? 'PENDING' : 'ACTIVE';
+
   const newUser = {
     id: `u_${role}_${Date.now()}`,
     username: username.trim(),
     password: password.trim(),
     name: name.trim(),
     role: role,
-    className: role === 'student' ? (className ? className.trim() : '11A1') : undefined,
-    subject: role === 'teacher' ? (subject ? subject.trim() : 'Tin học') : undefined
+    className: role === 'student' ? (className ? className.trim().toUpperCase() : 'C08TK') : undefined,
+    subject: role === 'teacher' ? (subject ? subject.trim() : 'Tin học') : undefined,
+    status: userStatus,
+    createdAt: new Date().toISOString()
   };
 
   db.users.push(newUser);
   writeDatabase(db);
 
   const { password: _, ...userInfo } = newUser;
-  return res.json({ success: true, message: "Đăng ký tài khoản thành công!", user: userInfo });
+  const msg = isTeacher
+    ? "Đăng ký thành công! Vì bạn chọn vai trò Giáo viên, tài khoản đang CHỜ THẦY NGUYỄN CÔNG DANH PHÊ DUYỆT trước khi có thể đăng nhập."
+    : "Đăng ký tài khoản Học sinh thành công!";
+
+  return res.json({ success: true, pendingApproval: isTeacher, message: msg, user: isTeacher ? null : userInfo });
 });
 
 // 1c. Quản lý danh mục Lớp học
@@ -182,6 +200,86 @@ app.post('/api/classes', (req, res) => {
     writeDatabase(db);
   }
   res.json({ success: true, message: `Đã tạo lớp ${cleanName} thành công!`, className: cleanName });
+});
+
+// 1d. Quản trị viên (Thầy Nguyễn Công Danh) duyệt người dùng
+app.get('/api/admin/users', (req, res) => {
+  const { adminId } = req.query;
+  const db = readDatabase();
+
+  const admin = db.users.find(u => u.id === adminId && u.isAdmin);
+  if (!admin) {
+    return res.status(403).json({ message: "Chỉ Quản trị viên mới có quyền xem danh sách này." });
+  }
+
+  const sanitizedUsers = db.users.map(({ password: _, ...u }) => u);
+  res.json({ users: sanitizedUsers });
+});
+
+// Quản trị viên phê duyệt tài khoản Giáo viên
+app.post('/api/admin/users/:id/approve', (req, res) => {
+  const { id } = req.params;
+  const { adminId } = req.body;
+  const db = readDatabase();
+
+  const admin = db.users.find(u => u.id === adminId && u.isAdmin);
+  if (!admin) {
+    return res.status(403).json({ message: "Chỉ Quản trị viên mới có quyền duyệt tài khoản." });
+  }
+
+  const target = db.users.find(u => u.id === id);
+  if (!target) {
+    return res.status(404).json({ message: "Không tìm thấy người dùng." });
+  }
+
+  target.status = 'ACTIVE';
+  writeDatabase(db);
+  res.json({ success: true, message: `Đã phê duyệt tài khoản ${target.name} (${target.username}) thành công!` });
+});
+
+// Quản trị viên chuyển tài khoản mạo danh giáo viên về vai trò Học sinh
+app.post('/api/admin/users/:id/convert-to-student', (req, res) => {
+  const { id } = req.params;
+  const { adminId, className } = req.body;
+  const db = readDatabase();
+
+  const admin = db.users.find(u => u.id === adminId && u.isAdmin);
+  if (!admin) {
+    return res.status(403).json({ message: "Chỉ Quản trị viên mới có quyền thao tác." });
+  }
+
+  const target = db.users.find(u => u.id === id);
+  if (!target) {
+    return res.status(404).json({ message: "Không tìm thấy người dùng." });
+  }
+
+  target.role = 'student';
+  target.className = className ? className.trim().toUpperCase() : 'C08TK';
+  delete target.subject;
+  target.status = 'ACTIVE';
+
+  writeDatabase(db);
+  res.json({ success: true, message: `Đã chuyển tài khoản ${target.name} thành Học sinh lớp ${target.className} và kích hoạt thành công!` });
+});
+
+// Quản trị viên xóa tài khoản
+app.delete('/api/admin/users/:id', (req, res) => {
+  const { id } = req.params;
+  const { adminId } = req.query;
+  const db = readDatabase();
+
+  const admin = db.users.find(u => u.id === adminId && u.isAdmin);
+  if (!admin) {
+    return res.status(403).json({ message: "Chỉ Quản trị viên mới có quyền xóa tài khoản." });
+  }
+
+  if (id === adminId) {
+    return res.status(400).json({ message: "Bạn không thể tự xóa tài khoản Quản trị viên của mình." });
+  }
+
+  db.users = db.users.filter(u => u.id !== id);
+  writeDatabase(db);
+  res.json({ success: true, message: "Đã xóa tài khoản thành công." });
 });
 
 // 2. Lấy danh sách bài tập (Phân tách độc lập theo từng Giáo viên và từng Lớp học)
