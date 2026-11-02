@@ -185,6 +185,35 @@ function writeDatabase(data) {
 // Khởi tạo DB khi bắt đầu
 readDatabase();
 
+// Chuẩn hóa viết hoa chữ cái đầu cho mỗi từ của Họ và Tên (Tiếng Việt)
+function capitalizeWords(str) {
+  if (!str) return "";
+  return str
+    .trim()
+    .split(/\s+/)
+    .map(word => {
+      // Giữ nguyên các mã như C08TK01, T15MG02 hoặc từ viết tắt
+      if (/^[A-Z0-9_]+$/i.test(word) && /\d/.test(word)) return word.toUpperCase();
+      return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+    })
+    .join(" ");
+}
+
+// Chuẩn hóa ngày sinh thành dạng DD/MM/YYYY
+function formatDob(str) {
+  if (!str) return "";
+  str = str.trim();
+  const ymdMatch = str.match(/^(\d{4})[-/.](\d{1,2})[-/.](\d{1,2})$/);
+  if (ymdMatch) {
+    return `${ymdMatch[3].padStart(2, "0")}/${ymdMatch[2].padStart(2, "0")}/${ymdMatch[1]}`;
+  }
+  const dmyMatch = str.match(/^(\d{1,2})[-/.](\d{1,2})[-/.](\d{4})$/);
+  if (dmyMatch) {
+    return `${dmyMatch[1].padStart(2, "0")}/${dmyMatch[2].padStart(2, "0")}/${dmyMatch[3]}`;
+  }
+  return str;
+}
+
 // ================= API ENDPOINTS =================
 
 // 1. Đăng nhập (Không phân biệt chữ hoa, chữ thường cho tên tài khoản)
@@ -278,12 +307,15 @@ app.post('/api/auth/register', (req, res) => {
   const isTeacher = (role === 'teacher');
   const userStatus = isTeacher ? 'PENDING' : 'ACTIVE';
 
+  const cleanName = capitalizeWords(name);
+  const cleanDob = role === 'student' ? (formatDob(dob) || undefined) : undefined;
+
   const newUser = {
     id: `u_${role}_${Date.now()}`,
     username: username.trim(),
     password: password.trim(),
-    name: name.trim(),
-    dob: role === 'student' ? (dob ? dob.trim() : undefined) : undefined,
+    name: cleanName,
+    dob: cleanDob,
     email: email && email.includes('@') ? email.trim().toLowerCase() : undefined,
     role: role,
     className: role === 'student' ? (className ? className.trim().toUpperCase() : 'C08TK01') : undefined,
@@ -1054,8 +1086,8 @@ app.get('/api/grade-sheets/sheet', (req, res) => {
       tt: idx + 1,
       studentId: s.id,
       studentCode: s.username,
-      name: s.name,
-      dob: s.dob || "",
+      name: capitalizeWords(s.name),
+      dob: formatDob(s.dob || ""),
       hs1: null,
       hs2_1: null,
       hs2_2: null,
@@ -1100,8 +1132,8 @@ app.get('/api/grade-sheets/sheet', (req, res) => {
           tt: sheet.records.length + 1,
           studentId: st.id,
           studentCode: st.username,
-          name: st.name,
-          dob: st.dob || "",
+          name: capitalizeWords(st.name),
+          dob: formatDob(st.dob || ""),
           hs1: null,
           hs2_1: null,
           hs2_2: null,
@@ -1110,11 +1142,17 @@ app.get('/api/grade-sheets/sheet', (req, res) => {
           note: ""
         });
       } else {
-        // Cập nhật thông tin đồng bộ nếu user đã đổi tên hoặc ngày sinh
-        if (st.name && !rec.name) rec.name = st.name;
-        if (st.dob && !rec.dob) rec.dob = st.dob;
+        // Cập nhật thông tin đồng bộ nếu user đã đổi tên hoặc ngày sinh (luôn viết hoa chữ cái đầu và chuẩn hóa ngày sinh)
+        rec.name = capitalizeWords(st.name || rec.name || '');
+        rec.dob = formatDob(st.dob || rec.dob || '');
         if (!rec.studentId) rec.studentId = st.id;
       }
+    });
+
+    // Chuẩn hóa tên và ngày sinh cho toàn bộ records
+    sheet.records.forEach(r => {
+      if (r.name) r.name = capitalizeWords(r.name);
+      if (r.dob) r.dob = formatDob(r.dob);
     });
 
     // Sắp xếp lại records theo studentCode hoặc TT
@@ -1150,11 +1188,13 @@ app.post('/api/grade-sheets/save', (req, res) => {
 
   // Cập nhật ngày sinh và họ tên ngược lại vào danh sách users nếu giáo viên có sửa trên form
   sheet.records.forEach(r => {
+    if (r.name) r.name = capitalizeWords(r.name);
+    if (r.dob) r.dob = formatDob(r.dob);
     if (r.studentCode) {
       const u = db.users.find(user => user.username === r.studentCode);
       if (u) {
         if (r.dob) u.dob = r.dob;
-        if (r.name && r.name !== u.name) u.name = r.name;
+        if (r.name) u.name = r.name;
       }
     }
   });
@@ -1194,10 +1234,13 @@ app.post('/api/grade-sheets/cell', (req, res) => {
   }
 
   if (field === 'note' || field === 'dob' || field === 'name') {
-    record[field] = value ? String(value).trim() : '';
+    let cleanVal = value ? String(value).trim() : '';
+    if (field === 'name') cleanVal = capitalizeWords(cleanVal);
+    if (field === 'dob') cleanVal = formatDob(cleanVal);
+    record[field] = cleanVal;
     if (field === 'dob' || field === 'name') {
       const u = db.users.find(user => user.username === studentCode);
-      if (u) u[field] = record[field];
+      if (u) u[field] = cleanVal;
     }
   } else {
     // Điểm số hs1, hs2_1, hs2_2, hs2_3, hs2_4
