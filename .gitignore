@@ -1,3 +1,5 @@
 node_modules/
 cloudflared
 .DS_Store
+uploads/*
+!uploads/.gitkeep

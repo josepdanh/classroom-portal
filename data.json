@@ -238,14 +238,18 @@
   ],
   "submissions": [
     {
-      "id": "sub_1793611560000",
+      "id": "sub_1793615180091",
       "assignmentId": "asm_1793609039129",
-      "studentId": "u_C08TK0101",
-      "studentName": "C08TK0101",
-      "content": "Bài báo cáo về 10 nguyên lý chuyển động trong motion graphics (Đã nộp lúc 16:26)",
+      "studentId": "u_C08TK0105",
+      "studentName": "C08TK0105",
+      "content": "",
       "link": "",
-      "file": null,
-      "submittedAt": "2026-11-02T09:26:00.000Z",
+      "file": {
+        "filename": "1793615179843_C08TK0105_NguyenDucHieu.pptx",
+        "originalName": "C08TK0105_NguyenDucHieu.pptx",
+        "size": 1266912
+      },
+      "submittedAt": "2026-11-02T10:26:20.091Z",
       "grade": null,
       "feedback": null,
       "gradedAt": null

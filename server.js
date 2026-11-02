@@ -24,6 +24,55 @@ function decodeFileName(name) {
   }
 }
 
+// Cấu hình đồng bộ tự động lên Đám mây (Google Drive / OneDrive)
+// Mỗi bài nộp sẽ lưu vào Thư mục cha: [Tên Lớp] -> Thư mục con: [Tên Môn Học]
+const CLOUD_SYNC_ROOTS = [
+  {
+    provider: "gdrive",
+    name: "Google Drive",
+    path: "/Users/Danh/Library/CloudStorage/GoogleDrive-josepdanh@gmail.com/Drive của tôi/EduClass_BaiTap"
+  },
+  {
+    provider: "onedrive",
+    name: "OneDrive",
+    path: "/Users/Danh/Library/CloudStorage/OneDrive-Personal/EduClass_BaiTap"
+  }
+];
+
+function sanitizeFolderName(name) {
+  if (!name) return 'Chung';
+  return name.trim().replace(/[/\\?%*:|"<>]/g, '_');
+}
+
+function syncFileToCloudStorage({ filePath, targetClass, subject, studentName, originalName }) {
+  if (!filePath || !fs.existsSync(filePath)) return;
+
+  const cleanClass = sanitizeFolderName(targetClass);
+  const cleanSubject = sanitizeFolderName(subject);
+  const cleanStudent = sanitizeFolderName(studentName);
+  const cleanOriginal = sanitizeFolderName(originalName);
+
+  const formattedFileName = `${cleanStudent}_${cleanOriginal}`;
+
+  CLOUD_SYNC_ROOTS.forEach(cloud => {
+    try {
+      const parentDir = path.dirname(cloud.path);
+      if (fs.existsSync(parentDir)) {
+        // Thư mục cha: Tên Lớp | Thư mục con: Môn Học
+        const destFolder = path.join(cloud.path, cleanClass, cleanSubject);
+        if (!fs.existsSync(destFolder)) {
+          fs.mkdirSync(destFolder, { recursive: true });
+        }
+        const destFilePath = path.join(destFolder, formattedFileName);
+        fs.copyFileSync(filePath, destFilePath);
+        console.log(`[Cloud Sync - ${cloud.name}] Đã đồng bộ bài tập vào: ${destFilePath}`);
+      }
+    } catch (err) {
+      console.error(`[Cloud Sync - ${cloud.name} Lỗi]:`, err.message);
+    }
+  });
+}
+
 // Cấu hình lưu trữ Multer
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -555,6 +604,17 @@ app.post('/api/assignments', upload.single('attachment'), (req, res) => {
     createdBy: teacherId || "u_teacher_danh"
   };
 
+  // Đồng bộ đề bài lên Google Drive / OneDrive
+  if (req.file) {
+    syncFileToCloudStorage({
+      filePath: req.file.path,
+      targetClass: cleanTargetClass,
+      subject: cleanSubject,
+      studentName: 'DE_BAI',
+      originalName: decodeFileName(req.file.originalname)
+    });
+  }
+
   db.assignments.unshift(newAssignment);
   writeDatabase(db);
 
@@ -662,6 +722,20 @@ app.post('/api/submissions', upload.single('submissionFile'), (req, res) => {
       originalName: decodeFileName(req.file.originalname),
       size: req.file.size
     };
+
+    // Tự động phân loại và đồng bộ lên Google Drive & OneDrive
+    // Thư mục cha: [Tên Lớp] -> Thư mục con: [Tên Môn Học]
+    const targetClassName = assignment.targetClass || (student && student.className ? student.className : 'Chung');
+    const targetSubjectName = assignment.subject || 'MonHoc';
+    const studentDisplayName = student ? (student.username || student.name) : (studentName || 'HocSinh');
+
+    syncFileToCloudStorage({
+      filePath: req.file.path,
+      targetClass: targetClassName,
+      subject: targetSubjectName,
+      studentName: studentDisplayName,
+      originalName: fileData.originalName
+    });
   }
 
   if (existingIndex >= 0) {
@@ -737,6 +811,42 @@ app.get('/api/download/:filename', (req, res) => {
   }
 
   res.download(filePath, downloadName);
+});
+
+// 9. API Trạng thái & Mở thư mục đám mây trên máy Mac
+app.get('/api/cloud-sync-status', (req, res) => {
+  const status = CLOUD_SYNC_ROOTS.map(cloud => {
+    const parentDir = path.dirname(cloud.path);
+    const isAvailable = fs.existsSync(parentDir);
+    return {
+      provider: cloud.provider,
+      name: cloud.name,
+      path: cloud.path,
+      isAvailable
+    };
+  });
+  res.json({ cloudSyncs: status });
+});
+
+app.post('/api/open-cloud-folder', (req, res) => {
+  const { provider } = req.body; // 'gdrive' | 'onedrive'
+  const { exec } = require('child_process');
+
+  const selected = CLOUD_SYNC_ROOTS.find(c => c.provider === provider) || CLOUD_SYNC_ROOTS[0];
+  const targetPath = selected.path;
+
+  if (!fs.existsSync(targetPath)) {
+    try {
+      fs.mkdirSync(targetPath, { recursive: true });
+    } catch (e) {}
+  }
+
+  if (fs.existsSync(targetPath)) {
+    exec(`open "${targetPath}"`);
+    return res.json({ success: true, message: `Đã mở thư mục ${selected.name} trên Finder máy Mac!` });
+  } else {
+    return res.status(404).json({ success: false, message: `Chưa tìm thấy thư mục ${selected.name} trên máy Mac.` });
+  }
 });
 
 // Khởi động server (Lắng nghe trên toàn bộ địa chỉ 0.0.0.0 để máy khác trong mạng truy cập được)
