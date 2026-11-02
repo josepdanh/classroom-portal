@@ -202,6 +202,23 @@ app.post('/api/classes', (req, res) => {
   res.json({ success: true, message: `Đã tạo lớp ${cleanName} thành công!`, className: cleanName });
 });
 
+// Cho phép học sinh đổi / chọn lớp học
+app.post('/api/students/update-class', (req, res) => {
+  const { studentId, newClass } = req.body;
+  if (!studentId || !newClass) {
+    return res.status(400).json({ message: "Thiếu thông tin học sinh hoặc lớp học." });
+  }
+  const db = readDatabase();
+  const student = db.users.find(u => u.id === studentId && u.role === 'student');
+  if (!student) {
+    return res.status(404).json({ message: "Không tìm thấy học sinh." });
+  }
+  student.className = newClass.trim().toUpperCase();
+  writeDatabase(db);
+  const { password: _, ...userInfo } = student;
+  res.json({ success: true, message: `Đã đổi sang lớp ${student.className} thành công!`, user: userInfo });
+});
+
 // 1d. Quản trị viên (Thầy Nguyễn Công Danh) duyệt người dùng
 app.get('/api/admin/users', (req, res) => {
   const { adminId } = req.query;

@@ -189,9 +189,27 @@
       "role": "student",
       "className": "C08TK",
       "status": "ACTIVE"
+    },
+    {
+      "id": "u_teacher_1793611881299",
+      "username": "Nguyenvana",
+      "password": "123556",
+      "name": "Nguyễn văn A",
+      "role": "teacher",
+      "subject": "Tin học",
+      "status": "ACTIVE",
+      "createdAt": "2026-11-02T09:31:21.299Z"
     }
   ],
   "classes": [
+    "T14TK01",
+    "T14TK02",
+    "T15TK01",
+    "T15TK02",
+    "L09TK01",
+    "C08TK01",
+    "C09TK01",
+    "C10TK01",
     "C08TK",
     "C09TK"
   ],

@@ -119,8 +119,19 @@
           </div>
 
           <div id="box-reg-class">
-            <label class="block text-sm font-medium text-slate-700 mb-1">Lớp học</label>
-            <input type="text" id="reg-class" value="C08TK" class="w-full px-3.5 py-2 rounded-xl border border-slate-300 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none text-sm" placeholder="Ví dụ: C08TK">
+            <label class="block text-sm font-medium text-slate-700 mb-1">Chọn Lớp học <span class="text-red-500">*</span></label>
+            <select id="reg-class" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none text-sm bg-white font-medium text-slate-800">
+              <option value="T14TK01">Lớp T14TK01</option>
+              <option value="T14TK02">Lớp T14TK02</option>
+              <option value="T15TK01">Lớp T15TK01</option>
+              <option value="T15TK02">Lớp T15TK02</option>
+              <option value="L09TK01">Lớp L09TK01</option>
+              <option value="C08TK01">Lớp C08TK01</option>
+              <option value="C09TK01">Lớp C09TK01</option>
+              <option value="C10TK01">Lớp C10TK01</option>
+              <option value="C08TK" selected>Lớp C08TK</option>
+              <option value="C09TK">Lớp C09TK</option>
+            </select>
           </div>
 
           <div id="box-reg-subject" class="hidden">
@@ -232,6 +243,15 @@
           </h1>
           <p id="student-welcome-text" class="text-emerald-100 text-sm mt-1">Theo dõi hạn nộp, gửi bài làm và xem điểm số, nhận xét từ thầy cô</p>
         </div>
+        <div class="flex items-center gap-2 flex-wrap">
+          <div class="bg-white/15 backdrop-blur-sm px-3.5 py-2 rounded-xl text-xs sm:text-sm flex items-center gap-2 border border-white/20">
+            <i class="fa-solid fa-users text-emerald-200"></i>
+            <span>Lớp: <b id="student-current-class-badge" class="font-bold underline">C08TK</b></span>
+          </div>
+          <button onclick="promptChangeStudentClass()" class="px-3.5 py-2 bg-white text-teal-800 hover:bg-teal-50 font-semibold rounded-xl text-xs transition shadow-sm flex items-center gap-1.5">
+            <i class="fa-solid fa-arrows-rotate"></i> Chọn / Đổi Lớp Khác
+          </button>
+        </div>
       </div>
 
       <!-- Bộ lọc bài tập cho học sinh -->
@@ -271,6 +291,10 @@
         <button onclick="switchAdminTab('pending')" id="tab-btn-pending" class="pb-3 text-sm font-bold text-indigo-600 border-b-2 border-indigo-600 flex items-center gap-2 transition">
           <span>Tài Khoản Chờ Phê Duyệt</span>
           <span id="admin-badge-tab" class="bg-rose-500 text-white text-xs px-2 py-0.5 rounded-full font-bold">0</span>
+        </button>
+        <button onclick="switchAdminTab('teachers')" id="tab-btn-teachers" class="pb-3 text-sm font-semibold text-slate-500 hover:text-slate-700 border-b-2 border-transparent flex items-center gap-2 transition">
+          <span><i class="fa-solid fa-chalkboard-user mr-1 text-indigo-500"></i>Danh Sách Giáo Viên</span>
+          <span id="admin-teachers-badge-tab" class="bg-indigo-100 text-indigo-700 text-xs px-2 py-0.5 rounded-full font-bold">0</span>
         </button>
         <button onclick="switchAdminTab('all')" id="tab-btn-all" class="pb-3 text-sm font-semibold text-slate-500 hover:text-slate-700 border-b-2 border-transparent flex items-center gap-2 transition">
           <span>Tất Cả Người Dùng</span>
@@ -320,6 +344,27 @@
                 </tr>
               </thead>
               <tbody id="admin-all-tbody" class="divide-y divide-slate-100 text-slate-700">
+                <!-- Render qua JS -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Tab 3: Danh sách Giáo viên đã đăng ký -->
+        <div id="admin-view-teachers" class="hidden">
+          <div class="overflow-x-auto border border-slate-200 rounded-xl">
+            <table class="w-full text-left text-sm">
+              <thead class="bg-indigo-50 text-indigo-900 text-xs uppercase font-semibold border-b border-indigo-100">
+                <tr>
+                  <th class="px-4 py-3">Họ và Tên Giáo Viên</th>
+                  <th class="px-4 py-3">Tài Khoản</th>
+                  <th class="px-4 py-3">Môn Giảng Dạy</th>
+                  <th class="px-4 py-3">Trạng Thái</th>
+                  <th class="px-4 py-3">Thời Gian Đăng Ký</th>
+                  <th class="px-4 py-3 text-right">Thao Tác</th>
+                </tr>
+              </thead>
+              <tbody id="admin-teachers-tbody" class="divide-y divide-slate-100 text-slate-700">
                 <!-- Render qua JS -->
               </tbody>
             </table>
@@ -507,6 +552,7 @@
     let availableClasses = [];
 
     window.addEventListener('DOMContentLoaded', () => {
+      loadClasses(); // Tải danh mục lớp học ngay từ đầu cho học sinh và giáo viên
       const savedUser = localStorage.getItem('educlass_user');
       if (savedUser) {
         try {
@@ -705,6 +751,9 @@
         document.getElementById('view-teacher').classList.add('hidden');
         document.getElementById('view-student').classList.remove('hidden');
         document.getElementById('student-welcome-text').textContent = `Lớp ${currentUser.className || 'C08TK'} - Chúc bạn hoàn thành bài tập thật tốt!`;
+        const classBadge = document.getElementById('student-current-class-badge');
+        if (classBadge) classBadge.textContent = currentUser.className || 'C08TK';
+        loadClasses();
         loadStudentData();
       }
     }
@@ -746,15 +795,63 @@
     }
 
     function populateClassDropdowns() {
-      const select = document.getElementById('create-target-class');
-      if (!select) return;
+      // 1. Dropdown khi Giáo viên tạo bài tập
+      const selectCreate = document.getElementById('create-target-class');
+      if (selectCreate) {
+        let html = `<option value="ALL">-- Tất cả các lớp (Toàn trường) --</option>`;
+        availableClasses.forEach(cls => {
+          const isSelected = (teacherSelectedClass === cls || cls === 'C08TK') ? 'selected' : '';
+          html += `<option value="${cls}" ${isSelected}>Lớp ${escapeHtml(cls)}</option>`;
+        });
+        selectCreate.innerHTML = html;
+      }
 
-      let html = `<option value="ALL">-- Tất cả các lớp (Toàn trường) --</option>`;
-      availableClasses.forEach(cls => {
-        const isSelected = (teacherSelectedClass === cls || cls === 'C08TK') ? 'selected' : '';
-        html += `<option value="${cls}" ${isSelected}>Lớp ${escapeHtml(cls)}</option>`;
-      });
-      select.innerHTML = html;
+      // 2. Dropdown cho Học sinh chọn lớp khi đăng ký
+      const selectReg = document.getElementById('reg-class');
+      if (selectReg && availableClasses.length > 0) {
+        const curVal = selectReg.value || 'C08TK';
+        let html = '';
+        availableClasses.forEach(cls => {
+          const isSel = (cls === curVal || cls === 'C08TK') ? 'selected' : '';
+          html += `<option value="${cls}" ${isSel}>Lớp ${escapeHtml(cls)}</option>`;
+        });
+        selectReg.innerHTML = html;
+      }
+    }
+
+    // Học sinh tự đổi hoặc chọn lớp học
+    async function promptChangeStudentClass() {
+      if (!currentUser || currentUser.role !== 'student') return;
+      const current = currentUser.className || 'C08TK';
+      
+      const classListText = availableClasses.join(', ');
+      const chosen = prompt(
+        `Lớp hiện tại của bạn là: ${current}\n\nCác lớp học có sẵn trong hệ thống:\n${classListText}\n\nNhập tên lớp bạn muốn chuyển sang (ví dụ: T14TK01, C09TK01...):`, 
+        current
+      );
+      if (!chosen || !chosen.trim()) return;
+
+      const cleanChosen = chosen.trim().toUpperCase();
+      if (cleanChosen === current) return;
+
+      try {
+        const res = await fetch('/api/students/update-class', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ studentId: currentUser.id, newClass: cleanChosen })
+        });
+        const data = await res.json();
+        if (res.ok) {
+          currentUser = data.user;
+          localStorage.setItem('educlass_user', JSON.stringify(currentUser));
+          showToast(data.message, 'success');
+          renderApp();
+        } else {
+          showToast(data.message || 'Lỗi khi đổi lớp!', 'error');
+        }
+      } catch (e) {
+        showToast('Lỗi kết nối máy chủ!', 'error');
+      }
     }
 
     async function promptCreateClass(autoSelectInModal = false) {
@@ -1332,30 +1429,41 @@
     function switchAdminTab(tab) {
       currentAdminTab = tab;
       const tabPending = document.getElementById('tab-btn-pending');
+      const tabTeachers = document.getElementById('tab-btn-teachers');
       const tabAll = document.getElementById('tab-btn-all');
       const viewPending = document.getElementById('admin-view-pending');
+      const viewTeachers = document.getElementById('admin-view-teachers');
       const viewAll = document.getElementById('admin-view-all');
 
+      [tabPending, tabTeachers, tabAll].forEach(b => {
+        if (b) b.className = "pb-3 text-sm font-semibold text-slate-500 hover:text-slate-700 border-b-2 border-transparent flex items-center gap-2 transition";
+      });
+      [viewPending, viewTeachers, viewAll].forEach(v => {
+        if (v) v.classList.add('hidden');
+      });
+
       if (tab === 'pending') {
-        tabPending.className = "pb-3 text-sm font-bold text-indigo-600 border-b-2 border-indigo-600 flex items-center gap-2 transition";
-        tabAll.className = "pb-3 text-sm font-semibold text-slate-500 hover:text-slate-700 border-b-2 border-transparent flex items-center gap-2 transition";
-        viewPending.classList.remove('hidden');
-        viewAll.classList.add('hidden');
+        if (tabPending) tabPending.className = "pb-3 text-sm font-bold text-indigo-600 border-b-2 border-indigo-600 flex items-center gap-2 transition";
+        if (viewPending) viewPending.classList.remove('hidden');
+      } else if (tab === 'teachers') {
+        if (tabTeachers) tabTeachers.className = "pb-3 text-sm font-bold text-indigo-600 border-b-2 border-indigo-600 flex items-center gap-2 transition";
+        if (viewTeachers) viewTeachers.classList.remove('hidden');
       } else {
-        tabAll.className = "pb-3 text-sm font-bold text-indigo-600 border-b-2 border-indigo-600 flex items-center gap-2 transition";
-        tabPending.className = "pb-3 text-sm font-semibold text-slate-500 hover:text-slate-700 border-b-2 border-transparent flex items-center gap-2 transition";
-        viewAll.classList.remove('hidden');
-        viewPending.classList.add('hidden');
+        if (tabAll) tabAll.className = "pb-3 text-sm font-bold text-indigo-600 border-b-2 border-indigo-600 flex items-center gap-2 transition";
+        if (viewAll) viewAll.classList.remove('hidden');
       }
     }
 
     function renderAdminTables() {
       const pendingUsers = adminUsersList.filter(u => u.status === 'PENDING');
+      const teacherUsers = adminUsersList.filter(u => u.role === 'teacher');
       const badgeTab = document.getElementById('admin-badge-tab');
+      const badgeTeachers = document.getElementById('admin-teachers-badge-tab');
       const badgeNav = document.getElementById('admin-pending-badge');
       const totalUsersTab = document.getElementById('admin-total-users-tab');
 
       if (badgeTab) badgeTab.textContent = pendingUsers.length;
+      if (badgeTeachers) badgeTeachers.textContent = teacherUsers.length;
       if (badgeNav) {
         if (pendingUsers.length > 0) {
           badgeNav.textContent = pendingUsers.length;
@@ -1366,7 +1474,7 @@
       }
       if (totalUsersTab) totalUsersTab.textContent = adminUsersList.length;
 
-      // Render Pending Table
+      // 1. Render Pending Table
       const emptyPending = document.getElementById('admin-pending-empty');
       const tablePendingBox = document.getElementById('admin-pending-table-box');
       const tbodyPending = document.getElementById('admin-pending-tbody');
@@ -1375,9 +1483,8 @@
         emptyPending.classList.remove('hidden');
         tablePendingBox.classList.add('hidden');
       } else {
-        emptyPending.classList.remove('hidden');
-        tablePendingBox.classList.remove('hidden');
         emptyPending.classList.add('hidden');
+        tablePendingBox.classList.remove('hidden');
         tbodyPending.innerHTML = pendingUsers.map(u => {
           return `
             <tr class="hover:bg-slate-50 transition">
@@ -1407,7 +1514,50 @@
         }).join('');
       }
 
-      // Render All Users Table
+      // 2. Render Dedicated Teachers Table
+      const tbodyTeachers = document.getElementById('admin-teachers-tbody');
+      if (tbodyTeachers) {
+        tbodyTeachers.innerHTML = teacherUsers.map(u => {
+          const isAdmin = u.isAdmin;
+          const isPending = u.status === 'PENDING';
+          const dateStr = u.createdAt ? formatDate(u.createdAt) : 'Tài khoản gốc';
+
+          return `
+            <tr class="hover:bg-slate-50 transition">
+              <td class="px-4 py-3 font-bold text-slate-900 flex items-center gap-2.5">
+                <div class="w-8 h-8 rounded-full ${isAdmin ? 'bg-amber-100 text-amber-700' : 'bg-indigo-100 text-indigo-700'} flex items-center justify-center font-bold text-xs shrink-0">
+                  <i class="fa-solid ${isAdmin ? 'fa-crown' : 'fa-chalkboard-user'}"></i>
+                </div>
+                <div>
+                  <div class="text-sm">${escapeHtml(u.name)}</div>
+                  ${isAdmin ? '<span class="text-xs text-amber-600 font-bold">Quản trị viên tối cao</span>' : '<span class="text-xs text-indigo-600 font-medium">Giáo viên</span>'}
+                </div>
+              </td>
+              <td class="px-4 py-3 font-mono text-xs font-semibold text-slate-800">${escapeHtml(u.username)}</td>
+              <td class="px-4 py-3 text-xs text-slate-700 font-medium">${escapeHtml(u.subject || 'Tin học')}</td>
+              <td class="px-4 py-3">
+                ${isPending 
+                  ? '<span class="px-2.5 py-0.5 rounded text-xs font-bold bg-amber-50 text-amber-700 border border-amber-200"><i class="fa-solid fa-hourglass-half mr-1"></i>Chờ duyệt</span>'
+                  : '<span class="px-2.5 py-0.5 rounded text-xs font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200"><i class="fa-solid fa-check mr-1"></i>Đang hoạt động</span>'
+                }
+              </td>
+              <td class="px-4 py-3 text-xs text-slate-500">${dateStr}</td>
+              <td class="px-4 py-3 text-right">
+                ${!isAdmin ? `
+                  <div class="flex items-center justify-end gap-1.5">
+                    ${isPending ? `<button onclick="adminApproveUser('${u.id}')" class="px-2.5 py-1 bg-emerald-600 hover:bg-emerald-700 text-white rounded text-xs font-medium">Duyệt</button>` : ''}
+                    <button onclick="adminDeleteUser('${u.id}', '${escapeHtml(u.name)}')" class="px-2.5 py-1 text-xs text-rose-600 hover:bg-rose-50 rounded-lg transition border border-rose-200 font-medium" title="Xóa tài khoản giáo viên này">
+                      <i class="fa-solid fa-trash-can mr-1"></i>Xóa
+                    </button>
+                  </div>
+                ` : '<span class="text-xs text-slate-400 italic">Admin (Không thể xóa)</span>'}
+              </td>
+            </tr>
+          `;
+        }).join('');
+      }
+
+      // 3. Render All Users Table
       const tbodyAll = document.getElementById('admin-all-tbody');
       tbodyAll.innerHTML = adminUsersList.map(u => {
         const isAdmin = u.isAdmin;
