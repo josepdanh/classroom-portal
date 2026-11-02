@@ -1077,10 +1077,45 @@ app.get('/api/grade-sheets/sheet', (req, res) => {
   // Sắp xếp học sinh theo mã HS / username tăng dần
   registeredStudents.sort((a, b) => (a.username || '').localeCompare(b.username || ''));
 
+  // Tìm giáo viên phụ trách giảng dạy môn học này
+  let teacherForSubject = null;
+  // Ưu tiên 1: Tra cứu trong danh sách db.subjects khớp đúng tên lớp và tên môn học
+  const matchedSubject = (db.subjects || []).find(
+    s => s.className && s.className.trim().toUpperCase() === cleanClass &&
+         s.name && s.name.trim().toLowerCase() === cleanSubject.toLowerCase()
+  );
+
+  if (matchedSubject && matchedSubject.teacherId) {
+    teacherForSubject = (db.users || []).find(u => u.id === matchedSubject.teacherId);
+  }
+
+  // Ưu tiên 2: Tra cứu bài tập thuộc lớp & môn này để lấy giáo viên tạo bài
+  if (!teacherForSubject) {
+    const matchedAsm = (db.assignments || []).find(
+      a => a.targetClass && a.targetClass.trim().toUpperCase() === cleanClass &&
+           a.subject && a.subject.trim().toLowerCase() === cleanSubject.toLowerCase() &&
+           a.createdBy
+    );
+    if (matchedAsm) {
+      teacherForSubject = (db.users || []).find(u => u.id === matchedAsm.createdBy);
+    }
+  }
+
+  // Ưu tiên 3: Sử dụng teacherId truyền vào từ giáo viên đang thao tác (nếu có)
+  if (!teacherForSubject && teacherId) {
+    teacherForSubject = (db.users || []).find(u => u.id === teacherId && u.role === 'teacher');
+  }
+
+  // Ưu tiên 4: Mặc định lấy giáo viên đầu tiên trong hệ thống
+  if (!teacherForSubject) {
+    teacherForSubject = (db.users || []).find(u => u.role === 'teacher');
+  }
+
+  const rawTeacherName = teacherForSubject ? teacherForSubject.name : (matchedSubject ? matchedSubject.teacherName : "Nguyễn Công Danh");
+  const assignedTeacherName = rawTeacherName ? rawTeacherName.replace(/^(Thầy|Cô)\s+/i, '').trim() : "Nguyễn Công Danh";
+  const assignedTeacherId = teacherForSubject ? teacherForSubject.id : (matchedSubject ? matchedSubject.teacherId : (teacherId || "u_teacher_danh"));
+
   if (!sheet) {
-    // Tìm thông tin giáo viên
-    const teacher = db.users.find(u => u.id === teacherId) || db.users.find(u => u.role === 'teacher');
-    
     // Tạo bảng điểm mới chuẩn hóa theo mẫu trường CĐ Hòa Bình Xuân Lộc
     const records = registeredStudents.map((s, idx) => ({
       tt: idx + 1,
@@ -1110,8 +1145,8 @@ app.get('/api/grade-sheets/sheet', (req, res) => {
       credits: 2,
       academicDate: `Đồng Nai, ngày ${now.getDate()} tháng ${now.getMonth() + 1} năm ${now.getFullYear()}`,
       deanName: "Nguyễn Văn Quang",
-      teacherName: teacher ? teacher.name : "Nguyễn Công Danh",
-      teacherId: teacher ? teacher.id : (teacherId || "u_teacher_danh"),
+      teacherName: assignedTeacherName,
+      teacherId: assignedTeacherId,
       records: records,
       updatedAt: now.toISOString()
     };
@@ -1120,7 +1155,14 @@ app.get('/api/grade-sheets/sheet', (req, res) => {
     db.gradeSheets.push(sheet);
     writeDatabase(db);
   } else {
-    // Nếu bảng điểm đã tồn tại: TỰ ĐỘNG ĐỒNG BỘ VỚI HỌC SINH MỚI ĐĂNG KÝ
+    // Nếu bảng điểm đã tồn tại: Cập nhật đúng tên giáo viên giảng dạy môn học đó
+    if (matchedSubject || !sheet.teacherName) {
+      sheet.teacherName = assignedTeacherName;
+      sheet.teacherId = assignedTeacherId;
+    } else if (sheet.teacherName) {
+      sheet.teacherName = sheet.teacherName.replace(/^(Thầy|Cô)\s+/i, '').trim();
+    }
+
     if (!sheet.records) sheet.records = [];
 
     // Duyệt qua tất cả học sinh đã đăng ký trong hệ thống
@@ -1184,6 +1226,9 @@ app.post('/api/grade-sheets/save', (req, res) => {
 
   sheet.className = cleanClass;
   sheet.subjectName = cleanSubject;
+  if (sheet.teacherName) {
+    sheet.teacherName = sheet.teacherName.replace(/^(Thầy|Cô)\s+/i, '').trim();
+  }
   sheet.updatedAt = new Date().toISOString();
 
   // Cập nhật ngày sinh và họ tên ngược lại vào danh sách users nếu giáo viên có sửa trên form

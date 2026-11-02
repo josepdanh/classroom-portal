@@ -8,12 +8,28 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- Font Awesome Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-  <!-- Google Fonts: Inter -->
+  <!-- Google Fonts: Inter & Tinos (Times New Roman webfont) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Tinos:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
   <style>
     body { font-family: 'Inter', sans-serif; }
+
+    /* ================= TIMES NEW ROMAN CHO BẢNG ĐIỂM THÀNH PHẦN ================= */
+    .font-times,
+    #grade-sheet-printable,
+    #grade-sheet-printable *,
+    #grade-sheet-printable input,
+    #grade-sheet-printable select,
+    #grade-sheet-printable textarea,
+    #grade-sheet-printable table,
+    #grade-sheet-printable th,
+    #grade-sheet-printable td,
+    #grade-sheet-printable span,
+    #grade-sheet-printable h1,
+    #grade-sheet-printable div {
+      font-family: "Times New Roman", "Tinos", Times, serif !important;
+    }
 
     /* In ấn chuẩn trang in A4 cho Bảng Điểm Thành Phần */
     @media print {
@@ -22,6 +38,11 @@
       }
       #modal-grade-sheet, #modal-grade-sheet * {
         visibility: visible !important;
+      }
+      #modal-grade-sheet,
+      #grade-sheet-printable,
+      #grade-sheet-printable * {
+        font-family: "Times New Roman", "Tinos", Times, serif !important;
       }
       #modal-grade-sheet {
         position: absolute !important;
@@ -339,6 +360,9 @@
           </div>
         </div>
         <div class="flex items-center gap-2 flex-wrap shrink-0">
+          <button onclick="openGradeSheetModal('C08TK01', 'Xử Lý Kỹ Xảo với After Effects')" class="px-3.5 py-2 bg-emerald-700 hover:bg-emerald-800 text-white font-bold rounded-xl text-xs transition flex items-center gap-1.5 shadow-sm">
+            <i class="fa-solid fa-pen-to-square"></i> Mở Lớp C08TK01 (20 HS)
+          </button>
           <button onclick="openGradeSheetModal('T15MG02', 'Nguyên lý hệ điều hành')" class="px-3.5 py-2 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl text-xs transition flex items-center gap-1.5 shadow-sm">
             <i class="fa-solid fa-pen-to-square"></i> Mở Lớp T15MG02 (26 HS)
           </button>
@@ -952,16 +976,16 @@
       <!-- Scrollable Document Container -->
       <div class="p-3 sm:p-6 overflow-y-auto flex-1 bg-slate-200/60">
         <!-- Printable Paper Sheet -->
-        <div id="grade-sheet-printable" class="bg-white max-w-5xl mx-auto p-6 sm:p-10 rounded-xl shadow border border-slate-300 font-serif text-slate-900">
+        <div id="grade-sheet-printable" class="bg-white max-w-5xl mx-auto p-6 sm:p-10 rounded-xl shadow border border-slate-300 font-times text-slate-900">
           
           <!-- Official Document Header -->
           <div class="grid grid-cols-2 gap-4 items-start pb-2">
             <!-- Left Header -->
             <div class="text-center">
-              <div id="gs-school-name" class="font-bold text-xs uppercase tracking-wider">TRƯỜNG CĐ HÒA BÌNH XUÂN LỘC</div>
-              <div id="gs-department-name" class="font-bold text-xs uppercase text-slate-800 mt-0.5">KHOA MỸ THUẬT - CNTT</div>
+              <div id="gs-school-name" class="font-bold text-xs uppercase tracking-wider font-times">TRƯỜNG CĐ HÒA BÌNH XUÂN LỘC</div>
+              <div id="gs-department-name" class="font-bold text-xs uppercase text-slate-800 mt-0.5 font-times">KHOA MỸ THUẬT - CNTT</div>
               <div class="mt-1">
-                <span class="inline-block border border-rose-500 text-rose-600 text-[10px] font-bold px-2 py-0.5 rounded uppercase tracking-wider">
+                <span class="inline-block border border-rose-500 text-rose-600 text-[10px] font-bold px-2 py-0.5 rounded uppercase tracking-wider font-times">
                   PHÒNG ĐÀO TẠO
                 </span>
               </div>
@@ -969,56 +993,56 @@
 
             <!-- Right Header -->
             <div class="text-center">
-              <div class="font-bold text-xs uppercase tracking-wider">CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM</div>
-              <div class="font-bold text-xs text-slate-800 mt-0.5">Độc Lập - Tự Do - Hạnh Phúc</div>
+              <div class="font-bold text-xs uppercase tracking-wider font-times">CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM</div>
+              <div class="font-bold text-xs text-slate-800 mt-0.5 font-times">Độc Lập - Tự Do - Hạnh Phúc</div>
               <div class="w-28 h-[1px] bg-slate-800 mx-auto mt-1"></div>
             </div>
           </div>
 
           <!-- Document Title -->
           <div class="text-center my-4">
-            <h1 class="text-xl sm:text-2xl font-bold uppercase tracking-wide text-slate-900">
+            <h1 class="text-xl sm:text-2xl font-bold uppercase tracking-wide text-slate-900 font-times">
               BẢNG ĐIỂM THÀNH PHẦN MÔN HỌC/MÔ ĐUN
             </h1>
           </div>
 
           <!-- Metadata Fields (Grid) -->
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-1.5 text-xs text-slate-800 font-sans mb-3">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-1.5 text-xs text-slate-800 font-times mb-3">
             <div class="flex items-baseline gap-1">
-              <span class="font-bold font-serif whitespace-nowrap">Tên môn học:</span>
-              <input type="text" id="gs-meta-subject" onchange="markGsDirty()" class="w-full font-semibold underline border-b border-dashed border-slate-300 focus:border-indigo-600 outline-none bg-transparent px-1 py-0.5 text-xs">
+              <span class="font-bold whitespace-nowrap">Tên môn học:</span>
+              <input type="text" id="gs-meta-subject" onchange="markGsDirty()" class="w-full font-semibold underline border-b border-dashed border-slate-300 focus:border-indigo-600 outline-none bg-transparent px-1 py-0.5 text-xs font-times">
             </div>
             <div class="flex items-baseline justify-between gap-2">
               <div class="flex items-baseline gap-1">
-                <span class="font-bold font-serif whitespace-nowrap">Lớp:</span>
-                <span id="gs-meta-class" class="font-bold text-slate-900 underline px-1"></span>
+                <span class="font-bold whitespace-nowrap">Lớp:</span>
+                <span id="gs-meta-class" class="font-bold text-slate-900 underline px-1 font-times"></span>
               </div>
               <div class="flex items-baseline gap-1">
-                <span class="font-bold font-serif whitespace-nowrap">Tổng tiết:</span>
-                <input type="number" id="gs-meta-periods" onchange="markGsDirty()" class="w-12 text-center underline border-b border-dashed border-slate-300 focus:border-indigo-600 outline-none bg-transparent px-1 py-0.5 text-xs">
+                <span class="font-bold whitespace-nowrap">Tổng tiết:</span>
+                <input type="number" id="gs-meta-periods" onchange="markGsDirty()" class="w-12 text-center underline border-b border-dashed border-slate-300 focus:border-indigo-600 outline-none bg-transparent px-1 py-0.5 text-xs font-times">
               </div>
             </div>
             <div class="flex items-baseline gap-1">
-              <span class="font-bold font-serif whitespace-nowrap">Nghề:</span>
-              <input type="text" id="gs-meta-major" onchange="markGsDirty()" class="w-full underline border-b border-dashed border-slate-300 focus:border-indigo-600 outline-none bg-transparent px-1 py-0.5 text-xs">
+              <span class="font-bold whitespace-nowrap">Nghề:</span>
+              <input type="text" id="gs-meta-major" onchange="markGsDirty()" class="w-full underline border-b border-dashed border-slate-300 focus:border-indigo-600 outline-none bg-transparent px-1 py-0.5 text-xs font-times">
             </div>
             <div class="flex items-baseline justify-between gap-2">
               <div class="flex items-baseline gap-1">
-                <span class="font-bold font-serif whitespace-nowrap">Khóa:</span>
-                <input type="text" id="gs-meta-cohort" onchange="markGsDirty()" class="w-16 underline border-b border-dashed border-slate-300 focus:border-indigo-600 outline-none bg-transparent px-1 py-0.5 text-xs">
+                <span class="font-bold whitespace-nowrap">Khóa:</span>
+                <input type="text" id="gs-meta-cohort" onchange="markGsDirty()" class="w-16 underline border-b border-dashed border-slate-300 focus:border-indigo-600 outline-none bg-transparent px-1 py-0.5 text-xs font-times">
               </div>
               <div class="flex items-baseline gap-1">
-                <span class="font-bold font-serif whitespace-nowrap">Số tín chỉ:</span>
-                <input type="number" id="gs-meta-credits" onchange="markGsDirty()" class="w-12 text-center underline border-b border-dashed border-slate-300 focus:border-indigo-600 outline-none bg-transparent px-1 py-0.5 text-xs">
+                <span class="font-bold whitespace-nowrap">Số tín chỉ:</span>
+                <input type="number" id="gs-meta-credits" onchange="markGsDirty()" class="w-12 text-center underline border-b border-dashed border-slate-300 focus:border-indigo-600 outline-none bg-transparent px-1 py-0.5 text-xs font-times">
               </div>
             </div>
           </div>
 
           <!-- Main Table Grid -->
           <div class="overflow-x-auto border-t border-black mt-2">
-            <table class="w-full border-collapse border border-black text-xs font-serif">
+            <table class="w-full border-collapse border border-black text-xs font-times">
               <thead>
-                <tr class="text-center font-bold bg-slate-50">
+                <tr class="text-center font-bold bg-slate-50 font-times">
                   <th rowspan="2" class="border border-black px-1 py-1.5 w-8">TT</th>
                   <th rowspan="2" class="border border-black px-2 py-1.5 w-24">Mã HS</th>
                   <th rowspan="2" class="border border-black px-2 py-1.5 min-w-[170px] text-left">Họ và tên</th>
@@ -1028,42 +1052,42 @@
                   <th rowspan="2" class="border border-black px-1 py-1.5 w-14 bg-indigo-50/50 text-indigo-900">Điểm<br>TB</th>
                   <th rowspan="2" class="border border-black px-2 py-1.5 min-w-[100px]">Ghi chú</th>
                 </tr>
-                <tr class="text-center font-semibold text-[11px] bg-slate-50">
+                <tr class="text-center font-semibold text-[11px] bg-slate-50 font-times">
                   <th class="border border-black px-1 py-1 w-11">Cột 1</th>
                   <th class="border border-black px-1 py-1 w-11">Cột 2</th>
                   <th class="border border-black px-1 py-1 w-11">Cột 3</th>
                   <th class="border border-black px-1 py-1 w-11">Cột 4</th>
                 </tr>
               </thead>
-              <tbody id="gs-table-body" class="divide-y divide-black">
+              <tbody id="gs-table-body" class="divide-y divide-black font-times">
                 <!-- Rendered dynamically -->
               </tbody>
             </table>
           </div>
 
           <!-- Document Footer & Signatures -->
-          <div class="mt-5 text-xs font-serif text-slate-900">
-            <div class="text-right italic pr-4">
-              <input type="text" id="gs-academic-date" onchange="markGsDirty()" class="text-right italic font-serif outline-none border-b border-dashed border-slate-300 w-72 bg-transparent">
+          <div class="mt-5 text-xs font-times text-slate-900">
+            <div class="text-right italic pr-4 font-times">
+              <input type="text" id="gs-academic-date" onchange="markGsDirty()" class="text-right italic font-times outline-none border-b border-dashed border-slate-300 w-72 bg-transparent">
             </div>
 
-            <div class="grid grid-cols-2 mt-3 text-center">
+            <div class="grid grid-cols-2 mt-3 text-center font-times">
               <div>
-                <div class="font-bold uppercase text-xs">TRƯỜNG KHOA</div>
+                <div class="font-bold uppercase text-xs font-times">TRƯỜNG KHOA</div>
                 <div class="h-20 flex items-center justify-center">
-                  <span class="text-slate-400 italic text-xs no-print">(Chữ ký trưởng khoa)</span>
+                  <span class="text-slate-400 italic text-xs no-print font-times">(Chữ ký trưởng khoa)</span>
                 </div>
-                <div class="font-bold text-sm" id="gs-dean-name">Nguyễn Văn Quang</div>
+                <div class="font-bold text-sm font-times" id="gs-dean-name">Nguyễn Văn Quang</div>
               </div>
 
               <div>
-                <div class="font-bold uppercase text-xs">GV GIẢNG DẠY</div>
+                <div class="font-bold uppercase text-xs font-times">GV GIẢNG DẠY</div>
                 <div class="h-20 flex items-center justify-center">
-                  <div class="font-serif italic text-indigo-800 text-2xl font-bold tracking-wider select-none rotate-[-5deg]">
+                  <div id="gs-teacher-signature" class="font-times italic text-indigo-800 text-2xl font-bold tracking-wider select-none rotate-[-5deg]">
                     Danh
                   </div>
                 </div>
-                <div class="font-bold text-sm" id="gs-teacher-name">Nguyễn Công Danh</div>
+                <input type="text" id="gs-teacher-name" oninput="onTeacherNameChange(this.value)" class="text-center font-bold text-sm outline-none border-b border-dashed border-transparent hover:border-slate-300 focus:border-indigo-600 w-full bg-transparent font-times" placeholder="Họ và tên giáo viên">
               </div>
             </div>
           </div>
@@ -2579,6 +2603,30 @@
       return (Math.round(avg * 10) / 10).toFixed(1);
     }
 
+    // Tiện ích tạo chữ ký viết tắt trang trọng từ họ và tên giáo viên
+    function getSignatureName(fullName) {
+      if (!fullName) return "";
+      let clean = fullName.replace(/^(thầy|cô|gv\.?|ths\.?|ts\.?)\s+/i, '').trim();
+      const parts = clean.split(/\s+/);
+      return parts[parts.length - 1] || "";
+    }
+
+    function updateTeacherSignature(fullName) {
+      const sigEl = document.getElementById('gs-teacher-signature');
+      if (sigEl) {
+        sigEl.textContent = getSignatureName(fullName);
+      }
+    }
+
+    function onTeacherNameChange(val) {
+      const cleanVal = (val || '').trim().replace(/^(Thầy|Cô)\s+/i, '');
+      if (currentGradeSheet) {
+        currentGradeSheet.teacherName = cleanVal;
+      }
+      updateTeacherSignature(cleanVal);
+      markGsDirty();
+    }
+
     // Render toàn bộ giao diện bảng điểm chuẩn form giấy
     function renderGradeSheet(sheet) {
       if (!sheet) return;
@@ -2591,7 +2639,14 @@
       document.getElementById('gs-meta-credits').value = sheet.credits || 2;
       document.getElementById('gs-academic-date').value = sheet.academicDate || 'Đồng Nai, ngày 18 tháng 09 năm 2026';
       document.getElementById('gs-dean-name').textContent = sheet.deanName || 'Nguyễn Văn Quang';
-      document.getElementById('gs-teacher-name').textContent = sheet.teacherName || (currentUser ? currentUser.name : 'Nguyễn Công Danh');
+
+      // Cập nhật tên giáo viên giảng dạy môn học và chữ ký động
+      const resolvedTeacher = (sheet.teacherName || (currentUser && currentUser.role === 'teacher' ? currentUser.name : 'Nguyễn Công Danh')).replace(/^(Thầy|Cô)\s+/i, '').trim();
+      const teacherInput = document.getElementById('gs-teacher-name');
+      if (teacherInput) {
+        teacherInput.value = resolvedTeacher;
+      }
+      updateTeacherSignature(resolvedTeacher);
 
       const countBadge = document.getElementById('gs-students-count-badge');
       if (countBadge) {
@@ -2600,20 +2655,20 @@
 
       const tbody = document.getElementById('gs-table-body');
       if (!sheet.records || sheet.records.length === 0) {
-        tbody.innerHTML = `<tr><td colspan="12" class="text-center py-6 text-slate-500 font-sans">Lớp này hiện chưa có học sinh nào đăng ký trên hệ thống.</td></tr>`;
+        tbody.innerHTML = `<tr><td colspan="12" class="text-center py-6 text-slate-500 font-times">Lớp này hiện chưa có học sinh nào đăng ký trên hệ thống.</td></tr>`;
         return;
       }
 
       tbody.innerHTML = sheet.records.map((r, idx) => {
         const tbScore = calcRowTB(r);
         return `
-          <tr class="hover:bg-slate-50/70 transition" data-row-idx="${idx}">
+          <tr class="hover:bg-slate-50/70 transition font-times" data-row-idx="${idx}">
             <td class="border border-black text-center py-1 font-semibold text-slate-700">${r.tt || (idx + 1)}</td>
-            <td class="border border-black px-2 py-1 font-mono font-bold text-slate-900">${escapeHtml(r.studentCode || '')}</td>
+            <td class="border border-black px-2 py-1 font-bold text-slate-900 font-times">${escapeHtml(r.studentCode || '')}</td>
             <td class="border border-black px-2 py-1 font-medium text-slate-900 text-left">
               <input type="text"
                 value="${escapeHtml(capitalizeWords(r.name || ''))}"
-                class="gs-text-input font-medium capitalize"
+                class="gs-text-input font-medium capitalize font-times"
                 data-row="${idx}"
                 data-field="name"
                 onchange="this.value = capitalizeWords(this.value); onGsFieldChange(${idx}, 'name', this.value)">
@@ -2622,7 +2677,7 @@
               <input type="text"
                 value="${escapeHtml(formatDob(r.dob || ''))}"
                 placeholder="dd/mm/yyyy"
-                class="gs-text-input text-center"
+                class="gs-text-input text-center font-times"
                 data-row="${idx}"
                 data-field="dob"
                 onchange="this.value = formatDob(this.value); onGsFieldChange(${idx}, 'dob', this.value)">
@@ -2630,7 +2685,7 @@
             <td class="border border-black p-0">
               <input type="number" step="0.1" min="0" max="10"
                 value="${r.hs1 !== null && r.hs1 !== undefined ? r.hs1 : ''}"
-                class="gs-score-input"
+                class="gs-score-input font-times"
                 data-row="${idx}"
                 data-field="hs1"
                 oninput="onGsScoreInput(${idx})"
@@ -2639,7 +2694,7 @@
             <td class="border border-black p-0">
               <input type="number" step="0.1" min="0" max="10"
                 value="${r.hs2_1 !== null && r.hs2_1 !== undefined ? r.hs2_1 : ''}"
-                class="gs-score-input"
+                class="gs-score-input font-times"
                 data-row="${idx}"
                 data-field="hs2_1"
                 oninput="onGsScoreInput(${idx})"
@@ -2648,7 +2703,7 @@
             <td class="border border-black p-0">
               <input type="number" step="0.1" min="0" max="10"
                 value="${r.hs2_2 !== null && r.hs2_2 !== undefined ? r.hs2_2 : ''}"
-                class="gs-score-input"
+                class="gs-score-input font-times"
                 data-row="${idx}"
                 data-field="hs2_2"
                 oninput="onGsScoreInput(${idx})"
@@ -2657,7 +2712,7 @@
             <td class="border border-black p-0">
               <input type="number" step="0.1" min="0" max="10"
                 value="${r.hs2_3 !== null && r.hs2_3 !== undefined ? r.hs2_3 : ''}"
-                class="gs-score-input"
+                class="gs-score-input font-times"
                 data-row="${idx}"
                 data-field="hs2_3"
                 oninput="onGsScoreInput(${idx})"
@@ -2666,20 +2721,20 @@
             <td class="border border-black p-0">
               <input type="number" step="0.1" min="0" max="10"
                 value="${r.hs2_4 !== null && r.hs2_4 !== undefined ? r.hs2_4 : ''}"
-                class="gs-score-input"
+                class="gs-score-input font-times"
                 data-row="${idx}"
                 data-field="hs2_4"
                 oninput="onGsScoreInput(${idx})"
                 onkeydown="handleGsKeyDown(event, ${idx}, 'hs2_4')">
             </td>
-            <td class="border border-black text-center py-1 font-bold bg-indigo-50/40 text-indigo-900" id="gs-tb-${idx}">
+            <td class="border border-black text-center py-1 font-bold bg-indigo-50/40 text-indigo-900 font-times" id="gs-tb-${idx}">
               ${tbScore}
             </td>
             <td class="border border-black p-0">
               <input type="text"
                 value="${escapeHtml(r.note || '')}"
                 placeholder=""
-                class="gs-text-input"
+                class="gs-text-input font-times"
                 data-row="${idx}"
                 data-field="note"
                 onchange="onGsFieldChange(${idx}, 'note', this.value)"
@@ -2767,6 +2822,10 @@
       currentGradeSheet.courseCohort = document.getElementById('gs-meta-cohort').value.trim();
       currentGradeSheet.credits = parseInt(document.getElementById('gs-meta-credits').value) || 2;
       currentGradeSheet.academicDate = document.getElementById('gs-academic-date').value.trim();
+      const teacherInput = document.getElementById('gs-teacher-name');
+      if (teacherInput && teacherInput.value) {
+        currentGradeSheet.teacherName = teacherInput.value.trim().replace(/^(Thầy|Cô)\s+/i, '');
+      }
 
       const statusSpan = document.getElementById('gs-save-status');
       if (statusSpan) {
