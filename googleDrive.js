@@ -46,15 +46,13 @@ function initDriveClient() {
   }
 
   try {
-    const auth = new google.auth.JWT(
-      credentials.client_email,
-      null,
-      credentials.private_key,
-      ['https://www.googleapis.com/auth/drive']
-    );
+    const auth = new google.auth.GoogleAuth({
+      credentials,
+      scopes: ['https://www.googleapis.com/auth/drive']
+    });
 
     driveClient = google.drive({ version: 'v3', auth });
-    console.log('[Google Drive API] ✅ Đã kết nối thành công với tài khoản Service Account:', credentials.client_email);
+    console.log('[Google Drive API] ✅ Đã nạp thành công tài khoản Service Account:', credentials.client_email);
     return driveClient;
   } catch (err) {
     console.error('[Google Drive API] Lỗi khởi tạo GoogleAuth:', err.message);
