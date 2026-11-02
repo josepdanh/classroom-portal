@@ -236,5 +236,19 @@
       "createdAt": "2026-11-02T08:00:00.000Z"
     }
   ],
-  "submissions": []
+  "submissions": [
+    {
+      "id": "sub_1793611560000",
+      "assignmentId": "asm_1793609039129",
+      "studentId": "u_C08TK0101",
+      "studentName": "C08TK0101",
+      "content": "Bài báo cáo về 10 nguyên lý chuyển động trong motion graphics (Đã nộp lúc 16:26)",
+      "link": "",
+      "file": null,
+      "submittedAt": "2026-11-02T09:26:00.000Z",
+      "grade": null,
+      "feedback": null,
+      "gradedAt": null
+    }
+  ]
 }
