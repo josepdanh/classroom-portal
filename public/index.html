@@ -693,9 +693,9 @@
     // ================= PHÂN HỆ GIÁO VIÊN =================
     async function loadTeacherData() {
       try {
-        let url = '/api/assignments';
+        let url = `/api/assignments?teacherId=${encodeURIComponent(currentUser.id)}`;
         if (teacherSelectedClass && teacherSelectedClass !== 'ALL') {
-          url += `?teacherFilterClass=${encodeURIComponent(teacherSelectedClass)}`;
+          url += `&teacherFilterClass=${encodeURIComponent(teacherSelectedClass)}`;
         }
         const res = await fetch(url);
         const data = await res.json();
@@ -838,7 +838,7 @@
     async function handleDeleteAssignment(id) {
       if (!confirm("Bạn có chắc chắn muốn xóa bài tập này cùng toàn bộ bài nộp liên quan?")) return;
       try {
-        const res = await fetch(`/api/assignments/${id}`, { method: 'DELETE' });
+        const res = await fetch(`/api/assignments/${id}?teacherId=${encodeURIComponent(currentUser.id)}`, { method: 'DELETE' });
         const data = await res.json();
         if (res.ok) {
           showToast(data.message, "success");
@@ -854,7 +854,7 @@
     async function openGradingModal(assignmentId) {
       currentViewingAssignmentId = assignmentId;
       try {
-        const res = await fetch(`/api/assignments/${assignmentId}/submissions`);
+        const res = await fetch(`/api/assignments/${assignmentId}/submissions?teacherId=${encodeURIComponent(currentUser.id)}`);
         const data = await res.json();
         
         if (!res.ok) {
@@ -966,7 +966,7 @@
         const res = await fetch(`/api/submissions/${subId}/grade`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ grade, feedback })
+          body: JSON.stringify({ grade, feedback, teacherId: currentUser.id })
         });
         const data = await res.json();
 
@@ -1101,8 +1101,9 @@
             ${feedbackArea}
 
             <div class="mt-4 pt-4 border-t border-slate-100 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-              <div class="text-xs text-slate-400">
-                ${sub ? `<i class="fa-regular fa-calendar-check mr-1"></i>Bạn đã nộp lúc: <b>${formatDate(sub.submittedAt)}</b>` : 'Chưa nộp bài làm'}
+              <div class="text-xs text-slate-500 flex items-center gap-3 flex-wrap">
+                ${asm.teacherName ? `<span><i class="fa-solid fa-chalkboard-user mr-1 text-indigo-500"></i>Giáo viên: <b class="text-slate-700">${escapeHtml(asm.teacherName)}</b> (${escapeHtml(asm.teacherSubject || 'Bộ môn')})</span>` : ''}
+                <span>${sub ? `<i class="fa-regular fa-calendar-check mr-1 text-emerald-500"></i>Đã nộp: <b>${formatDate(sub.submittedAt)}</b>` : '<i class="fa-regular fa-circle text-slate-400 mr-1"></i>Chưa nộp bài làm'}</span>
               </div>
               <div>${actionArea}</div>
             </div>

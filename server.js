@@ -184,9 +184,9 @@ app.post('/api/classes', (req, res) => {
   res.json({ success: true, message: `Đã tạo lớp ${cleanName} thành công!`, className: cleanName });
 });
 
-// 2. Lấy danh sách bài tập (Phân tách độc lập theo từng lớp học)
+// 2. Lấy danh sách bài tập (Phân tách độc lập theo từng Giáo viên và từng Lớp học)
 app.get('/api/assignments', (req, res) => {
-  const { studentId, teacherFilterClass } = req.query;
+  const { studentId, teacherId, teacherFilterClass } = req.query;
   const db = readDatabase();
 
   let targetAssignments = db.assignments;
@@ -201,18 +201,28 @@ app.get('/api/assignments', (req, res) => {
         return asm.targetClass.trim().toUpperCase() === studentClass;
       });
     }
-  } else if (teacherFilterClass && teacherFilterClass !== 'ALL') {
-    // GIÁO VIÊN: Lọc theo lớp được chọn
-    const filterClass = teacherFilterClass.trim().toUpperCase();
-    targetAssignments = db.assignments.filter(asm => {
-      return asm.targetClass && asm.targetClass.trim().toUpperCase() === filterClass;
-    });
+  } else if (teacherId) {
+    // BẢO VỆ PHÂN QUYỀN GIÁO VIÊN: Giáo viên CHỈ xem được bài tập do CHÍNH MÌNH tạo ra!
+    targetAssignments = db.assignments.filter(asm => asm.createdBy === teacherId);
+
+    // Nếu giáo viên chọn lọc theo 1 lớp cụ thể
+    if (teacherFilterClass && teacherFilterClass !== 'ALL') {
+      const filterClass = teacherFilterClass.trim().toUpperCase();
+      targetAssignments = targetAssignments.filter(asm => {
+        return asm.targetClass && asm.targetClass.trim().toUpperCase() === filterClass;
+      });
+    }
   }
 
   const result = targetAssignments.map(asm => {
     const submissions = db.submissions.filter(s => s.assignmentId === asm.id);
     const submittedCount = submissions.length;
     const gradedCount = submissions.filter(s => s.grade !== null && s.grade !== undefined).length;
+
+    // Tìm thông tin giáo viên tạo bài để hiển thị cho học sinh
+    const teacher = db.users.find(u => u.id === asm.createdBy);
+    const teacherName = teacher ? teacher.name : 'Giáo viên';
+    const teacherSubject = teacher ? teacher.subject : '';
 
     // Tính sĩ số chuẩn theo từng lớp được giao bài tập
     let totalStudents = db.users.filter(u => u.role === 'student').length;
@@ -237,6 +247,8 @@ app.get('/api/assignments', (req, res) => {
     return {
       ...asm,
       targetClass: asm.targetClass || 'ALL',
+      teacherName,
+      teacherSubject,
       stats: {
         totalStudents,
         submittedCount,
@@ -291,31 +303,42 @@ app.post('/api/assignments', upload.single('attachment'), (req, res) => {
   res.json({ success: true, message: `Giao bài tập mới cho lớp ${cleanTargetClass} thành công!`, assignment: newAssignment });
 });
 
-// 4. Giáo viên xóa bài tập
+// 4. Giáo viên xóa bài tập (Chỉ người tạo mới được xóa)
 app.delete('/api/assignments/:id', (req, res) => {
   const { id } = req.params;
+  const { teacherId } = req.query;
   const db = readDatabase();
 
-  const initialLength = db.assignments.length;
-  db.assignments = db.assignments.filter(a => a.id !== id);
-  db.submissions = db.submissions.filter(s => s.assignmentId !== id);
-
-  if (db.assignments.length === initialLength) {
+  const target = db.assignments.find(a => a.id === id);
+  if (!target) {
     return res.status(404).json({ message: "Không tìm thấy bài tập cần xóa." });
   }
+
+  if (teacherId && target.createdBy && target.createdBy !== teacherId) {
+    return res.status(403).json({ message: "Bạn không có quyền xóa bài tập của giáo viên khác." });
+  }
+
+  db.assignments = db.assignments.filter(a => a.id !== id);
+  db.submissions = db.submissions.filter(s => s.assignmentId !== id);
 
   writeDatabase(db);
   res.json({ success: true, message: "Đã xóa bài tập thành công." });
 });
 
-// 5. Giáo viên xem danh sách học sinh nộp bài (Chỉ hiện học sinh thuộc lớp nhận bài)
+// 5. Giáo viên xem danh sách học sinh nộp bài (Bảo mật: Chỉ giáo viên tạo bài mới được xem bài nộp & file)
 app.get('/api/assignments/:id/submissions', (req, res) => {
   const { id } = req.params;
+  const { teacherId } = req.query;
   const db = readDatabase();
 
   const assignment = db.assignments.find(a => a.id === id);
   if (!assignment) {
     return res.status(404).json({ message: "Không tìm thấy bài tập." });
+  }
+
+  // BẢO VỆ: Giáo viên khác không được xem bài nộp hoặc file của bài tập này
+  if (teacherId && assignment.createdBy && assignment.createdBy !== teacherId) {
+    return res.status(403).json({ message: "Bạn không có quyền xem bài tập hoặc bài nộp của giáo viên khác." });
   }
 
   // Lọc chỉ lấy học sinh của lớp nhận bài tập
@@ -415,10 +438,10 @@ app.post('/api/submissions', upload.single('submissionFile'), (req, res) => {
   res.json({ success: true, message: "Nộp bài tập thành công!" });
 });
 
-// 7. Giáo viên chấm điểm
+// 7. Giáo viên chấm điểm (Bảo mật: Chỉ giáo viên tạo bài mới được chấm)
 app.post('/api/submissions/:id/grade', (req, res) => {
   const { id } = req.params;
-  const { grade, feedback } = req.body;
+  const { grade, feedback, teacherId } = req.body;
 
   const numGrade = parseFloat(grade);
   if (isNaN(numGrade) || numGrade < 0 || numGrade > 10) {
@@ -430,6 +453,11 @@ app.post('/api/submissions/:id/grade', (req, res) => {
 
   if (!sub) {
     return res.status(404).json({ message: "Không tìm thấy bài nộp." });
+  }
+
+  const assignment = db.assignments.find(a => a.id === sub.assignmentId);
+  if (teacherId && assignment && assignment.createdBy && assignment.createdBy !== teacherId) {
+    return res.status(403).json({ message: "Bạn không có quyền chấm điểm bài tập của giáo viên khác." });
   }
 
   sub.grade = Math.round(numGrade * 10) / 10;
