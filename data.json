@@ -219,10 +219,21 @@
       "title": "Làm bài báo cáo về 10 nguyên lý chuyển động trong motion graphics",
       "description": "Làm file ppt",
       "targetClass": "C08TK",
+      "subject": "Motion Graphics",
       "dueDate": "2026-11-04T06:00",
       "createdAt": "2026-11-02T08:43:59.129Z",
       "attachment": null,
       "createdBy": "u_teacher_danh"
+    }
+  ],
+  "subjects": [
+    {
+      "id": "subj_motion_graphics",
+      "name": "Motion Graphics",
+      "className": "C08TK",
+      "teacherId": "u_teacher_danh",
+      "teacherName": "Thầy Nguyễn Công Danh",
+      "createdAt": "2026-11-02T08:00:00.000Z"
     }
   ],
   "submissions": []

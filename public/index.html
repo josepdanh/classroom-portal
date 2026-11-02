@@ -209,13 +209,35 @@
         </div>
       </div>
 
-      <!-- Thanh quản lý & Lọc theo Lớp học -->
+      <!-- Thanh quản lý & Lọc theo Lớp học (Hiển thị cho tất cả giáo viên) -->
       <div class="bg-white rounded-2xl border border-slate-200 p-4 shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-3">
         <div class="flex items-center gap-2 overflow-x-auto pb-1 sm:pb-0" id="teacher-class-tabs">
           <!-- Render danh sách tab lớp học qua JS -->
         </div>
-        <button onclick="promptCreateClass()" class="text-xs font-semibold px-3 py-2 rounded-xl bg-indigo-50 text-indigo-700 hover:bg-indigo-100 transition flex items-center gap-1.5 self-start sm:self-auto shrink-0 border border-indigo-100 shadow-sm">
-          <i class="fa-solid fa-folder-plus text-sm"></i> Tạo Lớp Học Mới
+        <div class="flex items-center gap-2 self-start sm:self-auto shrink-0 flex-wrap">
+          <button onclick="openCreateSubjectModal()" class="text-xs font-semibold px-3.5 py-2 rounded-xl bg-violet-50 text-violet-700 hover:bg-violet-100 transition flex items-center gap-1.5 border border-violet-200 shadow-sm" title="Giáo viên tự tạo môn học cho lớp đang chọn">
+            <i class="fa-solid fa-book-bookmark text-sm"></i> + Tạo Môn Học Cho Lớp
+          </button>
+          <!-- Nút chỉ hiển thị cho Quản trị viên (Thầy Nguyễn Công Danh) -->
+          <button id="btn-create-class" onclick="promptCreateClass()" class="hidden text-xs font-semibold px-3 py-2 rounded-xl bg-amber-500 hover:bg-amber-600 text-white transition flex items-center gap-1.5 shadow-sm" title="Chỉ Thầy Nguyễn Công Danh mới có quyền tạo thêm lớp">
+            <i class="fa-solid fa-folder-plus text-sm"></i> + Tạo Lớp Mới (Admin)
+          </button>
+        </div>
+      </div>
+
+      <!-- Khung hiển thị các môn học giáo viên đang dạy ở lớp hiện tại -->
+      <div id="teacher-subjects-bar" class="bg-indigo-50/50 border border-indigo-100 rounded-2xl p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs">
+        <div class="flex items-center gap-2 flex-wrap">
+          <span class="font-bold text-slate-700 flex items-center gap-1.5">
+            <i class="fa-solid fa-graduation-cap text-indigo-600 text-sm"></i>
+            Môn học của bạn tại lớp này:
+          </span>
+          <div id="teacher-subjects-chips" class="flex items-center gap-1.5 flex-wrap">
+            <!-- Render qua JS -->
+          </div>
+        </div>
+        <button onclick="openCreateSubjectModal()" class="text-indigo-600 hover:text-indigo-800 font-semibold flex items-center gap-1 shrink-0">
+          <i class="fa-solid fa-plus-circle"></i> Thêm môn cho lớp này
         </button>
       </div>
 
@@ -374,6 +396,37 @@
     </div>
   </div>
 
+  <!-- ================= MODAL: GIÁO VIÊN TẠO MÔN HỌC MỚI CHO LỚP ================= -->
+  <div id="modal-create-subject" class="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm hidden items-center justify-center p-4">
+    <div class="bg-white w-full max-w-md rounded-2xl shadow-2xl border border-slate-100 overflow-hidden transform transition-all">
+      <div class="px-6 py-4 bg-slate-900 text-white flex justify-between items-center">
+        <h3 class="font-bold text-base flex items-center gap-2">
+          <i class="fa-solid fa-book-bookmark text-amber-400"></i> Tạo Môn Học Mới Cho Lớp
+        </h3>
+        <button onclick="closeModal('modal-create-subject')" class="text-slate-400 hover:text-white text-xl font-bold">&times;</button>
+      </div>
+      <form onsubmit="handleCreateSubject(event)" class="p-6 space-y-4">
+        <div>
+          <label class="block text-sm font-medium text-slate-700 mb-1">Chọn Lớp học giảng dạy <span class="text-red-500">*</span></label>
+          <select id="subject-target-class" required class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-sm outline-none bg-white font-medium">
+            <!-- Render danh sách tất cả các lớp qua JS -->
+          </select>
+          <p class="text-xs text-slate-400 mt-1">Tất cả các lớp trong trường đều hiển thị để giáo viên tự tạo môn học.</p>
+        </div>
+
+        <div>
+          <label class="block text-sm font-medium text-slate-700 mb-1">Tên Môn học <span class="text-red-500">*</span></label>
+          <input type="text" id="subject-name" required class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-sm outline-none" placeholder="Ví dụ: Motion Graphics, Thiết Kế 2D, Photoshop...">
+        </div>
+
+        <div class="pt-3 border-t border-slate-100 flex justify-end space-x-3">
+          <button type="button" onclick="closeModal('modal-create-subject')" class="px-4 py-2 rounded-xl border border-slate-300 text-slate-600 hover:bg-slate-50 text-sm font-medium">Hủy bỏ</button>
+          <button type="submit" class="px-5 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-semibold shadow-md shadow-indigo-100">Xác Nhận Tạo Môn</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
   <!-- ================= MODAL: GIÁO VIÊN TẠO BÀI TẬP MỚI ================= -->
   <div id="modal-create-assignment" class="fixed inset-0 z-50 bg-slate-900/50 backdrop-blur-sm hidden items-center justify-center p-4">
     <div class="bg-white w-full max-w-xl rounded-2xl shadow-2xl border border-slate-100 overflow-hidden transform transition-all">
@@ -387,14 +440,23 @@
         <div>
           <label class="block text-sm font-medium text-slate-700 mb-1">Giao cho lớp học <span class="text-red-500">*</span></label>
           <div class="flex gap-2">
-            <select id="create-target-class" required class="flex-1 px-3.5 py-2 rounded-xl border border-slate-300 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-sm outline-none bg-white">
+            <select id="create-target-class" onchange="handleCreateClassChange()" required class="flex-1 px-3.5 py-2 rounded-xl border border-slate-300 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-sm outline-none bg-white">
               <!-- Rendered via JS -->
             </select>
-            <button type="button" onclick="promptCreateClass(true)" title="Tạo lớp mới" class="px-3 py-2 rounded-xl border border-slate-300 hover:bg-slate-50 text-indigo-600 text-xs font-semibold flex items-center gap-1">
+            <button id="btn-modal-create-class" type="button" onclick="promptCreateClass(true)" title="Tạo lớp mới (Chỉ Thầy Nguyễn Công Danh)" class="hidden px-3 py-2 rounded-xl border border-slate-300 hover:bg-slate-50 text-amber-600 text-xs font-semibold flex items-center gap-1">
               <i class="fa-solid fa-plus"></i> Lớp mới
             </button>
           </div>
           <p class="text-xs text-slate-400 mt-1">Chỉ học sinh thuộc lớp này mới nhìn thấy và nộp được bài tập.</p>
+        </div>
+
+        <div>
+          <label class="block text-sm font-medium text-slate-700 mb-1">Môn học <span class="text-red-500">*</span></label>
+          <input type="text" id="create-subject" required list="teacher-subjects-datalist" class="w-full px-3.5 py-2 rounded-xl border border-slate-300 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-sm outline-none" placeholder="Chọn hoặc nhập môn học (ví dụ: Motion Graphics, Photoshop, Tin học...)">
+          <datalist id="teacher-subjects-datalist">
+            <!-- Gợi ý môn học qua JS -->
+          </datalist>
+          <p class="text-xs text-slate-400 mt-1">Bạn có thể chọn từ danh sách môn đã tạo hoặc gõ tên môn mới.</p>
         </div>
 
         <div>
@@ -745,7 +807,19 @@
           btnAdmin.classList.add('hidden');
         }
 
+        // Nút Tạo Lớp Mới: Chỉ Admin (Thầy Nguyễn Công Danh) mới được tạo thêm lớp
+        const btnCreateClass = document.getElementById('btn-create-class');
+        const btnModalCreateClass = document.getElementById('btn-modal-create-class');
+        if (currentUser.isAdmin) {
+          if (btnCreateClass) btnCreateClass.classList.remove('hidden');
+          if (btnModalCreateClass) btnModalCreateClass.classList.remove('hidden');
+        } else {
+          if (btnCreateClass) btnCreateClass.classList.add('hidden');
+          if (btnModalCreateClass) btnModalCreateClass.classList.add('hidden');
+        }
+
         loadClasses();
+        loadTeacherSubjects();
         loadTeacherData();
       } else {
         document.getElementById('view-teacher').classList.add('hidden');
@@ -817,6 +891,144 @@
         });
         selectReg.innerHTML = html;
       }
+
+      // 3. Dropdown cho Giáo viên chọn lớp khi tạo Môn học mới
+      const selectSubjClass = document.getElementById('subject-target-class');
+      if (selectSubjClass && availableClasses.length > 0) {
+        let html = '';
+        availableClasses.forEach(cls => {
+          const isSel = (teacherSelectedClass === cls || cls === 'C08TK') ? 'selected' : '';
+          html += `<option value="${cls}" ${isSel}>Lớp ${escapeHtml(cls)}</option>`;
+        });
+        selectSubjClass.innerHTML = html;
+      }
+    }
+
+    // ================= QUẢN LÝ MÔN HỌC (SUBJECTS) CHO GIÁO VIÊN =================
+    let teacherSubjectsList = [];
+
+    async function loadTeacherSubjects() {
+      if (!currentUser || currentUser.role !== 'teacher') return;
+      try {
+        const res = await fetch(`/api/subjects?teacherId=${encodeURIComponent(currentUser.id)}`);
+        const data = await res.json();
+        teacherSubjectsList = data.subjects || [];
+        renderTeacherSubjectsChips();
+        updateSubjectDatalist();
+      } catch (e) {
+        console.error("Lỗi tải môn học:", e);
+      }
+    }
+
+    function renderTeacherSubjectsChips() {
+      const container = document.getElementById('teacher-subjects-chips');
+      if (!container) return;
+
+      let list = teacherSubjectsList;
+      if (teacherSelectedClass && teacherSelectedClass !== 'ALL') {
+        list = teacherSubjectsList.filter(s => s.className.toUpperCase() === teacherSelectedClass.toUpperCase());
+      }
+
+      if (list.length === 0) {
+        container.innerHTML = `<span class="text-slate-400 italic">Chưa tạo môn học nào cho lớp này. Bấm "+ Tạo Môn Học" để thêm!</span>`;
+        return;
+      }
+
+      container.innerHTML = list.map(s => {
+        return `
+          <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-white border border-indigo-200 text-indigo-900 font-bold shadow-xs">
+            <i class="fa-solid fa-book-open text-indigo-500 text-[11px]"></i>
+            <span>${escapeHtml(s.name)}</span>
+            ${teacherSelectedClass === 'ALL' ? `<span class="text-[10px] bg-slate-100 text-slate-600 px-1.5 py-0.2 rounded font-medium">Lớp ${escapeHtml(s.className)}</span>` : ''}
+            <button onclick="handleDeleteSubject('${s.id}', '${escapeHtml(s.name)}', '${escapeHtml(s.className)}')" title="Xóa môn này" class="text-slate-400 hover:text-rose-600 font-bold text-xs ml-0.5 transition">
+              &times;
+            </button>
+          </span>
+        `;
+      }).join('');
+    }
+
+    function updateSubjectDatalist(targetClass = null) {
+      const datalist = document.getElementById('teacher-subjects-datalist');
+      if (!datalist) return;
+
+      const cls = targetClass || (document.getElementById('create-target-class') ? document.getElementById('create-target-class').value : teacherSelectedClass);
+      let list = teacherSubjectsList;
+      if (cls && cls !== 'ALL') {
+        list = teacherSubjectsList.filter(s => s.className.toUpperCase() === cls.toUpperCase());
+      }
+
+      const names = Array.from(new Set(list.map(s => s.name)));
+      datalist.innerHTML = names.map(n => `<option value="${escapeHtml(n)}">`).join('');
+    }
+
+    function handleCreateClassChange() {
+      const cls = document.getElementById('create-target-class').value;
+      updateSubjectDatalist(cls);
+    }
+
+    function openCreateSubjectModal() {
+      populateClassDropdowns();
+      if (teacherSelectedClass && teacherSelectedClass !== 'ALL') {
+        const select = document.getElementById('subject-target-class');
+        if (select) select.value = teacherSelectedClass;
+      }
+      document.getElementById('subject-name').value = '';
+      document.getElementById('modal-create-subject').classList.remove('hidden');
+      document.getElementById('modal-create-subject').classList.add('flex');
+    }
+
+    async function handleCreateSubject(e) {
+      e.preventDefault();
+      const className = document.getElementById('subject-target-class').value;
+      const name = document.getElementById('subject-name').value.trim();
+
+      if (!className || !name) {
+        showToast("Vui lòng chọn lớp và nhập tên môn học!", "warning");
+        return;
+      }
+
+      try {
+        const res = await fetch('/api/subjects', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ className, name, teacherId: currentUser.id })
+        });
+        const data = await res.json();
+        if (!res.ok) {
+          showToast(data.message || "Lỗi tạo môn học", "error");
+          return;
+        }
+
+        showToast(data.message, "success");
+        closeModal('modal-create-subject');
+        await loadTeacherSubjects();
+        if (teacherSelectedClass !== 'ALL' && teacherSelectedClass !== className) {
+          setTeacherClassFilter(className);
+        }
+      } catch (err) {
+        showToast("Lỗi kết nối khi tạo môn học!", "error");
+      }
+    }
+
+    async function handleDeleteSubject(subjectId, name, className) {
+      if (!confirm(`Bạn có chắc muốn xóa môn "${name}" khỏi lớp ${className}?`)) return;
+
+      try {
+        const res = await fetch(`/api/subjects/${subjectId}?teacherId=${encodeURIComponent(currentUser.id)}`, {
+          method: 'DELETE'
+        });
+        const data = await res.json();
+        if (!res.ok) {
+          showToast(data.message || "Lỗi xóa môn học", "error");
+          return;
+        }
+
+        showToast(data.message, "success");
+        await loadTeacherSubjects();
+      } catch (err) {
+        showToast("Lỗi kết nối khi xóa môn học!", "error");
+      }
     }
 
     // Học sinh tự đổi hoặc chọn lớp học
@@ -854,7 +1066,13 @@
       }
     }
 
+    // CHỈ ADMIN (Thầy Nguyễn Công Danh) MỚI ĐƯỢC TẠO THÊM LỚP HỌC MỚI
     async function promptCreateClass(autoSelectInModal = false) {
+      if (!currentUser || !currentUser.isAdmin) {
+        showToast("Chỉ Quản trị viên (Thầy Nguyễn Công Danh) mới có quyền tạo thêm lớp học mới!", "warning");
+        return;
+      }
+
       const name = prompt("Nhập tên lớp học mới cần tạo (ví dụ: C09TK, 11A2, 12A1):");
       if (!name || !name.trim()) return;
 
@@ -862,7 +1080,7 @@
         const res = await fetch('/api/classes', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ name: name.trim() })
+          body: JSON.stringify({ name: name.trim(), adminId: currentUser.id })
         });
         const data = await res.json();
         if (!res.ok) {
@@ -884,6 +1102,11 @@
 
     function setTeacherClassFilter(cls) {
       teacherSelectedClass = cls;
+      renderTeacherClassTabs();
+      renderTeacherSubjectsChips();
+      updateSubjectDatalist();
+      loadTeacherData();
+    }
       renderTeacherClassTabs();
       loadTeacherData();
     }
@@ -935,6 +1158,7 @@
         const targetBadge = (!asm.targetClass || asm.targetClass === 'ALL')
           ? `<span class="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-slate-100 text-slate-600 border border-slate-200"><i class="fa-solid fa-globe mr-1"></i>Tất cả lớp</span>`
           : `<span class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-violet-50 text-violet-700 border border-violet-200"><i class="fa-solid fa-users mr-1"></i>Lớp: ${escapeHtml(asm.targetClass)}</span>`;
+        const subjectBadge = `<span class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-amber-50 text-amber-800 border border-amber-200"><i class="fa-solid fa-book-open mr-1"></i>Môn: ${escapeHtml(asm.subject || 'Tin học')}</span>`;
         
         return `
           <div class="p-6 hover:bg-slate-50/70 transition flex flex-col md:flex-row md:items-center justify-between gap-4">
@@ -942,6 +1166,7 @@
               <div class="flex items-center gap-2 flex-wrap">
                 <h3 class="text-base font-bold text-slate-900">${escapeHtml(asm.title)}</h3>
                 ${targetBadge}
+                ${subjectBadge}
                 ${isExpired 
                   ? `<span class="px-2 py-0.5 rounded text-xs font-semibold bg-rose-50 text-rose-600 border border-rose-100">Đã hết hạn</span>`
                   : `<span class="px-2 py-0.5 rounded text-xs font-semibold bg-emerald-50 text-emerald-600 border border-emerald-100">Đang nhận bài</span>`
@@ -988,6 +1213,16 @@
       const defaultDate = new Date(Date.now() + 86400000 * 3);
       document.getElementById('create-due-date').value = defaultDate.toISOString().slice(0, 16);
       populateClassDropdowns();
+      if (teacherSelectedClass && teacherSelectedClass !== 'ALL') {
+        document.getElementById('create-target-class').value = teacherSelectedClass;
+      }
+      updateSubjectDatalist();
+
+      // Điền sẵn môn học mà giáo viên đã tạo cho lớp này
+      const targetCls = document.getElementById('create-target-class').value;
+      const foundSubj = teacherSubjectsList.find(s => s.className.toUpperCase() === targetCls.toUpperCase());
+      document.getElementById('create-subject').value = foundSubj ? foundSubj.name : (currentUser.subject || 'Tin học');
+
       document.getElementById('modal-create-assignment').classList.remove('hidden');
       document.getElementById('modal-create-assignment').classList.add('flex');
     }
@@ -998,6 +1233,7 @@
       const description = document.getElementById('create-description').value.trim();
       const dueDate = document.getElementById('create-due-date').value;
       const targetClass = document.getElementById('create-target-class').value;
+      const subject = document.getElementById('create-subject').value.trim();
       const fileInput = document.getElementById('create-attachment');
 
       const formData = new FormData();
@@ -1005,6 +1241,7 @@
       formData.append('description', description);
       formData.append('dueDate', dueDate);
       formData.append('targetClass', targetClass);
+      formData.append('subject', subject);
       formData.append('teacherId', currentUser.id);
       if (fileInput.files[0]) {
         formData.append('attachment', fileInput.files[0]);
@@ -1027,6 +1264,7 @@
         document.getElementById('create-title').value = '';
         document.getElementById('create-description').value = '';
         fileInput.value = '';
+        await loadTeacherSubjects();
         loadTeacherData();
       } catch (err) {
         showToast("Lỗi khi gửi dữ liệu lên server!", "error");
@@ -1231,6 +1469,7 @@
         const targetClassBadge = (!asm.targetClass || asm.targetClass === 'ALL')
           ? `<span class="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-slate-100 text-slate-600 border border-slate-200"><i class="fa-solid fa-globe mr-1"></i>Chung</span>`
           : `<span class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-violet-50 text-violet-700 border border-violet-100"><i class="fa-solid fa-users mr-1"></i>Lớp: ${escapeHtml(asm.targetClass)}</span>`;
+        const subjectBadge = `<span class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-amber-50 text-amber-800 border border-amber-200"><i class="fa-solid fa-book-open mr-1"></i>Môn: ${escapeHtml(asm.subject || 'Tin học')}</span>`;
 
         let statusBadge = `<span class="px-3 py-1 rounded-full text-xs font-semibold bg-slate-100 text-slate-600 border border-slate-200"><i class="fa-regular fa-circle mr-1"></i>Chưa nộp bài</span>`;
         let actionArea = `
@@ -1277,6 +1516,7 @@
               <div class="flex items-center gap-2 flex-wrap">
                 <h3 class="font-bold text-slate-900 text-base sm:text-lg">${escapeHtml(asm.title)}</h3>
                 ${targetClassBadge}
+                ${subjectBadge}
                 ${statusBadge}
               </div>
               <div class="text-xs ${isExpired ? 'text-rose-600 font-semibold' : 'text-slate-500'}">
@@ -1300,7 +1540,8 @@
 
             <div class="mt-4 pt-4 border-t border-slate-100 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
               <div class="text-xs text-slate-500 flex items-center gap-3 flex-wrap">
-                ${asm.teacherName ? `<span><i class="fa-solid fa-chalkboard-user mr-1 text-indigo-500"></i>Giáo viên: <b class="text-slate-700">${escapeHtml(asm.teacherName)}</b> (${escapeHtml(asm.teacherSubject || 'Bộ môn')})</span>` : ''}
+                ${asm.teacherName ? `<span><i class="fa-solid fa-chalkboard-user mr-1 text-indigo-500"></i>Giáo viên: <b class="text-slate-700">${escapeHtml(asm.teacherName)}</b></span>` : ''}
+                <span><i class="fa-solid fa-book-open mr-1 text-amber-600"></i>Môn học: <b class="text-slate-700">${escapeHtml(asm.subject || 'Tin học')}</b></span>
                 <span>${sub ? `<i class="fa-regular fa-calendar-check mr-1 text-emerald-500"></i>Đã nộp: <b>${formatDate(sub.submittedAt)}</b>` : '<i class="fa-regular fa-circle text-slate-400 mr-1"></i>Chưa nộp bài làm'}</span>
               </div>
               <div>${actionArea}</div>

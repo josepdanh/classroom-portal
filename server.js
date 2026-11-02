@@ -187,19 +187,114 @@ app.get('/api/classes', (req, res) => {
   res.json({ classes: allUnique });
 });
 
+// CHỈ ADMIN (Thầy Nguyễn Công Danh) MỚI CÓ QUYỀN TẠO THÊM LỚP HỌC MỚI
 app.post('/api/classes', (req, res) => {
-  const { name } = req.body;
+  const { name, adminId } = req.body;
   if (!name || !name.trim()) {
     return res.status(400).json({ message: "Vui lòng nhập tên lớp học." });
   }
-  const cleanName = name.trim().toUpperCase();
+
   const db = readDatabase();
+  const admin = db.users.find(u => u.id === adminId && u.isAdmin);
+  if (!admin) {
+    return res.status(403).json({ 
+      message: "Chỉ Quản trị viên (Thầy Nguyễn Công Danh) mới có quyền tạo thêm lớp học mới! Các giáo viên khác chỉ chọn lớp và tự tạo môn học cho lớp đó." 
+    });
+  }
+
+  const cleanName = name.trim().toUpperCase();
   if (!db.classes) db.classes = [];
   if (!db.classes.map(c => c.toUpperCase()).includes(cleanName)) {
     db.classes.push(cleanName);
     writeDatabase(db);
   }
   res.json({ success: true, message: `Đã tạo lớp ${cleanName} thành công!`, className: cleanName });
+});
+
+// 1e. Quản lý Môn học (Giáo viên tự tạo môn học cho từng lớp)
+app.get('/api/subjects', (req, res) => {
+  const { className, teacherId } = req.query;
+  const db = readDatabase();
+  let subjects = db.subjects || [];
+
+  if (className && className !== 'ALL') {
+    subjects = subjects.filter(s => s.className.toUpperCase() === className.toUpperCase());
+  }
+  if (teacherId) {
+    subjects = subjects.filter(s => s.teacherId === teacherId);
+  }
+
+  res.json({ subjects });
+});
+
+app.post('/api/subjects', (req, res) => {
+  const { className, name, teacherId } = req.body;
+  if (!className || !name || !name.trim() || !teacherId) {
+    return res.status(400).json({ message: "Vui lòng chọn lớp, nhập tên môn học và xác nhận tài khoản giáo viên." });
+  }
+
+  const db = readDatabase();
+  const teacher = db.users.find(u => u.id === teacherId && u.role === 'teacher' && u.status === 'ACTIVE');
+  if (!teacher) {
+    return res.status(403).json({ message: "Chỉ giáo viên đã được kích hoạt mới có quyền tạo môn học." });
+  }
+
+  const cleanClassName = className.trim().toUpperCase();
+  const cleanSubjectName = name.trim();
+
+  if (!db.subjects) db.subjects = [];
+
+  const existing = db.subjects.find(
+    s => s.className.toUpperCase() === cleanClassName && 
+         s.name.toLowerCase() === cleanSubjectName.toLowerCase() &&
+         s.teacherId === teacherId
+  );
+  if (existing) {
+    return res.status(400).json({ message: `Bạn đã tạo môn "${cleanSubjectName}" cho lớp ${cleanClassName} rồi!` });
+  }
+
+  const newSubject = {
+    id: `subj_${Date.now()}`,
+    name: cleanSubjectName,
+    className: cleanClassName,
+    teacherId: teacher.id,
+    teacherName: teacher.name,
+    createdAt: new Date().toISOString()
+  };
+
+  db.subjects.push(newSubject);
+  writeDatabase(db);
+
+  res.json({ 
+    success: true, 
+    message: `Đã tạo môn học "${cleanSubjectName}" cho lớp ${cleanClassName} thành công!`, 
+    subject: newSubject 
+  });
+});
+
+app.delete('/api/subjects/:id', (req, res) => {
+  const { id } = req.params;
+  const { teacherId } = req.query;
+  const db = readDatabase();
+
+  const user = db.users.find(u => u.id === teacherId);
+  if (!user || user.role !== 'teacher') {
+    return res.status(403).json({ message: "Chỉ giáo viên mới có quyền thao tác." });
+  }
+
+  const target = (db.subjects || []).find(s => s.id === id);
+  if (!target) {
+    return res.status(404).json({ message: "Không tìm thấy môn học cần xóa." });
+  }
+
+  if (target.teacherId !== teacherId && !user.isAdmin) {
+    return res.status(403).json({ message: "Bạn chỉ có thể xóa môn học do chính bạn tạo ra." });
+  }
+
+  db.subjects = db.subjects.filter(s => s.id !== id);
+  writeDatabase(db);
+
+  res.json({ success: true, message: `Đã xóa môn "${target.name}" của lớp ${target.className} thành công!` });
 });
 
 // Cho phép học sinh đổi / chọn lớp học
@@ -362,6 +457,7 @@ app.get('/api/assignments', (req, res) => {
     return {
       ...asm,
       targetClass: asm.targetClass || 'ALL',
+      subject: asm.subject || teacherSubject || 'Tin học',
       teacherName,
       teacherSubject,
       stats: {
@@ -378,9 +474,9 @@ app.get('/api/assignments', (req, res) => {
   res.json({ assignments: result });
 });
 
-// 3. Giáo viên tạo bài tập mới (Chỉ định rõ lớp học nhận bài)
+// 3. Giáo viên tạo bài tập mới (Chỉ định rõ lớp học nhận bài và Môn học)
 app.post('/api/assignments', upload.single('attachment'), (req, res) => {
-  const { title, description, dueDate, teacherId, targetClass } = req.body;
+  const { title, description, dueDate, teacherId, targetClass, subject } = req.body;
 
   if (!title || !description || !dueDate) {
     return res.status(400).json({ message: "Vui lòng điền đầy đủ tiêu đề, yêu cầu và hạn nộp." });
@@ -388,12 +484,32 @@ app.post('/api/assignments', upload.single('attachment'), (req, res) => {
 
   const db = readDatabase();
   const cleanTargetClass = targetClass && targetClass.trim() ? targetClass.trim().toUpperCase() : 'ALL';
+  const teacher = db.users.find(u => u.id === teacherId);
+  const cleanSubject = (subject && subject.trim()) ? subject.trim() : (teacher && teacher.subject ? teacher.subject : 'Tin học');
 
   // Tự động ghi nhớ lớp mới nếu chưa có
   if (cleanTargetClass !== 'ALL') {
     if (!db.classes) db.classes = [];
     if (!db.classes.map(c => c.toUpperCase()).includes(cleanTargetClass)) {
       db.classes.push(cleanTargetClass);
+    }
+
+    // Tự động lưu môn học vào danh mục môn của lớp này nếu chưa có
+    if (!db.subjects) db.subjects = [];
+    const hasSub = db.subjects.some(
+      s => s.className.toUpperCase() === cleanTargetClass && 
+           s.name.toLowerCase() === cleanSubject.toLowerCase() && 
+           s.teacherId === teacherId
+    );
+    if (!hasSub) {
+      db.subjects.push({
+        id: `subj_${Date.now()}`,
+        name: cleanSubject,
+        className: cleanTargetClass,
+        teacherId: teacher ? teacher.id : (teacherId || 'u_teacher_danh'),
+        teacherName: teacher ? teacher.name : 'Giáo viên',
+        createdAt: new Date().toISOString()
+      });
     }
   }
 
@@ -402,6 +518,7 @@ app.post('/api/assignments', upload.single('attachment'), (req, res) => {
     title: title.trim(),
     description: description.trim(),
     targetClass: cleanTargetClass,
+    subject: cleanSubject,
     dueDate,
     createdAt: new Date().toISOString(),
     attachment: req.file ? {
