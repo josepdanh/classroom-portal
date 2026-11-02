@@ -166,7 +166,11 @@ function readDatabase() {
   }
   try {
     const raw = fs.readFileSync(DATA_FILE, 'utf8');
-    return JSON.parse(raw);
+    const data = JSON.parse(raw);
+    if (!data.gradeSheets) data.gradeSheets = [];
+    if (!data.subjects) data.subjects = [];
+    if (!data.classes) data.classes = [];
+    return data;
   } catch (err) {
     console.error("Lỗi đọc database. Khôi phục dữ liệu ban đầu:", err);
     fs.writeFileSync(DATA_FILE, JSON.stringify(initialData, null, 2), 'utf8');
@@ -258,7 +262,7 @@ app.get('/api/auth/verify', (req, res) => {
 
 // 1b. Đăng ký tài khoản mới (Giáo viên hoặc Học sinh)
 app.post('/api/auth/register', (req, res) => {
-  const { username, password, name, role, className, subject, email } = req.body;
+  const { username, password, name, role, className, subject, email, dob } = req.body;
   if (!username || !password || !name || !role) {
     return res.status(400).json({ message: "Vui lòng điền đầy đủ các thông tin bắt buộc." });
   }
@@ -279,6 +283,7 @@ app.post('/api/auth/register', (req, res) => {
     username: username.trim(),
     password: password.trim(),
     name: name.trim(),
+    dob: role === 'student' ? (dob ? dob.trim() : undefined) : undefined,
     email: email && email.includes('@') ? email.trim().toLowerCase() : undefined,
     role: role,
     className: role === 'student' ? (className ? className.trim().toUpperCase() : 'C08TK01') : undefined,
@@ -885,6 +890,341 @@ app.post('/api/submissions/:id/grade', (req, res) => {
 
   writeDatabase(db);
   res.json({ success: true, message: "Đã lưu điểm và nhận xét thành công!", submission: sub });
+});
+
+// 7b. Giáo viên nhập điểm trực tiếp trên bảng nộp bài tập (Từng học sinh)
+app.post('/api/assignments/:assignmentId/grade-student', (req, res) => {
+  const { assignmentId } = req.params;
+  const { studentId, grade, feedback, teacherId } = req.body;
+
+  const db = readDatabase();
+  const assignment = db.assignments.find(a => a.id === assignmentId);
+  if (!assignment) {
+    return res.status(404).json({ message: "Không tìm thấy bài tập." });
+  }
+
+  if (teacherId && assignment.createdBy && assignment.createdBy !== teacherId) {
+    return res.status(403).json({ message: "Bạn không có quyền chấm điểm bài tập của giáo viên khác." });
+  }
+
+  let numGrade = null;
+  if (grade !== null && grade !== undefined && grade !== '') {
+    numGrade = parseFloat(grade);
+    if (isNaN(numGrade) || numGrade < 0 || numGrade > 10) {
+      return res.status(400).json({ message: "Điểm số phải là số thực từ 0.0 đến 10.0." });
+    }
+    numGrade = Math.round(numGrade * 10) / 10;
+  }
+
+  let sub = db.submissions.find(s => s.assignmentId === assignmentId && s.studentId === studentId);
+  if (!sub) {
+    const student = db.users.find(u => u.id === studentId);
+    sub = {
+      id: `sub_${Date.now()}_${Math.random().toString(36).substr(2, 5)}`,
+      assignmentId,
+      studentId,
+      studentName: student ? student.name : studentId,
+      content: "",
+      link: "",
+      file: null,
+      submittedAt: new Date().toISOString(),
+      grade: numGrade,
+      feedback: feedback ? feedback.trim() : "",
+      gradedAt: new Date().toISOString()
+    };
+    db.submissions.push(sub);
+  } else {
+    sub.grade = numGrade;
+    if (feedback !== undefined) {
+      sub.feedback = feedback ? feedback.trim() : "";
+    }
+    sub.gradedAt = new Date().toISOString();
+  }
+
+  writeDatabase(db);
+  res.json({ success: true, message: "Đã lưu điểm thành công!", submission: sub });
+});
+
+// 7c. Giáo viên lưu tất cả điểm trên bảng nộp bài (Batch Grade)
+app.post('/api/assignments/:assignmentId/batch-grade', (req, res) => {
+  const { assignmentId } = req.params;
+  const { teacherId, grades } = req.body;
+
+  if (!Array.isArray(grades)) {
+    return res.status(400).json({ message: "Danh sách điểm không hợp lệ." });
+  }
+
+  const db = readDatabase();
+  const assignment = db.assignments.find(a => a.id === assignmentId);
+  if (!assignment) {
+    return res.status(404).json({ message: "Không tìm thấy bài tập." });
+  }
+
+  if (teacherId && assignment.createdBy && assignment.createdBy !== teacherId) {
+    return res.status(403).json({ message: "Bạn không có quyền chấm điểm bài tập của giáo viên khác." });
+  }
+
+  let updatedCount = 0;
+  grades.forEach(item => {
+    const { studentId, grade, feedback } = item;
+    if (!studentId) return;
+
+    let numGrade = null;
+    if (grade !== null && grade !== undefined && grade !== '') {
+      numGrade = parseFloat(grade);
+      if (isNaN(numGrade) || numGrade < 0 || numGrade > 10) return;
+      numGrade = Math.round(numGrade * 10) / 10;
+    }
+
+    let sub = db.submissions.find(s => s.assignmentId === assignmentId && s.studentId === studentId);
+    if (!sub) {
+      const student = db.users.find(u => u.id === studentId);
+      sub = {
+        id: `sub_${Date.now()}_${Math.random().toString(36).substr(2, 5)}`,
+        assignmentId,
+        studentId,
+        studentName: student ? student.name : studentId,
+        content: "",
+        link: "",
+        file: null,
+        submittedAt: new Date().toISOString(),
+        grade: numGrade,
+        feedback: feedback ? feedback.trim() : "",
+        gradedAt: new Date().toISOString()
+      };
+      db.submissions.push(sub);
+      updatedCount++;
+    } else {
+      sub.grade = numGrade;
+      if (feedback !== undefined) {
+        sub.feedback = feedback ? feedback.trim() : "";
+      }
+      sub.gradedAt = new Date().toISOString();
+      updatedCount++;
+    }
+  });
+
+  writeDatabase(db);
+  res.json({ success: true, message: `Đã lưu thành công ${updatedCount} điểm học sinh!`, updatedCount });
+});
+
+// ================= BẢNG ĐIỂM THÀNH PHẦN MÔN HỌC/MÔ ĐUN (THEO MẪU TRƯỜNG CĐ HÒA BÌNH XUÂN LỘC) =================
+
+// 7d. Lấy danh sách các bảng điểm hiện có
+app.get('/api/grade-sheets', (req, res) => {
+  const { teacherId } = req.query;
+  const db = readDatabase();
+  let sheets = db.gradeSheets || [];
+  if (teacherId) {
+    sheets = sheets.filter(s => !s.teacherId || s.teacherId === teacherId);
+  }
+  res.json({ success: true, sheets });
+});
+
+// 7e. Lấy bảng điểm chi tiết theo Lớp & Môn học (Tự động đồng bộ tất cả học sinh đã đăng ký trong hệ thống)
+app.get('/api/grade-sheets/sheet', (req, res) => {
+  const { className, subjectName, teacherId } = req.query;
+  if (!className || !subjectName) {
+    return res.status(400).json({ message: "Vui lòng cung cấp tên lớp và tên môn học." });
+  }
+
+  const db = readDatabase();
+  const cleanClass = className.trim().toUpperCase();
+  const cleanSubject = subjectName.trim();
+
+  // Tìm bảng điểm đã lưu
+  let sheet = (db.gradeSheets || []).find(
+    s => s.className.trim().toUpperCase() === cleanClass && s.subjectName.trim().toLowerCase() === cleanSubject.toLowerCase()
+  );
+
+  // Lấy toàn bộ học sinh thuộc lớp này đã đăng ký trong hệ thống
+  const registeredStudents = db.users.filter(
+    u => u.role === 'student' && u.className && u.className.trim().toUpperCase() === cleanClass
+  );
+
+  // Sắp xếp học sinh theo mã HS / username tăng dần
+  registeredStudents.sort((a, b) => (a.username || '').localeCompare(b.username || ''));
+
+  if (!sheet) {
+    // Tìm thông tin giáo viên
+    const teacher = db.users.find(u => u.id === teacherId) || db.users.find(u => u.role === 'teacher');
+    
+    // Tạo bảng điểm mới chuẩn hóa theo mẫu trường CĐ Hòa Bình Xuân Lộc
+    const records = registeredStudents.map((s, idx) => ({
+      tt: idx + 1,
+      studentId: s.id,
+      studentCode: s.username,
+      name: s.name,
+      dob: s.dob || "",
+      hs1: null,
+      hs2_1: null,
+      hs2_2: null,
+      hs2_3: null,
+      hs2_4: null,
+      note: ""
+    }));
+
+    const now = new Date();
+    sheet = {
+      id: `gs_${Date.now()}`,
+      schoolName: "TRƯỜNG CĐ HÒA BÌNH XUÂN LỘC",
+      departmentName: "KHOA MỸ THUẬT - CNTT",
+      title: "BẢNG ĐIỂM THÀNH PHẦN MÔN HỌC/MÔ ĐUN",
+      subjectName: cleanSubject,
+      className: cleanClass,
+      majorName: cleanClass.includes("MG") ? "Quản trị mạng máy tính" : "Thiết kế đồ họa",
+      courseCohort: "Khóa: 15",
+      totalPeriods: 45,
+      credits: 2,
+      academicDate: `Đồng Nai, ngày ${now.getDate()} tháng ${now.getMonth() + 1} năm ${now.getFullYear()}`,
+      deanName: "Nguyễn Văn Quang",
+      teacherName: teacher ? teacher.name : "Nguyễn Công Danh",
+      teacherId: teacher ? teacher.id : (teacherId || "u_teacher_danh"),
+      records: records,
+      updatedAt: now.toISOString()
+    };
+
+    if (!db.gradeSheets) db.gradeSheets = [];
+    db.gradeSheets.push(sheet);
+    writeDatabase(db);
+  } else {
+    // Nếu bảng điểm đã tồn tại: TỰ ĐỘNG ĐỒNG BỘ VỚI HỌC SINH MỚI ĐĂNG KÝ
+    if (!sheet.records) sheet.records = [];
+
+    // Duyệt qua tất cả học sinh đã đăng ký trong hệ thống
+    registeredStudents.forEach(st => {
+      let rec = sheet.records.find(r => r.studentCode === st.username || r.studentId === st.id);
+      if (!rec) {
+        // Học sinh mới đăng ký -> Tự động thêm vào bảng điểm!
+        sheet.records.push({
+          tt: sheet.records.length + 1,
+          studentId: st.id,
+          studentCode: st.username,
+          name: st.name,
+          dob: st.dob || "",
+          hs1: null,
+          hs2_1: null,
+          hs2_2: null,
+          hs2_3: null,
+          hs2_4: null,
+          note: ""
+        });
+      } else {
+        // Cập nhật thông tin đồng bộ nếu user đã đổi tên hoặc ngày sinh
+        if (st.name && !rec.name) rec.name = st.name;
+        if (st.dob && !rec.dob) rec.dob = st.dob;
+        if (!rec.studentId) rec.studentId = st.id;
+      }
+    });
+
+    // Sắp xếp lại records theo studentCode hoặc TT
+    sheet.records.sort((a, b) => (a.studentCode || '').localeCompare(b.studentCode || ''));
+
+    // Đánh số thứ tự lại từ 1 đến N
+    sheet.records.forEach((r, idx) => {
+      r.tt = idx + 1;
+    });
+
+    writeDatabase(db);
+  }
+
+  res.json({ success: true, sheet });
+});
+
+// 7f. Lưu toàn bộ bảng điểm thành phần
+app.post('/api/grade-sheets/save', (req, res) => {
+  const { sheet } = req.body;
+  if (!sheet || !sheet.className || !sheet.subjectName || !Array.isArray(sheet.records)) {
+    return res.status(400).json({ message: "Dữ liệu bảng điểm không hợp lệ." });
+  }
+
+  const db = readDatabase();
+  if (!db.gradeSheets) db.gradeSheets = [];
+
+  const cleanClass = sheet.className.trim().toUpperCase();
+  const cleanSubject = sheet.subjectName.trim();
+
+  sheet.className = cleanClass;
+  sheet.subjectName = cleanSubject;
+  sheet.updatedAt = new Date().toISOString();
+
+  // Cập nhật ngày sinh và họ tên ngược lại vào danh sách users nếu giáo viên có sửa trên form
+  sheet.records.forEach(r => {
+    if (r.studentCode) {
+      const u = db.users.find(user => user.username === r.studentCode);
+      if (u) {
+        if (r.dob) u.dob = r.dob;
+        if (r.name && r.name !== u.name) u.name = r.name;
+      }
+    }
+  });
+
+  const idx = db.gradeSheets.findIndex(
+    s => s.id === sheet.id || (s.className.trim().toUpperCase() === cleanClass && s.subjectName.trim().toLowerCase() === cleanSubject.toLowerCase())
+  );
+
+  if (idx >= 0) {
+    db.gradeSheets[idx] = sheet;
+  } else {
+    if (!sheet.id) sheet.id = `gs_${Date.now()}`;
+    db.gradeSheets.push(sheet);
+  }
+
+  writeDatabase(db);
+  res.json({ success: true, message: "Đã lưu bảng điểm thành công!", sheet });
+});
+
+// 7g. Lưu nhanh 1 ô điểm trong bảng điểm (Auto-save)
+app.post('/api/grade-sheets/cell', (req, res) => {
+  const { sheetId, studentCode, field, value } = req.body;
+  if (!sheetId || !studentCode || !field) {
+    return res.status(400).json({ message: "Thiếu dữ liệu cập nhật ô." });
+  }
+
+  const db = readDatabase();
+  if (!db.gradeSheets) db.gradeSheets = [];
+  const sheet = db.gradeSheets.find(s => s.id === sheetId);
+  if (!sheet) {
+    return res.status(404).json({ message: "Không tìm thấy bảng điểm." });
+  }
+
+  const record = sheet.records.find(r => r.studentCode === studentCode);
+  if (!record) {
+    return res.status(404).json({ message: "Không tìm thấy học sinh trong bảng điểm." });
+  }
+
+  if (field === 'note' || field === 'dob' || field === 'name') {
+    record[field] = value ? String(value).trim() : '';
+    if (field === 'dob' || field === 'name') {
+      const u = db.users.find(user => user.username === studentCode);
+      if (u) u[field] = record[field];
+    }
+  } else {
+    // Điểm số hs1, hs2_1, hs2_2, hs2_3, hs2_4
+    if (value === null || value === undefined || value === '') {
+      record[field] = null;
+    } else {
+      const num = parseFloat(value);
+      if (isNaN(num) || num < 0 || num > 10) {
+        return res.status(400).json({ message: "Điểm số phải từ 0 đến 10." });
+      }
+      record[field] = Math.round(num * 10) / 10;
+    }
+  }
+
+  sheet.updatedAt = new Date().toISOString();
+  writeDatabase(db);
+  res.json({ success: true, record });
+});
+
+// 7h. Xóa một bảng điểm
+app.delete('/api/grade-sheets/:id', (req, res) => {
+  const { id } = req.params;
+  const db = readDatabase();
+  if (!db.gradeSheets) db.gradeSheets = [];
+  db.gradeSheets = db.gradeSheets.filter(s => s.id !== id);
+  writeDatabase(db);
+  res.json({ success: true, message: "Đã xóa bảng điểm." });
 });
 
 // 8. Tải tệp tin

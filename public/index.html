@@ -14,6 +14,77 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     body { font-family: 'Inter', sans-serif; }
+
+    /* In ấn chuẩn trang in A4 cho Bảng Điểm Thành Phần */
+    @media print {
+      body * {
+        visibility: hidden !important;
+      }
+      #modal-grade-sheet, #modal-grade-sheet * {
+        visibility: visible !important;
+      }
+      #modal-grade-sheet {
+        position: absolute !important;
+        left: 0 !important;
+        top: 0 !important;
+        width: 100% !important;
+        height: auto !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        background: white !important;
+        display: block !important;
+        overflow: visible !important;
+      }
+      #modal-grade-sheet > div {
+        max-width: 100% !important;
+        max-height: none !important;
+        box-shadow: none !important;
+        border: none !important;
+        background: white !important;
+      }
+      #grade-sheet-printable {
+        width: 100% !important;
+        max-width: 100% !important;
+        box-shadow: none !important;
+        border: none !important;
+        padding: 0.5cm !important;
+        margin: 0 !important;
+      }
+      .no-print {
+        display: none !important;
+      }
+      input {
+        border-bottom: none !important;
+      }
+    }
+
+    .gs-score-input {
+      width: 100%;
+      height: 100%;
+      text-align: center;
+      font-weight: 700;
+      color: #0f172a;
+      background: transparent;
+      outline: none;
+      padding: 3px 1px;
+      font-family: inherit;
+      transition: all 0.15s;
+    }
+    .gs-score-input:focus {
+      background-color: #ecfdf5;
+      box-shadow: inset 0 0 0 2px #059669;
+    }
+    .gs-text-input {
+      width: 100%;
+      background: transparent;
+      outline: none;
+      padding: 2px 4px;
+      font-size: 11px;
+    }
+    .gs-text-input:focus {
+      background-color: #f1f5f9;
+      box-shadow: inset 0 0 0 1.5px #4f46e5;
+    }
   </style>
 </head>
 <body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col">
@@ -134,6 +205,7 @@
           <div id="box-reg-class">
             <label class="block text-sm font-medium text-slate-700 mb-1">Chọn Lớp học <span class="text-red-500">*</span></label>
             <select id="reg-class" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none text-sm bg-white font-medium text-slate-800">
+              <option value="T15MG02">Lớp T15MG02</option>
               <option value="T14TK01">Lớp T14TK01</option>
               <option value="T14TK02">Lớp T14TK02</option>
               <option value="T15TK01">Lớp T15TK01</option>
@@ -143,6 +215,11 @@
               <option value="C09TK01">Lớp C09TK01</option>
               <option value="C10TK01">Lớp C10TK01</option>
             </select>
+          </div>
+
+          <div id="box-reg-dob">
+            <label class="block text-sm font-medium text-slate-700 mb-1">Ngày sinh (dd/mm/yyyy)</label>
+            <input type="text" id="reg-dob" class="w-full px-3.5 py-2 rounded-xl border border-slate-300 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none text-sm" placeholder="Ví dụ: 18/07/2011">
           </div>
 
           <div id="box-reg-subject" class="hidden p-3.5 bg-indigo-50/70 border border-indigo-200 rounded-2xl space-y-3">
@@ -202,6 +279,9 @@
           <button onclick="openCloudFolder('onedrive')" title="Mở thư mục OneDrive trên máy Mac" class="admin-only hidden px-3.5 py-2.5 bg-sky-600 hover:bg-sky-700 text-white font-semibold rounded-xl shadow-sm transition flex items-center justify-center gap-1.5 text-xs">
             <i class="fa-brands fa-microsoft text-sm"></i> OneDrive
           </button>
+          <button onclick="openGradeSheetModal()" class="px-4 py-2.5 bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white font-semibold rounded-xl shadow-sm transition flex items-center justify-center gap-2 text-sm">
+            <i class="fa-solid fa-file-signature text-base"></i> Sổ Điểm Thành Phần
+          </button>
           <button onclick="openCreateModal()" class="px-4 py-2.5 bg-white text-indigo-700 hover:bg-indigo-50 font-semibold rounded-xl shadow-sm transition flex items-center justify-center gap-2 text-sm">
             <i class="fa-solid fa-plus"></i> Giao Bài Tập Mới
           </button>
@@ -227,6 +307,30 @@
           </button>
           <button onclick="openCloudFolder('onedrive')" class="px-3 py-1.5 bg-white hover:bg-sky-100 text-sky-700 font-bold rounded-xl border border-sky-300 transition flex items-center gap-1.5 shadow-xs">
             <i class="fa-brands fa-microsoft text-sky-600"></i> Mở OneDrive
+          </button>
+        </div>
+      </div>
+
+      <!-- BẢNG ĐIỂM THÀNH PHẦN MÔN HỌC / MÔ ĐUN (MẪU TRƯỜNG CĐ HÒA BÌNH XUÂN LỘC) -->
+      <div class="bg-gradient-to-r from-emerald-50/90 via-teal-50/70 to-slate-50 border border-emerald-200 rounded-2xl p-4 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div class="flex items-center gap-3">
+          <div class="w-11 h-11 rounded-xl bg-gradient-to-br from-emerald-600 to-teal-700 text-white flex items-center justify-center text-lg shrink-0 shadow-md shadow-emerald-200">
+            <i class="fa-solid fa-table-list"></i>
+          </div>
+          <div>
+            <div class="flex items-center gap-2 flex-wrap">
+              <span class="font-bold text-emerald-950 text-base">Bảng Điểm Thành Phần Môn Học / Mô Đun</span>
+              <span class="text-[11px] bg-emerald-100/80 text-emerald-800 border border-emerald-300 px-2 py-0.5 rounded-full font-bold">Mẫu Trường CĐ Hòa Bình Xuân Lộc</span>
+            </div>
+            <p class="text-xs text-emerald-800 mt-0.5">Nhập điểm hệ số 1, hệ số 2 trực tiếp trên form. Học sinh đã đăng ký sẽ tự động xuất hiện đầy đủ trong bảng điểm.</p>
+          </div>
+        </div>
+        <div class="flex items-center gap-2 flex-wrap shrink-0">
+          <button onclick="openGradeSheetModal('T15MG02', 'Nguyên lý hệ điều hành')" class="px-3.5 py-2 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl text-xs transition flex items-center gap-1.5 shadow-sm">
+            <i class="fa-solid fa-pen-to-square"></i> Mở Lớp T15MG02 (26 HS)
+          </button>
+          <button onclick="openGradeSheetModal()" class="px-3.5 py-2 bg-white hover:bg-emerald-50 text-emerald-800 border border-emerald-300 font-bold rounded-xl text-xs transition flex items-center gap-1.5 shadow-xs">
+            <i class="fa-solid fa-folder-open"></i> Xem Tất Cả Sổ Điểm
           </button>
         </div>
       </div>
@@ -550,13 +654,27 @@
 
   <!-- ================= MODAL: GIÁO VIÊN XEM BÀI NỘP & CHẤM ĐIỂM ================= -->
   <div id="modal-grading" class="fixed inset-0 z-50 bg-slate-900/50 backdrop-blur-sm hidden items-center justify-center p-4">
-    <div class="bg-white w-full max-w-4xl max-h-[90vh] rounded-2xl shadow-2xl border border-slate-100 flex flex-col overflow-hidden">
-      <div class="px-6 py-4 bg-slate-50 border-b border-slate-200 flex justify-between items-center">
+    <div class="bg-white w-full max-w-6xl max-h-[92vh] rounded-2xl shadow-2xl border border-slate-100 flex flex-col overflow-hidden">
+      <div class="px-6 py-4 bg-slate-50 border-b border-slate-200 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
         <div>
           <h3 id="grading-modal-title" class="font-bold text-slate-900 text-lg">Danh Sách Học Sinh Nộp Bài</h3>
           <p id="grading-modal-subtitle" class="text-xs text-slate-500 mt-0.5"></p>
         </div>
-        <button onclick="closeModal('modal-grading')" class="text-slate-400 hover:text-slate-600 text-xl font-bold">&times;</button>
+        <div class="flex items-center gap-2.5">
+          <button type="button" onclick="saveAllInlineGrades()" class="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-bold shadow-sm transition flex items-center gap-1.5">
+            <i class="fa-solid fa-floppy-disk"></i> Lưu Tất Cả Điểm
+          </button>
+          <button onclick="closeModal('modal-grading')" class="text-slate-400 hover:text-slate-600 text-xl font-bold px-2 py-1">&times;</button>
+        </div>
+      </div>
+
+      <!-- Mẹo phím tắt & trạng thái -->
+      <div class="bg-indigo-50/70 border-b border-indigo-100 px-6 py-2 text-xs text-indigo-900 flex items-center justify-between">
+        <span class="flex items-center gap-1.5 font-medium">
+          <i class="fa-solid fa-keyboard text-indigo-600"></i>
+          Mẹo: Nhập điểm trực tiếp trên form. Nhấn <b>Enter</b> hoặc <b>mũi tên xuống ↓</b> để chuyển sang học sinh tiếp theo.
+        </span>
+        <span id="batch-save-status" class="font-semibold text-emerald-700"></span>
       </div>
 
       <div class="p-6 overflow-y-auto flex-1 space-y-4">
@@ -564,12 +682,13 @@
           <table class="w-full text-left text-sm">
             <thead class="bg-slate-50 text-slate-600 text-xs uppercase font-semibold border-b border-slate-200">
               <tr>
-                <th class="px-4 py-3">Học Sinh</th>
-                <th class="px-4 py-3">Trạng Thái</th>
-                <th class="px-4 py-3">Thời Gian Nộp</th>
-                <th class="px-4 py-3">Bài Nộp</th>
-                <th class="px-4 py-3">Điểm Số</th>
-                <th class="px-4 py-3 text-right">Thao Tác</th>
+                <th class="px-3 py-3 w-12 text-center">STT</th>
+                <th class="px-4 py-3 min-w-[150px]">Học Sinh</th>
+                <th class="px-4 py-3 min-w-[110px]">Trạng Thái</th>
+                <th class="px-4 py-3 min-w-[180px]">Bài Nộp & File</th>
+                <th class="px-4 py-3 w-32">Điểm (0-10)</th>
+                <th class="px-4 py-3 min-w-[180px]">Lời Nhận Xét</th>
+                <th class="px-4 py-3 text-right w-24">Thao Tác</th>
               </tr>
             </thead>
             <tbody id="grading-table-body" class="divide-y divide-slate-100 text-slate-700">
@@ -768,6 +887,177 @@
           </a>
         </div>
       </div>
+    </div>
+  </div>
+
+  <!-- ================= MODAL: BẢNG ĐIỂM THÀNH PHẦN MÔN HỌC/MÔ ĐUN (MẪU TRƯỜNG CĐ HÒA BÌNH XUÂN LỘC) ================= -->
+  <div id="modal-grade-sheet" class="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm hidden items-center justify-center p-2 sm:p-4 overflow-y-auto">
+    <div class="bg-slate-100 w-full max-w-6xl max-h-[96vh] rounded-2xl shadow-2xl border border-slate-200 flex flex-col overflow-hidden my-auto">
+      
+      <!-- Modal Top Control Toolbar -->
+      <div class="no-print px-5 py-3.5 bg-white border-b border-slate-200 flex flex-wrap items-center justify-between gap-3 shrink-0">
+        <div class="flex items-center gap-3 flex-wrap">
+          <div class="flex items-center gap-2">
+            <label class="text-xs font-bold text-slate-600 uppercase">Lớp:</label>
+            <select id="gs-select-class" onchange="onGradeSheetClassChange()" class="px-3 py-1.5 rounded-xl border border-slate-300 text-xs font-bold text-slate-800 bg-slate-50 focus:bg-white focus:ring-2 focus:ring-emerald-500 outline-none">
+              <!-- Populated via JS -->
+            </select>
+          </div>
+
+          <div class="flex items-center gap-2">
+            <label class="text-xs font-bold text-slate-600 uppercase">Môn:</label>
+            <select id="gs-select-subject" onchange="onGradeSheetSubjectChange()" class="px-3 py-1.5 rounded-xl border border-slate-300 text-xs font-bold text-indigo-700 bg-slate-50 focus:bg-white focus:ring-2 focus:ring-emerald-500 outline-none">
+              <!-- Populated via JS -->
+            </select>
+          </div>
+
+          <span id="gs-students-count-badge" class="px-2.5 py-1 bg-emerald-50 text-emerald-700 border border-emerald-200 rounded-full text-xs font-semibold">
+            26 Học Sinh
+          </span>
+        </div>
+
+        <div class="flex items-center gap-2 flex-wrap">
+          <span id="gs-save-status" class="text-xs font-semibold text-emerald-600 hidden">✓ Đã lưu thay đổi</span>
+          <button type="button" onclick="saveGradeSheet()" class="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-bold shadow-sm transition flex items-center gap-1.5">
+            <i class="fa-solid fa-floppy-disk"></i> Lưu Bảng Điểm
+          </button>
+          <button type="button" onclick="printGradeSheet()" class="px-3.5 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl text-xs font-bold shadow-sm transition flex items-center gap-1.5">
+            <i class="fa-solid fa-print"></i> In Bảng Điểm Chuẩn (A4)
+          </button>
+          <button type="button" onclick="closeModal('modal-grade-sheet')" class="text-slate-400 hover:text-slate-700 text-2xl font-bold px-2 py-0.5 leading-none">&times;</button>
+        </div>
+      </div>
+
+      <!-- Quick Tips Bar -->
+      <div class="no-print bg-amber-50/80 border-b border-amber-200 px-5 py-2 text-xs text-amber-900 flex items-center justify-between">
+        <span class="flex items-center gap-1.5">
+          <i class="fa-solid fa-circle-info text-amber-600"></i>
+          <span><b>Học sinh tự động hiển thị:</b> Mọi học sinh đã đăng ký phần mềm thuộc lớp này sẽ tự động xuất hiện. Nhập điểm trực tiếp, nhấn <b>Enter</b> hoặc <b>phím mũi tên ↓</b> để chuyển hàng tiếp theo.</span>
+        </span>
+      </div>
+
+      <!-- Scrollable Document Container -->
+      <div class="p-3 sm:p-6 overflow-y-auto flex-1 bg-slate-200/60">
+        <!-- Printable Paper Sheet -->
+        <div id="grade-sheet-printable" class="bg-white max-w-5xl mx-auto p-6 sm:p-10 rounded-xl shadow border border-slate-300 font-serif text-slate-900">
+          
+          <!-- Official Document Header -->
+          <div class="grid grid-cols-2 gap-4 items-start pb-2">
+            <!-- Left Header -->
+            <div class="text-center">
+              <div id="gs-school-name" class="font-bold text-xs uppercase tracking-wider">TRƯỜNG CĐ HÒA BÌNH XUÂN LỘC</div>
+              <div id="gs-department-name" class="font-bold text-xs uppercase text-slate-800 mt-0.5">KHOA MỸ THUẬT - CNTT</div>
+              <div class="mt-1">
+                <span class="inline-block border border-rose-500 text-rose-600 text-[10px] font-bold px-2 py-0.5 rounded uppercase tracking-wider">
+                  PHÒNG ĐÀO TẠO
+                </span>
+              </div>
+            </div>
+
+            <!-- Right Header -->
+            <div class="text-center">
+              <div class="font-bold text-xs uppercase tracking-wider">CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM</div>
+              <div class="font-bold text-xs text-slate-800 mt-0.5">Độc Lập - Tự Do - Hạnh Phúc</div>
+              <div class="w-28 h-[1px] bg-slate-800 mx-auto mt-1"></div>
+            </div>
+          </div>
+
+          <!-- Document Title -->
+          <div class="text-center my-4">
+            <h1 class="text-xl sm:text-2xl font-bold uppercase tracking-wide text-slate-900">
+              BẢNG ĐIỂM THÀNH PHẦN MÔN HỌC/MÔ ĐUN
+            </h1>
+          </div>
+
+          <!-- Metadata Fields (Grid) -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-1.5 text-xs text-slate-800 font-sans mb-3">
+            <div class="flex items-baseline gap-1">
+              <span class="font-bold font-serif whitespace-nowrap">Tên môn học:</span>
+              <input type="text" id="gs-meta-subject" onchange="markGsDirty()" class="w-full font-semibold underline border-b border-dashed border-slate-300 focus:border-indigo-600 outline-none bg-transparent px-1 py-0.5 text-xs">
+            </div>
+            <div class="flex items-baseline justify-between gap-2">
+              <div class="flex items-baseline gap-1">
+                <span class="font-bold font-serif whitespace-nowrap">Lớp:</span>
+                <span id="gs-meta-class" class="font-bold text-slate-900 underline px-1"></span>
+              </div>
+              <div class="flex items-baseline gap-1">
+                <span class="font-bold font-serif whitespace-nowrap">Tổng tiết:</span>
+                <input type="number" id="gs-meta-periods" onchange="markGsDirty()" class="w-12 text-center underline border-b border-dashed border-slate-300 focus:border-indigo-600 outline-none bg-transparent px-1 py-0.5 text-xs">
+              </div>
+            </div>
+            <div class="flex items-baseline gap-1">
+              <span class="font-bold font-serif whitespace-nowrap">Nghề:</span>
+              <input type="text" id="gs-meta-major" onchange="markGsDirty()" class="w-full underline border-b border-dashed border-slate-300 focus:border-indigo-600 outline-none bg-transparent px-1 py-0.5 text-xs">
+            </div>
+            <div class="flex items-baseline justify-between gap-2">
+              <div class="flex items-baseline gap-1">
+                <span class="font-bold font-serif whitespace-nowrap">Khóa:</span>
+                <input type="text" id="gs-meta-cohort" onchange="markGsDirty()" class="w-16 underline border-b border-dashed border-slate-300 focus:border-indigo-600 outline-none bg-transparent px-1 py-0.5 text-xs">
+              </div>
+              <div class="flex items-baseline gap-1">
+                <span class="font-bold font-serif whitespace-nowrap">Số tín chỉ:</span>
+                <input type="number" id="gs-meta-credits" onchange="markGsDirty()" class="w-12 text-center underline border-b border-dashed border-slate-300 focus:border-indigo-600 outline-none bg-transparent px-1 py-0.5 text-xs">
+              </div>
+            </div>
+          </div>
+
+          <!-- Main Table Grid -->
+          <div class="overflow-x-auto border-t border-black mt-2">
+            <table class="w-full border-collapse border border-black text-xs font-serif">
+              <thead>
+                <tr class="text-center font-bold bg-slate-50">
+                  <th rowspan="2" class="border border-black px-1 py-1.5 w-8">TT</th>
+                  <th rowspan="2" class="border border-black px-2 py-1.5 w-24">Mã HS</th>
+                  <th rowspan="2" class="border border-black px-2 py-1.5 min-w-[170px] text-left">Họ và tên</th>
+                  <th rowspan="2" class="border border-black px-1.5 py-1.5 w-24">Ngày sinh</th>
+                  <th rowspan="2" class="border border-black px-1 py-1.5 w-14">Điểm<br>hệ số 1</th>
+                  <th colspan="4" class="border border-black px-2 py-1">Điểm hệ số 2</th>
+                  <th rowspan="2" class="border border-black px-1 py-1.5 w-14 bg-indigo-50/50 text-indigo-900">Điểm<br>TB</th>
+                  <th rowspan="2" class="border border-black px-2 py-1.5 min-w-[100px]">Ghi chú</th>
+                </tr>
+                <tr class="text-center font-semibold text-[11px] bg-slate-50">
+                  <th class="border border-black px-1 py-1 w-11">Cột 1</th>
+                  <th class="border border-black px-1 py-1 w-11">Cột 2</th>
+                  <th class="border border-black px-1 py-1 w-11">Cột 3</th>
+                  <th class="border border-black px-1 py-1 w-11">Cột 4</th>
+                </tr>
+              </thead>
+              <tbody id="gs-table-body" class="divide-y divide-black">
+                <!-- Rendered dynamically -->
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Document Footer & Signatures -->
+          <div class="mt-5 text-xs font-serif text-slate-900">
+            <div class="text-right italic pr-4">
+              <input type="text" id="gs-academic-date" onchange="markGsDirty()" class="text-right italic font-serif outline-none border-b border-dashed border-slate-300 w-72 bg-transparent">
+            </div>
+
+            <div class="grid grid-cols-2 mt-3 text-center">
+              <div>
+                <div class="font-bold uppercase text-xs">TRƯỜNG KHOA</div>
+                <div class="h-20 flex items-center justify-center">
+                  <span class="text-slate-400 italic text-xs no-print">(Chữ ký trưởng khoa)</span>
+                </div>
+                <div class="font-bold text-sm" id="gs-dean-name">Nguyễn Văn Quang</div>
+              </div>
+
+              <div>
+                <div class="font-bold uppercase text-xs">GV GIẢNG DẠY</div>
+                <div class="h-20 flex items-center justify-center">
+                  <div class="font-serif italic text-indigo-800 text-2xl font-bold tracking-wider select-none rotate-[-5deg]">
+                    Danh
+                  </div>
+                </div>
+                <div class="font-bold text-sm" id="gs-teacher-name">Nguyễn Công Danh</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
     </div>
   </div>
 
@@ -1126,11 +1416,14 @@
     }
 
     function toggleRegRole(role) {
+      const boxDob = document.getElementById('box-reg-dob');
       if (role === 'teacher') {
         document.getElementById('box-reg-class').classList.add('hidden');
+        if (boxDob) boxDob.classList.add('hidden');
         document.getElementById('box-reg-subject').classList.remove('hidden');
       } else {
         document.getElementById('box-reg-class').classList.remove('hidden');
+        if (boxDob) boxDob.classList.remove('hidden');
         document.getElementById('box-reg-subject').classList.add('hidden');
       }
     }
@@ -1142,6 +1435,7 @@
       const username = document.getElementById('reg-username').value.trim();
       const password = document.getElementById('reg-password').value.trim();
       const className = document.getElementById('reg-class').value.trim();
+      const dob = document.getElementById('reg-dob') ? document.getElementById('reg-dob').value.trim() : '';
       const subject = document.getElementById('reg-subject').value.trim();
       const email = document.getElementById('reg-email') ? document.getElementById('reg-email').value.trim() : '';
 
@@ -1159,7 +1453,7 @@
         const res = await fetch('/api/auth/register', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ role, name, username, password, className, subject, email })
+          body: JSON.stringify({ role, name, username, password, className, subject, email, dob })
         });
         const data = await res.json();
 
@@ -1357,6 +1651,18 @@
           html += `<option value="${cls}" ${isSel}>Lớp ${escapeHtml(cls)}</option>`;
         });
         selectSubjClass.innerHTML = html;
+      }
+
+      // 4. Dropdown chọn lớp cho Bảng Điểm Thành Phần
+      const selectGsClass = document.getElementById('gs-select-class');
+      if (selectGsClass && availableClasses.length > 0) {
+        const curVal = selectGsClass.value || (availableClasses.includes('T15MG02') ? 'T15MG02' : availableClasses[0]);
+        let html = '';
+        availableClasses.forEach(cls => {
+          const isSel = (cls === curVal) ? 'selected' : '';
+          html += `<option value="${cls}" ${isSel}>Lớp ${escapeHtml(cls)}</option>`;
+        });
+        selectGsClass.innerHTML = html;
       }
     }
 
@@ -1836,34 +2142,30 @@
         document.getElementById('grading-modal-subtitle').textContent = `Giao cho: ${targetClassText} | Hạn nộp: ${formatDate(data.assignment.dueDate)}`;
 
         const tbody = document.getElementById('grading-table-body');
-        tbody.innerHTML = data.studentsStatus.map(item => {
+        tbody.innerHTML = data.studentsStatus.map((item, idx) => {
           const s = item.student;
           const sub = item.submission;
           const hasSubmitted = item.hasSubmitted;
 
-          let statusBadge = `<span class="px-2.5 py-1 rounded-full text-xs font-semibold bg-slate-100 text-slate-500">Chưa nộp bài</span>`;
+          let statusBadge = `<span class="px-2 py-0.5 rounded-full text-xs font-semibold bg-slate-100 text-slate-500">Chưa nộp</span>`;
           let submitTime = "-";
-          let actionBtn = `<span class="text-slate-400 text-xs italic">Chưa nộp</span>`;
-          let gradeDisplay = `<span class="text-slate-400">-</span>`;
-          let submissionInfo = `<span class="text-slate-400 text-xs">-</span>`;
+          let submissionInfo = `<span class="text-slate-400 text-xs italic">Chưa nộp bài</span>`;
 
           if (hasSubmitted) {
             submitTime = formatDate(sub.submittedAt);
             const isGraded = sub.grade !== null && sub.grade !== undefined;
 
             if (isGraded) {
-              statusBadge = `<span class="px-2.5 py-1 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200"><i class="fa-solid fa-check mr-1"></i>Đã chấm</span>`;
-              gradeDisplay = `<span class="text-emerald-600 font-bold text-sm bg-emerald-50 px-2 py-0.5 rounded">${sub.grade}/10</span>`;
+              statusBadge = `<span class="px-2 py-0.5 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200"><i class="fa-solid fa-check mr-1"></i>Đã chấm</span>`;
             } else {
-              statusBadge = `<span class="px-2.5 py-1 rounded-full text-xs font-semibold bg-amber-50 text-amber-700 border border-amber-200"><i class="fa-solid fa-clock mr-1"></i>Chờ chấm</span>`;
-              gradeDisplay = `<span class="text-amber-500 font-semibold text-xs italic">Chưa chấm</span>`;
+              statusBadge = `<span class="px-2 py-0.5 rounded-full text-xs font-semibold bg-amber-50 text-amber-700 border border-amber-200"><i class="fa-solid fa-clock mr-1"></i>Chờ chấm</span>`;
             }
 
             const parts = [];
             if (sub.content) parts.push(`<span class="text-slate-600 truncate block max-w-xs" title="${escapeHtml(sub.content)}">"${escapeHtml(sub.content)}"</span>`);
             if (sub.file) parts.push(`
-              <div class="flex items-center gap-1.5 flex-wrap">
-                <button type="button" onclick="previewFile('${sub.file.filename}', '${escapeHtml(sub.file.originalName)}', ${sub.file.size || 0})" class="px-2 py-0.5 bg-indigo-50 hover:bg-indigo-100 text-indigo-700 font-semibold rounded-lg text-xs transition inline-flex items-center gap-1 border border-indigo-200 shadow-xs">
+              <div class="flex items-center gap-1.5 flex-wrap mt-0.5">
+                <button type="button" onclick="previewFile('${sub.file.filename}', '${escapeHtml(sub.file.originalName)}', ${sub.file.size || 0})" class="px-2 py-0.5 bg-indigo-50 hover:bg-indigo-100 text-indigo-700 font-semibold rounded text-xs transition inline-flex items-center gap-1 border border-indigo-200 shadow-xs">
                   <i class="fa-solid fa-eye"></i> Xem trực tiếp
                 </button>
                 <a href="/api/download/${sub.file.filename}?name=${encodeURIComponent(sub.file.originalName)}" class="text-slate-500 hover:text-indigo-600 font-medium hover:underline inline-flex items-center gap-1 text-xs" title="Tải về máy">
@@ -1873,23 +2175,57 @@
             `);
             if (sub.link) parts.push(`<a href="${escapeHtml(sub.link)}" target="_blank" class="text-teal-600 hover:underline inline-flex items-center gap-1 text-xs"><i class="fa-solid fa-arrow-up-right-from-square"></i> Liên kết</a>`);
             
-            submissionInfo = parts.join('<br>') || '<span class="text-slate-400">Không có tệp/văn bản</span>';
-
-            actionBtn = `
-              <button onclick='openSingleGradeModal(${JSON.stringify(sub).replace(/'/g, "&#39;")}, "${escapeHtml(s.name)}")' class="px-3 py-1.5 rounded-lg bg-indigo-600 hover:bg-indigo-700 text-white font-medium text-xs shadow-sm transition">
-                <i class="fa-solid fa-pen-to-square mr-1"></i>${isGraded ? 'Sửa điểm' : 'Chấm điểm'}
-              </button>
-            `;
+            submissionInfo = parts.join('') || '<span class="text-slate-400">Không có tệp/văn bản</span>';
           }
 
+          const curGrade = (sub && sub.grade !== null && sub.grade !== undefined) ? sub.grade : '';
+          const curFeedback = (sub && sub.feedback) ? sub.feedback : '';
+
           return `
-            <tr class="hover:bg-slate-50/80 transition">
-              <td class="px-4 py-3 font-semibold text-slate-900">${escapeHtml(s.name)}</td>
-              <td class="px-4 py-3">${statusBadge}</td>
-              <td class="px-4 py-3 text-xs text-slate-500">${submitTime}</td>
-              <td class="px-4 py-3">${submissionInfo}</td>
-              <td class="px-4 py-3">${gradeDisplay}</td>
-              <td class="px-4 py-3 text-right">${actionBtn}</td>
+            <tr class="hover:bg-slate-50/80 transition" data-student-row="${s.id}">
+              <td class="px-3 py-2.5 text-center text-xs font-semibold text-slate-500">${idx + 1}</td>
+              <td class="px-4 py-2.5">
+                <div class="font-bold text-slate-900 leading-tight">${escapeHtml(s.name)}</div>
+                <div class="text-[11px] font-mono text-slate-500">${escapeHtml(s.username || s.id)}</div>
+              </td>
+              <td class="px-4 py-2.5">${statusBadge}</td>
+              <td class="px-4 py-2.5">${submissionInfo}</td>
+              <td class="px-4 py-2.5">
+                <div class="flex items-center gap-1.5">
+                  <input type="number" step="0.1" min="0" max="10"
+                    id="inline-grade-${s.id}"
+                    data-student-id="${s.id}"
+                    data-student-idx="${idx}"
+                    value="${curGrade}"
+                    placeholder="0-10"
+                    class="assignment-grade-input w-20 px-2.5 py-1.5 rounded-lg border border-slate-300 focus:ring-2 focus:ring-indigo-500 font-bold text-center text-sm outline-none bg-white shadow-xs"
+                    onchange="autoSaveInlineGrade('${s.id}')"
+                    onkeydown="handleInlineGradeKeyDown(event, ${idx})">
+                  <span id="inline-status-${s.id}" class="text-xs shrink-0"></span>
+                </div>
+              </td>
+              <td class="px-4 py-2.5">
+                <input type="text"
+                  id="inline-feedback-${s.id}"
+                  data-student-id="${s.id}"
+                  value="${escapeHtml(curFeedback)}"
+                  placeholder="Nhận xét nhanh..."
+                  class="w-full px-2.5 py-1.5 rounded-lg border border-slate-300 focus:ring-2 focus:ring-indigo-500 text-xs outline-none bg-white shadow-xs"
+                  onchange="autoSaveInlineGrade('${s.id}')"
+                  onkeydown="handleInlineGradeKeyDown(event, ${idx})">
+              </td>
+              <td class="px-4 py-2.5 text-right whitespace-nowrap">
+                <div class="flex items-center justify-end gap-1.5">
+                  <button type="button" onclick="autoSaveInlineGrade('${s.id}')" title="Lưu điểm học sinh này" class="px-2.5 py-1.5 rounded-lg bg-emerald-50 hover:bg-emerald-100 text-emerald-700 font-semibold text-xs border border-emerald-200 transition">
+                    <i class="fa-solid fa-check"></i> Lưu
+                  </button>
+                  ${hasSubmitted ? `
+                    <button type="button" onclick='openSingleGradeModal(${JSON.stringify(sub).replace(/'/g, "&#39;")}, "${escapeHtml(s.name)}")' title="Xem chi tiết nộp bài" class="px-2.5 py-1.5 rounded-lg bg-slate-100 hover:bg-indigo-50 text-slate-600 hover:text-indigo-700 text-xs font-semibold border border-slate-200 transition">
+                      <i class="fa-solid fa-expand"></i>
+                    </button>
+                  ` : ''}
+                </div>
+              </td>
             </tr>
           `;
         }).join('');
@@ -1898,6 +2234,107 @@
         document.getElementById('modal-grading').classList.add('flex');
       } catch (e) {
         showToast("Không thể tải danh sách bài nộp!", "error");
+      }
+    }
+
+    // Tự động lưu điểm 1 học sinh trên form nộp bài tập
+    async function autoSaveInlineGrade(studentId) {
+      if (!currentViewingAssignmentId) return;
+      const gradeInput = document.getElementById(`inline-grade-${studentId}`);
+      const feedbackInput = document.getElementById(`inline-feedback-${studentId}`);
+      const statusSpan = document.getElementById(`inline-status-${studentId}`);
+
+      const gradeVal = gradeInput ? gradeInput.value.trim() : '';
+      const feedbackVal = feedbackInput ? feedbackInput.value.trim() : '';
+
+      if (statusSpan) {
+        statusSpan.innerHTML = `<i class="fa-solid fa-spinner fa-spin text-slate-400"></i>`;
+      }
+
+      try {
+        const res = await fetch(`/api/assignments/${currentViewingAssignmentId}/grade-student`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            studentId,
+            grade: gradeVal,
+            feedback: feedbackVal,
+            teacherId: currentUser.id
+          })
+        });
+        const data = await res.json();
+        if (!res.ok) {
+          if (statusSpan) statusSpan.innerHTML = `<i class="fa-solid fa-triangle-exclamation text-rose-500" title="${data.message}"></i>`;
+          showToast(data.message || "Lỗi lưu điểm", "error");
+          return;
+        }
+
+        if (statusSpan) {
+          statusSpan.innerHTML = `<i class="fa-solid fa-circle-check text-emerald-600" title="Đã lưu"></i>`;
+          setTimeout(() => { if (statusSpan) statusSpan.innerHTML = ''; }, 2500);
+        }
+      } catch (err) {
+        if (statusSpan) statusSpan.innerHTML = `<i class="fa-solid fa-xmark text-rose-500"></i>`;
+      }
+    }
+
+    // Điều hướng phím mũi tên và Enter trên bảng bài tập
+    function handleInlineGradeKeyDown(e, idx) {
+      if (e.key === 'Enter' || e.key === 'ArrowDown') {
+        e.preventDefault();
+        const nextInput = document.querySelector(`.assignment-grade-input[data-student-idx="${idx + 1}"]`);
+        if (nextInput) nextInput.focus();
+      } else if (e.key === 'ArrowUp') {
+        e.preventDefault();
+        const prevInput = document.querySelector(`.assignment-grade-input[data-student-idx="${idx - 1}"]`);
+        if (prevInput) prevInput.focus();
+      }
+    }
+
+    // Lưu tất cả điểm trên bảng bài tập
+    async function saveAllInlineGrades() {
+      if (!currentViewingAssignmentId) return;
+      const gradeInputs = document.querySelectorAll('.assignment-grade-input');
+      const grades = [];
+
+      gradeInputs.forEach(inp => {
+        const studentId = inp.getAttribute('data-student-id');
+        const feedbackInp = document.getElementById(`inline-feedback-${studentId}`);
+        grades.push({
+          studentId,
+          grade: inp.value.trim(),
+          feedback: feedbackInp ? feedbackInp.value.trim() : ''
+        });
+      });
+
+      const batchStatus = document.getElementById('batch-save-status');
+      if (batchStatus) batchStatus.textContent = "Đang lưu toàn bộ điểm...";
+
+      try {
+        const res = await fetch(`/api/assignments/${currentViewingAssignmentId}/batch-grade`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            teacherId: currentUser.id,
+            grades
+          })
+        });
+        const data = await res.json();
+        if (!res.ok) {
+          showToast(data.message || "Lỗi lưu hàng loạt", "error");
+          if (batchStatus) batchStatus.textContent = "";
+          return;
+        }
+
+        showToast(data.message || "Đã lưu tất cả điểm thành công!", "success");
+        if (batchStatus) {
+          batchStatus.textContent = `✓ Đã lưu tất cả ${data.updatedCount || grades.length} học sinh`;
+          setTimeout(() => { if (batchStatus) batchStatus.textContent = ""; }, 3000);
+        }
+        loadTeacherData();
+      } catch (err) {
+        showToast("Lỗi kết nối khi lưu toàn bộ điểm!", "error");
+        if (batchStatus) batchStatus.textContent = "";
       }
     }
 
@@ -1964,6 +2401,359 @@
       } catch (err) {
         showToast("Lỗi khi kết nối server chấm điểm!", "error");
       }
+    }
+
+    // ================= BẢNG ĐIỂM THÀNH PHẦN MÔN HỌC/MÔ ĐUN (CHUẨN TRƯỜNG CĐ HÒA BÌNH XUÂN LỘC) =================
+    let currentGradeSheet = null;
+    let gsAutoSaveDebounceTimer = null;
+
+    // Mở Bảng Điểm Thành Phần
+    async function openGradeSheetModal(targetClass, targetSubject) {
+      populateClassDropdowns();
+
+      const selectClass = document.getElementById('gs-select-class');
+      let chosenClass = targetClass || (selectClass ? selectClass.value : '') || (availableClasses.includes('T15MG02') ? 'T15MG02' : availableClasses[0] || 'T15MG02');
+      if (selectClass) selectClass.value = chosenClass;
+
+      // Tải danh sách môn học của lớp này
+      await updateGradeSheetSubjectsDropdown(chosenClass, targetSubject);
+
+      const selectSubject = document.getElementById('gs-select-subject');
+      let chosenSubject = targetSubject || (selectSubject ? selectSubject.value : '');
+
+      await loadGradeSheet(chosenClass, chosenSubject);
+
+      const modal = document.getElementById('modal-grade-sheet');
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+
+    async function updateGradeSheetSubjectsDropdown(className, preferredSubject) {
+      const selectSubject = document.getElementById('gs-select-subject');
+      if (!selectSubject) return;
+
+      try {
+        const res = await fetch(`/api/subjects?className=${encodeURIComponent(className)}`);
+        const data = await res.json();
+        const subs = data.subjects || [];
+
+        let html = '';
+        if (subs.length === 0) {
+          const defaultSubj = className.includes('MG') ? 'Nguyên lý hệ điều hành' : 'Tin học';
+          html = `<option value="${escapeHtml(defaultSubj)}" selected>${escapeHtml(defaultSubj)}</option>`;
+        } else {
+          subs.forEach(s => {
+            const isSel = (preferredSubject && s.name === preferredSubject) ? 'selected' : '';
+            html += `<option value="${escapeHtml(s.name)}" ${isSel}>${escapeHtml(s.name)}</option>`;
+          });
+        }
+        selectSubject.innerHTML = html;
+        if (preferredSubject && selectSubject.value !== preferredSubject) {
+          selectSubject.value = preferredSubject;
+        }
+      } catch (e) {
+        console.error("Lỗi tải môn học:", e);
+      }
+    }
+
+    async function onGradeSheetClassChange() {
+      const selectClass = document.getElementById('gs-select-class');
+      const cls = selectClass.value;
+      await updateGradeSheetSubjectsDropdown(cls);
+      const selectSubject = document.getElementById('gs-select-subject');
+      await loadGradeSheet(cls, selectSubject ? selectSubject.value : '');
+    }
+
+    async function onGradeSheetSubjectChange() {
+      const selectClass = document.getElementById('gs-select-class');
+      const selectSubject = document.getElementById('gs-select-subject');
+      await loadGradeSheet(selectClass ? selectClass.value : '', selectSubject ? selectSubject.value : '');
+    }
+
+    async function loadGradeSheet(className, subjectName) {
+      if (!className) return;
+      const cleanSubj = subjectName || (className.includes('MG') ? 'Nguyên lý hệ điều hành' : 'Tin học');
+
+      const tbody = document.getElementById('gs-table-body');
+      tbody.innerHTML = `<tr><td colspan="12" class="text-center py-8 text-slate-500 font-sans"><i class="fa-solid fa-spinner fa-spin mr-2"></i>Đang tải dữ liệu học sinh lớp ${className}...</td></tr>`;
+
+      try {
+        const res = await fetch(`/api/grade-sheets/sheet?className=${encodeURIComponent(className)}&subjectName=${encodeURIComponent(cleanSubj)}&teacherId=${currentUser ? currentUser.id : ''}`);
+        const data = await res.json();
+
+        if (!res.ok) {
+          showToast(data.message || "Không thể tải bảng điểm", "error");
+          tbody.innerHTML = `<tr><td colspan="12" class="text-center py-6 text-rose-500 font-sans">Lỗi tải dữ liệu bảng điểm</td></tr>`;
+          return;
+        }
+
+        currentGradeSheet = data.sheet;
+        renderGradeSheet(currentGradeSheet);
+      } catch (e) {
+        console.error("Lỗi nạp bảng điểm:", e);
+        showToast("Lỗi kết nối khi tải bảng điểm!", "error");
+      }
+    }
+
+    // Tính điểm trung bình thành phần theo chuẩn trường nghề
+    function calcRowTB(r) {
+      let hs1 = (r.hs1 !== null && r.hs1 !== undefined && r.hs1 !== '') ? parseFloat(r.hs1) : null;
+      let hs2List = [r.hs2_1, r.hs2_2, r.hs2_3, r.hs2_4]
+        .filter(v => v !== null && v !== undefined && v !== '')
+        .map(v => parseFloat(v))
+        .filter(v => !isNaN(v));
+
+      if (hs1 === null && hs2List.length === 0) return '-';
+
+      let totalScore = 0;
+      let totalWeight = 0;
+
+      if (hs1 !== null && !isNaN(hs1)) {
+        totalScore += hs1 * 1;
+        totalWeight += 1;
+      }
+
+      if (hs2List.length > 0) {
+        hs2List.forEach(v => {
+          totalScore += v * 2;
+          totalWeight += 2;
+        });
+      }
+
+      if (totalWeight === 0) return '-';
+      const avg = totalScore / totalWeight;
+      return (Math.round(avg * 10) / 10).toFixed(1);
+    }
+
+    // Render toàn bộ giao diện bảng điểm chuẩn form giấy
+    function renderGradeSheet(sheet) {
+      if (!sheet) return;
+
+      document.getElementById('gs-meta-subject').value = sheet.subjectName || '';
+      document.getElementById('gs-meta-class').textContent = sheet.className || '';
+      document.getElementById('gs-meta-periods').value = sheet.totalPeriods || 45;
+      document.getElementById('gs-meta-major').value = sheet.majorName || (sheet.className.includes('MG') ? 'Quản trị mạng máy tính' : 'Thiết kế đồ họa');
+      document.getElementById('gs-meta-cohort').value = sheet.courseCohort || 'Khóa: 15';
+      document.getElementById('gs-meta-credits').value = sheet.credits || 2;
+      document.getElementById('gs-academic-date').value = sheet.academicDate || 'Đồng Nai, ngày 18 tháng 09 năm 2026';
+      document.getElementById('gs-dean-name').textContent = sheet.deanName || 'Nguyễn Văn Quang';
+      document.getElementById('gs-teacher-name').textContent = sheet.teacherName || (currentUser ? currentUser.name : 'Nguyễn Công Danh');
+
+      const countBadge = document.getElementById('gs-students-count-badge');
+      if (countBadge) {
+        countBadge.textContent = `${sheet.records ? sheet.records.length : 0} Học Sinh`;
+      }
+
+      const tbody = document.getElementById('gs-table-body');
+      if (!sheet.records || sheet.records.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="12" class="text-center py-6 text-slate-500 font-sans">Lớp này hiện chưa có học sinh nào đăng ký trên hệ thống.</td></tr>`;
+        return;
+      }
+
+      tbody.innerHTML = sheet.records.map((r, idx) => {
+        const tbScore = calcRowTB(r);
+        return `
+          <tr class="hover:bg-slate-50/70 transition" data-row-idx="${idx}">
+            <td class="border border-black text-center py-1 font-semibold text-slate-700">${r.tt || (idx + 1)}</td>
+            <td class="border border-black px-2 py-1 font-mono font-bold text-slate-900">${escapeHtml(r.studentCode || '')}</td>
+            <td class="border border-black px-2 py-1 font-medium text-slate-900 text-left">
+              <input type="text"
+                value="${escapeHtml(r.name || '')}"
+                class="gs-text-input font-medium"
+                data-row="${idx}"
+                data-field="name"
+                onchange="onGsFieldChange(${idx}, 'name', this.value)">
+            </td>
+            <td class="border border-black px-1 py-1 text-center">
+              <input type="text"
+                value="${escapeHtml(r.dob || '')}"
+                placeholder="dd/mm/yyyy"
+                class="gs-text-input text-center"
+                data-row="${idx}"
+                data-field="dob"
+                onchange="onGsFieldChange(${idx}, 'dob', this.value)">
+            </td>
+            <td class="border border-black p-0">
+              <input type="number" step="0.1" min="0" max="10"
+                value="${r.hs1 !== null && r.hs1 !== undefined ? r.hs1 : ''}"
+                class="gs-score-input"
+                data-row="${idx}"
+                data-field="hs1"
+                oninput="onGsScoreInput(${idx})"
+                onkeydown="handleGsKeyDown(event, ${idx}, 'hs1')">
+            </td>
+            <td class="border border-black p-0">
+              <input type="number" step="0.1" min="0" max="10"
+                value="${r.hs2_1 !== null && r.hs2_1 !== undefined ? r.hs2_1 : ''}"
+                class="gs-score-input"
+                data-row="${idx}"
+                data-field="hs2_1"
+                oninput="onGsScoreInput(${idx})"
+                onkeydown="handleGsKeyDown(event, ${idx}, 'hs2_1')">
+            </td>
+            <td class="border border-black p-0">
+              <input type="number" step="0.1" min="0" max="10"
+                value="${r.hs2_2 !== null && r.hs2_2 !== undefined ? r.hs2_2 : ''}"
+                class="gs-score-input"
+                data-row="${idx}"
+                data-field="hs2_2"
+                oninput="onGsScoreInput(${idx})"
+                onkeydown="handleGsKeyDown(event, ${idx}, 'hs2_2')">
+            </td>
+            <td class="border border-black p-0">
+              <input type="number" step="0.1" min="0" max="10"
+                value="${r.hs2_3 !== null && r.hs2_3 !== undefined ? r.hs2_3 : ''}"
+                class="gs-score-input"
+                data-row="${idx}"
+                data-field="hs2_3"
+                oninput="onGsScoreInput(${idx})"
+                onkeydown="handleGsKeyDown(event, ${idx}, 'hs2_3')">
+            </td>
+            <td class="border border-black p-0">
+              <input type="number" step="0.1" min="0" max="10"
+                value="${r.hs2_4 !== null && r.hs2_4 !== undefined ? r.hs2_4 : ''}"
+                class="gs-score-input"
+                data-row="${idx}"
+                data-field="hs2_4"
+                oninput="onGsScoreInput(${idx})"
+                onkeydown="handleGsKeyDown(event, ${idx}, 'hs2_4')">
+            </td>
+            <td class="border border-black text-center py-1 font-bold bg-indigo-50/40 text-indigo-900" id="gs-tb-${idx}">
+              ${tbScore}
+            </td>
+            <td class="border border-black p-0">
+              <input type="text"
+                value="${escapeHtml(r.note || '')}"
+                placeholder=""
+                class="gs-text-input"
+                data-row="${idx}"
+                data-field="note"
+                onchange="onGsFieldChange(${idx}, 'note', this.value)"
+                onkeydown="handleGsKeyDown(event, ${idx}, 'note')">
+            </td>
+          </tr>
+        `;
+      }).join('');
+    }
+
+    // Xử lý khi gõ điểm: tính ngay điểm TB và tự động lưu ngầm
+    function onGsScoreInput(rowIdx) {
+      if (!currentGradeSheet || !currentGradeSheet.records || !currentGradeSheet.records[rowIdx]) return;
+      const r = currentGradeSheet.records[rowIdx];
+
+      const getVal = (field) => {
+        const inp = document.querySelector(`input[data-row="${rowIdx}"][data-field="${field}"]`);
+        if (!inp || inp.value === '') return null;
+        const val = parseFloat(inp.value);
+        return isNaN(val) ? null : val;
+      };
+
+      r.hs1 = getVal('hs1');
+      r.hs2_1 = getVal('hs2_1');
+      r.hs2_2 = getVal('hs2_2');
+      r.hs2_3 = getVal('hs2_3');
+      r.hs2_4 = getVal('hs2_4');
+
+      const tbSpan = document.getElementById(`gs-tb-${rowIdx}`);
+      if (tbSpan) {
+        tbSpan.textContent = calcRowTB(r);
+      }
+
+      markGsDirty();
+    }
+
+    function onGsFieldChange(rowIdx, field, val) {
+      if (!currentGradeSheet || !currentGradeSheet.records || !currentGradeSheet.records[rowIdx]) return;
+      currentGradeSheet.records[rowIdx][field] = val;
+      markGsDirty();
+    }
+
+    function markGsDirty() {
+      const statusSpan = document.getElementById('gs-save-status');
+      if (statusSpan) {
+        statusSpan.classList.remove('hidden');
+        statusSpan.className = "text-xs font-semibold text-amber-600";
+        statusSpan.textContent = "Chưa lưu thay đổi...";
+      }
+
+      clearTimeout(gsAutoSaveDebounceTimer);
+      gsAutoSaveDebounceTimer = setTimeout(() => {
+        saveGradeSheet(true); // Tự động lưu ngầm
+      }, 1500);
+    }
+
+    // Điều hướng bàn phím như Excel trên Bảng Điểm
+    function handleGsKeyDown(e, rowIdx, currentField) {
+      const fieldList = ['hs1', 'hs2_1', 'hs2_2', 'hs2_3', 'hs2_4', 'note'];
+      const fieldIdx = fieldList.indexOf(currentField);
+
+      if (e.key === 'Enter' || e.key === 'ArrowDown') {
+        e.preventDefault();
+        const nextInp = document.querySelector(`input[data-row="${rowIdx + 1}"][data-field="${currentField}"]`);
+        if (nextInp) nextInp.focus();
+      } else if (e.key === 'ArrowUp') {
+        e.preventDefault();
+        const prevInp = document.querySelector(`input[data-row="${rowIdx - 1}"][data-field="${currentField}"]`);
+        if (prevInp) prevInp.focus();
+      } else if (e.key === 'Tab' && !e.shiftKey) {
+        // Tab tự nhiên di chuyển sang cột tiếp theo
+      }
+    }
+
+    // Lưu toàn bộ bảng điểm
+    async function saveGradeSheet(isSilent = false) {
+      if (!currentGradeSheet) return;
+
+      // Cập nhật thông tin tiêu đề / header
+      currentGradeSheet.subjectName = document.getElementById('gs-meta-subject').value.trim();
+      currentGradeSheet.totalPeriods = parseInt(document.getElementById('gs-meta-periods').value) || 45;
+      currentGradeSheet.majorName = document.getElementById('gs-meta-major').value.trim();
+      currentGradeSheet.courseCohort = document.getElementById('gs-meta-cohort').value.trim();
+      currentGradeSheet.credits = parseInt(document.getElementById('gs-meta-credits').value) || 2;
+      currentGradeSheet.academicDate = document.getElementById('gs-academic-date').value.trim();
+
+      const statusSpan = document.getElementById('gs-save-status');
+      if (statusSpan) {
+        statusSpan.classList.remove('hidden');
+        statusSpan.className = "text-xs font-semibold text-slate-500";
+        statusSpan.textContent = "Đang lưu...";
+      }
+
+      try {
+        const res = await fetch('/api/grade-sheets/save', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ sheet: currentGradeSheet })
+        });
+        const data = await res.json();
+
+        if (!res.ok) {
+          if (!isSilent) showToast(data.message || "Lỗi lưu bảng điểm", "error");
+          if (statusSpan) {
+            statusSpan.className = "text-xs font-semibold text-rose-600";
+            statusSpan.textContent = "Lỗi khi lưu!";
+          }
+          return;
+        }
+
+        if (statusSpan) {
+          statusSpan.className = "text-xs font-semibold text-emerald-600";
+          statusSpan.textContent = "✓ Đã lưu thay đổi";
+        }
+        if (!isSilent) {
+          showToast("Đã lưu bảng điểm thành công!", "success");
+        }
+      } catch (e) {
+        console.error("Lỗi lưu bảng điểm:", e);
+        if (!isSilent) showToast("Lỗi kết nối khi lưu bảng điểm!", "error");
+      }
+    }
+
+    // In bảng điểm chuẩn khổ A4
+    function printGradeSheet() {
+      // Trước khi in, lưu dữ liệu trước
+      saveGradeSheet(true);
+      window.print();
     }
 
     // ================= PHÂN HỆ HỌC SINH =================
