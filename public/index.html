@@ -92,8 +92,21 @@
             </div>
           </div>
 
-          <button type="submit" class="w-full py-2.5 px-4 bg-indigo-600 hover:bg-indigo-700 text-white font-medium rounded-xl shadow-md shadow-indigo-200 transition duration-150">
-            Đăng nhập
+          <!-- Tùy chọn Duy trì đăng nhập -->
+          <div class="flex items-center justify-between pt-1">
+            <label class="flex items-center gap-2 cursor-pointer select-none group">
+              <input type="checkbox" id="login-remember" checked class="w-4 h-4 rounded text-indigo-600 focus:ring-indigo-500 border-slate-300 cursor-pointer transition">
+              <span class="text-xs font-semibold text-slate-700 group-hover:text-indigo-600 transition flex items-center gap-1.5">
+                <i class="fa-solid fa-circle-check text-emerald-500"></i>
+                Duy trì đăng nhập
+              </span>
+            </label>
+            <span class="text-[11px] text-slate-400 font-medium">Tự động vào lần sau</span>
+          </div>
+
+          <button type="submit" class="w-full py-2.5 px-4 bg-indigo-600 hover:bg-indigo-700 text-white font-medium rounded-xl shadow-md shadow-indigo-200 transition duration-150 flex items-center justify-center gap-2">
+            <i class="fa-solid fa-right-to-bracket"></i>
+            <span>Đăng nhập</span>
           </button>
         </form>
 
@@ -663,15 +676,74 @@
     let teacherSelectedClass = 'ALL';
     let availableClasses = [];
 
-    window.addEventListener('DOMContentLoaded', () => {
+    // ================= QUẢN LÝ PHIÊN ĐĂNG NHẬP (SESSION & REMEMBER ME) =================
+    function saveSessionUser(user, remember = null) {
+      currentUser = user;
+      if (!user) {
+        localStorage.removeItem('educlass_user');
+        sessionStorage.removeItem('educlass_user');
+        return;
+      }
+
+      if (remember === null) {
+        remember = (localStorage.getItem('educlass_remember') !== 'false');
+      }
+
+      if (remember) {
+        localStorage.setItem('educlass_user', JSON.stringify(user));
+        localStorage.setItem('educlass_remember', 'true');
+        if (user.username) localStorage.setItem('educlass_last_user', user.username);
+        sessionStorage.removeItem('educlass_user');
+      } else {
+        sessionStorage.setItem('educlass_user', JSON.stringify(user));
+        localStorage.removeItem('educlass_user');
+        localStorage.setItem('educlass_remember', 'false');
+        if (user.username) localStorage.setItem('educlass_last_user', user.username);
+      }
+    }
+
+    window.addEventListener('DOMContentLoaded', async () => {
       loadClasses(); // Tải danh mục lớp học ngay từ đầu cho học sinh và giáo viên
-      const savedUser = localStorage.getItem('educlass_user');
-      if (savedUser) {
+
+      // Đồng bộ trạng thái checkbox Duy trì đăng nhập (mặc định luôn bật)
+      const rememberCheckbox = document.getElementById('login-remember');
+      const savedRememberPref = localStorage.getItem('educlass_remember');
+      if (rememberCheckbox) {
+        rememberCheckbox.checked = (savedRememberPref !== 'false');
+      }
+
+      // Điền sẵn tên đăng nhập gần nhất nếu có để đăng nhập nhanh
+      const lastUsername = localStorage.getItem('educlass_last_user');
+      const usernameInput = document.getElementById('login-username');
+      if (lastUsername && usernameInput && !usernameInput.value) {
+        usernameInput.value = lastUsername;
+      }
+
+      // Kiểm tra phiên đăng nhập đã lưu trong localStorage hoặc sessionStorage
+      const savedUserStr = localStorage.getItem('educlass_user') || sessionStorage.getItem('educlass_user');
+      if (savedUserStr) {
         try {
-          currentUser = JSON.parse(savedUser);
+          currentUser = JSON.parse(savedUserStr);
           renderApp();
+
+          // Xác thực ngầm với máy chủ để cập nhật dữ liệu mới nhất (email, quyền hạn...)
+          if (currentUser && currentUser.id) {
+            fetch(`/api/auth/verify?id=${encodeURIComponent(currentUser.id)}`)
+              .then(res => res.json())
+              .then(data => {
+                if (data.valid && data.user) {
+                  const isRemember = (localStorage.getItem('educlass_remember') !== 'false');
+                  saveSessionUser(data.user, isRemember);
+                } else if (data.pending) {
+                  saveSessionUser(null);
+                  showLoginView();
+                  showToast(data.message || "Tài khoản đang chờ duyệt.", "warning");
+                }
+              })
+              .catch(() => {});
+          }
         } catch (e) {
-          localStorage.removeItem('educlass_user');
+          saveSessionUser(null);
           showLoginView();
         }
       } else {
@@ -776,8 +848,7 @@
           return;
         }
 
-        currentUser = data.user;
-        localStorage.setItem('educlass_user', JSON.stringify(currentUser));
+        saveSessionUser(data.user, true); // Tự động duy trì đăng nhập cho tài khoản mới
         showToast(`Tài khoản ${currentUser.name} (${role === 'teacher' ? 'Giáo viên' : 'Học sinh'}) đã được tạo!`, "success");
         renderApp();
       } catch (err) {
@@ -796,6 +867,7 @@
       if (e) e.preventDefault();
       const username = document.getElementById('login-username').value.trim();
       const password = document.getElementById('login-password').value.trim();
+      const remember = document.getElementById('login-remember') ? document.getElementById('login-remember').checked : true;
 
       if (!username || !password) {
         showToast("Vui lòng điền đủ tài khoản và mật khẩu!", "warning");
@@ -815,8 +887,7 @@
           return;
         }
 
-        currentUser = data.user;
-        localStorage.setItem('educlass_user', JSON.stringify(currentUser));
+        saveSessionUser(data.user, remember);
         showToast(`Xin chào, ${currentUser.name}!`, "success");
         renderApp();
       } catch (err) {
@@ -825,8 +896,7 @@
     }
 
     function handleLogout() {
-      currentUser = null;
-      localStorage.removeItem('educlass_user');
+      saveSessionUser(null);
       showToast("Đã đăng xuất tài khoản.", "success");
       showLoginView();
     }
@@ -1165,8 +1235,7 @@
         });
         const data = await res.json();
         if (res.ok) {
-          currentUser = data.user;
-          localStorage.setItem('educlass_user', JSON.stringify(currentUser));
+          saveSessionUser(data.user);
           showToast(data.message, 'success');
           renderApp();
         } else {

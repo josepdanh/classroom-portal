@@ -237,6 +237,22 @@ app.post('/api/auth/login', (req, res) => {
   return res.json({ success: true, user: userInfo });
 });
 
+// 1c. Xác thực phiên đăng nhập duy trì (Keep-alive / Verify session)
+app.get('/api/auth/verify', (req, res) => {
+  const { id } = req.query;
+  if (!id) return res.status(400).json({ valid: false });
+  const db = readDatabase();
+  const user = db.users.find(u => u.id === id);
+  if (!user) {
+    return res.status(404).json({ valid: false, message: "Tài khoản không tồn tại." });
+  }
+  if (user.status === 'PENDING') {
+    return res.status(403).json({ valid: false, pending: true, message: "Tài khoản đang chờ phê duyệt từ Quản trị viên." });
+  }
+  const { password: _, ...userInfo } = user;
+  return res.json({ valid: true, user: userInfo });
+});
+
 // 1b. Đăng ký tài khoản mới (Giáo viên hoặc Học sinh)
 app.post('/api/auth/register', (req, res) => {
   const { username, password, name, role, className, subject, email } = req.body;
