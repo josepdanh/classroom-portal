@@ -1,0 +1,189 @@
+{
+  "users": [
+    {
+      "id": "u_teacher_danh",
+      "username": "NguyenCongDanh",
+      "password": "12345679",
+      "name": "Thầy Nguyễn Công Danh",
+      "role": "teacher",
+      "subject": "Tin học"
+    },
+    {
+      "id": "u_C08TK0101",
+      "username": "C08TK0101",
+      "password": "12345",
+      "name": "C08TK0101",
+      "role": "student",
+      "className": "C08TK"
+    },
+    {
+      "id": "u_C08TK0102",
+      "username": "C08TK0102",
+      "password": "12345",
+      "name": "C08TK0102",
+      "role": "student",
+      "className": "C08TK"
+    },
+    {
+      "id": "u_C08TK0104",
+      "username": "C08TK0104",
+      "password": "12345",
+      "name": "C08TK0104",
+      "role": "student",
+      "className": "C08TK"
+    },
+    {
+      "id": "u_C08TK0105",
+      "username": "C08TK0105",
+      "password": "12345",
+      "name": "C08TK0105",
+      "role": "student",
+      "className": "C08TK"
+    },
+    {
+      "id": "u_C08TK0106",
+      "username": "C08TK0106",
+      "password": "12345",
+      "name": "C08TK0106",
+      "role": "student",
+      "className": "C08TK"
+    },
+    {
+      "id": "u_C08TK0107",
+      "username": "C08TK0107",
+      "password": "12345",
+      "name": "C08TK0107",
+      "role": "student",
+      "className": "C08TK"
+    },
+    {
+      "id": "u_C08TK0108",
+      "username": "C08TK0108",
+      "password": "12345",
+      "name": "C08TK0108",
+      "role": "student",
+      "className": "C08TK"
+    },
+    {
+      "id": "u_C08TK0109",
+      "username": "C08TK0109",
+      "password": "12345",
+      "name": "C08TK0109",
+      "role": "student",
+      "className": "C08TK"
+    },
+    {
+      "id": "u_C08TK0110",
+      "username": "C08TK0110",
+      "password": "12345",
+      "name": "C08TK0110",
+      "role": "student",
+      "className": "C08TK"
+    },
+    {
+      "id": "u_C08TK0111",
+      "username": "C08TK0111",
+      "password": "12345",
+      "name": "C08TK0111",
+      "role": "student",
+      "className": "C08TK"
+    },
+    {
+      "id": "u_C08TK0112",
+      "username": "C08TK0112",
+      "password": "12345",
+      "name": "C08TK0112",
+      "role": "student",
+      "className": "C08TK"
+    },
+    {
+      "id": "u_C08TK0113",
+      "username": "C08TK0113",
+      "password": "12345",
+      "name": "C08TK0113",
+      "role": "student",
+      "className": "C08TK"
+    },
+    {
+      "id": "u_C08TK0114",
+      "username": "C08TK0114",
+      "password": "12345",
+      "name": "C08TK0114",
+      "role": "student",
+      "className": "C08TK"
+    },
+    {
+      "id": "u_C08TK0115",
+      "username": "C08TK0115",
+      "password": "12345",
+      "name": "C08TK0115",
+      "role": "student",
+      "className": "C08TK"
+    },
+    {
+      "id": "u_C08TK0117",
+      "username": "C08TK0117",
+      "password": "12345",
+      "name": "C08TK0117",
+      "role": "student",
+      "className": "C08TK"
+    },
+    {
+      "id": "u_C08TK0118",
+      "username": "C08TK0118",
+      "password": "12345",
+      "name": "C08TK0118",
+      "role": "student",
+      "className": "C08TK"
+    },
+    {
+      "id": "u_C08TK0119",
+      "username": "C08TK0119",
+      "password": "12345",
+      "name": "C08TK0119",
+      "role": "student",
+      "className": "C08TK"
+    },
+    {
+      "id": "u_C08TK0120",
+      "username": "C08TK0120",
+      "password": "12345",
+      "name": "C08TK0120",
+      "role": "student",
+      "className": "C08TK"
+    },
+    {
+      "id": "u_C08TK0123",
+      "username": "C08TK0123",
+      "password": "12345",
+      "name": "C08TK0123",
+      "role": "student",
+      "className": "C08TK"
+    },
+    {
+      "id": "u_C08TK0124",
+      "username": "C08TK0124",
+      "password": "12345",
+      "name": "C08TK0124",
+      "role": "student",
+      "className": "C08TK"
+    }
+  ],
+  "classes": [
+    "C08TK",
+    "C09TK"
+  ],
+  "assignments": [
+    {
+      "id": "asm_1793609039129",
+      "title": "Làm bài báo cáo về 10 nguyên lý chuyển động trong motion graphics",
+      "description": "Làm file ppt",
+      "targetClass": "C08TK",
+      "dueDate": "2026-11-04T06:00",
+      "createdAt": "2026-11-02T08:43:59.129Z",
+      "attachment": null,
+      "createdBy": "u_teacher_danh"
+    }
+  ],
+  "submissions": []
+}

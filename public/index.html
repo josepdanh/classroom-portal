@@ -1,0 +1,1215 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EduClass - Quản Lý Bài Tập & Chấm Điểm</title>
+  <!-- TailwindCSS qua CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col">
+
+  <!-- ================= TOP NAVIGATION ================= -->
+  <nav class="bg-white border-b border-slate-200 sticky top-0 z-30 shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between h-16">
+        <div class="flex items-center space-x-3">
+          <div class="w-10 h-10 rounded-xl bg-indigo-600 flex items-center justify-center text-white shadow-md shadow-indigo-100">
+            <i class="fa-solid fa-graduation-cap text-lg"></i>
+          </div>
+          <div>
+            <span class="text-xl font-bold bg-gradient-to-r from-indigo-600 to-violet-600 bg-clip-text text-transparent">EduClass</span>
+            <span class="hidden sm:inline-block ml-2 text-xs font-semibold px-2.5 py-0.5 rounded-full bg-indigo-50 text-indigo-700 border border-indigo-100">THPT Tin Học</span>
+          </div>
+        </div>
+
+        <!-- Khối hiển thị khi đã đăng nhập -->
+        <div id="nav-user-info" class="hidden flex items-center space-x-4">
+          <div class="text-right">
+            <div id="nav-user-name" class="text-sm font-semibold text-slate-800 leading-tight"></div>
+            <div id="nav-user-badge" class="text-xs text-slate-500 font-medium"></div>
+          </div>
+          <button onclick="handleLogout()" title="Đăng xuất" class="px-3 py-1.5 rounded-lg text-slate-600 hover:text-red-600 hover:bg-red-50 text-sm font-medium transition flex items-center space-x-1.5 border border-slate-200">
+            <i class="fa-solid fa-arrow-right-from-bracket"></i>
+            <span class="hidden sm:inline">Thoát</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ================= TOAST NOTIFICATION CONTAINER ================= -->
+  <div id="toast-container" class="fixed top-20 right-4 z-50 flex flex-col space-y-2 pointer-events-none"></div>
+
+  <!-- ================= MAIN CONTENT CONTAINER ================= -->
+  <main class="flex-1 max-w-7xl w-full mx-auto p-4 sm:p-6 lg:p-8">
+
+    <!-- 1. MÀN HÌNH ĐĂNG NHẬP -->
+    <section id="view-login" class="max-w-md mx-auto my-8">
+      <div class="bg-white rounded-2xl shadow-xl border border-slate-100 p-8">
+        <div class="text-center mb-6">
+          <div class="w-14 h-14 bg-indigo-50 text-indigo-600 rounded-2xl flex items-center justify-center mx-auto text-2xl mb-3 shadow-inner">
+            <i class="fa-solid fa-lock"></i>
+          </div>
+          <h2 class="text-2xl font-bold text-slate-900">Đăng Nhập Hệ Thống</h2>
+          <p class="text-sm text-slate-500 mt-1">Học sinh nộp bài & Giáo viên quản lý chấm điểm</p>
+        </div>
+
+        <!-- Tabs Chuyển đổi Đăng nhập / Đăng ký -->
+        <div class="flex border-b border-slate-200 mb-6">
+          <button type="button" onclick="switchAuthTab('login')" id="tab-login-btn" class="flex-1 pb-3 text-sm font-bold text-indigo-600 border-b-2 border-indigo-600 transition">Đăng Nhập</button>
+          <button type="button" onclick="switchAuthTab('register')" id="tab-register-btn" class="flex-1 pb-3 text-sm font-semibold text-slate-400 hover:text-slate-600 border-b-2 border-transparent transition">Tạo Tài Khoản Mới</button>
+        </div>
+
+        <!-- Form Đăng Nhập -->
+        <form id="form-login" onsubmit="handleLogin(event)" class="space-y-4">
+          <div>
+            <label class="block text-sm font-medium text-slate-700 mb-1">Tài khoản</label>
+            <div class="relative">
+              <span class="absolute inset-y-0 left-0 pl-3 flex items-center text-slate-400">
+                <i class="fa-regular fa-user"></i>
+              </span>
+              <input type="text" id="login-username" required class="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-300 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none text-sm transition" placeholder="Tên đăng nhập (VD: NguyenCongDanh, C08TK0101)">
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium text-slate-700 mb-1">Mật khẩu</label>
+            <div class="relative">
+              <span class="absolute inset-y-0 left-0 pl-3 flex items-center text-slate-400">
+                <i class="fa-solid fa-key"></i>
+              </span>
+              <input type="password" id="login-password" required class="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-300 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none text-sm transition" placeholder="Nhập mật khẩu">
+            </div>
+          </div>
+
+          <button type="submit" class="w-full py-2.5 px-4 bg-indigo-600 hover:bg-indigo-700 text-white font-medium rounded-xl shadow-md shadow-indigo-200 transition duration-150">
+            Đăng nhập
+          </button>
+        </form>
+
+        <!-- Form Đăng Ký Tài Khoản Mới -->
+        <form id="form-register" onsubmit="handleRegister(event)" class="hidden space-y-3.5">
+          <div>
+            <label class="block text-xs font-semibold text-slate-600 uppercase mb-1">Vai trò tài khoản:</label>
+            <div class="grid grid-cols-2 gap-2">
+              <label class="flex items-center gap-2 p-2.5 rounded-xl border border-slate-200 cursor-pointer hover:bg-slate-50 transition text-sm">
+                <input type="radio" name="reg-role" value="student" checked onchange="toggleRegRole('student')" class="text-indigo-600 focus:ring-indigo-500">
+                <span class="font-medium text-slate-800"><i class="fa-solid fa-user-graduate text-emerald-500 mr-1"></i>Học sinh</span>
+              </label>
+              <label class="flex items-center gap-2 p-2.5 rounded-xl border border-slate-200 cursor-pointer hover:bg-slate-50 transition text-sm">
+                <input type="radio" name="reg-role" value="teacher" onchange="toggleRegRole('teacher')" class="text-indigo-600 focus:ring-indigo-500">
+                <span class="font-medium text-slate-800"><i class="fa-solid fa-chalkboard-user text-indigo-500 mr-1"></i>Giáo viên</span>
+              </label>
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium text-slate-700 mb-1">Họ và tên <span class="text-red-500">*</span></label>
+            <input type="text" id="reg-name" required class="w-full px-3.5 py-2 rounded-xl border border-slate-300 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none text-sm" placeholder="Ví dụ: Nguyễn Văn Nam">
+          </div>
+
+          <div id="box-reg-class">
+            <label class="block text-sm font-medium text-slate-700 mb-1">Lớp học</label>
+            <input type="text" id="reg-class" value="C08TK" class="w-full px-3.5 py-2 rounded-xl border border-slate-300 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none text-sm" placeholder="Ví dụ: C08TK">
+          </div>
+
+          <div id="box-reg-subject" class="hidden">
+            <label class="block text-sm font-medium text-slate-700 mb-1">Môn giảng dạy</label>
+            <input type="text" id="reg-subject" value="Tin học" class="w-full px-3.5 py-2 rounded-xl border border-slate-300 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none text-sm" placeholder="Ví dụ: Tin học, Toán học...">
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium text-slate-700 mb-1">Tên đăng nhập <span class="text-red-500">*</span></label>
+            <input type="text" id="reg-username" required class="w-full px-3.5 py-2 rounded-xl border border-slate-300 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none text-sm" placeholder="Viết liền không dấu, ví dụ: nam11a1">
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium text-slate-700 mb-1">Mật khẩu <span class="text-red-500">*</span></label>
+            <input type="password" id="reg-password" required class="w-full px-3.5 py-2 rounded-xl border border-slate-300 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none text-sm" placeholder="Nhập mật khẩu (ví dụ: 123)">
+          </div>
+
+          <button type="submit" class="w-full py-2.5 px-4 bg-emerald-600 hover:bg-emerald-700 text-white font-semibold rounded-xl shadow-md shadow-emerald-200 transition duration-150">
+            Tạo Tài Khoản & Vào Hệ Thống
+          </button>
+        </form>
+      </div>
+    </section>
+
+    <!-- 2. GIAO DIỆN PHÂN HỆ GIÁO VIÊN -->
+    <section id="view-teacher" class="hidden space-y-6">
+      <!-- Header Banner & Thống kê -->
+      <div class="bg-gradient-to-r from-indigo-700 to-violet-800 rounded-2xl p-6 text-white shadow-lg flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div>
+          <h1 class="text-2xl font-bold flex items-center gap-2">
+            <i class="fa-solid fa-chalkboard-user"></i>
+            Bảng Điều Khiển Giáo Viên
+          </h1>
+          <p class="text-indigo-200 text-sm mt-1">Quản lý giao đề, theo dõi tỷ lệ nộp bài và trực tiếp chấm điểm học sinh</p>
+        </div>
+        <button onclick="openCreateModal()" class="px-4 py-2.5 bg-white text-indigo-700 hover:bg-indigo-50 font-semibold rounded-xl shadow-sm transition flex items-center justify-center gap-2 text-sm">
+          <i class="fa-solid fa-plus"></i> Giao Bài Tập Mới
+        </button>
+      </div>
+
+      <!-- Thẻ tóm tắt thông số -->
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+        <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm flex items-center space-x-4">
+          <div class="w-12 h-12 rounded-lg bg-indigo-50 text-indigo-600 flex items-center justify-center text-xl">
+            <i class="fa-solid fa-book-open"></i>
+          </div>
+          <div>
+            <div id="stat-total-assignments" class="text-2xl font-bold text-slate-900">0</div>
+            <div class="text-xs text-slate-500 font-medium">Bài tập đã giao</div>
+          </div>
+        </div>
+        <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm flex items-center space-x-4">
+          <div class="w-12 h-12 rounded-lg bg-amber-50 text-amber-600 flex items-center justify-center text-xl">
+            <i class="fa-solid fa-file-circle-check"></i>
+          </div>
+          <div>
+            <div id="stat-total-submissions" class="text-2xl font-bold text-slate-900">0</div>
+            <div class="text-xs text-slate-500 font-medium">Lượt bài đã nộp</div>
+          </div>
+        </div>
+        <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm flex items-center space-x-4">
+          <div class="w-12 h-12 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center text-xl">
+            <i class="fa-solid fa-clipboard-check"></i>
+          </div>
+          <div>
+            <div id="stat-total-graded" class="text-2xl font-bold text-slate-900">0</div>
+            <div class="text-xs text-slate-500 font-medium">Bài đã chấm điểm</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Thanh quản lý & Lọc theo Lớp học -->
+      <div class="bg-white rounded-2xl border border-slate-200 p-4 shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+        <div class="flex items-center gap-2 overflow-x-auto pb-1 sm:pb-0" id="teacher-class-tabs">
+          <!-- Render danh sách tab lớp học qua JS -->
+        </div>
+        <button onclick="promptCreateClass()" class="text-xs font-semibold px-3 py-2 rounded-xl bg-indigo-50 text-indigo-700 hover:bg-indigo-100 transition flex items-center gap-1.5 self-start sm:self-auto shrink-0 border border-indigo-100 shadow-sm">
+          <i class="fa-solid fa-folder-plus text-sm"></i> Tạo Lớp Học Mới
+        </button>
+      </div>
+
+      <!-- Danh sách bài tập đã giao -->
+      <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+        <div class="px-6 py-4 border-b border-slate-100 flex items-center justify-between">
+          <h2 class="font-bold text-slate-900 text-lg flex items-center gap-2">
+            <i class="fa-solid fa-list-check text-indigo-600"></i> Danh Sách Bài Tập Đã Giao
+          </h2>
+          <span id="teacher-asm-count" class="text-xs bg-slate-100 text-slate-600 px-2.5 py-1 rounded-full font-medium">0 bài tập</span>
+        </div>
+        <div id="teacher-assignments-list" class="divide-y divide-slate-100">
+          <!-- Render bài tập qua JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. GIAO DIỆN PHÂN HỆ HỌC SINH -->
+    <section id="view-student" class="hidden space-y-6">
+      <div class="bg-gradient-to-r from-teal-600 to-emerald-700 rounded-2xl p-6 text-white shadow-lg flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div>
+          <h1 class="text-2xl font-bold flex items-center gap-2">
+            <i class="fa-solid fa-user-graduate"></i>
+            Góc Học Tập Của Bạn
+          </h1>
+          <p id="student-welcome-text" class="text-emerald-100 text-sm mt-1">Theo dõi hạn nộp, gửi bài làm và xem điểm số, nhận xét từ thầy cô</p>
+        </div>
+      </div>
+
+      <!-- Bộ lọc bài tập cho học sinh -->
+      <div class="flex items-center space-x-2 border-b border-slate-200 pb-2 overflow-x-auto">
+        <button onclick="setStudentFilter('ALL')" id="filter-all" class="px-3 py-1.5 rounded-lg text-sm font-semibold bg-indigo-600 text-white">Tất Cả</button>
+        <button onclick="setStudentFilter('NOT_SUBMITTED')" id="filter-not-submitted" class="px-3 py-1.5 rounded-lg text-sm font-medium text-slate-600 hover:bg-slate-100">Chưa Nộp</button>
+        <button onclick="setStudentFilter('SUBMITTED')" id="filter-submitted" class="px-3 py-1.5 rounded-lg text-sm font-medium text-slate-600 hover:bg-slate-100">Đã Nộp (Chờ Chấm)</button>
+        <button onclick="setStudentFilter('GRADED')" id="filter-graded" class="px-3 py-1.5 rounded-lg text-sm font-medium text-slate-600 hover:bg-slate-100">Đã Chấm Điểm</button>
+      </div>
+
+      <!-- Danh sách bài tập học sinh -->
+      <div id="student-assignments-list" class="grid grid-cols-1 gap-5">
+        <!-- Render bài tập học sinh qua JS -->
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ================= MODAL: GIÁO VIÊN TẠO BÀI TẬP MỚI ================= -->
+  <div id="modal-create-assignment" class="fixed inset-0 z-50 bg-slate-900/50 backdrop-blur-sm hidden items-center justify-center p-4">
+    <div class="bg-white w-full max-w-xl rounded-2xl shadow-2xl border border-slate-100 overflow-hidden transform transition-all">
+      <div class="px-6 py-4 bg-slate-50 border-b border-slate-200 flex justify-between items-center">
+        <h3 class="font-bold text-slate-900 text-lg flex items-center gap-2">
+          <i class="fa-solid fa-plus-circle text-indigo-600"></i> Giao Bài Tập Mới Cho Lớp
+        </h3>
+        <button onclick="closeModal('modal-create-assignment')" class="text-slate-400 hover:text-slate-600 text-xl font-bold">&times;</button>
+      </div>
+      <form onsubmit="handleCreateAssignment(event)" class="p-6 space-y-4">
+        <div>
+          <label class="block text-sm font-medium text-slate-700 mb-1">Giao cho lớp học <span class="text-red-500">*</span></label>
+          <div class="flex gap-2">
+            <select id="create-target-class" required class="flex-1 px-3.5 py-2 rounded-xl border border-slate-300 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-sm outline-none bg-white">
+              <!-- Rendered via JS -->
+            </select>
+            <button type="button" onclick="promptCreateClass(true)" title="Tạo lớp mới" class="px-3 py-2 rounded-xl border border-slate-300 hover:bg-slate-50 text-indigo-600 text-xs font-semibold flex items-center gap-1">
+              <i class="fa-solid fa-plus"></i> Lớp mới
+            </button>
+          </div>
+          <p class="text-xs text-slate-400 mt-1">Chỉ học sinh thuộc lớp này mới nhìn thấy và nộp được bài tập.</p>
+        </div>
+
+        <div>
+          <label class="block text-sm font-medium text-slate-700 mb-1">Tiêu đề bài tập <span class="text-red-500">*</span></label>
+          <input type="text" id="create-title" required class="w-full px-3.5 py-2 rounded-xl border border-slate-300 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-sm outline-none" placeholder="Ví dụ: Bài tập thực hành cấu trúc rẽ nhánh...">
+        </div>
+
+        <div>
+          <label class="block text-sm font-medium text-slate-700 mb-1">Yêu cầu / Đề bài chi tiết <span class="text-red-500">*</span></label>
+          <textarea id="create-description" rows="4" required class="w-full px-3.5 py-2 rounded-xl border border-slate-300 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-sm outline-none" placeholder="Mô tả các yêu cầu cụ thể, định dạng nộp, tiêu chí chấm..."></textarea>
+        </div>
+
+        <div>
+          <label class="block text-sm font-medium text-slate-700 mb-1">Hạn nộp bài <span class="text-red-500">*</span></label>
+          <input type="datetime-local" id="create-due-date" required class="w-full px-3.5 py-2 rounded-xl border border-slate-300 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-sm outline-none">
+        </div>
+
+        <div>
+          <label class="block text-sm font-medium text-slate-700 mb-1">File đính kèm đề bài (tùy chọn - PDF, Docx, Zip...)</label>
+          <input type="file" id="create-attachment" class="w-full text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-sm file:font-semibold file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100 cursor-pointer">
+        </div>
+
+        <div class="pt-4 border-t border-slate-100 flex justify-end space-x-3">
+          <button type="button" onclick="closeModal('modal-create-assignment')" class="px-4 py-2 rounded-xl border border-slate-300 text-slate-600 hover:bg-slate-50 text-sm font-medium">Hủy bỏ</button>
+          <button type="submit" class="px-5 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-semibold shadow-md shadow-indigo-100">Tạo & Giao bài</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ================= MODAL: GIÁO VIÊN XEM BÀI NỘP & CHẤM ĐIỂM ================= -->
+  <div id="modal-grading" class="fixed inset-0 z-50 bg-slate-900/50 backdrop-blur-sm hidden items-center justify-center p-4">
+    <div class="bg-white w-full max-w-4xl max-h-[90vh] rounded-2xl shadow-2xl border border-slate-100 flex flex-col overflow-hidden">
+      <div class="px-6 py-4 bg-slate-50 border-b border-slate-200 flex justify-between items-center">
+        <div>
+          <h3 id="grading-modal-title" class="font-bold text-slate-900 text-lg">Danh Sách Học Sinh Nộp Bài</h3>
+          <p id="grading-modal-subtitle" class="text-xs text-slate-500 mt-0.5"></p>
+        </div>
+        <button onclick="closeModal('modal-grading')" class="text-slate-400 hover:text-slate-600 text-xl font-bold">&times;</button>
+      </div>
+
+      <div class="p-6 overflow-y-auto flex-1 space-y-4">
+        <div class="overflow-x-auto border border-slate-200 rounded-xl">
+          <table class="w-full text-left text-sm">
+            <thead class="bg-slate-50 text-slate-600 text-xs uppercase font-semibold border-b border-slate-200">
+              <tr>
+                <th class="px-4 py-3">Học Sinh</th>
+                <th class="px-4 py-3">Trạng Thái</th>
+                <th class="px-4 py-3">Thời Gian Nộp</th>
+                <th class="px-4 py-3">Bài Nộp</th>
+                <th class="px-4 py-3">Điểm Số</th>
+                <th class="px-4 py-3 text-right">Thao Tác</th>
+              </tr>
+            </thead>
+            <tbody id="grading-table-body" class="divide-y divide-slate-100 text-slate-700">
+              <!-- Render danh sách nộp bài qua JS -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= MODAL CON: CHI TIẾT CHẤM ĐIỂM TỪNG HỌC SINH ================= -->
+  <div id="modal-grade-single" class="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm hidden items-center justify-center p-4">
+    <div class="bg-white w-full max-w-lg rounded-2xl shadow-2xl border border-slate-100 overflow-hidden">
+      <div class="px-6 py-4 bg-slate-50 border-b border-slate-200 flex justify-between items-center">
+        <h4 class="font-bold text-slate-900 text-base" id="single-grade-student-name">Chấm Điểm Học Sinh</h4>
+        <button onclick="closeModal('modal-grade-single')" class="text-slate-400 hover:text-slate-600 text-xl font-bold">&times;</button>
+      </div>
+      <form onsubmit="handleSaveGrade(event)" class="p-6 space-y-4">
+        <input type="hidden" id="grade-submission-id">
+
+        <!-- Chi tiết bài làm -->
+        <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-2 text-sm">
+          <div class="font-semibold text-slate-800">Nội dung học sinh trả lời:</div>
+          <div id="single-grade-content" class="text-slate-600 whitespace-pre-line bg-white p-2.5 rounded border border-slate-100"></div>
+          
+          <div id="single-grade-link-box" class="hidden">
+            <span class="font-semibold text-slate-800">Liên kết: </span>
+            <a id="single-grade-link" target="_blank" class="text-indigo-600 hover:underline break-all"></a>
+          </div>
+
+          <div id="single-grade-file-box" class="hidden">
+            <span class="font-semibold text-slate-800">File đính kèm: </span>
+            <a id="single-grade-file" class="inline-flex items-center gap-1.5 px-3 py-1 bg-white border border-slate-300 rounded-lg text-xs font-medium text-slate-700 hover:bg-slate-100">
+              <i class="fa-solid fa-download text-indigo-500"></i> <span id="single-grade-filename"></span>
+            </a>
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-sm font-medium text-slate-700 mb-1">Điểm số (Thang điểm 10) <span class="text-red-500">*</span></label>
+          <input type="number" id="input-grade-score" step="0.1" min="0" max="10" required class="w-full px-3.5 py-2 rounded-xl border border-slate-300 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-sm outline-none" placeholder="Ví dụ: 8.5">
+        </div>
+
+        <div>
+          <label class="block text-sm font-medium text-slate-700 mb-1">Lời nhận xét / Góp ý</label>
+          <textarea id="input-grade-feedback" rows="3" class="w-full px-3.5 py-2 rounded-xl border border-slate-300 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-sm outline-none" placeholder="Nhận xét ưu điểm và những điểm cần cải thiện..."></textarea>
+        </div>
+
+        <div class="pt-3 border-t border-slate-100 flex justify-end space-x-3">
+          <button type="button" onclick="closeModal('modal-grade-single')" class="px-4 py-2 rounded-xl border border-slate-300 text-slate-600 hover:bg-slate-50 text-sm font-medium">Đóng</button>
+          <button type="submit" class="px-5 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-semibold shadow-md shadow-emerald-100">Lưu Điểm & Nhận Xét</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ================= MODAL: HỌC SINH NỘP BÀI ================= -->
+  <div id="modal-submit-assignment" class="fixed inset-0 z-50 bg-slate-900/50 backdrop-blur-sm hidden items-center justify-center p-4">
+    <div class="bg-white w-full max-w-xl rounded-2xl shadow-2xl border border-slate-100 overflow-hidden">
+      <div class="px-6 py-4 bg-slate-50 border-b border-slate-200 flex justify-between items-center">
+        <div>
+          <h3 id="submit-modal-title" class="font-bold text-slate-900 text-lg">Nộp Bài Tập</h3>
+          <p id="submit-modal-due" class="text-xs text-slate-500 mt-0.5"></p>
+        </div>
+        <button onclick="closeModal('modal-submit-assignment')" class="text-slate-400 hover:text-slate-600 text-xl font-bold">&times;</button>
+      </div>
+
+      <form onsubmit="handleSubmitAssignment(event)" class="p-6 space-y-4">
+        <input type="hidden" id="submit-assignment-id">
+
+        <div>
+          <label class="block text-sm font-medium text-slate-700 mb-1">Câu trả lời / Nội dung bài làm</label>
+          <textarea id="submit-content" rows="4" class="w-full px-3.5 py-2 rounded-xl border border-slate-300 focus:ring-2 focus:ring-teal-500 focus:border-teal-500 text-sm outline-none" placeholder="Nhập câu trả lời trực tiếp hoặc dán mã nguồn vào đây..."></textarea>
+        </div>
+
+        <div>
+          <label class="block text-sm font-medium text-slate-700 mb-1">Đường dẫn liên kết (tùy chọn: Google Drive, Github, Docs...)</label>
+          <input type="url" id="submit-link" class="w-full px-3.5 py-2 rounded-xl border border-slate-300 focus:ring-2 focus:ring-teal-500 focus:border-teal-500 text-sm outline-none" placeholder="https://...">
+        </div>
+
+        <div>
+          <label class="block text-sm font-medium text-slate-700 mb-1">Tải file bài làm (tùy chọn: Zip, Py, Cpp, Pdf, Docx - Tối đa 20MB)</label>
+          <input type="file" id="submit-file" class="w-full text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-sm file:font-semibold file:bg-teal-50 file:text-teal-700 hover:file:bg-teal-100 cursor-pointer">
+          <p id="submit-existing-file-note" class="text-xs text-amber-600 mt-1 hidden"></p>
+        </div>
+
+        <div class="pt-4 border-t border-slate-100 flex justify-end space-x-3">
+          <button type="button" onclick="closeModal('modal-submit-assignment')" class="px-4 py-2 rounded-xl border border-slate-300 text-slate-600 hover:bg-slate-50 text-sm font-medium">Hủy</button>
+          <button type="submit" class="px-5 py-2 rounded-xl bg-teal-600 hover:bg-teal-700 text-white text-sm font-semibold shadow-md shadow-teal-100">Xác Nhận Nộp Bài</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ================= JAVASCRIPT LOGIC ================= -->
+  <script>
+    let currentUser = null;
+    let assignmentsData = [];
+    let currentStudentFilter = 'ALL';
+    let currentViewingAssignmentId = null;
+    let teacherSelectedClass = 'ALL';
+    let availableClasses = [];
+
+    window.addEventListener('DOMContentLoaded', () => {
+      const savedUser = localStorage.getItem('educlass_user');
+      if (savedUser) {
+        try {
+          currentUser = JSON.parse(savedUser);
+          renderApp();
+        } catch (e) {
+          localStorage.removeItem('educlass_user');
+          showLoginView();
+        }
+      } else {
+        showLoginView();
+      }
+    });
+
+    // ================= TOAST NOTIFICATION =================
+    function showToast(message, type = 'success') {
+      const container = document.getElementById('toast-container');
+      const toast = document.createElement('div');
+      
+      const icons = {
+        success: 'fa-circle-check text-emerald-500',
+        error: 'fa-circle-xmark text-rose-500',
+        warning: 'fa-triangle-exclamation text-amber-500'
+      };
+
+      toast.className = `pointer-events-auto flex items-center gap-3 px-4 py-3 rounded-xl bg-white shadow-xl border border-slate-100 text-sm font-medium text-slate-800 transform transition-all duration-300 translate-y-2 opacity-0`;
+      toast.innerHTML = `
+        <i class="fa-solid ${icons[type] || icons.success} text-lg"></i>
+        <span>${message}</span>
+      `;
+
+      container.appendChild(toast);
+      setTimeout(() => {
+        toast.classList.remove('translate-y-2', 'opacity-0');
+      }, 10);
+
+      setTimeout(() => {
+        toast.classList.add('opacity-0', 'translate-x-full');
+        setTimeout(() => toast.remove(), 300);
+      }, 3500);
+    }
+
+    // ================= CHUYỂN TAB ĐĂNG NHẬP / ĐĂNG KÝ =================
+    function switchAuthTab(tab) {
+      const loginForm = document.getElementById('form-login');
+      const regForm = document.getElementById('form-register');
+      const loginBtn = document.getElementById('tab-login-btn');
+      const regBtn = document.getElementById('tab-register-btn');
+
+      if (tab === 'login') {
+        loginForm.classList.remove('hidden');
+        regForm.classList.add('hidden');
+        loginBtn.className = "flex-1 pb-3 text-sm font-bold text-indigo-600 border-b-2 border-indigo-600 transition";
+        regBtn.className = "flex-1 pb-3 text-sm font-semibold text-slate-400 hover:text-slate-600 border-b-2 border-transparent transition";
+      } else {
+        loginForm.classList.add('hidden');
+        regForm.classList.remove('hidden');
+        regBtn.className = "flex-1 pb-3 text-sm font-bold text-emerald-600 border-b-2 border-emerald-600 transition";
+        loginBtn.className = "flex-1 pb-3 text-sm font-semibold text-slate-400 hover:text-slate-600 border-b-2 border-transparent transition";
+      }
+    }
+
+    function toggleRegRole(role) {
+      if (role === 'teacher') {
+        document.getElementById('box-reg-class').classList.add('hidden');
+        document.getElementById('box-reg-subject').classList.remove('hidden');
+      } else {
+        document.getElementById('box-reg-class').classList.remove('hidden');
+        document.getElementById('box-reg-subject').classList.add('hidden');
+      }
+    }
+
+    async function handleRegister(e) {
+      e.preventDefault();
+      const role = document.querySelector('input[name="reg-role"]:checked').value;
+      const name = document.getElementById('reg-name').value.trim();
+      const username = document.getElementById('reg-username').value.trim();
+      const password = document.getElementById('reg-password').value.trim();
+      const className = document.getElementById('reg-class').value.trim();
+      const subject = document.getElementById('reg-subject').value.trim();
+
+      if (!name || !username || !password) {
+        showToast("Vui lòng điền đầy đủ các thông tin bắt buộc!", "warning");
+        return;
+      }
+
+      try {
+        const res = await fetch('/api/auth/register', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ role, name, username, password, className, subject })
+        });
+        const data = await res.json();
+
+        if (!res.ok) {
+          showToast(data.message || "Đăng ký không thành công!", "error");
+          return;
+        }
+
+        currentUser = data.user;
+        localStorage.setItem('educlass_user', JSON.stringify(currentUser));
+        showToast(`Tài khoản ${currentUser.name} (${role === 'teacher' ? 'Giáo viên' : 'Học sinh'}) đã được tạo!`, "success");
+        renderApp();
+      } catch (err) {
+        showToast("Lỗi kết nối máy chủ khi đăng ký!", "error");
+      }
+    }
+
+    // ================= XÁC THỰC & ĐĂNG NHẬP =================
+    function fillAndLogin(u, p) {
+      document.getElementById('login-username').value = u;
+      document.getElementById('login-password').value = p;
+      handleLogin(new Event('submit'));
+    }
+
+    async function handleLogin(e) {
+      if (e) e.preventDefault();
+      const username = document.getElementById('login-username').value.trim();
+      const password = document.getElementById('login-password').value.trim();
+
+      if (!username || !password) {
+        showToast("Vui lòng điền đủ tài khoản và mật khẩu!", "warning");
+        return;
+      }
+
+      try {
+        const res = await fetch('/api/auth/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ username, password })
+        });
+        const data = await res.json();
+
+        if (!res.ok) {
+          showToast(data.message || "Đăng nhập thất bại!", "error");
+          return;
+        }
+
+        currentUser = data.user;
+        localStorage.setItem('educlass_user', JSON.stringify(currentUser));
+        showToast(`Xin chào, ${currentUser.name}!`, "success");
+        renderApp();
+      } catch (err) {
+        showToast("Lỗi kết nối tới máy chủ!", "error");
+      }
+    }
+
+    function handleLogout() {
+      currentUser = null;
+      localStorage.removeItem('educlass_user');
+      showToast("Đã đăng xuất tài khoản.", "success");
+      showLoginView();
+    }
+
+    function showLoginView() {
+      document.getElementById('nav-user-info').classList.add('hidden');
+      document.getElementById('view-login').classList.remove('hidden');
+      document.getElementById('view-teacher').classList.add('hidden');
+      document.getElementById('view-student').classList.add('hidden');
+    }
+
+    function renderApp() {
+      if (!currentUser) return showLoginView();
+
+      document.getElementById('view-login').classList.add('hidden');
+      document.getElementById('nav-user-info').classList.remove('hidden');
+      document.getElementById('nav-user-name').textContent = currentUser.name;
+      
+      const isTeacher = currentUser.role === 'teacher';
+      document.getElementById('nav-user-badge').innerHTML = isTeacher 
+        ? `<span class="text-indigo-600 font-semibold"><i class="fa-solid fa-chalkboard-user mr-1"></i>Giáo viên (${currentUser.subject})</span>`
+        : `<span class="text-emerald-600 font-semibold"><i class="fa-solid fa-user-graduate mr-1"></i>Học sinh (Lớp ${currentUser.className})</span>`;
+
+      if (isTeacher) {
+        document.getElementById('view-teacher').classList.remove('hidden');
+        document.getElementById('view-student').classList.add('hidden');
+        loadClasses();
+        loadTeacherData();
+      } else {
+        document.getElementById('view-teacher').classList.add('hidden');
+        document.getElementById('view-student').classList.remove('hidden');
+        document.getElementById('student-welcome-text').textContent = `Lớp ${currentUser.className || 'C08TK'} - Chúc bạn hoàn thành bài tập thật tốt!`;
+        loadStudentData();
+      }
+    }
+
+    // ================= QUẢN LÝ LỚP HỌC (CLASSES) =================
+    async function loadClasses() {
+      try {
+        const res = await fetch('/api/classes');
+        const data = await res.json();
+        availableClasses = data.classes || [];
+        renderTeacherClassTabs();
+        populateClassDropdowns();
+      } catch (e) {
+        console.error("Lỗi tải lớp:", e);
+      }
+    }
+
+    function renderTeacherClassTabs() {
+      const container = document.getElementById('teacher-class-tabs');
+      if (!container) return;
+
+      const isAll = teacherSelectedClass === 'ALL';
+      let html = `
+        <button onclick="setTeacherClassFilter('ALL')" class="px-3.5 py-1.5 rounded-xl text-xs font-bold transition flex items-center gap-1.5 shrink-0 ${isAll ? 'bg-indigo-600 text-white shadow-sm' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'}">
+          <i class="fa-solid fa-layer-group"></i> Tất Cả Lớp
+        </button>
+      `;
+
+      availableClasses.forEach(cls => {
+        const isActive = teacherSelectedClass === cls;
+        html += `
+          <button onclick="setTeacherClassFilter('${cls}')" class="px-3.5 py-1.5 rounded-xl text-xs font-bold transition flex items-center gap-1.5 shrink-0 ${isActive ? 'bg-indigo-600 text-white shadow-sm' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'}">
+            <i class="fa-solid fa-users"></i> Lớp ${escapeHtml(cls)}
+          </button>
+        `;
+      });
+
+      container.innerHTML = html;
+    }
+
+    function populateClassDropdowns() {
+      const select = document.getElementById('create-target-class');
+      if (!select) return;
+
+      let html = `<option value="ALL">-- Tất cả các lớp (Toàn trường) --</option>`;
+      availableClasses.forEach(cls => {
+        const isSelected = (teacherSelectedClass === cls || cls === 'C08TK') ? 'selected' : '';
+        html += `<option value="${cls}" ${isSelected}>Lớp ${escapeHtml(cls)}</option>`;
+      });
+      select.innerHTML = html;
+    }
+
+    async function promptCreateClass(autoSelectInModal = false) {
+      const name = prompt("Nhập tên lớp học mới cần tạo (ví dụ: C09TK, 11A2, 12A1):");
+      if (!name || !name.trim()) return;
+
+      try {
+        const res = await fetch('/api/classes', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name: name.trim() })
+        });
+        const data = await res.json();
+        if (!res.ok) {
+          showToast(data.message || "Lỗi tạo lớp học", "error");
+          return;
+        }
+
+        showToast(data.message, "success");
+        await loadClasses();
+        if (autoSelectInModal) {
+          document.getElementById('create-target-class').value = data.className;
+        } else {
+          setTeacherClassFilter(data.className);
+        }
+      } catch (err) {
+        showToast("Lỗi kết nối khi tạo lớp", "error");
+      }
+    }
+
+    function setTeacherClassFilter(cls) {
+      teacherSelectedClass = cls;
+      renderTeacherClassTabs();
+      loadTeacherData();
+    }
+
+    // ================= PHÂN HỆ GIÁO VIÊN =================
+    async function loadTeacherData() {
+      try {
+        let url = '/api/assignments';
+        if (teacherSelectedClass && teacherSelectedClass !== 'ALL') {
+          url += `?teacherFilterClass=${encodeURIComponent(teacherSelectedClass)}`;
+        }
+        const res = await fetch(url);
+        const data = await res.json();
+        assignmentsData = data.assignments || [];
+
+        let totalSubmitted = 0;
+        let totalGraded = 0;
+        assignmentsData.forEach(a => {
+          totalSubmitted += a.stats.submittedCount;
+          totalGraded += a.stats.gradedCount;
+        });
+
+        document.getElementById('stat-total-assignments').textContent = assignmentsData.length;
+        document.getElementById('stat-total-submissions').textContent = totalSubmitted;
+        document.getElementById('stat-total-graded').textContent = totalGraded;
+        document.getElementById('teacher-asm-count').textContent = `${assignmentsData.length} bài tập`;
+
+        renderTeacherAssignments();
+      } catch (e) {
+        showToast("Không thể tải danh sách bài tập!", "error");
+      }
+    }
+
+    function renderTeacherAssignments() {
+      const container = document.getElementById('teacher-assignments-list');
+      if (assignmentsData.length === 0) {
+        container.innerHTML = `
+          <div class="p-8 text-center text-slate-400">
+            <i class="fa-solid fa-folder-open text-4xl mb-2"></i>
+            <p>Chưa có bài tập nào được giao${teacherSelectedClass !== 'ALL' ? ' cho lớp ' + escapeHtml(teacherSelectedClass) : ''}. Bấm "+ Giao Bài Tập Mới" để bắt đầu.</p>
+          </div>
+        `;
+        return;
+      }
+
+      container.innerHTML = assignmentsData.map(asm => {
+        const isExpired = new Date(asm.dueDate) < new Date();
+        const dueText = formatDate(asm.dueDate);
+        const targetBadge = (!asm.targetClass || asm.targetClass === 'ALL')
+          ? `<span class="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-slate-100 text-slate-600 border border-slate-200"><i class="fa-solid fa-globe mr-1"></i>Tất cả lớp</span>`
+          : `<span class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-violet-50 text-violet-700 border border-violet-200"><i class="fa-solid fa-users mr-1"></i>Lớp: ${escapeHtml(asm.targetClass)}</span>`;
+        
+        return `
+          <div class="p-6 hover:bg-slate-50/70 transition flex flex-col md:flex-row md:items-center justify-between gap-4">
+            <div class="space-y-1.5 flex-1">
+              <div class="flex items-center gap-2 flex-wrap">
+                <h3 class="text-base font-bold text-slate-900">${escapeHtml(asm.title)}</h3>
+                ${targetBadge}
+                ${isExpired 
+                  ? `<span class="px-2 py-0.5 rounded text-xs font-semibold bg-rose-50 text-rose-600 border border-rose-100">Đã hết hạn</span>`
+                  : `<span class="px-2 py-0.5 rounded text-xs font-semibold bg-emerald-50 text-emerald-600 border border-emerald-100">Đang nhận bài</span>`
+                }
+              </div>
+              <p class="text-xs text-slate-500 line-clamp-2">${escapeHtml(asm.description)}</p>
+              
+              <div class="flex items-center gap-4 text-xs text-slate-500 pt-1 flex-wrap">
+                <span><i class="fa-regular fa-clock mr-1 text-slate-400"></i>Hạn nộp: <b class="text-slate-700">${dueText}</b></span>
+                ${asm.attachment ? `
+                  <a href="/api/download/${asm.attachment.filename}?name=${encodeURIComponent(asm.attachment.originalName)}" class="text-indigo-600 hover:underline inline-flex items-center gap-1 font-medium">
+                    <i class="fa-solid fa-paperclip"></i> Đề bài: ${escapeHtml(asm.attachment.originalName)}
+                  </a>
+                ` : ''}
+              </div>
+            </div>
+
+            <!-- Thống kê & Nút Chấm -->
+            <div class="flex items-center gap-4 border-t md:border-t-0 pt-3 md:pt-0">
+              <div class="text-right">
+                <div class="text-sm font-bold text-slate-800">
+                  Đã nộp: <span class="text-indigo-600">${asm.stats.submittedCount}</span>/${asm.stats.totalStudents}
+                </div>
+                <div class="text-xs text-slate-500">
+                  Đã chấm: <span class="text-emerald-600 font-semibold">${asm.stats.gradedCount}</span> | Chờ chấm: <span class="text-amber-600 font-semibold">${asm.stats.pendingCount}</span>
+                </div>
+              </div>
+
+              <div class="flex items-center gap-2">
+                <button onclick="openGradingModal('${asm.id}')" class="px-3.5 py-2 bg-indigo-50 hover:bg-indigo-100 text-indigo-700 font-semibold rounded-xl text-xs transition flex items-center gap-1.5">
+                  <i class="fa-solid fa-eye"></i> Xem & Chấm Điểm
+                </button>
+                <button onclick="handleDeleteAssignment('${asm.id}')" title="Xóa bài tập" class="p-2 text-slate-400 hover:text-rose-600 hover:bg-rose-50 rounded-xl text-xs transition">
+                  <i class="fa-solid fa-trash-can"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function openCreateModal() {
+      const defaultDate = new Date(Date.now() + 86400000 * 3);
+      document.getElementById('create-due-date').value = defaultDate.toISOString().slice(0, 16);
+      populateClassDropdowns();
+      document.getElementById('modal-create-assignment').classList.remove('hidden');
+      document.getElementById('modal-create-assignment').classList.add('flex');
+    }
+
+    async function handleCreateAssignment(e) {
+      e.preventDefault();
+      const title = document.getElementById('create-title').value.trim();
+      const description = document.getElementById('create-description').value.trim();
+      const dueDate = document.getElementById('create-due-date').value;
+      const targetClass = document.getElementById('create-target-class').value;
+      const fileInput = document.getElementById('create-attachment');
+
+      const formData = new FormData();
+      formData.append('title', title);
+      formData.append('description', description);
+      formData.append('dueDate', dueDate);
+      formData.append('targetClass', targetClass);
+      formData.append('teacherId', currentUser.id);
+      if (fileInput.files[0]) {
+        formData.append('attachment', fileInput.files[0]);
+      }
+
+      try {
+        const res = await fetch('/api/assignments', {
+          method: 'POST',
+          body: formData
+        });
+        const data = await res.json();
+
+        if (!res.ok) {
+          showToast(data.message || "Lỗi tạo bài tập", "error");
+          return;
+        }
+
+        showToast("Đã giao bài tập mới thành công!", "success");
+        closeModal('modal-create-assignment');
+        document.getElementById('create-title').value = '';
+        document.getElementById('create-description').value = '';
+        fileInput.value = '';
+        loadTeacherData();
+      } catch (err) {
+        showToast("Lỗi khi gửi dữ liệu lên server!", "error");
+      }
+    }
+
+    async function handleDeleteAssignment(id) {
+      if (!confirm("Bạn có chắc chắn muốn xóa bài tập này cùng toàn bộ bài nộp liên quan?")) return;
+      try {
+        const res = await fetch(`/api/assignments/${id}`, { method: 'DELETE' });
+        const data = await res.json();
+        if (res.ok) {
+          showToast(data.message, "success");
+          loadTeacherData();
+        } else {
+          showToast(data.message, "error");
+        }
+      } catch (err) {
+        showToast("Lỗi khi xóa bài tập", "error");
+      }
+    }
+
+    async function openGradingModal(assignmentId) {
+      currentViewingAssignmentId = assignmentId;
+      try {
+        const res = await fetch(`/api/assignments/${assignmentId}/submissions`);
+        const data = await res.json();
+        
+        if (!res.ok) {
+          showToast(data.message || "Lỗi khi lấy dữ liệu bài nộp", "error");
+          return;
+        }
+
+        document.getElementById('grading-modal-title').textContent = data.assignment.title;
+        const targetClassText = (!data.assignment.targetClass || data.assignment.targetClass === 'ALL') ? 'Tất cả các lớp' : `Lớp ${data.assignment.targetClass}`;
+        document.getElementById('grading-modal-subtitle').textContent = `Giao cho: ${targetClassText} | Hạn nộp: ${formatDate(data.assignment.dueDate)}`;
+
+        const tbody = document.getElementById('grading-table-body');
+        tbody.innerHTML = data.studentsStatus.map(item => {
+          const s = item.student;
+          const sub = item.submission;
+          const hasSubmitted = item.hasSubmitted;
+
+          let statusBadge = `<span class="px-2.5 py-1 rounded-full text-xs font-semibold bg-slate-100 text-slate-500">Chưa nộp bài</span>`;
+          let submitTime = "-";
+          let actionBtn = `<span class="text-slate-400 text-xs italic">Chưa nộp</span>`;
+          let gradeDisplay = `<span class="text-slate-400">-</span>`;
+          let submissionInfo = `<span class="text-slate-400 text-xs">-</span>`;
+
+          if (hasSubmitted) {
+            submitTime = formatDate(sub.submittedAt);
+            const isGraded = sub.grade !== null && sub.grade !== undefined;
+
+            if (isGraded) {
+              statusBadge = `<span class="px-2.5 py-1 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200"><i class="fa-solid fa-check mr-1"></i>Đã chấm</span>`;
+              gradeDisplay = `<span class="text-emerald-600 font-bold text-sm bg-emerald-50 px-2 py-0.5 rounded">${sub.grade}/10</span>`;
+            } else {
+              statusBadge = `<span class="px-2.5 py-1 rounded-full text-xs font-semibold bg-amber-50 text-amber-700 border border-amber-200"><i class="fa-solid fa-clock mr-1"></i>Chờ chấm</span>`;
+              gradeDisplay = `<span class="text-amber-500 font-semibold text-xs italic">Chưa chấm</span>`;
+            }
+
+            const parts = [];
+            if (sub.content) parts.push(`<span class="text-slate-600 truncate block max-w-xs" title="${escapeHtml(sub.content)}">"${escapeHtml(sub.content)}"</span>`);
+            if (sub.file) parts.push(`<a href="/api/download/${sub.file.filename}?name=${encodeURIComponent(sub.file.originalName)}" class="text-indigo-600 font-medium hover:underline inline-flex items-center gap-1 text-xs"><i class="fa-solid fa-file-arrow-down"></i> ${escapeHtml(sub.file.originalName)}</a>`);
+            if (sub.link) parts.push(`<a href="${escapeHtml(sub.link)}" target="_blank" class="text-teal-600 hover:underline inline-flex items-center gap-1 text-xs"><i class="fa-solid fa-arrow-up-right-from-square"></i> Liên kết</a>`);
+            
+            submissionInfo = parts.join('<br>') || '<span class="text-slate-400">Không có tệp/văn bản</span>';
+
+            actionBtn = `
+              <button onclick='openSingleGradeModal(${JSON.stringify(sub).replace(/'/g, "&#39;")}, "${escapeHtml(s.name)}")' class="px-3 py-1.5 rounded-lg bg-indigo-600 hover:bg-indigo-700 text-white font-medium text-xs shadow-sm transition">
+                <i class="fa-solid fa-pen-to-square mr-1"></i>${isGraded ? 'Sửa điểm' : 'Chấm điểm'}
+              </button>
+            `;
+          }
+
+          return `
+            <tr class="hover:bg-slate-50/80 transition">
+              <td class="px-4 py-3 font-semibold text-slate-900">${escapeHtml(s.name)}</td>
+              <td class="px-4 py-3">${statusBadge}</td>
+              <td class="px-4 py-3 text-xs text-slate-500">${submitTime}</td>
+              <td class="px-4 py-3">${submissionInfo}</td>
+              <td class="px-4 py-3">${gradeDisplay}</td>
+              <td class="px-4 py-3 text-right">${actionBtn}</td>
+            </tr>
+          `;
+        }).join('');
+
+        document.getElementById('modal-grading').classList.remove('hidden');
+        document.getElementById('modal-grading').classList.add('flex');
+      } catch (e) {
+        showToast("Không thể tải danh sách bài nộp!", "error");
+      }
+    }
+
+    function openSingleGradeModal(sub, studentName) {
+      document.getElementById('single-grade-student-name').textContent = `Chấm Điểm: ${studentName}`;
+      document.getElementById('grade-submission-id').value = sub.id;
+      document.getElementById('single-grade-content').textContent = sub.content || "(Học sinh không nhập nội dung text)";
+
+      const linkBox = document.getElementById('single-grade-link-box');
+      const linkElem = document.getElementById('single-grade-link');
+      if (sub.link) {
+        linkBox.classList.remove('hidden');
+        linkElem.href = sub.link;
+        linkElem.textContent = sub.link;
+      } else {
+        linkBox.classList.add('hidden');
+      }
+
+      const fileBox = document.getElementById('single-grade-file-box');
+      const fileElem = document.getElementById('single-grade-file');
+      const fileNameElem = document.getElementById('single-grade-filename');
+      if (sub.file) {
+        fileBox.classList.remove('hidden');
+        fileElem.href = `/api/download/${sub.file.filename}?name=${encodeURIComponent(sub.file.originalName)}`;
+        fileNameElem.textContent = `${sub.file.originalName} (${formatBytes(sub.file.size)})`;
+      } else {
+        fileBox.classList.add('hidden');
+      }
+
+      document.getElementById('input-grade-score').value = sub.grade !== null ? sub.grade : '';
+      document.getElementById('input-grade-feedback').value = sub.feedback || '';
+
+      document.getElementById('modal-grade-single').classList.remove('hidden');
+      document.getElementById('modal-grade-single').classList.add('flex');
+    }
+
+    async function handleSaveGrade(e) {
+      e.preventDefault();
+      const subId = document.getElementById('grade-submission-id').value;
+      const grade = document.getElementById('input-grade-score').value;
+      const feedback = document.getElementById('input-grade-feedback').value;
+
+      try {
+        const res = await fetch(`/api/submissions/${subId}/grade`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ grade, feedback })
+        });
+        const data = await res.json();
+
+        if (!res.ok) {
+          showToast(data.message || "Lỗi khi lưu điểm", "error");
+          return;
+        }
+
+        showToast("Đã lưu điểm và nhận xét thành công!", "success");
+        closeModal('modal-grade-single');
+        openGradingModal(currentViewingAssignmentId);
+        loadTeacherData();
+      } catch (err) {
+        showToast("Lỗi khi kết nối server chấm điểm!", "error");
+      }
+    }
+
+    // ================= PHÂN HỆ HỌC SINH =================
+    async function loadStudentData() {
+      try {
+        const res = await fetch(`/api/assignments?studentId=${currentUser.id}`);
+        const data = await res.json();
+        assignmentsData = data.assignments || [];
+        renderStudentAssignments();
+      } catch (e) {
+        showToast("Không thể tải danh sách bài tập!", "error");
+      }
+    }
+
+    function setStudentFilter(filter) {
+      currentStudentFilter = filter;
+      ['filter-all', 'filter-not-submitted', 'filter-submitted', 'filter-graded'].forEach(id => {
+        document.getElementById(id).className = "px-3 py-1.5 rounded-lg text-sm font-medium text-slate-600 hover:bg-slate-100";
+      });
+      const activeId = filter === 'ALL' ? 'filter-all' : (filter === 'NOT_SUBMITTED' ? 'filter-not-submitted' : (filter === 'SUBMITTED' ? 'filter-submitted' : 'filter-graded'));
+      document.getElementById(activeId).className = "px-3 py-1.5 rounded-lg text-sm font-semibold bg-indigo-600 text-white";
+
+      renderStudentAssignments();
+    }
+
+    function renderStudentAssignments() {
+      const container = document.getElementById('student-assignments-list');
+      let filtered = assignmentsData;
+
+      if (currentStudentFilter !== 'ALL') {
+        filtered = assignmentsData.filter(a => a.studentStatus === currentStudentFilter);
+      }
+
+      if (filtered.length === 0) {
+        container.innerHTML = `
+          <div class="bg-white rounded-2xl p-8 text-center text-slate-400 border border-slate-200">
+            <i class="fa-solid fa-circle-check text-4xl mb-2 text-slate-300"></i>
+            <p>Không có bài tập nào trong mục này.</p>
+          </div>
+        `;
+        return;
+      }
+
+      container.innerHTML = filtered.map(asm => {
+        const isExpired = new Date(asm.dueDate) < new Date();
+        const dueText = formatDate(asm.dueDate);
+        const sub = asm.mySubmission;
+
+        const targetClassBadge = (!asm.targetClass || asm.targetClass === 'ALL')
+          ? `<span class="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-slate-100 text-slate-600 border border-slate-200"><i class="fa-solid fa-globe mr-1"></i>Chung</span>`
+          : `<span class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-violet-50 text-violet-700 border border-violet-100"><i class="fa-solid fa-users mr-1"></i>Lớp: ${escapeHtml(asm.targetClass)}</span>`;
+
+        let statusBadge = `<span class="px-3 py-1 rounded-full text-xs font-semibold bg-slate-100 text-slate-600 border border-slate-200"><i class="fa-regular fa-circle mr-1"></i>Chưa nộp bài</span>`;
+        let actionArea = `
+          <button onclick="openSubmitModal('${asm.id}', '${escapeHtml(asm.title)}', '${dueText}')" class="px-4 py-2 bg-teal-600 hover:bg-teal-700 text-white font-semibold rounded-xl text-sm shadow-sm transition flex items-center gap-1.5">
+            <i class="fa-solid fa-arrow-up-from-bracket"></i> Nộp Bài Ngay
+          </button>
+        `;
+
+        let feedbackArea = '';
+
+        if (asm.studentStatus === 'SUBMITTED') {
+          statusBadge = `<span class="px-3 py-1 rounded-full text-xs font-semibold bg-blue-50 text-blue-700 border border-blue-200"><i class="fa-solid fa-clock mr-1"></i>Đã nộp bài (Chờ chấm điểm)</span>`;
+          actionArea = `
+            <button onclick="openSubmitModal('${asm.id}', '${escapeHtml(asm.title)}', '${dueText}', true)" class="px-3.5 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium rounded-xl text-xs transition">
+              <i class="fa-solid fa-pen mr-1"></i> Cập nhật / Nộp lại
+            </button>
+          `;
+        } else if (asm.studentStatus === 'GRADED') {
+          statusBadge = `<span class="px-3 py-1 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200"><i class="fa-solid fa-check-circle mr-1"></i>Đã có điểm</span>`;
+          actionArea = `
+            <div class="flex items-center gap-2">
+              <div class="text-right">
+                <span class="text-xs text-slate-400 uppercase font-bold">Điểm số</span>
+                <div class="text-2xl font-black text-emerald-600 leading-none">${sub.grade}<span class="text-xs text-slate-400 font-normal">/10</span></div>
+              </div>
+            </div>
+          `;
+
+          if (sub.feedback) {
+            feedbackArea = `
+              <div class="mt-4 p-4 rounded-xl bg-emerald-50/80 border border-emerald-100 text-sm">
+                <div class="font-bold text-emerald-800 flex items-center gap-1.5 mb-1">
+                  <i class="fa-regular fa-comment-dots"></i> Lời nhận xét từ Giáo viên:
+                </div>
+                <p class="text-emerald-950 whitespace-pre-line">${escapeHtml(sub.feedback)}</p>
+              </div>
+            `;
+          }
+        }
+
+        return `
+          <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm hover:shadow-md transition">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-slate-100">
+              <div class="flex items-center gap-2 flex-wrap">
+                <h3 class="font-bold text-slate-900 text-base sm:text-lg">${escapeHtml(asm.title)}</h3>
+                ${targetClassBadge}
+                ${statusBadge}
+              </div>
+              <div class="text-xs ${isExpired ? 'text-rose-600 font-semibold' : 'text-slate-500'}">
+                <i class="fa-regular fa-clock mr-1"></i>Hạn: <b>${dueText}</b>
+              </div>
+            </div>
+
+            <div class="py-4 text-sm text-slate-600 whitespace-pre-line leading-relaxed">
+              ${escapeHtml(asm.description)}
+            </div>
+
+            ${asm.attachment ? `
+              <div class="mb-4">
+                <a href="/api/download/${asm.attachment.filename}?name=${encodeURIComponent(asm.attachment.originalName)}" class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-slate-50 hover:bg-indigo-50 border border-slate-200 text-xs font-semibold text-slate-700 hover:text-indigo-600 transition">
+                  <i class="fa-solid fa-file-pdf text-rose-500"></i> Đề bài đính kèm: ${escapeHtml(asm.attachment.originalName)} (${formatBytes(asm.attachment.size)})
+                </a>
+              </div>
+            ` : ''}
+
+            ${feedbackArea}
+
+            <div class="mt-4 pt-4 border-t border-slate-100 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+              <div class="text-xs text-slate-400">
+                ${sub ? `<i class="fa-regular fa-calendar-check mr-1"></i>Bạn đã nộp lúc: <b>${formatDate(sub.submittedAt)}</b>` : 'Chưa nộp bài làm'}
+              </div>
+              <div>${actionArea}</div>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function openSubmitModal(asmId, title, dueText, isUpdate = false) {
+      document.getElementById('submit-assignment-id').value = asmId;
+      document.getElementById('submit-modal-title').textContent = isUpdate ? `Cập Nhật Bài Nộp: ${title}` : `Nộp Bài: ${title}`;
+      document.getElementById('submit-modal-due').textContent = `Hạn chót: ${dueText}`;
+
+      const asm = assignmentsData.find(a => a.id === asmId);
+      const sub = asm ? asm.mySubmission : null;
+
+      document.getElementById('submit-content').value = (sub && sub.content) ? sub.content : '';
+      document.getElementById('submit-link').value = (sub && sub.link) ? sub.link : '';
+      document.getElementById('submit-file').value = '';
+
+      const note = document.getElementById('submit-existing-file-note');
+      if (sub && sub.file) {
+        note.classList.remove('hidden');
+        note.textContent = `File đã nộp trước đó: ${sub.file.originalName}. (Chọn file mới nếu muốn thay thế)`;
+      } else {
+        note.classList.add('hidden');
+      }
+
+      document.getElementById('modal-submit-assignment').classList.remove('hidden');
+      document.getElementById('modal-submit-assignment').classList.add('flex');
+    }
+
+    async function handleSubmitAssignment(e) {
+      e.preventDefault();
+      const asmId = document.getElementById('submit-assignment-id').value;
+      const content = document.getElementById('submit-content').value.trim();
+      const link = document.getElementById('submit-link').value.trim();
+      const fileInput = document.getElementById('submit-file');
+
+      if (!content && !link && (!fileInput.files || fileInput.files.length === 0)) {
+        showToast("Vui lòng nhập nội dung, dán link hoặc chọn file đính kèm!", "warning");
+        return;
+      }
+
+      const formData = new FormData();
+      formData.append('assignmentId', asmId);
+      formData.append('studentId', currentUser.id);
+      formData.append('studentName', currentUser.name);
+      formData.append('content', content);
+      formData.append('link', link);
+      if (fileInput.files[0]) {
+        formData.append('submissionFile', fileInput.files[0]);
+      }
+
+      try {
+        const res = await fetch('/api/submissions', {
+          method: 'POST',
+          body: formData
+        });
+        const data = await res.json();
+
+        if (!res.ok) {
+          showToast(data.message || "Lỗi khi nộp bài", "error");
+          return;
+        }
+
+        showToast("Nộp bài tập thành công!", "success");
+        closeModal('modal-submit-assignment');
+        loadStudentData();
+      } catch (err) {
+        showToast("Lỗi kết nối khi nộp bài!", "error");
+      }
+    }
+
+    function closeModal(modalId) {
+      const el = document.getElementById(modalId);
+      if (el) {
+        el.classList.add('hidden');
+        el.classList.remove('flex');
+      }
+    }
+
+    function formatDate(isoStr) {
+      if (!isoStr) return '';
+      const d = new Date(isoStr);
+      const pad = n => n < 10 ? '0' + n : n;
+      return `${pad(d.getHours())}:${pad(d.getMinutes())} - ${pad(d.getDate())}/${pad(d.getMonth() + 1)}/${d.getFullYear()}`;
+    }
+
+    function formatBytes(bytes, decimals = 1) {
+      if (!bytes || bytes === 0) return '0 Bytes';
+      const k = 1024;
+      const dm = decimals < 0 ? 0 : decimals;
+      const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+      const i = Math.floor(Math.log(bytes) / Math.log(k));
+      return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
+    }
+
+    function escapeHtml(str) {
+      if (!str) return '';
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+    }
+  </script>
+</body>
+</html>
