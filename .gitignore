@@ -8,3 +8,5 @@ google-credentials.json
 service-account.json
 credentials.json
 *.key.json
+data.backup.json
+backups/

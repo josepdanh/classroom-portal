@@ -10,9 +10,14 @@ const PORT = process.env.PORT || 3000;
 
 // Thư mục lưu trữ dữ liệu và tệp tin tải lên
 const DATA_FILE = path.join(__dirname, 'data.json');
+const BACKUP_FILE = path.join(__dirname, 'data.backup.json');
+const BACKUPS_DIR = path.join(__dirname, 'backups');
 const UPLOAD_DIR = path.join(__dirname, 'uploads');
 
-// Tự động tạo thư mục uploads nếu chưa có
+// Tự động tạo thư mục backups và uploads nếu chưa có
+if (!fs.existsSync(BACKUPS_DIR)) {
+  fs.mkdirSync(BACKUPS_DIR, { recursive: true });
+}
 if (!fs.existsSync(UPLOAD_DIR)) {
   fs.mkdirSync(UPLOAD_DIR, { recursive: true });
 }
@@ -158,9 +163,18 @@ const initialData = {
   submissions: []
 };
 
-// Đọc và ghi CSDL file JSON
+// Đọc và ghi CSDL file JSON với cơ chế tự động bảo vệ & sao lưu an toàn chống mất dữ liệu
 function readDatabase() {
   if (!fs.existsSync(DATA_FILE)) {
+    // Nếu có file backup thì ưu tiên khôi phục từ backup trước
+    if (fs.existsSync(BACKUP_FILE)) {
+      try {
+        const backupRaw = fs.readFileSync(BACKUP_FILE, 'utf8');
+        const backupData = JSON.parse(backupRaw);
+        fs.writeFileSync(DATA_FILE, backupRaw, 'utf8');
+        return backupData;
+      } catch (e) {}
+    }
     fs.writeFileSync(DATA_FILE, JSON.stringify(initialData, null, 2), 'utf8');
     return JSON.parse(JSON.stringify(initialData));
   }
@@ -170,16 +184,51 @@ function readDatabase() {
     if (!data.gradeSheets) data.gradeSheets = [];
     if (!data.subjects) data.subjects = [];
     if (!data.classes) data.classes = [];
+    if (!data.notifications) data.notifications = [];
+    if (!data.assignments) data.assignments = [];
+    if (!data.submissions) data.submissions = [];
+
+    // Nếu data.json đọc tốt và có dữ liệu, tự động đồng bộ sang bản backup an toàn
+    if (data.assignments.length > 0 || (data.users && data.users.length > 3)) {
+      try {
+        fs.writeFileSync(BACKUP_FILE, raw, 'utf8');
+      } catch (e) {}
+    }
     return data;
   } catch (err) {
-    console.error("Lỗi đọc database. Khôi phục dữ liệu ban đầu:", err);
-    fs.writeFileSync(DATA_FILE, JSON.stringify(initialData, null, 2), 'utf8');
+    console.error("Lỗi đọc database. Đang cố gắng khôi phục từ bản sao lưu an toàn:", err);
+    // KHÔNG BAO GIỜ TỰ Ý XÓA TRẮNG DỮ LIỆU ĐÈ LÊN data.json
+    if (fs.existsSync(BACKUP_FILE)) {
+      try {
+        const backupRaw = fs.readFileSync(BACKUP_FILE, 'utf8');
+        const backupData = JSON.parse(backupRaw);
+        fs.writeFileSync(DATA_FILE, backupRaw, 'utf8');
+        return backupData;
+      } catch (e) {}
+    }
     return JSON.parse(JSON.stringify(initialData));
   }
 }
 
 function writeDatabase(data) {
-  fs.writeFileSync(DATA_FILE, JSON.stringify(data, null, 2), 'utf8');
+  try {
+    const content = JSON.stringify(data, null, 2);
+    // 1. Ghi vào file CSDL chính
+    fs.writeFileSync(DATA_FILE, content, 'utf8');
+
+    // 2. Tự động lưu bản backup an toàn (data.backup.json) chống bị git đè
+    fs.writeFileSync(BACKUP_FILE, content, 'utf8');
+
+    // 3. Tự động lưu bản snapshot định kỳ trong thư mục backups/
+    const now = new Date();
+    const dateStr = now.toISOString().split('T')[0];
+    const dailyFile = path.join(BACKUPS_DIR, `data_${dateStr}.json`);
+    if (!fs.existsSync(dailyFile)) {
+      fs.writeFileSync(dailyFile, content, 'utf8');
+    }
+  } catch (err) {
+    console.error("Lỗi ghi CSDL:", err);
+  }
 }
 
 // Khởi tạo DB khi bắt đầu
@@ -1556,6 +1605,15 @@ app.post('/api/open-cloud-folder', (req, res) => {
   } else {
     return res.status(404).json({ success: false, message: `Chưa tìm thấy thư mục ${selected.name} trên máy Mac.` });
   }
+});
+
+// 10. API Tải về bản sao lưu dữ liệu toàn hệ thống (Backup CSDL data.json)
+app.get('/api/admin/export-database', (req, res) => {
+  if (!fs.existsSync(DATA_FILE)) {
+    return res.status(404).json({ message: "Chưa có file dữ liệu" });
+  }
+  const dateStr = new Date().toISOString().split('T')[0];
+  res.download(DATA_FILE, `educlass_backup_${dateStr}.json`);
 });
 
 // Khởi động server (Lắng nghe trên toàn bộ địa chỉ 0.0.0.0 để máy khác trong mạng truy cập được)
