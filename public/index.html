@@ -371,26 +371,40 @@
       </div>
 
       <!-- BẢNG ĐIỂM THÀNH PHẦN MÔN HỌC / MÔ ĐUN (MẪU TRƯỜNG CĐ HÒA BÌNH XUÂN LỘC) -->
-      <div class="bg-gradient-to-r from-emerald-50/90 via-teal-50/70 to-slate-50 border border-emerald-200 rounded-2xl p-4 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4">
-        <div class="flex items-center gap-3">
-          <div class="w-11 h-11 rounded-xl bg-gradient-to-br from-emerald-600 to-teal-700 text-white flex items-center justify-center text-lg shrink-0 shadow-md shadow-emerald-200">
-            <i class="fa-solid fa-table-list"></i>
-          </div>
-          <div>
-            <div class="flex items-center gap-2 flex-wrap">
-              <span class="font-bold text-emerald-950 text-base">Bảng Điểm Thành Phần Môn Học / Mô Đun</span>
-              <span class="text-[11px] bg-emerald-100/80 text-emerald-800 border border-emerald-300 px-2 py-0.5 rounded-full font-bold">Mẫu Trường CĐ Hòa Bình Xuân Lộc</span>
-              <span class="text-[11px] bg-blue-100 text-blue-800 border border-blue-200 px-2 py-0.5 rounded-full font-bold flex items-center gap-1">
-                <i class="fa-solid fa-user-shield text-[10px]"></i> Riêng tư: Chỉ môn bạn dạy
-              </span>
+      <div class="bg-gradient-to-br from-emerald-50/90 via-teal-50/60 to-white border border-emerald-200/80 rounded-2xl p-4 sm:p-5 shadow-sm space-y-3.5">
+        <!-- Dòng 1: Tiêu đề, Huy hiệu và Nút mở chính -->
+        <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-3">
+          <div class="flex items-center gap-3 min-w-0">
+            <div class="w-11 h-11 rounded-xl bg-gradient-to-br from-emerald-600 to-teal-700 text-white flex items-center justify-center text-lg shrink-0 shadow-md shadow-emerald-200">
+              <i class="fa-solid fa-table-list"></i>
             </div>
-            <p class="text-xs text-emerald-800 mt-0.5">Bảo đảm tính riêng tư: Mỗi giáo viên chỉ xem và quản lý bảng điểm các môn học do chính mình phụ trách giảng dạy.</p>
+            <div class="min-w-0">
+              <div class="flex items-center gap-2 flex-wrap">
+                <h3 class="font-bold text-emerald-950 text-base leading-snug">Bảng Điểm Thành Phần Môn Học / Mô Đun</h3>
+                <span class="text-[11px] bg-emerald-100/90 text-emerald-800 border border-emerald-300 px-2.5 py-0.5 rounded-full font-bold shrink-0">Mẫu Trường CĐ Hòa Bình Xuân Lộc</span>
+                <span class="text-[11px] bg-blue-50 text-blue-700 border border-blue-200 px-2.5 py-0.5 rounded-full font-bold flex items-center gap-1 shrink-0">
+                  <i class="fa-solid fa-user-shield text-[10px]"></i> Riêng tư: Môn bạn dạy
+                </span>
+              </div>
+              <p class="text-xs text-emerald-800/80 mt-1 line-clamp-1 sm:line-clamp-none">Nhập điểm hệ số 1, hệ số 2 và tính điểm trung bình môn tự động theo quy chế đào tạo nghề.</p>
+            </div>
+          </div>
+          
+          <div class="shrink-0 flex items-center gap-2 self-start lg:self-auto">
+            <button onclick="openGradeSheetModal()" class="w-full sm:w-auto px-4 py-2 bg-gradient-to-r from-emerald-600 to-teal-700 hover:from-emerald-700 hover:to-teal-800 text-white font-bold rounded-xl text-xs transition flex items-center justify-center gap-2 shadow-sm hover:shadow">
+              <i class="fa-solid fa-folder-open text-sm"></i> Mở Sổ Điểm Thành Phần
+            </button>
           </div>
         </div>
-        <div id="teacher-grade-sheet-shortcuts" class="flex items-center gap-2 flex-wrap shrink-0">
-          <button onclick="openGradeSheetModal()" class="px-3.5 py-2 bg-emerald-700 hover:bg-emerald-800 text-white font-bold rounded-xl text-xs transition flex items-center gap-1.5 shadow-sm">
-            <i class="fa-solid fa-folder-open"></i> Sổ Điểm Của Tôi
-          </button>
+
+        <!-- Dòng 2: Mở nhanh các môn giáo viên đang phụ trách -->
+        <div class="pt-3 border-t border-emerald-100/80 flex flex-col sm:flex-row sm:items-center gap-2.5">
+          <span class="text-xs font-bold text-slate-500 uppercase tracking-wider shrink-0 flex items-center gap-1.5">
+            <i class="fa-solid fa-bolt text-amber-500"></i> Mở nhanh môn bạn dạy:
+          </span>
+          <div id="teacher-grade-sheet-shortcuts" class="flex items-center gap-2 flex-wrap flex-1">
+            <!-- Render các môn học giáo viên phụ trách dạng pills đẹp mắt qua JS -->
+          </div>
         </div>
       </div>
 
@@ -2414,33 +2428,30 @@
 
       if (!teacherSubjectsList || teacherSubjectsList.length === 0) {
         container.innerHTML = `
-          <button onclick="openCreateSubjectModal()" class="px-3.5 py-2 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl text-xs transition flex items-center gap-1.5 shadow-sm">
-            <i class="fa-solid fa-plus"></i> Tạo Môn Học Đầu Tiên
-          </button>
-          <button onclick="openGradeSheetModal()" class="px-3.5 py-2 bg-white hover:bg-emerald-50 text-emerald-800 border border-emerald-300 font-bold rounded-xl text-xs transition flex items-center gap-1.5 shadow-xs">
-            <i class="fa-solid fa-folder-open"></i> Sổ Điểm Của Tôi
-          </button>
+          <div class="flex items-center gap-2 flex-wrap">
+            <span class="text-xs text-slate-500 italic">Bạn chưa tạo môn học nào.</span>
+            <button onclick="openCreateSubjectModal()" class="px-3 py-1 bg-emerald-600 hover:bg-emerald-700 text-white font-semibold rounded-lg text-xs transition flex items-center gap-1 shadow-xs">
+              <i class="fa-solid fa-plus text-[11px]"></i> + Tạo Môn Học Đầu Tiên
+            </button>
+          </div>
         `;
         return;
       }
 
       let html = '';
-      // Hiển thị tối đa 3-4 môn học nổi bật do giáo viên này phụ trách
-      teacherSubjectsList.slice(0, 3).forEach(sub => {
+      teacherSubjectsList.forEach(sub => {
         const safeClass = escapeHtml(sub.className).replace(/'/g, "\\'");
         const safeSubj = escapeHtml(sub.name).replace(/'/g, "\\'");
         html += `
-          <button onclick="openGradeSheetModal('${safeClass}', '${safeSubj}')" class="px-3.5 py-2 bg-emerald-700 hover:bg-emerald-800 text-white font-bold rounded-xl text-xs transition flex items-center gap-1.5 shadow-sm" title="Mở bảng điểm lớp ${escapeHtml(sub.className)} môn ${escapeHtml(sub.name)}">
-            <i class="fa-solid fa-pen-to-square"></i> Lớp ${escapeHtml(sub.className)} (${escapeHtml(sub.name)})
+          <button onclick="openGradeSheetModal('${safeClass}', '${safeSubj}')" class="group inline-flex items-center gap-2 px-3 py-1.5 bg-white hover:bg-emerald-600 text-slate-700 hover:text-white rounded-xl text-xs font-semibold border border-emerald-200/80 hover:border-emerald-600 transition-all duration-150 shadow-2xs hover:shadow-sm" title="Mở sổ điểm môn ${escapeHtml(sub.name)} của Lớp ${escapeHtml(sub.className)}">
+            <span class="px-1.5 py-0.5 rounded-md bg-emerald-100 group-hover:bg-white/20 text-emerald-800 group-hover:text-white font-extrabold text-[10px] uppercase transition-colors tracking-wide">
+              ${escapeHtml(sub.className)}
+            </span>
+            <span class="font-medium truncate max-w-[190px] sm:max-w-[240px]">${escapeHtml(sub.name)}</span>
+            <i class="fa-solid fa-arrow-right text-[10px] opacity-40 group-hover:opacity-100 transition-opacity"></i>
           </button>
         `;
       });
-
-      html += `
-        <button onclick="openGradeSheetModal()" class="px-3.5 py-2 bg-white hover:bg-emerald-50 text-emerald-800 border border-emerald-300 font-bold rounded-xl text-xs transition flex items-center gap-1.5 shadow-xs">
-          <i class="fa-solid fa-folder-open"></i> Xem Sổ Điểm (${teacherSubjectsList.length} môn)
-        </button>
-      `;
 
       container.innerHTML = html;
     }
