@@ -200,6 +200,8 @@ async function uploadFileToCloudinary(filePath, originalName, className, subject
 
     const result = await cloudinary.uploader.upload(filePath, {
       resource_type: 'raw',
+      type: 'upload',
+      access_mode: 'public',
       folder: folder,
       use_filename: true,
       unique_filename: true
@@ -1945,6 +1947,47 @@ app.post('/api/open-cloud-folder', (req, res) => {
   }
   exec(`open "${MAC_LOCAL_DIR}"`);
   return res.json({ success: true, message: `Đã mở thư mục EduClass_BaiTap trên máy Mac!` });
+});
+
+// API Thực thi lệnh "npm run sync-mac" trực tiếp từ giao diện Web
+app.post('/api/admin/sync-mac', (req, res) => {
+  const isMac = process.platform === 'darwin';
+
+  if (!isMac) {
+    return res.json({
+      success: false,
+      isCloud: true,
+      isMac: false,
+      message: "Máy chủ hiện đang chạy trên nền tảng đám mây Render (Linux) nên không thể ghi file trực tiếp vào ổ cứng macOS của bạn.",
+      suggestion: "Bạn có thể dùng nút 'Tải Bài Nộp (.ZIP)' để tải toàn bộ bài nộp về máy Mac dạng nén, hoặc mở web tại địa chỉ nội bộ của máy Mac (http://localhost:3000) để chạy lệnh đồng bộ tự động."
+    });
+  }
+
+  const { exec } = require('child_process');
+  const projectDir = __dirname;
+
+  // Thực thi script node sync-to-mac.js (tương đương npm run sync-mac)
+  exec('node sync-to-mac.js', { cwd: projectDir, maxBuffer: 15 * 1024 * 1024 }, (error, stdout, stderr) => {
+    if (error) {
+      console.error('[Sync-Mac Lỗi]:', error);
+      return res.json({
+        success: false,
+        isCloud: false,
+        isMac: true,
+        message: 'Có lỗi trong quá trình thực thi: ' + error.message,
+        stdout: stdout || '',
+        stderr: stderr || error.message
+      });
+    }
+
+    return res.json({
+      success: true,
+      isCloud: false,
+      isMac: true,
+      message: 'Đã hoàn tất đồng bộ bài nộp về máy Mac!',
+      stdout: stdout || 'Đồng bộ hoàn tất.'
+    });
+  });
 });
 
 // 10. API Tải về bản sao lưu dữ liệu toàn hệ thống (Backup CSDL data.json)

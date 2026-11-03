@@ -12,37 +12,57 @@ const LOCAL_SERVER_URL = 'http://localhost:3000';
 const MAC_TARGET_DIR = path.join(require('os').homedir(), 'Downloads', 'EduClass_BaiTap');
 const PROJECT_UPLOADS_DIR = path.join(__dirname, 'uploads');
 
-function fetchJson(targetUrl) {
+function fetchJson(targetUrl, timeoutMs = 12000) {
   return new Promise((resolve, reject) => {
+    let timer = null;
     const client = targetUrl.startsWith('https') ? https : http;
-    client.get(targetUrl, (res) => {
+    const req = client.get(targetUrl, (res) => {
       if (res.statusCode >= 300 && res.statusCode < 400 && res.headers.location) {
-        return fetchJson(res.headers.location).then(resolve).catch(reject);
+        res.resume();
+        if (timer) clearTimeout(timer);
+        return fetchJson(res.headers.location, timeoutMs).then(resolve).catch(reject);
       }
       if (res.statusCode !== 200) {
+        res.resume();
+        if (timer) clearTimeout(timer);
         return reject(new Error(`HTTP ${res.statusCode} khi tải dữ liệu từ ${targetUrl}`));
       }
       let raw = '';
       res.on('data', chunk => raw += chunk);
       res.on('end', () => {
+        if (timer) clearTimeout(timer);
         try {
           resolve(JSON.parse(raw));
         } catch (e) {
           reject(new Error("Không thể đọc định dạng JSON: " + raw.substring(0, 150)));
         }
       });
-    }).on('error', reject);
+    });
+
+    req.on('error', (err) => {
+      if (timer) clearTimeout(timer);
+      reject(err);
+    });
+
+    timer = setTimeout(() => {
+      req.destroy(new Error('Timeout kết nối'));
+    }, timeoutMs);
   });
 }
 
-function downloadFile(sourceUrl, destPath) {
+function downloadFile(sourceUrl, destPath, timeoutMs = 20000) {
   return new Promise((resolve, reject) => {
+    let timer = null;
     const client = sourceUrl.startsWith('https') ? https : http;
-    client.get(sourceUrl, (res) => {
+    const req = client.get(sourceUrl, (res) => {
       if (res.statusCode >= 300 && res.statusCode < 400 && res.headers.location) {
-        return downloadFile(res.headers.location, destPath).then(resolve).catch(reject);
+        res.resume();
+        if (timer) clearTimeout(timer);
+        return downloadFile(res.headers.location, destPath, timeoutMs).then(resolve).catch(reject);
       }
       if (res.statusCode !== 200) {
+        res.resume();
+        if (timer) clearTimeout(timer);
         return reject(new Error(`HTTP ${res.statusCode} khi tải file từ ${sourceUrl}`));
       }
       const dir = path.dirname(destPath);
@@ -51,13 +71,24 @@ function downloadFile(sourceUrl, destPath) {
       const fileStream = fs.createWriteStream(destPath);
       res.pipe(fileStream);
       fileStream.on('finish', () => {
+        if (timer) clearTimeout(timer);
         fileStream.close(resolve);
       });
       fileStream.on('error', (err) => {
+        if (timer) clearTimeout(timer);
         try { fs.unlinkSync(destPath); } catch (e) {}
         reject(err);
       });
-    }).on('error', reject);
+    });
+
+    req.on('error', (err) => {
+      if (timer) clearTimeout(timer);
+      reject(err);
+    });
+
+    timer = setTimeout(() => {
+      req.destroy(new Error('Timeout tải file'));
+    }, timeoutMs);
   });
 }
 
@@ -162,23 +193,23 @@ async function startSync() {
           // Ghi nhận file thông tin bài nộp nếu file vật lý bị Render dọn dẹp trước đó
           const noteFile = path.join(primaryFolder, `${prefix}_ThongTinBaiNop.txt`);
           if (!fs.existsSync(noteFile)) {
-            const noteContent = `THÔNG TIN BÀI NỘP HỌC SINH\n==============================\n` +
-              `Mã sinh viên: ${studentCode}\n` +
-              `Họ và tên: ${student.name || sub.studentName}\n` +
-              `Lớp: ${className}\n` +
-              `Môn: ${subjectName}\n` +
-              `Tên file nộp: ${sub.file.originalName}\n` +
-              `Kích thước: ${sub.file.size ? (sub.file.size / (1024 * 1024)).toFixed(2) + ' MB' : 'N/A'}\n` +
-              `Thời gian nộp: ${sub.submittedAt || ''}\n` +
-              `Ghi chú: ${sub.content || '(Không có)'}\n` +
-              `Trạng thái file: File vật lý này đã bị máy chủ Render dọn dẹp khi khởi động lại trước khi kết nối MongoDB.\n` +
-              `Dữ liệu nộp bài và điểm số vẫn được lưu an toàn 100% trên MongoDB Atlas Cloud.\n`;
-            fs.writeFileSync(noteFile, noteContent, 'utf8');
-            console.log(`  📝 Đã lưu phiếu thông tin bài nộp: [${className}/${subjectName}] ${path.basename(noteFile)}`);
+              const noteContent = `THÔNG TIN BÀI NỘP HỌC SINH\n==============================\n` +
+                `Mã sinh viên: ${studentCode}\n` +
+                `Họ và tên: ${student.name || sub.studentName}\n` +
+                `Lớp: ${className}\n` +
+                `Môn: ${subjectName}\n` +
+                `Tên file nộp: ${sub.file.originalName}\n` +
+                `Kích thước: ${sub.file.size ? (sub.file.size / (1024 * 1024)).toFixed(2) + ' MB' : 'N/A'}\n` +
+                `Thời gian nộp: ${sub.submittedAt || ''}\n` +
+                `Ghi chú: ${sub.content || '(Không có)'}\n` +
+                `Trạng thái file: File vật lý này đã bị máy chủ Render dọn dẹp khi khởi động lại trước khi kết nối MongoDB.\n` +
+                `Dữ liệu nộp bài và điểm số vẫn được lưu an toàn 100% trên MongoDB Atlas Cloud.\n`;
+              fs.writeFileSync(noteFile, noteContent, 'utf8');
+              console.log(`  📝 Đã lưu phiếu thông tin bài nộp: [${className}/${subjectName}] ${path.basename(noteFile)}`);
+            }
           }
         }
-      }
-    } else if (sub.link) {
+      } else if (sub.link) {
       const linkFileName = `${prefix}_BaiNop_LienKet.url`;
       const linkFilePath = path.join(primaryFolder, linkFileName);
       const fileContent = `[InternetShortcut]\nURL=${sub.link}\n\n[ThongTinBaiNop]\nMSSV=${studentCode}\nHoVaTen=${student.name || sub.studentName}\nLop=${className}\nMon=${subjectName}\nThoiGianNop=${sub.submittedAt || ''}\nLink=${sub.link}\nGhiChu=${sub.content || ''}\n`;

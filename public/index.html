@@ -346,8 +346,11 @@
             <i class="fa-solid fa-shield-halved"></i> Quản Trị & Duyệt User
             <span id="admin-pending-badge" class="hidden bg-rose-600 text-white text-xs px-2 py-0.5 rounded-full font-bold">0</span>
           </button>
+          <button id="btn-sync-mac" onclick="openSyncMacModal()" title="Thực thi lệnh 'npm run sync-mac' để tải và phân loại toàn bộ bài nộp về máy Mac" class="admin-only hidden px-3.5 py-2.5 bg-gradient-to-r from-sky-600 via-blue-600 to-indigo-700 hover:from-sky-700 hover:to-indigo-800 text-white font-semibold rounded-xl shadow-sm transition flex items-center justify-center gap-1.5 text-xs">
+            <i class="fa-solid fa-rotate"></i> <i class="fa-brands fa-apple text-sm"></i> Đồng Bộ Về Mac
+          </button>
           <button onclick="openCloudFolder('local')" title="Mở thư mục bài nộp trên máy Mac" class="admin-only hidden px-3.5 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-semibold rounded-xl shadow-sm transition flex items-center justify-center gap-1.5 text-xs">
-            <i class="fa-solid fa-folder-open text-sm"></i> Thư Mục Bài Nộp (Mac)
+            <i class="fa-solid fa-folder-open text-sm"></i> Mở Thư Mục Mac
           </button>
           <a href="/api/admin/download-all-submissions-zip" title="Tải toàn bộ bài nộp của tất cả các lớp về máy Mac dạng file ZIP" class="admin-only hidden px-3.5 py-2.5 bg-indigo-700 hover:bg-indigo-800 text-white font-semibold rounded-xl shadow-sm transition flex items-center justify-center gap-1.5 text-xs">
             <i class="fa-solid fa-cloud-arrow-down text-sm"></i> Tải Bài Nộp (.ZIP)
@@ -524,6 +527,89 @@
     </section>
 
   </main>
+
+  <!-- ================= MODAL: ĐỒNG BỘ BÀI NỘP VỀ MÁY MAC (npm run sync-mac) ================= -->
+  <div id="modal-sync-mac" class="fixed inset-0 z-50 bg-slate-950/70 backdrop-blur-sm hidden items-center justify-center p-3 sm:p-4">
+    <div class="bg-white w-full max-w-2xl rounded-2xl shadow-2xl border border-slate-100 flex flex-col overflow-hidden max-h-[90vh]">
+      <!-- Header -->
+      <div class="px-5 py-4 bg-slate-900 text-white flex justify-between items-center">
+        <div class="flex items-center gap-2.5">
+          <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-sky-500 to-indigo-600 flex items-center justify-center text-white text-lg shadow-sm">
+            <i class="fa-brands fa-apple"></i>
+          </div>
+          <div>
+            <h3 class="font-bold text-base sm:text-lg leading-tight flex items-center gap-2">
+              Đồng Bộ Bài Nộp Về Máy Mac
+              <span class="text-[11px] font-mono bg-sky-500/20 text-sky-300 border border-sky-400/30 px-2 py-0.5 rounded-full font-normal">npm run sync-mac</span>
+            </h3>
+            <p class="text-xs text-slate-400 mt-0.5">Tải & phân loại theo Lớp / Môn / MSSV / Họ Tên vào <code class="text-sky-300 font-mono">Downloads/EduClass_BaiTap</code></p>
+          </div>
+        </div>
+        <button onclick="closeModal('modal-sync-mac')" class="text-slate-400 hover:text-white text-2xl font-bold leading-none">&times;</button>
+      </div>
+
+      <!-- Body -->
+      <div class="p-5 overflow-y-auto space-y-4 flex-1">
+        <!-- Trạng thái -->
+        <div id="sync-mac-status-box" class="p-3.5 rounded-xl bg-slate-50 border border-slate-200 flex items-center justify-between gap-3">
+          <div class="flex items-center gap-3">
+            <div id="sync-mac-spinner" class="text-sky-600 text-lg">
+              <i class="fa-solid fa-spinner fa-spin"></i>
+            </div>
+            <div>
+              <div id="sync-mac-status-title" class="font-bold text-slate-800 text-xs sm:text-sm">Đang chuẩn bị thực thi...</div>
+              <div id="sync-mac-status-desc" class="text-[11px] text-slate-500 mt-0.5">Hệ thống đang kết nối CSDL và kiểm tra danh sách bài nộp</div>
+            </div>
+          </div>
+          <button id="btn-sync-mac-rerun" onclick="runSyncMac()" class="hidden px-3 py-1.5 bg-sky-600 hover:bg-sky-700 text-white text-xs font-semibold rounded-lg transition items-center gap-1.5 shadow-xs">
+            <i class="fa-solid fa-rotate"></i> Chạy lại
+          </button>
+        </div>
+
+        <!-- Terminal log window -->
+        <div class="rounded-xl overflow-hidden border border-slate-800 shadow-md">
+          <div class="flex items-center justify-between px-3 py-2 bg-slate-900 text-xs text-slate-400 border-b border-slate-800">
+            <div class="flex items-center gap-2">
+              <span class="w-2.5 h-2.5 rounded-full bg-rose-500 inline-block"></span>
+              <span class="w-2.5 h-2.5 rounded-full bg-amber-500 inline-block"></span>
+              <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 inline-block"></span>
+              <span class="font-mono text-slate-300 ml-1.5">Mac Terminal Output</span>
+            </div>
+            <button type="button" onclick="copySyncMacLog()" class="hover:text-white transition flex items-center gap-1 font-sans text-[11px]">
+              <i class="fa-regular fa-copy"></i> Sao chép log
+            </button>
+          </div>
+          <pre id="sync-mac-log" class="bg-slate-950 text-emerald-400 font-mono text-[11px] p-4 max-h-72 overflow-y-auto whitespace-pre-wrap leading-relaxed shadow-inner">Đang chờ thực thi lệnh...</pre>
+        </div>
+
+        <!-- Cloud Warning (nếu gọi từ Render) -->
+        <div id="sync-mac-cloud-note" class="hidden p-3.5 rounded-xl bg-amber-50 border border-amber-200 text-xs text-amber-800 space-y-2">
+          <div class="flex items-center gap-2 font-bold text-amber-900">
+            <i class="fa-solid fa-cloud"></i> Đang duyệt trên Render Cloud
+          </div>
+          <p id="sync-mac-cloud-text">Máy chủ hiện tại chạy trên Linux Cloud nên không thể ghi file trực tiếp vào ổ cứng máy Mac của bạn.</p>
+          <div class="flex items-center gap-2 pt-1 flex-wrap">
+            <a href="/api/admin/download-all-submissions-zip" class="px-3 py-1.5 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold rounded-lg inline-flex items-center gap-1.5 transition">
+              <i class="fa-solid fa-file-zipper"></i> Tải bài nộp dạng ZIP về Mac
+            </a>
+            <button onclick="navigator.clipboard.writeText('npm run sync-mac'); showToast('Đã sao chép: npm run sync-mac', 'success');" class="px-3 py-1.5 bg-white border border-amber-300 text-amber-900 hover:bg-amber-100 font-semibold rounded-lg inline-flex items-center gap-1.5 transition">
+              <i class="fa-regular fa-copy"></i> Copy lệnh "npm run sync-mac"
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Footer -->
+      <div class="px-5 py-3.5 bg-slate-50 border-t border-slate-200 flex items-center justify-between gap-3">
+        <button type="button" onclick="openCloudFolder('local')" class="px-3.5 py-2 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-semibold rounded-xl transition flex items-center gap-1.5 shadow-xs">
+          <i class="fa-solid fa-folder-open"></i> Mở Thư Mục Finder (Mac)
+        </button>
+        <button type="button" onclick="closeModal('modal-sync-mac')" class="px-4 py-2 bg-slate-200 hover:bg-slate-300 text-slate-700 text-xs font-semibold rounded-xl transition">
+          Đóng
+        </button>
+      </div>
+    </div>
+  </div>
 
   <!-- ================= MODAL: QUẢN TRỊ VIÊN DUYỆT TÀI KHOẢN ================= -->
   <div id="modal-admin-panel" class="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm hidden items-center justify-center p-4">
@@ -2445,6 +2531,79 @@
         }
       } catch (err) {
         showToast("Lỗi kết nối khi mở thư mục đám mây", "error");
+      }
+    }
+
+    function openSyncMacModal() {
+      const modal = document.getElementById('modal-sync-mac');
+      if (modal) {
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+        runSyncMac();
+      }
+    }
+
+    async function runSyncMac() {
+      const logElem = document.getElementById('sync-mac-log');
+      const spinnerElem = document.getElementById('sync-mac-spinner');
+      const titleElem = document.getElementById('sync-mac-status-title');
+      const descElem = document.getElementById('sync-mac-status-desc');
+      const btnRerun = document.getElementById('btn-sync-mac-rerun');
+      const cloudNote = document.getElementById('sync-mac-cloud-note');
+
+      if (logElem) logElem.textContent = "$ npm run sync-mac\n> node sync-to-mac.js\n\nĐang kết nối CSDL và quét bài nộp...\n";
+      if (spinnerElem) spinnerElem.innerHTML = '<i class="fa-solid fa-spinner fa-spin text-sky-600"></i>';
+      if (titleElem) titleElem.textContent = "Đang thực thi đồng bộ về máy Mac...";
+      if (descElem) descElem.textContent = "Hệ thống đang tải và phân loại bài nộp vào Downloads/EduClass_BaiTap";
+      if (btnRerun) btnRerun.classList.add('hidden');
+      if (cloudNote) cloudNote.classList.add('hidden');
+
+      try {
+        const res = await fetch('/api/admin/sync-mac', { method: 'POST' });
+        const data = await res.json();
+
+        if (data.isCloud) {
+          if (spinnerElem) spinnerElem.innerHTML = '<i class="fa-solid fa-cloud text-amber-500"></i>';
+          if (titleElem) titleElem.textContent = "Đang duyệt trên Render Cloud (Linux)";
+          if (descElem) descElem.textContent = "Không thể ghi trực tiếp vào ổ đĩa Mac từ cloud. Hãy chọn tải file ZIP hoặc chạy lệnh trên máy Mac.";
+          if (cloudNote) {
+            cloudNote.classList.remove('hidden');
+            const noteText = document.getElementById('sync-mac-cloud-text');
+            if (noteText) noteText.textContent = data.message + ' ' + (data.suggestion || '');
+          }
+          if (logElem) logElem.textContent = `$ npm run sync-mac\n\n⚠️ ${data.message}\n💡 ${data.suggestion || ''}`;
+          return;
+        }
+
+        if (data.success) {
+          if (spinnerElem) spinnerElem.innerHTML = '<i class="fa-solid fa-circle-check text-emerald-500"></i>';
+          if (titleElem) titleElem.textContent = "Đồng bộ thành công về máy Mac!";
+          if (descElem) descElem.textContent = "Thư mục Finder EduClass_BaiTap đã được mở tự động.";
+          if (logElem) logElem.textContent = `$ npm run sync-mac\n> node sync-to-mac.js\n\n` + (data.stdout || 'Đồng bộ hoàn tất.');
+          showToast("Đã đồng bộ bài nộp về máy Mac và mở Finder!", "success");
+        } else {
+          if (spinnerElem) spinnerElem.innerHTML = '<i class="fa-solid fa-circle-exclamation text-rose-500"></i>';
+          if (titleElem) titleElem.textContent = "Đồng bộ gặp sự cố";
+          if (descElem) descElem.textContent = data.message || "Kiểm tra log bên dưới để biết chi tiết";
+          if (logElem) logElem.textContent = `$ npm run sync-mac\n> node sync-to-mac.js\n\n` + (data.stdout || '') + '\n[ERROR]: ' + (data.stderr || data.message || '');
+          showToast(data.message || "Lỗi đồng bộ", "error");
+        }
+      } catch (err) {
+        if (spinnerElem) spinnerElem.innerHTML = '<i class="fa-solid fa-circle-xmark text-rose-500"></i>';
+        if (titleElem) titleElem.textContent = "Lỗi kết nối máy chủ";
+        if (descElem) descElem.textContent = err.message;
+        if (logElem) logElem.textContent += `\n❌ Lỗi mạng: ${err.message}`;
+        showToast("Không thể kết nối đến máy chủ", "error");
+      } finally {
+        if (btnRerun) btnRerun.classList.remove('hidden');
+      }
+    }
+
+    function copySyncMacLog() {
+      const logElem = document.getElementById('sync-mac-log');
+      if (logElem && logElem.textContent) {
+        navigator.clipboard.writeText(logElem.textContent);
+        showToast("Đã sao chép log Terminal vào bộ nhớ tạm!", "success");
       }
     }
 
