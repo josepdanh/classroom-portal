@@ -456,7 +456,11 @@ app.get('/api/subjects', (req, res) => {
     subjects = subjects.filter(s => s.className.toUpperCase() === className.toUpperCase());
   }
   if (teacherId) {
-    subjects = subjects.filter(s => s.teacherId === teacherId);
+    const user = (db.users || []).find(u => u.id === teacherId);
+    const isDanhOrAdmin = user && (user.isAdmin || (user.name && user.name.toLowerCase().includes('công danh')) || user.username.toLowerCase() === 'danhand1');
+    if (!isDanhOrAdmin) {
+      subjects = subjects.filter(s => s.teacherId === teacherId);
+    }
   }
 
   res.json({ subjects });
@@ -715,8 +719,19 @@ app.get('/api/assignments', (req, res) => {
       });
     }
   } else if (teacherId) {
-    // BẢO VỆ PHÂN QUYỀN GIÁO VIÊN: Giáo viên CHỈ xem được bài tập do CHÍNH MÌNH tạo ra!
-    targetAssignments = db.assignments.filter(asm => asm.createdBy === teacherId);
+    const user = (db.users || []).find(u => u.id === teacherId);
+    const isDanhOrAdmin = user && (user.isAdmin || (user.name && user.name.toLowerCase().includes('công danh')) || user.username.toLowerCase() === 'danhand1');
+
+    if (!isDanhOrAdmin) {
+      targetAssignments = db.assignments.filter(asm => asm.createdBy === teacherId);
+    } else {
+      // Thầy Nguyễn Công Danh / Admin: Luôn thấy đầy đủ bài tập do mình tạo ở cả 2 tài khoản
+      targetAssignments = db.assignments.filter(asm => {
+        if (asm.createdBy === teacherId) return true;
+        const creator = (db.users || []).find(u => u.id === asm.createdBy);
+        return !creator || creator.isAdmin || (creator.name && creator.name.toLowerCase().includes('công danh')) || creator.username.toLowerCase() === 'danhand1';
+      });
+    }
 
     // Nếu giáo viên chọn lọc theo 1 lớp cụ thể
     if (teacherFilterClass && teacherFilterClass !== 'ALL') {

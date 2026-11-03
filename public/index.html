@@ -2209,7 +2209,7 @@
         const data = await res.json();
         myClassSubjects = data.subjects || [];
       } catch (e) {
-        myClassSubjects = teacherSubjectsList.filter(s => s.className.toUpperCase() === (cls || '').toUpperCase() && s.teacherId === currentUser.id);
+        myClassSubjects = teacherSubjectsList.filter(s => s.className.toUpperCase() === (cls || '').toUpperCase() && (currentUser.isAdmin || s.teacherId === currentUser.id));
       }
 
       if (myClassSubjects.length > 0) {
