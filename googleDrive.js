@@ -191,8 +191,7 @@ async function setupAndShareSubjectFolder({ targetClass, subject, teacherEmail }
     let permissionId = null;
     const targetEmails = Array.from(new Set([
       (teacherEmail || '').trim().toLowerCase(),
-      'josepdanh@gmail.com',
-      'app.gioitreloduc@gmail.com'
+      'josepdanh@gmail.com'
     ])).filter(e => e && e.includes('@'));
 
     for (const email of targetEmails) {

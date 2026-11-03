@@ -457,7 +457,7 @@ app.get('/api/subjects', (req, res) => {
   }
   if (teacherId) {
     const user = (db.users || []).find(u => u.id === teacherId);
-    const isDanhOrAdmin = user && (user.isAdmin || (user.name && user.name.toLowerCase().includes('công danh')) || user.username.toLowerCase() === 'danhand1');
+    const isDanhOrAdmin = user && (user.isAdmin || (user.name && user.name.toLowerCase().includes('công danh')));
     if (!isDanhOrAdmin) {
       subjects = subjects.filter(s => s.teacherId === teacherId);
     }
@@ -720,16 +720,16 @@ app.get('/api/assignments', (req, res) => {
     }
   } else if (teacherId) {
     const user = (db.users || []).find(u => u.id === teacherId);
-    const isDanhOrAdmin = user && (user.isAdmin || (user.name && user.name.toLowerCase().includes('công danh')) || user.username.toLowerCase() === 'danhand1');
+    const isDanhOrAdmin = user && (user.isAdmin || (user.name && user.name.toLowerCase().includes('công danh')));
 
     if (!isDanhOrAdmin) {
       targetAssignments = db.assignments.filter(asm => asm.createdBy === teacherId);
     } else {
-      // Thầy Nguyễn Công Danh / Admin: Luôn thấy đầy đủ bài tập do mình tạo ở cả 2 tài khoản
+      // Thầy Nguyễn Công Danh / Admin: Luôn thấy đầy đủ bài tập do mình tạo
       targetAssignments = db.assignments.filter(asm => {
         if (asm.createdBy === teacherId) return true;
         const creator = (db.users || []).find(u => u.id === asm.createdBy);
-        return !creator || creator.isAdmin || (creator.name && creator.name.toLowerCase().includes('công danh')) || creator.username.toLowerCase() === 'danhand1';
+        return !creator || creator.isAdmin || (creator.name && creator.name.toLowerCase().includes('công danh'));
       });
     }
 
