@@ -124,16 +124,31 @@
           </div>
         </div>
 
-        <!-- Khối hiển thị khi đã đăng nhập -->
-        <div id="nav-user-info" class="hidden flex items-center space-x-4">
-          <div class="text-right">
-            <div id="nav-user-name" class="text-sm font-semibold text-slate-800 leading-tight"></div>
-            <div id="nav-user-badge" class="text-xs text-slate-500 font-medium"></div>
+        <!-- Khối điều khiển và thông tin người dùng -->
+        <div class="flex items-center space-x-3">
+          <!-- Widget Tự động làm mới trang sau 30 giây -->
+          <div class="flex items-center shadow-xs">
+            <button id="btn-refresh-now" onclick="triggerAutoRefreshNow()" title="Tự động làm mới trang sau 30 giây. Nhấp để làm mới ngay!" class="flex items-center gap-1.5 px-3 py-1.5 rounded-l-full text-xs font-semibold bg-slate-100 hover:bg-indigo-50 hover:text-indigo-700 text-slate-700 border border-slate-200 border-r-0 transition select-none">
+              <i id="auto-refresh-icon" class="fa-solid fa-arrows-rotate text-indigo-600 text-xs"></i>
+              <span class="hidden sm:inline">Làm mới:</span>
+              <span id="auto-refresh-countdown" class="font-mono text-indigo-600 font-bold">30s</span>
+            </button>
+            <button id="btn-toggle-refresh" onclick="toggleAutoRefresh()" title="Tạm dừng / Tiếp tục tự động làm mới" class="px-2.5 py-1.5 rounded-r-full text-xs font-semibold bg-slate-100 hover:bg-slate-200 text-slate-500 border border-slate-200 transition">
+              <i id="auto-refresh-toggle-icon" class="fa-solid fa-pause text-[10px]"></i>
+            </button>
           </div>
-          <button onclick="handleLogout()" title="Đăng xuất" class="px-3 py-1.5 rounded-lg text-slate-600 hover:text-red-600 hover:bg-red-50 text-sm font-medium transition flex items-center space-x-1.5 border border-slate-200">
-            <i class="fa-solid fa-arrow-right-from-bracket"></i>
-            <span class="hidden sm:inline">Thoát</span>
-          </button>
+
+          <!-- Khối hiển thị khi đã đăng nhập -->
+          <div id="nav-user-info" class="hidden flex items-center space-x-3">
+            <div class="text-right">
+              <div id="nav-user-name" class="text-sm font-semibold text-slate-800 leading-tight"></div>
+              <div id="nav-user-badge" class="text-xs text-slate-500 font-medium"></div>
+            </div>
+            <button onclick="handleLogout()" title="Đăng xuất" class="px-3 py-1.5 rounded-lg text-slate-600 hover:text-red-600 hover:bg-red-50 text-sm font-medium transition flex items-center space-x-1.5 border border-slate-200">
+              <i class="fa-solid fa-arrow-right-from-bracket"></i>
+              <span class="hidden sm:inline">Thoát</span>
+            </button>
+          </div>
         </div>
       </div>
     </div>
@@ -1385,8 +1400,112 @@
       }
     }
 
+    // ================= TỰ ĐỘNG LÀM MỚI TRANG SAU 30 GIÂY =================
+    const AUTO_REFRESH_INTERVAL = 30; // 30 giây
+    let autoRefreshRemaining = AUTO_REFRESH_INTERVAL;
+    let autoRefreshPaused = false;
+    let autoRefreshTimer = null;
+
+    function startAutoRefreshTimer() {
+      if (autoRefreshTimer) clearInterval(autoRefreshTimer);
+      autoRefreshRemaining = AUTO_REFRESH_INTERVAL;
+      updateAutoRefreshDisplay();
+
+      autoRefreshTimer = setInterval(() => {
+        if (autoRefreshPaused) return;
+
+        autoRefreshRemaining--;
+        if (autoRefreshRemaining <= 0) {
+          executeAutoRefresh();
+        } else {
+          updateAutoRefreshDisplay();
+        }
+      }, 1000);
+    }
+
+    function updateAutoRefreshDisplay() {
+      const el = document.getElementById('auto-refresh-countdown');
+      const toggleIcon = document.getElementById('auto-refresh-toggle-icon');
+      if (el) {
+        if (autoRefreshPaused) {
+          el.textContent = "Tạm dừng";
+          el.className = "font-mono text-slate-400 font-bold";
+        } else {
+          el.textContent = `${autoRefreshRemaining}s`;
+          el.className = "font-mono text-indigo-600 font-bold";
+        }
+      }
+      if (toggleIcon) {
+        toggleIcon.className = autoRefreshPaused ? "fa-solid fa-play text-[10px]" : "fa-solid fa-pause text-[10px]";
+      }
+    }
+
+    function toggleAutoRefresh() {
+      autoRefreshPaused = !autoRefreshPaused;
+      if (!autoRefreshPaused && autoRefreshRemaining <= 0) {
+        autoRefreshRemaining = AUTO_REFRESH_INTERVAL;
+      }
+      updateAutoRefreshDisplay();
+      if (autoRefreshPaused) {
+        showToast("Đã tạm dừng tự động làm mới", "warning");
+      } else {
+        showToast("Đã tiếp tục tự động làm mới mỗi 30s", "success");
+      }
+    }
+
+    // Kiểm tra xem có modal nào đang mở không (để tránh reload đóng modal bất ngờ)
+    function isAnyModalActive() {
+      const modals = document.querySelectorAll('[id^="modal-"]');
+      for (const m of modals) {
+        if (!m.classList.contains('hidden')) return true;
+      }
+      return false;
+    }
+
+    // Kiểm tra xem người dùng có đang gõ văn bản trong ô nhập liệu không
+    function isUserCurrentlyTyping() {
+      const active = document.activeElement;
+      if (!active) return false;
+      const tag = active.tagName;
+      return (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT' || active.isContentEditable);
+    }
+
+    // Thực hiện làm mới trang web hoặc làm mới dữ liệu thông minh
+    async function executeAutoRefresh() {
+      const icon = document.getElementById('auto-refresh-icon');
+      if (icon) icon.classList.add('animate-spin');
+
+      // Nếu người dùng đang mở modal hoặc đang gõ phím, tự động cập nhật dữ liệu ngầm để không ngắt quãng thao tác
+      if (isAnyModalActive() || isUserCurrentlyTyping()) {
+        try {
+          if (currentUser) {
+            if (currentUser.role === 'teacher') {
+              await loadTeacherData();
+            } else {
+              await loadStudentData();
+            }
+          }
+        } catch (e) {
+          console.error("Lỗi cập nhật dữ liệu ngầm:", e);
+        }
+        setTimeout(() => {
+          if (icon) icon.classList.remove('animate-spin');
+        }, 800);
+        autoRefreshRemaining = AUTO_REFRESH_INTERVAL;
+        updateAutoRefreshDisplay();
+      } else {
+        // Tải lại toàn bộ trang web chuẩn xác sau 30 giây
+        window.location.reload();
+      }
+    }
+
+    function triggerAutoRefreshNow() {
+      executeAutoRefresh();
+    }
+
     window.addEventListener('DOMContentLoaded', async () => {
       loadClasses(); // Tải danh mục lớp học ngay từ đầu cho học sinh và giáo viên
+      startAutoRefreshTimer(); // Bắt đầu đếm ngược tự động làm mới trang sau 30 giây
 
       // Đồng bộ trạng thái checkbox Duy trì đăng nhập (mặc định luôn bật)
       const rememberCheckbox = document.getElementById('login-remember');
