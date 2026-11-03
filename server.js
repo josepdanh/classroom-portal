@@ -197,7 +197,7 @@ function readDatabase() {
       });
     }
 
-    // Tự động thanh lọc triệt để tài khoản danhand1 và môn Thiết kế catalog (đặc biệt khi chạy trên Render.com)
+    // Tự động thanh lọc tài khoản danhand1 và các dữ liệu thuộc về tài khoản này (u_teacher_1793618741478)
     let hasPurged = false;
     if (data.users && Array.isArray(data.users)) {
       const uCount = data.users.length;
@@ -211,45 +211,23 @@ function readDatabase() {
     if (data.subjects && Array.isArray(data.subjects)) {
       const sCount = data.subjects.length;
       data.subjects = data.subjects.filter(s => {
-        const sname = (s.name || '').trim().toLowerCase();
-        return !sname.includes('catalog') && s.id !== 'subj_1793618863236';
+        return s.teacherId !== 'u_teacher_1793618741478' && s.id !== 'subj_1793618863236';
       });
       if (data.subjects.length !== sCount) hasPurged = true;
     }
     if (data.assignments && Array.isArray(data.assignments)) {
       const aCount = data.assignments.length;
       data.assignments = data.assignments.filter(a => {
-        const title = (a.title || '').trim().toLowerCase();
-        const subj = (a.subject || '').trim().toLowerCase();
-        return !title.includes('catalog') && !subj.includes('catalog');
+        return a.createdBy !== 'u_teacher_1793618741478';
       });
       if (data.assignments.length !== aCount) hasPurged = true;
     }
     if (data.submissions && Array.isArray(data.submissions)) {
       const subCount = data.submissions.length;
       data.submissions = data.submissions.filter(sub => {
-        const subj = (sub.subject || '').trim().toLowerCase();
-        const title = (sub.assignmentTitle || '').trim().toLowerCase();
-        return !subj.includes('catalog') && !title.includes('catalog');
+        return sub.teacherId !== 'u_teacher_1793618741478';
       });
       if (data.submissions.length !== subCount) hasPurged = true;
-    }
-    if (data.gradeSheets && Array.isArray(data.gradeSheets)) {
-      const gCount = data.gradeSheets.length;
-      data.gradeSheets = data.gradeSheets.filter(g => {
-        const subj = (g.subject || '').trim().toLowerCase();
-        return !subj.includes('catalog');
-      });
-      if (data.gradeSheets.length !== gCount) hasPurged = true;
-    }
-    if (data.notifications && Array.isArray(data.notifications)) {
-      const nCount = data.notifications.length;
-      data.notifications = data.notifications.filter(n => {
-        const title = (n.title || '').trim().toLowerCase();
-        const msg = (n.message || '').trim().toLowerCase();
-        return !title.includes('catalog') && !msg.includes('catalog');
-      });
-      if (data.notifications.length !== nCount) hasPurged = true;
     }
 
     if (hasPurged) {

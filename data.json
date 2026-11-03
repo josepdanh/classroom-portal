@@ -595,6 +595,17 @@
       "teacherName": "Thầy Nguyễn Công Danh",
       "teacherEmail": "josepdanh@gmail.com",
       "createdAt": "2026-11-02T15:40:26.889Z"
+    },
+    {
+      "id": "subj_1793676523354",
+      "name": "Thiết Kế Catalog",
+      "className": "T14TK01",
+      "teacherId": "u_teacher_danh",
+      "teacherName": "Thầy Nguyễn Công Danh",
+      "teacherEmail": "josepdanh@gmail.com",
+      "driveFolderId": "1HLIgB_8cnUoAjObz3CoLnb3RDDRGgwj3",
+      "driveLink": "https://drive.google.com/drive/folders/1HLIgB_8cnUoAjObz3CoLnb3RDDRGgwj3",
+      "createdAt": "2026-11-03T03:28:43.354Z"
     }
   ],
   "submissions": [
