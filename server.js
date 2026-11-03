@@ -163,10 +163,51 @@ const initialData = {
   submissions: []
 };
 
-// Đọc và ghi CSDL file JSON với cơ chế tự động bảo vệ & sao lưu an toàn chống mất dữ liệu
-function readDatabase() {
+// Cấu hình kết nối MongoDB Atlas (Đám mây vĩnh viễn, chống mất dữ liệu khi cập nhật code)
+const { MongoClient } = require('mongodb');
+const MONGODB_URI = process.env.MONGODB_URI || "mongodb+srv://josepdanh_db_user:RZr9ZyW1u8Itji2H@cluster0.jdus1os.mongodb.net/educlass?retryWrites=true&w=majority";
+
+let mongoClient = null;
+let mongoDbCollection = null;
+let memoryCache = null;
+
+async function initMongoConnection() {
+  if (!MONGODB_URI) return;
+  try {
+    mongoClient = new MongoClient(MONGODB_URI);
+    await mongoClient.connect();
+    const db = mongoClient.db('educlass');
+    mongoDbCollection = db.collection('system_data');
+    console.log('[MongoDB Atlas] ✅ Đã kết nối thành công tới Database đám mây MongoDB Atlas!');
+
+    // Tải dữ liệu đám mây vào bộ nhớ
+    const cloudDoc = await mongoDbCollection.findOne({ id: 'main' });
+    if (cloudDoc) {
+      delete cloudDoc._id;
+      memoryCache = cloudDoc;
+      try {
+        fs.writeFileSync(DATA_FILE, JSON.stringify(cloudDoc, null, 2), 'utf8');
+        fs.writeFileSync(BACKUP_FILE, JSON.stringify(cloudDoc, null, 2), 'utf8');
+      } catch (e) {}
+      console.log(`[MongoDB Atlas] 📥 Đã tải CSDL từ đám mây: ${cloudDoc.assignments?.length || 0} bài tập, ${cloudDoc.submissions?.length || 0} bài nộp, ${cloudDoc.users?.length || 0} người dùng.`);
+    } else {
+      const localData = readLocalJsonFile();
+      await mongoDbCollection.updateOne(
+        { id: 'main' },
+        { $set: { id: 'main', ...localData, updatedAt: new Date().toISOString() } },
+        { upsert: true }
+      );
+      memoryCache = localData;
+      console.log('[MongoDB Atlas] 📤 Đã nạp CSDL ban đầu lên đám mây Atlas thành công!');
+    }
+  } catch (err) {
+    console.error('[MongoDB Atlas Lỗi]:', err.message);
+  }
+}
+
+// Đọc CSDL từ file JSON cục bộ
+function readLocalJsonFile() {
   if (!fs.existsSync(DATA_FILE)) {
-    // Nếu có file backup thì ưu tiên khôi phục từ backup trước
     if (fs.existsSync(BACKUP_FILE)) {
       try {
         const backupRaw = fs.readFileSync(BACKUP_FILE, 'utf8');
@@ -238,7 +279,6 @@ function readDatabase() {
       } catch (e) {}
     }
 
-    // Nếu data.json đọc tốt và có dữ liệu, tự động đồng bộ sang bản backup an toàn
     if (data.assignments.length > 0 || (data.users && data.users.length > 3)) {
       try {
         fs.writeFileSync(BACKUP_FILE, raw, 'utf8');
@@ -246,8 +286,7 @@ function readDatabase() {
     }
     return data;
   } catch (err) {
-    console.error("Lỗi đọc database. Đang cố gắng khôi phục từ bản sao lưu an toàn:", err);
-    // KHÔNG BAO GIỜ TỰ Ý XÓA TRẮNG DỮ LIỆU ĐÈ LÊN data.json
+    console.error("Lỗi đọc database cục bộ. Khôi phục từ backup:", err);
     if (fs.existsSync(BACKUP_FILE)) {
       try {
         const backupRaw = fs.readFileSync(BACKUP_FILE, 'utf8');
@@ -260,7 +299,17 @@ function readDatabase() {
   }
 }
 
+// Đọc CSDL (ưu tiên bộ nhớ cache đồng bộ với MongoDB Atlas)
+function readDatabase() {
+  if (memoryCache) {
+    return memoryCache;
+  }
+  return readLocalJsonFile();
+}
+
+// Ghi CSDL (đồng bộ vào cả bộ nhớ, file data.json cục bộ và MongoDB Atlas đám mây)
 function writeDatabase(data) {
+  memoryCache = data;
   try {
     const content = JSON.stringify(data, null, 2);
     // 1. Ghi vào file CSDL chính
@@ -279,9 +328,19 @@ function writeDatabase(data) {
   } catch (err) {
     console.error("Lỗi ghi CSDL:", err);
   }
+
+  // 4. Đồng bộ thời gian thực lên MongoDB Atlas Cloud
+  if (mongoDbCollection) {
+    mongoDbCollection.updateOne(
+      { id: 'main' },
+      { $set: { id: 'main', ...data, updatedAt: new Date().toISOString() } },
+      { upsert: true }
+    ).catch(e => console.error("[MongoDB Atlas] Lỗi cập nhật đám mây:", e.message));
+  }
 }
 
-// Khởi tạo DB khi bắt đầu
+// Khởi tạo kết nối MongoDB Atlas khi bắt đầu
+initMongoConnection();
 readDatabase();
 
 // Chuẩn hóa viết hoa chữ cái đầu cho mỗi từ của Họ và Tên (Tiếng Việt)
