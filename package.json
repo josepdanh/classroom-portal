@@ -7,7 +7,9 @@
     "start": "node server.js",
     "push": "git add . && git commit -m 'Cap nhat code tu Mac' && git push origin main",
     "push-all": "git update-index --no-skip-worktree data.json && git add . && git commit -m 'Dong bo code va CSDL len GitHub' && git push origin main && git update-index --skip-worktree data.json",
-    "pull": "git pull origin main"
+    "pull": "git pull origin main",
+    "sync-files": "node syncDriveFiles.js",
+    "open-drive": "open ~/Library/CloudStorage/GoogleDrive-josepdanh@gmail.com/'Drive của tôi'/EduClass_BaiTap"
   },
   "dependencies": {
     "express": "^4.19.2",
