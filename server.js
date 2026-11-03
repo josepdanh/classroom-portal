@@ -197,6 +197,69 @@ function readDatabase() {
       });
     }
 
+    // Tự động thanh lọc triệt để tài khoản danhand1 và môn Thiết kế catalog (đặc biệt khi chạy trên Render.com)
+    let hasPurged = false;
+    if (data.users && Array.isArray(data.users)) {
+      const uCount = data.users.length;
+      data.users = data.users.filter(u => {
+        const uname = (u.username || '').trim().toLowerCase();
+        const uemail = (u.email || '').trim().toLowerCase();
+        return uname !== 'danhand1' && uemail !== 'app.gioitreloduc@gmail.com' && u.id !== 'u_teacher_1793618741478';
+      });
+      if (data.users.length !== uCount) hasPurged = true;
+    }
+    if (data.subjects && Array.isArray(data.subjects)) {
+      const sCount = data.subjects.length;
+      data.subjects = data.subjects.filter(s => {
+        const sname = (s.name || '').trim().toLowerCase();
+        return !sname.includes('catalog') && s.id !== 'subj_1793618863236';
+      });
+      if (data.subjects.length !== sCount) hasPurged = true;
+    }
+    if (data.assignments && Array.isArray(data.assignments)) {
+      const aCount = data.assignments.length;
+      data.assignments = data.assignments.filter(a => {
+        const title = (a.title || '').trim().toLowerCase();
+        const subj = (a.subject || '').trim().toLowerCase();
+        return !title.includes('catalog') && !subj.includes('catalog');
+      });
+      if (data.assignments.length !== aCount) hasPurged = true;
+    }
+    if (data.submissions && Array.isArray(data.submissions)) {
+      const subCount = data.submissions.length;
+      data.submissions = data.submissions.filter(sub => {
+        const subj = (sub.subject || '').trim().toLowerCase();
+        const title = (sub.assignmentTitle || '').trim().toLowerCase();
+        return !subj.includes('catalog') && !title.includes('catalog');
+      });
+      if (data.submissions.length !== subCount) hasPurged = true;
+    }
+    if (data.gradeSheets && Array.isArray(data.gradeSheets)) {
+      const gCount = data.gradeSheets.length;
+      data.gradeSheets = data.gradeSheets.filter(g => {
+        const subj = (g.subject || '').trim().toLowerCase();
+        return !subj.includes('catalog');
+      });
+      if (data.gradeSheets.length !== gCount) hasPurged = true;
+    }
+    if (data.notifications && Array.isArray(data.notifications)) {
+      const nCount = data.notifications.length;
+      data.notifications = data.notifications.filter(n => {
+        const title = (n.title || '').trim().toLowerCase();
+        const msg = (n.message || '').trim().toLowerCase();
+        return !title.includes('catalog') && !msg.includes('catalog');
+      });
+      if (data.notifications.length !== nCount) hasPurged = true;
+    }
+
+    if (hasPurged) {
+      try {
+        const cleanContent = JSON.stringify(data, null, 2);
+        fs.writeFileSync(DATA_FILE, cleanContent, 'utf8');
+        fs.writeFileSync(BACKUP_FILE, cleanContent, 'utf8');
+      } catch (e) {}
+    }
+
     // Nếu data.json đọc tốt và có dữ liệu, tự động đồng bộ sang bản backup an toàn
     if (data.assignments.length > 0 || (data.users && data.users.length > 3)) {
       try {
@@ -279,6 +342,12 @@ app.post('/api/auth/login', (req, res) => {
   const { username, password } = req.body;
   if (!username || !password) {
     return res.status(400).json({ message: "Vui lòng nhập đầy đủ tài khoản và mật khẩu." });
+  }
+
+  // Chặn hoàn toàn tài khoản đã xóa danhand1
+  const inputCheck = (username || '').trim().toLowerCase();
+  if (inputCheck === 'danhand1' || inputCheck === 'app.gioitreloduc@gmail.com') {
+    return res.status(401).json({ message: "Tài khoản hoặc mật khẩu không chính xác." });
   }
 
   const db = readDatabase();

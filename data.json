@@ -22,17 +22,6 @@
       "createdAt": "2026-11-02T09:31:21.299Z"
     },
     {
-      "id": "u_teacher_1793618741478",
-      "username": "Danhand1",
-      "password": "Josephdanh&1",
-      "name": "Nguyễn Công Danh",
-      "email": "app.gioitreloduc@gmail.com",
-      "role": "teacher",
-      "subject": "Thiết kế đồ hoan",
-      "status": "ACTIVE",
-      "createdAt": "2026-11-02T11:25:41.478Z"
-    },
-    {
       "id": "u_T15MG0201",
       "username": "T15MG0201",
       "password": "12345",
@@ -40,7 +29,8 @@
       "dob": "18/07/2011",
       "role": "student",
       "className": "T15MG02",
-      "status": "ACTIVE"
+      "status": "ACTIVE",
+      "studentCode": "T15MG0201"
     },
     {
       "id": "u_T15MG0202",
@@ -50,7 +40,8 @@
       "dob": "23/01/2011",
       "role": "student",
       "className": "T15MG02",
-      "status": "ACTIVE"
+      "status": "ACTIVE",
+      "studentCode": "T15MG0202"
     },
     {
       "id": "u_T15MG0203",
@@ -60,7 +51,8 @@
       "dob": "11/03/2011",
       "role": "student",
       "className": "T15MG02",
-      "status": "ACTIVE"
+      "status": "ACTIVE",
+      "studentCode": "T15MG0203"
     },
     {
       "id": "u_T15MG0204",
@@ -70,7 +62,8 @@
       "dob": "16/12/2011",
       "role": "student",
       "className": "T15MG02",
-      "status": "ACTIVE"
+      "status": "ACTIVE",
+      "studentCode": "T15MG0204"
     },
     {
       "id": "u_T15MG0205",
@@ -80,7 +73,8 @@
       "dob": "07/03/2011",
       "role": "student",
       "className": "T15MG02",
-      "status": "ACTIVE"
+      "status": "ACTIVE",
+      "studentCode": "T15MG0205"
     },
     {
       "id": "u_T15MG0206",
@@ -90,7 +84,8 @@
       "dob": "10/03/2010",
       "role": "student",
       "className": "T15MG02",
-      "status": "ACTIVE"
+      "status": "ACTIVE",
+      "studentCode": "T15MG0206"
     },
     {
       "id": "u_T15MG0207",
@@ -100,7 +95,8 @@
       "dob": "10/06/2006",
       "role": "student",
       "className": "T15MG02",
-      "status": "ACTIVE"
+      "status": "ACTIVE",
+      "studentCode": "T15MG0207"
     },
     {
       "id": "u_T15MG0208",
@@ -110,7 +106,8 @@
       "dob": "19/01/2011",
       "role": "student",
       "className": "T15MG02",
-      "status": "ACTIVE"
+      "status": "ACTIVE",
+      "studentCode": "T15MG0208"
     },
     {
       "id": "u_T15MG0209",
@@ -120,7 +117,8 @@
       "dob": "21/09/2011",
       "role": "student",
       "className": "T15MG02",
-      "status": "ACTIVE"
+      "status": "ACTIVE",
+      "studentCode": "T15MG0209"
     },
     {
       "id": "u_T15MG0210",
@@ -130,7 +128,8 @@
       "dob": "06/01/2011",
       "role": "student",
       "className": "T15MG02",
-      "status": "ACTIVE"
+      "status": "ACTIVE",
+      "studentCode": "T15MG0210"
     },
     {
       "id": "u_T15MG0211",
@@ -140,7 +139,8 @@
       "dob": "19/12/2011",
       "role": "student",
       "className": "T15MG02",
-      "status": "ACTIVE"
+      "status": "ACTIVE",
+      "studentCode": "T15MG0211"
     },
     {
       "id": "u_T15MG0212",
@@ -150,7 +150,8 @@
       "dob": "07/10/2011",
       "role": "student",
       "className": "T15MG02",
-      "status": "ACTIVE"
+      "status": "ACTIVE",
+      "studentCode": "T15MG0212"
     },
     {
       "id": "u_T15MG0213",
@@ -160,7 +161,8 @@
       "dob": "17/08/2011",
       "role": "student",
       "className": "T15MG02",
-      "status": "ACTIVE"
+      "status": "ACTIVE",
+      "studentCode": "T15MG0213"
     },
     {
       "id": "u_T15MG0214",
@@ -170,7 +172,8 @@
       "dob": "30/03/2010",
       "role": "student",
       "className": "T15MG02",
-      "status": "ACTIVE"
+      "status": "ACTIVE",
+      "studentCode": "T15MG0214"
     },
     {
       "id": "u_T15MG0215",
@@ -180,7 +183,8 @@
       "dob": "29/07/2011",
       "role": "student",
       "className": "T15MG02",
-      "status": "ACTIVE"
+      "status": "ACTIVE",
+      "studentCode": "T15MG0215"
     },
     {
       "id": "u_T15MG0216",
@@ -190,7 +194,8 @@
       "dob": "13/02/2011",
       "role": "student",
       "className": "T15MG02",
-      "status": "ACTIVE"
+      "status": "ACTIVE",
+      "studentCode": "T15MG0216"
     },
     {
       "id": "u_T15MG0217",
@@ -200,7 +205,8 @@
       "dob": "05/07/2011",
       "role": "student",
       "className": "T15MG02",
-      "status": "ACTIVE"
+      "status": "ACTIVE",
+      "studentCode": "T15MG0217"
     },
     {
       "id": "u_T15MG0218",
@@ -210,7 +216,8 @@
       "dob": "30/05/2011",
       "role": "student",
       "className": "T15MG02",
-      "status": "ACTIVE"
+      "status": "ACTIVE",
+      "studentCode": "T15MG0218"
     },
     {
       "id": "u_T15MG0219",
@@ -220,7 +227,8 @@
       "dob": "06/01/2011",
       "role": "student",
       "className": "T15MG02",
-      "status": "ACTIVE"
+      "status": "ACTIVE",
+      "studentCode": "T15MG0219"
     },
     {
       "id": "u_T15MG0220",
@@ -230,7 +238,8 @@
       "dob": "31/05/2011",
       "role": "student",
       "className": "T15MG02",
-      "status": "ACTIVE"
+      "status": "ACTIVE",
+      "studentCode": "T15MG0220"
     },
     {
       "id": "u_T15MG0221",
@@ -240,7 +249,8 @@
       "dob": "30/11/2011",
       "role": "student",
       "className": "T15MG02",
-      "status": "ACTIVE"
+      "status": "ACTIVE",
+      "studentCode": "T15MG0221"
     },
     {
       "id": "u_T15MG0222",
@@ -250,7 +260,8 @@
       "dob": "28/04/2011",
       "role": "student",
       "className": "T15MG02",
-      "status": "ACTIVE"
+      "status": "ACTIVE",
+      "studentCode": "T15MG0222"
     },
     {
       "id": "u_T15MG0223",
@@ -260,7 +271,8 @@
       "dob": "17/11/2011",
       "role": "student",
       "className": "T15MG02",
-      "status": "ACTIVE"
+      "status": "ACTIVE",
+      "studentCode": "T15MG0223"
     },
     {
       "id": "u_T15MG0224",
@@ -270,7 +282,8 @@
       "dob": "05/03/2011",
       "role": "student",
       "className": "T15MG02",
-      "status": "ACTIVE"
+      "status": "ACTIVE",
+      "studentCode": "T15MG0224"
     },
     {
       "id": "u_T15MG0225",
@@ -280,7 +293,8 @@
       "dob": "09/05/2011",
       "role": "student",
       "className": "T15MG02",
-      "status": "ACTIVE"
+      "status": "ACTIVE",
+      "studentCode": "T15MG0225"
     },
     {
       "id": "u_T15MG0226",
@@ -290,7 +304,8 @@
       "dob": "16/01/2011",
       "role": "student",
       "className": "T15MG02",
-      "status": "ACTIVE"
+      "status": "ACTIVE",
+      "studentCode": "T15MG0226"
     },
     {
       "id": "u_C08TK0101",
@@ -300,7 +315,8 @@
       "dob": "20/11/2006",
       "role": "student",
       "className": "C08TK01",
-      "status": "ACTIVE"
+      "status": "ACTIVE",
+      "studentCode": "C08TK0101"
     },
     {
       "id": "u_C08TK0102",
@@ -310,7 +326,8 @@
       "dob": "26/01/2005",
       "role": "student",
       "className": "C08TK01",
-      "status": "ACTIVE"
+      "status": "ACTIVE",
+      "studentCode": "C08TK0102"
     },
     {
       "id": "u_C08TK0104",
@@ -320,7 +337,8 @@
       "dob": "07/08/2006",
       "role": "student",
       "className": "C08TK01",
-      "status": "ACTIVE"
+      "status": "ACTIVE",
+      "studentCode": "C08TK0104"
     },
     {
       "id": "u_C08TK0105",
@@ -330,7 +348,8 @@
       "dob": "17/06/2006",
       "role": "student",
       "className": "C08TK01",
-      "status": "ACTIVE"
+      "status": "ACTIVE",
+      "studentCode": "C08TK0105"
     },
     {
       "id": "u_C08TK0106",
@@ -340,7 +359,8 @@
       "dob": "13/08/2006",
       "role": "student",
       "className": "C08TK01",
-      "status": "ACTIVE"
+      "status": "ACTIVE",
+      "studentCode": "C08TK0106"
     },
     {
       "id": "u_C08TK0107",
@@ -350,7 +370,8 @@
       "dob": "20/07/2006",
       "role": "student",
       "className": "C08TK01",
-      "status": "ACTIVE"
+      "status": "ACTIVE",
+      "studentCode": "C08TK0107"
     },
     {
       "id": "u_C08TK0108",
@@ -360,7 +381,8 @@
       "dob": "12/01/2006",
       "role": "student",
       "className": "C08TK01",
-      "status": "ACTIVE"
+      "status": "ACTIVE",
+      "studentCode": "C08TK0108"
     },
     {
       "id": "u_C08TK0109",
@@ -370,7 +392,8 @@
       "dob": "10/02/1994",
       "role": "student",
       "className": "C08TK01",
-      "status": "ACTIVE"
+      "status": "ACTIVE",
+      "studentCode": "C08TK0109"
     },
     {
       "id": "u_C08TK0110",
@@ -380,7 +403,8 @@
       "dob": "10/09/2006",
       "role": "student",
       "className": "C08TK01",
-      "status": "ACTIVE"
+      "status": "ACTIVE",
+      "studentCode": "C08TK0110"
     },
     {
       "id": "u_C08TK0111",
@@ -390,7 +414,8 @@
       "dob": "08/03/2006",
       "role": "student",
       "className": "C08TK01",
-      "status": "ACTIVE"
+      "status": "ACTIVE",
+      "studentCode": "C08TK0111"
     },
     {
       "id": "u_C08TK0112",
@@ -400,7 +425,8 @@
       "dob": "29/08/2006",
       "role": "student",
       "className": "C08TK01",
-      "status": "ACTIVE"
+      "status": "ACTIVE",
+      "studentCode": "C08TK0112"
     },
     {
       "id": "u_C08TK0113",
@@ -410,7 +436,8 @@
       "dob": "15/10/2006",
       "role": "student",
       "className": "C08TK01",
-      "status": "ACTIVE"
+      "status": "ACTIVE",
+      "studentCode": "C08TK0113"
     },
     {
       "id": "u_C08TK0114",
@@ -420,7 +447,8 @@
       "dob": "29/01/2006",
       "role": "student",
       "className": "C08TK01",
-      "status": "ACTIVE"
+      "status": "ACTIVE",
+      "studentCode": "C08TK0114"
     },
     {
       "id": "u_C08TK0115",
@@ -430,7 +458,8 @@
       "dob": "02/08/2006",
       "role": "student",
       "className": "C08TK01",
-      "status": "ACTIVE"
+      "status": "ACTIVE",
+      "studentCode": "C08TK0115"
     },
     {
       "id": "u_C08TK0117",
@@ -440,7 +469,8 @@
       "dob": "04/06/2006",
       "role": "student",
       "className": "C08TK01",
-      "status": "ACTIVE"
+      "status": "ACTIVE",
+      "studentCode": "C08TK0117"
     },
     {
       "id": "u_C08TK0118",
@@ -450,7 +480,8 @@
       "dob": "01/01/2002",
       "role": "student",
       "className": "C08TK01",
-      "status": "ACTIVE"
+      "status": "ACTIVE",
+      "studentCode": "C08TK0118"
     },
     {
       "id": "u_C08TK0119",
@@ -460,7 +491,8 @@
       "dob": "24/10/2006",
       "role": "student",
       "className": "C08TK01",
-      "status": "ACTIVE"
+      "status": "ACTIVE",
+      "studentCode": "C08TK0119"
     },
     {
       "id": "u_C08TK0120",
@@ -470,7 +502,8 @@
       "dob": "19/12/2006",
       "role": "student",
       "className": "C08TK01",
-      "status": "ACTIVE"
+      "status": "ACTIVE",
+      "studentCode": "C08TK0120"
     },
     {
       "id": "u_C08TK0123",
@@ -480,7 +513,8 @@
       "dob": "06/01/2006",
       "role": "student",
       "className": "C08TK01",
-      "status": "ACTIVE"
+      "status": "ACTIVE",
+      "studentCode": "C08TK0123"
     },
     {
       "id": "u_C08TK0124",
@@ -490,7 +524,20 @@
       "dob": "08/04/2006",
       "role": "student",
       "className": "C08TK01",
-      "status": "ACTIVE"
+      "status": "ACTIVE",
+      "studentCode": "C08TK0124"
+    },
+    {
+      "id": "u_student_T14TK0113",
+      "username": "T14TK0113",
+      "studentCode": "T14TK0113",
+      "password": "123",
+      "name": "Đặng Thụy My",
+      "dob": "20/10/2007",
+      "role": "student",
+      "className": "T14TK01",
+      "status": "ACTIVE",
+      "createdAt": "2026-11-03T03:02:25.165Z"
     }
   ],
   "classes": [
@@ -528,17 +575,6 @@
       "driveFolderId": "1xahcgOj8_Yi2X_3TI9yg8RSVbIVAaclk",
       "driveLink": "https://drive.google.com/drive/folders/1xahcgOj8_Yi2X_3TI9yg8RSVbIVAaclk",
       "createdAt": "2026-11-02T11:20:43.229Z"
-    },
-    {
-      "id": "subj_1793618863236",
-      "name": "Thiết kế catalog",
-      "className": "T14TK01",
-      "teacherId": "u_teacher_1793618741478",
-      "teacherName": "Nguyễn Công Danh",
-      "teacherEmail": "app.gioitreloduc@gmail.com",
-      "driveFolderId": "1fCkA0aAz260f3OXPMyofDogdWnhBJlQX",
-      "driveLink": "https://drive.google.com/drive/folders/1fCkA0aAz260f3OXPMyofDogdWnhBJlQX",
-      "createdAt": "2026-11-02T11:27:43.236Z"
     },
     {
       "id": "subj_1793620227358",
