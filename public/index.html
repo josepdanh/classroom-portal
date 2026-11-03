@@ -894,6 +894,11 @@
             <button id="btn-viewer-google" type="button" onclick="switchOfficeViewer('google')" class="px-2.5 py-1 rounded-lg font-medium transition text-slate-300 hover:text-white">Google Docs</button>
           </div>
 
+          <!-- Mở Photopea toàn màn hình (cho PSD, AI, INDD, CDR, Ảnh...) -->
+          <a id="btn-preview-photopea" href="#" target="_blank" class="hidden px-2.5 py-1.5 rounded-xl bg-violet-600 hover:bg-violet-700 text-white text-xs font-semibold shadow-xs transition items-center gap-1.5" title="Mở trong Photopea toàn màn hình">
+            <i class="fa-solid fa-wand-magic-sparkles text-amber-300"></i> <span class="hidden sm:inline">Photopea Studio</span>
+          </a>
+
           <!-- Tải xuống -->
           <a id="btn-preview-download" href="#" class="px-3 py-1.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-semibold shadow-xs transition flex items-center gap-1.5" title="Tải file về máy">
             <i class="fa-solid fa-download"></i> <span class="hidden sm:inline">Tải về</span>
@@ -1211,7 +1216,7 @@
       size: 0
     };
 
-    async function previewFile(filename, originalName, size = 0) {
+    async function previewFile(filename, originalName, size = 0, customUrl = null) {
       if (!filename) return;
 
       currentPreviewState = { filename, originalName: originalName || filename, size };
@@ -1221,7 +1226,7 @@
       document.getElementById('preview-file-size').textContent = size ? formatBytes(size) : '';
 
       const downloadUrl = `/api/download/${filename}?name=${encodeURIComponent(originalName || filename)}`;
-      const rawUrl = `/api/raw-file/${filename}`;
+      const rawUrl = customUrl || `/api/raw-file/${filename}`;
 
       document.getElementById('btn-preview-download').href = downloadUrl;
       document.getElementById('btn-preview-newtab').href = rawUrl;
@@ -1246,8 +1251,34 @@
       const ext = (originalName || filename).split('.').pop().toLowerCase();
       setPreviewFileIcon(ext);
 
-      // 1. Ảnh (PNG, JPG, JPEG, GIF, WEBP, SVG)
-      if (['png', 'jpg', 'jpeg', 'gif', 'webp', 'svg', 'bmp'].includes(ext)) {
+      // Cấu hình nút Photopea Studio toàn màn hình
+      let fileAbsoluteUrl = rawUrl;
+      if (!fileAbsoluteUrl.startsWith('http')) {
+        fileAbsoluteUrl = window.location.origin + fileAbsoluteUrl;
+      }
+      const photopeaUrl = `https://www.photopea.com#` + encodeURIComponent(JSON.stringify({ files: [fileAbsoluteUrl] }));
+      const btnPhotopea = document.getElementById('btn-preview-photopea');
+      if (btnPhotopea) {
+        btnPhotopea.href = photopeaUrl;
+        if (['psd', 'ai', 'indd', 'idml', 'cdr', 'sketch', 'xd', 'fig', 'eps', 'png', 'jpg', 'jpeg', 'webp', 'svg', 'tiff', 'tif'].includes(ext)) {
+          btnPhotopea.classList.remove('hidden');
+          btnPhotopea.classList.add('flex');
+        } else {
+          btnPhotopea.classList.add('hidden');
+          btnPhotopea.classList.remove('flex');
+        }
+      }
+
+      // 1. File đồ họa chuyên nghiệp (PSD, AI, INDD, IDML, CDR, SKETCH, XD, EPS, TIFF) -> Mở trực tiếp bằng Photopea Web
+      if (['psd', 'ai', 'indd', 'idml', 'cdr', 'sketch', 'xd', 'eps', 'tiff', 'tif'].includes(ext)) {
+        document.getElementById('preview-file-subtitle').textContent = `Trình xem đồ họa chuyên sâu Photopea (Đọc Layer, Vector, Hệ màu, Font)`;
+        const iframe = document.getElementById('preview-iframe');
+        iframe.src = photopeaUrl;
+        iframe.classList.remove('hidden');
+      }
+      // 2. Ảnh thông thường (PNG, JPG, JPEG, GIF, WEBP, SVG)
+      else if (['png', 'jpg', 'jpeg', 'gif', 'webp', 'svg', 'bmp'].includes(ext)) {
+        document.getElementById('preview-file-subtitle').textContent = `Trình xem ảnh trực tiếp`;
         const imgBox = document.getElementById('preview-image-box');
         const img = document.getElementById('preview-image');
         img.src = rawUrl;
@@ -1257,16 +1288,18 @@
         };
         img.onerror = () => showPreviewFallback();
       }
-      // 2. Video (MP4, WEBM, MOV)
+      // 3. Video (MP4, WEBM, MOV)
       else if (['mp4', 'webm', 'ogg', 'mov'].includes(ext)) {
+        document.getElementById('preview-file-subtitle').textContent = `Trình phát video`;
         const vidBox = document.getElementById('preview-video-box');
         const vid = document.getElementById('preview-video');
         vid.src = rawUrl;
         document.getElementById('preview-loading').classList.add('hidden');
         vidBox.classList.remove('hidden');
       }
-      // 3. Âm thanh (MP3, WAV, M4A)
+      // 4. Âm thanh (MP3, WAV, M4A)
       else if (['mp3', 'wav', 'm4a', 'aac', 'ogg'].includes(ext)) {
+        document.getElementById('preview-file-subtitle').textContent = `Trình phát âm thanh`;
         const audBox = document.getElementById('preview-audio-box');
         const aud = document.getElementById('preview-audio');
         document.getElementById('preview-audio-name').textContent = originalName || filename;
@@ -1274,20 +1307,23 @@
         document.getElementById('preview-loading').classList.add('hidden');
         audBox.classList.remove('hidden');
       }
-      // 4. File PDF (Trình xem PDF tích hợp của trình duyệt cực chuẩn)
+      // 5. File PDF (Trình xem PDF tích hợp của trình duyệt cực chuẩn)
       else if (ext === 'pdf') {
+        document.getElementById('preview-file-subtitle').textContent = `Tài liệu PDF`;
         const iframe = document.getElementById('preview-iframe');
         iframe.src = rawUrl;
         iframe.classList.remove('hidden');
       }
-      // 5. Tài liệu Office (PowerPoint PPTX, Word DOCX, Excel XLSX)
+      // 6. Tài liệu Office (PowerPoint PPTX, Word DOCX, Excel XLSX)
       else if (['pptx', 'ppt', 'docx', 'doc', 'xlsx', 'xls'].includes(ext)) {
+        document.getElementById('preview-file-subtitle').textContent = `Tài liệu văn phòng`;
         document.getElementById('preview-office-switcher').classList.remove('hidden');
         document.getElementById('preview-office-switcher').classList.add('flex');
         switchOfficeViewer('ms'); // Mặc định mở bằng Microsoft Office Viewer
       }
-      // 6. Mã nguồn & Văn bản (Python, C++, JS, HTML, CSS, JSON, TXT, MD...)
+      // 7. Mã nguồn & Văn bản (Python, C++, JS, HTML, CSS, JSON, TXT, MD...)
       else if (['txt', 'py', 'js', 'json', 'html', 'css', 'cpp', 'c', 'h', 'java', 'sql', 'sh', 'md', 'xml', 'log'].includes(ext)) {
+        document.getElementById('preview-file-subtitle').textContent = `Mã nguồn / Văn bản`;
         try {
           const res = await fetch(`/api/file-text/${filename}`);
           const data = await res.json();
@@ -1304,7 +1340,7 @@
           showPreviewFallback();
         }
       }
-      // 7. Định dạng khác (ZIP, RAR...)
+      // 8. Định dạng khác (ZIP, RAR...)
       else {
         showPreviewFallback();
       }
@@ -1390,7 +1426,19 @@
       let iconHtml = '<i class="fa-solid fa-file"></i>';
       let color = 'text-indigo-400';
 
-      if (['pptx', 'ppt'].includes(ext)) {
+      if (ext === 'psd') {
+        iconHtml = '<span class="font-extrabold text-sm tracking-tight text-blue-400">Ps</span>';
+        color = 'bg-blue-950/80 border border-blue-500/40';
+      } else if (ext === 'ai') {
+        iconHtml = '<span class="font-extrabold text-sm tracking-tight text-amber-400">Ai</span>';
+        color = 'bg-amber-950/80 border border-amber-500/40';
+      } else if (['indd', 'idml'].includes(ext)) {
+        iconHtml = '<span class="font-extrabold text-sm tracking-tight text-pink-400">Id</span>';
+        color = 'bg-pink-950/80 border border-pink-500/40';
+      } else if (ext === 'cdr') {
+        iconHtml = '<span class="font-extrabold text-xs tracking-tight text-emerald-400">CDR</span>';
+        color = 'bg-emerald-950/80 border border-emerald-500/40';
+      } else if (['pptx', 'ppt'].includes(ext)) {
         iconHtml = '<i class="fa-solid fa-file-powerpoint"></i>';
         color = 'text-orange-500';
       } else if (['docx', 'doc'].includes(ext)) {
@@ -2467,7 +2515,7 @@
                 <span><i class="fa-regular fa-clock mr-1 text-slate-400"></i>Hạn nộp: <b class="text-slate-700">${dueText}</b></span>
                 ${asm.attachment ? `
                   <div class="inline-flex items-center gap-2">
-                    <button type="button" onclick="previewFile('${asm.attachment.filename}', '${escapeHtml(asm.attachment.originalName)}', ${asm.attachment.size || 0})" class="text-indigo-600 hover:text-indigo-800 font-medium inline-flex items-center gap-1 hover:underline">
+                    <button type="button" onclick="previewFile('${asm.attachment.filename}', '${escapeHtml(asm.attachment.originalName)}', ${asm.attachment.size || 0}, '${asm.attachment.url || ''}')" class="text-indigo-600 hover:text-indigo-800 font-medium inline-flex items-center gap-1 hover:underline">
                       <i class="fa-solid fa-eye"></i> Đề bài: ${escapeHtml(asm.attachment.originalName)}
                     </button>
                     <a href="/api/download/${asm.attachment.filename}?name=${encodeURIComponent(asm.attachment.originalName)}" class="text-slate-400 hover:text-indigo-600" title="Tải về máy">
@@ -2632,16 +2680,24 @@
 
             const parts = [];
             if (sub.content) parts.push(`<span class="text-slate-600 truncate block max-w-xs" title="${escapeHtml(sub.content)}">"${escapeHtml(sub.content)}"</span>`);
-            if (sub.file) parts.push(`
-              <div class="flex items-center gap-1.5 flex-wrap mt-0.5">
-                <button type="button" onclick="previewFile('${sub.file.filename}', '${escapeHtml(sub.file.originalName)}', ${sub.file.size || 0})" class="px-2 py-0.5 bg-indigo-50 hover:bg-indigo-100 text-indigo-700 font-semibold rounded text-xs transition inline-flex items-center gap-1 border border-indigo-200 shadow-xs">
-                  <i class="fa-solid fa-eye"></i> Xem trực tiếp
-                </button>
-                <a href="/api/download/${sub.file.filename}?name=${encodeURIComponent(sub.file.originalName)}" class="text-slate-500 hover:text-indigo-600 font-medium hover:underline inline-flex items-center gap-1 text-xs" title="Tải về máy">
-                  <i class="fa-solid fa-download"></i> ${escapeHtml(sub.file.originalName)}
-                </a>
-              </div>
-            `);
+            if (sub.file) {
+              const fileExt = (sub.file.originalName || sub.file.filename || '').split('.').pop().toLowerCase();
+              const isGraphic = ['psd', 'ai', 'indd', 'idml', 'cdr', 'sketch', 'xd', 'fig', 'eps'].includes(fileExt);
+              const viewBtnText = isGraphic ? 'Mở Photopea' : 'Xem trực tiếp';
+              const viewBtnIcon = isGraphic ? 'fa-wand-magic-sparkles text-amber-500' : 'fa-eye';
+              const viewBtnBg = isGraphic ? 'bg-violet-50 hover:bg-violet-100 text-violet-800 border-violet-300' : 'bg-indigo-50 hover:bg-indigo-100 text-indigo-700 border-indigo-200';
+
+              parts.push(`
+                <div class="flex items-center gap-1.5 flex-wrap mt-0.5">
+                  <button type="button" onclick="previewFile('${sub.file.filename}', '${escapeHtml(sub.file.originalName)}', ${sub.file.size || 0}, '${sub.file.url || ''}')" class="px-2 py-0.5 ${viewBtnBg} font-semibold rounded text-xs transition inline-flex items-center gap-1 border shadow-xs" title="Xem trực tiếp trên web">
+                    <i class="fa-solid ${viewBtnIcon}"></i> ${viewBtnText}
+                  </button>
+                  <a href="/api/download/${sub.file.filename}?name=${encodeURIComponent(sub.file.originalName)}" class="text-slate-500 hover:text-indigo-600 font-medium hover:underline inline-flex items-center gap-1 text-xs" title="Tải về máy">
+                    <i class="fa-solid fa-download"></i> ${escapeHtml(sub.file.originalName)}
+                  </a>
+                </div>
+              `);
+            }
             if (sub.link) parts.push(`<a href="${escapeHtml(sub.link)}" target="_blank" class="text-teal-600 hover:underline inline-flex items-center gap-1 text-xs"><i class="fa-solid fa-arrow-up-right-from-square"></i> Liên kết</a>`);
             
             submissionInfo = parts.join('') || '<span class="text-slate-400">Không có tệp/văn bản</span>';
@@ -2831,7 +2887,10 @@
         fileNameElem.textContent = `${sub.file.originalName} (${formatBytes(sub.file.size)})`;
         const btnPreview = document.getElementById('btn-single-grade-preview');
         if (btnPreview) {
-          btnPreview.onclick = () => previewFile(sub.file.filename, sub.file.originalName, sub.file.size);
+          const fileExt = (sub.file.originalName || sub.file.filename || '').split('.').pop().toLowerCase();
+          const isGraphic = ['psd', 'ai', 'indd', 'idml', 'cdr', 'sketch', 'xd', 'fig', 'eps'].includes(fileExt);
+          btnPreview.innerHTML = isGraphic ? '<i class="fa-solid fa-wand-magic-sparkles text-amber-300"></i> Mở Photopea' : '<i class="fa-solid fa-eye"></i> Xem trước';
+          btnPreview.onclick = () => previewFile(sub.file.filename, sub.file.originalName, sub.file.size, sub.file.url);
         }
       } else {
         fileBox.classList.add('hidden');
@@ -3381,7 +3440,7 @@
 
             ${asm.attachment ? `
               <div class="mb-4 flex items-center gap-2 flex-wrap">
-                <button type="button" onclick="previewFile('${asm.attachment.filename}', '${escapeHtml(asm.attachment.originalName)}', ${asm.attachment.size || 0})" class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-indigo-50 hover:bg-indigo-100 border border-indigo-200 text-xs font-semibold text-indigo-700 transition">
+                <button type="button" onclick="previewFile('${asm.attachment.filename}', '${escapeHtml(asm.attachment.originalName)}', ${asm.attachment.size || 0}, '${asm.attachment.url || ''}')" class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-indigo-50 hover:bg-indigo-100 border border-indigo-200 text-xs font-semibold text-indigo-700 transition">
                   <i class="fa-solid fa-eye text-indigo-500"></i> Xem đề bài: ${escapeHtml(asm.attachment.originalName)} (${formatBytes(asm.attachment.size)})
                 </button>
                 <a href="/api/download/${asm.attachment.filename}?name=${encodeURIComponent(asm.attachment.originalName)}" class="p-1.5 rounded-xl border border-slate-200 text-slate-500 hover:text-indigo-600 hover:bg-slate-50 text-xs transition" title="Tải đề bài về máy">
@@ -3390,22 +3449,30 @@
               </div>
             ` : ''}
 
-            ${sub && sub.file ? `
-              <div class="mb-3 p-3 bg-slate-50 border border-slate-200 rounded-xl flex items-center justify-between gap-3 flex-wrap">
-                <div class="flex items-center gap-2 text-xs text-slate-700">
-                  <i class="fa-solid fa-file-lines text-indigo-500"></i>
-                  <span>Bài làm đã nộp: <b>${escapeHtml(sub.file.originalName)}</b> (${formatBytes(sub.file.size)})</span>
+            ${(() => {
+              if (!sub || !sub.file) return '';
+              const sExt = (sub.file.originalName || sub.file.filename || '').split('.').pop().toLowerCase();
+              const isG = ['psd', 'ai', 'indd', 'idml', 'cdr', 'sketch', 'xd', 'fig', 'eps'].includes(sExt);
+              const bText = isG ? 'Mở Photopea' : 'Xem bài nộp';
+              const bIcon = isG ? 'fa-wand-magic-sparkles text-amber-500' : 'fa-eye';
+              const bBg = isG ? 'bg-violet-50 hover:bg-violet-100 text-violet-700 border-violet-200' : 'bg-indigo-50 hover:bg-indigo-100 text-indigo-700 border-indigo-200';
+              return `
+                <div class="mb-3 p-3 bg-slate-50 border border-slate-200 rounded-xl flex items-center justify-between gap-3 flex-wrap">
+                  <div class="flex items-center gap-2 text-xs text-slate-700">
+                    <i class="fa-solid fa-file-lines text-indigo-500"></i>
+                    <span>Bài làm đã nộp: <b>${escapeHtml(sub.file.originalName)}</b> (${formatBytes(sub.file.size)})</span>
+                  </div>
+                  <div class="flex items-center gap-2">
+                    <button type="button" onclick="previewFile('${sub.file.filename}', '${escapeHtml(sub.file.originalName)}', ${sub.file.size || 0}, '${sub.file.url || ''}')" class="px-2.5 py-1 ${bBg} font-semibold rounded-lg text-xs transition inline-flex items-center gap-1 border">
+                      <i class="fa-solid ${bIcon}"></i> ${bText}
+                    </button>
+                    <a href="/api/download/${sub.file.filename}?name=${encodeURIComponent(sub.file.originalName)}" class="px-2.5 py-1 bg-white hover:bg-slate-100 text-slate-600 font-semibold rounded-lg text-xs transition inline-flex items-center gap-1 border border-slate-200">
+                      <i class="fa-solid fa-download"></i> Tải về
+                    </a>
+                  </div>
                 </div>
-                <div class="flex items-center gap-2">
-                  <button type="button" onclick="previewFile('${sub.file.filename}', '${escapeHtml(sub.file.originalName)}', ${sub.file.size || 0})" class="px-2.5 py-1 bg-indigo-50 hover:bg-indigo-100 text-indigo-700 font-semibold rounded-lg text-xs transition inline-flex items-center gap-1 border border-indigo-200">
-                    <i class="fa-solid fa-eye"></i> Xem bài nộp
-                  </button>
-                  <a href="/api/download/${sub.file.filename}?name=${encodeURIComponent(sub.file.originalName)}" class="px-2.5 py-1 bg-white hover:bg-slate-100 text-slate-600 font-semibold rounded-lg text-xs transition inline-flex items-center gap-1 border border-slate-200">
-                    <i class="fa-solid fa-download"></i> Tải về
-                  </a>
-                </div>
-              </div>
-            ` : ''}
+              `;
+            })()}
 
             ${feedbackArea}
 
