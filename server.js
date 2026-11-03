@@ -215,6 +215,13 @@ async function initMongoConnection() {
     mongoStatus = 'ERROR';
     lastMongoError = err.message;
     console.error('[MongoDB Atlas Lỗi]:', err.message);
+    // Tự động thử kết nối lại sau 30 giây nếu bị từ chối IP hoặc lỗi mạng
+    setTimeout(() => {
+      if (!mongoDbCollection) {
+        console.log('[MongoDB Atlas] Đang tự động thử kết nối lại...');
+        initMongoConnection();
+      }
+    }, 30000);
   }
 }
 
