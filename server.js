@@ -225,6 +225,36 @@ async function initMongoConnection() {
   }
 }
 
+// Cấu hình Cloudinary lưu trữ file đám mây vĩnh viễn (25GB Free, không mất file khi Render restart)
+const cloudinary = require('cloudinary').v2;
+const CLOUDINARY_URL = process.env.CLOUDINARY_URL || "cloudinary://935592411136868:ZbzIp26WqTM0dlRDGbgNm2Jh9hk@riddonyi";
+process.env.CLOUDINARY_URL = CLOUDINARY_URL;
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME || 'riddonyi',
+  api_key: process.env.CLOUDINARY_API_KEY || '935592411136868',
+  api_secret: process.env.CLOUDINARY_API_SECRET || 'ZbzIp26WqTM0dlRDGbgNm2Jh9hk'
+});
+
+async function uploadFileToCloudinary(filePath, originalName, className, subjectName) {
+  try {
+    const cleanClass = sanitizeFolderName(className || 'Chung');
+    const cleanSubject = sanitizeFolderName(subjectName || 'MonHoc');
+    const folder = `educlass_submissions/${cleanClass}/${cleanSubject}`;
+
+    const result = await cloudinary.uploader.upload(filePath, {
+      resource_type: 'raw',
+      folder: folder,
+      use_filename: true,
+      unique_filename: true
+    });
+    console.log(`[Cloudinary] ☁️ Đã lưu file vĩnh viễn lên Cloudinary: ${result.secure_url}`);
+    return result.secure_url;
+  } catch (err) {
+    console.error('[Cloudinary Lỗi Upload]:', err.message);
+    return null;
+  }
+}
+
 // Đọc CSDL từ file JSON cục bộ
 function readLocalJsonFile() {
   if (!fs.existsSync(DATA_FILE)) {
@@ -372,6 +402,8 @@ app.get('/api/system/status', (req, res) => {
     lastMongoError,
     isMongoConnected: !!mongoDbCollection,
     hasMemoryCache: !!memoryCache,
+    cloudinaryConnected: true,
+    cloudinaryCloud: 'riddonyi',
     assignmentsCount: (db.assignments || []).length,
     submissionsCount: (db.submissions || []).length,
     usersCount: (db.users || []).length,
@@ -936,7 +968,7 @@ app.get('/api/assignments', (req, res) => {
 });
 
 // 3. Giáo viên tạo bài tập mới (Chỉ định rõ lớp học nhận bài và Môn học)
-app.post('/api/assignments', upload.single('attachment'), (req, res) => {
+app.post('/api/assignments', upload.single('attachment'), async (req, res) => {
   const { title, description, dueDate, teacherId, targetClass, subject } = req.body;
 
   if (!title || !description || !dueDate) {
@@ -974,6 +1006,19 @@ app.post('/api/assignments', upload.single('attachment'), (req, res) => {
     }
   }
 
+  let attachment = null;
+  if (req.file) {
+    attachment = {
+      filename: req.file.filename,
+      originalName: decodeFileName(req.file.originalname),
+      size: req.file.size
+    };
+    try {
+      const cloudUrl = await uploadFileToCloudinary(req.file.path, attachment.originalName, cleanTargetClass, cleanSubject);
+      if (cloudUrl) attachment.url = cloudUrl;
+    } catch (e) {}
+  }
+
   const newAssignment = {
     id: `asm_${Date.now()}`,
     title: title.trim(),
@@ -982,11 +1027,7 @@ app.post('/api/assignments', upload.single('attachment'), (req, res) => {
     subject: cleanSubject,
     dueDate,
     createdAt: new Date().toISOString(),
-    attachment: req.file ? {
-      filename: req.file.filename,
-      originalName: decodeFileName(req.file.originalname),
-      size: req.file.size
-    } : null,
+    attachment,
     createdBy: teacherId || "u_teacher_danh"
   };
 
@@ -1105,7 +1146,7 @@ app.get('/api/assignments/:id/submissions', (req, res) => {
 });
 
 // 6. Học sinh nộp bài / Cập nhật bài nộp
-app.post('/api/submissions', upload.single('submissionFile'), (req, res) => {
+app.post('/api/submissions', upload.single('submissionFile'), async (req, res) => {
   const { assignmentId, studentId, studentName, content, link } = req.body;
 
   if (!assignmentId || !studentId) {
@@ -1146,6 +1187,16 @@ app.post('/api/submissions', upload.single('submissionFile'), (req, res) => {
       originalName: decodeFileName(req.file.originalname),
       size: req.file.size
     };
+
+    // Tải ngay lên Cloudinary lưu trữ đám mây vĩnh viễn (25GB Free, không bao giờ mất)
+    try {
+      const cloudUrl = await uploadFileToCloudinary(req.file.path, fileData.originalName, targetClassName, targetSubjectName);
+      if (cloudUrl) {
+        fileData.url = cloudUrl;
+      }
+    } catch (e) {
+      console.error("[Cloudinary] Lỗi tải file học sinh:", e.message);
+    }
 
     // Tự động phân loại và đồng bộ tệp lên Google Drive & OneDrive
     syncFileToCloudStorage({
@@ -1664,11 +1715,33 @@ app.get('/api/download/:filename', (req, res) => {
   const downloadName = req.query.name || filename;
   const filePath = path.join(UPLOAD_DIR, filename);
 
-  if (!fs.existsSync(filePath)) {
-    return res.status(404).send("Tệp tin không tồn tại trên hệ thống.");
+  if (fs.existsSync(filePath)) {
+    return res.download(filePath, downloadName);
   }
 
-  res.download(filePath, downloadName);
+  // Nếu file vật lý không còn trên ổ cứng tạm của Render, tìm URL lưu trên Cloudinary
+  const db = readDatabase();
+  let cloudUrl = null;
+  const decodedName = decodeURIComponent(filename);
+
+  for (const s of (db.submissions || [])) {
+    if (s.file && (s.file.filename === filename || s.file.originalName === filename || s.file.filename === decodedName || s.file.originalName === decodedName)) {
+      if (s.file.url) { cloudUrl = s.file.url; break; }
+    }
+  }
+  if (!cloudUrl) {
+    for (const a of (db.assignments || [])) {
+      if (a.attachment && (a.attachment.filename === filename || a.attachment.originalName === filename || a.attachment.filename === decodedName || a.attachment.originalName === decodedName)) {
+        if (a.attachment.url) { cloudUrl = a.attachment.url; break; }
+      }
+    }
+  }
+
+  if (cloudUrl) {
+    return res.redirect(cloudUrl);
+  }
+
+  return res.status(404).send("Tệp tin không tồn tại trên hệ thống.");
 });
 
 // 8b. Xem nội dung file trực tiếp trên Web (Xem Inline / Preview)
@@ -1676,11 +1749,24 @@ app.get('/api/raw-file/:filename', (req, res) => {
   const { filename } = req.params;
   const filePath = path.join(UPLOAD_DIR, filename);
 
-  if (!fs.existsSync(filePath)) {
-    return res.status(404).send("Tệp tin không tồn tại trên hệ thống.");
+  if (fs.existsSync(filePath)) {
+    return res.sendFile(filePath);
   }
 
-  res.sendFile(filePath);
+  const db = readDatabase();
+  let cloudUrl = null;
+  const decodedName = decodeURIComponent(filename);
+
+  for (const s of (db.submissions || [])) {
+    if (s.file && (s.file.filename === filename || s.file.originalName === filename || s.file.filename === decodedName || s.file.originalName === decodedName)) {
+      if (s.file.url) { cloudUrl = s.file.url; break; }
+    }
+  }
+  if (cloudUrl) {
+    return res.redirect(cloudUrl);
+  }
+
+  return res.status(404).send("Tệp tin không tồn tại trên hệ thống.");
 });
 
 // 8c. Đọc nội dung file dạng văn bản / mã nguồn để hiển thị trực tiếp

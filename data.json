@@ -731,7 +731,8 @@
       "file": {
         "filename": "1793615179843_C08TK0105_NguyenDucHieu.pptx",
         "originalName": "C08TK0105_NguyenDucHieu.pptx",
-        "size": 1266912
+        "size": 1266912,
+        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1793691370/educlass_submissions/C08TK01/1793615179843_C08TK0105_NguyenDucHieu_z61ljz.pptx"
       },
       "submittedAt": "2026-11-02T10:26:20.091Z",
       "grade": 9.5,
@@ -748,7 +749,8 @@
       "file": {
         "filename": "catalog.indd",
         "originalName": "catalog.indd",
-        "size": 7421952
+        "size": 7421952,
+        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1793691394/educlass_submissions/T14TK01/1793677316388_bai_catalog_gom_vs1_k98ahf.indd"
       },
       "submittedAt": "2026-11-03T03:45:00.000Z",
       "grade": null,
@@ -819,7 +821,7 @@
       "feedback": null
     }
   ],
-  "updatedAt": "2026-11-03T06:54:35.507Z",
+  "updatedAt": "2026-11-03T07:37:59.725Z",
   "users": [
     {
       "id": "u_teacher_danh",

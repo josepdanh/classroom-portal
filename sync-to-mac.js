@@ -127,18 +127,18 @@ async function startSync() {
       fs.mkdirSync(primaryFolder, { recursive: true });
     }
 
-    if (sub.file && sub.file.filename) {
+    if (sub.file && (sub.file.filename || sub.file.url)) {
       const formattedFileName = `${prefix}_${sanitizeName(sub.file.originalName)}`;
       const targetFilePath = path.join(primaryFolder, formattedFileName);
-      const downloadUrl = `${activeUrl}/api/download/${encodeURIComponent(sub.file.filename)}?name=${encodeURIComponent(sub.file.originalName)}`;
+      const downloadUrl = sub.file.url || `${activeUrl}/api/download/${encodeURIComponent(sub.file.filename)}?name=${encodeURIComponent(sub.file.originalName)}`;
 
       if (fs.existsSync(targetFilePath) && fs.statSync(targetFilePath).size > 0) {
         console.log(`  ✓ Đã có sẵn: [${className}/${subjectName}] ${formattedFileName}`);
         existingCount++;
       } else {
         // 1. Kiểm tra trước trong thư mục uploads cục bộ trên máy Mac
-        const localUploadPath = path.join(PROJECT_UPLOADS_DIR, sub.file.filename);
-        if (fs.existsSync(localUploadPath) && fs.statSync(localUploadPath).size > 0) {
+        const localUploadPath = sub.file.filename ? path.join(PROJECT_UPLOADS_DIR, sub.file.filename) : null;
+        if (localUploadPath && fs.existsSync(localUploadPath) && fs.statSync(localUploadPath).size > 0) {
           try {
             fs.copyFileSync(localUploadPath, targetFilePath);
             console.log(`  💾 Đã đồng bộ từ bản lưu trên máy Mac: [${className}/${subjectName}] ${formattedFileName}`);
@@ -147,15 +147,18 @@ async function startSync() {
           } catch (e) {}
         }
 
-        // 2. Tải từ máy chủ từ xa
+        // 2. Tải từ máy chủ từ xa hoặc Cloudinary
         try {
-          process.stdout.write(`  ⬇️ Đang tải từ máy chủ: [${className}/${subjectName}] ${formattedFileName}... `);
+          const sourceDesc = sub.file.url ? 'Cloudinary CDN' : 'máy chủ';
+          process.stdout.write(`  ⬇️ Đang tải từ ${sourceDesc}: [${className}/${subjectName}] ${formattedFileName}... `);
           await downloadFile(downloadUrl, targetFilePath);
 
           // Lưu bản sao vào uploads cục bộ của dự án
-          try {
-            fs.copyFileSync(targetFilePath, localUploadPath);
-          } catch (e) {}
+          if (localUploadPath) {
+            try {
+              fs.copyFileSync(targetFilePath, localUploadPath);
+            } catch (e) {}
+          }
 
           console.log('✅ Xong');
           downloadedCount++;
