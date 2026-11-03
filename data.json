@@ -675,7 +675,22 @@
       "updatedAt": "2026-11-02T16:17:59.693Z"
     }
   ],
-  "notifications": [],
+  "notifications": [
+    {
+      "id": "notif_sub_1793719571166_4yeq",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793677200000",
+      "assignmentTitle": "Thiết kế Catalog 16 trang về chủ đề bất kỳ",
+      "targetClass": "T14TK01",
+      "subject": "Thiết Kế Catalog",
+      "studentId": "u_T14TK0101",
+      "studentName": "Lê Thị Vân Anh",
+      "studentCode": "T14TK0101",
+      "submittedAt": "2026-11-03T15:26:11.166Z",
+      "createdAt": "2026-11-03T15:26:11.166Z",
+      "readBy": []
+    }
+  ],
   "subjects": [
     {
       "id": "subj_1793620227358",
@@ -729,9 +744,9 @@
         "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1793691370/educlass_submissions/C08TK01/1793615179843_C08TK0105_NguyenDucHieu_z61ljz.pptx"
       },
       "submittedAt": "2026-11-02T10:26:20.091Z",
-      "grade": 9.5,
+      "grade": 9,
       "feedback": "Làm slide chuyển động rất tốt",
-      "gradedAt": "2026-11-02T15:51:45.343Z"
+      "gradedAt": "2026-11-03T15:14:26.046Z"
     },
     {
       "id": "sub_restored_1793688874436_0",
@@ -837,14 +852,14 @@
       "assignmentId": "asm_1793677200000",
       "studentId": "u_T14TK0101",
       "studentName": "Lê Thị Vân Anh",
-      "content": "nộp bài lần 1",
+      "content": "Kiểm tra ghi nhận dấu thời gian nộp bài",
       "link": "",
       "file": {
         "filename": "1793693823311_T14TK0101_LETHIVANANH.indd",
         "originalName": "T14TK0101-LETHIVANANH.indd",
         "size": 16875520
       },
-      "submittedAt": "2026-11-03T08:17:06.570Z",
+      "submittedAt": "2026-11-03T15:26:11.166Z",
       "grade": null,
       "feedback": null,
       "gradedAt": null
@@ -991,9 +1006,306 @@
       "grade": null,
       "feedback": null,
       "gradedAt": null
+    },
+    {
+      "id": "sub_1793708017092",
+      "assignmentId": "asm_1793609039129",
+      "studentId": "u_C08TK0106",
+      "studentName": "Đỗ Ngọc Khuê",
+      "content": "",
+      "link": "",
+      "file": {
+        "filename": "1793708018069_C08TK0106.pptx",
+        "originalName": "C08TK0106.pptx",
+        "size": 1439477,
+        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1793708018/educlass_submissions/C08TK01/X%E1%BB%AD%20L%C3%BD%20K%E1%BB%B9%20X%E1%BA%A3o%20v%E1%BB%9Bi%20After%20Effects/1793708018069_C08TK0106_dqneqy.pptx"
+      },
+      "submittedAt": "2026-11-03T12:13:39.320Z",
+      "grade": 8,
+      "feedback": "",
+      "gradedAt": "2026-11-03T15:14:26.046Z"
+    },
+    {
+      "id": "sub_1793708018157",
+      "assignmentId": "asm_1793609039129",
+      "studentId": "u_C08TK0106",
+      "studentName": "Đỗ Ngọc Khuê",
+      "content": "",
+      "link": "",
+      "file": {
+        "filename": "1793708016694_C08TK0106.pptx",
+        "originalName": "C08TK0106.pptx",
+        "size": 1439477,
+        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1793708017/educlass_submissions/C08TK01/X%E1%BB%AD%20L%C3%BD%20K%E1%BB%B9%20X%E1%BA%A3o%20v%E1%BB%9Bi%20After%20Effects/1793708016694_C08TK0106_j4w2rv.pptx"
+      },
+      "submittedAt": "2026-11-03T12:13:38.157Z",
+      "grade": null,
+      "feedback": null,
+      "gradedAt": null
+    },
+    {
+      "id": "sub_1793708457881",
+      "assignmentId": "asm_1793677200000",
+      "studentId": "u_T14TK0119",
+      "studentName": "Đặng Quang Minh",
+      "content": "Bài của Đặng Quang Minh TK14TK0119\r\nChủ đề là sản phẩm trò chơi Persona của Atlus (bản vật lý) \r\n(Thông tin được sử dụng trong websibe https://persona.atlus.com/series/portal/uk/ )",
+      "link": "",
+      "file": {
+        "filename": "1793708537668_PERSONA__ALL_.pdf",
+        "originalName": "PERSONA (ALL).pdf",
+        "size": 6773052,
+        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1793708540/educlass_submissions/T14TK01/Thi%E1%BA%BFt%20K%E1%BA%BF%20Catalog/1793708537668_PERSONA__ALL__w8vja0.pdf"
+      },
+      "submittedAt": "2026-11-03T12:22:20.499Z",
+      "grade": null,
+      "feedback": null,
+      "gradedAt": null
+    },
+    {
+      "id": "sub_1793714714494",
+      "assignmentId": "asm_1793609039129",
+      "studentId": "u_C08TK0111",
+      "studentName": "Đoàn Thị Thúy",
+      "content": "BÀI TẬP",
+      "link": "",
+      "file": {
+        "filename": "1793714714365_10_Nguyên_Tắc_Thiết_Kế_Trong_Animation.pptx",
+        "originalName": "10 Nguyên Tắc Thiết Kế Trong Animation.pptx",
+        "size": 1386959,
+        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1793714715/educlass_submissions/C08TK01/X%E1%BB%AD%20L%C3%BD%20K%E1%BB%B9%20X%E1%BA%A3o%20v%E1%BB%9Bi%20After%20Effects/d4rrfksgwqa7dbdzt9u1"
+      },
+      "submittedAt": "2026-11-03T14:05:16.248Z",
+      "grade": 8,
+      "feedback": "",
+      "gradedAt": "2026-11-03T15:14:26.046Z"
+    },
+    {
+      "id": "sub_1793718352407",
+      "assignmentId": "asm_1793609039129",
+      "studentId": "u_C08TK0108",
+      "studentName": "Lương Ngọc Nhi",
+      "content": "",
+      "link": "",
+      "file": {
+        "filename": "1793718349818_Bao_cao.rar",
+        "originalName": "Bao cao.rar",
+        "size": 13816811
+      },
+      "submittedAt": "2026-11-03T15:05:52.407Z",
+      "grade": 8,
+      "feedback": "",
+      "gradedAt": "2026-11-03T15:14:26.046Z"
+    },
+    {
+      "id": "sub_1793718866046_flxoz",
+      "assignmentId": "asm_1793609039129",
+      "studentId": "u_C08TK0101",
+      "studentName": "Nguyễn Doãn Lê Anh",
+      "content": "",
+      "link": "",
+      "file": null,
+      "submittedAt": "2026-11-03T15:14:26.046Z",
+      "grade": null,
+      "feedback": "",
+      "gradedAt": "2026-11-03T15:14:26.046Z"
+    },
+    {
+      "id": "sub_1793718866046_5wkop",
+      "assignmentId": "asm_1793609039129",
+      "studentId": "u_C08TK0102",
+      "studentName": "Nguyễn Thị Duyên",
+      "content": "",
+      "link": "",
+      "file": null,
+      "submittedAt": "2026-11-03T15:14:26.046Z",
+      "grade": null,
+      "feedback": "",
+      "gradedAt": "2026-11-03T15:14:26.046Z"
+    },
+    {
+      "id": "sub_1793718866046_nk3q2",
+      "assignmentId": "asm_1793609039129",
+      "studentId": "u_C08TK0104",
+      "studentName": "Nguyễn Hải Đăng",
+      "content": "",
+      "link": "",
+      "file": null,
+      "submittedAt": "2026-11-03T15:14:26.046Z",
+      "grade": null,
+      "feedback": "",
+      "gradedAt": "2026-11-03T15:14:26.046Z"
+    },
+    {
+      "id": "sub_1793718866046_z32pr",
+      "assignmentId": "asm_1793609039129",
+      "studentId": "u_C08TK0107",
+      "studentName": "Nguyễn Phương Loan",
+      "content": "",
+      "link": "",
+      "file": null,
+      "submittedAt": "2026-11-03T15:14:26.046Z",
+      "grade": null,
+      "feedback": "",
+      "gradedAt": "2026-11-03T15:14:26.046Z"
+    },
+    {
+      "id": "sub_1793718866046_sf4vn",
+      "assignmentId": "asm_1793609039129",
+      "studentId": "u_C08TK0109",
+      "studentName": "Nguyễn Văn Tâm",
+      "content": "",
+      "link": "",
+      "file": null,
+      "submittedAt": "2026-11-03T15:14:26.046Z",
+      "grade": null,
+      "feedback": "",
+      "gradedAt": "2026-11-03T15:14:26.046Z"
+    },
+    {
+      "id": "sub_1793718866046_lhn4s",
+      "assignmentId": "asm_1793609039129",
+      "studentId": "u_C08TK0110",
+      "studentName": "Nguyễn Thị Phương Thảo",
+      "content": "",
+      "link": "",
+      "file": null,
+      "submittedAt": "2026-11-03T15:14:26.046Z",
+      "grade": null,
+      "feedback": "",
+      "gradedAt": "2026-11-03T15:14:26.046Z"
+    },
+    {
+      "id": "sub_1793718866046_s53t0",
+      "assignmentId": "asm_1793609039129",
+      "studentId": "u_C08TK0112",
+      "studentName": "Ngô Đỗ Minh Thùy",
+      "content": "",
+      "link": "",
+      "file": null,
+      "submittedAt": "2026-11-03T15:14:26.046Z",
+      "grade": null,
+      "feedback": "",
+      "gradedAt": "2026-11-03T15:14:26.046Z"
+    },
+    {
+      "id": "sub_1793718866046_79dax",
+      "assignmentId": "asm_1793609039129",
+      "studentId": "u_C08TK0113",
+      "studentName": "Nguyễn Vũ Anh Thư",
+      "content": "",
+      "link": "",
+      "file": null,
+      "submittedAt": "2026-11-03T15:14:26.046Z",
+      "grade": null,
+      "feedback": "",
+      "gradedAt": "2026-11-03T15:14:26.046Z"
+    },
+    {
+      "id": "sub_1793718866046_1nubn",
+      "assignmentId": "asm_1793609039129",
+      "studentId": "u_C08TK0114",
+      "studentName": "Phạm Ngọc Thảo Trâm",
+      "content": "",
+      "link": "",
+      "file": null,
+      "submittedAt": "2026-11-03T15:14:26.046Z",
+      "grade": null,
+      "feedback": "",
+      "gradedAt": "2026-11-03T15:14:26.046Z"
+    },
+    {
+      "id": "sub_1793718866046_04o9v",
+      "assignmentId": "asm_1793609039129",
+      "studentId": "u_C08TK0115",
+      "studentName": "Nguyễn Ngọc Trân",
+      "content": "",
+      "link": "",
+      "file": null,
+      "submittedAt": "2026-11-03T15:14:26.046Z",
+      "grade": null,
+      "feedback": "",
+      "gradedAt": "2026-11-03T15:14:26.046Z"
+    },
+    {
+      "id": "sub_1793718866046_dw288",
+      "assignmentId": "asm_1793609039129",
+      "studentId": "u_C08TK0117",
+      "studentName": "Võ Thị Mỹ Xuyên",
+      "content": "",
+      "link": "",
+      "file": null,
+      "submittedAt": "2026-11-03T15:14:26.046Z",
+      "grade": null,
+      "feedback": "",
+      "gradedAt": "2026-11-03T15:14:26.046Z"
+    },
+    {
+      "id": "sub_1793718866046_uf6ee",
+      "assignmentId": "asm_1793609039129",
+      "studentId": "u_C08TK0118",
+      "studentName": "Trần Tuấn Anh",
+      "content": "",
+      "link": "",
+      "file": null,
+      "submittedAt": "2026-11-03T15:14:26.046Z",
+      "grade": null,
+      "feedback": "",
+      "gradedAt": "2026-11-03T15:14:26.046Z"
+    },
+    {
+      "id": "sub_1793718866046_pxag7",
+      "assignmentId": "asm_1793609039129",
+      "studentId": "u_C08TK0119",
+      "studentName": "Nguyễn Viết Vửng",
+      "content": "",
+      "link": "",
+      "file": null,
+      "submittedAt": "2026-11-03T15:14:26.046Z",
+      "grade": null,
+      "feedback": "",
+      "gradedAt": "2026-11-03T15:14:26.046Z"
+    },
+    {
+      "id": "sub_1793718866046_9y80n",
+      "assignmentId": "asm_1793609039129",
+      "studentId": "u_C08TK0120",
+      "studentName": "Vũ Ngọc Thiên",
+      "content": "",
+      "link": "",
+      "file": null,
+      "submittedAt": "2026-11-03T15:14:26.046Z",
+      "grade": null,
+      "feedback": "",
+      "gradedAt": "2026-11-03T15:14:26.046Z"
+    },
+    {
+      "id": "sub_1793718866046_0u3ls",
+      "assignmentId": "asm_1793609039129",
+      "studentId": "u_C08TK0123",
+      "studentName": "Trần Hoàng Long",
+      "content": "",
+      "link": "",
+      "file": null,
+      "submittedAt": "2026-11-03T15:14:26.046Z",
+      "grade": null,
+      "feedback": "",
+      "gradedAt": "2026-11-03T15:14:26.046Z"
+    },
+    {
+      "id": "sub_1793718866046_h9ah0",
+      "assignmentId": "asm_1793609039129",
+      "studentId": "u_C08TK0124",
+      "studentName": "Nguyễn Tất Việt",
+      "content": "",
+      "link": "",
+      "file": null,
+      "submittedAt": "2026-11-03T15:14:26.046Z",
+      "grade": null,
+      "feedback": "",
+      "gradedAt": "2026-11-03T15:14:26.046Z"
     }
   ],
-  "updatedAt": "2026-11-03T11:34:25.403Z",
+  "updatedAt": "2026-11-03T15:14:26.047Z",
   "users": [
     {
       "id": "u_teacher_danh",

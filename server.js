@@ -1160,6 +1160,8 @@ app.post('/api/submissions', upload.single('submissionFile'), async (req, res) =
     try { fs.unlinkSync(tempFilePath); } catch (e) {}
   }
 
+  const submissionTimestamp = new Date().toISOString();
+
   if (existingIndex >= 0) {
     if (db.submissions[existingIndex].grade !== null && db.submissions[existingIndex].grade !== undefined) {
       return res.status(400).json({ message: "Bài tập đã được chấm điểm, bạn không thể nộp lại." });
@@ -1170,17 +1172,17 @@ app.post('/api/submissions', upload.single('submissionFile'), async (req, res) =
     if (fileData) {
       db.submissions[existingIndex].file = fileData;
     }
-    db.submissions[existingIndex].submittedAt = new Date().toISOString();
+    db.submissions[existingIndex].submittedAt = submissionTimestamp;
   } else {
     const newSubmission = {
       id: `sub_${Date.now()}`,
       assignmentId,
       studentId,
-      studentName: studentName || "Học sinh",
+      studentName: studentDisplayName || studentName || "Học sinh",
       content: content ? content.trim() : "",
       link: link ? link.trim() : "",
       file: fileData,
-      submittedAt: new Date().toISOString(),
+      submittedAt: submissionTimestamp,
       grade: null,
       feedback: null,
       gradedAt: null
@@ -1188,8 +1190,34 @@ app.post('/api/submissions', upload.single('submissionFile'), async (req, res) =
     db.submissions.push(newSubmission);
   }
 
+  // Ghi nhận thông báo nộp bài có dấu thời gian chính xác
+  const targetAsm = (db.assignments || []).find(a => a.id === assignmentId);
+  if (targetAsm) {
+    const submitNotif = {
+      id: `notif_sub_${Date.now()}_${Math.random().toString(36).substr(2, 4)}`,
+      type: 'STUDENT_SUBMITTED',
+      assignmentId: targetAsm.id,
+      assignmentTitle: targetAsm.title,
+      targetClass: targetClassName,
+      subject: targetSubjectName,
+      studentId,
+      studentName: student ? student.name : studentDisplayName,
+      studentCode: student ? (student.studentCode || student.username) : '',
+      submittedAt: submissionTimestamp,
+      createdAt: submissionTimestamp,
+      readBy: []
+    };
+    if (!db.notifications) db.notifications = [];
+    db.notifications.unshift(submitNotif);
+    if (db.notifications.length > 200) db.notifications = db.notifications.slice(0, 200);
+  }
+
   writeDatabase(db);
-  res.json({ success: true, message: "Nộp bài tập thành công!" });
+  res.json({ 
+    success: true, 
+    message: "Nộp bài tập thành công!",
+    submittedAt: submissionTimestamp
+  });
 });
 
 // 7. Giáo viên chấm điểm (Bảo mật: Chỉ giáo viên tạo bài mới được chấm)
@@ -1257,7 +1285,7 @@ app.post('/api/assignments/:assignmentId/grade-student', (req, res) => {
       content: "",
       link: "",
       file: null,
-      submittedAt: new Date().toISOString(),
+      submittedAt: null,
       grade: numGrade,
       feedback: feedback ? feedback.trim() : "",
       gradedAt: new Date().toISOString()
@@ -1317,7 +1345,7 @@ app.post('/api/assignments/:assignmentId/batch-grade', (req, res) => {
         content: "",
         link: "",
         file: null,
-        submittedAt: new Date().toISOString(),
+        submittedAt: null,
         grade: numGrade,
         feedback: feedback ? feedback.trim() : "",
         gradedAt: new Date().toISOString()
