@@ -678,15 +678,6 @@
   "notifications": [],
   "subjects": [
     {
-      "id": "subj_1793618443229",
-      "name": "Typography",
-      "className": "T14TK01",
-      "teacherId": "u_teacher_danh",
-      "teacherName": "Thầy Nguyễn Công Danh",
-      "teacherEmail": "josepdanh@gmail.com",
-      "createdAt": "2026-11-02T11:20:43.229Z"
-    },
-    {
       "id": "subj_1793620227358",
       "name": "Xử Lý Kỹ Xảo với After Effects",
       "className": "C08TK01",
@@ -712,6 +703,15 @@
       "teacherName": "Thầy Nguyễn Công Danh",
       "teacherEmail": "josepdanh@gmail.com",
       "createdAt": "2026-11-03T03:28:43.354Z"
+    },
+    {
+      "id": "subj_1793705665404",
+      "name": "Thiết kế minh họa với Corel Draw",
+      "className": "T15TK02",
+      "teacherId": "u_teacher_danh",
+      "teacherName": "Thầy Nguyễn Công Danh",
+      "teacherEmail": "josepdanh@gmail.com",
+      "createdAt": "2026-11-03T11:34:25.403Z"
     }
   ],
   "submissions": [
@@ -813,9 +813,187 @@
       "submittedAt": "2026-11-03T03:45:00.000Z",
       "grade": null,
       "feedback": null
+    },
+    {
+      "id": "sub_1793693778670",
+      "assignmentId": "asm_1793677200000",
+      "studentId": "u_T14TK0102",
+      "studentName": "Vũ Hoàng Minh Anh",
+      "content": "T14TK0102",
+      "link": "",
+      "file": {
+        "filename": "1793693777711_T14TK0102_MINHANHVH_VERSION_1.indd",
+        "originalName": "T14TK0102-MINHANHVH-VERSION 1.indd",
+        "size": 6672384,
+        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1793693779/educlass_submissions/T14TK01/Thi%E1%BA%BFt%20K%E1%BA%BF%20Catalog/1793693777711_T14TK0102_MINHANHVH_VERSION_1_d2o52f.indd"
+      },
+      "submittedAt": "2026-11-03T08:16:20.027Z",
+      "grade": null,
+      "feedback": null,
+      "gradedAt": null
+    },
+    {
+      "id": "sub_1793693820936",
+      "assignmentId": "asm_1793677200000",
+      "studentId": "u_T14TK0101",
+      "studentName": "Lê Thị Vân Anh",
+      "content": "nộp bài lần 1",
+      "link": "",
+      "file": {
+        "filename": "1793693823311_T14TK0101_LETHIVANANH.indd",
+        "originalName": "T14TK0101-LETHIVANANH.indd",
+        "size": 16875520
+      },
+      "submittedAt": "2026-11-03T08:17:06.570Z",
+      "grade": null,
+      "feedback": null,
+      "gradedAt": null
+    },
+    {
+      "id": "sub_1793694414944",
+      "assignmentId": "asm_1793677200000",
+      "studentId": "u_T14TK0112",
+      "studentName": "Mai Nhật Hoàng",
+      "content": "catalog bài thi nộp bài p1",
+      "link": "",
+      "file": {
+        "filename": "1793694415063_T14TK0112_mainhathoang.rar",
+        "originalName": "T14TK0112_mainhathoang.rar",
+        "size": 1247519,
+        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1793694415/educlass_submissions/T14TK01/Thi%E1%BA%BFt%20K%E1%BA%BF%20Catalog/1793694415063_T14TK0112_mainhathoang_jbbbbm.rar"
+      },
+      "submittedAt": "2026-11-03T08:26:56.535Z",
+      "grade": null,
+      "feedback": null,
+      "gradedAt": null
+    },
+    {
+      "id": "sub_1793694823152",
+      "assignmentId": "asm_1793677200000",
+      "studentId": "u_T14TK0109",
+      "studentName": "Vũ Ngọc Thanh Hằng",
+      "content": "",
+      "link": "",
+      "file": {
+        "filename": "1793694823041_T14TK0109_VuNgocThanhHang_Version1.indd",
+        "originalName": "T14TK0109_VuNgocThanhHang_Version1.indd",
+        "size": 2744320,
+        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1793694824/educlass_submissions/T14TK01/Thi%E1%BA%BFt%20K%E1%BA%BF%20Catalog/1793694823041_T14TK0109_VuNgocThanhHang_Version1_wcjovj.indd"
+      },
+      "submittedAt": "2026-11-03T08:33:44.795Z",
+      "grade": null,
+      "feedback": null,
+      "gradedAt": null
+    },
+    {
+      "id": "sub_1793694824541",
+      "assignmentId": "asm_1793677200000",
+      "studentId": "u_T14TK0109",
+      "studentName": "Vũ Ngọc Thanh Hằng",
+      "content": "",
+      "link": "",
+      "file": {
+        "filename": "1793694822079_T14TK0109_VuNgocThanhHang_Version1.indd",
+        "originalName": "T14TK0109_VuNgocThanhHang_Version1.indd",
+        "size": 2744320,
+        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1793694823/educlass_submissions/T14TK01/Thi%E1%BA%BFt%20K%E1%BA%BF%20Catalog/1793694822079_T14TK0109_VuNgocThanhHang_Version1_jiropp.indd"
+      },
+      "submittedAt": "2026-11-03T08:33:44.541Z",
+      "grade": null,
+      "feedback": null,
+      "gradedAt": null
+    },
+    {
+      "id": "sub_1793697057801",
+      "assignmentId": "asm_1793677200000",
+      "studentId": "u_T14TK0123",
+      "studentName": "Phạm Thị Hương Ngọc",
+      "content": "",
+      "link": "",
+      "file": {
+        "filename": "1793697054482_T14TK0123_PhamThiHuongNgoc_Version1.indd",
+        "originalName": "T14TK0123-PhamThiHuongNgoc-Version1.indd",
+        "size": 4870144,
+        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1793697057/educlass_submissions/T14TK01/Thi%E1%BA%BFt%20K%E1%BA%BF%20Catalog/1793697054482_T14TK0123_PhamThiHuongNgoc_Version1_qhsjox.indd"
+      },
+      "submittedAt": "2026-11-03T09:10:57.801Z",
+      "grade": null,
+      "feedback": null,
+      "gradedAt": null
+    },
+    {
+      "id": "sub_1793697058206",
+      "assignmentId": "asm_1793677200000",
+      "studentId": "u_T14TK0123",
+      "studentName": "Phạm Thị Hương Ngọc",
+      "content": "",
+      "link": "",
+      "file": {
+        "filename": "1793697055058_T14TK0123_PhamThiHuongNgoc_Version1.indd",
+        "originalName": "T14TK0123-PhamThiHuongNgoc-Version1.indd",
+        "size": 4870144,
+        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1793697057/educlass_submissions/T14TK01/Thi%E1%BA%BFt%20K%E1%BA%BF%20Catalog/1793697055058_T14TK0123_PhamThiHuongNgoc_Version1_gulfwj.indd"
+      },
+      "submittedAt": "2026-11-03T09:10:58.206Z",
+      "grade": null,
+      "feedback": null,
+      "gradedAt": null
+    },
+    {
+      "id": "sub_1793697058599",
+      "assignmentId": "asm_1793677200000",
+      "studentId": "u_T14TK0123",
+      "studentName": "Phạm Thị Hương Ngọc",
+      "content": "",
+      "link": "",
+      "file": {
+        "filename": "1793697055999_T14TK0123_PhamThiHuongNgoc_Version1.indd",
+        "originalName": "T14TK0123-PhamThiHuongNgoc-Version1.indd",
+        "size": 4870144,
+        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1793697058/educlass_submissions/T14TK01/Thi%E1%BA%BFt%20K%E1%BA%BF%20Catalog/1793697055999_T14TK0123_PhamThiHuongNgoc_Version1_qk8oqc.indd"
+      },
+      "submittedAt": "2026-11-03T09:10:58.599Z",
+      "grade": null,
+      "feedback": null,
+      "gradedAt": null
+    },
+    {
+      "id": "sub_1793697058643",
+      "assignmentId": "asm_1793677200000",
+      "studentId": "u_T14TK0123",
+      "studentName": "Phạm Thị Hương Ngọc",
+      "content": "",
+      "link": "",
+      "file": {
+        "filename": "1793697056598_T14TK0123_PhamThiHuongNgoc_Version1.indd",
+        "originalName": "T14TK0123-PhamThiHuongNgoc-Version1.indd",
+        "size": 4870144,
+        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1793697058/educlass_submissions/T14TK01/Thi%E1%BA%BFt%20K%E1%BA%BF%20Catalog/1793697056598_T14TK0123_PhamThiHuongNgoc_Version1_oi6nlu.indd"
+      },
+      "submittedAt": "2026-11-03T09:10:58.643Z",
+      "grade": null,
+      "feedback": null,
+      "gradedAt": null
+    },
+    {
+      "id": "sub_1793697150597",
+      "assignmentId": "asm_1793677200000",
+      "studentId": "u_T14TK0118",
+      "studentName": "Nguyễn Nhật Linh",
+      "content": "",
+      "link": "",
+      "file": {
+        "filename": "1793697154393_NGUYENHATLINH_THAYDANH.indd",
+        "originalName": "NGUYENHATLINH-THAYDANH.indd",
+        "size": 11370496
+      },
+      "submittedAt": "2026-11-03T09:12:38.525Z",
+      "grade": null,
+      "feedback": null,
+      "gradedAt": null
     }
   ],
-  "updatedAt": "2026-11-03T07:56:42.799Z",
+  "updatedAt": "2026-11-03T11:34:25.403Z",
   "users": [
     {
       "id": "u_teacher_danh",
@@ -827,16 +1005,6 @@
       "isAdmin": true,
       "status": "ACTIVE",
       "email": "josepdanh@gmail.com"
-    },
-    {
-      "id": "u_teacher_1793611881299",
-      "username": "Nguyenvana",
-      "password": "123556",
-      "name": "Nguyễn Văn A",
-      "role": "teacher",
-      "subject": "Tin học",
-      "status": "ACTIVE",
-      "createdAt": "2026-11-02T09:31:21.299Z"
     },
     {
       "id": "u_T15MG0201",
@@ -1703,6 +1871,402 @@
       "className": "T14TK01",
       "status": "ACTIVE",
       "createdAt": "2026-11-03T03:40:00.000Z"
+    },
+    {
+      "id": "u_student_T15TK0201",
+      "username": "T15TK0201",
+      "studentCode": "T15TK0201",
+      "password": "123",
+      "name": "Hà Kiều Anh",
+      "dob": "01/04/2011",
+      "role": "student",
+      "className": "T15TK02",
+      "status": "ACTIVE",
+      "createdAt": "2026-11-03T11:34:25.403Z"
+    },
+    {
+      "id": "u_student_T15TK0202",
+      "username": "T15TK0202",
+      "studentCode": "T15TK0202",
+      "password": "123",
+      "name": "Phan Nguyễn Hoài Anh",
+      "dob": "17/08/2011",
+      "role": "student",
+      "className": "T15TK02",
+      "status": "ACTIVE",
+      "createdAt": "2026-11-03T11:34:25.403Z"
+    },
+    {
+      "id": "u_student_T15TK0203",
+      "username": "T15TK0203",
+      "studentCode": "T15TK0203",
+      "password": "123",
+      "name": "Vũ Thị Lan Anh",
+      "dob": "15/09/2011",
+      "role": "student",
+      "className": "T15TK02",
+      "status": "ACTIVE",
+      "createdAt": "2026-11-03T11:34:25.403Z"
+    },
+    {
+      "id": "u_student_T15TK0204",
+      "username": "T15TK0204",
+      "studentCode": "T15TK0204",
+      "password": "123",
+      "name": "Bùi Quốc Bảo",
+      "dob": "25/08/2011",
+      "role": "student",
+      "className": "T15TK02",
+      "status": "ACTIVE",
+      "createdAt": "2026-11-03T11:34:25.403Z"
+    },
+    {
+      "id": "u_student_T15TK0205",
+      "username": "T15TK0205",
+      "studentCode": "T15TK0205",
+      "password": "123",
+      "name": "Phạm Nguyễn Thành Danh",
+      "dob": "21/10/2011",
+      "role": "student",
+      "className": "T15TK02",
+      "status": "ACTIVE",
+      "createdAt": "2026-11-03T11:34:25.403Z"
+    },
+    {
+      "id": "u_student_T15TK0206",
+      "username": "T15TK0206",
+      "studentCode": "T15TK0206",
+      "password": "123",
+      "name": "Nguyễn Ngọc Kỳ Duyên",
+      "dob": "19/08/2011",
+      "role": "student",
+      "className": "T15TK02",
+      "status": "ACTIVE",
+      "createdAt": "2026-11-03T11:34:25.403Z"
+    },
+    {
+      "id": "u_student_T15TK0207",
+      "username": "T15TK0207",
+      "studentCode": "T15TK0207",
+      "password": "123",
+      "name": "Vũ Thị Ngọc Hằng",
+      "dob": "18/10/2011",
+      "role": "student",
+      "className": "T15TK02",
+      "status": "ACTIVE",
+      "createdAt": "2026-11-03T11:34:25.403Z"
+    },
+    {
+      "id": "u_student_T15TK0208",
+      "username": "T15TK0208",
+      "studentCode": "T15TK0208",
+      "password": "123",
+      "name": "Lê Ngọc Gia Hân",
+      "dob": "26/11/2011",
+      "role": "student",
+      "className": "T15TK02",
+      "status": "ACTIVE",
+      "createdAt": "2026-11-03T11:34:25.403Z"
+    },
+    {
+      "id": "u_student_T15TK0209",
+      "username": "T15TK0209",
+      "studentCode": "T15TK0209",
+      "password": "123",
+      "name": "Đoàn Anh Huy",
+      "dob": "03/10/2011",
+      "role": "student",
+      "className": "T15TK02",
+      "status": "ACTIVE",
+      "createdAt": "2026-11-03T11:34:25.403Z"
+    },
+    {
+      "id": "u_student_T15TK0210",
+      "username": "T15TK0210",
+      "studentCode": "T15TK0210",
+      "password": "123",
+      "name": "Trần Diệu Hương",
+      "dob": "17/08/2011",
+      "role": "student",
+      "className": "T15TK02",
+      "status": "ACTIVE",
+      "createdAt": "2026-11-03T11:34:25.403Z"
+    },
+    {
+      "id": "u_student_T15TK0211",
+      "username": "T15TK0211",
+      "studentCode": "T15TK0211",
+      "password": "123",
+      "name": "Ngô Ngân Khánh",
+      "dob": "18/08/2011",
+      "role": "student",
+      "className": "T15TK02",
+      "status": "ACTIVE",
+      "createdAt": "2026-11-03T11:34:25.403Z"
+    },
+    {
+      "id": "u_student_T15TK0212",
+      "username": "T15TK0212",
+      "studentCode": "T15TK0212",
+      "password": "123",
+      "name": "Nguyễn Trần Kim Khánh",
+      "dob": "01/09/2011",
+      "role": "student",
+      "className": "T15TK02",
+      "status": "ACTIVE",
+      "createdAt": "2026-11-03T11:34:25.403Z"
+    },
+    {
+      "id": "u_student_T15TK0213",
+      "username": "T15TK0213",
+      "studentCode": "T15TK0213",
+      "password": "123",
+      "name": "Đỗ Anh Khoa",
+      "dob": "01/12/2011",
+      "role": "student",
+      "className": "T15TK02",
+      "status": "ACTIVE",
+      "createdAt": "2026-11-03T11:34:25.403Z"
+    },
+    {
+      "id": "u_student_T15TK0215",
+      "username": "T15TK0215",
+      "studentCode": "T15TK0215",
+      "password": "123",
+      "name": "Lê Anh Kiệt",
+      "dob": "05/05/2011",
+      "role": "student",
+      "className": "T15TK02",
+      "status": "ACTIVE",
+      "createdAt": "2026-11-03T11:34:25.403Z"
+    },
+    {
+      "id": "u_student_T15TK0216",
+      "username": "T15TK0216",
+      "studentCode": "T15TK0216",
+      "password": "123",
+      "name": "Lê Nhã Kỳ",
+      "dob": "03/07/2011",
+      "role": "student",
+      "className": "T15TK02",
+      "status": "ACTIVE",
+      "createdAt": "2026-11-03T11:34:25.403Z"
+    },
+    {
+      "id": "u_student_T15TK0217",
+      "username": "T15TK0217",
+      "studentCode": "T15TK0217",
+      "password": "123",
+      "name": "Trần Ánh Ngọc Lan",
+      "dob": "25/07/2011",
+      "role": "student",
+      "className": "T15TK02",
+      "status": "ACTIVE",
+      "createdAt": "2026-11-03T11:34:25.403Z"
+    },
+    {
+      "id": "u_student_T15TK0218",
+      "username": "T15TK0218",
+      "studentCode": "T15TK0218",
+      "password": "123",
+      "name": "Nguyễn Trần Diệu Linh",
+      "dob": "26/08/2011",
+      "role": "student",
+      "className": "T15TK02",
+      "status": "ACTIVE",
+      "createdAt": "2026-11-03T11:34:25.403Z"
+    },
+    {
+      "id": "u_student_T15TK0219",
+      "username": "T15TK0219",
+      "studentCode": "T15TK0219",
+      "password": "123",
+      "name": "Lê Nguyễn Thảo Ly",
+      "dob": "22/10/2011",
+      "role": "student",
+      "className": "T15TK02",
+      "status": "ACTIVE",
+      "createdAt": "2026-11-03T11:34:25.403Z"
+    },
+    {
+      "id": "u_student_T15TK0220",
+      "username": "T15TK0220",
+      "studentCode": "T15TK0220",
+      "password": "123",
+      "name": "Nguyễn Hoàng Phương Nghi",
+      "dob": "24/08/2011",
+      "role": "student",
+      "className": "T15TK02",
+      "status": "ACTIVE",
+      "createdAt": "2026-11-03T11:34:25.403Z"
+    },
+    {
+      "id": "u_student_T15TK0221",
+      "username": "T15TK0221",
+      "studentCode": "T15TK0221",
+      "password": "123",
+      "name": "Nguyễn Cao Lê Hồng Ngọc",
+      "dob": "21/07/2010",
+      "role": "student",
+      "className": "T15TK02",
+      "status": "ACTIVE",
+      "createdAt": "2026-11-03T11:34:25.403Z"
+    },
+    {
+      "id": "u_student_T15TK0222",
+      "username": "T15TK0222",
+      "studentCode": "T15TK0222",
+      "password": "123",
+      "name": "Phan Gia Nguyễn",
+      "dob": "05/07/2011",
+      "role": "student",
+      "className": "T15TK02",
+      "status": "ACTIVE",
+      "createdAt": "2026-11-03T11:34:25.403Z"
+    },
+    {
+      "id": "u_student_T15TK0223",
+      "username": "T15TK0223",
+      "studentCode": "T15TK0223",
+      "password": "123",
+      "name": "Chu Hoàng Quyên Nhi",
+      "dob": "19/11/2011",
+      "role": "student",
+      "className": "T15TK02",
+      "status": "ACTIVE",
+      "createdAt": "2026-11-03T11:34:25.403Z"
+    },
+    {
+      "id": "u_student_T15TK0224",
+      "username": "T15TK0224",
+      "studentCode": "T15TK0224",
+      "password": "123",
+      "name": "Phạm Ngọc Nhi",
+      "dob": "13/03/2011",
+      "role": "student",
+      "className": "T15TK02",
+      "status": "ACTIVE",
+      "createdAt": "2026-11-03T11:34:25.403Z"
+    },
+    {
+      "id": "u_student_T15TK0225",
+      "username": "T15TK0225",
+      "studentCode": "T15TK0225",
+      "password": "123",
+      "name": "Nguyễn Ngọc Lan Phương",
+      "dob": "15/07/2011",
+      "role": "student",
+      "className": "T15TK02",
+      "status": "ACTIVE",
+      "createdAt": "2026-11-03T11:34:25.403Z"
+    },
+    {
+      "id": "u_student_T15TK0226",
+      "username": "T15TK0226",
+      "studentCode": "T15TK0226",
+      "password": "123",
+      "name": "Trần Nguyễn Minh Quân",
+      "dob": "20/07/2011",
+      "role": "student",
+      "className": "T15TK02",
+      "status": "ACTIVE",
+      "createdAt": "2026-11-03T11:34:25.403Z"
+    },
+    {
+      "id": "u_student_T15TK0227",
+      "username": "T15TK0227",
+      "studentCode": "T15TK0227",
+      "password": "123",
+      "name": "Trần Hoàng Thanh Thảo",
+      "dob": "28/10/2010",
+      "role": "student",
+      "className": "T15TK02",
+      "status": "ACTIVE",
+      "createdAt": "2026-11-03T11:34:25.403Z"
+    },
+    {
+      "id": "u_student_T15TK0228",
+      "username": "T15TK0228",
+      "studentCode": "T15TK0228",
+      "password": "123",
+      "name": "Nguyễn Ngọc Hoài Thu",
+      "dob": "03/09/2011",
+      "role": "student",
+      "className": "T15TK02",
+      "status": "ACTIVE",
+      "createdAt": "2026-11-03T11:34:25.403Z"
+    },
+    {
+      "id": "u_student_T15TK0229",
+      "username": "T15TK0229",
+      "studentCode": "T15TK0229",
+      "password": "123",
+      "name": "Nguyễn Hoài Thương",
+      "dob": "25/12/2011",
+      "role": "student",
+      "className": "T15TK02",
+      "status": "ACTIVE",
+      "createdAt": "2026-11-03T11:34:25.403Z"
+    },
+    {
+      "id": "u_student_T15TK0230",
+      "username": "T15TK0230",
+      "studentCode": "T15TK0230",
+      "password": "123",
+      "name": "Nguyễn Đức Tin",
+      "dob": "19/10/2011",
+      "role": "student",
+      "className": "T15TK02",
+      "status": "ACTIVE",
+      "createdAt": "2026-11-03T11:34:25.403Z"
+    },
+    {
+      "id": "u_student_T15TK0231",
+      "username": "T15TK0231",
+      "studentCode": "T15TK0231",
+      "password": "123",
+      "name": "Đặng Thị Tuyết Trinh",
+      "dob": "15/12/2011",
+      "role": "student",
+      "className": "T15TK02",
+      "status": "ACTIVE",
+      "createdAt": "2026-11-03T11:34:25.403Z"
+    },
+    {
+      "id": "u_student_T15TK0232",
+      "username": "T15TK0232",
+      "studentCode": "T15TK0232",
+      "password": "123",
+      "name": "Nguyễn Thị Phương Uyên",
+      "dob": "16/07/2011",
+      "role": "student",
+      "className": "T15TK02",
+      "status": "ACTIVE",
+      "createdAt": "2026-11-03T11:34:25.403Z"
+    },
+    {
+      "id": "u_student_T15TK0233",
+      "username": "T15TK0233",
+      "studentCode": "T15TK0233",
+      "password": "123",
+      "name": "Phan Nguyễn Thảo Vy",
+      "dob": "29/06/2011",
+      "role": "student",
+      "className": "T15TK02",
+      "status": "ACTIVE",
+      "createdAt": "2026-11-03T11:34:25.403Z"
+    },
+    {
+      "id": "u_student_T15TK0234",
+      "username": "T15TK0234",
+      "studentCode": "T15TK0234",
+      "password": "123",
+      "name": "Nguyễn Minh Thành",
+      "dob": "09/06/2011",
+      "role": "student",
+      "className": "T15TK02",
+      "status": "ACTIVE",
+      "createdAt": "2026-11-03T11:34:25.403Z"
     }
   ]
 }
