@@ -937,7 +937,13 @@ app.get('/api/assignments/:id/submissions', (req, res) => {
     };
   });
 
-  res.json({ assignment, studentsStatus: list });
+  const matchedSubject = (db.subjects || []).find(
+    s => s.className && s.className.trim().toUpperCase() === (assignment.targetClass || '').trim().toUpperCase() &&
+         s.name && s.name.trim().toLowerCase() === (assignment.subject || '').trim().toLowerCase()
+  );
+  const driveLink = matchedSubject ? matchedSubject.driveLink : null;
+
+  res.json({ assignment, studentsStatus: list, driveLink });
 });
 
 // 6. Học sinh nộp bài / Cập nhật bài nộp
@@ -972,6 +978,10 @@ app.post('/api/submissions', upload.single('submissionFile'), (req, res) => {
   );
 
   let fileData = null;
+  const targetClassName = assignment.targetClass || (student && student.className ? student.className : 'Chung');
+  const targetSubjectName = assignment.subject || 'MonHoc';
+  const studentDisplayName = student ? (student.studentCode || student.username || student.name) : (studentName || 'HocSinh');
+
   if (req.file) {
     fileData = {
       filename: req.file.filename,
@@ -979,12 +989,7 @@ app.post('/api/submissions', upload.single('submissionFile'), (req, res) => {
       size: req.file.size
     };
 
-    // Tự động phân loại và đồng bộ lên Google Drive & OneDrive
-    // Thư mục cha: [Tên Lớp] -> Thư mục con: [Tên Môn Học]
-    const targetClassName = assignment.targetClass || (student && student.className ? student.className : 'Chung');
-    const targetSubjectName = assignment.subject || 'MonHoc';
-    const studentDisplayName = student ? (student.username || student.name) : (studentName || 'HocSinh');
-
+    // Tự động phân loại và đồng bộ tệp lên Google Drive & OneDrive
     syncFileToCloudStorage({
       filePath: req.file.path,
       targetClass: targetClassName,
@@ -993,6 +998,29 @@ app.post('/api/submissions', upload.single('submissionFile'), (req, res) => {
       originalName: fileData.originalName,
       mimeType: req.file.mimetype
     }).catch(e => console.error("Cloud sync submission error:", e));
+  } else if (link || content) {
+    // Nếu học sinh nộp bằng Link (Canva, Figma, Drive...) hoặc Ghi chú:
+    // Tự động tạo tệp lối tắt (.url) ghi rõ thông tin bài làm để đưa lên Google Drive và máy Mac, giúp Thầy Cô luôn thấy bài nộp!
+    const tempDir = path.join(__dirname, 'temp_submissions');
+    if (!fs.existsSync(tempDir)) fs.mkdirSync(tempDir, { recursive: true });
+
+    const safeName = studentDisplayName.replace(/[^a-zA-Z0-9_\u00C0-\u024F\u1E00-\u1EFF]/g, '_');
+    const tempFileName = `${Date.now()}_${safeName}_BaiNop_LienKet.url`;
+    const tempFilePath = path.join(tempDir, tempFileName);
+
+    const fileContent = `[InternetShortcut]\nURL=${link || ''}\n\n[ThongTinBaiNop]\nMSSV=${student ? (student.studentCode || student.username) : ''}\nHoVaTen=${student ? student.name : ''}\nLop=${targetClassName}\nMon=${targetSubjectName}\nThoiGianNop=${new Date().toLocaleString('vi-VN')}\nLinkBaiLam=${link || ''}\nGhiChu=${content || ''}\n`;
+    fs.writeFileSync(tempFilePath, fileContent, 'utf8');
+
+    syncFileToCloudStorage({
+      filePath: tempFilePath,
+      targetClass: targetClassName,
+      subject: targetSubjectName,
+      studentName: studentDisplayName,
+      originalName: `${safeName}_BaiNop_LienKet.url`,
+      mimeType: 'text/plain'
+    }).then(() => {
+      try { fs.unlinkSync(tempFilePath); } catch (e) {}
+    }).catch(e => console.error("Cloud sync link submission error:", e));
   }
 
   if (existingIndex >= 0) {

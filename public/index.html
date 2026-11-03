@@ -2624,7 +2624,10 @@
 
         document.getElementById('grading-modal-title').textContent = data.assignment.title;
         const targetClassText = (!data.assignment.targetClass || data.assignment.targetClass === 'ALL') ? 'Tất cả các lớp' : `Lớp ${data.assignment.targetClass}`;
-        document.getElementById('grading-modal-subtitle').textContent = `Giao cho: ${targetClassText} | Hạn nộp: ${formatDate(data.assignment.dueDate)}`;
+        const driveBtn = data.driveLink 
+          ? `<a href="${data.driveLink}" target="_blank" class="ml-2 inline-flex items-center gap-1.5 px-3 py-1 bg-emerald-50 hover:bg-emerald-100 text-emerald-800 font-bold rounded-lg text-xs border border-emerald-300 transition shadow-xs"><i class="fa-brands fa-google-drive text-emerald-600"></i> Mở thư mục Google Drive môn này</a>`
+          : '';
+        document.getElementById('grading-modal-subtitle').innerHTML = `Giao cho: <b>${targetClassText}</b> (Môn: ${escapeHtml(data.assignment.subject || '-')}) | Hạn nộp: ${formatDate(data.assignment.dueDate)} ${driveBtn}`;
 
         const tbody = document.getElementById('grading-table-body');
         tbody.innerHTML = data.studentsStatus.map((item, idx) => {

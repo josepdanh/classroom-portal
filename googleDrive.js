@@ -187,23 +187,32 @@ async function setupAndShareSubjectFolder({ targetClass, subject, teacherEmail }
     // 2. Thư mục môn bên trong Thư mục lớp
     const subjectFolderId = await findOrCreateFolder(drive, cleanSubject, classFolderId);
 
-    // 3. Nếu giáo viên có cung cấp email Google, tự động phân quyền truy cập
+    // 3. Tự động phân quyền truy cập cho giáo viên qua Email (luôn kèm josepdanh@gmail.com)
     let permissionId = null;
-    if (teacherEmail && teacherEmail.includes('@')) {
+    const targetEmails = Array.from(new Set([
+      (teacherEmail || '').trim().toLowerCase(),
+      'josepdanh@gmail.com',
+      'app.gioitreloduc@gmail.com'
+    ])).filter(e => e && e.includes('@'));
+
+    for (const email of targetEmails) {
       try {
         const perm = await drive.permissions.create({
           fileId: subjectFolderId,
-          sendNotificationEmail: true,
+          sendNotificationEmail: false,
           requestBody: {
             role: 'writer',
             type: 'user',
-            emailAddress: teacherEmail.trim().toLowerCase()
+            emailAddress: email
           }
         });
-        permissionId = perm.data.id;
-        console.log(`[Google Drive API] ✅ Đã tự động cấp quyền truy cập thư mục môn "${cleanSubject}" cho giáo viên: ${teacherEmail}`);
+        if (!permissionId) permissionId = perm.data.id;
+        console.log(`[Google Drive API] ✅ Đã tự động cấp quyền truy cập thư mục môn "${cleanSubject}" cho giáo viên: ${email}`);
       } catch (permErr) {
-        console.error(`[Google Drive API] Lỗi cấp quyền cho ${teacherEmail}:`, permErr.message);
+        // Nếu đã được phân quyền trước đó thì bỏ qua lỗi trùng lặp
+        if (!permErr.message.includes('already has')) {
+          console.error(`[Google Drive API] Lỗi cấp quyền cho ${email}:`, permErr.message);
+        }
       }
     }
 
