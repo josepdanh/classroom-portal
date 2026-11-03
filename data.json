@@ -528,12 +528,12 @@
       "studentCode": "C08TK0124"
     },
     {
-      "id": "u_student_T14TK0113",
-      "username": "T14TK0113",
-      "studentCode": "T14TK0113",
+      "id": "u_student_T14TK0120",
+      "username": "T14TK0120",
+      "studentCode": "T14TK0120",
       "password": "123",
       "name": "Đặng Thụy My",
-      "dob": "20/10/2007",
+      "dob": "02/10/2010",
       "role": "student",
       "className": "T14TK01",
       "status": "ACTIVE",
