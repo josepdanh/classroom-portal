@@ -1101,6 +1101,34 @@
   ],
   "notifications": [
     {
+      "id": "notif_sub_1793723438951_cs4o",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793609039129",
+      "assignmentTitle": "Làm bài báo cáo về 10 nguyên lý chuyển động trong motion graphics",
+      "targetClass": "C08TK01",
+      "subject": "Xử Lý Kỹ Xảo với After Effects",
+      "studentId": "u_C08TK0118",
+      "studentName": "Trần Tuấn Anh",
+      "studentCode": "C08TK0118",
+      "submittedAt": "2026-11-03T16:30:38.951Z",
+      "createdAt": "2026-11-03T16:30:38.951Z",
+      "readBy": []
+    },
+    {
+      "id": "notif_sub_1793723437876_saxz",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793609039129",
+      "assignmentTitle": "Làm bài báo cáo về 10 nguyên lý chuyển động trong motion graphics",
+      "targetClass": "C08TK01",
+      "subject": "Xử Lý Kỹ Xảo với After Effects",
+      "studentId": "u_C08TK0118",
+      "studentName": "Trần Tuấn Anh",
+      "studentCode": "C08TK0118",
+      "submittedAt": "2026-11-03T16:30:37.876Z",
+      "createdAt": "2026-11-03T16:30:37.876Z",
+      "readBy": []
+    },
+    {
       "id": "notif_sub_1793721204555_l6c2",
       "type": "STUDENT_SUBMITTED",
       "assignmentId": "asm_1793609039129",
@@ -1691,8 +1719,13 @@
       "studentName": "Trần Tuấn Anh",
       "content": "",
       "link": "",
-      "file": null,
-      "submittedAt": "2026-11-03T15:14:26.046Z",
+      "file": {
+        "filename": "1793723437103_Animation__Tran_Tuan_Anh_.pptx",
+        "originalName": "Animation  Tran Tuan Anh .pptx",
+        "size": 6433537,
+        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1793723438/educlass_submissions/C08TK01/X%E1%BB%AD%20L%C3%BD%20K%E1%BB%B9%20X%E1%BA%A3o%20v%E1%BB%9Bi%20After%20Effects/1793723437103_Animation__Tran_Tuan_Anh__m5npy1.pptx"
+      },
+      "submittedAt": "2026-11-03T16:30:38.951Z",
       "grade": null,
       "feedback": "",
       "gradedAt": "2026-11-03T15:14:26.046Z"
@@ -1750,7 +1783,7 @@
       "gradedAt": "2026-11-03T15:14:26.046Z"
     }
   ],
-  "updatedAt": "2026-11-03T16:28:33.700Z",
+  "updatedAt": "2026-11-03T16:30:38.953Z",
   "users": [
     {
       "id": "u_teacher_danh",
