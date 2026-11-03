@@ -2,6 +2,17 @@
   "id": "main",
   "assignments": [
     {
+      "id": "asm_1793723665139",
+      "title": "abc",
+      "description": "abc",
+      "targetClass": "C08TK01",
+      "subject": "Ví dụ Mẫu",
+      "dueDate": "2026-11-04T16:34",
+      "createdAt": "2026-11-03T16:34:25.139Z",
+      "attachment": null,
+      "createdBy": "u_teacher_1793722738431"
+    },
+    {
       "id": "asm_1793609039129",
       "title": "Làm bài báo cáo về 10 nguyên lý chuyển động trong motion graphics",
       "description": "Làm file ppt",
@@ -1097,9 +1108,350 @@
         }
       ],
       "updatedAt": "2026-11-03T16:19:57.831Z"
+    },
+    {
+      "id": "gs_1793725499305",
+      "schoolName": "TRƯỜNG CĐ HÒA BÌNH XUÂN LỘC",
+      "departmentName": "KHOA MỸ THUẬT - CNTT",
+      "title": "BẢNG ĐIỂM THÀNH PHẦN MÔN HỌC/MÔ ĐUN",
+      "subjectName": "Ví dụ Mẫu",
+      "className": "C08TK01",
+      "majorName": "Thiết kế đồ họa",
+      "courseCohort": "Khóa: 15",
+      "totalPeriods": 45,
+      "credits": 2,
+      "academicDate": "Đồng Nai, ngày 3 tháng 11 năm 2026",
+      "deanName": "Nguyễn Văn Quang",
+      "teacherName": "Nguyễn Tâm",
+      "teacherId": "u_teacher_1793722738431",
+      "records": [
+        {
+          "tt": 1,
+          "studentId": "u_C08TK0101",
+          "studentCode": "C08TK0101",
+          "name": "Nguyễn Doãn Lê Anh",
+          "dob": "20/11/2006",
+          "hs1": null,
+          "hs2_1": null,
+          "hs2_2": null,
+          "hs2_3": null,
+          "hs2_4": null,
+          "note": ""
+        },
+        {
+          "tt": 2,
+          "studentId": "u_C08TK0102",
+          "studentCode": "C08TK0102",
+          "name": "Nguyễn Thị Duyên",
+          "dob": "26/01/2005",
+          "hs1": null,
+          "hs2_1": null,
+          "hs2_2": null,
+          "hs2_3": null,
+          "hs2_4": null,
+          "note": ""
+        },
+        {
+          "tt": 3,
+          "studentId": "u_C08TK0104",
+          "studentCode": "C08TK0104",
+          "name": "Nguyễn Hải Đăng",
+          "dob": "07/08/2006",
+          "hs1": null,
+          "hs2_1": null,
+          "hs2_2": null,
+          "hs2_3": null,
+          "hs2_4": null,
+          "note": ""
+        },
+        {
+          "tt": 4,
+          "studentId": "u_C08TK0105",
+          "studentCode": "C08TK0105",
+          "name": "Nguyễn Đức Hiếu",
+          "dob": "17/06/2006",
+          "hs1": null,
+          "hs2_1": null,
+          "hs2_2": null,
+          "hs2_3": null,
+          "hs2_4": null,
+          "note": ""
+        },
+        {
+          "tt": 5,
+          "studentId": "u_C08TK0106",
+          "studentCode": "C08TK0106",
+          "name": "Đỗ Ngọc Khuê",
+          "dob": "13/08/2006",
+          "hs1": null,
+          "hs2_1": null,
+          "hs2_2": null,
+          "hs2_3": null,
+          "hs2_4": null,
+          "note": ""
+        },
+        {
+          "tt": 6,
+          "studentId": "u_C08TK0107",
+          "studentCode": "C08TK0107",
+          "name": "Nguyễn Phương Loan",
+          "dob": "20/07/2006",
+          "hs1": null,
+          "hs2_1": null,
+          "hs2_2": null,
+          "hs2_3": null,
+          "hs2_4": null,
+          "note": ""
+        },
+        {
+          "tt": 7,
+          "studentId": "u_C08TK0108",
+          "studentCode": "C08TK0108",
+          "name": "Lương Ngọc Nhi",
+          "dob": "12/01/2006",
+          "hs1": null,
+          "hs2_1": null,
+          "hs2_2": null,
+          "hs2_3": null,
+          "hs2_4": null,
+          "note": ""
+        },
+        {
+          "tt": 8,
+          "studentId": "u_C08TK0109",
+          "studentCode": "C08TK0109",
+          "name": "Nguyễn Văn Tâm",
+          "dob": "10/02/1994",
+          "hs1": null,
+          "hs2_1": null,
+          "hs2_2": null,
+          "hs2_3": null,
+          "hs2_4": null,
+          "note": ""
+        },
+        {
+          "tt": 9,
+          "studentId": "u_C08TK0110",
+          "studentCode": "C08TK0110",
+          "name": "Nguyễn Thị Phương Thảo",
+          "dob": "10/09/2006",
+          "hs1": null,
+          "hs2_1": null,
+          "hs2_2": null,
+          "hs2_3": null,
+          "hs2_4": null,
+          "note": ""
+        },
+        {
+          "tt": 10,
+          "studentId": "u_C08TK0111",
+          "studentCode": "C08TK0111",
+          "name": "Đoàn Thị Thúy",
+          "dob": "08/03/2006",
+          "hs1": null,
+          "hs2_1": null,
+          "hs2_2": null,
+          "hs2_3": null,
+          "hs2_4": null,
+          "note": ""
+        },
+        {
+          "tt": 11,
+          "studentId": "u_C08TK0112",
+          "studentCode": "C08TK0112",
+          "name": "Ngô Đỗ Minh Thùy",
+          "dob": "29/08/2006",
+          "hs1": null,
+          "hs2_1": null,
+          "hs2_2": null,
+          "hs2_3": null,
+          "hs2_4": null,
+          "note": ""
+        },
+        {
+          "tt": 12,
+          "studentId": "u_C08TK0113",
+          "studentCode": "C08TK0113",
+          "name": "Nguyễn Vũ Anh Thư",
+          "dob": "15/10/2006",
+          "hs1": null,
+          "hs2_1": null,
+          "hs2_2": null,
+          "hs2_3": null,
+          "hs2_4": null,
+          "note": ""
+        },
+        {
+          "tt": 13,
+          "studentId": "u_C08TK0114",
+          "studentCode": "C08TK0114",
+          "name": "Phạm Ngọc Thảo Trâm",
+          "dob": "29/01/2006",
+          "hs1": null,
+          "hs2_1": null,
+          "hs2_2": null,
+          "hs2_3": null,
+          "hs2_4": null,
+          "note": ""
+        },
+        {
+          "tt": 14,
+          "studentId": "u_C08TK0115",
+          "studentCode": "C08TK0115",
+          "name": "Nguyễn Ngọc Trân",
+          "dob": "02/08/2006",
+          "hs1": null,
+          "hs2_1": null,
+          "hs2_2": null,
+          "hs2_3": null,
+          "hs2_4": null,
+          "note": ""
+        },
+        {
+          "tt": 15,
+          "studentId": "u_C08TK0117",
+          "studentCode": "C08TK0117",
+          "name": "Võ Thị Mỹ Xuyên",
+          "dob": "04/06/2006",
+          "hs1": null,
+          "hs2_1": null,
+          "hs2_2": null,
+          "hs2_3": null,
+          "hs2_4": null,
+          "note": ""
+        },
+        {
+          "tt": 16,
+          "studentId": "u_C08TK0118",
+          "studentCode": "C08TK0118",
+          "name": "Trần Tuấn Anh",
+          "dob": "01/01/2002",
+          "hs1": null,
+          "hs2_1": null,
+          "hs2_2": null,
+          "hs2_3": null,
+          "hs2_4": null,
+          "note": ""
+        },
+        {
+          "tt": 17,
+          "studentId": "u_C08TK0119",
+          "studentCode": "C08TK0119",
+          "name": "Nguyễn Viết Vửng",
+          "dob": "24/10/2006",
+          "hs1": null,
+          "hs2_1": null,
+          "hs2_2": null,
+          "hs2_3": null,
+          "hs2_4": null,
+          "note": ""
+        },
+        {
+          "tt": 18,
+          "studentId": "u_C08TK0120",
+          "studentCode": "C08TK0120",
+          "name": "Vũ Ngọc Thiên",
+          "dob": "19/12/2006",
+          "hs1": null,
+          "hs2_1": null,
+          "hs2_2": null,
+          "hs2_3": null,
+          "hs2_4": null,
+          "note": ""
+        },
+        {
+          "tt": 19,
+          "studentId": "u_C08TK0123",
+          "studentCode": "C08TK0123",
+          "name": "Trần Hoàng Long",
+          "dob": "06/01/2006",
+          "hs1": null,
+          "hs2_1": null,
+          "hs2_2": null,
+          "hs2_3": null,
+          "hs2_4": null,
+          "note": ""
+        },
+        {
+          "tt": 20,
+          "studentId": "u_C08TK0124",
+          "studentCode": "C08TK0124",
+          "name": "Nguyễn Tất Việt",
+          "dob": "08/04/2006",
+          "hs1": null,
+          "hs2_1": null,
+          "hs2_2": null,
+          "hs2_3": null,
+          "hs2_4": null,
+          "note": ""
+        }
+      ],
+      "updatedAt": "2026-11-03T17:04:59.305Z"
     }
   ],
   "notifications": [
+    {
+      "id": "notif_sub_1793724773230_4xl4",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793609039129",
+      "assignmentTitle": "Làm bài báo cáo về 10 nguyên lý chuyển động trong motion graphics",
+      "targetClass": "C08TK01",
+      "subject": "Xử Lý Kỹ Xảo với After Effects",
+      "studentId": "u_C08TK0112",
+      "studentName": "Ngô Đỗ Minh Thùy",
+      "studentCode": "C08TK0112",
+      "submittedAt": "2026-11-03T16:52:53.230Z",
+      "createdAt": "2026-11-03T16:52:53.230Z",
+      "readBy": [
+        "u_C08TK0113"
+      ]
+    },
+    {
+      "id": "notif_sub_1793724771459_yuun",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793609039129",
+      "assignmentTitle": "Làm bài báo cáo về 10 nguyên lý chuyển động trong motion graphics",
+      "targetClass": "C08TK01",
+      "subject": "Xử Lý Kỹ Xảo với After Effects",
+      "studentId": "u_C08TK0112",
+      "studentName": "Ngô Đỗ Minh Thùy",
+      "studentCode": "C08TK0112",
+      "submittedAt": "2026-11-03T16:52:51.458Z",
+      "createdAt": "2026-11-03T16:52:51.458Z",
+      "readBy": [
+        "u_C08TK0113"
+      ]
+    },
+    {
+      "id": "notif_sub_1793724767759_2mbg",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793609039129",
+      "assignmentTitle": "Làm bài báo cáo về 10 nguyên lý chuyển động trong motion graphics",
+      "targetClass": "C08TK01",
+      "subject": "Xử Lý Kỹ Xảo với After Effects",
+      "studentId": "u_C08TK0112",
+      "studentName": "Ngô Đỗ Minh Thùy",
+      "studentCode": "C08TK0112",
+      "submittedAt": "2026-11-03T16:52:47.759Z",
+      "createdAt": "2026-11-03T16:52:47.759Z",
+      "readBy": []
+    },
+    {
+      "id": "notif_1793723665139",
+      "type": "NEW_ASSIGNMENT",
+      "assignmentId": "asm_1793723665139",
+      "title": "abc",
+      "description": "abc",
+      "targetClass": "C08TK01",
+      "subject": "Ví dụ Mẫu",
+      "dueDate": "2026-11-04T16:34",
+      "teacherName": "Nguyễn Tâm",
+      "teacherId": "u_teacher_1793722738431",
+      "createdAt": "2026-11-03T16:34:25.139Z",
+      "readBy": [
+        "u_C08TK0113"
+      ]
+    },
     {
       "id": "notif_sub_1793723438951_cs4o",
       "type": "STUDENT_SUBMITTED",
@@ -1112,7 +1464,9 @@
       "studentCode": "C08TK0118",
       "submittedAt": "2026-11-03T16:30:38.951Z",
       "createdAt": "2026-11-03T16:30:38.951Z",
-      "readBy": []
+      "readBy": [
+        "u_C08TK0112"
+      ]
     },
     {
       "id": "notif_sub_1793723437876_saxz",
@@ -1195,6 +1549,15 @@
       "teacherName": "Thầy Nguyễn Công Danh",
       "teacherEmail": "josepdanh@gmail.com",
       "createdAt": "2026-11-03T11:34:25.403Z"
+    },
+    {
+      "id": "subj_1793723626731",
+      "name": "Ví dụ Mẫu",
+      "className": "C08TK01",
+      "teacherId": "u_teacher_1793722738431",
+      "teacherName": "Nguyễn Tâm",
+      "teacherEmail": "app.gioitreloduc@gmail.com",
+      "createdAt": "2026-11-03T16:33:46.731Z"
     }
   ],
   "submissions": [
@@ -1647,10 +2010,14 @@
       "assignmentId": "asm_1793609039129",
       "studentId": "u_C08TK0112",
       "studentName": "Ngô Đỗ Minh Thùy",
-      "content": "",
+      "content": "NỘP BÀI BÁO CÁO",
       "link": "",
-      "file": null,
-      "submittedAt": "2026-11-03T15:14:26.046Z",
+      "file": {
+        "filename": "1793724770459_C08TK0112_NGODOMINHTHUY.pptx",
+        "originalName": "C08TK0112-NGODOMINHTHUY.pptx",
+        "size": 20318867
+      },
+      "submittedAt": "2026-11-03T16:52:53.230Z",
       "grade": null,
       "feedback": "",
       "gradedAt": "2026-11-03T15:14:26.046Z"
@@ -1783,7 +2150,7 @@
       "gradedAt": "2026-11-03T15:14:26.046Z"
     }
   ],
-  "updatedAt": "2026-11-03T16:30:38.953Z",
+  "updatedAt": "2026-11-03T17:05:05.543Z",
   "users": [
     {
       "id": "u_teacher_danh",

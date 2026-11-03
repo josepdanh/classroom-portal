@@ -679,6 +679,9 @@
           <span>Tất Cả Người Dùng</span>
           <span id="admin-total-users-tab" class="bg-slate-200 text-slate-700 text-xs px-2 py-0.5 rounded-full font-bold">0</span>
         </button>
+        <button onclick="switchAdminTab('cleanup')" id="tab-btn-cleanup" class="pb-3 text-sm font-semibold text-slate-500 hover:text-slate-700 border-b-2 border-transparent flex items-center gap-2 transition">
+          <span><i class="fa-solid fa-cloud-arrow-down mr-1 text-sky-500"></i>Dọn Dẹp Đám Mây (60 Ngày)</span>
+        </button>
       </div>
 
       <!-- Nội dung Tab -->
@@ -747,6 +750,63 @@
                 <!-- Render qua JS -->
               </tbody>
             </table>
+          </div>
+        </div>
+
+        <!-- Tab 4: Tự Động Dọn Dẹp Cloudinary (60 Ngày) -->
+        <div id="admin-view-cleanup" class="hidden space-y-4">
+          <div class="bg-sky-50 border border-sky-200 rounded-2xl p-5 text-sky-900">
+            <div class="flex items-start gap-3.5">
+              <div class="w-10 h-10 rounded-xl bg-sky-600 text-white flex items-center justify-center shrink-0 shadow-sm text-lg">
+                <i class="fa-solid fa-cloud-arrow-down"></i>
+              </div>
+              <div class="flex-1">
+                <h4 class="font-bold text-base text-sky-950">Chính Sách Tự Động Dọn Dẹp File Cloudinary (60 Ngày)</h4>
+                <p class="text-xs text-sky-700 mt-1 leading-relaxed">
+                  Để tối ưu hóa dung lượng lưu trữ trên Cloudinary (giữ dung lượng tài khoản miễn phí luôn dồi dào), hệ thống sẽ <strong>tự động xóa vĩnh viễn các tệp tin đính kèm (đề bài & bài nộp học sinh)</strong> trên Cloudinary sau <strong>60 ngày</strong> tính từ ngày kết thúc nhiệm vụ (<code class="bg-sky-100 px-1 py-0.5 rounded font-mono text-xs">dueDate</code>).
+                </p>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-3 mt-4 pt-4 border-t border-sky-200/80 text-xs">
+              <div class="bg-white/80 backdrop-blur rounded-xl p-3 border border-sky-100">
+                <div class="font-bold text-slate-800 flex items-center gap-1.5 mb-1">
+                  <i class="fa-solid fa-calendar-check text-sky-600"></i> Mốc Thời Gian 60 Ngày
+                </div>
+                <div class="text-slate-600">Chỉ xóa file của những bài tập có ngày kết thúc đã qua hơn 60 ngày. Các bài đang diễn ra hoặc mới kết thúc được bảo vệ tuyệt đối.</div>
+              </div>
+
+              <div class="bg-white/80 backdrop-blur rounded-xl p-3 border border-sky-100">
+                <div class="font-bold text-slate-800 flex items-center gap-1.5 mb-1">
+                  <i class="fa-solid fa-database text-emerald-600"></i> Bảo Toàn Học Vụ 100%
+                </div>
+                <div class="text-slate-600">Điểm số, nhận xét, bảng điểm Excel, lịch sử nộp bài của sinh viên vẫn lưu đầy đủ trong CSDL, chỉ giải phóng file lưu trữ đám mây.</div>
+              </div>
+
+              <div class="bg-white/80 backdrop-blur rounded-xl p-3 border border-sky-100">
+                <div class="font-bold text-slate-800 flex items-center gap-1.5 mb-1">
+                  <i class="fa-solid fa-robot text-indigo-600"></i> 3 Cơ Chế Vận Hành
+                </div>
+                <div class="text-slate-600">Tự động ngầm trên máy chủ (24h/lần), GitHub Actions (07:00 sáng hàng ngày) và nút kích hoạt thủ công bên dưới.</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Bảng điều khiển kích hoạt thủ công -->
+          <div class="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm space-y-4">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+              <div>
+                <h5 class="font-bold text-slate-800 text-sm">Kích Hoạt Quét & Dọn Dẹp Thủ Công Ngay Lập Tức</h5>
+                <p class="text-xs text-slate-500 mt-0.5">Quét toàn bộ CSDL và xóa ngay các file quá hạn 60 ngày trên Cloudinary mà không cần đợi lịch hẹn tự động.</p>
+              </div>
+              <button id="btn-run-cleanup" onclick="triggerCloudinaryCleanup()" class="px-5 py-2.5 rounded-xl bg-gradient-to-r from-sky-600 to-indigo-600 hover:from-sky-700 hover:to-indigo-700 text-white text-xs font-bold shadow-md shadow-sky-200 flex items-center justify-center gap-2 transition shrink-0 active:scale-95">
+                <i class="fa-solid fa-bolt"></i>
+                <span>Chạy Quét & Dọn Dẹp Cloudinary Ngay</span>
+              </button>
+            </div>
+
+            <!-- Hộp kết quả hiển thị sau khi quét -->
+            <div id="admin-cleanup-result" class="hidden"></div>
           </div>
         </div>
       </div>
@@ -4121,14 +4181,16 @@
       const tabPending = document.getElementById('tab-btn-pending');
       const tabTeachers = document.getElementById('tab-btn-teachers');
       const tabAll = document.getElementById('tab-btn-all');
+      const tabCleanup = document.getElementById('tab-btn-cleanup');
       const viewPending = document.getElementById('admin-view-pending');
       const viewTeachers = document.getElementById('admin-view-teachers');
       const viewAll = document.getElementById('admin-view-all');
+      const viewCleanup = document.getElementById('admin-view-cleanup');
 
-      [tabPending, tabTeachers, tabAll].forEach(b => {
+      [tabPending, tabTeachers, tabAll, tabCleanup].forEach(b => {
         if (b) b.className = "pb-3 text-sm font-semibold text-slate-500 hover:text-slate-700 border-b-2 border-transparent flex items-center gap-2 transition";
       });
-      [viewPending, viewTeachers, viewAll].forEach(v => {
+      [viewPending, viewTeachers, viewAll, viewCleanup].forEach(v => {
         if (v) v.classList.add('hidden');
       });
 
@@ -4138,9 +4200,82 @@
       } else if (tab === 'teachers') {
         if (tabTeachers) tabTeachers.className = "pb-3 text-sm font-bold text-indigo-600 border-b-2 border-indigo-600 flex items-center gap-2 transition";
         if (viewTeachers) viewTeachers.classList.remove('hidden');
+      } else if (tab === 'cleanup') {
+        if (tabCleanup) tabCleanup.className = "pb-3 text-sm font-bold text-indigo-600 border-b-2 border-indigo-600 flex items-center gap-2 transition";
+        if (viewCleanup) viewCleanup.classList.remove('hidden');
       } else {
         if (tabAll) tabAll.className = "pb-3 text-sm font-bold text-indigo-600 border-b-2 border-indigo-600 flex items-center gap-2 transition";
         if (viewAll) viewAll.classList.remove('hidden');
+      }
+    }
+
+    async function triggerCloudinaryCleanup() {
+      const btn = document.getElementById('btn-run-cleanup');
+      const resultBox = document.getElementById('admin-cleanup-result');
+      if (btn) {
+        btn.disabled = true;
+        btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin mr-2"></i>Đang quét dọn Cloudinary...';
+      }
+      if (resultBox) {
+        resultBox.classList.remove('hidden');
+        resultBox.innerHTML = '<div class="p-4 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-600 flex items-center gap-2"><i class="fa-solid fa-circle-notch fa-spin text-indigo-500"></i> Đang kết nối CSDL và Cloudinary để quét các bài tập quá hạn 60 ngày...</div>';
+      }
+
+      try {
+        const res = await fetch('/api/admin/cleanup-expired-files', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ adminId: currentUser ? currentUser.id : 'u_teacher_danh' })
+        });
+        const data = await res.json();
+        if (data.success) {
+          const r = data.result || {};
+          const mbFreed = ( (r.freedBytesEstimate || 0) / (1024 * 1024) ).toFixed(2);
+          showToast("Dọn dẹp Cloudinary hoàn tất!", "success");
+          if (resultBox) {
+            resultBox.innerHTML = `
+              <div class="p-4 bg-emerald-50 border border-emerald-200 rounded-xl text-emerald-900 text-sm space-y-3">
+                <div class="font-bold flex items-center gap-2 text-emerald-800">
+                  <i class="fa-solid fa-circle-check text-emerald-600 text-base"></i> Quét dọn hoàn tất thành công!
+                </div>
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5 pt-1">
+                  <div class="bg-white p-3 rounded-xl border border-emerald-100 text-center shadow-xs">
+                    <div class="text-[11px] font-medium text-slate-400 uppercase tracking-wide">Bài tập đã quét</div>
+                    <div class="text-base font-black text-slate-800 mt-0.5">${r.scannedAssignments ?? 0}</div>
+                  </div>
+                  <div class="bg-white p-3 rounded-xl border border-emerald-100 text-center shadow-xs">
+                    <div class="text-[11px] font-medium text-slate-400 uppercase tracking-wide">Quá hạn (&gt;60 ngày)</div>
+                    <div class="text-base font-black text-amber-600 mt-0.5">${r.expiredAssignmentsCount ?? 0}</div>
+                  </div>
+                  <div class="bg-white p-3 rounded-xl border border-emerald-100 text-center shadow-xs">
+                    <div class="text-[11px] font-medium text-slate-400 uppercase tracking-wide">File đã xóa</div>
+                    <div class="text-base font-black text-rose-600 mt-0.5">${r.deletedFilesCount ?? 0}</div>
+                  </div>
+                  <div class="bg-white p-3 rounded-xl border border-emerald-100 text-center shadow-xs">
+                    <div class="text-[11px] font-medium text-slate-400 uppercase tracking-wide">Đã giải phóng</div>
+                    <div class="text-base font-black text-emerald-600 mt-0.5">${mbFreed} MB</div>
+                  </div>
+                </div>
+                ${r.deletedFilesCount === 0 ? '<p class="text-xs text-slate-500 italic pt-1">Ghi chú: Hiện không có bài tập nào quá hạn 60 ngày hoặc các tệp tin đã được làm sạch trước đó. Dung lượng đám mây của Thầy đang ở trạng thái an toàn nhất!</p>' : ''}
+              </div>
+            `;
+          }
+        } else {
+          showToast(data.message || "Lỗi khi dọn dẹp", "error");
+          if (resultBox) {
+            resultBox.innerHTML = `<div class="p-4 bg-rose-50 border border-rose-200 rounded-xl text-rose-700 text-sm"><i class="fa-solid fa-triangle-exclamation mr-2"></i>${data.message || 'Lỗi xử lý'}</div>`;
+          }
+        }
+      } catch (err) {
+        showToast("Lỗi kết nối máy chủ: " + err.message, "error");
+        if (resultBox) {
+          resultBox.innerHTML = `<div class="p-4 bg-rose-50 border border-rose-200 rounded-xl text-rose-700 text-sm"><i class="fa-solid fa-triangle-exclamation mr-2"></i>Lỗi kết nối: ${err.message}</div>`;
+        }
+      } finally {
+        if (btn) {
+          btn.disabled = false;
+          btn.innerHTML = '<i class="fa-solid fa-bolt mr-2"></i>Chạy Quét & Dọn Dẹp Cloudinary Ngay';
+        }
       }
     }
 

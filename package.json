@@ -9,6 +9,7 @@
     "push-all": "git update-index --no-skip-worktree data.json && git add . && git commit -m 'Dong bo code va CSDL len GitHub' && git push origin main && git update-index --skip-worktree data.json",
     "pull": "git pull origin main",
     "sync-mac": "node sync-to-mac.js",
+    "cleanup-expired": "node cleanup-cloudinary-expired.js",
     "open-mac": "open ~/Downloads/EduClass_BaiTap"
   },
   "dependencies": {

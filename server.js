@@ -2199,6 +2199,51 @@ app.get('/api/admin/export-database', (req, res) => {
   res.download(DATA_FILE, `educlass_backup_${dateStr}.json`);
 });
 
+// 11. Tự động hóa công việc xóa file trên Cloudinary sau 60 ngày tính từ ngày kết thúc nhiệm vụ (dueDate)
+const { cleanupExpiredFiles } = require('./cleanup-cloudinary-expired');
+
+// API Kích hoạt dọn dẹp file Cloudinary quá hạn 60 ngày (Chỉ Quản trị viên)
+app.post('/api/admin/cleanup-expired-files', async (req, res) => {
+  const { adminId } = req.body;
+  const db = readDatabase();
+  const caller = (db.users || []).find(u => u.id === adminId);
+  if (!caller || (!caller.isAdmin && caller.id !== 'u_teacher_danh')) {
+    return res.status(403).json({ message: "Chỉ Quản trị viên (Thầy Nguyễn Công Danh) mới có quyền kích hoạt dọn dẹp tệp tin!" });
+  }
+
+  try {
+    const result = await cleanupExpiredFiles();
+    // Tải lại memoryCache sau khi cleanup cập nhật CSDL
+    if (mongoDbCollection) {
+      const cloudDoc = await mongoDbCollection.findOne({ id: 'main' });
+      if (cloudDoc) {
+        delete cloudDoc._id;
+        memoryCache = cloudDoc;
+      }
+    }
+    res.json({ success: true, message: "Đã hoàn tất quá trình quét & dọn dẹp file quá hạn 60 ngày trên Cloudinary!", result });
+  } catch (err) {
+    res.status(500).json({ success: false, message: "Lỗi dọn dẹp: " + err.message });
+  }
+});
+
+// Tiến trình tự động chạy ngầm trên máy chủ mỗi 24 giờ
+async function runAutoCloudinaryCleanup() {
+  try {
+    console.log('[Cloudinary Cleanup Cron] 🕒 Đang kiểm tra định kỳ các bài tập quá hạn 60 ngày...');
+    const res = await cleanupExpiredFiles();
+    if (res && res.deletedFilesCount > 0) {
+      console.log(`[Cloudinary Cleanup Cron] 🧹 Đã tự động xóa ${res.deletedFilesCount} file quá hạn 60 ngày trên Cloudinary!`);
+    }
+  } catch (err) {
+    console.error('[Cloudinary Cleanup Cron] Lỗi kiểm tra:', err.message);
+  }
+}
+
+// Khởi chạy sau 15 giây khi server bật, lặp lại mỗi 24 giờ
+setTimeout(runAutoCloudinaryCleanup, 15000);
+setInterval(runAutoCloudinaryCleanup, 24 * 60 * 60 * 1000);
+
 // Khởi động server (Lắng nghe trên toàn bộ địa chỉ 0.0.0.0 để máy khác trong mạng truy cập được)
 app.listen(PORT, '0.0.0.0', () => {
   console.log(`=======================================================`);
