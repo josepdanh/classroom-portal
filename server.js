@@ -591,6 +591,36 @@ app.delete('/api/admin/users/:id', (req, res) => {
   res.json({ success: true, message: "Đã xóa tài khoản thành công." });
 });
 
+// ================= HỆ THỐNG THÔNG BÁO THỜI GIAN THỰC TỚI THIẾT BỊ HỌC SINH (SSE) =================
+const sseClients = new Set();
+
+function broadcastNotification(notification) {
+  const targetClass = (notification.targetClass || 'ALL').trim().toUpperCase();
+  const payload = JSON.stringify({ type: 'NEW_ASSIGNMENT', notification });
+
+  for (const client of sseClients) {
+    // CHỈ THÔNG BÁO CHO THIẾT BỊ HỌC SINH THUỘC ĐÚNG LỚP ĐƯỢC GIAO (HOẶC ALL)
+    if (targetClass === 'ALL' || client.className === targetClass) {
+      try {
+        client.res.write(`data: ${payload}\n\n`);
+      } catch (err) {
+        console.error("Lỗi gửi thông báo SSE:", err);
+      }
+    }
+  }
+}
+
+// Duy trì kết nối SSE không bị ngắt qua mạng / proxy
+setInterval(() => {
+  for (const client of sseClients) {
+    try {
+      client.res.write(': keepalive\n\n');
+    } catch (e) {
+      sseClients.delete(client);
+    }
+  }
+}, 25000);
+
 // 2. Lấy danh sách bài tập (Phân tách độc lập theo từng Giáo viên và từng Lớp học)
 app.get('/api/assignments', (req, res) => {
   const { studentId, teacherId, teacherFilterClass } = req.query;
@@ -739,9 +769,33 @@ app.post('/api/assignments', upload.single('attachment'), (req, res) => {
   }
 
   db.assignments.unshift(newAssignment);
+
+  // Tạo bản ghi thông báo và gửi ngay tới thiết bị của các học sinh thuộc lớp cleanTargetClass
+  const newNotification = {
+    id: `notif_${Date.now()}`,
+    type: 'NEW_ASSIGNMENT',
+    assignmentId: newAssignment.id,
+    title: newAssignment.title,
+    description: newAssignment.description,
+    targetClass: cleanTargetClass,
+    subject: cleanSubject,
+    dueDate: newAssignment.dueDate,
+    teacherName: teacher ? teacher.name : 'Giáo viên',
+    teacherId: teacher ? teacher.id : (teacherId || 'u_teacher_danh'),
+    createdAt: new Date().toISOString(),
+    readBy: []
+  };
+
+  if (!db.notifications) db.notifications = [];
+  db.notifications.unshift(newNotification);
+  if (db.notifications.length > 100) db.notifications = db.notifications.slice(0, 100);
+
   writeDatabase(db);
 
-  res.json({ success: true, message: `Giao bài tập mới cho lớp ${cleanTargetClass} thành công!`, assignment: newAssignment });
+  // Phát thông báo đẩy tức thời tới các thiết bị học sinh của đúng lớp được giao
+  broadcastNotification(newNotification);
+
+  res.json({ success: true, message: `Giao bài tập mới cho lớp ${cleanTargetClass} thành công! Hệ thống đã phát thông báo tới thiết bị của học sinh.`, assignment: newAssignment });
 });
 
 // 4. Giáo viên xóa bài tập (Chỉ người tạo mới được xóa)
@@ -761,6 +815,9 @@ app.delete('/api/assignments/:id', (req, res) => {
 
   db.assignments = db.assignments.filter(a => a.id !== id);
   db.submissions = db.submissions.filter(s => s.assignmentId !== id);
+  if (db.notifications) {
+    db.notifications = db.notifications.filter(n => n.assignmentId !== id);
+  }
 
   writeDatabase(db);
   res.json({ success: true, message: "Đã xóa bài tập thành công." });
@@ -1381,6 +1438,83 @@ app.get('/api/server-info', (req, res) => {
     currentOrigin,
     publicUrl: tunnelUrl || currentOrigin
   });
+});
+
+// 8e. API Luồng thông báo đẩy thời gian thực (SSE) cho thiết bị học sinh
+app.get('/api/notifications/stream', (req, res) => {
+  const { studentId, className } = req.query;
+  res.setHeader('Content-Type', 'text/event-stream');
+  res.setHeader('Cache-Control', 'no-cache');
+  res.setHeader('Connection', 'keep-alive');
+  if (res.flushHeaders) res.flushHeaders();
+
+  const clientId = `client_${Date.now()}_${Math.random()}`;
+  const client = {
+    id: clientId,
+    res,
+    studentId: studentId || null,
+    className: (className || '').trim().toUpperCase()
+  };
+  sseClients.add(client);
+
+  res.write(`data: ${JSON.stringify({ type: 'CONNECTED', message: 'Đã kết nối thông báo thời gian thực' })}\n\n`);
+
+  req.on('close', () => {
+    sseClients.delete(client);
+  });
+});
+
+// 8f. Lấy danh sách thông báo của học sinh theo Lớp
+app.get('/api/notifications', (req, res) => {
+  const { studentId, className } = req.query;
+  const db = readDatabase();
+  const allNotifs = db.notifications || [];
+
+  if (!className) {
+    return res.json({ success: true, notifications: [], unreadCount: 0 });
+  }
+
+  const cleanClass = className.trim().toUpperCase();
+  // CHỈ LẤY THÔNG BÁO CHO ĐÚNG LỚP NÀY (HOẶC ALL)
+  const classNotifs = allNotifs.filter(
+    n => n.targetClass === 'ALL' || (n.targetClass && n.targetClass.trim().toUpperCase() === cleanClass)
+  );
+
+  const formatted = classNotifs.map(n => ({
+    ...n,
+    isRead: Array.isArray(n.readBy) && studentId ? n.readBy.includes(studentId) : false
+  }));
+
+  const unreadCount = formatted.filter(n => !n.isRead).length;
+  res.json({ success: true, notifications: formatted, unreadCount });
+});
+
+// 8g. Đánh dấu thông báo đã đọc
+app.post('/api/notifications/mark-read', (req, res) => {
+  const { studentId, notificationId, all, className } = req.body;
+  if (!studentId) return res.status(400).json({ message: "Thiếu studentId" });
+
+  const db = readDatabase();
+  if (!db.notifications) db.notifications = [];
+
+  if (all && className) {
+    const cleanClass = className.trim().toUpperCase();
+    db.notifications.forEach(n => {
+      if (n.targetClass === 'ALL' || (n.targetClass && n.targetClass.trim().toUpperCase() === cleanClass)) {
+        if (!Array.isArray(n.readBy)) n.readBy = [];
+        if (!n.readBy.includes(studentId)) n.readBy.push(studentId);
+      }
+    });
+  } else if (notificationId) {
+    const notif = db.notifications.find(n => n.id === notificationId);
+    if (notif) {
+      if (!Array.isArray(notif.readBy)) notif.readBy = [];
+      if (!notif.readBy.includes(studentId)) notif.readBy.push(studentId);
+    }
+  }
+
+  writeDatabase(db);
+  res.json({ success: true, message: "Đã cập nhật trạng thái thông báo" });
 });
 
 // 9. API Trạng thái & Mở thư mục đám mây trên máy Mac
