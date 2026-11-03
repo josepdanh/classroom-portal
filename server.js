@@ -3,7 +3,6 @@ const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
 const os = require('os');
-const { isDriveApiConfigured, uploadToGoogleDrive, setupAndShareSubjectFolder } = require('./googleDrive');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -13,6 +12,7 @@ const DATA_FILE = path.join(__dirname, 'data.json');
 const BACKUP_FILE = path.join(__dirname, 'data.backup.json');
 const BACKUPS_DIR = path.join(__dirname, 'backups');
 const UPLOAD_DIR = path.join(__dirname, 'uploads');
+const MAC_LOCAL_DIR = path.join(os.homedir(), 'Downloads', 'EduClass_BaiTap');
 
 // Tự động tạo thư mục backups và uploads nếu chưa có
 if (!fs.existsSync(BACKUPS_DIR)) {
@@ -31,75 +31,26 @@ function decodeFileName(name) {
   }
 }
 
-// Cấu hình đồng bộ tự động lên Đám mây (Google Drive / OneDrive)
-// Mỗi bài nộp sẽ lưu vào Thư mục cha: [Tên Lớp] -> Thư mục con: [Tên Môn Học]
-const CLOUD_SYNC_ROOTS = [
-  {
-    provider: "gdrive",
-    name: "Google Drive",
-    path: "/Users/Danh/Library/CloudStorage/GoogleDrive-josepdanh@gmail.com/Drive của tôi/EduClass_BaiTap"
-  },
-  {
-    provider: "onedrive",
-    name: "OneDrive",
-    path: "/Users/Danh/Library/CloudStorage/OneDrive-Personal/EduClass_BaiTap"
-  }
-];
-
 function sanitizeFolderName(name) {
   if (!name) return 'Chung';
   return name.trim().replace(/[/\\?%*:|"<>]/g, '_');
 }
 
-async function syncFileToCloudStorage({ filePath, targetClass, subject, studentName, originalName, mimeType }) {
-  if (!filePath || !fs.existsSync(filePath)) return null;
-
-  const cleanClass = sanitizeFolderName(targetClass);
-  const cleanSubject = sanitizeFolderName(subject);
-  const cleanStudent = sanitizeFolderName(studentName);
-  const cleanOriginal = sanitizeFolderName(originalName);
-
-  const formattedFileName = `${cleanStudent}_${cleanOriginal}`;
-  let driveResult = null;
-
-  // 1. Tải lên trực tiếp Google Drive qua Google Drive API (Hoạt động trên cả Render.com và Máy Mac)
-  if (isDriveApiConfigured()) {
-    try {
-      driveResult = await uploadToGoogleDrive({
-        filePath,
-        fileName: formattedFileName,
-        targetClass: cleanClass,
-        subject: cleanSubject,
-        mimeType
-      });
-      if (driveResult) {
-        console.log(`[Google Drive API] ✅ Đã lưu file "${formattedFileName}" lên Google Drive!`);
-      }
-    } catch (apiErr) {
-      console.error('[Google Drive API Lỗi]:', apiErr.message);
+// Hàm lưu trữ bài tập cục bộ trên máy Mac (khi chạy server trên Mac)
+function saveSubmissionLocally({ filePath, targetClass, subject, studentName, originalName }) {
+  if (!filePath || !fs.existsSync(filePath)) return;
+  try {
+    const cleanClass = sanitizeFolderName(targetClass);
+    const cleanSubject = sanitizeFolderName(subject);
+    const cleanStudent = sanitizeFolderName(studentName);
+    const cleanOriginal = sanitizeFolderName(originalName);
+    const destFolder = path.join(MAC_LOCAL_DIR, cleanClass, cleanSubject);
+    if (!fs.existsSync(destFolder)) {
+      fs.mkdirSync(destFolder, { recursive: true });
     }
-  }
-
-  // 2. Đồng bộ vào ứng dụng Google Drive / OneDrive Desktop cục bộ trên máy Mac (nếu có)
-  CLOUD_SYNC_ROOTS.forEach(cloud => {
-    try {
-      const parentDir = path.dirname(cloud.path);
-      if (fs.existsSync(parentDir)) {
-        // Thư mục cha: Tên Lớp | Thư mục con: Môn Học
-        const destFolder = path.join(cloud.path, cleanClass, cleanSubject);
-        if (!fs.existsSync(destFolder)) {
-          fs.mkdirSync(destFolder, { recursive: true });
-        }
-        const destFilePath = path.join(destFolder, formattedFileName);
-        fs.copyFileSync(filePath, destFilePath);
-        console.log(`[Cloud Sync - ${cloud.name}] Đã đồng bộ bài tập vào: ${destFilePath}`);
-      }
-    } catch (err) {
-      console.error(`[Cloud Sync - ${cloud.name} Lỗi]:`, err.message);
-    }
-  });
-
-  return driveResult;
+    const destFilePath = path.join(destFolder, `${cleanStudent}_${cleanOriginal}`);
+    fs.copyFileSync(filePath, destFilePath);
+  } catch (err) {}
 }
 
 // Cấu hình lưu trữ Multer
@@ -667,20 +618,6 @@ app.post('/api/subjects', async (req, res) => {
     return res.status(400).json({ message: `Bạn đã tạo môn "${cleanSubjectName}" cho lớp ${cleanClassName} rồi!` });
   }
 
-  // Tự động tạo thư mục và chia sẻ quyền truy cập Google Drive nếu giáo viên có email
-  let driveInfo = null;
-  if (isDriveApiConfigured() && teacher.email) {
-    try {
-      driveInfo = await setupAndShareSubjectFolder({
-        targetClass: cleanClassName,
-        subject: cleanSubjectName,
-        teacherEmail: teacher.email
-      });
-    } catch (e) {
-      console.error("[Subject Drive Setup Error]:", e.message);
-    }
-  }
-
   const newSubject = {
     id: `subj_${Date.now()}`,
     name: cleanSubjectName,
@@ -688,22 +625,15 @@ app.post('/api/subjects', async (req, res) => {
     teacherId: teacher.id,
     teacherName: teacher.name,
     teacherEmail: teacher.email || null,
-    driveFolderId: driveInfo ? driveInfo.subjectFolderId : null,
-    driveLink: driveInfo ? driveInfo.driveLink : null,
     createdAt: new Date().toISOString()
   };
 
   db.subjects.push(newSubject);
   writeDatabase(db);
 
-  let successMsg = `Đã tạo môn học "${cleanSubjectName}" cho lớp ${cleanClassName} thành công!`;
-  if (teacher.email) {
-    successMsg += ` Thư mục môn học đã được tự động cấp quyền truy cập trên Google Drive tới email: ${teacher.email}`;
-  }
-
   res.json({ 
     success: true, 
-    message: successMsg, 
+    message: `Đã tạo môn học "${cleanSubjectName}" cho lớp ${cleanClassName} thành công!`, 
     subject: newSubject 
   });
 });
@@ -1031,16 +961,15 @@ app.post('/api/assignments', upload.single('attachment'), async (req, res) => {
     createdBy: teacherId || "u_teacher_danh"
   };
 
-  // Đồng bộ đề bài lên Google Drive / OneDrive
+  // Lưu bản đề bài cục bộ nếu chạy trên máy Mac
   if (req.file) {
-    syncFileToCloudStorage({
+    saveSubmissionLocally({
       filePath: req.file.path,
       targetClass: cleanTargetClass,
       subject: cleanSubject,
       studentName: 'DE_BAI',
-      originalName: decodeFileName(req.file.originalname),
-      mimeType: req.file.mimetype
-    }).catch(e => console.error("Cloud sync assignment error:", e));
+      originalName: decodeFileName(req.file.originalname)
+    });
   }
 
   db.assignments.unshift(newAssignment);
@@ -1136,13 +1065,7 @@ app.get('/api/assignments/:id/submissions', (req, res) => {
     };
   });
 
-  const matchedSubject = (db.subjects || []).find(
-    s => s.className && s.className.trim().toUpperCase() === (assignment.targetClass || '').trim().toUpperCase() &&
-         s.name && s.name.trim().toLowerCase() === (assignment.subject || '').trim().toLowerCase()
-  );
-  const driveLink = matchedSubject ? matchedSubject.driveLink : null;
-
-  res.json({ assignment, studentsStatus: list, driveLink });
+  res.json({ assignment, studentsStatus: list });
 });
 
 // 6. Học sinh nộp bài / Cập nhật bài nộp
@@ -1198,18 +1121,17 @@ app.post('/api/submissions', upload.single('submissionFile'), async (req, res) =
       console.error("[Cloudinary] Lỗi tải file học sinh:", e.message);
     }
 
-    // Tự động phân loại và đồng bộ tệp lên Google Drive & OneDrive
-    syncFileToCloudStorage({
+    // Lưu bản sao cục bộ nếu server đang chạy trên máy Mac
+    saveSubmissionLocally({
       filePath: req.file.path,
       targetClass: targetClassName,
       subject: targetSubjectName,
       studentName: studentDisplayName,
-      originalName: fileData.originalName,
-      mimeType: req.file.mimetype
-    }).catch(e => console.error("Cloud sync submission error:", e));
+      originalName: fileData.originalName
+    });
   } else if (link || content) {
     // Nếu học sinh nộp bằng Link (Canva, Figma, Drive...) hoặc Ghi chú:
-    // Tự động tạo tệp lối tắt (.url) ghi rõ thông tin bài làm để đưa lên Google Drive và máy Mac, giúp Thầy Cô luôn thấy bài nộp!
+    // Tạo tệp lối tắt (.url) trên máy Mac để lưu trữ
     const tempDir = path.join(__dirname, 'temp_submissions');
     if (!fs.existsSync(tempDir)) fs.mkdirSync(tempDir, { recursive: true });
 
@@ -1220,16 +1142,14 @@ app.post('/api/submissions', upload.single('submissionFile'), async (req, res) =
     const fileContent = `[InternetShortcut]\nURL=${link || ''}\n\n[ThongTinBaiNop]\nMSSV=${student ? (student.studentCode || student.username) : ''}\nHoVaTen=${student ? student.name : ''}\nLop=${targetClassName}\nMon=${targetSubjectName}\nThoiGianNop=${new Date().toLocaleString('vi-VN')}\nLinkBaiLam=${link || ''}\nGhiChu=${content || ''}\n`;
     fs.writeFileSync(tempFilePath, fileContent, 'utf8');
 
-    syncFileToCloudStorage({
+    saveSubmissionLocally({
       filePath: tempFilePath,
       targetClass: targetClassName,
       subject: targetSubjectName,
       studentName: studentDisplayName,
-      originalName: `${safeName}_BaiNop_LienKet.url`,
-      mimeType: 'text/plain'
-    }).then(() => {
-      try { fs.unlinkSync(tempFilePath); } catch (e) {}
-    }).catch(e => console.error("Cloud sync link submission error:", e));
+      originalName: `${safeName}_BaiNop_LienKet.url`
+    });
+    try { fs.unlinkSync(tempFilePath); } catch (e) {}
   }
 
   if (existingIndex >= 0) {
@@ -2002,45 +1922,23 @@ app.post('/api/notifications/mark-read', (req, res) => {
   res.json({ success: true, message: "Đã cập nhật trạng thái thông báo" });
 });
 
-// 9. API Trạng thái & Mở thư mục đám mây trên máy Mac
+// 9. API Mở thư mục lưu trữ bài nộp trên máy Mac
 app.get('/api/cloud-sync-status', (req, res) => {
-  const status = CLOUD_SYNC_ROOTS.map(cloud => {
-    const parentDir = path.dirname(cloud.path);
-    const isAvailable = fs.existsSync(parentDir);
-    return {
-      provider: cloud.provider,
-      name: cloud.name,
-      path: cloud.path,
-      isAvailable
-    };
-  });
   res.json({ 
-    cloudSyncs: status,
-    googleDriveApi: {
-      configured: isDriveApiConfigured()
-    }
+    localDir: MAC_LOCAL_DIR,
+    isAvailable: fs.existsSync(MAC_LOCAL_DIR)
   });
 });
 
 app.post('/api/open-cloud-folder', (req, res) => {
-  const { provider } = req.body; // 'gdrive' | 'onedrive'
   const { exec } = require('child_process');
-
-  const selected = CLOUD_SYNC_ROOTS.find(c => c.provider === provider) || CLOUD_SYNC_ROOTS[0];
-  const targetPath = selected.path;
-
-  if (!fs.existsSync(targetPath)) {
+  if (!fs.existsSync(MAC_LOCAL_DIR)) {
     try {
-      fs.mkdirSync(targetPath, { recursive: true });
+      fs.mkdirSync(MAC_LOCAL_DIR, { recursive: true });
     } catch (e) {}
   }
-
-  if (fs.existsSync(targetPath)) {
-    exec(`open "${targetPath}"`);
-    return res.json({ success: true, message: `Đã mở thư mục ${selected.name} trên Finder máy Mac!` });
-  } else {
-    return res.status(404).json({ success: false, message: `Chưa tìm thấy thư mục ${selected.name} trên máy Mac.` });
-  }
+  exec(`open "${MAC_LOCAL_DIR}"`);
+  return res.json({ success: true, message: `Đã mở thư mục EduClass_BaiTap trên máy Mac!` });
 });
 
 // 10. API Tải về bản sao lưu dữ liệu toàn hệ thống (Backup CSDL data.json)

@@ -8,9 +8,8 @@ const { exec } = require('child_process');
 const REMOTE_SERVER_URL = process.env.SERVER_URL || 'https://classroom-portal-jlkb.onrender.com';
 const LOCAL_SERVER_URL = 'http://localhost:3000';
 
-// Các thư mục đích trên máy Mac
-const MAC_GDRIVE_DIR = '/Users/Danh/Library/CloudStorage/GoogleDrive-josepdanh@gmail.com/Drive của tôi/EduClass_BaiTap';
-const MAC_DOWNLOADS_DIR = path.join(require('os').homedir(), 'Downloads', 'EduClass_BaiTap');
+// Thư mục lưu trữ bài nộp trên máy Mac
+const MAC_TARGET_DIR = path.join(require('os').homedir(), 'Downloads', 'EduClass_BaiTap');
 const PROJECT_UPLOADS_DIR = path.join(__dirname, 'uploads');
 
 function fetchJson(targetUrl) {
@@ -115,13 +114,9 @@ async function startSync() {
     const studentName = sanitizeName(student.name || sub.studentName || 'HocSinh');
     const prefix = studentCode ? `${studentCode}_${studentName}` : studentName;
 
-    // Chọn thư mục lưu trên máy Mac: Ưu tiên thư mục Google Drive Desktop, nếu chưa có thì lưu vào Downloads
-    let rootTargetDir = MAC_DOWNLOADS_DIR;
-    if (fs.existsSync(path.dirname(MAC_GDRIVE_DIR))) {
-      rootTargetDir = MAC_GDRIVE_DIR;
-    }
-    const primaryFolder = path.join(rootTargetDir, className, subjectName);
-    if (!openedFolder) openedFolder = rootTargetDir;
+    // Thư mục lưu trên máy Mac: Downloads/EduClass_BaiTap/[Lớp]/[Môn]
+    const primaryFolder = path.join(MAC_TARGET_DIR, className, subjectName);
+    if (!openedFolder) openedFolder = MAC_TARGET_DIR;
 
     if (!fs.existsSync(primaryFolder)) {
       fs.mkdirSync(primaryFolder, { recursive: true });

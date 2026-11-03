@@ -684,8 +684,6 @@
       "teacherId": "u_teacher_danh",
       "teacherName": "Thầy Nguyễn Công Danh",
       "teacherEmail": "josepdanh@gmail.com",
-      "driveFolderId": "1xahcgOj8_Yi2X_3TI9yg8RSVbIVAaclk",
-      "driveLink": "https://drive.google.com/drive/folders/1xahcgOj8_Yi2X_3TI9yg8RSVbIVAaclk",
       "createdAt": "2026-11-02T11:20:43.229Z"
     },
     {
@@ -695,8 +693,6 @@
       "teacherId": "u_teacher_danh",
       "teacherName": "Thầy Nguyễn Công Danh",
       "teacherEmail": "josepdanh@gmail.com",
-      "driveFolderId": "13PN5Sza1a1sSrbGNj1TMOUP8lnvsgpAJ",
-      "driveLink": "https://drive.google.com/drive/folders/13PN5Sza1a1sSrbGNj1TMOUP8lnvsgpAJ",
       "createdAt": "2026-11-02T11:50:27.358Z"
     },
     {
@@ -715,8 +711,6 @@
       "teacherId": "u_teacher_danh",
       "teacherName": "Thầy Nguyễn Công Danh",
       "teacherEmail": "josepdanh@gmail.com",
-      "driveFolderId": "1HLIgB_8cnUoAjObz3CoLnb3RDDRGgwj3",
-      "driveLink": "https://drive.google.com/drive/folders/1HLIgB_8cnUoAjObz3CoLnb3RDDRGgwj3",
       "createdAt": "2026-11-03T03:28:43.354Z"
     }
   ],
@@ -821,7 +815,7 @@
       "feedback": null
     }
   ],
-  "updatedAt": "2026-11-03T07:37:59.725Z",
+  "updatedAt": "2026-11-03T07:56:42.799Z",
   "users": [
     {
       "id": "u_teacher_danh",
