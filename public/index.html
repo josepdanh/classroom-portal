@@ -428,19 +428,27 @@
         </div>
       </div>
 
-      <!-- Thanh quản lý & Lọc theo Lớp học (Hiển thị cho tất cả giáo viên) -->
-      <div class="bg-white rounded-2xl border border-slate-200 p-4 shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-        <div class="flex items-center gap-2 overflow-x-auto pb-1 sm:pb-0" id="teacher-class-tabs">
-          <!-- Render danh sách tab lớp học qua JS -->
+      <!-- Thanh quản lý & Lọc theo Nhóm Ngành và Lớp học (Hiển thị cho tất cả giáo viên) -->
+      <div class="bg-white rounded-2xl border border-slate-200 p-4 shadow-sm flex flex-col gap-3">
+        <!-- Dòng 1: Bộ lọc Nhóm Ngành Đào Tạo & Các nút tác vụ -->
+        <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-3 pb-3 border-b border-slate-100">
+          <div class="flex items-center gap-1.5 overflow-x-auto pb-1 lg:pb-0" id="teacher-industry-tabs">
+            <!-- Tabs nhóm ngành: Tất Cả / Thiết Kế Đồ Họa / CNTT / May Thời Trang -->
+          </div>
+          <div class="flex items-center gap-2 self-start lg:self-auto shrink-0 flex-wrap">
+            <button onclick="openCreateSubjectModal()" class="text-xs font-semibold px-3.5 py-1.5 rounded-xl bg-violet-50 text-violet-700 hover:bg-violet-100 transition flex items-center gap-1.5 border border-violet-200 shadow-sm" title="Giáo viên tự tạo môn học cho lớp đang chọn">
+              <i class="fa-solid fa-book-bookmark text-sm"></i> + Tạo Môn Học Cho Lớp
+            </button>
+            <!-- Nút chỉ hiển thị cho Quản trị viên (Thầy Nguyễn Công Danh) -->
+            <button id="btn-create-class" onclick="promptCreateClass()" class="hidden text-xs font-semibold px-3 py-1.5 rounded-xl bg-amber-500 hover:bg-amber-600 text-white transition flex items-center gap-1.5 shadow-sm" title="Chỉ Thầy Nguyễn Công Danh mới có quyền tạo thêm lớp">
+              <i class="fa-solid fa-folder-plus text-sm"></i> + Tạo Lớp Mới (Admin)
+            </button>
+          </div>
         </div>
-        <div class="flex items-center gap-2 self-start sm:self-auto shrink-0 flex-wrap">
-          <button onclick="openCreateSubjectModal()" class="text-xs font-semibold px-3.5 py-2 rounded-xl bg-violet-50 text-violet-700 hover:bg-violet-100 transition flex items-center gap-1.5 border border-violet-200 shadow-sm" title="Giáo viên tự tạo môn học cho lớp đang chọn">
-            <i class="fa-solid fa-book-bookmark text-sm"></i> + Tạo Môn Học Cho Lớp
-          </button>
-          <!-- Nút chỉ hiển thị cho Quản trị viên (Thầy Nguyễn Công Danh) -->
-          <button id="btn-create-class" onclick="promptCreateClass()" class="hidden text-xs font-semibold px-3 py-2 rounded-xl bg-amber-500 hover:bg-amber-600 text-white transition flex items-center gap-1.5 shadow-sm" title="Chỉ Thầy Nguyễn Công Danh mới có quyền tạo thêm lớp">
-            <i class="fa-solid fa-folder-plus text-sm"></i> + Tạo Lớp Mới (Admin)
-          </button>
+
+        <!-- Dòng 2: Danh sách các lớp học thuộc nhóm ngành đang chọn -->
+        <div class="flex items-center gap-2 overflow-x-auto pb-1" id="teacher-class-tabs">
+          <!-- Render danh sách tab lớp học qua JS -->
         </div>
       </div>
 
@@ -1322,6 +1330,8 @@
     let currentViewingAssignmentId = null;
     let teacherSelectedClass = 'ALL';
     let availableClasses = [];
+    let availableIndustryGroups = [];
+    let teacherSelectedIndustry = 'ALL';
 
     // ================= XEM TRỰC TIẾP FILE TRÊN WEB (FILE PREVIEWER) =================
     let currentPreviewState = {
@@ -2209,12 +2219,13 @@
       }
     }
 
-    // ================= QUẢN LÝ LỚP HỌC (CLASSES) =================
+    // ================= QUẢN LÝ LỚP HỌC (CLASSES) & NHÓM NGÀNH =================
     async function loadClasses() {
       try {
         const res = await fetch('/api/classes');
         const data = await res.json();
         availableClasses = data.classes || [];
+        availableIndustryGroups = data.industryGroups || [];
         renderTeacherClassTabs();
         populateClassDropdowns();
       } catch (e) {
@@ -2222,22 +2233,89 @@
       }
     }
 
+    function setTeacherIndustryFilter(indId) {
+      teacherSelectedIndustry = indId;
+      // Nếu lớp hiện tại không thuộc nhóm ngành mới chọn thì đưa về 'ALL'
+      if (indId !== 'ALL' && teacherSelectedClass !== 'ALL') {
+        const curGroup = (availableIndustryGroups || []).find(g => g.id === indId);
+        if (curGroup && !(curGroup.classes || []).map(c => c.toUpperCase()).includes(teacherSelectedClass.toUpperCase())) {
+          teacherSelectedClass = 'ALL';
+          renderTeacherSubjectsChips();
+          loadTeacherData();
+        }
+      }
+      renderTeacherClassTabs();
+    }
+
+    function setTeacherClassFilter(cls) {
+      teacherSelectedClass = cls;
+      // Tự động đồng bộ nhóm ngành tương ứng nếu chọn một lớp cụ thể
+      if (cls !== 'ALL') {
+        const parentGroup = (availableIndustryGroups || []).find(g => (g.classes || []).map(c => c.toUpperCase()).includes(cls.toUpperCase()));
+        if (parentGroup && teacherSelectedIndustry !== 'ALL' && teacherSelectedIndustry !== parentGroup.id) {
+          teacherSelectedIndustry = parentGroup.id;
+        }
+      }
+      renderTeacherClassTabs();
+      renderTeacherSubjectsChips();
+      loadTeacherData();
+    }
+
     function renderTeacherClassTabs() {
+      // 1. Render Tabs Nhóm Ngành Đào Tạo
+      const indContainer = document.getElementById('teacher-industry-tabs');
+      if (indContainer) {
+        const isAllInd = teacherSelectedIndustry === 'ALL';
+        let indHtml = `
+          <button onclick="setTeacherIndustryFilter('ALL')" class="px-3 py-1.5 rounded-xl text-xs font-bold transition flex items-center gap-1.5 shrink-0 ${isAllInd ? 'bg-indigo-600 text-white shadow-sm' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'}">
+            <i class="fa-solid fa-shapes"></i> Tất Cả Ngành (${availableClasses.length})
+          </button>
+        `;
+
+        (availableIndustryGroups || []).forEach(g => {
+          const isActive = teacherSelectedIndustry === g.id;
+          const count = (g.classes || []).length;
+          const icon = g.icon || (g.id === 'thiet_ke_do_hoa' ? 'fa-palette' : (g.id === 'may_thoi_trang' ? 'fa-shirt' : 'fa-laptop-code'));
+          indHtml += `
+            <button onclick="setTeacherIndustryFilter('${g.id}')" class="px-3 py-1.5 rounded-xl text-xs font-bold transition flex items-center gap-1.5 shrink-0 ${isActive ? 'bg-indigo-600 text-white shadow-sm' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'}">
+              <i class="fa-solid ${icon}"></i> ${escapeHtml(g.name)} (${count})
+            </button>
+          `;
+        });
+        indContainer.innerHTML = indHtml;
+      }
+
+      // 2. Render Tabs Lớp Học tương ứng
       const container = document.getElementById('teacher-class-tabs');
       if (!container) return;
+
+      let classesToShow = availableClasses;
+      if (teacherSelectedIndustry !== 'ALL') {
+        const curGroup = (availableIndustryGroups || []).find(g => g.id === teacherSelectedIndustry);
+        if (curGroup) {
+          classesToShow = (curGroup.classes || []).filter(c => availableClasses.includes(c));
+        }
+      }
 
       const isAll = teacherSelectedClass === 'ALL';
       let html = `
         <button onclick="setTeacherClassFilter('ALL')" class="px-3.5 py-1.5 rounded-xl text-xs font-bold transition flex items-center gap-1.5 shrink-0 ${isAll ? 'bg-indigo-600 text-white shadow-sm' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'}">
-          <i class="fa-solid fa-layer-group"></i> Tất Cả Lớp
+          <i class="fa-solid fa-layer-group"></i> ${teacherSelectedIndustry === 'ALL' ? 'Tất Cả Lớp' : 'Tất Cả Lớp Thuộc Ngành'}
         </button>
       `;
 
-      availableClasses.forEach(cls => {
+      classesToShow.forEach(cls => {
         const isActive = teacherSelectedClass === cls;
+        let badge = '';
+        if (teacherSelectedIndustry === 'ALL') {
+          if (cls.includes('TK')) badge = `<span class="text-[9px] px-1 py-0.2 rounded bg-indigo-100 text-indigo-700 font-bold ml-1">Đồ Họa</span>`;
+          else if (cls.includes('MA')) badge = `<span class="text-[9px] px-1 py-0.2 rounded bg-pink-100 text-pink-700 font-bold ml-1">May</span>`;
+          else badge = `<span class="text-[9px] px-1 py-0.2 rounded bg-blue-100 text-blue-700 font-bold ml-1">CNTT</span>`;
+        }
+
         html += `
-          <button onclick="setTeacherClassFilter('${cls}')" class="px-3.5 py-1.5 rounded-xl text-xs font-bold transition flex items-center gap-1.5 shrink-0 ${isActive ? 'bg-indigo-600 text-white shadow-sm' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'}">
-            <i class="fa-solid fa-users"></i> Lớp ${escapeHtml(cls)}
+          <button onclick="setTeacherClassFilter('${cls}')" class="px-3 py-1.5 rounded-xl text-xs font-bold transition flex items-center gap-1 shrink-0 ${isActive ? 'bg-indigo-600 text-white shadow-sm' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'}">
+            <i class="fa-solid fa-users"></i> Lớp ${escapeHtml(cls)}${badge}
           </button>
         `;
       });
@@ -2245,51 +2323,74 @@
       container.innerHTML = html;
     }
 
+    function buildGroupedClassOptionsHtml(selectedValue, includeAll = false, allLabel = "-- Tất cả các lớp (Toàn trường) --") {
+      let html = '';
+      if (includeAll) {
+        const isAllSel = (!selectedValue || selectedValue === 'ALL') ? 'selected' : '';
+        html += `<option value="ALL" ${isAllSel}>${allLabel}</option>`;
+      }
+
+      if (availableIndustryGroups && availableIndustryGroups.length > 0) {
+        const handledClasses = new Set();
+        availableIndustryGroups.forEach(group => {
+          const gClasses = (group.classes || []).filter(c => availableClasses.includes(c));
+          if (gClasses.length > 0) {
+            const iconEmoji = (group.id === 'thiet_ke_do_hoa') ? '🎨' : (group.id === 'may_thoi_trang' ? '✂️' : '💻');
+            html += `<optgroup label="${iconEmoji} ${escapeHtml(group.name)} (${gClasses.length} lớp)">`;
+            gClasses.forEach(cls => {
+              handledClasses.add(cls);
+              const isSel = (cls === selectedValue) ? 'selected' : '';
+              html += `<option value="${cls}" ${isSel}>Lớp ${escapeHtml(cls)}</option>`;
+            });
+            html += `</optgroup>`;
+          }
+        });
+
+        const remaining = availableClasses.filter(c => !handledClasses.has(c));
+        if (remaining.length > 0) {
+          html += `<optgroup label="📁 Lớp khác (${remaining.length} lớp)">`;
+          remaining.forEach(cls => {
+            const isSel = (cls === selectedValue) ? 'selected' : '';
+            html += `<option value="${cls}" ${isSel}>Lớp ${escapeHtml(cls)}</option>`;
+          });
+          html += `</optgroup>`;
+        }
+      } else {
+        availableClasses.forEach(cls => {
+          const isSel = (cls === selectedValue) ? 'selected' : '';
+          html += `<option value="${cls}" ${isSel}>Lớp ${escapeHtml(cls)}</option>`;
+        });
+      }
+      return html;
+    }
+
     function populateClassDropdowns() {
       // 1. Dropdown khi Giáo viên tạo bài tập
       const selectCreate = document.getElementById('create-target-class');
       if (selectCreate) {
-        let html = `<option value="ALL">-- Tất cả các lớp (Toàn trường) --</option>`;
-        availableClasses.forEach(cls => {
-          const isSelected = (teacherSelectedClass === cls || cls === 'T15MG02') ? 'selected' : '';
-          html += `<option value="${cls}" ${isSelected}>Lớp ${escapeHtml(cls)}</option>`;
-        });
-        selectCreate.innerHTML = html;
+        const curVal = selectCreate.value || (teacherSelectedClass !== 'ALL' ? teacherSelectedClass : 'ALL');
+        selectCreate.innerHTML = buildGroupedClassOptionsHtml(curVal, true, "-- Tất cả các lớp (Toàn trường) --");
       }
 
       // 2. Dropdown cho Học sinh chọn lớp khi đăng ký
       const selectReg = document.getElementById('reg-class');
       if (selectReg && availableClasses.length > 0) {
         const curVal = selectReg.value || 'T15MG02';
-        let html = '';
-        availableClasses.forEach(cls => {
-          const isSel = (cls === curVal || cls === 'T15MG02') ? 'selected' : '';
-          html += `<option value="${cls}" ${isSel}>Lớp ${escapeHtml(cls)}</option>`;
-        });
-        selectReg.innerHTML = html;
+        selectReg.innerHTML = buildGroupedClassOptionsHtml(curVal, false);
       }
 
       // 3. Dropdown cho Giáo viên chọn lớp khi tạo Môn học mới
       const selectSubjClass = document.getElementById('subject-target-class');
       if (selectSubjClass && availableClasses.length > 0) {
-        let html = '';
-        availableClasses.forEach(cls => {
-          const isSel = (teacherSelectedClass === cls || cls === 'T15MG02') ? 'selected' : '';
-          html += `<option value="${cls}" ${isSel}>Lớp ${escapeHtml(cls)}</option>`;
-        });
-        selectSubjClass.innerHTML = html;
+        const curVal = selectSubjClass.value || (teacherSelectedClass !== 'ALL' ? teacherSelectedClass : (availableClasses[0] || 'T15MG02'));
+        selectSubjClass.innerHTML = buildGroupedClassOptionsHtml(curVal, false);
       }
 
       // 4. Dropdown chọn lớp cho Bảng Điểm Thành Phần
       const selectGsClass = document.getElementById('gs-select-class');
       if (selectGsClass && availableClasses.length > 0) {
         const curVal = selectGsClass.value || (availableClasses.includes('T15MG02') ? 'T15MG02' : availableClasses[0]);
-        let html = '';
-        availableClasses.forEach(cls => {
-          const isSel = (cls === curVal) ? 'selected' : '';
-          html += `<option value="${cls}" ${isSel}>Lớp ${escapeHtml(cls)}</option>`;
-        });
-        selectGsClass.innerHTML = html;
+        selectGsClass.innerHTML = buildGroupedClassOptionsHtml(curVal, false);
       }
     }
 
@@ -2511,14 +2612,19 @@
         return;
       }
 
-      const name = prompt("Nhập tên lớp học mới cần tạo (ví dụ: C09TK, 11A2, 12A1):");
+      const name = prompt("Nhập tên lớp học mới cần tạo (ví dụ: T16TK01, C11TH01, T16MA01):");
       if (!name || !name.trim()) return;
+
+      let industryGroupId = 'cong_nghe_thong_tin';
+      const cleanUpper = name.trim().toUpperCase();
+      if (cleanUpper.includes('TK')) industryGroupId = 'thiet_ke_do_hoa';
+      else if (cleanUpper.includes('MA')) industryGroupId = 'may_thoi_trang';
 
       try {
         const res = await fetch('/api/classes', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ name: name.trim(), adminId: currentUser.id })
+          body: JSON.stringify({ name: name.trim(), adminId: currentUser.id, industryGroupId })
         });
         const data = await res.json();
         if (!res.ok) {
@@ -2538,12 +2644,6 @@
       }
     }
 
-    function setTeacherClassFilter(cls) {
-      teacherSelectedClass = cls;
-      renderTeacherClassTabs();
-      renderTeacherSubjectsChips();
-      loadTeacherData();
-    }
 
     async function openCloudFolder(provider) {
       try {

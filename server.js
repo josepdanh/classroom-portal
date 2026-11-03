@@ -124,6 +124,67 @@ const initialData = {
 const { MongoClient } = require('mongodb');
 const MONGODB_URI = process.env.MONGODB_URI || "mongodb+srv://josepdanh_db_user:RZr9ZyW1u8Itji2H@cluster0.jdus1os.mongodb.net/educlass?retryWrites=true&w=majority";
 
+// Danh mục chuẩn 3 Nhóm Ngành & 24 Lớp học
+const DEFAULT_INDUSTRY_GROUPS = [
+  {
+    id: "thiet_ke_do_hoa",
+    name: "Ngành Thiết Kế Đồ Họa",
+    icon: "fa-palette",
+    color: "indigo",
+    classes: [
+      "T14TK01", "T14TK02", "T15TK01", "T15TK02", "C08TK01", "C09TK01", "C10TK01", "L09TK01"
+    ]
+  },
+  {
+    id: "cong_nghe_thong_tin",
+    name: "Ngành Công Nghệ Thông Tin",
+    icon: "fa-laptop-code",
+    color: "blue",
+    classes: [
+      "T14TH01", "T14TH02", "T14MT01", "T14MG01", "T15TH01", "T15TH02", "T15MT01", "T15MT02", "T15MG01", "T15MG02", "L09MG01"
+    ]
+  },
+  {
+    id: "may_thoi_trang",
+    name: "Ngành May Thời Trang",
+    icon: "fa-shirt",
+    color: "pink",
+    classes: [
+      "T14MA01", "T14MA02", "T15MA01", "T15MA02", "L09MA01"
+    ]
+  }
+];
+
+function ensureClassInIndustryGroup(db, className, industryGroupId = null) {
+  if (!className || className === 'ALL') return;
+  const cleanName = className.trim().toUpperCase();
+  if (!db.classes) db.classes = [];
+  if (!db.classes.map(c => c.toUpperCase()).includes(cleanName)) {
+    db.classes.push(cleanName);
+    db.classes.sort();
+  }
+  if (!db.industryGroups || db.industryGroups.length === 0) {
+    db.industryGroups = JSON.parse(JSON.stringify(DEFAULT_INDUSTRY_GROUPS));
+  }
+  const alreadyInGroup = db.industryGroups.some(g => (g.classes || []).map(c => c.toUpperCase()).includes(cleanName));
+  if (!alreadyInGroup) {
+    let targetGroupId = industryGroupId;
+    if (!targetGroupId) {
+      if (cleanName.includes("TK")) targetGroupId = "thiet_ke_do_hoa";
+      else if (cleanName.includes("MA")) targetGroupId = "may_thoi_trang";
+      else targetGroupId = "cong_nghe_thong_tin";
+    }
+    const group = db.industryGroups.find(g => g.id === targetGroupId) || db.industryGroups[0];
+    if (group) {
+      if (!group.classes) group.classes = [];
+      if (!group.classes.includes(cleanName)) {
+        group.classes.push(cleanName);
+        group.classes.sort();
+      }
+    }
+  }
+}
+
 let mongoClient = null;
 let mongoDbCollection = null;
 let memoryCache = null;
@@ -233,7 +294,12 @@ function readLocalJsonFile() {
     const data = JSON.parse(raw);
     if (!data.gradeSheets) data.gradeSheets = [];
     if (!data.subjects) data.subjects = [];
-    if (!data.classes) data.classes = [];
+    if (!data.classes || data.classes.length === 0) {
+      data.classes = DEFAULT_INDUSTRY_GROUPS.flatMap(g => g.classes).sort();
+    }
+    if (!data.industryGroups || data.industryGroups.length === 0) {
+      data.industryGroups = JSON.parse(JSON.stringify(DEFAULT_INDUSTRY_GROUPS));
+    }
     if (!data.notifications) data.notifications = [];
     if (!data.assignments) data.assignments = [];
     if (!data.submissions) data.submissions = [];
@@ -545,26 +611,41 @@ app.post('/api/auth/register', (req, res) => {
   return res.json({ success: true, pendingApproval: isTeacher, message: msg, user: isTeacher ? null : userInfo });
 });
 
-// 1c. Quản lý danh mục Lớp học
+// 1c. Quản lý danh mục Lớp học & Nhóm ngành đào tạo
 app.get('/api/classes', (req, res) => {
   const db = readDatabase();
   const classesFromUsers = db.users
     .filter(u => u.role === 'student' && u.className)
     .map(u => u.className.trim().toUpperCase());
   const definedClasses = (db.classes || []).map(c => c.trim().toUpperCase());
-  const allUnique = Array.from(new Set([...definedClasses, ...classesFromUsers])).filter(Boolean).sort();
-  res.json({ classes: allUnique });
+  
+  const groups = (db.industryGroups && db.industryGroups.length > 0) ? db.industryGroups : JSON.parse(JSON.stringify(DEFAULT_INDUSTRY_GROUPS));
+  const classesFromGroups = groups.flatMap(g => g.classes || []).map(c => c.trim().toUpperCase());
+
+  const allUnique = Array.from(new Set([...classesFromGroups, ...definedClasses, ...classesFromUsers])).filter(Boolean).sort();
+
+  // Đảm bảo từng lớp đều thuộc về một nhóm ngành cụ thể
+  allUnique.forEach(cls => {
+    ensureClassInIndustryGroup(db, cls);
+  });
+
+  const finalGroups = (db.industryGroups && db.industryGroups.length > 0) ? db.industryGroups : groups;
+
+  res.json({
+    classes: allUnique,
+    industryGroups: finalGroups
+  });
 });
 
 // CHỈ ADMIN (Thầy Nguyễn Công Danh) MỚI CÓ QUYỀN TẠO THÊM LỚP HỌC MỚI
 app.post('/api/classes', (req, res) => {
-  const { name, adminId } = req.body;
+  const { name, adminId, industryGroupId } = req.body;
   if (!name || !name.trim()) {
     return res.status(400).json({ message: "Vui lòng nhập tên lớp học." });
   }
 
   const db = readDatabase();
-  const admin = db.users.find(u => u.id === adminId && u.isAdmin);
+  const admin = db.users.find(u => (u.id === adminId && u.isAdmin) || (u.id === 'u_teacher_danh'));
   if (!admin) {
     return res.status(403).json({ 
       message: "Chỉ Quản trị viên (Thầy Nguyễn Công Danh) mới có quyền tạo thêm lớp học mới! Các giáo viên khác chỉ chọn lớp và tự tạo môn học cho lớp đó." 
@@ -572,12 +653,16 @@ app.post('/api/classes', (req, res) => {
   }
 
   const cleanName = name.trim().toUpperCase();
-  if (!db.classes) db.classes = [];
-  if (!db.classes.map(c => c.toUpperCase()).includes(cleanName)) {
-    db.classes.push(cleanName);
-    writeDatabase(db);
-  }
-  res.json({ success: true, message: `Đã tạo lớp ${cleanName} thành công!`, className: cleanName });
+  ensureClassInIndustryGroup(db, cleanName, industryGroupId);
+  writeDatabase(db);
+
+  const matchedGroup = (db.industryGroups || []).find(g => (g.classes || []).map(c => c.toUpperCase()).includes(cleanName));
+  res.json({
+    success: true,
+    message: `Đã tạo lớp ${cleanName} ${matchedGroup ? `thuộc ${matchedGroup.name}` : ''} thành công!`,
+    className: cleanName,
+    industryGroup: matchedGroup
+  });
 });
 
 // 1e. Quản lý Môn học (Giáo viên tự tạo môn học cho từng lớp)
@@ -920,10 +1005,7 @@ app.post('/api/assignments', upload.single('attachment'), async (req, res) => {
 
   // Tự động ghi nhớ lớp mới nếu chưa có
   if (cleanTargetClass !== 'ALL') {
-    if (!db.classes) db.classes = [];
-    if (!db.classes.map(c => c.toUpperCase()).includes(cleanTargetClass)) {
-      db.classes.push(cleanTargetClass);
-    }
+    ensureClassInIndustryGroup(db, cleanTargetClass);
 
     // Tự động lưu môn học vào danh mục môn của lớp này nếu chưa có
     if (!db.subjects) db.subjects = [];

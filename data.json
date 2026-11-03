@@ -27,15 +27,30 @@
     }
   ],
   "classes": [
-    "T14TK01",
-    "T14TK02",
-    "T15TK01",
-    "T15TK02",
-    "L09TK01",
     "C08TK01",
     "C09TK01",
     "C10TK01",
-    "T15MG02"
+    "L09MA01",
+    "L09MG01",
+    "L09TK01",
+    "T14MA01",
+    "T14MA02",
+    "T14MG01",
+    "T14MT01",
+    "T14TH01",
+    "T14TH02",
+    "T14TK01",
+    "T14TK02",
+    "T15MA01",
+    "T15MA02",
+    "T15MG01",
+    "T15MG02",
+    "T15MT01",
+    "T15MT02",
+    "T15TH01",
+    "T15TH02",
+    "T15TK01",
+    "T15TK02"
   ],
   "gradeSheets": [
     {
@@ -677,6 +692,20 @@
   ],
   "notifications": [
     {
+      "id": "notif_sub_1793721204555_l6c2",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793609039129",
+      "assignmentTitle": "Làm bài báo cáo về 10 nguyên lý chuyển động trong motion graphics",
+      "targetClass": "C08TK01",
+      "subject": "Xử Lý Kỹ Xảo với After Effects",
+      "studentId": "u_C08TK0115",
+      "studentName": "Nguyễn Ngọc Trân",
+      "studentCode": "C08TK0115",
+      "submittedAt": "2026-11-03T15:53:24.555Z",
+      "createdAt": "2026-11-03T15:53:24.555Z",
+      "readBy": []
+    },
+    {
       "id": "notif_sub_1793719571166_4yeq",
       "type": "STUDENT_SUBMITTED",
       "assignmentId": "asm_1793677200000",
@@ -1218,10 +1247,15 @@
       "assignmentId": "asm_1793609039129",
       "studentId": "u_C08TK0115",
       "studentName": "Nguyễn Ngọc Trân",
-      "content": "",
+      "content": "file pdf ạ",
       "link": "",
-      "file": null,
-      "submittedAt": "2026-11-03T15:14:26.046Z",
+      "file": {
+        "filename": "1793721202302_NguyenNgocTran_C08TK0115.pdf",
+        "originalName": "NguyenNgocTran-C08TK0115.pdf",
+        "size": 2748196,
+        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1793721203/educlass_submissions/C08TK01/X%E1%BB%AD%20L%C3%BD%20K%E1%BB%B9%20X%E1%BA%A3o%20v%E1%BB%9Bi%20After%20Effects/1793721202302_NguyenNgocTran_C08TK0115_lhyli9.pdf"
+      },
+      "submittedAt": "2026-11-03T15:53:24.555Z",
       "grade": null,
       "feedback": "",
       "gradedAt": "2026-11-03T15:14:26.046Z"
@@ -1305,7 +1339,7 @@
       "gradedAt": "2026-11-03T15:14:26.046Z"
     }
   ],
-  "updatedAt": "2026-11-03T15:14:26.047Z",
+  "updatedAt": "2026-11-03T16:05:47.872Z",
   "users": [
     {
       "id": "u_teacher_danh",
@@ -2579,6 +2613,70 @@
       "className": "T15TK02",
       "status": "ACTIVE",
       "createdAt": "2026-11-03T11:34:25.403Z"
+    },
+    {
+      "id": "u_teacher_1793720273149",
+      "username": "Quang_giaovien",
+      "studentCode": null,
+      "password": "123456789",
+      "name": "Nguyễn Văn Quang",
+      "dob": null,
+      "email": "nvquang24@gmail.com",
+      "role": "teacher",
+      "className": null,
+      "subject": "nvquang24@gmail.com",
+      "status": "ACTIVE",
+      "createdAt": "2026-11-03T15:37:53.149Z"
+    }
+  ],
+  "industryGroups": [
+    {
+      "id": "thiet_ke_do_hoa",
+      "name": "Ngành Thiết Kế Đồ Họa",
+      "icon": "fa-palette",
+      "color": "indigo",
+      "classes": [
+        "C08TK01",
+        "C09TK01",
+        "C10TK01",
+        "L09TK01",
+        "T14TK01",
+        "T14TK02",
+        "T15TK01",
+        "T15TK02"
+      ]
+    },
+    {
+      "id": "cong_nghe_thong_tin",
+      "name": "Ngành Công Nghệ Thông Tin",
+      "icon": "fa-laptop-code",
+      "color": "blue",
+      "classes": [
+        "T14TH01",
+        "T14TH02",
+        "T14MT01",
+        "T14MG01",
+        "T15TH01",
+        "T15TH02",
+        "T15MT01",
+        "T15MT02",
+        "T15MG01",
+        "T15MG02",
+        "L09MG01"
+      ]
+    },
+    {
+      "id": "may_thoi_trang",
+      "name": "Ngành May Thời Trang",
+      "icon": "fa-shirt",
+      "color": "pink",
+      "classes": [
+        "T14MA01",
+        "T14MA02",
+        "T15MA01",
+        "T15MA02",
+        "L09MA01"
+      ]
     }
   ]
 }
