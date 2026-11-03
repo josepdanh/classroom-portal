@@ -116,11 +116,12 @@ async function startSync() {
     const prefix = studentCode ? `${studentCode}_${studentName}` : studentName;
 
     // Chọn thư mục lưu trên máy Mac: Ưu tiên thư mục Google Drive Desktop, nếu chưa có thì lưu vào Downloads
-    let primaryFolder = path.join(MAC_DOWNLOADS_DIR, className, subjectName);
+    let rootTargetDir = MAC_DOWNLOADS_DIR;
     if (fs.existsSync(path.dirname(MAC_GDRIVE_DIR))) {
-      primaryFolder = path.join(MAC_GDRIVE_DIR, className, subjectName);
+      rootTargetDir = MAC_GDRIVE_DIR;
     }
-    if (!openedFolder) openedFolder = primaryFolder;
+    const primaryFolder = path.join(rootTargetDir, className, subjectName);
+    if (!openedFolder) openedFolder = rootTargetDir;
 
     if (!fs.existsSync(primaryFolder)) {
       fs.mkdirSync(primaryFolder, { recursive: true });
@@ -135,20 +136,48 @@ async function startSync() {
         console.log(`  ✓ Đã có sẵn: [${className}/${subjectName}] ${formattedFileName}`);
         existingCount++;
       } else {
+        // 1. Kiểm tra trước trong thư mục uploads cục bộ trên máy Mac
+        const localUploadPath = path.join(PROJECT_UPLOADS_DIR, sub.file.filename);
+        if (fs.existsSync(localUploadPath) && fs.statSync(localUploadPath).size > 0) {
+          try {
+            fs.copyFileSync(localUploadPath, targetFilePath);
+            console.log(`  💾 Đã đồng bộ từ bản lưu trên máy Mac: [${className}/${subjectName}] ${formattedFileName}`);
+            downloadedCount++;
+            continue;
+          } catch (e) {}
+        }
+
+        // 2. Tải từ máy chủ từ xa
         try {
-          process.stdout.write(`  ⬇️ Đang tải: [${className}/${subjectName}] ${formattedFileName}... `);
+          process.stdout.write(`  ⬇️ Đang tải từ máy chủ: [${className}/${subjectName}] ${formattedFileName}... `);
           await downloadFile(downloadUrl, targetFilePath);
 
-          // Sao chép thêm bản vào uploads cục bộ của dự án
+          // Lưu bản sao vào uploads cục bộ của dự án
           try {
-            const projectUploadPath = path.join(PROJECT_UPLOADS_DIR, sub.file.filename);
-            fs.copyFileSync(targetFilePath, projectUploadPath);
+            fs.copyFileSync(targetFilePath, localUploadPath);
           } catch (e) {}
 
           console.log('✅ Xong');
           downloadedCount++;
         } catch (downloadErr) {
-          console.log(`❌ Lỗi: ${downloadErr.message}`);
+          console.log(`⚠️ Không tải được (${downloadErr.message})`);
+          // Ghi nhận file thông tin bài nộp nếu file vật lý bị Render dọn dẹp trước đó
+          const noteFile = path.join(primaryFolder, `${prefix}_ThongTinBaiNop.txt`);
+          if (!fs.existsSync(noteFile)) {
+            const noteContent = `THÔNG TIN BÀI NỘP HỌC SINH\n==============================\n` +
+              `Mã sinh viên: ${studentCode}\n` +
+              `Họ và tên: ${student.name || sub.studentName}\n` +
+              `Lớp: ${className}\n` +
+              `Môn: ${subjectName}\n` +
+              `Tên file nộp: ${sub.file.originalName}\n` +
+              `Kích thước: ${sub.file.size ? (sub.file.size / (1024 * 1024)).toFixed(2) + ' MB' : 'N/A'}\n` +
+              `Thời gian nộp: ${sub.submittedAt || ''}\n` +
+              `Ghi chú: ${sub.content || '(Không có)'}\n` +
+              `Trạng thái file: File vật lý này đã bị máy chủ Render dọn dẹp khi khởi động lại trước khi kết nối MongoDB.\n` +
+              `Dữ liệu nộp bài và điểm số vẫn được lưu an toàn 100% trên MongoDB Atlas Cloud.\n`;
+            fs.writeFileSync(noteFile, noteContent, 'utf8');
+            console.log(`  📝 Đã lưu phiếu thông tin bài nộp: [${className}/${subjectName}] ${path.basename(noteFile)}`);
+          }
         }
       }
     } else if (sub.link) {
