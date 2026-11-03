@@ -1,0 +1,32 @@
+name: Tự Động Xóa File Cloudinary Quá Hạn 60 Ngày
+on:
+  schedule:
+    # Tự động thực thi vào 00:00 UTC hàng ngày (tức 07:00 sáng giờ Việt Nam)
+    - cron: '0 0 * * *'
+  # Cho phép bấm nút "Run workflow" thủ công trên GitHub bất cứ lúc nào
+  workflow_dispatch:
+jobs:
+  cleanup-cloudinary-files:
+    name: Quét & Dọn Dẹp File Quá Hạn
+    runs-on: ubuntu-latest
+    steps:
+      - name: 📥 Tải mã nguồn (Checkout Repository)
+        uses: actions/checkout@v4
+      - name: 🟢 Cài đặt môi trường Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+      - name: 📦 Cài đặt các gói thư viện phụ thuộc
+        run: npm ci || npm install
+      - name: 🧹 Thực thi quét & xóa file quá hạn 60 ngày trên Cloudinary
+        env:
+          MONGODB_URI: ${{ secrets.MONGODB_URI }}
+          CLOUDINARY_URL: ${{ secrets.CLOUDINARY_URL }}
+        run: node cleanup-cloudinary-expired.js
+      - name: 💾 Tự động đồng bộ cập nhật CSDL (nếu có file bị xóa)
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "EduClass Automation Bot"
+          git add data.json data.backup.json || true
+          git diff --quiet && git diff --staged --quiet || (git commit -m "chore(auto): Tu dong xoa file Cloudinary qua han 60 ngay [skip ci]" && git push)
