@@ -1837,8 +1837,80 @@ app.delete('/api/grade-sheets/:id', (req, res) => {
   res.json({ success: true, message: "Đã xóa bảng điểm." });
 });
 
+// Hàm hỗ trợ tìm kiếm URL đám mây của file (Tra cứu CSDL và Auto-Recovery trên Cloudinary)
+async function findCloudUrlForFile(filename, db) {
+  if (!filename) return null;
+  const decodedName = decodeURIComponent(filename);
+  const cleanBase = filename.replace(/\.[^/.]+$/, "").replace(/^\d+_/, "");
+
+  // 1. Tìm chính xác trong submissions
+  for (const s of (db.submissions || [])) {
+    if (s.file && (s.file.filename === filename || s.file.originalName === filename || s.file.filename === decodedName || s.file.originalName === decodedName)) {
+      if (s.file.url) return s.file.url;
+    }
+  }
+
+  // 2. Tìm chính xác trong assignments (file đính kèm đề bài)
+  for (const a of (db.assignments || [])) {
+    if (a.attachment && (a.attachment.filename === filename || a.attachment.originalName === filename || a.attachment.filename === decodedName || a.attachment.originalName === decodedName)) {
+      if (a.attachment.url) return a.attachment.url;
+    }
+  }
+
+  // 3. Tìm tương đối trong submissions và assignments (nếu có URL chứa tên file)
+  if (cleanBase.length > 3) {
+    for (const s of (db.submissions || [])) {
+      if (s.file && s.file.url) {
+        if (s.file.url.includes(cleanBase) || s.file.url.includes(encodeURIComponent(cleanBase))) {
+          return s.file.url;
+        }
+      }
+    }
+    for (const a of (db.assignments || [])) {
+      if (a.attachment && a.attachment.url) {
+        if (a.attachment.url.includes(cleanBase) || a.attachment.url.includes(encodeURIComponent(cleanBase))) {
+          return a.attachment.url;
+        }
+      }
+    }
+  }
+
+  // 4. Tra cứu trực tiếp trên Cloudinary (Auto-Recovery qua Cloudinary API nếu CSDL bị mất URL)
+  if (cloudinary) {
+    try {
+      const resCloud = await cloudinary.api.resources({
+        resource_type: 'raw',
+        type: 'upload',
+        prefix: 'educlass_submissions/',
+        max_results: 500
+      });
+      const match = (resCloud.resources || []).find(r => {
+        const pid = r.public_id || '';
+        return pid.includes(filename) || pid.includes(decodedName) || (cleanBase.length > 3 && (pid.includes(cleanBase) || pid.includes(encodeURIComponent(cleanBase))));
+      });
+      if (match) {
+        console.log(`[Cloud Auto-Recovery] ☁️ Đã tìm thấy file "${filename}" trên Cloudinary: ${match.secure_url}`);
+        // Tự động khôi phục URL cho submission nếu chưa có
+        for (const s of (db.submissions || [])) {
+          if (s.file && !s.file.url && (s.file.filename === filename || s.file.originalName === filename || s.file.filename === decodedName || s.file.originalName === decodedName)) {
+            s.file.url = match.secure_url;
+            s.file.publicId = match.public_id;
+            writeDatabase(db);
+            break;
+          }
+        }
+        return match.secure_url;
+      }
+    } catch (err) {
+      console.error('[Cloud Auto-Recovery Error]:', err.message);
+    }
+  }
+
+  return null;
+}
+
 // 8. Tải tệp tin
-app.get('/api/download/:filename', (req, res) => {
+app.get('/api/download/:filename', async (req, res) => {
   const { filename } = req.params;
   const downloadName = req.query.name || filename;
   const filePath = path.join(UPLOAD_DIR, filename);
@@ -1849,31 +1921,49 @@ app.get('/api/download/:filename', (req, res) => {
 
   // Nếu file vật lý không còn trên ổ cứng tạm của Render, tìm URL lưu trên Cloudinary
   const db = readDatabase();
-  let cloudUrl = null;
-  const decodedName = decodeURIComponent(filename);
-
-  for (const s of (db.submissions || [])) {
-    if (s.file && (s.file.filename === filename || s.file.originalName === filename || s.file.filename === decodedName || s.file.originalName === decodedName)) {
-      if (s.file.url) { cloudUrl = s.file.url; break; }
-    }
-  }
-  if (!cloudUrl) {
-    for (const a of (db.assignments || [])) {
-      if (a.attachment && (a.attachment.filename === filename || a.attachment.originalName === filename || a.attachment.filename === decodedName || a.attachment.originalName === decodedName)) {
-        if (a.attachment.url) { cloudUrl = a.attachment.url; break; }
-      }
-    }
-  }
+  const cloudUrl = await findCloudUrlForFile(filename, db);
 
   if (cloudUrl) {
     return res.redirect(cloudUrl);
   }
 
-  return res.status(404).send("Tệp tin không tồn tại trên hệ thống.");
+  // Trang thông báo thân thiện giải thích nếu tệp tin bị xoá trên ổ cứng tạm
+  return res.status(404).send(`
+    <!DOCTYPE html>
+    <html lang="vi">
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Thông Báo Tệp Tin - EduClass</title>
+      <script src="https://cdn.tailwindcss.com"></script>
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    </head>
+    <body class="bg-slate-100 flex items-center justify-center min-h-screen p-4 font-sans">
+      <div class="bg-white max-w-lg w-full p-8 rounded-2xl shadow-xl text-center space-y-4 border border-slate-200">
+        <div class="w-16 h-16 bg-amber-100 text-amber-600 rounded-2xl flex items-center justify-center mx-auto text-2xl shadow-sm">
+          <i class="fa-solid fa-cloud-exclamation"></i>
+        </div>
+        <h2 class="text-xl font-bold text-slate-800">Tệp Tin Không Còn Trên Máy Chủ Tạm</h2>
+        <p class="text-sm text-slate-600 leading-relaxed">
+          Tệp tin <span class="font-semibold text-slate-800 break-all">${filename}</span> không còn tồn tại trên ổ cứng tạm của máy chủ (do Render tự động giải phóng bộ nhớ khi khởi động lại).
+        </p>
+        <div class="p-3.5 bg-emerald-50 border border-emerald-200 rounded-xl text-xs text-emerald-800 text-left space-y-1">
+          <div class="font-bold flex items-center gap-1.5"><i class="fa-solid fa-shield-check text-emerald-600"></i> Dữ liệu học vụ an toàn 100%:</div>
+          <div>Mọi thông tin nộp bài, điểm số, nhận xét và danh sách học sinh vẫn được lưu trữ vĩnh viễn trên Cơ sở dữ liệu MongoDB Atlas.</div>
+        </div>
+        <div class="pt-2">
+          <button onclick="window.history.back()" class="px-5 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-semibold text-sm shadow-md transition inline-flex items-center gap-2">
+            <i class="fa-solid fa-arrow-left"></i> Quay lại trang trước
+          </button>
+        </div>
+      </div>
+    </body>
+    </html>
+  `);
 });
 
 // 8b. Xem nội dung file trực tiếp trên Web (Xem Inline / Preview)
-app.get('/api/raw-file/:filename', (req, res) => {
+app.get('/api/raw-file/:filename', async (req, res) => {
   const { filename } = req.params;
   const filePath = path.join(UPLOAD_DIR, filename);
 
@@ -1882,14 +1972,8 @@ app.get('/api/raw-file/:filename', (req, res) => {
   }
 
   const db = readDatabase();
-  let cloudUrl = null;
-  const decodedName = decodeURIComponent(filename);
+  const cloudUrl = await findCloudUrlForFile(filename, db);
 
-  for (const s of (db.submissions || [])) {
-    if (s.file && (s.file.filename === filename || s.file.originalName === filename || s.file.filename === decodedName || s.file.originalName === decodedName)) {
-      if (s.file.url) { cloudUrl = s.file.url; break; }
-    }
-  }
   if (cloudUrl) {
     return res.redirect(cloudUrl);
   }
@@ -1898,20 +1982,32 @@ app.get('/api/raw-file/:filename', (req, res) => {
 });
 
 // 8c. Đọc nội dung file dạng văn bản / mã nguồn để hiển thị trực tiếp
-app.get('/api/file-text/:filename', (req, res) => {
+app.get('/api/file-text/:filename', async (req, res) => {
   const { filename } = req.params;
   const filePath = path.join(UPLOAD_DIR, filename);
 
-  if (!fs.existsSync(filePath)) {
-    return res.status(404).json({ error: "Tệp tin không tồn tại." });
+  if (fs.existsSync(filePath)) {
+    try {
+      const content = fs.readFileSync(filePath, 'utf8');
+      return res.json({ success: true, content, size: fs.statSync(filePath).size });
+    } catch (err) {
+      return res.status(500).json({ error: "Không thể đọc nội dung văn bản: " + err.message });
+    }
   }
 
-  try {
-    const content = fs.readFileSync(filePath, 'utf8');
-    res.json({ success: true, content, size: fs.statSync(filePath).size });
-  } catch (err) {
-    res.status(500).json({ error: "Không thể đọc nội dung văn bản: " + err.message });
+  const db = readDatabase();
+  const cloudUrl = await findCloudUrlForFile(filename, db);
+  if (cloudUrl) {
+    try {
+      const fetchRes = await fetch(cloudUrl);
+      if (fetchRes.ok) {
+        const content = await fetchRes.text();
+        return res.json({ success: true, content, size: content.length });
+      }
+    } catch (e) {}
   }
+
+  return res.status(404).json({ error: "Tệp tin không tồn tại." });
 });
 
 // 8d. Tải toàn bộ bài nộp của 1 bài tập dưới dạng file ZIP (gom theo lớp và môn)

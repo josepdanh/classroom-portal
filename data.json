@@ -1391,6 +1391,39 @@
   ],
   "notifications": [
     {
+      "id": "notif_sub_1793727103111_1kgo",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793723665139",
+      "assignmentTitle": "abc",
+      "targetClass": "C08TK01",
+      "subject": "Ví dụ Mẫu",
+      "studentId": "u_C08TK0113",
+      "studentName": "Nguyễn Vũ Anh Thư",
+      "studentCode": "C08TK0113",
+      "submittedAt": "2026-11-03T17:31:43.111Z",
+      "createdAt": "2026-11-03T17:31:43.111Z",
+      "readBy": [
+        "u_C08TK0104"
+      ]
+    },
+    {
+      "id": "notif_sub_1793726843729_8vl3",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793609039129",
+      "assignmentTitle": "Làm bài báo cáo về 10 nguyên lý chuyển động trong motion graphics",
+      "targetClass": "C08TK01",
+      "subject": "Xử Lý Kỹ Xảo với After Effects",
+      "studentId": "u_C08TK0113",
+      "studentName": "Nguyễn Vũ Anh Thư",
+      "studentCode": "C08TK0113",
+      "submittedAt": "2026-11-03T17:27:23.729Z",
+      "createdAt": "2026-11-03T17:27:23.729Z",
+      "readBy": [
+        "u_C08TK0113",
+        "u_C08TK0104"
+      ]
+    },
+    {
       "id": "notif_sub_1793724773230_4xl4",
       "type": "STUDENT_SUBMITTED",
       "assignmentId": "asm_1793609039129",
@@ -1434,7 +1467,9 @@
       "studentCode": "C08TK0112",
       "submittedAt": "2026-11-03T16:52:47.759Z",
       "createdAt": "2026-11-03T16:52:47.759Z",
-      "readBy": []
+      "readBy": [
+        "u_C08TK0113"
+      ]
     },
     {
       "id": "notif_1793723665139",
@@ -1606,7 +1641,9 @@
       "file": {
         "filename": "1793677316388_bai_catalog_gom_vs1.indd",
         "originalName": "bài catalog gom vs1.indd",
-        "size": 7421952
+        "size": 7421952,
+        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1793691394/educlass_submissions/T14TK01/1793677316388_bai_catalog_gom_vs1_k98ahf.indd",
+        "publicId": "educlass_submissions/T14TK01/1793677316388_bai_catalog_gom_vs1_k98ahf.indd"
       },
       "submittedAt": "2026-11-03T03:45:00.000Z",
       "grade": null,
@@ -2027,10 +2064,10 @@
       "assignmentId": "asm_1793609039129",
       "studentId": "u_C08TK0113",
       "studentName": "Nguyễn Vũ Anh Thư",
-      "content": "",
-      "link": "",
+      "content": "Nộp Bài 10 nguyên lý",
+      "link": "https://canva.link/2dt4w9svdnxjhuv",
       "file": null,
-      "submittedAt": "2026-11-03T15:14:26.046Z",
+      "submittedAt": "2026-11-03T17:27:23.729Z",
       "grade": null,
       "feedback": "",
       "gradedAt": "2026-11-03T15:14:26.046Z"
@@ -2148,9 +2185,22 @@
       "grade": null,
       "feedback": "",
       "gradedAt": "2026-11-03T15:14:26.046Z"
+    },
+    {
+      "id": "sub_1793727103111",
+      "assignmentId": "asm_1793723665139",
+      "studentId": "u_C08TK0113",
+      "studentName": "C08TK0113",
+      "content": "Nguyenvuanhthu- nopbai ạ",
+      "link": "https://canva.link/2dt4w9svdnxjhuv",
+      "file": null,
+      "submittedAt": "2026-11-03T17:31:43.111Z",
+      "grade": null,
+      "feedback": null,
+      "gradedAt": null
     }
   ],
-  "updatedAt": "2026-11-03T17:05:05.543Z",
+  "updatedAt": "2026-11-03T23:16:17.880Z",
   "users": [
     {
       "id": "u_teacher_danh",

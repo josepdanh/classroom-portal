@@ -139,16 +139,17 @@ async function cleanupExpiredFiles() {
       console.log(`   - Có ${relatedSubmissions.length} lượt nộp bài cần kiểm tra file đám mây...`);
 
       for (const sub of relatedSubmissions) {
-        if (sub.fileData && sub.fileData.url && !sub.fileData.cloudinaryDeleted) {
-          const publicId = sub.fileData.publicId || extractCloudinaryPublicId(sub.fileData.url);
+        const fileObj = sub.file || sub.fileData;
+        if (fileObj && fileObj.url && !fileObj.cloudinaryDeleted) {
+          const publicId = fileObj.publicId || extractCloudinaryPublicId(fileObj.url);
           if (publicId) {
             console.log(`     + Xóa bài nộp [${sub.studentName || sub.studentId}]: ${publicId}...`);
             const res = await destroyCloudinaryFile(publicId);
-            sub.fileData.cloudinaryDeleted = true;
-            sub.fileData.deletedAt = now.toISOString();
-            sub.fileData.cleanupReason = `Tự động xóa sau ${diffDays} ngày kể từ ngày kết thúc nhiệm vụ`;
+            fileObj.cloudinaryDeleted = true;
+            fileObj.deletedAt = now.toISOString();
+            fileObj.cleanupReason = `Tự động xóa sau ${diffDays} ngày kể từ ngày kết thúc nhiệm vụ`;
             deletedFilesCount++;
-            freedBytesEstimate += (sub.fileData.size || 0);
+            freedBytesEstimate += (fileObj.size || 0);
             deletedDetails.push({
               type: 'submission_file',
               assignmentId: asm.id,
