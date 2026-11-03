@@ -188,6 +188,15 @@ function readDatabase() {
     if (!data.assignments) data.assignments = [];
     if (!data.submissions) data.submissions = [];
 
+    // Tự động chuẩn hóa mã số sinh viên (studentCode) cho toàn bộ học sinh
+    if (data.users && Array.isArray(data.users)) {
+      data.users.forEach(u => {
+        if (u.role === 'student' && !u.studentCode && u.username) {
+          u.studentCode = u.username.trim().toUpperCase();
+        }
+      });
+    }
+
     // Nếu data.json đọc tốt và có dữ liệu, tự động đồng bộ sang bản backup an toàn
     if (data.assignments.length > 0 || (data.users && data.users.length > 3)) {
       try {
@@ -281,13 +290,16 @@ app.post('/api/auth/login', (req, res) => {
   const cleanInputUser = norm(username);
   const cleanInputPass = password.trim();
 
-  // Tìm người dùng: hỗ trợ không phân biệt hoa thường, có dấu tiếng Việt, có/không khoảng trắng
+  // Tìm người dùng: hỗ trợ không phân biệt hoa thường, có dấu tiếng Việt, có/không khoảng trắng, đăng nhập bằng MSSV hoặc username
   const user = db.users.find(u => {
     const dbUserNorm = norm(u.username);
     const dbNameNorm = norm(u.name);
+    const dbCodeNorm = norm(u.studentCode);
     const userMatch = (
       u.username.trim().toLowerCase() === username.trim().toLowerCase() ||
+      (u.studentCode && u.studentCode.trim().toLowerCase() === username.trim().toLowerCase()) ||
       dbUserNorm === cleanInputUser ||
+      (dbCodeNorm && dbCodeNorm === cleanInputUser) ||
       (dbNameNorm === cleanInputUser && u.role === 'teacher') ||
       (cleanInputUser.includes('nguyencongdanh') && dbUserNorm.includes('nguyencongdanh'))
     );
@@ -340,15 +352,29 @@ app.get('/api/auth/verify', (req, res) => {
 
 // 1b. Đăng ký tài khoản mới (Giáo viên hoặc Học sinh)
 app.post('/api/auth/register', (req, res) => {
-  const { username, password, name, role, className, subject, email, dob } = req.body;
+  const { username, password, name, role, className, subject, email, dob, studentCode } = req.body;
   if (!username || !password || !name || !role) {
     return res.status(400).json({ message: "Vui lòng điền đầy đủ các thông tin bắt buộc." });
   }
 
+  const cleanStudentCode = role === 'student'
+    ? (studentCode ? studentCode.trim().toUpperCase() : username.trim().toUpperCase())
+    : undefined;
+
   const db = readDatabase();
-  const existing = db.users.find(u => u.username.toLowerCase() === username.trim().toLowerCase());
+  const existing = db.users.find(u => {
+    if (u.username.toLowerCase() === username.trim().toLowerCase()) return true;
+    if (cleanStudentCode && u.studentCode && u.studentCode.toUpperCase() === cleanStudentCode) return true;
+    return false;
+  });
+
   if (existing) {
-    return res.status(400).json({ message: "Tên đăng nhập này đã tồn tại, vui lòng chọn tên khác." });
+    const isDupCode = cleanStudentCode && existing.studentCode && existing.studentCode.toUpperCase() === cleanStudentCode;
+    return res.status(400).json({ 
+      message: isDupCode 
+        ? `Mã số sinh viên ${cleanStudentCode} đã tồn tại trong hệ thống (thuộc về học sinh ${existing.name})!` 
+        : "Tên đăng nhập này đã tồn tại, vui lòng chọn tên khác." 
+    });
   }
 
   // BẢO VỆ CHỐNG HỌC SINH MẠO DANH GIÁO VIÊN:
@@ -362,6 +388,7 @@ app.post('/api/auth/register', (req, res) => {
   const newUser = {
     id: `u_${role}_${Date.now()}`,
     username: username.trim(),
+    studentCode: cleanStudentCode,
     password: password.trim(),
     name: cleanName,
     dob: cleanDob,
@@ -1180,8 +1207,12 @@ app.get('/api/grade-sheets/sheet', (req, res) => {
     u => u.role === 'student' && u.className && u.className.trim().toUpperCase() === cleanClass
   );
 
-  // Sắp xếp học sinh theo mã HS / username tăng dần
-  registeredStudents.sort((a, b) => (a.username || '').localeCompare(b.username || ''));
+  // Sắp xếp học sinh theo mã HS (studentCode hoặc username) tăng dần
+  registeredStudents.sort((a, b) => {
+    const codeA = a.studentCode || a.username || '';
+    const codeB = b.studentCode || b.username || '';
+    return codeA.localeCompare(codeB, undefined, { numeric: true, sensitivity: 'base' });
+  });
 
   // Tìm giáo viên phụ trách giảng dạy môn học này
   let teacherForSubject = null;
@@ -1226,7 +1257,7 @@ app.get('/api/grade-sheets/sheet', (req, res) => {
     const records = registeredStudents.map((s, idx) => ({
       tt: idx + 1,
       studentId: s.id,
-      studentCode: s.username,
+      studentCode: s.studentCode || s.username,
       name: capitalizeWords(s.name),
       dob: formatDob(s.dob || ""),
       hs1: null,
@@ -1273,13 +1304,18 @@ app.get('/api/grade-sheets/sheet', (req, res) => {
 
     // Duyệt qua tất cả học sinh đã đăng ký trong hệ thống
     registeredStudents.forEach(st => {
-      let rec = sheet.records.find(r => r.studentCode === st.username || r.studentId === st.id);
+      const targetCode = st.studentCode || st.username;
+      let rec = sheet.records.find(r => 
+        (st.id && r.studentId === st.id) ||
+        (st.studentCode && r.studentCode && r.studentCode.toUpperCase() === st.studentCode.toUpperCase()) ||
+        (r.studentCode && r.studentCode.toUpperCase() === st.username.toUpperCase())
+      );
       if (!rec) {
         // Học sinh mới đăng ký -> Tự động thêm vào bảng điểm!
         sheet.records.push({
           tt: sheet.records.length + 1,
           studentId: st.id,
-          studentCode: st.username,
+          studentCode: targetCode,
           name: capitalizeWords(st.name),
           dob: formatDob(st.dob || ""),
           hs1: null,
@@ -1290,21 +1326,25 @@ app.get('/api/grade-sheets/sheet', (req, res) => {
           note: ""
         });
       } else {
-        // Cập nhật thông tin đồng bộ nếu user đã đổi tên hoặc ngày sinh (luôn viết hoa chữ cái đầu và chuẩn hóa ngày sinh)
+        // Cập nhật thông tin đồng bộ nếu user đã đổi MSSV, đổi tên hoặc ngày sinh (luôn viết hoa chữ cái đầu và chuẩn hóa ngày sinh)
+        if (!rec.studentId) rec.studentId = st.id;
+        if (targetCode && (!rec.studentCode || rec.studentCode !== targetCode)) {
+          rec.studentCode = targetCode;
+        }
         rec.name = capitalizeWords(st.name || rec.name || '');
         rec.dob = formatDob(st.dob || rec.dob || '');
-        if (!rec.studentId) rec.studentId = st.id;
       }
     });
 
-    // Chuẩn hóa tên và ngày sinh cho toàn bộ records
+    // Chuẩn hóa tên, ngày sinh và mã HS cho toàn bộ records
     sheet.records.forEach(r => {
       if (r.name) r.name = capitalizeWords(r.name);
       if (r.dob) r.dob = formatDob(r.dob);
+      if (r.studentCode) r.studentCode = r.studentCode.trim().toUpperCase();
     });
 
     // Sắp xếp lại records theo studentCode hoặc TT
-    sheet.records.sort((a, b) => (a.studentCode || '').localeCompare(b.studentCode || ''));
+    sheet.records.sort((a, b) => (a.studentCode || '').localeCompare(b.studentCode || '', undefined, { numeric: true, sensitivity: 'base' }));
 
     // Đánh số thứ tự lại từ 1 đến N
     sheet.records.forEach((r, idx) => {
@@ -1337,15 +1377,21 @@ app.post('/api/grade-sheets/save', (req, res) => {
   }
   sheet.updatedAt = new Date().toISOString();
 
-  // Cập nhật ngày sinh và họ tên ngược lại vào danh sách users nếu giáo viên có sửa trên form
+  // Cập nhật ngày sinh, MSSV và họ tên ngược lại vào danh sách users nếu giáo viên có sửa trên form
   sheet.records.forEach(r => {
     if (r.name) r.name = capitalizeWords(r.name);
     if (r.dob) r.dob = formatDob(r.dob);
     if (r.studentCode) {
-      const u = db.users.find(user => user.username === r.studentCode);
+      r.studentCode = r.studentCode.trim().toUpperCase();
+      const u = db.users.find(user => 
+        (r.studentId && user.id === r.studentId) || 
+        (user.studentCode && user.studentCode.toUpperCase() === r.studentCode.toUpperCase()) || 
+        user.username.toUpperCase() === r.studentCode.toUpperCase()
+      );
       if (u) {
         if (r.dob) u.dob = r.dob;
         if (r.name) u.name = r.name;
+        u.studentCode = r.studentCode;
       }
     }
   });
@@ -1384,13 +1430,18 @@ app.post('/api/grade-sheets/cell', (req, res) => {
     return res.status(404).json({ message: "Không tìm thấy học sinh trong bảng điểm." });
   }
 
-  if (field === 'note' || field === 'dob' || field === 'name') {
+  if (field === 'note' || field === 'dob' || field === 'name' || field === 'studentCode') {
     let cleanVal = value ? String(value).trim() : '';
     if (field === 'name') cleanVal = capitalizeWords(cleanVal);
     if (field === 'dob') cleanVal = formatDob(cleanVal);
+    if (field === 'studentCode') cleanVal = cleanVal.toUpperCase();
     record[field] = cleanVal;
-    if (field === 'dob' || field === 'name') {
-      const u = db.users.find(user => user.username === studentCode);
+    if (field === 'dob' || field === 'name' || field === 'studentCode') {
+      const u = db.users.find(user => 
+        (record.studentId && user.id === record.studentId) || 
+        (user.studentCode && user.studentCode.toUpperCase() === studentCode.toUpperCase()) || 
+        user.username.toUpperCase() === studentCode.toUpperCase()
+      );
       if (u) u[field] = cleanVal;
     }
   } else {

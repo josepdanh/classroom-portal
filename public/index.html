@@ -187,12 +187,12 @@
         <!-- Form Đăng Nhập -->
         <form id="form-login" onsubmit="handleLogin(event)" class="space-y-4">
           <div>
-            <label class="block text-sm font-medium text-slate-700 mb-1">Tài khoản</label>
+            <label class="block text-sm font-medium text-slate-700 mb-1">Tài khoản hoặc Mã số sinh viên (MSSV)</label>
             <div class="relative">
               <span class="absolute inset-y-0 left-0 pl-3 flex items-center text-slate-400">
                 <i class="fa-regular fa-user"></i>
               </span>
-              <input type="text" id="login-username" required class="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-300 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none text-sm transition" placeholder="Tên đăng nhập (VD: NguyenCongDanh, T15MG0201)">
+              <input type="text" id="login-username" required class="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-300 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none text-sm transition" placeholder="Tên đăng nhập hoặc MSSV (VD: C08TK0105, T15MG0201)">
             </div>
           </div>
 
@@ -266,6 +266,18 @@
             </select>
           </div>
 
+          <div id="box-reg-student-code">
+            <label class="block text-sm font-medium text-slate-700 mb-1 flex items-center justify-between">
+              <span><i class="fa-solid fa-id-card text-indigo-500 mr-1.5"></i>Mã số sinh viên (MSSV) <span class="text-red-500">*</span></span>
+              <span class="text-[11px] text-indigo-600 font-semibold">Tự động đưa vào Bảng điểm</span>
+            </label>
+            <input type="text" id="reg-student-code"
+              oninput="onRegStudentCodeInput(this.value)"
+              class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none text-sm bg-white font-bold uppercase tracking-wider text-slate-800"
+              placeholder="Ví dụ: C08TK0105 hoặc C08TK0125">
+            <p class="text-[11px] text-slate-500 mt-1">Mã số sinh viên sẽ tự động đưa vào cột <b>Mã HS</b> trên Bảng điểm và có thể dùng để đăng nhập.</p>
+          </div>
+
           <div id="box-reg-dob">
             <label class="block text-sm font-medium text-slate-700 mb-1 flex items-center justify-between">
               <span><i class="fa-regular fa-calendar-days text-indigo-500 mr-1.5"></i>Ngày sinh <span class="text-red-500">*</span></span>
@@ -297,8 +309,14 @@
           </div>
 
           <div>
-            <label class="block text-sm font-medium text-slate-700 mb-1">Tên đăng nhập <span class="text-red-500">*</span></label>
-            <input type="text" id="reg-username" required class="w-full px-3.5 py-2 rounded-xl border border-slate-300 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none text-sm" placeholder="Viết liền không dấu, ví dụ: nam11a1">
+            <label class="block text-sm font-medium text-slate-700 mb-1 flex items-center justify-between">
+              <span>Tên đăng nhập <span class="text-red-500">*</span></span>
+              <span class="text-[11px] text-slate-400 font-normal">Tự động điền theo MSSV</span>
+            </label>
+            <input type="text" id="reg-username" required
+              oninput="this.dataset.customized = 'true'"
+              class="w-full px-3.5 py-2 rounded-xl border border-slate-300 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none text-sm"
+              placeholder="Viết liền, ví dụ: C08TK0105 hoặc tên riêng">
           </div>
 
           <div>
@@ -482,6 +500,10 @@
           <p id="student-welcome-text" class="text-emerald-100 text-sm mt-1">Theo dõi hạn nộp, gửi bài làm và xem điểm số, nhận xét từ thầy cô</p>
         </div>
         <div class="flex items-center gap-2 flex-wrap">
+          <div class="bg-white/15 backdrop-blur-sm px-3.5 py-2 rounded-xl text-xs sm:text-sm flex items-center gap-2 border border-white/20">
+            <i class="fa-solid fa-id-badge text-emerald-200"></i>
+            <span>MSSV: <b id="student-current-mssv-badge" class="font-bold font-mono tracking-wider">C08TK0101</b></span>
+          </div>
           <div class="bg-white/15 backdrop-blur-sm px-3.5 py-2 rounded-xl text-xs sm:text-sm flex items-center gap-2 border border-white/20">
             <i class="fa-solid fa-users text-emerald-200"></i>
             <span>Lớp: <b id="student-current-class-badge" class="font-bold underline">T15MG02</b></span>
@@ -1813,14 +1835,27 @@
 
     function toggleRegRole(role) {
       const boxDob = document.getElementById('box-reg-dob');
+      const boxStudentCode = document.getElementById('box-reg-student-code');
+      const boxClass = document.getElementById('box-reg-class');
+      const boxSubject = document.getElementById('box-reg-subject');
       if (role === 'teacher') {
-        document.getElementById('box-reg-class').classList.add('hidden');
+        if (boxClass) boxClass.classList.add('hidden');
         if (boxDob) boxDob.classList.add('hidden');
-        document.getElementById('box-reg-subject').classList.remove('hidden');
+        if (boxStudentCode) boxStudentCode.classList.add('hidden');
+        if (boxSubject) boxSubject.classList.remove('hidden');
       } else {
-        document.getElementById('box-reg-class').classList.remove('hidden');
+        if (boxClass) boxClass.classList.remove('hidden');
         if (boxDob) boxDob.classList.remove('hidden');
-        document.getElementById('box-reg-subject').classList.add('hidden');
+        if (boxStudentCode) boxStudentCode.classList.remove('hidden');
+        if (boxSubject) boxSubject.classList.add('hidden');
+      }
+    }
+
+    function onRegStudentCodeInput(val) {
+      const code = (val || '').trim().toUpperCase();
+      const userInp = document.getElementById('reg-username');
+      if (userInp && (!userInp.value || userInp.dataset.customized !== 'true')) {
+        userInp.value = code;
       }
     }
 
@@ -1828,6 +1863,7 @@
       e.preventDefault();
       const role = document.querySelector('input[name="reg-role"]:checked').value;
       const rawName = document.getElementById('reg-name').value.trim();
+      const rawStudentCode = document.getElementById('reg-student-code') ? document.getElementById('reg-student-code').value.trim() : '';
       const username = document.getElementById('reg-username').value.trim();
       const password = document.getElementById('reg-password').value.trim();
       const className = document.getElementById('reg-class').value.trim();
@@ -1837,6 +1873,15 @@
 
       if (!rawName || !username || !password) {
         showToast("Vui lòng điền đầy đủ các thông tin bắt buộc!", "warning");
+        return;
+      }
+
+      const studentCode = rawStudentCode ? rawStudentCode.toUpperCase() : '';
+
+      if (role === 'student' && !studentCode) {
+        showToast("Vui lòng nhập Mã số sinh viên (MSSV) để tự động đưa vào Bảng điểm!", "warning");
+        const codeInp = document.getElementById('reg-student-code');
+        if (codeInp) codeInp.focus();
         return;
       }
 
@@ -1860,7 +1905,7 @@
         const res = await fetch('/api/auth/register', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ role, name, username, password, className, subject, email, dob })
+          body: JSON.stringify({ role, name, studentCode, username, password, className, subject, email, dob })
         });
         const data = await res.json();
 
@@ -2001,6 +2046,8 @@
         document.getElementById('student-welcome-text').textContent = `Lớp ${currentUser.className || 'T15MG02'} - Chúc bạn hoàn thành bài tập thật tốt!`;
         const classBadge = document.getElementById('student-current-class-badge');
         if (classBadge) classBadge.textContent = currentUser.className || 'T15MG02';
+        const mssvBadge = document.getElementById('student-current-mssv-badge');
+        if (mssvBadge) mssvBadge.textContent = currentUser.studentCode || currentUser.username || '-';
 
         // Kiểm tra quyền thông báo trên thiết bị
         const permBanner = document.getElementById('notif-permission-banner');
@@ -3024,7 +3071,15 @@
         return `
           <tr class="hover:bg-slate-50/70 transition font-times" data-row-idx="${idx}">
             <td class="border border-black text-center py-1 font-semibold text-slate-700">${r.tt || (idx + 1)}</td>
-            <td class="border border-black px-2 py-1 font-bold text-slate-900 font-times">${escapeHtml(r.studentCode || '')}</td>
+            <td class="border border-black px-1 py-1 text-center font-bold text-slate-900 font-times">
+              <input type="text"
+                value="${escapeHtml(r.studentCode || '')}"
+                placeholder="Mã HS"
+                class="gs-text-input text-center font-bold uppercase font-times"
+                data-row="${idx}"
+                data-field="studentCode"
+                onchange="this.value = this.value.trim().toUpperCase(); onGsFieldChange(${idx}, 'studentCode', this.value)">
+            </td>
             <td class="border border-black px-2 py-1 font-medium text-slate-900 text-left">
               <input type="text"
                 value="${escapeHtml(capitalizeWords(r.name || ''))}"
@@ -3135,6 +3190,7 @@
       if (!currentGradeSheet || !currentGradeSheet.records || !currentGradeSheet.records[rowIdx]) return;
       if (field === 'name') val = capitalizeWords(val);
       if (field === 'dob') val = formatDob(val);
+      if (field === 'studentCode') val = (val || '').trim().toUpperCase();
       currentGradeSheet.records[rowIdx][field] = val;
       markGsDirty();
     }
@@ -3663,7 +3719,7 @@
         return `
           <tr class="hover:bg-slate-50 transition">
             <td class="px-4 py-3 font-semibold text-slate-900">${escapeHtml(u.name)} ${isAdmin ? '<span class="text-xs text-amber-600 font-bold ml-1">(Quản trị viên)</span>' : ''}</td>
-            <td class="px-4 py-3 font-mono text-xs text-slate-600">${escapeHtml(u.username)}</td>
+            <td class="px-4 py-3 font-mono text-xs text-slate-700 font-semibold">${escapeHtml(u.studentCode && u.studentCode !== u.username ? `${u.username} (${u.studentCode})` : u.username)}</td>
             <td class="px-4 py-3">${roleBadge}</td>
             <td class="px-4 py-3 text-xs text-slate-600">${escapeHtml(u.subject || u.className || '-')}</td>
             <td class="px-4 py-3">${statusBadge}</td>
