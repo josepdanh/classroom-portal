@@ -8,10 +8,12 @@
     "push": "git add . && git commit -m 'Cap nhat code tu Mac' && git push origin main",
     "push-all": "git update-index --no-skip-worktree data.json && git add . && git commit -m 'Dong bo code va CSDL len GitHub' && git push origin main && git update-index --skip-worktree data.json",
     "pull": "git pull origin main",
+    "sync-mac": "node sync-to-mac.js",
     "sync-files": "node syncDriveFiles.js",
     "open-drive": "open ~/Library/CloudStorage/GoogleDrive-josepdanh@gmail.com/'Drive của tôi'/EduClass_BaiTap"
   },
   "dependencies": {
+    "adm-zip": "^0.6.1",
     "express": "^4.19.2",
     "googleapis": "^189.0.0",
     "multer": "^1.4.5-lts.1"

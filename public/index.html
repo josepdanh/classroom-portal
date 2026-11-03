@@ -353,6 +353,9 @@
           <button onclick="openCloudFolder('onedrive')" title="Mở thư mục OneDrive trên máy Mac" class="admin-only hidden px-3.5 py-2.5 bg-sky-600 hover:bg-sky-700 text-white font-semibold rounded-xl shadow-sm transition flex items-center justify-center gap-1.5 text-xs">
             <i class="fa-brands fa-microsoft text-sm"></i> OneDrive
           </button>
+          <a href="/api/admin/download-all-submissions-zip" title="Tải toàn bộ bài nộp của tất cả các lớp về máy Mac dạng file ZIP" class="admin-only hidden px-3.5 py-2.5 bg-indigo-700 hover:bg-indigo-800 text-white font-semibold rounded-xl shadow-sm transition flex items-center justify-center gap-1.5 text-xs">
+            <i class="fa-solid fa-cloud-arrow-down text-sm"></i> Tải Bài Nộp (.ZIP)
+          </a>
           <button onclick="openGradeSheetModal()" class="px-4 py-2.5 bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white font-semibold rounded-xl shadow-sm transition flex items-center justify-center gap-2 text-sm">
             <i class="fa-solid fa-file-signature text-base"></i> Sổ Điểm Thành Phần
           </button>
@@ -761,6 +764,9 @@
           <p id="grading-modal-subtitle" class="text-xs text-slate-500 mt-0.5"></p>
         </div>
         <div class="flex items-center gap-2.5">
+          <a id="grading-modal-download-zip" href="#" target="_blank" class="px-3.5 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl text-xs font-bold shadow-sm transition flex items-center gap-1.5">
+            <i class="fa-solid fa-file-zipper"></i> Tải Về Máy Mac (.ZIP)
+          </a>
           <button type="button" onclick="saveAllInlineGrades()" class="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-bold shadow-sm transition flex items-center gap-1.5">
             <i class="fa-solid fa-floppy-disk"></i> Lưu Tất Cả Điểm
           </button>
@@ -2627,7 +2633,13 @@
         const driveBtn = data.driveLink 
           ? `<a href="${data.driveLink}" target="_blank" class="ml-2 inline-flex items-center gap-1.5 px-3 py-1 bg-emerald-50 hover:bg-emerald-100 text-emerald-800 font-bold rounded-lg text-xs border border-emerald-300 transition shadow-xs"><i class="fa-brands fa-google-drive text-emerald-600"></i> Mở thư mục Google Drive môn này</a>`
           : '';
-        document.getElementById('grading-modal-subtitle').innerHTML = `Giao cho: <b>${targetClassText}</b> (Môn: ${escapeHtml(data.assignment.subject || '-')}) | Hạn nộp: ${formatDate(data.assignment.dueDate)} ${driveBtn}`;
+        const zipBtn = `<a href="/api/assignments/${data.assignment.id}/download-all-zip" class="ml-2 inline-flex items-center gap-1.5 px-3 py-1 bg-indigo-50 hover:bg-indigo-100 text-indigo-700 font-bold rounded-lg text-xs border border-indigo-200 transition shadow-xs"><i class="fa-solid fa-file-zipper text-indigo-600"></i> Tải toàn bộ bài nộp (.ZIP)</a>`;
+        document.getElementById('grading-modal-subtitle').innerHTML = `Giao cho: <b>${targetClassText}</b> (Môn: ${escapeHtml(data.assignment.subject || '-')}) | Hạn nộp: ${formatDate(data.assignment.dueDate)} ${driveBtn} ${zipBtn}`;
+
+        const topZipBtn = document.getElementById('grading-modal-download-zip');
+        if (topZipBtn) {
+          topZipBtn.href = `/api/assignments/${data.assignment.id}/download-all-zip`;
+        }
 
         const tbody = document.getElementById('grading-table-body');
         tbody.innerHTML = data.studentsStatus.map((item, idx) => {

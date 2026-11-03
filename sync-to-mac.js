@@ -1,0 +1,183 @@
+const fs = require('fs');
+const path = require('path');
+const https = require('https');
+const http = require('http');
+const { exec } = require('child_process');
+
+// URL của máy chủ web (mặc định lấy từ Render, hoặc localhost nếu test offline)
+const REMOTE_SERVER_URL = process.env.SERVER_URL || 'https://classroom-portal-jlkb.onrender.com';
+const LOCAL_SERVER_URL = 'http://localhost:3000';
+
+// Các thư mục đích trên máy Mac
+const MAC_GDRIVE_DIR = '/Users/Danh/Library/CloudStorage/GoogleDrive-josepdanh@gmail.com/Drive của tôi/EduClass_BaiTap';
+const MAC_DOWNLOADS_DIR = path.join(require('os').homedir(), 'Downloads', 'EduClass_BaiTap');
+const PROJECT_UPLOADS_DIR = path.join(__dirname, 'uploads');
+
+function fetchJson(targetUrl) {
+  return new Promise((resolve, reject) => {
+    const client = targetUrl.startsWith('https') ? https : http;
+    client.get(targetUrl, (res) => {
+      if (res.statusCode >= 300 && res.statusCode < 400 && res.headers.location) {
+        return fetchJson(res.headers.location).then(resolve).catch(reject);
+      }
+      if (res.statusCode !== 200) {
+        return reject(new Error(`HTTP ${res.statusCode} khi tải dữ liệu từ ${targetUrl}`));
+      }
+      let raw = '';
+      res.on('data', chunk => raw += chunk);
+      res.on('end', () => {
+        try {
+          resolve(JSON.parse(raw));
+        } catch (e) {
+          reject(new Error("Không thể đọc định dạng JSON: " + raw.substring(0, 150)));
+        }
+      });
+    }).on('error', reject);
+  });
+}
+
+function downloadFile(sourceUrl, destPath) {
+  return new Promise((resolve, reject) => {
+    const client = sourceUrl.startsWith('https') ? https : http;
+    client.get(sourceUrl, (res) => {
+      if (res.statusCode >= 300 && res.statusCode < 400 && res.headers.location) {
+        return downloadFile(res.headers.location, destPath).then(resolve).catch(reject);
+      }
+      if (res.statusCode !== 200) {
+        return reject(new Error(`HTTP ${res.statusCode} khi tải file từ ${sourceUrl}`));
+      }
+      const dir = path.dirname(destPath);
+      if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
+
+      const fileStream = fs.createWriteStream(destPath);
+      res.pipe(fileStream);
+      fileStream.on('finish', () => {
+        fileStream.close(resolve);
+      });
+      fileStream.on('error', (err) => {
+        try { fs.unlinkSync(destPath); } catch (e) {}
+        reject(err);
+      });
+    }).on('error', reject);
+  });
+}
+
+function sanitizeName(str) {
+  if (!str) return 'Chung';
+  return str.trim().replace(/[/\\?%*:|"<>]/g, '_');
+}
+
+async function startSync() {
+  console.log('=======================================================');
+  console.log('🚀 ĐANG BẮT ĐẦU ĐỒNG BỘ BÀI NỘP VỀ MÁY MAC...');
+  console.log('🌐 Máy chủ nguồn:', REMOTE_SERVER_URL);
+  console.log('=======================================================');
+
+  let db = null;
+  let activeUrl = REMOTE_SERVER_URL;
+
+  try {
+    console.log(`📡 Đang kết nối tới ${REMOTE_SERVER_URL}...`);
+    db = await fetchJson(`${REMOTE_SERVER_URL}/api/admin/export-database`);
+    console.log('✅ Kết nối thành công tới Render!');
+  } catch (err) {
+    console.warn(`⚠️ Không kết nối được Render (${err.message}). Đang thử kết nối máy chủ nội bộ localhost...`);
+    try {
+      db = await fetchJson(`${LOCAL_SERVER_URL}/api/admin/export-database`);
+      activeUrl = LOCAL_SERVER_URL;
+      console.log('✅ Đã kết nối tới máy chủ localhost!');
+    } catch (err2) {
+      console.error('❌ Thất bại: Không thể lấy dữ liệu bài nộp từ cả Render và localhost.');
+      return;
+    }
+  }
+
+  const submissions = (db.submissions || []).filter(s => s.file || s.link);
+  if (submissions.length === 0) {
+    console.log('ℹ️ Hiện chưa có bài nộp nào trên hệ thống.');
+    return;
+  }
+
+  console.log(`📋 Tìm thấy tổng cộng ${submissions.length} bài nộp cần kiểm tra.\n`);
+
+  let downloadedCount = 0;
+  let existingCount = 0;
+  let openedFolder = null;
+
+  for (const sub of submissions) {
+    const asm = (db.assignments || []).find(a => a.id === sub.assignmentId) || {};
+    const student = (db.users || []).find(u => u.id === sub.studentId) || {};
+
+    const className = sanitizeName(asm.targetClass || student.className || 'Chung');
+    const subjectName = sanitizeName(asm.subject || 'MonHoc');
+
+    const studentCode = student.studentCode || student.username || '';
+    const studentName = sanitizeName(student.name || sub.studentName || 'HocSinh');
+    const prefix = studentCode ? `${studentCode}_${studentName}` : studentName;
+
+    // Chọn thư mục lưu trên máy Mac: Ưu tiên thư mục Google Drive Desktop, nếu chưa có thì lưu vào Downloads
+    let primaryFolder = path.join(MAC_DOWNLOADS_DIR, className, subjectName);
+    if (fs.existsSync(path.dirname(MAC_GDRIVE_DIR))) {
+      primaryFolder = path.join(MAC_GDRIVE_DIR, className, subjectName);
+    }
+    if (!openedFolder) openedFolder = primaryFolder;
+
+    if (!fs.existsSync(primaryFolder)) {
+      fs.mkdirSync(primaryFolder, { recursive: true });
+    }
+
+    if (sub.file && sub.file.filename) {
+      const formattedFileName = `${prefix}_${sanitizeName(sub.file.originalName)}`;
+      const targetFilePath = path.join(primaryFolder, formattedFileName);
+      const downloadUrl = `${activeUrl}/api/download/${encodeURIComponent(sub.file.filename)}?name=${encodeURIComponent(sub.file.originalName)}`;
+
+      if (fs.existsSync(targetFilePath) && fs.statSync(targetFilePath).size > 0) {
+        console.log(`  ✓ Đã có sẵn: [${className}/${subjectName}] ${formattedFileName}`);
+        existingCount++;
+      } else {
+        try {
+          process.stdout.write(`  ⬇️ Đang tải: [${className}/${subjectName}] ${formattedFileName}... `);
+          await downloadFile(downloadUrl, targetFilePath);
+
+          // Sao chép thêm bản vào uploads cục bộ của dự án
+          try {
+            const projectUploadPath = path.join(PROJECT_UPLOADS_DIR, sub.file.filename);
+            fs.copyFileSync(targetFilePath, projectUploadPath);
+          } catch (e) {}
+
+          console.log('✅ Xong');
+          downloadedCount++;
+        } catch (downloadErr) {
+          console.log(`❌ Lỗi: ${downloadErr.message}`);
+        }
+      }
+    } else if (sub.link) {
+      const linkFileName = `${prefix}_BaiNop_LienKet.url`;
+      const linkFilePath = path.join(primaryFolder, linkFileName);
+      const fileContent = `[InternetShortcut]\nURL=${sub.link}\n\n[ThongTinBaiNop]\nMSSV=${studentCode}\nHoVaTen=${student.name || sub.studentName}\nLop=${className}\nMon=${subjectName}\nThoiGianNop=${sub.submittedAt || ''}\nLink=${sub.link}\nGhiChu=${sub.content || ''}\n`;
+
+      if (!fs.existsSync(linkFilePath)) {
+        fs.writeFileSync(linkFilePath, fileContent, 'utf8');
+        console.log(`  🔗 Đã tạo lối tắt liên kết: [${className}/${subjectName}] ${linkFileName}`);
+        downloadedCount++;
+      } else {
+        existingCount++;
+      }
+    }
+  }
+
+  console.log('\n=======================================================');
+  console.log('🎉 TỔNG KẾT ĐỒNG BỘ VỀ MÁY MAC:');
+  console.log(`- File mới tải về: ${downloadedCount}`);
+  console.log(`- File đã có sẵn: ${existingCount}`);
+  console.log(`- Thư mục lưu trên máy Mac:`);
+  console.log(`  📁 ${openedFolder || primaryFolder}`);
+  console.log('=======================================================');
+
+  // Mở ngay Finder máy Mac để thầy xem
+  if (openedFolder && fs.existsSync(openedFolder)) {
+    exec(`open "${openedFolder}"`);
+  }
+}
+
+startSync();

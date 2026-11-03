@@ -1604,6 +1604,119 @@ app.get('/api/file-text/:filename', (req, res) => {
   }
 });
 
+// 8d. Tải toàn bộ bài nộp của 1 bài tập dưới dạng file ZIP (gom theo lớp và môn)
+app.get('/api/assignments/:id/download-all-zip', (req, res) => {
+  const { id } = req.params;
+  const db = readDatabase();
+  const AdmZip = require('adm-zip');
+
+  const asm = (db.assignments || []).find(a => a.id === id);
+  if (!asm) {
+    return res.status(404).send("Bài tập không tồn tại.");
+  }
+
+  const submissions = (db.submissions || []).filter(s => s.assignmentId === id);
+  if (submissions.length === 0) {
+    return res.status(400).send("Chưa có học sinh nào nộp bài cho bài tập này.");
+  }
+
+  const zip = new AdmZip();
+  const cleanClass = sanitizeFolderName(asm.targetClass || 'Chung');
+  const cleanSubject = sanitizeFolderName(asm.subject || 'MonHoc');
+
+  let fileCount = 0;
+
+  submissions.forEach(sub => {
+    const student = (db.users || []).find(u => u.id === sub.studentId);
+    const studentCode = student ? (student.studentCode || student.username || '') : '';
+    const studentName = student ? student.name : (sub.studentName || 'HocSinh');
+    const safeStudentName = studentName.replace(/[/\\?%*:|"<>]/g, '_');
+    const prefix = studentCode ? `${studentCode}_${safeStudentName}` : safeStudentName;
+
+    if (sub.file && sub.file.filename) {
+      const filePath = path.join(UPLOAD_DIR, sub.file.filename);
+      if (fs.existsSync(filePath)) {
+        const destName = `${prefix}_${sub.file.originalName}`;
+        zip.addLocalFile(filePath, `${cleanClass}/${cleanSubject}`, destName);
+        fileCount++;
+      }
+    } else if (sub.link || sub.content) {
+      const urlContent = `[InternetShortcut]\nURL=${sub.link || ''}\n\n[ThongTinBaiNop]\nMSSV=${studentCode}\nHoVaTen=${studentName}\nLop=${cleanClass}\nMon=${cleanSubject}\nThoiGianNop=${sub.submittedAt || ''}\nLink=${sub.link || ''}\nGhiChu=${sub.content || ''}\n`;
+      zip.addFile(`${cleanClass}/${cleanSubject}/${prefix}_LienKet.url`, Buffer.from(urlContent, 'utf8'));
+      fileCount++;
+    }
+  });
+
+  if (fileCount === 0) {
+    return res.status(404).send("Không tìm thấy file bài nộp vật lý nào trên máy chủ.");
+  }
+
+  const dateStr = new Date().toISOString().split('T')[0];
+  const zipFileName = `BaiNop_${cleanClass}_${cleanSubject}_${dateStr}.zip`;
+  const buffer = zip.toBuffer();
+
+  res.set({
+    'Content-Type': 'application/zip',
+    'Content-Disposition': `attachment; filename="${encodeURIComponent(zipFileName)}"`,
+    'Content-Length': buffer.length
+  });
+  res.send(buffer);
+});
+
+// 8e. Tải toàn bộ bài nộp của TẤT CẢ các lớp/môn dưới dạng file ZIP
+app.get('/api/admin/download-all-submissions-zip', (req, res) => {
+  const db = readDatabase();
+  const AdmZip = require('adm-zip');
+
+  const submissions = (db.submissions || []).filter(s => s.file || s.link);
+  if (submissions.length === 0) {
+    return res.status(400).send("Chưa có bài nộp nào trên hệ thống.");
+  }
+
+  const zip = new AdmZip();
+  let fileCount = 0;
+
+  submissions.forEach(sub => {
+    const asm = (db.assignments || []).find(a => a.id === sub.assignmentId);
+    const cleanClass = sanitizeFolderName(asm ? asm.targetClass : 'Chung');
+    const cleanSubject = sanitizeFolderName(asm ? asm.subject : 'MonHoc');
+
+    const student = (db.users || []).find(u => u.id === sub.studentId);
+    const studentCode = student ? (student.studentCode || student.username || '') : '';
+    const studentName = student ? student.name : (sub.studentName || 'HocSinh');
+    const safeStudentName = studentName.replace(/[/\\?%*:|"<>]/g, '_');
+    const prefix = studentCode ? `${studentCode}_${safeStudentName}` : safeStudentName;
+
+    if (sub.file && sub.file.filename) {
+      const filePath = path.join(UPLOAD_DIR, sub.file.filename);
+      if (fs.existsSync(filePath)) {
+        const destName = `${prefix}_${sub.file.originalName}`;
+        zip.addLocalFile(filePath, `${cleanClass}/${cleanSubject}`, destName);
+        fileCount++;
+      }
+    } else if (sub.link || sub.content) {
+      const urlContent = `[InternetShortcut]\nURL=${sub.link || ''}\n\n[ThongTinBaiNop]\nMSSV=${studentCode}\nHoVaTen=${studentName}\nLop=${cleanClass}\nMon=${cleanSubject}\nThoiGianNop=${sub.submittedAt || ''}\nLink=${sub.link || ''}\nGhiChu=${sub.content || ''}\n`;
+      zip.addFile(`${cleanClass}/${cleanSubject}/${prefix}_LienKet.url`, Buffer.from(urlContent, 'utf8'));
+      fileCount++;
+    }
+  });
+
+  if (fileCount === 0) {
+    return res.status(404).send("Không tìm thấy file bài nộp nào.");
+  }
+
+  const dateStr = new Date().toISOString().split('T')[0];
+  const zipFileName = `ToanBo_BaiNop_${dateStr}.zip`;
+  const buffer = zip.toBuffer();
+
+  res.set({
+    'Content-Type': 'application/zip',
+    'Content-Disposition': `attachment; filename="${encodeURIComponent(zipFileName)}"`,
+    'Content-Length': buffer.length
+  });
+  res.send(buffer);
+});
+
 // 8d. API lấy URL công khai hỗ trợ xem trước Office & Google Docs
 app.get('/api/server-info', (req, res) => {
   let tunnelUrl = process.env.PUBLIC_URL || '';
