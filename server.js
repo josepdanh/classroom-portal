@@ -170,14 +170,25 @@ const MONGODB_URI = process.env.MONGODB_URI || "mongodb+srv://josepdanh_db_user:
 let mongoClient = null;
 let mongoDbCollection = null;
 let memoryCache = null;
+let mongoStatus = 'NOT_STARTED';
+let lastMongoError = null;
 
 async function initMongoConnection() {
-  if (!MONGODB_URI) return;
+  if (!MONGODB_URI) {
+    mongoStatus = 'NO_URI';
+    return;
+  }
+  mongoStatus = 'CONNECTING';
   try {
-    mongoClient = new MongoClient(MONGODB_URI);
+    mongoClient = new MongoClient(MONGODB_URI, {
+      serverSelectionTimeoutMS: 8000,
+      connectTimeoutMS: 8000
+    });
     await mongoClient.connect();
     const db = mongoClient.db('educlass');
     mongoDbCollection = db.collection('system_data');
+    mongoStatus = 'CONNECTED';
+    lastMongoError = null;
     console.log('[MongoDB Atlas] ✅ Đã kết nối thành công tới Database đám mây MongoDB Atlas!');
 
     // Tải dữ liệu đám mây vào bộ nhớ
@@ -201,6 +212,8 @@ async function initMongoConnection() {
       console.log('[MongoDB Atlas] 📤 Đã nạp CSDL ban đầu lên đám mây Atlas thành công!');
     }
   } catch (err) {
+    mongoStatus = 'ERROR';
+    lastMongoError = err.message;
     console.error('[MongoDB Atlas Lỗi]:', err.message);
   }
 }
@@ -342,6 +355,23 @@ function writeDatabase(data) {
 // Khởi tạo kết nối MongoDB Atlas khi bắt đầu
 initMongoConnection();
 readDatabase();
+
+// API giám sát hệ thống và trạng thái kết nối Cloud Database
+app.get('/api/system/status', (req, res) => {
+  const db = readDatabase();
+  res.json({
+    status: 'ok',
+    mongoStatus,
+    lastMongoError,
+    isMongoConnected: !!mongoDbCollection,
+    hasMemoryCache: !!memoryCache,
+    assignmentsCount: (db.assignments || []).length,
+    submissionsCount: (db.submissions || []).length,
+    usersCount: (db.users || []).length,
+    assignments: (db.assignments || []).map(a => ({ id: a.id, title: a.title, targetClass: a.targetClass })),
+    timestamp: new Date().toISOString()
+  });
+});
 
 // Chuẩn hóa viết hoa chữ cái đầu cho mỗi từ của Họ và Tên (Tiếng Việt)
 function capitalizeWords(str) {
