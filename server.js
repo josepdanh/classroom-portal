@@ -667,7 +667,7 @@ app.post('/api/classes', (req, res) => {
 
 // 1e. Quản lý Môn học (Giáo viên tự tạo môn học cho từng lớp)
 app.get('/api/subjects', (req, res) => {
-  const { className, teacherId } = req.query;
+  const { className, teacherId, forGradeSheet } = req.query;
   const db = readDatabase();
   let subjects = db.subjects || [];
 
@@ -677,7 +677,8 @@ app.get('/api/subjects', (req, res) => {
   if (teacherId) {
     const user = (db.users || []).find(u => u.id === teacherId);
     const isDanhOrAdmin = user && (user.isAdmin || (user.name && user.name.toLowerCase().includes('công danh')));
-    if (!isDanhOrAdmin) {
+    // Nếu là chế độ xem Sổ Điểm (forGradeSheet) HOẶC không phải Admin: CHỈ trả về môn do giáo viên này phụ trách
+    if (!isDanhOrAdmin || forGradeSheet === 'true') {
       subjects = subjects.filter(s => s.teacherId === teacherId);
     }
   }
@@ -1450,20 +1451,67 @@ app.post('/api/assignments/:assignmentId/batch-grade', (req, res) => {
 
 // ================= BẢNG ĐIỂM THÀNH PHẦN MÔN HỌC/MÔ ĐUN (THEO MẪU TRƯỜNG CĐ HÒA BÌNH XUÂN LỘC) =================
 
-// 7d. Lấy danh sách các bảng điểm hiện có
+// Hàm kiểm tra quyền riêng tư: Chỉ giáo viên phụ trách môn học mới được xem/sửa bảng điểm đó
+function canTeacherAccessGradeSheet(db, teacherUser, className, subjectName, existingSheet = null, allowAdminBypass = true) {
+  if (!teacherUser) return false;
+  // Quản trị viên (Thầy Nguyễn Công Danh) có quyền xem toàn bộ hệ thống khi cần
+  if (allowAdminBypass && (teacherUser.isAdmin || teacherUser.id === 'u_teacher_danh')) {
+    return true;
+  }
+
+  const cleanClass = (className || '').trim().toUpperCase();
+  const cleanSubj = (subjectName || '').trim().toLowerCase();
+
+  // 1. Kiểm tra nếu bảng điểm đã ghi nhận đúng teacherId của giáo viên này
+  if (existingSheet && existingSheet.teacherId === teacherUser.id) {
+    return true;
+  }
+
+  // 2. Tra cứu trong danh mục môn học (db.subjects) khớp lớp, môn và do chính giáo viên này tạo
+  const matchedSubject = (db.subjects || []).find(
+    s => s.className && s.className.trim().toUpperCase() === cleanClass &&
+         s.name && s.name.trim().toLowerCase() === cleanSubj &&
+         s.teacherId === teacherUser.id
+  );
+  if (matchedSubject) return true;
+
+  // 3. Tra cứu trong danh mục bài tập (db.assignments)
+  const matchedAsm = (db.assignments || []).find(
+    a => a.targetClass && a.targetClass.trim().toUpperCase() === cleanClass &&
+         a.subject && a.subject.trim().toLowerCase() === cleanSubj &&
+         a.createdBy === teacherUser.id
+  );
+  if (matchedAsm) return true;
+
+  return false;
+}
+
+// 7d. Lấy danh sách các bảng điểm hiện có (Bảo mật riêng tư: Mỗi giáo viên chỉ xem môn mình dạy)
 app.get('/api/grade-sheets', (req, res) => {
-  const { teacherId } = req.query;
+  const { teacherId, viewAll } = req.query;
   const db = readDatabase();
   let sheets = db.gradeSheets || [];
-  if (teacherId) {
-    sheets = sheets.filter(s => !s.teacherId || s.teacherId === teacherId);
+
+  if (!teacherId) {
+    return res.status(401).json({ success: false, message: "Vui lòng xác thực tài khoản giáo viên." });
   }
+
+  const user = (db.users || []).find(u => u.id === teacherId);
+  if (!user || user.role !== 'teacher') {
+    return res.status(403).json({ success: false, message: "Tài khoản không có quyền truy cập giáo viên." });
+  }
+
+  const isAdmin = user.isAdmin || user.id === 'u_teacher_danh';
+  if (!isAdmin || viewAll !== 'true') {
+    sheets = sheets.filter(s => canTeacherAccessGradeSheet(db, user, s.className, s.subjectName, s, false));
+  }
+
   res.json({ success: true, sheets });
 });
 
 // 7e. Lấy bảng điểm chi tiết theo Lớp & Môn học (Tự động đồng bộ tất cả học sinh đã đăng ký trong hệ thống)
 app.get('/api/grade-sheets/sheet', (req, res) => {
-  const { className, subjectName, teacherId } = req.query;
+  const { className, subjectName, teacherId, viewAll } = req.query;
   if (!className || !subjectName) {
     return res.status(400).json({ message: "Vui lòng cung cấp tên lớp và tên môn học." });
   }
@@ -1472,10 +1520,25 @@ app.get('/api/grade-sheets/sheet', (req, res) => {
   const cleanClass = className.trim().toUpperCase();
   const cleanSubject = subjectName.trim();
 
+  // Xác thực quyền Giáo viên
+  const teacherUser = (db.users || []).find(u => u.id === teacherId);
+  if (!teacherUser || teacherUser.role !== 'teacher') {
+    return res.status(403).json({ message: "Vui lòng đăng nhập với tài khoản Giáo viên để xem bảng điểm." });
+  }
+
   // Tìm bảng điểm đã lưu
   let sheet = (db.gradeSheets || []).find(
     s => s.className.trim().toUpperCase() === cleanClass && s.subjectName.trim().toLowerCase() === cleanSubject.toLowerCase()
   );
+
+  // KIỂM TRA QUYỀN TRUY CẬP: Chỉ giáo viên phụ trách môn học mới được xem
+  const allowBypass = viewAll === 'true' || teacherUser.isAdmin || teacherUser.id === 'u_teacher_danh';
+  const hasAccess = canTeacherAccessGradeSheet(db, teacherUser, cleanClass, cleanSubject, sheet, allowBypass);
+  if (!hasAccess) {
+    return res.status(403).json({ 
+      message: `Để đảm bảo tính riêng tư, bạn chỉ có thể xem bảng điểm của môn học do chính bạn giảng dạy. Môn "${cleanSubject}" của lớp ${cleanClass} do giáo viên khác phụ trách!` 
+    });
+  }
 
   // Lấy toàn bộ học sinh thuộc lớp này đã đăng ký trong hệ thống
   const registeredStudents = db.users.filter(
@@ -1513,19 +1576,14 @@ app.get('/api/grade-sheets/sheet', (req, res) => {
     }
   }
 
-  // Ưu tiên 3: Sử dụng teacherId truyền vào từ giáo viên đang thao tác (nếu có)
-  if (!teacherForSubject && teacherId) {
-    teacherForSubject = (db.users || []).find(u => u.id === teacherId && u.role === 'teacher');
-  }
-
-  // Ưu tiên 4: Mặc định lấy giáo viên đầu tiên trong hệ thống
+  // Ưu tiên 3: Sử dụng teacherId truyền vào từ giáo viên đang thao tác
   if (!teacherForSubject) {
-    teacherForSubject = (db.users || []).find(u => u.role === 'teacher');
+    teacherForSubject = teacherUser;
   }
 
-  const rawTeacherName = teacherForSubject ? teacherForSubject.name : (matchedSubject ? matchedSubject.teacherName : "Nguyễn Công Danh");
+  const rawTeacherName = teacherForSubject ? teacherForSubject.name : (matchedSubject ? matchedSubject.teacherName : teacherUser.name);
   const assignedTeacherName = rawTeacherName ? rawTeacherName.replace(/^(Thầy|Cô)\s+/i, '').trim() : "Nguyễn Công Danh";
-  const assignedTeacherId = teacherForSubject ? teacherForSubject.id : (matchedSubject ? matchedSubject.teacherId : (teacherId || "u_teacher_danh"));
+  const assignedTeacherId = teacherForSubject ? teacherForSubject.id : (matchedSubject ? matchedSubject.teacherId : teacherUser.id);
 
   if (!sheet) {
     // Tạo bảng điểm mới chuẩn hóa theo mẫu trường CĐ Hòa Bình Xuân Lộc
@@ -1601,7 +1659,7 @@ app.get('/api/grade-sheets/sheet', (req, res) => {
           note: ""
         });
       } else {
-        // Cập nhật thông tin đồng bộ nếu user đã đổi MSSV, đổi tên hoặc ngày sinh (luôn viết hoa chữ cái đầu và chuẩn hóa ngày sinh)
+        // Cập nhật thông tin đồng bộ nếu user đã đổi MSSV, đổi tên hoặc ngày sinh
         if (!rec.studentId) rec.studentId = st.id;
         if (targetCode && (!rec.studentCode || rec.studentCode !== targetCode)) {
           rec.studentCode = targetCode;
@@ -1634,7 +1692,7 @@ app.get('/api/grade-sheets/sheet', (req, res) => {
 
 // 7f. Lưu toàn bộ bảng điểm thành phần
 app.post('/api/grade-sheets/save', (req, res) => {
-  const { sheet } = req.body;
+  const { sheet, teacherId } = req.body;
   if (!sheet || !sheet.className || !sheet.subjectName || !Array.isArray(sheet.records)) {
     return res.status(400).json({ message: "Dữ liệu bảng điểm không hợp lệ." });
   }
@@ -1644,6 +1702,18 @@ app.post('/api/grade-sheets/save', (req, res) => {
 
   const cleanClass = sheet.className.trim().toUpperCase();
   const cleanSubject = sheet.subjectName.trim();
+
+  const user = (db.users || []).find(u => u.id === (teacherId || sheet.teacherId));
+  if (!user || user.role !== 'teacher') {
+    return res.status(403).json({ message: "Vui lòng xác thực tài khoản giáo viên trước khi lưu." });
+  }
+
+  const hasAccess = canTeacherAccessGradeSheet(db, user, cleanClass, cleanSubject, sheet, true);
+  if (!hasAccess) {
+    return res.status(403).json({ 
+      message: `Bạn không có quyền chỉnh sửa bảng điểm môn "${cleanSubject}" vì môn này do giáo viên khác giảng dạy!` 
+    });
+  }
 
   sheet.className = cleanClass;
   sheet.subjectName = cleanSubject;
@@ -1688,7 +1758,7 @@ app.post('/api/grade-sheets/save', (req, res) => {
 
 // 7g. Lưu nhanh 1 ô điểm trong bảng điểm (Auto-save)
 app.post('/api/grade-sheets/cell', (req, res) => {
-  const { sheetId, studentCode, field, value } = req.body;
+  const { sheetId, studentCode, field, value, teacherId } = req.body;
   if (!sheetId || !studentCode || !field) {
     return res.status(400).json({ message: "Thiếu dữ liệu cập nhật ô." });
   }
@@ -1698,6 +1768,13 @@ app.post('/api/grade-sheets/cell', (req, res) => {
   const sheet = db.gradeSheets.find(s => s.id === sheetId);
   if (!sheet) {
     return res.status(404).json({ message: "Không tìm thấy bảng điểm." });
+  }
+
+  if (teacherId) {
+    const user = (db.users || []).find(u => u.id === teacherId);
+    if (!canTeacherAccessGradeSheet(db, user, sheet.className, sheet.subjectName, sheet, true)) {
+      return res.status(403).json({ message: "Bạn không có quyền chỉnh sửa bảng điểm này." });
+    }
   }
 
   const record = sheet.records.find(r => r.studentCode === studentCode);
@@ -1740,8 +1817,21 @@ app.post('/api/grade-sheets/cell', (req, res) => {
 // 7h. Xóa một bảng điểm
 app.delete('/api/grade-sheets/:id', (req, res) => {
   const { id } = req.params;
+  const { teacherId } = req.query;
   const db = readDatabase();
   if (!db.gradeSheets) db.gradeSheets = [];
+  const sheet = db.gradeSheets.find(s => s.id === id);
+  if (!sheet) {
+    return res.status(404).json({ message: "Không tìm thấy bảng điểm." });
+  }
+
+  if (teacherId) {
+    const user = (db.users || []).find(u => u.id === teacherId);
+    if (!canTeacherAccessGradeSheet(db, user, sheet.className, sheet.subjectName, sheet, true)) {
+      return res.status(403).json({ message: "Bạn không có quyền xóa bảng điểm của giáo viên khác." });
+    }
+  }
+
   db.gradeSheets = db.gradeSheets.filter(s => s.id !== id);
   writeDatabase(db);
   res.json({ success: true, message: "Đã xóa bảng điểm." });

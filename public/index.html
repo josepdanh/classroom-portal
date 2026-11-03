@@ -380,19 +380,16 @@
             <div class="flex items-center gap-2 flex-wrap">
               <span class="font-bold text-emerald-950 text-base">Bảng Điểm Thành Phần Môn Học / Mô Đun</span>
               <span class="text-[11px] bg-emerald-100/80 text-emerald-800 border border-emerald-300 px-2 py-0.5 rounded-full font-bold">Mẫu Trường CĐ Hòa Bình Xuân Lộc</span>
+              <span class="text-[11px] bg-blue-100 text-blue-800 border border-blue-200 px-2 py-0.5 rounded-full font-bold flex items-center gap-1">
+                <i class="fa-solid fa-user-shield text-[10px]"></i> Riêng tư: Chỉ môn bạn dạy
+              </span>
             </div>
-            <p class="text-xs text-emerald-800 mt-0.5">Nhập điểm hệ số 1, hệ số 2 trực tiếp trên form. Học sinh đã đăng ký sẽ tự động xuất hiện đầy đủ trong bảng điểm.</p>
+            <p class="text-xs text-emerald-800 mt-0.5">Bảo đảm tính riêng tư: Mỗi giáo viên chỉ xem và quản lý bảng điểm các môn học do chính mình phụ trách giảng dạy.</p>
           </div>
         </div>
-        <div class="flex items-center gap-2 flex-wrap shrink-0">
-          <button onclick="openGradeSheetModal('C08TK01', 'Xử Lý Kỹ Xảo với After Effects')" class="px-3.5 py-2 bg-emerald-700 hover:bg-emerald-800 text-white font-bold rounded-xl text-xs transition flex items-center gap-1.5 shadow-sm">
-            <i class="fa-solid fa-pen-to-square"></i> Mở Lớp C08TK01 (20 HS)
-          </button>
-          <button onclick="openGradeSheetModal('T15MG02', 'Nguyên lý hệ điều hành')" class="px-3.5 py-2 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl text-xs transition flex items-center gap-1.5 shadow-sm">
-            <i class="fa-solid fa-pen-to-square"></i> Mở Lớp T15MG02 (26 HS)
-          </button>
-          <button onclick="openGradeSheetModal()" class="px-3.5 py-2 bg-white hover:bg-emerald-50 text-emerald-800 border border-emerald-300 font-bold rounded-xl text-xs transition flex items-center gap-1.5 shadow-xs">
-            <i class="fa-solid fa-folder-open"></i> Xem Tất Cả Sổ Điểm
+        <div id="teacher-grade-sheet-shortcuts" class="flex items-center gap-2 flex-wrap shrink-0">
+          <button onclick="openGradeSheetModal()" class="px-3.5 py-2 bg-emerald-700 hover:bg-emerald-800 text-white font-bold rounded-xl text-xs transition flex items-center gap-1.5 shadow-sm">
+            <i class="fa-solid fa-folder-open"></i> Sổ Điểm Của Tôi
           </button>
         </div>
       </div>
@@ -1119,8 +1116,14 @@
           </div>
 
           <span id="gs-students-count-badge" class="px-2.5 py-1 bg-emerald-50 text-emerald-700 border border-emerald-200 rounded-full text-xs font-semibold">
-            26 Học Sinh
+            0 Học Sinh
           </span>
+
+          <!-- Tùy chọn Quản trị viên (Thầy Nguyễn Công Danh) giám sát toàn trường -->
+          <div id="gs-admin-scope-box" class="hidden items-center gap-1.5 pl-2 border-l border-slate-200 text-xs">
+            <input type="checkbox" id="gs-admin-view-all" onchange="onGradeSheetAdminScopeToggle()" class="rounded text-indigo-600 focus:ring-indigo-500 cursor-pointer">
+            <label for="gs-admin-view-all" class="text-slate-600 font-semibold cursor-pointer select-none">Xem tất cả môn toàn trường (Admin)</label>
+          </div>
         </div>
 
         <div class="flex items-center gap-2 flex-wrap">
@@ -2386,12 +2389,6 @@
         selectSubjClass.innerHTML = buildGroupedClassOptionsHtml(curVal, false);
       }
 
-      // 4. Dropdown chọn lớp cho Bảng Điểm Thành Phần
-      const selectGsClass = document.getElementById('gs-select-class');
-      if (selectGsClass && availableClasses.length > 0) {
-        const curVal = selectGsClass.value || (availableClasses.includes('T15MG02') ? 'T15MG02' : availableClasses[0]);
-        selectGsClass.innerHTML = buildGroupedClassOptionsHtml(curVal, false);
-      }
     }
 
     // ================= QUẢN LÝ MÔN HỌC (SUBJECTS) CHO GIÁO VIÊN =================
@@ -2400,13 +2397,52 @@
     async function loadTeacherSubjects() {
       if (!currentUser || currentUser.role !== 'teacher') return;
       try {
-        const res = await fetch(`/api/subjects?teacherId=${encodeURIComponent(currentUser.id)}`);
+        const res = await fetch(`/api/subjects?teacherId=${encodeURIComponent(currentUser.id)}&forGradeSheet=true`);
         const data = await res.json();
         teacherSubjectsList = data.subjects || [];
         renderTeacherSubjectsChips();
+        renderTeacherGradeSheetShortcuts();
       } catch (e) {
         console.error("Lỗi tải môn học:", e);
       }
+    }
+
+    // Render danh sách nút mở nhanh Sổ Điểm cho các môn giáo viên hiện tại phụ trách
+    function renderTeacherGradeSheetShortcuts() {
+      const container = document.getElementById('teacher-grade-sheet-shortcuts');
+      if (!container) return;
+
+      if (!teacherSubjectsList || teacherSubjectsList.length === 0) {
+        container.innerHTML = `
+          <button onclick="openCreateSubjectModal()" class="px-3.5 py-2 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl text-xs transition flex items-center gap-1.5 shadow-sm">
+            <i class="fa-solid fa-plus"></i> Tạo Môn Học Đầu Tiên
+          </button>
+          <button onclick="openGradeSheetModal()" class="px-3.5 py-2 bg-white hover:bg-emerald-50 text-emerald-800 border border-emerald-300 font-bold rounded-xl text-xs transition flex items-center gap-1.5 shadow-xs">
+            <i class="fa-solid fa-folder-open"></i> Sổ Điểm Của Tôi
+          </button>
+        `;
+        return;
+      }
+
+      let html = '';
+      // Hiển thị tối đa 3-4 môn học nổi bật do giáo viên này phụ trách
+      teacherSubjectsList.slice(0, 3).forEach(sub => {
+        const safeClass = escapeHtml(sub.className).replace(/'/g, "\\'");
+        const safeSubj = escapeHtml(sub.name).replace(/'/g, "\\'");
+        html += `
+          <button onclick="openGradeSheetModal('${safeClass}', '${safeSubj}')" class="px-3.5 py-2 bg-emerald-700 hover:bg-emerald-800 text-white font-bold rounded-xl text-xs transition flex items-center gap-1.5 shadow-sm" title="Mở bảng điểm lớp ${escapeHtml(sub.className)} môn ${escapeHtml(sub.name)}">
+            <i class="fa-solid fa-pen-to-square"></i> Lớp ${escapeHtml(sub.className)} (${escapeHtml(sub.name)})
+          </button>
+        `;
+      });
+
+      html += `
+        <button onclick="openGradeSheetModal()" class="px-3.5 py-2 bg-white hover:bg-emerald-50 text-emerald-800 border border-emerald-300 font-bold rounded-xl text-xs transition flex items-center gap-1.5 shadow-xs">
+          <i class="fa-solid fa-folder-open"></i> Xem Sổ Điểm (${teacherSubjectsList.length} môn)
+        </button>
+      `;
+
+      container.innerHTML = html;
     }
 
     function renderTeacherSubjectsChips() {
@@ -3254,61 +3290,182 @@
     let currentGradeSheet = null;
     let gsAutoSaveDebounceTimer = null;
 
-    // Mở Bảng Điểm Thành Phần
+    // Đổ danh sách lớp học cho Sổ Điểm: Chỉ hiển thị các lớp mà giáo viên hiện tại có môn giảng dạy
+    function populateGradeSheetClassDropdown(preferredClass) {
+      const selectClass = document.getElementById('gs-select-class');
+      if (!selectClass) return;
+
+      const adminViewAll = document.getElementById('gs-admin-view-all')?.checked;
+      const myClasses = Array.from(new Set((teacherSubjectsList || []).map(s => s.className.toUpperCase())));
+
+      let classesList = myClasses;
+      if (currentUser && (currentUser.isAdmin || currentUser.id === 'u_teacher_danh') && adminViewAll) {
+        classesList = availableClasses;
+      }
+
+      if (classesList.length === 0) {
+        selectClass.innerHTML = `<option value="" disabled selected>-- Bạn chưa có môn học ở lớp nào --</option>`;
+        return;
+      }
+
+      let html = '';
+      classesList.forEach(cls => {
+        const isSel = (cls === preferredClass || (!preferredClass && cls === classesList[0])) ? 'selected' : '';
+        html += `<option value="${cls}" ${isSel}>Lớp ${escapeHtml(cls)}</option>`;
+      });
+
+      selectClass.innerHTML = html;
+      if (preferredClass && classesList.includes(preferredClass)) {
+        selectClass.value = preferredClass;
+      } else if (classesList.length > 0) {
+        selectClass.value = classesList[0];
+      }
+    }
+
+    // Mở Bảng Điểm Thành Phần (Tuân thủ quyền riêng tư tuyệt đối: Chỉ mở môn do giáo viên đó dạy)
     async function openGradeSheetModal(targetClass, targetSubject) {
-      populateClassDropdowns();
+      if (!currentUser || currentUser.role !== 'teacher') {
+        showToast("Chỉ tài khoản Giáo viên mới có quyền mở Sổ điểm thành phần!", "warning");
+        return;
+      }
+
+      // Đảm bảo nạp đầy đủ danh sách môn học của giáo viên này
+      if (!teacherSubjectsList || teacherSubjectsList.length === 0) {
+        await loadTeacherSubjects();
+      }
+
+      // Quản lý hiển thị tùy chọn cho Quản trị viên
+      const adminScopeBox = document.getElementById('gs-admin-scope-box');
+      if (adminScopeBox) {
+        if (currentUser.isAdmin || currentUser.id === 'u_teacher_danh') {
+          adminScopeBox.classList.remove('hidden');
+          adminScopeBox.classList.add('flex');
+        } else {
+          adminScopeBox.classList.add('hidden');
+          adminScopeBox.classList.remove('flex');
+        }
+      }
+
+      const myClasses = Array.from(new Set((teacherSubjectsList || []).map(s => s.className.toUpperCase())));
+      
+      let chosenClass = targetClass;
+      if (!chosenClass) {
+        if (teacherSelectedClass && teacherSelectedClass !== 'ALL' && myClasses.includes(teacherSelectedClass)) {
+          chosenClass = teacherSelectedClass;
+        } else if (myClasses.length > 0) {
+          chosenClass = myClasses[0];
+        } else if (currentUser.isAdmin && availableClasses.length > 0) {
+          chosenClass = availableClasses[0];
+        }
+      }
+
+      populateGradeSheetClassDropdown(chosenClass);
 
       const selectClass = document.getElementById('gs-select-class');
-      let chosenClass = targetClass || (selectClass ? selectClass.value : '') || (availableClasses.includes('T15MG02') ? 'T15MG02' : availableClasses[0] || 'T15MG02');
-      if (selectClass) selectClass.value = chosenClass;
+      if (selectClass && selectClass.value) {
+        chosenClass = selectClass.value;
+      }
 
-      // Tải danh sách môn học của lớp này
       await updateGradeSheetSubjectsDropdown(chosenClass, targetSubject);
 
       const selectSubject = document.getElementById('gs-select-subject');
-      let chosenSubject = targetSubject || (selectSubject ? selectSubject.value : '');
-
-      await loadGradeSheet(chosenClass, chosenSubject);
+      let chosenSubject = selectSubject && selectSubject.value ? selectSubject.value : '';
 
       const modal = document.getElementById('modal-grade-sheet');
       modal.classList.remove('hidden');
       modal.classList.add('flex');
+
+      if (!chosenClass || !chosenSubject) {
+        const tbody = document.getElementById('gs-table-body');
+        if (tbody) {
+          tbody.innerHTML = `
+            <tr>
+              <td colspan="12" class="text-center py-12 text-slate-500 font-sans">
+                <div class="max-w-md mx-auto text-center">
+                  <div class="w-14 h-14 rounded-2xl bg-amber-100 text-amber-600 flex items-center justify-center text-2xl mx-auto mb-3 shadow-inner">
+                    <i class="fa-solid fa-lock"></i>
+                  </div>
+                  <h4 class="font-bold text-slate-800 text-base mb-1">Chưa có môn học do bạn phụ trách</h4>
+                  <p class="text-xs text-slate-500 mb-4">Để bảo đảm tính riêng tư, hệ thống chỉ hiển thị sổ điểm cho các môn học do chính bạn giảng dạy. Bạn chưa có môn học nào ở lớp này.</p>
+                  <button onclick="closeModal('modal-grade-sheet'); openCreateSubjectModal();" class="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl text-xs font-bold transition inline-flex items-center gap-1.5 shadow-sm">
+                    <i class="fa-solid fa-plus"></i> + Tạo Môn Học Mới Cho Lớp
+                  </button>
+                </div>
+              </td>
+            </tr>
+          `;
+        }
+        return;
+      }
+
+      await loadGradeSheet(chosenClass, chosenSubject);
     }
 
     async function updateGradeSheetSubjectsDropdown(className, preferredSubject) {
       const selectSubject = document.getElementById('gs-select-subject');
       if (!selectSubject) return;
 
-      try {
-        const res = await fetch(`/api/subjects?className=${encodeURIComponent(className)}`);
-        const data = await res.json();
-        const subs = data.subjects || [];
+      if (!className) {
+        selectSubject.innerHTML = `<option value="" disabled selected>-- Chưa chọn lớp --</option>`;
+        return;
+      }
 
-        let html = '';
-        if (subs.length === 0) {
-          const defaultSubj = className.includes('MG') ? 'Nguyên lý hệ điều hành' : 'Tin học';
-          html = `<option value="${escapeHtml(defaultSubj)}" selected>${escapeHtml(defaultSubj)}</option>`;
-        } else {
-          subs.forEach(s => {
-            const isSel = (preferredSubject && s.name === preferredSubject) ? 'selected' : '';
-            html += `<option value="${escapeHtml(s.name)}" ${isSel}>${escapeHtml(s.name)}</option>`;
-          });
+      const adminViewAll = document.getElementById('gs-admin-view-all')?.checked;
+      let subs = [];
+
+      try {
+        let url = `/api/subjects?className=${encodeURIComponent(className)}&teacherId=${encodeURIComponent(currentUser ? currentUser.id : '')}`;
+        if (!adminViewAll) {
+          url += '&forGradeSheet=true';
         }
-        selectSubject.innerHTML = html;
-        if (preferredSubject && selectSubject.value !== preferredSubject) {
-          selectSubject.value = preferredSubject;
-        }
+        const res = await fetch(url);
+        const data = await res.json();
+        subs = data.subjects || [];
       } catch (e) {
         console.error("Lỗi tải môn học:", e);
+      }
+
+      if (subs.length === 0) {
+        selectSubject.innerHTML = `<option value="" disabled selected>-- Bạn không dạy môn nào ở lớp này --</option>`;
+        return;
+      }
+
+      let html = '';
+      subs.forEach((s, idx) => {
+        const isSel = (preferredSubject && s.name.toLowerCase() === preferredSubject.toLowerCase()) || (!preferredSubject && idx === 0) ? 'selected' : '';
+        html += `<option value="${escapeHtml(s.name)}" ${isSel}>${escapeHtml(s.name)}</option>`;
+      });
+      selectSubject.innerHTML = html;
+
+      if (preferredSubject && subs.some(s => s.name.toLowerCase() === preferredSubject.toLowerCase())) {
+        selectSubject.value = preferredSubject;
+      } else if (subs.length > 0) {
+        selectSubject.value = subs[0].name;
       }
     }
 
     async function onGradeSheetClassChange() {
       const selectClass = document.getElementById('gs-select-class');
-      const cls = selectClass.value;
+      const cls = selectClass ? selectClass.value : '';
       await updateGradeSheetSubjectsDropdown(cls);
       const selectSubject = document.getElementById('gs-select-subject');
-      await loadGradeSheet(cls, selectSubject ? selectSubject.value : '');
+      const subj = selectSubject ? selectSubject.value : '';
+      if (cls && subj) {
+        await loadGradeSheet(cls, subj);
+      } else {
+        const tbody = document.getElementById('gs-table-body');
+        if (tbody) {
+          tbody.innerHTML = `
+            <tr>
+              <td colspan="12" class="text-center py-12 text-slate-500 font-sans">
+                <i class="fa-solid fa-user-shield text-3xl mb-2 text-indigo-400 block"></i>
+                <h4 class="font-bold text-slate-800 text-sm mb-1">Lớp ${escapeHtml(cls)} chưa có môn học do bạn phụ trách</h4>
+                <p class="text-xs text-slate-400">Để đảm bảo tính riêng tư, bảng điểm các môn của giáo viên khác sẽ không hiển thị.</p>
+              </td>
+            </tr>
+          `;
+        }
+      }
     }
 
     async function onGradeSheetSubjectChange() {
@@ -3317,20 +3474,34 @@
       await loadGradeSheet(selectClass ? selectClass.value : '', selectSubject ? selectSubject.value : '');
     }
 
+    async function onGradeSheetAdminScopeToggle() {
+      const selectClass = document.getElementById('gs-select-class');
+      const curClass = selectClass ? selectClass.value : '';
+      populateGradeSheetClassDropdown(curClass);
+      await onGradeSheetClassChange();
+    }
+
     async function loadGradeSheet(className, subjectName) {
-      if (!className) return;
-      const cleanSubj = subjectName || (className.includes('MG') ? 'Nguyên lý hệ điều hành' : 'Tin học');
+      if (!className || !subjectName) return;
 
       const tbody = document.getElementById('gs-table-body');
       tbody.innerHTML = `<tr><td colspan="12" class="text-center py-8 text-slate-500 font-sans"><i class="fa-solid fa-spinner fa-spin mr-2"></i>Đang tải dữ liệu học sinh lớp ${className}...</td></tr>`;
 
       try {
-        const res = await fetch(`/api/grade-sheets/sheet?className=${encodeURIComponent(className)}&subjectName=${encodeURIComponent(cleanSubj)}&teacherId=${currentUser ? currentUser.id : ''}`);
+        const adminViewAll = document.getElementById('gs-admin-view-all')?.checked ? 'true' : 'false';
+        const res = await fetch(`/api/grade-sheets/sheet?className=${encodeURIComponent(className)}&subjectName=${encodeURIComponent(subjectName)}&teacherId=${currentUser ? currentUser.id : ''}&viewAll=${adminViewAll}`);
         const data = await res.json();
 
         if (!res.ok) {
           showToast(data.message || "Không thể tải bảng điểm", "error");
-          tbody.innerHTML = `<tr><td colspan="12" class="text-center py-6 text-rose-500 font-sans">Lỗi tải dữ liệu bảng điểm</td></tr>`;
+          tbody.innerHTML = `
+            <tr>
+              <td colspan="12" class="text-center py-10 text-rose-600 font-sans">
+                <i class="fa-solid fa-triangle-exclamation text-2xl mb-2 text-rose-500 block"></i>
+                <span class="font-bold">${escapeHtml(data.message || "Lỗi tải bảng điểm")}</span>
+              </td>
+            </tr>
+          `;
           return;
         }
 
@@ -3616,7 +3787,7 @@
         const res = await fetch('/api/grade-sheets/save', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ sheet: currentGradeSheet })
+          body: JSON.stringify({ sheet: currentGradeSheet, teacherId: currentUser ? currentUser.id : '' })
         });
         const data = await res.json();
 
