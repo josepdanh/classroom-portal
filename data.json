@@ -3,6 +3,35 @@
   "id": "main",
   "assignments": [
     {
+      "id": "asm_1793774399970",
+      "title": "Vẽ Logo trường Hòa Bình",
+      "description": "vẽ đúng đường cong",
+      "targetClass": "T15TK02",
+      "subject": "Thiết kế minh họa với Corel Draw",
+      "dueDate": "2026-11-04T16:15",
+      "createdAt": "2026-11-04T06:39:59.970Z",
+      "attachment": {
+        "filename": "1793774399127_logo_hoa_binh.jpg",
+        "originalName": "logo hoa binh.jpg",
+        "size": 130082,
+        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1793774399/educlass_submissions/T15TK02/Thi%E1%BA%BFt%20k%E1%BA%BF%20minh%20h%E1%BB%8Da%20v%E1%BB%9Bi%20Corel%20Draw/V%E1%BA%BD%20Logo%20tr%C6%B0%E1%BB%9Dng%20H%C3%B2a%20B%C3%ACnh/1793774399127_logo_hoa_binh_d0ipeg.jpg",
+        "storageKey": "educlass_submissions/T15TK02/Thiết kế minh họa với Corel Draw/Vẽ Logo trường Hòa Bình/1793774399127_logo_hoa_binh_d0ipeg.jpg",
+        "provider": "cloudinary"
+      },
+      "createdBy": "u_teacher_danh"
+    },
+    {
+      "id": "asm_1793769990154",
+      "title": "Tạo kỹ xảo cho banner",
+      "description": "Tạo chuyển động cho thiết kế đã nộp",
+      "targetClass": "C08TK01",
+      "subject": "Xử Lý Kỹ Xảo với After Effects",
+      "dueDate": "2026-11-05T21:00",
+      "createdAt": "2026-11-04T05:26:30.154Z",
+      "attachment": null,
+      "createdBy": "u_teacher_danh"
+    },
+    {
       "id": "asm_1793760704116",
       "title": "BÀI TẬP THỰC HÀNH SHAPE TOOL",
       "description": "SỬ DỤNG CÁC LỆNH VẼ ĐƯỜNG, HÌNH KHỐI CƠ BẢN VÀ MÀU SẮC HOÀN THÀNH BÀI TẬP",
@@ -2306,6 +2335,232 @@
   ],
   "notifications": [
     {
+      "id": "notif_sub_1793781630958_58ub",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793774399970",
+      "assignmentTitle": "Vẽ Logo trường Hòa Bình",
+      "targetClass": "T15TK02",
+      "subject": "Thiết kế minh họa với Corel Draw",
+      "studentId": "u_student_T15TK0212",
+      "studentName": "Nguyễn Trần Kim Khánh",
+      "studentCode": "T15TK0212",
+      "submittedAt": "2026-11-04T08:40:30.958Z",
+      "createdAt": "2026-11-04T08:40:30.958Z",
+      "readBy": []
+    },
+    {
+      "id": "notif_sub_1793781507213_y572",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793774399970",
+      "assignmentTitle": "Vẽ Logo trường Hòa Bình",
+      "targetClass": "T15TK02",
+      "subject": "Thiết kế minh họa với Corel Draw",
+      "studentId": "u_student_T15TK0220",
+      "studentName": "Nguyễn Hoàng Phương Nghi",
+      "studentCode": "T15TK0220",
+      "submittedAt": "2026-11-04T08:38:27.213Z",
+      "createdAt": "2026-11-04T08:38:27.213Z",
+      "readBy": []
+    },
+    {
+      "id": "notif_sub_1793781505901_thrr",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793774399970",
+      "assignmentTitle": "Vẽ Logo trường Hòa Bình",
+      "targetClass": "T15TK02",
+      "subject": "Thiết kế minh họa với Corel Draw",
+      "studentId": "u_student_T15TK0220",
+      "studentName": "Nguyễn Hoàng Phương Nghi",
+      "studentCode": "T15TK0220",
+      "submittedAt": "2026-11-04T08:38:25.901Z",
+      "createdAt": "2026-11-04T08:38:25.901Z",
+      "readBy": []
+    },
+    {
+      "id": "notif_sub_1793781334893_kqzc",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793774399970",
+      "assignmentTitle": "Vẽ Logo trường Hòa Bình",
+      "targetClass": "T15TK02",
+      "subject": "Thiết kế minh họa với Corel Draw",
+      "studentId": "u_student_T15TK0222",
+      "studentName": "Phan Gia Nguyễn",
+      "studentCode": "T15TK0222",
+      "submittedAt": "2026-11-04T08:35:34.893Z",
+      "createdAt": "2026-11-04T08:35:34.893Z",
+      "readBy": []
+    },
+    {
+      "id": "notif_sub_1793781328326_ueja",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793774399970",
+      "assignmentTitle": "Vẽ Logo trường Hòa Bình",
+      "targetClass": "T15TK02",
+      "subject": "Thiết kế minh họa với Corel Draw",
+      "studentId": "u_student_T15TK0222",
+      "studentName": "Phan Gia Nguyễn",
+      "studentCode": "T15TK0222",
+      "submittedAt": "2026-11-04T08:35:28.326Z",
+      "createdAt": "2026-11-04T08:35:28.326Z",
+      "readBy": []
+    },
+    {
+      "id": "notif_sub_1793781104652_wiu9",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793774399970",
+      "assignmentTitle": "Vẽ Logo trường Hòa Bình",
+      "targetClass": "T15TK02",
+      "subject": "Thiết kế minh họa với Corel Draw",
+      "studentId": "u_student_T15TK0209",
+      "studentName": "Đoàn Anh Huy",
+      "studentCode": "T15TK0209",
+      "submittedAt": "2026-11-04T08:31:44.652Z",
+      "createdAt": "2026-11-04T08:31:44.652Z",
+      "readBy": []
+    },
+    {
+      "id": "notif_sub_1793780875198_cck5",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793774399970",
+      "assignmentTitle": "Vẽ Logo trường Hòa Bình",
+      "targetClass": "T15TK02",
+      "subject": "Thiết kế minh họa với Corel Draw",
+      "studentId": "u_student_T15TK0232",
+      "studentName": "Nguyễn Thị Phương Uyên",
+      "studentCode": "T15TK0232",
+      "submittedAt": "2026-11-04T08:27:55.198Z",
+      "createdAt": "2026-11-04T08:27:55.198Z",
+      "readBy": []
+    },
+    {
+      "id": "notif_sub_1793777253512_2tsg",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793769990154",
+      "assignmentTitle": "Tạo kỹ xảo cho banner",
+      "targetClass": "C08TK01",
+      "subject": "Xử Lý Kỹ Xảo với After Effects",
+      "studentId": "u_C08TK0107",
+      "studentName": "Nguyễn Phương Loan",
+      "studentCode": "C08TK0107",
+      "submittedAt": "2026-11-04T07:27:33.512Z",
+      "createdAt": "2026-11-04T07:27:33.512Z",
+      "readBy": [
+        "u_C08TK0107"
+      ]
+    },
+    {
+      "id": "notif_1793774399971",
+      "type": "NEW_ASSIGNMENT",
+      "assignmentId": "asm_1793774399970",
+      "title": "Vẽ Logo trường Hòa Bình",
+      "description": "vẽ đúng đường cong",
+      "targetClass": "T15TK02",
+      "subject": "Thiết kế minh họa với Corel Draw",
+      "dueDate": "2026-11-04T16:15",
+      "teacherName": "Thầy Nguyễn Công Danh",
+      "teacherId": "u_teacher_danh",
+      "createdAt": "2026-11-04T06:39:59.971Z",
+      "readBy": [
+        "u_student_T15TK0213"
+      ]
+    },
+    {
+      "id": "notif_sub_1793772612669_xcdm",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793769990154",
+      "assignmentTitle": "Tạo kỹ xảo cho banner",
+      "targetClass": "C08TK01",
+      "subject": "Xử Lý Kỹ Xảo với After Effects",
+      "studentId": "u_C08TK0105",
+      "studentName": "Nguyễn Đức Hiếu",
+      "studentCode": "C08TK0105",
+      "submittedAt": "2026-11-04T06:10:12.669Z",
+      "createdAt": "2026-11-04T06:10:12.669Z",
+      "readBy": [
+        "u_C08TK0107"
+      ]
+    },
+    {
+      "id": "notif_sub_1793772607377_nspb",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793769990154",
+      "assignmentTitle": "Tạo kỹ xảo cho banner",
+      "targetClass": "C08TK01",
+      "subject": "Xử Lý Kỹ Xảo với After Effects",
+      "studentId": "u_C08TK0105",
+      "studentName": "Nguyễn Đức Hiếu",
+      "studentCode": "C08TK0105",
+      "submittedAt": "2026-11-04T06:10:07.377Z",
+      "createdAt": "2026-11-04T06:10:07.377Z",
+      "readBy": [
+        "u_C08TK0107"
+      ]
+    },
+    {
+      "id": "notif_sub_1793772231175_08sx",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793769990154",
+      "assignmentTitle": "Tạo kỹ xảo cho banner",
+      "targetClass": "C08TK01",
+      "subject": "Xử Lý Kỹ Xảo với After Effects",
+      "studentId": "u_C08TK0105",
+      "studentName": "Nguyễn Đức Hiếu",
+      "studentCode": "C08TK0105",
+      "submittedAt": "2026-11-04T06:03:51.175Z",
+      "createdAt": "2026-11-04T06:03:51.175Z",
+      "readBy": [
+        "u_C08TK0107"
+      ]
+    },
+    {
+      "id": "notif_1793769990154",
+      "type": "NEW_ASSIGNMENT",
+      "assignmentId": "asm_1793769990154",
+      "title": "Tạo kỹ xảo cho banner",
+      "description": "Tạo chuyển động cho thiết kế đã nộp",
+      "targetClass": "C08TK01",
+      "subject": "Xử Lý Kỹ Xảo với After Effects",
+      "dueDate": "2026-11-05T21:00",
+      "teacherName": "Thầy Nguyễn Công Danh",
+      "teacherId": "u_teacher_danh",
+      "createdAt": "2026-11-04T05:26:30.154Z",
+      "readBy": [
+        "u_C08TK0107"
+      ]
+    },
+    {
+      "id": "notif_sub_1793765594891_obal",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793609039129",
+      "assignmentTitle": "Làm bài báo cáo về 10 nguyên lý chuyển động trong motion graphics",
+      "targetClass": "C08TK01",
+      "subject": "Xử Lý Kỹ Xảo với After Effects",
+      "studentId": "u_C08TK0107",
+      "studentName": "Nguyễn Phương Loan",
+      "studentCode": "C08TK0107",
+      "submittedAt": "2026-11-04T04:13:14.891Z",
+      "createdAt": "2026-11-04T04:13:14.891Z",
+      "readBy": [
+        "u_C08TK0107"
+      ]
+    },
+    {
+      "id": "notif_sub_1793765594055_fnnb",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793609039129",
+      "assignmentTitle": "Làm bài báo cáo về 10 nguyên lý chuyển động trong motion graphics",
+      "targetClass": "C08TK01",
+      "subject": "Xử Lý Kỹ Xảo với After Effects",
+      "studentId": "u_C08TK0107",
+      "studentName": "Nguyễn Phương Loan",
+      "studentCode": "C08TK0107",
+      "submittedAt": "2026-11-04T04:13:14.055Z",
+      "createdAt": "2026-11-04T04:13:14.055Z",
+      "readBy": [
+        "u_C08TK0107"
+      ]
+    },
+    {
       "id": "notif_sub_1793761548075_7a8v",
       "type": "STUDENT_SUBMITTED",
       "assignmentId": "asm_1793752994063",
@@ -2317,7 +2572,10 @@
       "studentCode": "C08TK0113",
       "submittedAt": "2026-11-04T03:05:48.075Z",
       "createdAt": "2026-11-04T03:05:48.075Z",
-      "readBy": []
+      "readBy": [
+        "u_C08TK0109",
+        "u_C08TK0107"
+      ]
     },
     {
       "id": "notif_sub_1793761547330_nzsj",
@@ -2331,7 +2589,9 @@
       "studentCode": "C08TK0113",
       "submittedAt": "2026-11-04T03:05:47.330Z",
       "createdAt": "2026-11-04T03:05:47.330Z",
-      "readBy": []
+      "readBy": [
+        "u_C08TK0107"
+      ]
     },
     {
       "id": "notif_sub_1793761545888_b7da",
@@ -2345,7 +2605,9 @@
       "studentCode": "C08TK0113",
       "submittedAt": "2026-11-04T03:05:45.888Z",
       "createdAt": "2026-11-04T03:05:45.888Z",
-      "readBy": []
+      "readBy": [
+        "u_C08TK0107"
+      ]
     },
     {
       "id": "notif_sub_1793761540086_9ila",
@@ -2359,7 +2621,9 @@
       "studentCode": "C08TK0113",
       "submittedAt": "2026-11-04T03:05:40.086Z",
       "createdAt": "2026-11-04T03:05:40.086Z",
-      "readBy": []
+      "readBy": [
+        "u_C08TK0107"
+      ]
     },
     {
       "id": "notif_sub_1793761534386_5c1i",
@@ -2373,7 +2637,9 @@
       "studentCode": "C08TK0113",
       "submittedAt": "2026-11-04T03:05:34.386Z",
       "createdAt": "2026-11-04T03:05:34.386Z",
-      "readBy": []
+      "readBy": [
+        "u_C08TK0107"
+      ]
     },
     {
       "id": "notif_sub_1793761018295_fiyw",
@@ -2387,7 +2653,9 @@
       "studentCode": "C08TK0105",
       "submittedAt": "2026-11-04T02:56:58.295Z",
       "createdAt": "2026-11-04T02:56:58.295Z",
-      "readBy": []
+      "readBy": [
+        "u_C08TK0107"
+      ]
     },
     {
       "id": "notif_sub_1793761016678_gpqf",
@@ -2401,7 +2669,9 @@
       "studentCode": "C08TK0105",
       "submittedAt": "2026-11-04T02:56:56.678Z",
       "createdAt": "2026-11-04T02:56:56.678Z",
-      "readBy": []
+      "readBy": [
+        "u_C08TK0107"
+      ]
     },
     {
       "id": "notif_sub_1793760837149_fjh4",
@@ -2415,7 +2685,9 @@
       "studentCode": "C08TK0112",
       "submittedAt": "2026-11-04T02:53:57.149Z",
       "createdAt": "2026-11-04T02:53:57.149Z",
-      "readBy": []
+      "readBy": [
+        "u_C08TK0107"
+      ]
     },
     {
       "id": "notif_sub_1793760832990_xyll",
@@ -2429,7 +2701,9 @@
       "studentCode": "C08TK0112",
       "submittedAt": "2026-11-04T02:53:52.990Z",
       "createdAt": "2026-11-04T02:53:52.990Z",
-      "readBy": []
+      "readBy": [
+        "u_C08TK0107"
+      ]
     },
     {
       "id": "notif_1793760704118",
@@ -2457,7 +2731,10 @@
       "studentCode": "C08TK0119",
       "submittedAt": "2026-11-04T02:40:47.868Z",
       "createdAt": "2026-11-04T02:40:47.868Z",
-      "readBy": []
+      "readBy": [
+        "u_C08TK0118",
+        "u_C08TK0107"
+      ]
     },
     {
       "id": "notif_sub_1793760039152_ihol",
@@ -2471,7 +2748,10 @@
       "studentCode": "C08TK0119",
       "submittedAt": "2026-11-04T02:40:39.152Z",
       "createdAt": "2026-11-04T02:40:39.152Z",
-      "readBy": []
+      "readBy": [
+        "u_C08TK0118",
+        "u_C08TK0107"
+      ]
     },
     {
       "id": "notif_sub_1793760034262_y0np",
@@ -2485,7 +2765,9 @@
       "studentCode": "C08TK0119",
       "submittedAt": "2026-11-04T02:40:34.262Z",
       "createdAt": "2026-11-04T02:40:34.262Z",
-      "readBy": []
+      "readBy": [
+        "u_C08TK0107"
+      ]
     },
     {
       "id": "notif_sub_1793760032263_dgbm",
@@ -2499,7 +2781,9 @@
       "studentCode": "C08TK0119",
       "submittedAt": "2026-11-04T02:40:32.263Z",
       "createdAt": "2026-11-04T02:40:32.263Z",
-      "readBy": []
+      "readBy": [
+        "u_C08TK0107"
+      ]
     },
     {
       "id": "notif_sub_1793760031465_mxgh",
@@ -2513,7 +2797,9 @@
       "studentCode": "C08TK0119",
       "submittedAt": "2026-11-04T02:40:31.465Z",
       "createdAt": "2026-11-04T02:40:31.465Z",
-      "readBy": []
+      "readBy": [
+        "u_C08TK0107"
+      ]
     },
     {
       "id": "notif_sub_1793760018645_c7wh",
@@ -2527,7 +2813,9 @@
       "studentCode": "C08TK0119",
       "submittedAt": "2026-11-04T02:40:18.645Z",
       "createdAt": "2026-11-04T02:40:18.645Z",
-      "readBy": []
+      "readBy": [
+        "u_C08TK0107"
+      ]
     },
     {
       "id": "notif_sub_1793760007673_ljj2",
@@ -2541,7 +2829,9 @@
       "studentCode": "C08TK0119",
       "submittedAt": "2026-11-04T02:40:07.673Z",
       "createdAt": "2026-11-04T02:40:07.673Z",
-      "readBy": []
+      "readBy": [
+        "u_C08TK0107"
+      ]
     },
     {
       "id": "notif_sub_1793760003661_ugam",
@@ -2555,7 +2845,9 @@
       "studentCode": "C08TK0119",
       "submittedAt": "2026-11-04T02:40:03.661Z",
       "createdAt": "2026-11-04T02:40:03.661Z",
-      "readBy": []
+      "readBy": [
+        "u_C08TK0107"
+      ]
     },
     {
       "id": "notif_sub_1793760002557_dawe",
@@ -2569,7 +2861,9 @@
       "studentCode": "C08TK0119",
       "submittedAt": "2026-11-04T02:40:02.557Z",
       "createdAt": "2026-11-04T02:40:02.557Z",
-      "readBy": []
+      "readBy": [
+        "u_C08TK0107"
+      ]
     },
     {
       "id": "notif_sub_1793759999161_k7ia",
@@ -2583,7 +2877,9 @@
       "studentCode": "C08TK0119",
       "submittedAt": "2026-11-04T02:39:59.161Z",
       "createdAt": "2026-11-04T02:39:59.161Z",
-      "readBy": []
+      "readBy": [
+        "u_C08TK0107"
+      ]
     },
     {
       "id": "notif_sub_1793759996945_vlee",
@@ -2597,7 +2893,9 @@
       "studentCode": "C08TK0119",
       "submittedAt": "2026-11-04T02:39:56.945Z",
       "createdAt": "2026-11-04T02:39:56.945Z",
-      "readBy": []
+      "readBy": [
+        "u_C08TK0107"
+      ]
     },
     {
       "id": "notif_sub_1793759979881_gxy6",
@@ -2611,7 +2909,9 @@
       "studentCode": "C08TK0119",
       "submittedAt": "2026-11-04T02:39:39.881Z",
       "createdAt": "2026-11-04T02:39:39.881Z",
-      "readBy": []
+      "readBy": [
+        "u_C08TK0107"
+      ]
     },
     {
       "id": "notif_sub_1793759977881_7gcg",
@@ -2625,7 +2925,9 @@
       "studentCode": "C08TK0119",
       "submittedAt": "2026-11-04T02:39:37.881Z",
       "createdAt": "2026-11-04T02:39:37.881Z",
-      "readBy": []
+      "readBy": [
+        "u_C08TK0107"
+      ]
     },
     {
       "id": "notif_sub_1793759872384_a2zj",
@@ -2639,7 +2941,9 @@
       "studentCode": "C08TK0104",
       "submittedAt": "2026-11-04T02:37:52.384Z",
       "createdAt": "2026-11-04T02:37:52.384Z",
-      "readBy": []
+      "readBy": [
+        "u_C08TK0107"
+      ]
     },
     {
       "id": "notif_sub_1793759872279_4pmj",
@@ -2653,7 +2957,9 @@
       "studentCode": "C08TK0104",
       "submittedAt": "2026-11-04T02:37:52.279Z",
       "createdAt": "2026-11-04T02:37:52.279Z",
-      "readBy": []
+      "readBy": [
+        "u_C08TK0107"
+      ]
     },
     {
       "id": "notif_sub_1793759872196_43f6",
@@ -2667,7 +2973,9 @@
       "studentCode": "C08TK0104",
       "submittedAt": "2026-11-04T02:37:52.195Z",
       "createdAt": "2026-11-04T02:37:52.195Z",
-      "readBy": []
+      "readBy": [
+        "u_C08TK0107"
+      ]
     },
     {
       "id": "notif_sub_1793759872094_wmbe",
@@ -2681,7 +2989,9 @@
       "studentCode": "C08TK0104",
       "submittedAt": "2026-11-04T02:37:52.094Z",
       "createdAt": "2026-11-04T02:37:52.094Z",
-      "readBy": []
+      "readBy": [
+        "u_C08TK0107"
+      ]
     },
     {
       "id": "notif_sub_1793759871979_2wjh",
@@ -2695,7 +3005,9 @@
       "studentCode": "C08TK0104",
       "submittedAt": "2026-11-04T02:37:51.979Z",
       "createdAt": "2026-11-04T02:37:51.979Z",
-      "readBy": []
+      "readBy": [
+        "u_C08TK0107"
+      ]
     },
     {
       "id": "notif_sub_1793759871878_fl7g",
@@ -2709,7 +3021,9 @@
       "studentCode": "C08TK0104",
       "submittedAt": "2026-11-04T02:37:51.878Z",
       "createdAt": "2026-11-04T02:37:51.878Z",
-      "readBy": []
+      "readBy": [
+        "u_C08TK0107"
+      ]
     },
     {
       "id": "notif_sub_1793759871774_7bps",
@@ -2723,7 +3037,9 @@
       "studentCode": "C08TK0104",
       "submittedAt": "2026-11-04T02:37:51.774Z",
       "createdAt": "2026-11-04T02:37:51.774Z",
-      "readBy": []
+      "readBy": [
+        "u_C08TK0107"
+      ]
     },
     {
       "id": "notif_sub_1793759871659_pf0w",
@@ -2737,7 +3053,9 @@
       "studentCode": "C08TK0104",
       "submittedAt": "2026-11-04T02:37:51.659Z",
       "createdAt": "2026-11-04T02:37:51.659Z",
-      "readBy": []
+      "readBy": [
+        "u_C08TK0107"
+      ]
     },
     {
       "id": "notif_sub_1793759871186_gib5",
@@ -2751,7 +3069,9 @@
       "studentCode": "C08TK0104",
       "submittedAt": "2026-11-04T02:37:51.186Z",
       "createdAt": "2026-11-04T02:37:51.186Z",
-      "readBy": []
+      "readBy": [
+        "u_C08TK0107"
+      ]
     },
     {
       "id": "notif_sub_1793759871087_dzla",
@@ -2765,7 +3085,9 @@
       "studentCode": "C08TK0104",
       "submittedAt": "2026-11-04T02:37:51.087Z",
       "createdAt": "2026-11-04T02:37:51.087Z",
-      "readBy": []
+      "readBy": [
+        "u_C08TK0107"
+      ]
     },
     {
       "id": "notif_sub_1793759870988_2j2j",
@@ -2779,7 +3101,9 @@
       "studentCode": "C08TK0104",
       "submittedAt": "2026-11-04T02:37:50.988Z",
       "createdAt": "2026-11-04T02:37:50.988Z",
-      "readBy": []
+      "readBy": [
+        "u_C08TK0107"
+      ]
     },
     {
       "id": "notif_sub_1793759870789_ayp5",
@@ -2793,7 +3117,9 @@
       "studentCode": "C08TK0104",
       "submittedAt": "2026-11-04T02:37:50.789Z",
       "createdAt": "2026-11-04T02:37:50.789Z",
-      "readBy": []
+      "readBy": [
+        "u_C08TK0107"
+      ]
     },
     {
       "id": "notif_sub_1793759870288_dnw9",
@@ -2807,7 +3133,9 @@
       "studentCode": "C08TK0104",
       "submittedAt": "2026-11-04T02:37:50.288Z",
       "createdAt": "2026-11-04T02:37:50.288Z",
-      "readBy": []
+      "readBy": [
+        "u_C08TK0107"
+      ]
     },
     {
       "id": "notif_sub_1793759869489_eg3l",
@@ -2821,7 +3149,9 @@
       "studentCode": "C08TK0104",
       "submittedAt": "2026-11-04T02:37:49.489Z",
       "createdAt": "2026-11-04T02:37:49.489Z",
-      "readBy": []
+      "readBy": [
+        "u_C08TK0107"
+      ]
     },
     {
       "id": "notif_sub_1793759869394_9pes",
@@ -2835,7 +3165,9 @@
       "studentCode": "C08TK0104",
       "submittedAt": "2026-11-04T02:37:49.394Z",
       "createdAt": "2026-11-04T02:37:49.394Z",
-      "readBy": []
+      "readBy": [
+        "u_C08TK0107"
+      ]
     },
     {
       "id": "notif_sub_1793759869292_ffyx",
@@ -2849,7 +3181,9 @@
       "studentCode": "C08TK0104",
       "submittedAt": "2026-11-04T02:37:49.292Z",
       "createdAt": "2026-11-04T02:37:49.292Z",
-      "readBy": []
+      "readBy": [
+        "u_C08TK0107"
+      ]
     },
     {
       "id": "notif_sub_1793759869088_3nsx",
@@ -2863,7 +3197,9 @@
       "studentCode": "C08TK0104",
       "submittedAt": "2026-11-04T02:37:49.088Z",
       "createdAt": "2026-11-04T02:37:49.088Z",
-      "readBy": []
+      "readBy": [
+        "u_C08TK0107"
+      ]
     },
     {
       "id": "notif_sub_1793759868288_3mqk",
@@ -2877,7 +3213,9 @@
       "studentCode": "C08TK0104",
       "submittedAt": "2026-11-04T02:37:48.288Z",
       "createdAt": "2026-11-04T02:37:48.288Z",
-      "readBy": []
+      "readBy": [
+        "u_C08TK0107"
+      ]
     },
     {
       "id": "notif_sub_1793759867991_rzp6",
@@ -2891,7 +3229,9 @@
       "studentCode": "C08TK0104",
       "submittedAt": "2026-11-04T02:37:47.991Z",
       "createdAt": "2026-11-04T02:37:47.991Z",
-      "readBy": []
+      "readBy": [
+        "u_C08TK0107"
+      ]
     },
     {
       "id": "notif_sub_1793759865986_v0na",
@@ -2905,7 +3245,9 @@
       "studentCode": "C08TK0104",
       "submittedAt": "2026-11-04T02:37:45.986Z",
       "createdAt": "2026-11-04T02:37:45.986Z",
-      "readBy": []
+      "readBy": [
+        "u_C08TK0107"
+      ]
     },
     {
       "id": "notif_sub_1793759863787_2wfs",
@@ -2919,7 +3261,9 @@
       "studentCode": "C08TK0104",
       "submittedAt": "2026-11-04T02:37:43.787Z",
       "createdAt": "2026-11-04T02:37:43.787Z",
-      "readBy": []
+      "readBy": [
+        "u_C08TK0107"
+      ]
     },
     {
       "id": "notif_sub_1793759862689_ymia",
@@ -2933,7 +3277,9 @@
       "studentCode": "C08TK0104",
       "submittedAt": "2026-11-04T02:37:42.689Z",
       "createdAt": "2026-11-04T02:37:42.689Z",
-      "readBy": []
+      "readBy": [
+        "u_C08TK0107"
+      ]
     },
     {
       "id": "notif_sub_1793759862188_5i5w",
@@ -2947,7 +3293,9 @@
       "studentCode": "C08TK0104",
       "submittedAt": "2026-11-04T02:37:42.188Z",
       "createdAt": "2026-11-04T02:37:42.188Z",
-      "readBy": []
+      "readBy": [
+        "u_C08TK0107"
+      ]
     },
     {
       "id": "notif_sub_1793759859690_qmli",
@@ -2961,7 +3309,9 @@
       "studentCode": "C08TK0104",
       "submittedAt": "2026-11-04T02:37:39.690Z",
       "createdAt": "2026-11-04T02:37:39.690Z",
-      "readBy": []
+      "readBy": [
+        "u_C08TK0107"
+      ]
     },
     {
       "id": "notif_sub_1793759816695_fk8x",
@@ -2975,7 +3325,9 @@
       "studentCode": "C08TK0104",
       "submittedAt": "2026-11-04T02:36:56.695Z",
       "createdAt": "2026-11-04T02:36:56.695Z",
-      "readBy": []
+      "readBy": [
+        "u_C08TK0107"
+      ]
     },
     {
       "id": "notif_sub_1793759799315_828h",
@@ -2989,7 +3341,9 @@
       "studentCode": "C08TK0104",
       "submittedAt": "2026-11-04T02:36:39.315Z",
       "createdAt": "2026-11-04T02:36:39.315Z",
-      "readBy": []
+      "readBy": [
+        "u_C08TK0107"
+      ]
     },
     {
       "id": "notif_sub_1793759799202_mtt1",
@@ -3003,7 +3357,9 @@
       "studentCode": "C08TK0104",
       "submittedAt": "2026-11-04T02:36:39.201Z",
       "createdAt": "2026-11-04T02:36:39.201Z",
-      "readBy": []
+      "readBy": [
+        "u_C08TK0107"
+      ]
     },
     {
       "id": "notif_sub_1793759799101_o54u",
@@ -3017,7 +3373,9 @@
       "studentCode": "C08TK0104",
       "submittedAt": "2026-11-04T02:36:39.101Z",
       "createdAt": "2026-11-04T02:36:39.101Z",
-      "readBy": []
+      "readBy": [
+        "u_C08TK0107"
+      ]
     },
     {
       "id": "notif_sub_1793759798996_phn2",
@@ -3031,7 +3389,9 @@
       "studentCode": "C08TK0104",
       "submittedAt": "2026-11-04T02:36:38.996Z",
       "createdAt": "2026-11-04T02:36:38.996Z",
-      "readBy": []
+      "readBy": [
+        "u_C08TK0107"
+      ]
     },
     {
       "id": "notif_sub_1793759798889_jfm3",
@@ -3045,7 +3405,9 @@
       "studentCode": "C08TK0104",
       "submittedAt": "2026-11-04T02:36:38.889Z",
       "createdAt": "2026-11-04T02:36:38.889Z",
-      "readBy": []
+      "readBy": [
+        "u_C08TK0107"
+      ]
     },
     {
       "id": "notif_sub_1793759798775_oa5r",
@@ -3059,7 +3421,9 @@
       "studentCode": "C08TK0104",
       "submittedAt": "2026-11-04T02:36:38.775Z",
       "createdAt": "2026-11-04T02:36:38.775Z",
-      "readBy": []
+      "readBy": [
+        "u_C08TK0107"
+      ]
     },
     {
       "id": "notif_sub_1793759798355_e5q5",
@@ -3073,7 +3437,9 @@
       "studentCode": "C08TK0104",
       "submittedAt": "2026-11-04T02:36:38.355Z",
       "createdAt": "2026-11-04T02:36:38.355Z",
-      "readBy": []
+      "readBy": [
+        "u_C08TK0107"
+      ]
     },
     {
       "id": "notif_sub_1793759798031_jrbq",
@@ -3087,7 +3453,9 @@
       "studentCode": "C08TK0104",
       "submittedAt": "2026-11-04T02:36:38.031Z",
       "createdAt": "2026-11-04T02:36:38.031Z",
-      "readBy": []
+      "readBy": [
+        "u_C08TK0107"
+      ]
     },
     {
       "id": "notif_sub_1793759797632_137e",
@@ -3101,7 +3469,9 @@
       "studentCode": "C08TK0104",
       "submittedAt": "2026-11-04T02:36:37.632Z",
       "createdAt": "2026-11-04T02:36:37.632Z",
-      "readBy": []
+      "readBy": [
+        "u_C08TK0107"
+      ]
     },
     {
       "id": "notif_sub_1793759795311_x660",
@@ -3115,7 +3485,9 @@
       "studentCode": "C08TK0104",
       "submittedAt": "2026-11-04T02:36:35.311Z",
       "createdAt": "2026-11-04T02:36:35.311Z",
-      "readBy": []
+      "readBy": [
+        "u_C08TK0107"
+      ]
     },
     {
       "id": "notif_sub_1793759795207_80y8",
@@ -3129,7 +3501,9 @@
       "studentCode": "C08TK0104",
       "submittedAt": "2026-11-04T02:36:35.207Z",
       "createdAt": "2026-11-04T02:36:35.207Z",
-      "readBy": []
+      "readBy": [
+        "u_C08TK0107"
+      ]
     },
     {
       "id": "notif_sub_1793759795094_x97o",
@@ -3143,7 +3517,9 @@
       "studentCode": "C08TK0104",
       "submittedAt": "2026-11-04T02:36:35.094Z",
       "createdAt": "2026-11-04T02:36:35.094Z",
-      "readBy": []
+      "readBy": [
+        "u_C08TK0107"
+      ]
     },
     {
       "id": "notif_sub_1793759794231_9h1l",
@@ -3157,7 +3533,9 @@
       "studentCode": "C08TK0104",
       "submittedAt": "2026-11-04T02:36:34.231Z",
       "createdAt": "2026-11-04T02:36:34.231Z",
-      "readBy": []
+      "readBy": [
+        "u_C08TK0107"
+      ]
     },
     {
       "id": "notif_sub_1793759791834_o5kn",
@@ -3171,7 +3549,9 @@
       "studentCode": "C08TK0104",
       "submittedAt": "2026-11-04T02:36:31.834Z",
       "createdAt": "2026-11-04T02:36:31.834Z",
-      "readBy": []
+      "readBy": [
+        "u_C08TK0107"
+      ]
     },
     {
       "id": "notif_sub_1793759767862_x8iv",
@@ -3185,7 +3565,9 @@
       "studentCode": "C08TK0104",
       "submittedAt": "2026-11-04T02:36:07.862Z",
       "createdAt": "2026-11-04T02:36:07.862Z",
-      "readBy": []
+      "readBy": [
+        "u_C08TK0107"
+      ]
     },
     {
       "id": "notif_sub_1793759619246_fnso",
@@ -3199,7 +3581,9 @@
       "studentCode": "C08TK0123",
       "submittedAt": "2026-11-04T02:33:39.245Z",
       "createdAt": "2026-11-04T02:33:39.245Z",
-      "readBy": []
+      "readBy": [
+        "u_C08TK0107"
+      ]
     },
     {
       "id": "notif_sub_1793759026497_1yjp",
@@ -3214,7 +3598,8 @@
       "submittedAt": "2026-11-04T02:23:46.497Z",
       "createdAt": "2026-11-04T02:23:46.497Z",
       "readBy": [
-        "u_C08TK0104"
+        "u_C08TK0104",
+        "u_C08TK0107"
       ]
     },
     {
@@ -3230,7 +3615,8 @@
       "submittedAt": "2026-11-04T02:15:26.725Z",
       "createdAt": "2026-11-04T02:15:26.725Z",
       "readBy": [
-        "u_C08TK0106"
+        "u_C08TK0106",
+        "u_C08TK0107"
       ]
     },
     {
@@ -3246,7 +3632,8 @@
       "submittedAt": "2026-11-04T02:12:48.844Z",
       "createdAt": "2026-11-04T02:12:48.844Z",
       "readBy": [
-        "u_C08TK0106"
+        "u_C08TK0106",
+        "u_C08TK0107"
       ]
     },
     {
@@ -3262,7 +3649,8 @@
       "submittedAt": "2026-11-04T02:12:38.219Z",
       "createdAt": "2026-11-04T02:12:38.219Z",
       "readBy": [
-        "u_C08TK0106"
+        "u_C08TK0106",
+        "u_C08TK0107"
       ]
     },
     {
@@ -3278,7 +3666,8 @@
       "submittedAt": "2026-11-04T02:05:12.926Z",
       "createdAt": "2026-11-04T02:05:12.926Z",
       "readBy": [
-        "u_C08TK0106"
+        "u_C08TK0106",
+        "u_C08TK0107"
       ]
     },
     {
@@ -3294,7 +3683,8 @@
       "submittedAt": "2026-11-04T02:04:41.571Z",
       "createdAt": "2026-11-04T02:04:41.571Z",
       "readBy": [
-        "u_C08TK0106"
+        "u_C08TK0106",
+        "u_C08TK0107"
       ]
     },
     {
@@ -3310,7 +3700,8 @@
       "submittedAt": "2026-11-04T02:04:41.390Z",
       "createdAt": "2026-11-04T02:04:41.390Z",
       "readBy": [
-        "u_C08TK0106"
+        "u_C08TK0106",
+        "u_C08TK0107"
       ]
     },
     {
@@ -3326,7 +3717,8 @@
       "submittedAt": "2026-11-04T02:04:41.237Z",
       "createdAt": "2026-11-04T02:04:41.237Z",
       "readBy": [
-        "u_C08TK0106"
+        "u_C08TK0106",
+        "u_C08TK0107"
       ]
     },
     {
@@ -3342,7 +3734,8 @@
       "submittedAt": "2026-11-04T02:04:41.020Z",
       "createdAt": "2026-11-04T02:04:41.020Z",
       "readBy": [
-        "u_C08TK0106"
+        "u_C08TK0106",
+        "u_C08TK0107"
       ]
     },
     {
@@ -3358,7 +3751,8 @@
       "submittedAt": "2026-11-04T02:04:39.588Z",
       "createdAt": "2026-11-04T02:04:39.588Z",
       "readBy": [
-        "u_C08TK0106"
+        "u_C08TK0106",
+        "u_C08TK0107"
       ]
     },
     {
@@ -3374,7 +3768,8 @@
       "submittedAt": "2026-11-04T02:04:39.453Z",
       "createdAt": "2026-11-04T02:04:39.453Z",
       "readBy": [
-        "u_C08TK0106"
+        "u_C08TK0106",
+        "u_C08TK0107"
       ]
     },
     {
@@ -3390,7 +3785,8 @@
       "submittedAt": "2026-11-04T02:04:38.248Z",
       "createdAt": "2026-11-04T02:04:38.248Z",
       "readBy": [
-        "u_C08TK0106"
+        "u_C08TK0106",
+        "u_C08TK0107"
       ]
     },
     {
@@ -3406,7 +3802,8 @@
       "submittedAt": "2026-11-04T02:04:37.546Z",
       "createdAt": "2026-11-04T02:04:37.546Z",
       "readBy": [
-        "u_C08TK0106"
+        "u_C08TK0106",
+        "u_C08TK0107"
       ]
     },
     {
@@ -3422,7 +3819,8 @@
       "submittedAt": "2026-11-04T02:04:37.344Z",
       "createdAt": "2026-11-04T02:04:37.344Z",
       "readBy": [
-        "u_C08TK0106"
+        "u_C08TK0106",
+        "u_C08TK0107"
       ]
     },
     {
@@ -3438,7 +3836,8 @@
       "submittedAt": "2026-11-04T02:04:35.782Z",
       "createdAt": "2026-11-04T02:04:35.782Z",
       "readBy": [
-        "u_C08TK0106"
+        "u_C08TK0106",
+        "u_C08TK0107"
       ]
     },
     {
@@ -3454,7 +3853,8 @@
       "submittedAt": "2026-11-04T02:04:33.654Z",
       "createdAt": "2026-11-04T02:04:33.654Z",
       "readBy": [
-        "u_C08TK0106"
+        "u_C08TK0106",
+        "u_C08TK0107"
       ]
     },
     {
@@ -3470,7 +3870,8 @@
       "submittedAt": "2026-11-04T02:04:32.643Z",
       "createdAt": "2026-11-04T02:04:32.643Z",
       "readBy": [
-        "u_C08TK0106"
+        "u_C08TK0106",
+        "u_C08TK0107"
       ]
     },
     {
@@ -3486,7 +3887,8 @@
       "submittedAt": "2026-11-04T02:04:32.384Z",
       "createdAt": "2026-11-04T02:04:32.384Z",
       "readBy": [
-        "u_C08TK0106"
+        "u_C08TK0106",
+        "u_C08TK0107"
       ]
     },
     {
@@ -3502,7 +3904,8 @@
       "submittedAt": "2026-11-04T02:04:31.486Z",
       "createdAt": "2026-11-04T02:04:31.486Z",
       "readBy": [
-        "u_C08TK0106"
+        "u_C08TK0106",
+        "u_C08TK0107"
       ]
     },
     {
@@ -3518,7 +3921,8 @@
       "submittedAt": "2026-11-04T02:04:31.157Z",
       "createdAt": "2026-11-04T02:04:31.157Z",
       "readBy": [
-        "u_C08TK0106"
+        "u_C08TK0106",
+        "u_C08TK0107"
       ]
     },
     {
@@ -3534,7 +3938,8 @@
       "submittedAt": "2026-11-04T02:04:30.146Z",
       "createdAt": "2026-11-04T02:04:30.146Z",
       "readBy": [
-        "u_C08TK0106"
+        "u_C08TK0106",
+        "u_C08TK0107"
       ]
     },
     {
@@ -3550,7 +3955,8 @@
       "submittedAt": "2026-11-04T02:04:28.046Z",
       "createdAt": "2026-11-04T02:04:28.046Z",
       "readBy": [
-        "u_C08TK0106"
+        "u_C08TK0106",
+        "u_C08TK0107"
       ]
     },
     {
@@ -3566,7 +3972,8 @@
       "submittedAt": "2026-11-04T02:04:21.958Z",
       "createdAt": "2026-11-04T02:04:21.958Z",
       "readBy": [
-        "u_C08TK0106"
+        "u_C08TK0106",
+        "u_C08TK0107"
       ]
     },
     {
@@ -3582,7 +3989,8 @@
       "submittedAt": "2026-11-04T02:03:20.016Z",
       "createdAt": "2026-11-04T02:03:20.016Z",
       "readBy": [
-        "u_C08TK0106"
+        "u_C08TK0106",
+        "u_C08TK0107"
       ]
     },
     {
@@ -3598,7 +4006,8 @@
       "submittedAt": "2026-11-04T02:02:32.085Z",
       "createdAt": "2026-11-04T02:02:32.085Z",
       "readBy": [
-        "u_C08TK0106"
+        "u_C08TK0106",
+        "u_C08TK0107"
       ]
     },
     {
@@ -3614,7 +4023,8 @@
       "submittedAt": "2026-11-04T02:01:18.379Z",
       "createdAt": "2026-11-04T02:01:18.379Z",
       "readBy": [
-        "u_C08TK0106"
+        "u_C08TK0106",
+        "u_C08TK0107"
       ]
     },
     {
@@ -3630,7 +4040,8 @@
       "submittedAt": "2026-11-04T01:59:06.968Z",
       "createdAt": "2026-11-04T01:59:06.968Z",
       "readBy": [
-        "u_C08TK0106"
+        "u_C08TK0106",
+        "u_C08TK0107"
       ]
     },
     {
@@ -3646,7 +4057,8 @@
       "submittedAt": "2026-11-04T01:58:55.444Z",
       "createdAt": "2026-11-04T01:58:55.444Z",
       "readBy": [
-        "u_C08TK0106"
+        "u_C08TK0106",
+        "u_C08TK0107"
       ]
     },
     {
@@ -3662,263 +4074,8 @@
       "submittedAt": "2026-11-04T01:58:51.963Z",
       "createdAt": "2026-11-04T01:58:51.963Z",
       "readBy": [
-        "u_C08TK0106"
-      ]
-    },
-    {
-      "id": "notif_sub_1793757531652_is0v",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1793752994063",
-      "assignmentTitle": "Tạo Thiết kế banner hoặc poster để tạo chuyển động",
-      "targetClass": "C08TK01",
-      "subject": "Xử Lý Kỹ Xảo với After Effects",
-      "studentId": "u_C08TK0111",
-      "studentName": "Đoàn Thị Thúy",
-      "studentCode": "C08TK0111",
-      "submittedAt": "2026-11-04T01:58:51.652Z",
-      "createdAt": "2026-11-04T01:58:51.652Z",
-      "readBy": [
-        "u_C08TK0106"
-      ]
-    },
-    {
-      "id": "notif_sub_1793757528891_5rep",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1793752994063",
-      "assignmentTitle": "Tạo Thiết kế banner hoặc poster để tạo chuyển động",
-      "targetClass": "C08TK01",
-      "subject": "Xử Lý Kỹ Xảo với After Effects",
-      "studentId": "u_C08TK0111",
-      "studentName": "Đoàn Thị Thúy",
-      "studentCode": "C08TK0111",
-      "submittedAt": "2026-11-04T01:58:48.890Z",
-      "createdAt": "2026-11-04T01:58:48.890Z",
-      "readBy": [
-        "u_C08TK0106"
-      ]
-    },
-    {
-      "id": "notif_sub_1793757528144_0vzg",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1793752994063",
-      "assignmentTitle": "Tạo Thiết kế banner hoặc poster để tạo chuyển động",
-      "targetClass": "C08TK01",
-      "subject": "Xử Lý Kỹ Xảo với After Effects",
-      "studentId": "u_C08TK0111",
-      "studentName": "Đoàn Thị Thúy",
-      "studentCode": "C08TK0111",
-      "submittedAt": "2026-11-04T01:58:48.144Z",
-      "createdAt": "2026-11-04T01:58:48.144Z",
-      "readBy": [
-        "u_C08TK0106"
-      ]
-    },
-    {
-      "id": "notif_sub_1793757526891_b86a",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1793752994063",
-      "assignmentTitle": "Tạo Thiết kế banner hoặc poster để tạo chuyển động",
-      "targetClass": "C08TK01",
-      "subject": "Xử Lý Kỹ Xảo với After Effects",
-      "studentId": "u_C08TK0111",
-      "studentName": "Đoàn Thị Thúy",
-      "studentCode": "C08TK0111",
-      "submittedAt": "2026-11-04T01:58:46.891Z",
-      "createdAt": "2026-11-04T01:58:46.891Z",
-      "readBy": [
-        "u_C08TK0106"
-      ]
-    },
-    {
-      "id": "notif_sub_1793757526102_4nhh",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1793752994063",
-      "assignmentTitle": "Tạo Thiết kế banner hoặc poster để tạo chuyển động",
-      "targetClass": "C08TK01",
-      "subject": "Xử Lý Kỹ Xảo với After Effects",
-      "studentId": "u_C08TK0111",
-      "studentName": "Đoàn Thị Thúy",
-      "studentCode": "C08TK0111",
-      "submittedAt": "2026-11-04T01:58:46.102Z",
-      "createdAt": "2026-11-04T01:58:46.102Z",
-      "readBy": [
-        "u_C08TK0106"
-      ]
-    },
-    {
-      "id": "notif_sub_1793757525673_qmxc",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1793752994063",
-      "assignmentTitle": "Tạo Thiết kế banner hoặc poster để tạo chuyển động",
-      "targetClass": "C08TK01",
-      "subject": "Xử Lý Kỹ Xảo với After Effects",
-      "studentId": "u_C08TK0111",
-      "studentName": "Đoàn Thị Thúy",
-      "studentCode": "C08TK0111",
-      "submittedAt": "2026-11-04T01:58:45.673Z",
-      "createdAt": "2026-11-04T01:58:45.673Z",
-      "readBy": [
-        "u_C08TK0106"
-      ]
-    },
-    {
-      "id": "notif_sub_1793757522751_6ahm",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1793752994063",
-      "assignmentTitle": "Tạo Thiết kế banner hoặc poster để tạo chuyển động",
-      "targetClass": "C08TK01",
-      "subject": "Xử Lý Kỹ Xảo với After Effects",
-      "studentId": "u_C08TK0111",
-      "studentName": "Đoàn Thị Thúy",
-      "studentCode": "C08TK0111",
-      "submittedAt": "2026-11-04T01:58:42.751Z",
-      "createdAt": "2026-11-04T01:58:42.751Z",
-      "readBy": [
-        "u_C08TK0106"
-      ]
-    },
-    {
-      "id": "notif_sub_1793757522157_08p9",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1793752994063",
-      "assignmentTitle": "Tạo Thiết kế banner hoặc poster để tạo chuyển động",
-      "targetClass": "C08TK01",
-      "subject": "Xử Lý Kỹ Xảo với After Effects",
-      "studentId": "u_C08TK0111",
-      "studentName": "Đoàn Thị Thúy",
-      "studentCode": "C08TK0111",
-      "submittedAt": "2026-11-04T01:58:42.157Z",
-      "createdAt": "2026-11-04T01:58:42.157Z",
-      "readBy": [
-        "u_C08TK0106"
-      ]
-    },
-    {
-      "id": "notif_sub_1793757520493_q6ln",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1793752994063",
-      "assignmentTitle": "Tạo Thiết kế banner hoặc poster để tạo chuyển động",
-      "targetClass": "C08TK01",
-      "subject": "Xử Lý Kỹ Xảo với After Effects",
-      "studentId": "u_C08TK0111",
-      "studentName": "Đoàn Thị Thúy",
-      "studentCode": "C08TK0111",
-      "submittedAt": "2026-11-04T01:58:40.493Z",
-      "createdAt": "2026-11-04T01:58:40.493Z",
-      "readBy": [
-        "u_C08TK0106"
-      ]
-    },
-    {
-      "id": "notif_sub_1793757519644_oavi",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1793752994063",
-      "assignmentTitle": "Tạo Thiết kế banner hoặc poster để tạo chuyển động",
-      "targetClass": "C08TK01",
-      "subject": "Xử Lý Kỹ Xảo với After Effects",
-      "studentId": "u_C08TK0111",
-      "studentName": "Đoàn Thị Thúy",
-      "studentCode": "C08TK0111",
-      "submittedAt": "2026-11-04T01:58:39.644Z",
-      "createdAt": "2026-11-04T01:58:39.644Z",
-      "readBy": [
-        "u_C08TK0106"
-      ]
-    },
-    {
-      "id": "notif_sub_1793757512729_r6aw",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1793752994063",
-      "assignmentTitle": "Tạo Thiết kế banner hoặc poster để tạo chuyển động",
-      "targetClass": "C08TK01",
-      "subject": "Xử Lý Kỹ Xảo với After Effects",
-      "studentId": "u_C08TK0111",
-      "studentName": "Đoàn Thị Thúy",
-      "studentCode": "C08TK0111",
-      "submittedAt": "2026-11-04T01:58:32.729Z",
-      "createdAt": "2026-11-04T01:58:32.729Z",
-      "readBy": [
-        "u_C08TK0106"
-      ]
-    },
-    {
-      "id": "notif_sub_1793757505733_dgdc",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1793752994063",
-      "assignmentTitle": "Tạo Thiết kế banner hoặc poster để tạo chuyển động",
-      "targetClass": "C08TK01",
-      "subject": "Xử Lý Kỹ Xảo với After Effects",
-      "studentId": "u_C08TK0111",
-      "studentName": "Đoàn Thị Thúy",
-      "studentCode": "C08TK0111",
-      "submittedAt": "2026-11-04T01:58:25.733Z",
-      "createdAt": "2026-11-04T01:58:25.733Z",
-      "readBy": [
-        "u_C08TK0106"
-      ]
-    },
-    {
-      "id": "notif_sub_1793757504845_51u9",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1793752994063",
-      "assignmentTitle": "Tạo Thiết kế banner hoặc poster để tạo chuyển động",
-      "targetClass": "C08TK01",
-      "subject": "Xử Lý Kỹ Xảo với After Effects",
-      "studentId": "u_C08TK0111",
-      "studentName": "Đoàn Thị Thúy",
-      "studentCode": "C08TK0111",
-      "submittedAt": "2026-11-04T01:58:24.845Z",
-      "createdAt": "2026-11-04T01:58:24.845Z",
-      "readBy": [
-        "u_C08TK0106"
-      ]
-    },
-    {
-      "id": "notif_sub_1793757501032_gtk0",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1793752994063",
-      "assignmentTitle": "Tạo Thiết kế banner hoặc poster để tạo chuyển động",
-      "targetClass": "C08TK01",
-      "subject": "Xử Lý Kỹ Xảo với After Effects",
-      "studentId": "u_C08TK0111",
-      "studentName": "Đoàn Thị Thúy",
-      "studentCode": "C08TK0111",
-      "submittedAt": "2026-11-04T01:58:21.032Z",
-      "createdAt": "2026-11-04T01:58:21.032Z",
-      "readBy": [
-        "u_C08TK0106"
-      ]
-    },
-    {
-      "id": "notif_sub_1793757492745_q6zm",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1793752994063",
-      "assignmentTitle": "Tạo Thiết kế banner hoặc poster để tạo chuyển động",
-      "targetClass": "C08TK01",
-      "subject": "Xử Lý Kỹ Xảo với After Effects",
-      "studentId": "u_C08TK0111",
-      "studentName": "Đoàn Thị Thúy",
-      "studentCode": "C08TK0111",
-      "submittedAt": "2026-11-04T01:58:12.745Z",
-      "createdAt": "2026-11-04T01:58:12.745Z",
-      "readBy": [
-        "u_C08TK0106"
-      ]
-    },
-    {
-      "id": "notif_sub_1793757481273_o4cw",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1793752994063",
-      "assignmentTitle": "Tạo Thiết kế banner hoặc poster để tạo chuyển động",
-      "targetClass": "C08TK01",
-      "subject": "Xử Lý Kỹ Xảo với After Effects",
-      "studentId": "u_C08TK0111",
-      "studentName": "Đoàn Thị Thúy",
-      "studentCode": "C08TK0111",
-      "submittedAt": "2026-11-04T01:58:01.273Z",
-      "createdAt": "2026-11-04T01:58:01.273Z",
-      "readBy": [
-        "u_C08TK0106"
+        "u_C08TK0106",
+        "u_C08TK0107"
       ]
     }
   ],
@@ -4412,8 +4569,15 @@
       "studentName": "Nguyễn Phương Loan",
       "content": "",
       "link": "",
-      "file": null,
-      "submittedAt": "2026-11-03T15:14:26.046Z",
+      "file": {
+        "filename": "1793765593788_C08TK0107_NGUYENPHUONGLOAN.pptx",
+        "originalName": "C08TK0107-NGUYENPHUONGLOAN.pptx",
+        "size": 1517702,
+        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1793765594/educlass_submissions/C08TK01/X%E1%BB%AD%20L%C3%BD%20K%E1%BB%B9%20X%E1%BA%A3o%20v%E1%BB%9Bi%20After%20Effects/L%C3%A0m%20b%C3%A0i%20b%C3%A1o%20c%C3%A1o%20v%E1%BB%81%2010%20nguy%C3%AAn%20l%C3%BD%20chuy%E1%BB%83n%20%C4%91%E1%BB%99ng%20trong%20motion%20graphics/1793765593788_C08TK0107_NGUYENPHUONGLOAN_gbdgpl.pptx",
+        "storageKey": "educlass_submissions/C08TK01/Xử Lý Kỹ Xảo với After Effects/Làm bài báo cáo về 10 nguyên lý chuyển động trong motion graphics/1793765593788_C08TK0107_NGUYENPHUONGLOAN_gbdgpl.pptx",
+        "provider": "cloudinary"
+      },
+      "submittedAt": "2026-11-04T04:13:14.891Z",
       "grade": null,
       "feedback": "",
       "gradedAt": "2026-11-03T15:14:26.046Z"
@@ -4855,9 +5019,149 @@
       "grade": null,
       "feedback": null,
       "gradedAt": null
+    },
+    {
+      "id": "sub_1793772231175",
+      "assignmentId": "asm_1793769990154",
+      "studentId": "u_C08TK0105",
+      "studentName": "C08TK0105",
+      "content": "",
+      "link": "",
+      "file": {
+        "filename": "1793772607670_C08TK0105_NguyenDucHieu.rar",
+        "originalName": "C08TK0105_NguyenDucHieu.rar",
+        "size": 14513073,
+        "url": "https://pub-cd6bf46bdf5c4034bdac614cd4ea7b35.r2.dev/educlass_submissions/C08TK01/Xử Lý Kỹ Xảo với After Effects/Tạo kỹ xảo cho banner/1793772609070_C08TK0105_NguyenDucHieu.rar",
+        "storageKey": "educlass_submissions/C08TK01/Xử Lý Kỹ Xảo với After Effects/Tạo kỹ xảo cho banner/1793772609070_C08TK0105_NguyenDucHieu.rar",
+        "provider": "r2"
+      },
+      "submittedAt": "2026-11-04T06:10:12.669Z",
+      "grade": null,
+      "feedback": null,
+      "gradedAt": null
+    },
+    {
+      "id": "sub_1793777253512",
+      "assignmentId": "asm_1793769990154",
+      "studentId": "u_C08TK0107",
+      "studentName": "C08TK0107",
+      "content": "",
+      "link": "",
+      "file": {
+        "filename": "1793777248850_C08TK0107_NGUYENPHUONGLOAN.rar",
+        "originalName": "C08TK0107-NGUYENPHUONGLOAN.rar",
+        "size": 14457441,
+        "url": "https://pub-cd6bf46bdf5c4034bdac614cd4ea7b35.r2.dev/educlass_submissions/C08TK01/Xử Lý Kỹ Xảo với After Effects/Tạo kỹ xảo cho banner/1793777251791_C08TK0107_NGUYENPHUONGLOAN.rar",
+        "storageKey": "educlass_submissions/C08TK01/Xử Lý Kỹ Xảo với After Effects/Tạo kỹ xảo cho banner/1793777251791_C08TK0107_NGUYENPHUONGLOAN.rar",
+        "provider": "r2"
+      },
+      "submittedAt": "2026-11-04T07:27:33.512Z",
+      "grade": null,
+      "feedback": null,
+      "gradedAt": null
+    },
+    {
+      "id": "sub_1793780875198",
+      "assignmentId": "asm_1793774399970",
+      "studentId": "u_student_T15TK0232",
+      "studentName": "T15TK0232",
+      "content": "Bài làm của Nguyễn Thị Phương Uyên-T15TK0232",
+      "link": "",
+      "file": {
+        "filename": "1793780872492_T15TK0232_NguyenThiPhuongUyen.cdr",
+        "originalName": "T15TK0232-NguyenThiPhuongUyen.cdr",
+        "size": 2041558,
+        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1793780874/educlass_submissions/T15TK02/Thi%E1%BA%BFt%20k%E1%BA%BF%20minh%20h%E1%BB%8Da%20v%E1%BB%9Bi%20Corel%20Draw/V%E1%BA%BD%20Logo%20tr%C6%B0%E1%BB%9Dng%20H%C3%B2a%20B%C3%ACnh/1793780872492_T15TK0232_NguyenThiPhuongUyen_pzlp7t.cdr",
+        "storageKey": "educlass_submissions/T15TK02/Thiết kế minh họa với Corel Draw/Vẽ Logo trường Hòa Bình/1793780872492_T15TK0232_NguyenThiPhuongUyen_pzlp7t.cdr",
+        "provider": "cloudinary"
+      },
+      "submittedAt": "2026-11-04T08:27:55.198Z",
+      "grade": null,
+      "feedback": null,
+      "gradedAt": null
+    },
+    {
+      "id": "sub_1793781104652",
+      "assignmentId": "asm_1793774399970",
+      "studentId": "u_student_T15TK0209",
+      "studentName": "T15TK0209",
+      "content": "Đoàn Anh Huy-MSSV:T15TK0209",
+      "link": "",
+      "file": {
+        "filename": "1793781102577_T15TK0209_DOAN_ANH_HUY.cdr",
+        "originalName": "T15TK0209-DOAN ANH HUY.cdr",
+        "size": 2689434,
+        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1793781104/educlass_submissions/T15TK02/Thi%E1%BA%BFt%20k%E1%BA%BF%20minh%20h%E1%BB%8Da%20v%E1%BB%9Bi%20Corel%20Draw/V%E1%BA%BD%20Logo%20tr%C6%B0%E1%BB%9Dng%20H%C3%B2a%20B%C3%ACnh/1793781102577_T15TK0209_DOAN_ANH_HUY_ygvbyr.cdr",
+        "storageKey": "educlass_submissions/T15TK02/Thiết kế minh họa với Corel Draw/Vẽ Logo trường Hòa Bình/1793781102577_T15TK0209_DOAN_ANH_HUY_ygvbyr.cdr",
+        "provider": "cloudinary"
+      },
+      "submittedAt": "2026-11-04T08:31:44.652Z",
+      "grade": null,
+      "feedback": null,
+      "gradedAt": null
+    },
+    {
+      "id": "sub_1793781328326",
+      "assignmentId": "asm_1793774399970",
+      "studentId": "u_student_T15TK0222",
+      "studentName": "T15TK0222",
+      "content": "T15TK0222-PHAN GIA NGUYEN",
+      "link": "",
+      "file": {
+        "filename": "1793781329242_T15TK0222_PHAN_GIA_NGUYEN.cdr",
+        "originalName": "T15TK0222-PHAN GIA NGUYEN.cdr",
+        "size": 2157873,
+        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1793781334/educlass_submissions/T15TK02/Thi%E1%BA%BFt%20k%E1%BA%BF%20minh%20h%E1%BB%8Da%20v%E1%BB%9Bi%20Corel%20Draw/V%E1%BA%BD%20Logo%20tr%C6%B0%E1%BB%9Dng%20H%C3%B2a%20B%C3%ACnh/1793781329242_T15TK0222_PHAN_GIA_NGUYEN_pnzyff.cdr",
+        "storageKey": "educlass_submissions/T15TK02/Thiết kế minh họa với Corel Draw/Vẽ Logo trường Hòa Bình/1793781329242_T15TK0222_PHAN_GIA_NGUYEN_pnzyff.cdr",
+        "provider": "cloudinary"
+      },
+      "submittedAt": "2026-11-04T08:35:34.893Z",
+      "grade": null,
+      "feedback": null,
+      "gradedAt": null
+    },
+    {
+      "id": "sub_1793781505901",
+      "assignmentId": "asm_1793774399970",
+      "studentId": "u_student_T15TK0220",
+      "studentName": "T15TK0220",
+      "content": "T15TK0220-NGUYEN HOANG PHUONG NGHI",
+      "link": "",
+      "file": {
+        "filename": "1793781505797_t15tk0220_nguyenhoangphuongnghi.cdr",
+        "originalName": "t15tk0220-nguyenhoangphuongnghi.cdr",
+        "size": 962952,
+        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1793781506/educlass_submissions/T15TK02/Thi%E1%BA%BFt%20k%E1%BA%BF%20minh%20h%E1%BB%8Da%20v%E1%BB%9Bi%20Corel%20Draw/V%E1%BA%BD%20Logo%20tr%C6%B0%E1%BB%9Dng%20H%C3%B2a%20B%C3%ACnh/1793781505797_t15tk0220_nguyenhoangphuongnghi_l4d6tj.cdr",
+        "storageKey": "educlass_submissions/T15TK02/Thiết kế minh họa với Corel Draw/Vẽ Logo trường Hòa Bình/1793781505797_t15tk0220_nguyenhoangphuongnghi_l4d6tj.cdr",
+        "provider": "cloudinary"
+      },
+      "submittedAt": "2026-11-04T08:38:27.213Z",
+      "grade": null,
+      "feedback": null,
+      "gradedAt": null
+    },
+    {
+      "id": "sub_1793781630958",
+      "assignmentId": "asm_1793774399970",
+      "studentId": "u_student_T15TK0212",
+      "studentName": "T15TK0212",
+      "content": "T15TK0212- NGUYEN TRAN KIM KHANH",
+      "link": "",
+      "file": {
+        "filename": "1793781628988_T15TK0212__NGUYEN_TRAN_KIM_KHANH.cdr",
+        "originalName": "T15TK0212- NGUYEN TRAN KIM KHANH.cdr",
+        "size": 2692019,
+        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1793781630/educlass_submissions/T15TK02/Thi%E1%BA%BFt%20k%E1%BA%BF%20minh%20h%E1%BB%8Da%20v%E1%BB%9Bi%20Corel%20Draw/V%E1%BA%BD%20Logo%20tr%C6%B0%E1%BB%9Dng%20H%C3%B2a%20B%C3%ACnh/1793781628988_T15TK0212__NGUYEN_TRAN_KIM_KHANH_i0mtbd.cdr",
+        "storageKey": "educlass_submissions/T15TK02/Thiết kế minh họa với Corel Draw/Vẽ Logo trường Hòa Bình/1793781628988_T15TK0212__NGUYEN_TRAN_KIM_KHANH_i0mtbd.cdr",
+        "provider": "cloudinary"
+      },
+      "submittedAt": "2026-11-04T08:40:30.958Z",
+      "grade": null,
+      "feedback": null,
+      "gradedAt": null
     }
   ],
-  "updatedAt": "2026-11-04T03:22:42.328Z",
+  "updatedAt": "2026-11-04T08:41:32.088Z",
   "users": [
     {
       "id": "u_teacher_danh",
@@ -7379,7 +7683,9 @@
         "T14TK01",
         "T14TK02",
         "T15TK01",
-        "T15TK02"
+        "T15TK02",
+        "T15TK0209",
+        "T15TK0212"
       ]
     },
     {
