@@ -1,5 +1,4 @@
 {
-  "_id": "6ae9852bc149813cbbfa0830",
   "id": "main",
   "assignments": [
     {
@@ -1409,6 +1408,20 @@
     }
   ],
   "notifications": [
+    {
+      "id": "notif_sub_1793759816695_fk8x",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793609039129",
+      "assignmentTitle": "Làm bài báo cáo về 10 nguyên lý chuyển động trong motion graphics",
+      "targetClass": "C08TK01",
+      "subject": "Xử Lý Kỹ Xảo với After Effects",
+      "studentId": "u_C08TK0104",
+      "studentName": "Nguyễn Hải Đăng",
+      "studentCode": "C08TK0104",
+      "submittedAt": "2026-11-04T02:36:56.695Z",
+      "createdAt": "2026-11-04T02:36:56.695Z",
+      "readBy": []
+    },
     {
       "id": "notif_sub_1793759799315_828h",
       "type": "STUDENT_SUBMITTED",
@@ -3078,10 +3091,7 @@
         "filename": "1793615179843_C08TK0105_NguyenDucHieu.pptx",
         "originalName": "C08TK0105_NguyenDucHieu.pptx",
         "size": 1266912,
-        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1793691370/educlass_submissions/C08TK01/L%C3%A0m%20b%C3%A0i%20b%C3%A1o%20c%C3%A1o%20v%E1%BB%81%2010%20nguy%C3%AAn%20l%C3%BD%20chuy%E1%BB%83n%20%C4%91%E1%BB%99ng%20trong%20motion%20graphics/1793615179843_C08TK0105_NguyenDucHieu_z61ljz.pptx",
-        "publicId": "educlass_submissions/C08TK01/Làm bài báo cáo về 10 nguyên lý chuyển động trong motion graphics/1793615179843_C08TK0105_NguyenDucHieu_z61ljz.pptx",
-        "storageKey": "educlass_submissions/C08TK01/Làm bài báo cáo về 10 nguyên lý chuyển động trong motion graphics/1793615179843_C08TK0105_NguyenDucHieu_z61ljz.pptx",
-        "provider": "cloudinary"
+        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1793691370/educlass_submissions/C08TK01/1793615179843_C08TK0105_NguyenDucHieu_z61ljz.pptx"
       },
       "submittedAt": "2026-11-02T10:26:20.091Z",
       "grade": 9,
@@ -3099,10 +3109,7 @@
         "filename": "catalog.indd",
         "originalName": "catalog.indd",
         "size": 7421952,
-        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1793691394/educlass_submissions/T14TK01/Thi%E1%BA%BFt%20k%E1%BA%BF%20Catalog%2016%20trang%20v%E1%BB%81%20ch%E1%BB%A7%20%C4%91%E1%BB%81%20b%E1%BA%A5t%20k%E1%BB%B3/1793677316388_bai_catalog_gom_vs1_k98ahf.indd",
-        "publicId": "educlass_submissions/T14TK01/Thiết kế Catalog 16 trang về chủ đề bất kỳ/1793677316388_bai_catalog_gom_vs1_k98ahf.indd",
-        "storageKey": "educlass_submissions/T14TK01/Thiết kế Catalog 16 trang về chủ đề bất kỳ/1793677316388_bai_catalog_gom_vs1_k98ahf.indd",
-        "provider": "cloudinary"
+        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1793691394/educlass_submissions/T14TK01/1793677316388_bai_catalog_gom_vs1_k98ahf.indd"
       },
       "submittedAt": "2026-11-03T03:45:00.000Z",
       "grade": null,
@@ -3119,10 +3126,8 @@
         "filename": "1793677316388_bai_catalog_gom_vs1.indd",
         "originalName": "bài catalog gom vs1.indd",
         "size": 7421952,
-        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1793691394/educlass_submissions/T14TK01/Thi%E1%BA%BFt%20k%E1%BA%BF%20Catalog%2016%20trang%20v%E1%BB%81%20ch%E1%BB%A7%20%C4%91%E1%BB%81%20b%E1%BA%A5t%20k%E1%BB%B3/1793677316388_bai_catalog_gom_vs1_k98ahf.indd",
-        "publicId": "educlass_submissions/T14TK01/Thiết kế Catalog 16 trang về chủ đề bất kỳ/1793677316388_bai_catalog_gom_vs1_k98ahf.indd",
-        "storageKey": "educlass_submissions/T14TK01/Thiết kế Catalog 16 trang về chủ đề bất kỳ/1793677316388_bai_catalog_gom_vs1_k98ahf.indd",
-        "provider": "cloudinary"
+        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1793691394/educlass_submissions/T14TK01/1793677316388_bai_catalog_gom_vs1_k98ahf.indd",
+        "publicId": "educlass_submissions/T14TK01/1793677316388_bai_catalog_gom_vs1_k98ahf.indd"
       },
       "submittedAt": "2026-11-03T03:45:00.000Z",
       "grade": null,
@@ -3187,10 +3192,7 @@
         "filename": "1793693777711_T14TK0102_MINHANHVH_VERSION_1.indd",
         "originalName": "T14TK0102-MINHANHVH-VERSION 1.indd",
         "size": 6672384,
-        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1793693778/educlass_submissions/T14TK01/Thi%E1%BA%BFt%20K%E1%BA%BF%20Catalog/1793693775454_T14TK0102_MINHANHVH_VERSION_1_ixki7e.indd",
-        "publicId": "educlass_submissions/T14TK01/Thiết Kế Catalog/1793693775454_T14TK0102_MINHANHVH_VERSION_1_ixki7e.indd",
-        "storageKey": "educlass_submissions/T14TK01/Thiết Kế Catalog/1793693775454_T14TK0102_MINHANHVH_VERSION_1_ixki7e.indd",
-        "provider": "cloudinary"
+        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1793693779/educlass_submissions/T14TK01/Thi%E1%BA%BFt%20K%E1%BA%BF%20Catalog/1793693777711_T14TK0102_MINHANHVH_VERSION_1_d2o52f.indd"
       },
       "submittedAt": "2026-11-03T08:16:20.027Z",
       "grade": null,
@@ -3225,10 +3227,7 @@
         "filename": "1793694415063_T14TK0112_mainhathoang.rar",
         "originalName": "T14TK0112_mainhathoang.rar",
         "size": 1247519,
-        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1793694414/educlass_submissions/T14TK01/Thi%E1%BA%BFt%20K%E1%BA%BF%20Catalog/1793694413315_T14TK0112_mainhathoang_uyagg2.rar",
-        "publicId": "educlass_submissions/T14TK01/Thiết Kế Catalog/1793694413315_T14TK0112_mainhathoang_uyagg2.rar",
-        "storageKey": "educlass_submissions/T14TK01/Thiết Kế Catalog/1793694413315_T14TK0112_mainhathoang_uyagg2.rar",
-        "provider": "cloudinary"
+        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1793694415/educlass_submissions/T14TK01/Thi%E1%BA%BFt%20K%E1%BA%BF%20Catalog/1793694415063_T14TK0112_mainhathoang_jbbbbm.rar"
       },
       "submittedAt": "2026-11-03T08:26:56.535Z",
       "grade": null,
@@ -3246,10 +3245,7 @@
         "filename": "1793694823041_T14TK0109_VuNgocThanhHang_Version1.indd",
         "originalName": "T14TK0109_VuNgocThanhHang_Version1.indd",
         "size": 2744320,
-        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1793694822/educlass_submissions/T14TK01/Thi%E1%BA%BFt%20K%E1%BA%BF%20Catalog/1793694820871_T14TK0109_VuNgocThanhHang_Version1_nfw1qn.indd",
-        "publicId": "educlass_submissions/T14TK01/Thiết Kế Catalog/1793694820871_T14TK0109_VuNgocThanhHang_Version1_nfw1qn.indd",
-        "storageKey": "educlass_submissions/T14TK01/Thiết Kế Catalog/1793694820871_T14TK0109_VuNgocThanhHang_Version1_nfw1qn.indd",
-        "provider": "cloudinary"
+        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1793694824/educlass_submissions/T14TK01/Thi%E1%BA%BFt%20K%E1%BA%BF%20Catalog/1793694823041_T14TK0109_VuNgocThanhHang_Version1_wcjovj.indd"
       },
       "submittedAt": "2026-11-03T08:33:44.795Z",
       "grade": null,
@@ -3267,10 +3263,7 @@
         "filename": "1793694822079_T14TK0109_VuNgocThanhHang_Version1.indd",
         "originalName": "T14TK0109_VuNgocThanhHang_Version1.indd",
         "size": 2744320,
-        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1793694822/educlass_submissions/T14TK01/Thi%E1%BA%BFt%20K%E1%BA%BF%20Catalog/1793694820871_T14TK0109_VuNgocThanhHang_Version1_nfw1qn.indd",
-        "publicId": "educlass_submissions/T14TK01/Thiết Kế Catalog/1793694820871_T14TK0109_VuNgocThanhHang_Version1_nfw1qn.indd",
-        "storageKey": "educlass_submissions/T14TK01/Thiết Kế Catalog/1793694820871_T14TK0109_VuNgocThanhHang_Version1_nfw1qn.indd",
-        "provider": "cloudinary"
+        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1793694823/educlass_submissions/T14TK01/Thi%E1%BA%BFt%20K%E1%BA%BF%20Catalog/1793694822079_T14TK0109_VuNgocThanhHang_Version1_jiropp.indd"
       },
       "submittedAt": "2026-11-03T08:33:44.541Z",
       "grade": null,
@@ -3288,10 +3281,7 @@
         "filename": "1793697054482_T14TK0123_PhamThiHuongNgoc_Version1.indd",
         "originalName": "T14TK0123-PhamThiHuongNgoc-Version1.indd",
         "size": 4870144,
-        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1793697057/educlass_submissions/T14TK01/Thi%E1%BA%BFt%20K%E1%BA%BF%20Catalog/Thi%E1%BA%BFt%20k%E1%BA%BF%20Catalog%2016%20trang%20v%E1%BB%81%20ch%E1%BB%A7%20%C4%91%E1%BB%81%20b%E1%BA%A5t%20k%E1%BB%B3/1793697054482_T14TK0123_PhamThiHuongNgoc_Version1_qhsjox.indd",
-        "publicId": "educlass_submissions/T14TK01/Thiết Kế Catalog/Thiết kế Catalog 16 trang về chủ đề bất kỳ/1793697054482_T14TK0123_PhamThiHuongNgoc_Version1_qhsjox.indd",
-        "storageKey": "educlass_submissions/T14TK01/Thiết Kế Catalog/Thiết kế Catalog 16 trang về chủ đề bất kỳ/1793697054482_T14TK0123_PhamThiHuongNgoc_Version1_qhsjox.indd",
-        "provider": "cloudinary"
+        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1793697057/educlass_submissions/T14TK01/Thi%E1%BA%BFt%20K%E1%BA%BF%20Catalog/1793697054482_T14TK0123_PhamThiHuongNgoc_Version1_qhsjox.indd"
       },
       "submittedAt": "2026-11-03T09:10:57.801Z",
       "grade": null,
@@ -3309,10 +3299,7 @@
         "filename": "1793697055058_T14TK0123_PhamThiHuongNgoc_Version1.indd",
         "originalName": "T14TK0123-PhamThiHuongNgoc-Version1.indd",
         "size": 4870144,
-        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1793697057/educlass_submissions/T14TK01/Thi%E1%BA%BFt%20K%E1%BA%BF%20Catalog/Thi%E1%BA%BFt%20k%E1%BA%BF%20Catalog%2016%20trang%20v%E1%BB%81%20ch%E1%BB%A7%20%C4%91%E1%BB%81%20b%E1%BA%A5t%20k%E1%BB%B3/1793697054482_T14TK0123_PhamThiHuongNgoc_Version1_qhsjox.indd",
-        "publicId": "educlass_submissions/T14TK01/Thiết Kế Catalog/Thiết kế Catalog 16 trang về chủ đề bất kỳ/1793697054482_T14TK0123_PhamThiHuongNgoc_Version1_qhsjox.indd",
-        "storageKey": "educlass_submissions/T14TK01/Thiết Kế Catalog/Thiết kế Catalog 16 trang về chủ đề bất kỳ/1793697054482_T14TK0123_PhamThiHuongNgoc_Version1_qhsjox.indd",
-        "provider": "cloudinary"
+        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1793697057/educlass_submissions/T14TK01/Thi%E1%BA%BFt%20K%E1%BA%BF%20Catalog/1793697055058_T14TK0123_PhamThiHuongNgoc_Version1_gulfwj.indd"
       },
       "submittedAt": "2026-11-03T09:10:58.206Z",
       "grade": null,
@@ -3330,10 +3317,7 @@
         "filename": "1793697055999_T14TK0123_PhamThiHuongNgoc_Version1.indd",
         "originalName": "T14TK0123-PhamThiHuongNgoc-Version1.indd",
         "size": 4870144,
-        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1793697057/educlass_submissions/T14TK01/Thi%E1%BA%BFt%20K%E1%BA%BF%20Catalog/Thi%E1%BA%BFt%20k%E1%BA%BF%20Catalog%2016%20trang%20v%E1%BB%81%20ch%E1%BB%A7%20%C4%91%E1%BB%81%20b%E1%BA%A5t%20k%E1%BB%B3/1793697054482_T14TK0123_PhamThiHuongNgoc_Version1_qhsjox.indd",
-        "publicId": "educlass_submissions/T14TK01/Thiết Kế Catalog/Thiết kế Catalog 16 trang về chủ đề bất kỳ/1793697054482_T14TK0123_PhamThiHuongNgoc_Version1_qhsjox.indd",
-        "storageKey": "educlass_submissions/T14TK01/Thiết Kế Catalog/Thiết kế Catalog 16 trang về chủ đề bất kỳ/1793697054482_T14TK0123_PhamThiHuongNgoc_Version1_qhsjox.indd",
-        "provider": "cloudinary"
+        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1793697058/educlass_submissions/T14TK01/Thi%E1%BA%BFt%20K%E1%BA%BF%20Catalog/1793697055999_T14TK0123_PhamThiHuongNgoc_Version1_qk8oqc.indd"
       },
       "submittedAt": "2026-11-03T09:10:58.599Z",
       "grade": null,
@@ -3351,10 +3335,7 @@
         "filename": "1793697056598_T14TK0123_PhamThiHuongNgoc_Version1.indd",
         "originalName": "T14TK0123-PhamThiHuongNgoc-Version1.indd",
         "size": 4870144,
-        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1793697057/educlass_submissions/T14TK01/Thi%E1%BA%BFt%20K%E1%BA%BF%20Catalog/Thi%E1%BA%BFt%20k%E1%BA%BF%20Catalog%2016%20trang%20v%E1%BB%81%20ch%E1%BB%A7%20%C4%91%E1%BB%81%20b%E1%BA%A5t%20k%E1%BB%B3/1793697054482_T14TK0123_PhamThiHuongNgoc_Version1_qhsjox.indd",
-        "publicId": "educlass_submissions/T14TK01/Thiết Kế Catalog/Thiết kế Catalog 16 trang về chủ đề bất kỳ/1793697054482_T14TK0123_PhamThiHuongNgoc_Version1_qhsjox.indd",
-        "storageKey": "educlass_submissions/T14TK01/Thiết Kế Catalog/Thiết kế Catalog 16 trang về chủ đề bất kỳ/1793697054482_T14TK0123_PhamThiHuongNgoc_Version1_qhsjox.indd",
-        "provider": "cloudinary"
+        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1793697058/educlass_submissions/T14TK01/Thi%E1%BA%BFt%20K%E1%BA%BF%20Catalog/1793697056598_T14TK0123_PhamThiHuongNgoc_Version1_oi6nlu.indd"
       },
       "submittedAt": "2026-11-03T09:10:58.643Z",
       "grade": null,
@@ -3389,9 +3370,7 @@
         "filename": "1793708018069_C08TK0106.pptx",
         "originalName": "C08TK0106.pptx",
         "size": 1439477,
-        "url": "https://pub-cd6bf46bdf5c4034bdac614cd4ea7b35.r2.dev/educlass_submissions/C08TK01/Xử Lý Kỹ Xảo với After Effects/Tạo Thiết kế banner hoặc poster để tạo chuyển động/1793758365845_C08TK0106.psd",
-        "storageKey": "educlass_submissions/C08TK01/Xử Lý Kỹ Xảo với After Effects/Tạo Thiết kế banner hoặc poster để tạo chuyển động/1793758365845_C08TK0106.psd",
-        "provider": "r2"
+        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1793708018/educlass_submissions/C08TK01/X%E1%BB%AD%20L%C3%BD%20K%E1%BB%B9%20X%E1%BA%A3o%20v%E1%BB%9Bi%20After%20Effects/1793708018069_C08TK0106_dqneqy.pptx"
       },
       "submittedAt": "2026-11-03T12:13:39.320Z",
       "grade": 8,
@@ -3409,9 +3388,7 @@
         "filename": "1793708016694_C08TK0106.pptx",
         "originalName": "C08TK0106.pptx",
         "size": 1439477,
-        "url": "https://pub-cd6bf46bdf5c4034bdac614cd4ea7b35.r2.dev/educlass_submissions/C08TK01/Xử Lý Kỹ Xảo với After Effects/Tạo Thiết kế banner hoặc poster để tạo chuyển động/1793758365845_C08TK0106.psd",
-        "storageKey": "educlass_submissions/C08TK01/Xử Lý Kỹ Xảo với After Effects/Tạo Thiết kế banner hoặc poster để tạo chuyển động/1793758365845_C08TK0106.psd",
-        "provider": "r2"
+        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1793708017/educlass_submissions/C08TK01/X%E1%BB%AD%20L%C3%BD%20K%E1%BB%B9%20X%E1%BA%A3o%20v%E1%BB%9Bi%20After%20Effects/1793708016694_C08TK0106_j4w2rv.pptx"
       },
       "submittedAt": "2026-11-03T12:13:38.157Z",
       "grade": null,
@@ -3429,10 +3406,7 @@
         "filename": "1793708537668_PERSONA__ALL_.pdf",
         "originalName": "PERSONA (ALL).pdf",
         "size": 6773052,
-        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1793708531/educlass_submissions/T14TK01/Thi%E1%BA%BFt%20K%E1%BA%BF%20Catalog/1793708529347_PERSONA__ALL__vhoy9j.pdf",
-        "publicId": "educlass_submissions/T14TK01/Thiết Kế Catalog/1793708529347_PERSONA__ALL__vhoy9j.pdf",
-        "storageKey": "educlass_submissions/T14TK01/Thiết Kế Catalog/1793708529347_PERSONA__ALL__vhoy9j.pdf",
-        "provider": "cloudinary"
+        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1793708540/educlass_submissions/T14TK01/Thi%E1%BA%BFt%20K%E1%BA%BF%20Catalog/1793708537668_PERSONA__ALL__w8vja0.pdf"
       },
       "submittedAt": "2026-11-03T12:22:20.499Z",
       "grade": null,
@@ -3502,15 +3476,14 @@
       "content": "",
       "link": "",
       "file": {
-        "filename": "1793759790931_C08TK0104_NGUYENHAIDANG.pptx",
+        "filename": "1793759813923_C08TK0104_NGUYENHAIDANG.pptx",
         "originalName": "C08TK0104_NGUYENHAIDANG.pptx",
         "size": 6023086,
-        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1793759767/educlass_submissions/C08TK01/X%E1%BB%AD%20L%C3%BD%20K%E1%BB%B9%20X%E1%BA%A3o%20v%E1%BB%9Bi%20After%20Effects/L%C3%A0m%20b%C3%A0i%20b%C3%A1o%20c%C3%A1o%20v%E1%BB%81%2010%20nguy%C3%AAn%20l%C3%BD%20chuy%E1%BB%83n%20%C4%91%E1%BB%99ng%20trong%20motion%20graphics/1793759764998_C08TK0104_NGUYENHAIDANG_se1edt.pptx",
-        "storageKey": "educlass_submissions/C08TK01/Xử Lý Kỹ Xảo với After Effects/Làm bài báo cáo về 10 nguyên lý chuyển động trong motion graphics/1793759764998_C08TK0104_NGUYENHAIDANG_se1edt.pptx",
-        "provider": "cloudinary",
-        "publicId": "educlass_submissions/C08TK01/Xử Lý Kỹ Xảo với After Effects/Làm bài báo cáo về 10 nguyên lý chuyển động trong motion graphics/1793759764998_C08TK0104_NGUYENHAIDANG_se1edt.pptx"
+        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1793759815/educlass_submissions/C08TK01/X%E1%BB%AD%20L%C3%BD%20K%E1%BB%B9%20X%E1%BA%A3o%20v%E1%BB%9Bi%20After%20Effects/L%C3%A0m%20b%C3%A0i%20b%C3%A1o%20c%C3%A1o%20v%E1%BB%81%2010%20nguy%C3%AAn%20l%C3%BD%20chuy%E1%BB%83n%20%C4%91%E1%BB%99ng%20trong%20motion%20graphics/1793759813923_C08TK0104_NGUYENHAIDANG_uewyzi.pptx",
+        "storageKey": "educlass_submissions/C08TK01/Xử Lý Kỹ Xảo với After Effects/Làm bài báo cáo về 10 nguyên lý chuyển động trong motion graphics/1793759813923_C08TK0104_NGUYENHAIDANG_uewyzi.pptx",
+        "provider": "cloudinary"
       },
-      "submittedAt": "2026-11-04T02:36:39.315Z",
+      "submittedAt": "2026-11-04T02:36:56.695Z",
       "grade": null,
       "feedback": "",
       "gradedAt": "2026-11-03T15:14:26.046Z"
@@ -3539,10 +3512,9 @@
         "filename": "1793757797858_nguyenvantam.pptx",
         "originalName": "nguyenvantam.pptx",
         "size": 2515808,
-        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1793757799/educlass_submissions/C08TK01/X%E1%BB%AD%20L%C3%BD%20K%E1%BB%B9%20X%E1%BA%A3o%20v%E1%BB%9Bi%20After%20Effects/L%C3%A0m%20b%C3%A0i%20b%C3%A1o%20c%C3%A1o%20v%E1%BB%81%2010%20nguy%C3%AAn%20l%C3%BD%20chuy%E1%BB%83n%20%C4%91%E1%BB%99ng%20trong%20motion%20graphics/1793757797858_nguyenvantam_dfciyu.pptx",
-        "storageKey": "educlass_submissions/C08TK01/Xử Lý Kỹ Xảo với After Effects/Làm bài báo cáo về 10 nguyên lý chuyển động trong motion graphics/1793757797858_nguyenvantam_dfciyu.pptx",
-        "provider": "cloudinary",
-        "publicId": "educlass_submissions/C08TK01/Xử Lý Kỹ Xảo với After Effects/Làm bài báo cáo về 10 nguyên lý chuyển động trong motion graphics/1793757797858_nguyenvantam_dfciyu.pptx"
+        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1793757799/educlass_submissions/C08TK01/X%E1%BB%AD%20L%C3%BD%20K%E1%BB%B9%20X%E1%BA%A3o%20v%E1%BB%9Bi%20After%20Effects/1793757797858_nguyenvantam_dfciyu.pptx",
+        "storageKey": "educlass_submissions/C08TK01/Xử Lý Kỹ Xảo với After Effects/1793757797858_nguyenvantam_dfciyu.pptx",
+        "provider": "cloudinary"
       },
       "submittedAt": "2026-11-04T02:03:20.016Z",
       "grade": null,
@@ -3616,10 +3588,7 @@
         "filename": "1793721202302_NguyenNgocTran_C08TK0115.pdf",
         "originalName": "NguyenNgocTran-C08TK0115.pdf",
         "size": 2748196,
-        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1793721203/educlass_submissions/C08TK01/X%E1%BB%AD%20L%C3%BD%20K%E1%BB%B9%20X%E1%BA%A3o%20v%E1%BB%9Bi%20After%20Effects/L%C3%A0m%20b%C3%A0i%20b%C3%A1o%20c%C3%A1o%20v%E1%BB%81%2010%20nguy%C3%AAn%20l%C3%BD%20chuy%E1%BB%83n%20%C4%91%E1%BB%99ng%20trong%20motion%20graphics/1793721202302_NguyenNgocTran_C08TK0115_lhyli9.pdf",
-        "publicId": "educlass_submissions/C08TK01/Xử Lý Kỹ Xảo với After Effects/Làm bài báo cáo về 10 nguyên lý chuyển động trong motion graphics/1793721202302_NguyenNgocTran_C08TK0115_lhyli9.pdf",
-        "storageKey": "educlass_submissions/C08TK01/Xử Lý Kỹ Xảo với After Effects/Làm bài báo cáo về 10 nguyên lý chuyển động trong motion graphics/1793721202302_NguyenNgocTran_C08TK0115_lhyli9.pdf",
-        "provider": "cloudinary"
+        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1793721203/educlass_submissions/C08TK01/X%E1%BB%AD%20L%C3%BD%20K%E1%BB%B9%20X%E1%BA%A3o%20v%E1%BB%9Bi%20After%20Effects/1793721202302_NguyenNgocTran_C08TK0115_lhyli9.pdf"
       },
       "submittedAt": "2026-11-03T15:53:24.555Z",
       "grade": null,
@@ -3637,10 +3606,9 @@
         "filename": "1793757912110_C08TK0117_VOTHIMYXUYEN.pptx",
         "originalName": "C08TK0117-VOTHIMYXUYEN.pptx",
         "size": 97888,
-        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1793757912/educlass_submissions/C08TK01/X%E1%BB%AD%20L%C3%BD%20K%E1%BB%B9%20X%E1%BA%A3o%20v%E1%BB%9Bi%20After%20Effects/L%C3%A0m%20b%C3%A0i%20b%C3%A1o%20c%C3%A1o%20v%E1%BB%81%2010%20nguy%C3%AAn%20l%C3%BD%20chuy%E1%BB%83n%20%C4%91%E1%BB%99ng%20trong%20motion%20graphics/1793757912110_C08TK0117_VOTHIMYXUYEN_k723xa.pptx",
-        "storageKey": "educlass_submissions/C08TK01/Xử Lý Kỹ Xảo với After Effects/Làm bài báo cáo về 10 nguyên lý chuyển động trong motion graphics/1793757912110_C08TK0117_VOTHIMYXUYEN_k723xa.pptx",
-        "provider": "cloudinary",
-        "publicId": "educlass_submissions/C08TK01/Xử Lý Kỹ Xảo với After Effects/Làm bài báo cáo về 10 nguyên lý chuyển động trong motion graphics/1793757912110_C08TK0117_VOTHIMYXUYEN_k723xa.pptx"
+        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1793757912/educlass_submissions/C08TK01/X%E1%BB%AD%20L%C3%BD%20K%E1%BB%B9%20X%E1%BA%A3o%20v%E1%BB%9Bi%20After%20Effects/1793757912110_C08TK0117_VOTHIMYXUYEN_k723xa.pptx",
+        "storageKey": "educlass_submissions/C08TK01/Xử Lý Kỹ Xảo với After Effects/1793757912110_C08TK0117_VOTHIMYXUYEN_k723xa.pptx",
+        "provider": "cloudinary"
       },
       "submittedAt": "2026-11-04T02:05:12.926Z",
       "grade": null,
@@ -3658,10 +3626,7 @@
         "filename": "1793723437103_Animation__Tran_Tuan_Anh_.pptx",
         "originalName": "Animation  Tran Tuan Anh .pptx",
         "size": 6433537,
-        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1793723437/educlass_submissions/C08TK01/X%E1%BB%AD%20L%C3%BD%20K%E1%BB%B9%20X%E1%BA%A3o%20v%E1%BB%9Bi%20After%20Effects/1793723435414_Animation__Tran_Tuan_Anh__axktbk.pptx",
-        "publicId": "educlass_submissions/C08TK01/Xử Lý Kỹ Xảo với After Effects/1793723435414_Animation__Tran_Tuan_Anh__axktbk.pptx",
-        "storageKey": "educlass_submissions/C08TK01/Xử Lý Kỹ Xảo với After Effects/1793723435414_Animation__Tran_Tuan_Anh__axktbk.pptx",
-        "provider": "cloudinary"
+        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1793723438/educlass_submissions/C08TK01/X%E1%BB%AD%20L%C3%BD%20K%E1%BB%B9%20X%E1%BA%A3o%20v%E1%BB%9Bi%20After%20Effects/1793723437103_Animation__Tran_Tuan_Anh__m5npy1.pptx"
       },
       "submittedAt": "2026-11-03T16:30:38.951Z",
       "grade": null,
@@ -3738,10 +3703,9 @@
         "filename": "1793756925409_POSTER.psd",
         "originalName": "POSTER.psd",
         "size": 4666799,
-        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1793756930/educlass_submissions/C08TK01/X%E1%BB%AD%20L%C3%BD%20K%E1%BB%B9%20X%E1%BA%A3o%20v%E1%BB%9Bi%20After%20Effects/1793756917805_POSTER_lf3nki.psd",
-        "storageKey": "educlass_submissions/C08TK01/Xử Lý Kỹ Xảo với After Effects/1793756917805_POSTER_lf3nki.psd",
-        "provider": "cloudinary",
-        "publicId": "educlass_submissions/C08TK01/Xử Lý Kỹ Xảo với After Effects/1793756917805_POSTER_lf3nki.psd"
+        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1793756934/educlass_submissions/C08TK01/X%E1%BB%AD%20L%C3%BD%20K%E1%BB%B9%20X%E1%BA%A3o%20v%E1%BB%9Bi%20After%20Effects/1793756925409_POSTER_fxqjen.psd",
+        "storageKey": "educlass_submissions/C08TK01/Xử Lý Kỹ Xảo với After Effects/1793756925409_POSTER_fxqjen.psd",
+        "provider": "cloudinary"
       },
       "submittedAt": "2026-11-04T01:48:54.606Z",
       "grade": null,
@@ -3779,10 +3743,9 @@
         "filename": "1793756963126_character.ai",
         "originalName": "character.ai",
         "size": 1871054,
-        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1793756964/educlass_submissions/C08TK01/X%E1%BB%AD%20L%C3%BD%20K%E1%BB%B9%20X%E1%BA%A3o%20v%E1%BB%9Bi%20After%20Effects/T%E1%BA%A1o%20Thi%E1%BA%BFt%20k%E1%BA%BF%20banner%20ho%E1%BA%B7c%20poster%20%C4%91%E1%BB%83%20t%E1%BA%A1o%20chuy%E1%BB%83n%20%C4%91%E1%BB%99ng/1793756963126_character_fhi6uc.ai",
-        "storageKey": "educlass_submissions/C08TK01/Xử Lý Kỹ Xảo với After Effects/Tạo Thiết kế banner hoặc poster để tạo chuyển động/1793756963126_character_fhi6uc.ai",
-        "provider": "cloudinary",
-        "publicId": "educlass_submissions/C08TK01/Xử Lý Kỹ Xảo với After Effects/Tạo Thiết kế banner hoặc poster để tạo chuyển động/1793756963126_character_fhi6uc.ai"
+        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1793756964/educlass_submissions/C08TK01/X%E1%BB%AD%20L%C3%BD%20K%E1%BB%B9%20X%E1%BA%A3o%20v%E1%BB%9Bi%20After%20Effects/1793756963126_character_fhi6uc.ai",
+        "storageKey": "educlass_submissions/C08TK01/Xử Lý Kỹ Xảo với After Effects/1793756963126_character_fhi6uc.ai",
+        "provider": "cloudinary"
       },
       "submittedAt": "2026-11-04T01:49:24.766Z",
       "grade": null,
@@ -3800,9 +3763,9 @@
         "filename": "1793757348272_poster.ai",
         "originalName": "poster.ai",
         "size": 2338899,
-        "url": "https://pub-cd6bf46bdf5c4034bdac614cd4ea7b35.r2.dev/educlass_submissions/C08TK01/Xử Lý Kỹ Xảo với After Effects/Tạo Thiết kế banner hoặc poster để tạo chuyển động/1793757745248_BANNER.psd",
-        "storageKey": "educlass_submissions/C08TK01/Xử Lý Kỹ Xảo với After Effects/Tạo Thiết kế banner hoặc poster để tạo chuyển động/1793757745248_BANNER.psd",
-        "provider": "r2"
+        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1793757350/educlass_submissions/C08TK01/X%E1%BB%AD%20L%C3%BD%20K%E1%BB%B9%20X%E1%BA%A3o%20v%E1%BB%9Bi%20After%20Effects/1793757348272_poster_lsh3pk.ai",
+        "storageKey": "educlass_submissions/C08TK01/Xử Lý Kỹ Xảo với After Effects/1793757348272_poster_lsh3pk.ai",
+        "provider": "cloudinary"
       },
       "submittedAt": "2026-11-04T01:55:50.395Z",
       "grade": null,
@@ -3820,8 +3783,8 @@
         "filename": "1793757862351_CAO_TINHN_NGHE.psd",
         "originalName": "CAO TINHN NGHE.psd",
         "size": 11773823,
-        "url": "https://pub-cd6bf46bdf5c4034bdac614cd4ea7b35.r2.dev/educlass_submissions/C08TK01/Xử Lý Kỹ Xảo với After Effects/Tạo Thiết kế banner hoặc poster để tạo chuyển động/1793757877651_CAO_TINHN_NGHE.psd",
-        "storageKey": "educlass_submissions/C08TK01/Xử Lý Kỹ Xảo với After Effects/Tạo Thiết kế banner hoặc poster để tạo chuyển động/1793757877651_CAO_TINHN_NGHE.psd",
+        "url": "https://pub-cd6bf46bdf5c4034bdac614cd4ea7b35.r2.dev/educlass_submissions/C08TK01/Xử Lý Kỹ Xảo với After Effects/1793757877651_CAO_TINHN_NGHE.psd",
+        "storageKey": "educlass_submissions/C08TK01/Xử Lý Kỹ Xảo với After Effects/1793757877651_CAO_TINHN_NGHE.psd",
         "provider": "r2"
       },
       "submittedAt": "2026-11-04T02:04:41.571Z",
@@ -3840,8 +3803,8 @@
         "filename": "1793757731600_BANNER.psd",
         "originalName": "BANNER.psd",
         "size": 74724060,
-        "url": "https://pub-cd6bf46bdf5c4034bdac614cd4ea7b35.r2.dev/educlass_submissions/C08TK01/Xử Lý Kỹ Xảo với After Effects/Tạo Thiết kế banner hoặc poster để tạo chuyển động/1793757745248_BANNER.psd",
-        "storageKey": "educlass_submissions/C08TK01/Xử Lý Kỹ Xảo với After Effects/Tạo Thiết kế banner hoặc poster để tạo chuyển động/1793757745248_BANNER.psd",
+        "url": "https://pub-cd6bf46bdf5c4034bdac614cd4ea7b35.r2.dev/educlass_submissions/C08TK01/Xử Lý Kỹ Xảo với After Effects/1793757745248_BANNER.psd",
+        "storageKey": "educlass_submissions/C08TK01/Xử Lý Kỹ Xảo với After Effects/1793757745248_BANNER.psd",
         "provider": "r2"
       },
       "submittedAt": "2026-11-04T02:02:32.085Z",
@@ -3860,8 +3823,8 @@
         "filename": "1793758361540_C08TK0106.psd",
         "originalName": "C08TK0106.psd",
         "size": 24752706,
-        "url": "https://pub-cd6bf46bdf5c4034bdac614cd4ea7b35.r2.dev/educlass_submissions/C08TK01/Xử Lý Kỹ Xảo với After Effects/Tạo Thiết kế banner hoặc poster để tạo chuyển động/1793758365845_C08TK0106.psd",
-        "storageKey": "educlass_submissions/C08TK01/Xử Lý Kỹ Xảo với After Effects/Tạo Thiết kế banner hoặc poster để tạo chuyển động/1793758365845_C08TK0106.psd",
+        "url": "https://pub-cd6bf46bdf5c4034bdac614cd4ea7b35.r2.dev/educlass_submissions/C08TK01/Xử Lý Kỹ Xảo với After Effects/1793758365845_C08TK0106.psd",
+        "storageKey": "educlass_submissions/C08TK01/Xử Lý Kỹ Xảo với After Effects/1793758365845_C08TK0106.psd",
         "provider": "r2"
       },
       "submittedAt": "2026-11-04T02:12:48.844Z",
@@ -3880,9 +3843,9 @@
         "filename": "1793759023689_banner.ai",
         "originalName": "banner.ai",
         "size": 960068,
-        "url": "https://pub-cd6bf46bdf5c4034bdac614cd4ea7b35.r2.dev/educlass_submissions/C08TK01/Xử Lý Kỹ Xảo với After Effects/Tạo Thiết kế banner hoặc poster để tạo chuyển động/1793757745248_BANNER.psd",
-        "storageKey": "educlass_submissions/C08TK01/Xử Lý Kỹ Xảo với After Effects/Tạo Thiết kế banner hoặc poster để tạo chuyển động/1793757745248_BANNER.psd",
-        "provider": "r2"
+        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1793759025/educlass_submissions/C08TK01/X%E1%BB%AD%20L%C3%BD%20K%E1%BB%B9%20X%E1%BA%A3o%20v%E1%BB%9Bi%20After%20Effects/1793759023689_banner_n0pn8b.ai",
+        "storageKey": "educlass_submissions/C08TK01/Xử Lý Kỹ Xảo với After Effects/1793759023689_banner_n0pn8b.ai",
+        "provider": "cloudinary"
       },
       "submittedAt": "2026-11-04T02:23:46.497Z",
       "grade": null,
@@ -3890,7 +3853,7 @@
       "gradedAt": null
     }
   ],
-  "updatedAt": "2026-11-04T02:36:42.230Z",
+  "updatedAt": "2026-11-04T02:36:56.697Z",
   "users": [
     {
       "id": "u_teacher_danh",
