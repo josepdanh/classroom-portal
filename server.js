@@ -37,14 +37,17 @@ function sanitizeFolderName(name) {
 }
 
 // Hàm lưu trữ bài tập cục bộ trên máy Mac (khi chạy server trên Mac)
-function saveSubmissionLocally({ filePath, targetClass, subject, studentName, originalName }) {
+function saveSubmissionLocally({ filePath, targetClass, subject, studentName, originalName, assignmentTitle }) {
   if (!filePath || !fs.existsSync(filePath)) return;
   try {
     const cleanClass = sanitizeFolderName(targetClass);
     const cleanSubject = sanitizeFolderName(subject);
+    const cleanAssignment = assignmentTitle ? sanitizeFolderName(assignmentTitle) : '';
     const cleanStudent = sanitizeFolderName(studentName);
     const cleanOriginal = sanitizeFolderName(originalName);
-    const destFolder = path.join(MAC_LOCAL_DIR, cleanClass, cleanSubject);
+    const destFolder = cleanAssignment
+      ? path.join(MAC_LOCAL_DIR, cleanClass, cleanSubject, cleanAssignment)
+      : path.join(MAC_LOCAL_DIR, cleanClass, cleanSubject);
     if (!fs.existsSync(destFolder)) {
       fs.mkdirSync(destFolder, { recursive: true });
     }
@@ -287,14 +290,17 @@ function getMimeType(fileName) {
   return map[ext] || 'application/octet-stream';
 }
 
-async function uploadFileToR2(filePath, originalName, className, subjectName) {
+async function uploadFileToR2(filePath, originalName, className, subjectName, assignmentTitle = '') {
   try {
     const cleanClass = sanitizeFolderName(className || 'Chung');
     const cleanSubject = sanitizeFolderName(subjectName || 'MonHoc');
+    const cleanAssignment = assignmentTitle ? sanitizeFolderName(assignmentTitle) : '';
     const ext = path.extname(originalName || filePath);
     const base = path.basename(originalName || filePath, ext).replace(/[^a-zA-Z0-9_\u00C0-\u024F\u1E00-\u1EFF]/g, '_');
     const uniqueName = `${Date.now()}_${base}${ext}`;
-    const key = `educlass_submissions/${cleanClass}/${cleanSubject}/${uniqueName}`;
+    const key = cleanAssignment 
+      ? `educlass_submissions/${cleanClass}/${cleanSubject}/${cleanAssignment}/${uniqueName}`
+      : `educlass_submissions/${cleanClass}/${cleanSubject}/${uniqueName}`;
 
     const fileBuffer = fs.readFileSync(filePath);
     await r2Client.send(new PutObjectCommand({
@@ -323,11 +329,14 @@ cloudinary.config({
   api_secret: process.env.CLOUDINARY_API_SECRET || 'ZbzIp26WqTM0dlRDGbgNm2Jh9hk'
 });
 
-async function uploadFileToCloudinary(filePath, originalName, className, subjectName) {
+async function uploadFileToCloudinary(filePath, originalName, className, subjectName, assignmentTitle = '') {
   try {
     const cleanClass = sanitizeFolderName(className || 'Chung');
     const cleanSubject = sanitizeFolderName(subjectName || 'MonHoc');
-    const folder = `educlass_submissions/${cleanClass}/${cleanSubject}`;
+    const cleanAssignment = assignmentTitle ? sanitizeFolderName(assignmentTitle) : '';
+    const folder = cleanAssignment
+      ? `educlass_submissions/${cleanClass}/${cleanSubject}/${cleanAssignment}`
+      : `educlass_submissions/${cleanClass}/${cleanSubject}`;
 
     const result = await cloudinary.uploader.upload(filePath, {
       resource_type: 'raw',
@@ -348,22 +357,22 @@ async function uploadFileToCloudinary(filePath, originalName, className, subject
 // Hàm tải tệp tin lên đám mây phân luồng theo dung lượng:
 // 1. File có dung lượng <= 10MB: Tự động lưu ở Cloudinary (Tận dụng 25GB miễn phí)
 // 2. File có dung lượng > 10MB: Tự động chuyển sang Cloudflare R2 (Hỗ trợ file nặng tới 100MB)
-async function uploadFileToCloud(filePath, originalName, className, subjectName, fileSize = 0) {
+async function uploadFileToCloud(filePath, originalName, className, subjectName, fileSize = 0, assignmentTitle = '') {
   const TEN_MB = 10 * 1024 * 1024; // 10 MB = 10,485,760 bytes
   const sizeMB = (fileSize / (1024 * 1024)).toFixed(2);
 
   if (fileSize <= TEN_MB) {
     console.log(`[Storage Routing] 📦 File "${originalName}" (${sizeMB} MB <= 10MB) -> Lưu trữ tại Cloudinary...`);
-    const cldRes = await uploadFileToCloudinary(filePath, originalName, className, subjectName);
+    const cldRes = await uploadFileToCloudinary(filePath, originalName, className, subjectName, assignmentTitle);
     if (cldRes && cldRes.url) {
       return cldRes;
     }
     // Dự phòng: Nếu Cloudinary gặp sự cố, tự động lưu sang Cloudflare R2 để bài nộp không bao giờ bị mất
     console.log('[Storage Fallback] Cloudinary gặp sự cố, tự động chuyển lưu sang Cloudflare R2 dự phòng...');
-    return await uploadFileToR2(filePath, originalName, className, subjectName);
+    return await uploadFileToR2(filePath, originalName, className, subjectName, assignmentTitle);
   } else {
     console.log(`[Storage Routing] ⚡ File "${originalName}" (${sizeMB} MB > 10MB) -> Tự động chuyển sang Cloudflare R2...`);
-    return await uploadFileToR2(filePath, originalName, className, subjectName);
+    return await uploadFileToR2(filePath, originalName, className, subjectName, assignmentTitle);
   }
 }
 
@@ -1127,7 +1136,7 @@ app.post('/api/assignments', upload.single('attachment'), async (req, res) => {
       size: req.file.size
     };
     try {
-      const cloudRes = await uploadFileToCloud(req.file.path, attachment.originalName, cleanTargetClass, cleanSubject, req.file.size);
+      const cloudRes = await uploadFileToCloud(req.file.path, attachment.originalName, cleanTargetClass, cleanSubject, req.file.size, title.trim());
       if (cloudRes && cloudRes.url) {
         attachment.url = cloudRes.url;
         attachment.storageKey = cloudRes.key;
@@ -1291,6 +1300,7 @@ app.post('/api/submissions', upload.single('submissionFile'), async (req, res) =
   let fileData = null;
   const targetClassName = assignment.targetClass || (student && student.className ? student.className : 'Chung');
   const targetSubjectName = assignment.subject || 'MonHoc';
+  const assignmentTitle = assignment.title || 'BaiTap';
   const studentDisplayName = student ? (student.studentCode || student.username || student.name) : (studentName || 'HocSinh');
 
   if (req.file) {
@@ -1302,7 +1312,7 @@ app.post('/api/submissions', upload.single('submissionFile'), async (req, res) =
 
     // Tải ngay lên Cloudflare R2 / Cloudinary lưu trữ đám mây vĩnh viễn (Hỗ trợ tới 100MB)
     try {
-      const cloudRes = await uploadFileToCloud(req.file.path, fileData.originalName, targetClassName, targetSubjectName, req.file.size);
+      const cloudRes = await uploadFileToCloud(req.file.path, fileData.originalName, targetClassName, targetSubjectName, req.file.size, assignmentTitle);
       if (cloudRes && cloudRes.url) {
         fileData.url = cloudRes.url;
         fileData.storageKey = cloudRes.key;
@@ -1318,7 +1328,8 @@ app.post('/api/submissions', upload.single('submissionFile'), async (req, res) =
       targetClass: targetClassName,
       subject: targetSubjectName,
       studentName: studentDisplayName,
-      originalName: fileData.originalName
+      originalName: fileData.originalName,
+      assignmentTitle: assignmentTitle
     });
   } else if (link || content) {
     // Nếu học sinh nộp bằng Link (Canva, Figma, Drive...) hoặc Ghi chú:
@@ -2159,6 +2170,8 @@ app.get('/api/assignments/:id/download-all-zip', (req, res) => {
   const zip = new AdmZip();
   const cleanClass = sanitizeFolderName(asm.targetClass || 'Chung');
   const cleanSubject = sanitizeFolderName(asm.subject || 'MonHoc');
+  const cleanAssignment = sanitizeFolderName(asm.title || 'BaiTap');
+  const folderPath = `${cleanClass}/${cleanSubject}/${cleanAssignment}`;
 
   let fileCount = 0;
 
@@ -2173,12 +2186,12 @@ app.get('/api/assignments/:id/download-all-zip', (req, res) => {
       const filePath = path.join(UPLOAD_DIR, sub.file.filename);
       if (fs.existsSync(filePath)) {
         const destName = `${prefix}_${sub.file.originalName}`;
-        zip.addLocalFile(filePath, `${cleanClass}/${cleanSubject}`, destName);
+        zip.addLocalFile(filePath, folderPath, destName);
         fileCount++;
       }
     } else if (sub.link || sub.content) {
-      const urlContent = `[InternetShortcut]\nURL=${sub.link || ''}\n\n[ThongTinBaiNop]\nMSSV=${studentCode}\nHoVaTen=${studentName}\nLop=${cleanClass}\nMon=${cleanSubject}\nThoiGianNop=${sub.submittedAt || ''}\nLink=${sub.link || ''}\nGhiChu=${sub.content || ''}\n`;
-      zip.addFile(`${cleanClass}/${cleanSubject}/${prefix}_LienKet.url`, Buffer.from(urlContent, 'utf8'));
+      const urlContent = `[InternetShortcut]\nURL=${sub.link || ''}\n\n[ThongTinBaiNop]\nMSSV=${studentCode}\nHoVaTen=${studentName}\nLop=${cleanClass}\nMon=${cleanSubject}\nBaiTap=${cleanAssignment}\nThoiGianNop=${sub.submittedAt || ''}\nLink=${sub.link || ''}\nGhiChu=${sub.content || ''}\n`;
+      zip.addFile(`${folderPath}/${prefix}_LienKet.url`, Buffer.from(urlContent, 'utf8'));
       fileCount++;
     }
   });
@@ -2188,7 +2201,7 @@ app.get('/api/assignments/:id/download-all-zip', (req, res) => {
   }
 
   const dateStr = new Date().toISOString().split('T')[0];
-  const zipFileName = `BaiNop_${cleanClass}_${cleanSubject}_${dateStr}.zip`;
+  const zipFileName = `BaiNop_${cleanClass}_${cleanSubject}_${cleanAssignment}_${dateStr}.zip`;
   const buffer = zip.toBuffer();
 
   res.set({
@@ -2216,6 +2229,8 @@ app.get('/api/admin/download-all-submissions-zip', (req, res) => {
     const asm = (db.assignments || []).find(a => a.id === sub.assignmentId);
     const cleanClass = sanitizeFolderName(asm ? asm.targetClass : 'Chung');
     const cleanSubject = sanitizeFolderName(asm ? asm.subject : 'MonHoc');
+    const cleanAssignment = sanitizeFolderName(asm ? asm.title : 'BaiTap');
+    const folderPath = `${cleanClass}/${cleanSubject}/${cleanAssignment}`;
 
     const student = (db.users || []).find(u => u.id === sub.studentId);
     const studentCode = student ? (student.studentCode || student.username || '') : '';
@@ -2227,12 +2242,12 @@ app.get('/api/admin/download-all-submissions-zip', (req, res) => {
       const filePath = path.join(UPLOAD_DIR, sub.file.filename);
       if (fs.existsSync(filePath)) {
         const destName = `${prefix}_${sub.file.originalName}`;
-        zip.addLocalFile(filePath, `${cleanClass}/${cleanSubject}`, destName);
+        zip.addLocalFile(filePath, folderPath, destName);
         fileCount++;
       }
     } else if (sub.link || sub.content) {
-      const urlContent = `[InternetShortcut]\nURL=${sub.link || ''}\n\n[ThongTinBaiNop]\nMSSV=${studentCode}\nHoVaTen=${studentName}\nLop=${cleanClass}\nMon=${cleanSubject}\nThoiGianNop=${sub.submittedAt || ''}\nLink=${sub.link || ''}\nGhiChu=${sub.content || ''}\n`;
-      zip.addFile(`${cleanClass}/${cleanSubject}/${prefix}_LienKet.url`, Buffer.from(urlContent, 'utf8'));
+      const urlContent = `[InternetShortcut]\nURL=${sub.link || ''}\n\n[ThongTinBaiNop]\nMSSV=${studentCode}\nHoVaTen=${studentName}\nLop=${cleanClass}\nMon=${cleanSubject}\nBaiTap=${cleanAssignment}\nThoiGianNop=${sub.submittedAt || ''}\nLink=${sub.link || ''}\nGhiChu=${sub.content || ''}\n`;
+      zip.addFile(`${folderPath}/${prefix}_LienKet.url`, Buffer.from(urlContent, 'utf8'));
       fileCount++;
     }
   });

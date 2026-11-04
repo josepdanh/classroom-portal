@@ -140,13 +140,14 @@ async function startSync() {
 
     const className = sanitizeName(asm.targetClass || student.className || 'Chung');
     const subjectName = sanitizeName(asm.subject || 'MonHoc');
+    const assignmentTitle = sanitizeName(asm.title || 'BaiTap');
 
     const studentCode = student.studentCode || student.username || '';
     const studentName = sanitizeName(student.name || sub.studentName || 'HocSinh');
     const prefix = studentCode ? `${studentCode}_${studentName}` : studentName;
 
-    // Thư mục lưu trên máy Mac: Downloads/EduClass_BaiTap/[Lớp]/[Môn]
-    const primaryFolder = path.join(MAC_TARGET_DIR, className, subjectName);
+    // Thư mục lưu trên máy Mac: Downloads/EduClass_BaiTap/[Lớp]/[Môn]/[Tên bài tập]
+    const primaryFolder = path.join(MAC_TARGET_DIR, className, subjectName, assignmentTitle);
     if (!openedFolder) openedFolder = MAC_TARGET_DIR;
 
     if (!fs.existsSync(primaryFolder)) {
@@ -159,7 +160,7 @@ async function startSync() {
       const downloadUrl = sub.file.url || `${activeUrl}/api/download/${encodeURIComponent(sub.file.filename)}?name=${encodeURIComponent(sub.file.originalName)}`;
 
       if (fs.existsSync(targetFilePath) && fs.statSync(targetFilePath).size > 0) {
-        console.log(`  ✓ Đã có sẵn: [${className}/${subjectName}] ${formattedFileName}`);
+        console.log(`  ✓ Đã có sẵn: [${className}/${subjectName}/${assignmentTitle}] ${formattedFileName}`);
         existingCount++;
       } else {
         // 1. Kiểm tra trước trong thư mục uploads cục bộ trên máy Mac

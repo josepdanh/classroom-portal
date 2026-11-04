@@ -1,4 +1,5 @@
 {
+  "_id": "6ae9852bc149813cbbfa0830",
   "id": "main",
   "assignments": [
     {
@@ -11,17 +12,6 @@
       "createdAt": "2026-11-04T00:43:14.063Z",
       "attachment": null,
       "createdBy": "u_teacher_danh"
-    },
-    {
-      "id": "asm_1793723665139",
-      "title": "abc",
-      "description": "abc",
-      "targetClass": "C08TK01",
-      "subject": "Ví dụ Mẫu",
-      "dueDate": "2026-11-04T16:34",
-      "createdAt": "2026-11-03T16:34:25.139Z",
-      "attachment": null,
-      "createdBy": "u_teacher_1793722738431"
     },
     {
       "id": "asm_1793609039129",
@@ -1402,6 +1392,756 @@
   ],
   "notifications": [
     {
+      "id": "notif_sub_1793759026497_1yjp",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793752994063",
+      "assignmentTitle": "Tạo Thiết kế banner hoặc poster để tạo chuyển động",
+      "targetClass": "C08TK01",
+      "subject": "Xử Lý Kỹ Xảo với After Effects",
+      "studentId": "u_C08TK0124",
+      "studentName": "Nguyễn Tất Việt",
+      "studentCode": "C08TK0124",
+      "submittedAt": "2026-11-04T02:23:46.497Z",
+      "createdAt": "2026-11-04T02:23:46.497Z",
+      "readBy": []
+    },
+    {
+      "id": "notif_sub_1793758526725_4cca",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793609039129",
+      "assignmentTitle": "Làm bài báo cáo về 10 nguyên lý chuyển động trong motion graphics",
+      "targetClass": "C08TK01",
+      "subject": "Xử Lý Kỹ Xảo với After Effects",
+      "studentId": "u_C08TK0102",
+      "studentName": "Nguyễn Thị Duyên",
+      "studentCode": "C08TK0102",
+      "submittedAt": "2026-11-04T02:15:26.725Z",
+      "createdAt": "2026-11-04T02:15:26.725Z",
+      "readBy": [
+        "u_C08TK0106"
+      ]
+    },
+    {
+      "id": "notif_sub_1793758368844_npta",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793752994063",
+      "assignmentTitle": "Tạo Thiết kế banner hoặc poster để tạo chuyển động",
+      "targetClass": "C08TK01",
+      "subject": "Xử Lý Kỹ Xảo với After Effects",
+      "studentId": "u_C08TK0106",
+      "studentName": "Đỗ Ngọc Khuê",
+      "studentCode": "C08TK0106",
+      "submittedAt": "2026-11-04T02:12:48.844Z",
+      "createdAt": "2026-11-04T02:12:48.844Z",
+      "readBy": [
+        "u_C08TK0106"
+      ]
+    },
+    {
+      "id": "notif_sub_1793758358219_ja5t",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793752994063",
+      "assignmentTitle": "Tạo Thiết kế banner hoặc poster để tạo chuyển động",
+      "targetClass": "C08TK01",
+      "subject": "Xử Lý Kỹ Xảo với After Effects",
+      "studentId": "u_C08TK0106",
+      "studentName": "Đỗ Ngọc Khuê",
+      "studentCode": "C08TK0106",
+      "submittedAt": "2026-11-04T02:12:38.219Z",
+      "createdAt": "2026-11-04T02:12:38.219Z",
+      "readBy": [
+        "u_C08TK0106"
+      ]
+    },
+    {
+      "id": "notif_sub_1793757912926_5mhs",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793609039129",
+      "assignmentTitle": "Làm bài báo cáo về 10 nguyên lý chuyển động trong motion graphics",
+      "targetClass": "C08TK01",
+      "subject": "Xử Lý Kỹ Xảo với After Effects",
+      "studentId": "u_C08TK0117",
+      "studentName": "Võ Thị Mỹ Xuyên",
+      "studentCode": "C08TK0117",
+      "submittedAt": "2026-11-04T02:05:12.926Z",
+      "createdAt": "2026-11-04T02:05:12.926Z",
+      "readBy": [
+        "u_C08TK0106"
+      ]
+    },
+    {
+      "id": "notif_sub_1793757881571_3hju",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793752994063",
+      "assignmentTitle": "Tạo Thiết kế banner hoặc poster để tạo chuyển động",
+      "targetClass": "C08TK01",
+      "subject": "Xử Lý Kỹ Xảo với After Effects",
+      "studentId": "u_C08TK0111",
+      "studentName": "Đoàn Thị Thúy",
+      "studentCode": "C08TK0111",
+      "submittedAt": "2026-11-04T02:04:41.571Z",
+      "createdAt": "2026-11-04T02:04:41.571Z",
+      "readBy": [
+        "u_C08TK0106"
+      ]
+    },
+    {
+      "id": "notif_sub_1793757881390_i58s",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793752994063",
+      "assignmentTitle": "Tạo Thiết kế banner hoặc poster để tạo chuyển động",
+      "targetClass": "C08TK01",
+      "subject": "Xử Lý Kỹ Xảo với After Effects",
+      "studentId": "u_C08TK0111",
+      "studentName": "Đoàn Thị Thúy",
+      "studentCode": "C08TK0111",
+      "submittedAt": "2026-11-04T02:04:41.390Z",
+      "createdAt": "2026-11-04T02:04:41.390Z",
+      "readBy": [
+        "u_C08TK0106"
+      ]
+    },
+    {
+      "id": "notif_sub_1793757881237_kasw",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793752994063",
+      "assignmentTitle": "Tạo Thiết kế banner hoặc poster để tạo chuyển động",
+      "targetClass": "C08TK01",
+      "subject": "Xử Lý Kỹ Xảo với After Effects",
+      "studentId": "u_C08TK0111",
+      "studentName": "Đoàn Thị Thúy",
+      "studentCode": "C08TK0111",
+      "submittedAt": "2026-11-04T02:04:41.237Z",
+      "createdAt": "2026-11-04T02:04:41.237Z",
+      "readBy": [
+        "u_C08TK0106"
+      ]
+    },
+    {
+      "id": "notif_sub_1793757881020_g9we",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793752994063",
+      "assignmentTitle": "Tạo Thiết kế banner hoặc poster để tạo chuyển động",
+      "targetClass": "C08TK01",
+      "subject": "Xử Lý Kỹ Xảo với After Effects",
+      "studentId": "u_C08TK0111",
+      "studentName": "Đoàn Thị Thúy",
+      "studentCode": "C08TK0111",
+      "submittedAt": "2026-11-04T02:04:41.020Z",
+      "createdAt": "2026-11-04T02:04:41.020Z",
+      "readBy": [
+        "u_C08TK0106"
+      ]
+    },
+    {
+      "id": "notif_sub_1793757879588_3wx2",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793752994063",
+      "assignmentTitle": "Tạo Thiết kế banner hoặc poster để tạo chuyển động",
+      "targetClass": "C08TK01",
+      "subject": "Xử Lý Kỹ Xảo với After Effects",
+      "studentId": "u_C08TK0111",
+      "studentName": "Đoàn Thị Thúy",
+      "studentCode": "C08TK0111",
+      "submittedAt": "2026-11-04T02:04:39.588Z",
+      "createdAt": "2026-11-04T02:04:39.588Z",
+      "readBy": [
+        "u_C08TK0106"
+      ]
+    },
+    {
+      "id": "notif_sub_1793757879453_o4c2",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793752994063",
+      "assignmentTitle": "Tạo Thiết kế banner hoặc poster để tạo chuyển động",
+      "targetClass": "C08TK01",
+      "subject": "Xử Lý Kỹ Xảo với After Effects",
+      "studentId": "u_C08TK0111",
+      "studentName": "Đoàn Thị Thúy",
+      "studentCode": "C08TK0111",
+      "submittedAt": "2026-11-04T02:04:39.453Z",
+      "createdAt": "2026-11-04T02:04:39.453Z",
+      "readBy": [
+        "u_C08TK0106"
+      ]
+    },
+    {
+      "id": "notif_sub_1793757878248_ogqq",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793752994063",
+      "assignmentTitle": "Tạo Thiết kế banner hoặc poster để tạo chuyển động",
+      "targetClass": "C08TK01",
+      "subject": "Xử Lý Kỹ Xảo với After Effects",
+      "studentId": "u_C08TK0111",
+      "studentName": "Đoàn Thị Thúy",
+      "studentCode": "C08TK0111",
+      "submittedAt": "2026-11-04T02:04:38.248Z",
+      "createdAt": "2026-11-04T02:04:38.248Z",
+      "readBy": [
+        "u_C08TK0106"
+      ]
+    },
+    {
+      "id": "notif_sub_1793757877546_43zw",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793752994063",
+      "assignmentTitle": "Tạo Thiết kế banner hoặc poster để tạo chuyển động",
+      "targetClass": "C08TK01",
+      "subject": "Xử Lý Kỹ Xảo với After Effects",
+      "studentId": "u_C08TK0111",
+      "studentName": "Đoàn Thị Thúy",
+      "studentCode": "C08TK0111",
+      "submittedAt": "2026-11-04T02:04:37.546Z",
+      "createdAt": "2026-11-04T02:04:37.546Z",
+      "readBy": [
+        "u_C08TK0106"
+      ]
+    },
+    {
+      "id": "notif_sub_1793757877344_o6fk",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793752994063",
+      "assignmentTitle": "Tạo Thiết kế banner hoặc poster để tạo chuyển động",
+      "targetClass": "C08TK01",
+      "subject": "Xử Lý Kỹ Xảo với After Effects",
+      "studentId": "u_C08TK0111",
+      "studentName": "Đoàn Thị Thúy",
+      "studentCode": "C08TK0111",
+      "submittedAt": "2026-11-04T02:04:37.344Z",
+      "createdAt": "2026-11-04T02:04:37.344Z",
+      "readBy": [
+        "u_C08TK0106"
+      ]
+    },
+    {
+      "id": "notif_sub_1793757875782_fyyw",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793752994063",
+      "assignmentTitle": "Tạo Thiết kế banner hoặc poster để tạo chuyển động",
+      "targetClass": "C08TK01",
+      "subject": "Xử Lý Kỹ Xảo với After Effects",
+      "studentId": "u_C08TK0111",
+      "studentName": "Đoàn Thị Thúy",
+      "studentCode": "C08TK0111",
+      "submittedAt": "2026-11-04T02:04:35.782Z",
+      "createdAt": "2026-11-04T02:04:35.782Z",
+      "readBy": [
+        "u_C08TK0106"
+      ]
+    },
+    {
+      "id": "notif_sub_1793757873654_32xq",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793752994063",
+      "assignmentTitle": "Tạo Thiết kế banner hoặc poster để tạo chuyển động",
+      "targetClass": "C08TK01",
+      "subject": "Xử Lý Kỹ Xảo với After Effects",
+      "studentId": "u_C08TK0111",
+      "studentName": "Đoàn Thị Thúy",
+      "studentCode": "C08TK0111",
+      "submittedAt": "2026-11-04T02:04:33.654Z",
+      "createdAt": "2026-11-04T02:04:33.654Z",
+      "readBy": [
+        "u_C08TK0106"
+      ]
+    },
+    {
+      "id": "notif_sub_1793757872643_7xzu",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793752994063",
+      "assignmentTitle": "Tạo Thiết kế banner hoặc poster để tạo chuyển động",
+      "targetClass": "C08TK01",
+      "subject": "Xử Lý Kỹ Xảo với After Effects",
+      "studentId": "u_C08TK0111",
+      "studentName": "Đoàn Thị Thúy",
+      "studentCode": "C08TK0111",
+      "submittedAt": "2026-11-04T02:04:32.643Z",
+      "createdAt": "2026-11-04T02:04:32.643Z",
+      "readBy": [
+        "u_C08TK0106"
+      ]
+    },
+    {
+      "id": "notif_sub_1793757872384_8x6u",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793752994063",
+      "assignmentTitle": "Tạo Thiết kế banner hoặc poster để tạo chuyển động",
+      "targetClass": "C08TK01",
+      "subject": "Xử Lý Kỹ Xảo với After Effects",
+      "studentId": "u_C08TK0111",
+      "studentName": "Đoàn Thị Thúy",
+      "studentCode": "C08TK0111",
+      "submittedAt": "2026-11-04T02:04:32.384Z",
+      "createdAt": "2026-11-04T02:04:32.384Z",
+      "readBy": [
+        "u_C08TK0106"
+      ]
+    },
+    {
+      "id": "notif_sub_1793757871486_0gmt",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793752994063",
+      "assignmentTitle": "Tạo Thiết kế banner hoặc poster để tạo chuyển động",
+      "targetClass": "C08TK01",
+      "subject": "Xử Lý Kỹ Xảo với After Effects",
+      "studentId": "u_C08TK0111",
+      "studentName": "Đoàn Thị Thúy",
+      "studentCode": "C08TK0111",
+      "submittedAt": "2026-11-04T02:04:31.486Z",
+      "createdAt": "2026-11-04T02:04:31.486Z",
+      "readBy": [
+        "u_C08TK0106"
+      ]
+    },
+    {
+      "id": "notif_sub_1793757871157_yg42",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793752994063",
+      "assignmentTitle": "Tạo Thiết kế banner hoặc poster để tạo chuyển động",
+      "targetClass": "C08TK01",
+      "subject": "Xử Lý Kỹ Xảo với After Effects",
+      "studentId": "u_C08TK0111",
+      "studentName": "Đoàn Thị Thúy",
+      "studentCode": "C08TK0111",
+      "submittedAt": "2026-11-04T02:04:31.157Z",
+      "createdAt": "2026-11-04T02:04:31.157Z",
+      "readBy": [
+        "u_C08TK0106"
+      ]
+    },
+    {
+      "id": "notif_sub_1793757870146_tuu2",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793752994063",
+      "assignmentTitle": "Tạo Thiết kế banner hoặc poster để tạo chuyển động",
+      "targetClass": "C08TK01",
+      "subject": "Xử Lý Kỹ Xảo với After Effects",
+      "studentId": "u_C08TK0111",
+      "studentName": "Đoàn Thị Thúy",
+      "studentCode": "C08TK0111",
+      "submittedAt": "2026-11-04T02:04:30.146Z",
+      "createdAt": "2026-11-04T02:04:30.146Z",
+      "readBy": [
+        "u_C08TK0106"
+      ]
+    },
+    {
+      "id": "notif_sub_1793757868046_ionn",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793752994063",
+      "assignmentTitle": "Tạo Thiết kế banner hoặc poster để tạo chuyển động",
+      "targetClass": "C08TK01",
+      "subject": "Xử Lý Kỹ Xảo với After Effects",
+      "studentId": "u_C08TK0111",
+      "studentName": "Đoàn Thị Thúy",
+      "studentCode": "C08TK0111",
+      "submittedAt": "2026-11-04T02:04:28.046Z",
+      "createdAt": "2026-11-04T02:04:28.046Z",
+      "readBy": [
+        "u_C08TK0106"
+      ]
+    },
+    {
+      "id": "notif_sub_1793757861958_r7x2",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793752994063",
+      "assignmentTitle": "Tạo Thiết kế banner hoặc poster để tạo chuyển động",
+      "targetClass": "C08TK01",
+      "subject": "Xử Lý Kỹ Xảo với After Effects",
+      "studentId": "u_C08TK0111",
+      "studentName": "Đoàn Thị Thúy",
+      "studentCode": "C08TK0111",
+      "submittedAt": "2026-11-04T02:04:21.958Z",
+      "createdAt": "2026-11-04T02:04:21.958Z",
+      "readBy": [
+        "u_C08TK0106"
+      ]
+    },
+    {
+      "id": "notif_sub_1793757800016_yy2n",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793609039129",
+      "assignmentTitle": "Làm bài báo cáo về 10 nguyên lý chuyển động trong motion graphics",
+      "targetClass": "C08TK01",
+      "subject": "Xử Lý Kỹ Xảo với After Effects",
+      "studentId": "u_C08TK0109",
+      "studentName": "Nguyễn Văn Tâm",
+      "studentCode": "C08TK0109",
+      "submittedAt": "2026-11-04T02:03:20.016Z",
+      "createdAt": "2026-11-04T02:03:20.016Z",
+      "readBy": [
+        "u_C08TK0106"
+      ]
+    },
+    {
+      "id": "notif_sub_1793757752085_mfxh",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793752994063",
+      "assignmentTitle": "Tạo Thiết kế banner hoặc poster để tạo chuyển động",
+      "targetClass": "C08TK01",
+      "subject": "Xử Lý Kỹ Xảo với After Effects",
+      "studentId": "u_C08TK0117",
+      "studentName": "Võ Thị Mỹ Xuyên",
+      "studentCode": "C08TK0117",
+      "submittedAt": "2026-11-04T02:02:32.085Z",
+      "createdAt": "2026-11-04T02:02:32.085Z",
+      "readBy": [
+        "u_C08TK0106"
+      ]
+    },
+    {
+      "id": "notif_sub_1793757678379_n8mt",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793752994063",
+      "assignmentTitle": "Tạo Thiết kế banner hoặc poster để tạo chuyển động",
+      "targetClass": "C08TK01",
+      "subject": "Xử Lý Kỹ Xảo với After Effects",
+      "studentId": "u_C08TK0111",
+      "studentName": "Đoàn Thị Thúy",
+      "studentCode": "C08TK0111",
+      "submittedAt": "2026-11-04T02:01:18.379Z",
+      "createdAt": "2026-11-04T02:01:18.379Z",
+      "readBy": [
+        "u_C08TK0106"
+      ]
+    },
+    {
+      "id": "notif_sub_1793757546968_hrpc",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793752994063",
+      "assignmentTitle": "Tạo Thiết kế banner hoặc poster để tạo chuyển động",
+      "targetClass": "C08TK01",
+      "subject": "Xử Lý Kỹ Xảo với After Effects",
+      "studentId": "u_C08TK0111",
+      "studentName": "Đoàn Thị Thúy",
+      "studentCode": "C08TK0111",
+      "submittedAt": "2026-11-04T01:59:06.968Z",
+      "createdAt": "2026-11-04T01:59:06.968Z",
+      "readBy": [
+        "u_C08TK0106"
+      ]
+    },
+    {
+      "id": "notif_sub_1793757535444_bcon",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793752994063",
+      "assignmentTitle": "Tạo Thiết kế banner hoặc poster để tạo chuyển động",
+      "targetClass": "C08TK01",
+      "subject": "Xử Lý Kỹ Xảo với After Effects",
+      "studentId": "u_C08TK0111",
+      "studentName": "Đoàn Thị Thúy",
+      "studentCode": "C08TK0111",
+      "submittedAt": "2026-11-04T01:58:55.444Z",
+      "createdAt": "2026-11-04T01:58:55.444Z",
+      "readBy": [
+        "u_C08TK0106"
+      ]
+    },
+    {
+      "id": "notif_sub_1793757531963_w6vx",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793752994063",
+      "assignmentTitle": "Tạo Thiết kế banner hoặc poster để tạo chuyển động",
+      "targetClass": "C08TK01",
+      "subject": "Xử Lý Kỹ Xảo với After Effects",
+      "studentId": "u_C08TK0111",
+      "studentName": "Đoàn Thị Thúy",
+      "studentCode": "C08TK0111",
+      "submittedAt": "2026-11-04T01:58:51.963Z",
+      "createdAt": "2026-11-04T01:58:51.963Z",
+      "readBy": [
+        "u_C08TK0106"
+      ]
+    },
+    {
+      "id": "notif_sub_1793757531652_is0v",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793752994063",
+      "assignmentTitle": "Tạo Thiết kế banner hoặc poster để tạo chuyển động",
+      "targetClass": "C08TK01",
+      "subject": "Xử Lý Kỹ Xảo với After Effects",
+      "studentId": "u_C08TK0111",
+      "studentName": "Đoàn Thị Thúy",
+      "studentCode": "C08TK0111",
+      "submittedAt": "2026-11-04T01:58:51.652Z",
+      "createdAt": "2026-11-04T01:58:51.652Z",
+      "readBy": [
+        "u_C08TK0106"
+      ]
+    },
+    {
+      "id": "notif_sub_1793757528891_5rep",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793752994063",
+      "assignmentTitle": "Tạo Thiết kế banner hoặc poster để tạo chuyển động",
+      "targetClass": "C08TK01",
+      "subject": "Xử Lý Kỹ Xảo với After Effects",
+      "studentId": "u_C08TK0111",
+      "studentName": "Đoàn Thị Thúy",
+      "studentCode": "C08TK0111",
+      "submittedAt": "2026-11-04T01:58:48.890Z",
+      "createdAt": "2026-11-04T01:58:48.890Z",
+      "readBy": [
+        "u_C08TK0106"
+      ]
+    },
+    {
+      "id": "notif_sub_1793757528144_0vzg",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793752994063",
+      "assignmentTitle": "Tạo Thiết kế banner hoặc poster để tạo chuyển động",
+      "targetClass": "C08TK01",
+      "subject": "Xử Lý Kỹ Xảo với After Effects",
+      "studentId": "u_C08TK0111",
+      "studentName": "Đoàn Thị Thúy",
+      "studentCode": "C08TK0111",
+      "submittedAt": "2026-11-04T01:58:48.144Z",
+      "createdAt": "2026-11-04T01:58:48.144Z",
+      "readBy": [
+        "u_C08TK0106"
+      ]
+    },
+    {
+      "id": "notif_sub_1793757526891_b86a",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793752994063",
+      "assignmentTitle": "Tạo Thiết kế banner hoặc poster để tạo chuyển động",
+      "targetClass": "C08TK01",
+      "subject": "Xử Lý Kỹ Xảo với After Effects",
+      "studentId": "u_C08TK0111",
+      "studentName": "Đoàn Thị Thúy",
+      "studentCode": "C08TK0111",
+      "submittedAt": "2026-11-04T01:58:46.891Z",
+      "createdAt": "2026-11-04T01:58:46.891Z",
+      "readBy": [
+        "u_C08TK0106"
+      ]
+    },
+    {
+      "id": "notif_sub_1793757526102_4nhh",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793752994063",
+      "assignmentTitle": "Tạo Thiết kế banner hoặc poster để tạo chuyển động",
+      "targetClass": "C08TK01",
+      "subject": "Xử Lý Kỹ Xảo với After Effects",
+      "studentId": "u_C08TK0111",
+      "studentName": "Đoàn Thị Thúy",
+      "studentCode": "C08TK0111",
+      "submittedAt": "2026-11-04T01:58:46.102Z",
+      "createdAt": "2026-11-04T01:58:46.102Z",
+      "readBy": [
+        "u_C08TK0106"
+      ]
+    },
+    {
+      "id": "notif_sub_1793757525673_qmxc",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793752994063",
+      "assignmentTitle": "Tạo Thiết kế banner hoặc poster để tạo chuyển động",
+      "targetClass": "C08TK01",
+      "subject": "Xử Lý Kỹ Xảo với After Effects",
+      "studentId": "u_C08TK0111",
+      "studentName": "Đoàn Thị Thúy",
+      "studentCode": "C08TK0111",
+      "submittedAt": "2026-11-04T01:58:45.673Z",
+      "createdAt": "2026-11-04T01:58:45.673Z",
+      "readBy": [
+        "u_C08TK0106"
+      ]
+    },
+    {
+      "id": "notif_sub_1793757522751_6ahm",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793752994063",
+      "assignmentTitle": "Tạo Thiết kế banner hoặc poster để tạo chuyển động",
+      "targetClass": "C08TK01",
+      "subject": "Xử Lý Kỹ Xảo với After Effects",
+      "studentId": "u_C08TK0111",
+      "studentName": "Đoàn Thị Thúy",
+      "studentCode": "C08TK0111",
+      "submittedAt": "2026-11-04T01:58:42.751Z",
+      "createdAt": "2026-11-04T01:58:42.751Z",
+      "readBy": [
+        "u_C08TK0106"
+      ]
+    },
+    {
+      "id": "notif_sub_1793757522157_08p9",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793752994063",
+      "assignmentTitle": "Tạo Thiết kế banner hoặc poster để tạo chuyển động",
+      "targetClass": "C08TK01",
+      "subject": "Xử Lý Kỹ Xảo với After Effects",
+      "studentId": "u_C08TK0111",
+      "studentName": "Đoàn Thị Thúy",
+      "studentCode": "C08TK0111",
+      "submittedAt": "2026-11-04T01:58:42.157Z",
+      "createdAt": "2026-11-04T01:58:42.157Z",
+      "readBy": [
+        "u_C08TK0106"
+      ]
+    },
+    {
+      "id": "notif_sub_1793757520493_q6ln",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793752994063",
+      "assignmentTitle": "Tạo Thiết kế banner hoặc poster để tạo chuyển động",
+      "targetClass": "C08TK01",
+      "subject": "Xử Lý Kỹ Xảo với After Effects",
+      "studentId": "u_C08TK0111",
+      "studentName": "Đoàn Thị Thúy",
+      "studentCode": "C08TK0111",
+      "submittedAt": "2026-11-04T01:58:40.493Z",
+      "createdAt": "2026-11-04T01:58:40.493Z",
+      "readBy": [
+        "u_C08TK0106"
+      ]
+    },
+    {
+      "id": "notif_sub_1793757519644_oavi",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793752994063",
+      "assignmentTitle": "Tạo Thiết kế banner hoặc poster để tạo chuyển động",
+      "targetClass": "C08TK01",
+      "subject": "Xử Lý Kỹ Xảo với After Effects",
+      "studentId": "u_C08TK0111",
+      "studentName": "Đoàn Thị Thúy",
+      "studentCode": "C08TK0111",
+      "submittedAt": "2026-11-04T01:58:39.644Z",
+      "createdAt": "2026-11-04T01:58:39.644Z",
+      "readBy": [
+        "u_C08TK0106"
+      ]
+    },
+    {
+      "id": "notif_sub_1793757512729_r6aw",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793752994063",
+      "assignmentTitle": "Tạo Thiết kế banner hoặc poster để tạo chuyển động",
+      "targetClass": "C08TK01",
+      "subject": "Xử Lý Kỹ Xảo với After Effects",
+      "studentId": "u_C08TK0111",
+      "studentName": "Đoàn Thị Thúy",
+      "studentCode": "C08TK0111",
+      "submittedAt": "2026-11-04T01:58:32.729Z",
+      "createdAt": "2026-11-04T01:58:32.729Z",
+      "readBy": [
+        "u_C08TK0106"
+      ]
+    },
+    {
+      "id": "notif_sub_1793757505733_dgdc",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793752994063",
+      "assignmentTitle": "Tạo Thiết kế banner hoặc poster để tạo chuyển động",
+      "targetClass": "C08TK01",
+      "subject": "Xử Lý Kỹ Xảo với After Effects",
+      "studentId": "u_C08TK0111",
+      "studentName": "Đoàn Thị Thúy",
+      "studentCode": "C08TK0111",
+      "submittedAt": "2026-11-04T01:58:25.733Z",
+      "createdAt": "2026-11-04T01:58:25.733Z",
+      "readBy": [
+        "u_C08TK0106"
+      ]
+    },
+    {
+      "id": "notif_sub_1793757504845_51u9",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793752994063",
+      "assignmentTitle": "Tạo Thiết kế banner hoặc poster để tạo chuyển động",
+      "targetClass": "C08TK01",
+      "subject": "Xử Lý Kỹ Xảo với After Effects",
+      "studentId": "u_C08TK0111",
+      "studentName": "Đoàn Thị Thúy",
+      "studentCode": "C08TK0111",
+      "submittedAt": "2026-11-04T01:58:24.845Z",
+      "createdAt": "2026-11-04T01:58:24.845Z",
+      "readBy": [
+        "u_C08TK0106"
+      ]
+    },
+    {
+      "id": "notif_sub_1793757501032_gtk0",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793752994063",
+      "assignmentTitle": "Tạo Thiết kế banner hoặc poster để tạo chuyển động",
+      "targetClass": "C08TK01",
+      "subject": "Xử Lý Kỹ Xảo với After Effects",
+      "studentId": "u_C08TK0111",
+      "studentName": "Đoàn Thị Thúy",
+      "studentCode": "C08TK0111",
+      "submittedAt": "2026-11-04T01:58:21.032Z",
+      "createdAt": "2026-11-04T01:58:21.032Z",
+      "readBy": [
+        "u_C08TK0106"
+      ]
+    },
+    {
+      "id": "notif_sub_1793757492745_q6zm",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793752994063",
+      "assignmentTitle": "Tạo Thiết kế banner hoặc poster để tạo chuyển động",
+      "targetClass": "C08TK01",
+      "subject": "Xử Lý Kỹ Xảo với After Effects",
+      "studentId": "u_C08TK0111",
+      "studentName": "Đoàn Thị Thúy",
+      "studentCode": "C08TK0111",
+      "submittedAt": "2026-11-04T01:58:12.745Z",
+      "createdAt": "2026-11-04T01:58:12.745Z",
+      "readBy": [
+        "u_C08TK0106"
+      ]
+    },
+    {
+      "id": "notif_sub_1793757481273_o4cw",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793752994063",
+      "assignmentTitle": "Tạo Thiết kế banner hoặc poster để tạo chuyển động",
+      "targetClass": "C08TK01",
+      "subject": "Xử Lý Kỹ Xảo với After Effects",
+      "studentId": "u_C08TK0111",
+      "studentName": "Đoàn Thị Thúy",
+      "studentCode": "C08TK0111",
+      "submittedAt": "2026-11-04T01:58:01.273Z",
+      "createdAt": "2026-11-04T01:58:01.273Z",
+      "readBy": [
+        "u_C08TK0106"
+      ]
+    },
+    {
+      "id": "notif_sub_1793757441048_e9ly",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793752994063",
+      "assignmentTitle": "Tạo Thiết kế banner hoặc poster để tạo chuyển động",
+      "targetClass": "C08TK01",
+      "subject": "Xử Lý Kỹ Xảo với After Effects",
+      "studentId": "u_C08TK0111",
+      "studentName": "Đoàn Thị Thúy",
+      "studentCode": "C08TK0111",
+      "submittedAt": "2026-11-04T01:57:21.048Z",
+      "createdAt": "2026-11-04T01:57:21.048Z",
+      "readBy": [
+        "u_C08TK0106"
+      ]
+    },
+    {
+      "id": "notif_sub_1793757350395_fg0z",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793752994063",
+      "assignmentTitle": "Tạo Thiết kế banner hoặc poster để tạo chuyển động",
+      "targetClass": "C08TK01",
+      "subject": "Xử Lý Kỹ Xảo với After Effects",
+      "studentId": "u_C08TK0109",
+      "studentName": "Nguyễn Văn Tâm",
+      "studentCode": "C08TK0109",
+      "submittedAt": "2026-11-04T01:55:50.395Z",
+      "createdAt": "2026-11-04T01:55:50.395Z",
+      "readBy": [
+        "u_C08TK0106"
+      ]
+    },
+    {
       "id": "notif_sub_1793757042028_7oib",
       "type": "STUDENT_SUBMITTED",
       "assignmentId": "asm_1793752994063",
@@ -1413,7 +2153,9 @@
       "studentCode": "C08TK0102",
       "submittedAt": "2026-11-04T01:50:42.028Z",
       "createdAt": "2026-11-04T01:50:42.028Z",
-      "readBy": []
+      "readBy": [
+        "u_C08TK0106"
+      ]
     },
     {
       "id": "notif_sub_1793757013663_4plh",
@@ -1427,7 +2169,9 @@
       "studentCode": "C08TK0102",
       "submittedAt": "2026-11-04T01:50:13.663Z",
       "createdAt": "2026-11-04T01:50:13.663Z",
-      "readBy": []
+      "readBy": [
+        "u_C08TK0106"
+      ]
     },
     {
       "id": "notif_sub_1793757008853_04jx",
@@ -1441,7 +2185,9 @@
       "studentCode": "C08TK0102",
       "submittedAt": "2026-11-04T01:50:08.853Z",
       "createdAt": "2026-11-04T01:50:08.853Z",
-      "readBy": []
+      "readBy": [
+        "u_C08TK0106"
+      ]
     },
     {
       "id": "notif_sub_1793757007479_9ef4",
@@ -1455,7 +2201,9 @@
       "studentCode": "C08TK0102",
       "submittedAt": "2026-11-04T01:50:07.479Z",
       "createdAt": "2026-11-04T01:50:07.479Z",
-      "readBy": []
+      "readBy": [
+        "u_C08TK0106"
+      ]
     },
     {
       "id": "notif_sub_1793757001540_n0wo",
@@ -1469,7 +2217,9 @@
       "studentCode": "C08TK0102",
       "submittedAt": "2026-11-04T01:50:01.540Z",
       "createdAt": "2026-11-04T01:50:01.540Z",
-      "readBy": []
+      "readBy": [
+        "u_C08TK0106"
+      ]
     },
     {
       "id": "notif_sub_1793756996048_sr9a",
@@ -1483,7 +2233,9 @@
       "studentCode": "C08TK0102",
       "submittedAt": "2026-11-04T01:49:56.048Z",
       "createdAt": "2026-11-04T01:49:56.048Z",
-      "readBy": []
+      "readBy": [
+        "u_C08TK0106"
+      ]
     },
     {
       "id": "notif_sub_1793756994012_xumr",
@@ -1497,7 +2249,9 @@
       "studentCode": "C08TK0102",
       "submittedAt": "2026-11-04T01:49:54.012Z",
       "createdAt": "2026-11-04T01:49:54.012Z",
-      "readBy": []
+      "readBy": [
+        "u_C08TK0106"
+      ]
     },
     {
       "id": "notif_sub_1793756985461_vj9f",
@@ -1511,7 +2265,9 @@
       "studentCode": "C08TK0102",
       "submittedAt": "2026-11-04T01:49:45.461Z",
       "createdAt": "2026-11-04T01:49:45.461Z",
-      "readBy": []
+      "readBy": [
+        "u_C08TK0106"
+      ]
     },
     {
       "id": "notif_sub_1793756964766_6lrp",
@@ -1525,7 +2281,9 @@
       "studentCode": "C08TK0108",
       "submittedAt": "2026-11-04T01:49:24.766Z",
       "createdAt": "2026-11-04T01:49:24.766Z",
-      "readBy": []
+      "readBy": [
+        "u_C08TK0106"
+      ]
     },
     {
       "id": "notif_sub_1793756961908_b2m6",
@@ -1539,7 +2297,9 @@
       "studentCode": "C08TK0102",
       "submittedAt": "2026-11-04T01:49:21.908Z",
       "createdAt": "2026-11-04T01:49:21.908Z",
-      "readBy": []
+      "readBy": [
+        "u_C08TK0106"
+      ]
     },
     {
       "id": "notif_sub_1793756934606_gf7k",
@@ -1553,7 +2313,9 @@
       "studentCode": "C08TK0107",
       "submittedAt": "2026-11-04T01:48:54.606Z",
       "createdAt": "2026-11-04T01:48:54.606Z",
-      "readBy": []
+      "readBy": [
+        "u_C08TK0106"
+      ]
     },
     {
       "id": "notif_sub_1793756933892_n3e4",
@@ -1567,7 +2329,9 @@
       "studentCode": "C08TK0107",
       "submittedAt": "2026-11-04T01:48:53.892Z",
       "createdAt": "2026-11-04T01:48:53.892Z",
-      "readBy": []
+      "readBy": [
+        "u_C08TK0106"
+      ]
     },
     {
       "id": "notif_sub_1793756933799_chjp",
@@ -1581,7 +2345,9 @@
       "studentCode": "C08TK0107",
       "submittedAt": "2026-11-04T01:48:53.799Z",
       "createdAt": "2026-11-04T01:48:53.799Z",
-      "readBy": []
+      "readBy": [
+        "u_C08TK0106"
+      ]
     },
     {
       "id": "notif_sub_1793756933720_d1up",
@@ -1595,7 +2361,9 @@
       "studentCode": "C08TK0107",
       "submittedAt": "2026-11-04T01:48:53.720Z",
       "createdAt": "2026-11-04T01:48:53.720Z",
-      "readBy": []
+      "readBy": [
+        "u_C08TK0106"
+      ]
     },
     {
       "id": "notif_sub_1793756933639_h6ap",
@@ -1609,7 +2377,9 @@
       "studentCode": "C08TK0107",
       "submittedAt": "2026-11-04T01:48:53.639Z",
       "createdAt": "2026-11-04T01:48:53.639Z",
-      "readBy": []
+      "readBy": [
+        "u_C08TK0106"
+      ]
     },
     {
       "id": "notif_sub_1793756933494_r1wt",
@@ -1623,7 +2393,9 @@
       "studentCode": "C08TK0107",
       "submittedAt": "2026-11-04T01:48:53.494Z",
       "createdAt": "2026-11-04T01:48:53.494Z",
-      "readBy": []
+      "readBy": [
+        "u_C08TK0106"
+      ]
     },
     {
       "id": "notif_sub_1793756933476_hjvv",
@@ -1637,7 +2409,9 @@
       "studentCode": "C08TK0107",
       "submittedAt": "2026-11-04T01:48:53.476Z",
       "createdAt": "2026-11-04T01:48:53.476Z",
-      "readBy": []
+      "readBy": [
+        "u_C08TK0106"
+      ]
     },
     {
       "id": "notif_sub_1793756933190_vo1q",
@@ -1651,7 +2425,9 @@
       "studentCode": "C08TK0107",
       "submittedAt": "2026-11-04T01:48:53.190Z",
       "createdAt": "2026-11-04T01:48:53.190Z",
-      "readBy": []
+      "readBy": [
+        "u_C08TK0106"
+      ]
     },
     {
       "id": "notif_sub_1793756932674_l2ql",
@@ -1665,7 +2441,9 @@
       "studentCode": "C08TK0107",
       "submittedAt": "2026-11-04T01:48:52.673Z",
       "createdAt": "2026-11-04T01:48:52.673Z",
-      "readBy": []
+      "readBy": [
+        "u_C08TK0106"
+      ]
     },
     {
       "id": "notif_sub_1793756932516_fzb4",
@@ -1679,7 +2457,9 @@
       "studentCode": "C08TK0107",
       "submittedAt": "2026-11-04T01:48:52.516Z",
       "createdAt": "2026-11-04T01:48:52.516Z",
-      "readBy": []
+      "readBy": [
+        "u_C08TK0106"
+      ]
     },
     {
       "id": "notif_sub_1793756932509_yr9e",
@@ -1693,7 +2473,9 @@
       "studentCode": "C08TK0107",
       "submittedAt": "2026-11-04T01:48:52.509Z",
       "createdAt": "2026-11-04T01:48:52.509Z",
-      "readBy": []
+      "readBy": [
+        "u_C08TK0106"
+      ]
     },
     {
       "id": "notif_sub_1793756931812_xsnn",
@@ -1707,7 +2489,9 @@
       "studentCode": "C08TK0107",
       "submittedAt": "2026-11-04T01:48:51.812Z",
       "createdAt": "2026-11-04T01:48:51.812Z",
-      "readBy": []
+      "readBy": [
+        "u_C08TK0106"
+      ]
     },
     {
       "id": "notif_sub_1793756931411_c85c",
@@ -1721,7 +2505,9 @@
       "studentCode": "C08TK0107",
       "submittedAt": "2026-11-04T01:48:51.411Z",
       "createdAt": "2026-11-04T01:48:51.411Z",
-      "readBy": []
+      "readBy": [
+        "u_C08TK0106"
+      ]
     },
     {
       "id": "notif_sub_1793756927309_mzlk",
@@ -1735,7 +2521,9 @@
       "studentCode": "C08TK0107",
       "submittedAt": "2026-11-04T01:48:47.309Z",
       "createdAt": "2026-11-04T01:48:47.309Z",
-      "readBy": []
+      "readBy": [
+        "u_C08TK0106"
+      ]
     },
     {
       "id": "notif_sub_1793756926310_0x90",
@@ -1749,7 +2537,9 @@
       "studentCode": "C08TK0102",
       "submittedAt": "2026-11-04T01:48:46.310Z",
       "createdAt": "2026-11-04T01:48:46.310Z",
-      "readBy": []
+      "readBy": [
+        "u_C08TK0106"
+      ]
     },
     {
       "id": "notif_sub_1793756925035_wskh",
@@ -1763,7 +2553,9 @@
       "studentCode": "C08TK0107",
       "submittedAt": "2026-11-04T01:48:45.035Z",
       "createdAt": "2026-11-04T01:48:45.035Z",
-      "readBy": []
+      "readBy": [
+        "u_C08TK0106"
+      ]
     },
     {
       "id": "notif_sub_1793754690590_bczt",
@@ -1777,7 +2569,10 @@
       "studentCode": "C08TK0101",
       "submittedAt": "2026-11-04T01:11:30.589Z",
       "createdAt": "2026-11-04T01:11:30.589Z",
-      "readBy": []
+      "readBy": [
+        "u_C08TK0106",
+        "u_C08TK0108"
+      ]
     },
     {
       "id": "notif_sub_1793754681644_a517",
@@ -1791,7 +2586,9 @@
       "studentCode": "C08TK0101",
       "submittedAt": "2026-11-04T01:11:21.643Z",
       "createdAt": "2026-11-04T01:11:21.643Z",
-      "readBy": []
+      "readBy": [
+        "u_C08TK0106"
+      ]
     },
     {
       "id": "notif_sub_1793754501694_pa29",
@@ -1805,7 +2602,9 @@
       "studentCode": "C08TK0101",
       "submittedAt": "2026-11-04T01:08:21.694Z",
       "createdAt": "2026-11-04T01:08:21.694Z",
-      "readBy": []
+      "readBy": [
+        "u_C08TK0106"
+      ]
     },
     {
       "id": "notif_1793752994063",
@@ -1819,50 +2618,8 @@
       "teacherName": "Thầy Nguyễn Công Danh",
       "teacherId": "u_teacher_danh",
       "createdAt": "2026-11-04T00:43:14.063Z",
-      "readBy": []
-    },
-    {
-      "id": "notif_sub_1793752676506_rnlw",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1793723665139",
-      "assignmentTitle": "abc",
-      "targetClass": "C08TK01",
-      "subject": "Ví dụ Mẫu",
-      "studentId": "u_C08TK0114",
-      "studentName": "Phạm Ngọc Thảo Trâm",
-      "studentCode": "C08TK0114",
-      "submittedAt": "2026-11-04T00:37:56.506Z",
-      "createdAt": "2026-11-04T00:37:56.506Z",
-      "readBy": []
-    },
-    {
-      "id": "notif_sub_1793752671576_ve8h",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1793723665139",
-      "assignmentTitle": "abc",
-      "targetClass": "C08TK01",
-      "subject": "Ví dụ Mẫu",
-      "studentId": "u_C08TK0114",
-      "studentName": "Phạm Ngọc Thảo Trâm",
-      "studentCode": "C08TK0114",
-      "submittedAt": "2026-11-04T00:37:51.576Z",
-      "createdAt": "2026-11-04T00:37:51.576Z",
-      "readBy": []
-    },
-    {
-      "id": "notif_sub_1793727103111_1kgo",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1793723665139",
-      "assignmentTitle": "abc",
-      "targetClass": "C08TK01",
-      "subject": "Ví dụ Mẫu",
-      "studentId": "u_C08TK0113",
-      "studentName": "Nguyễn Vũ Anh Thư",
-      "studentCode": "C08TK0113",
-      "submittedAt": "2026-11-03T17:31:43.111Z",
-      "createdAt": "2026-11-03T17:31:43.111Z",
       "readBy": [
-        "u_C08TK0104"
+        "u_C08TK0106"
       ]
     },
     {
@@ -1879,7 +2636,8 @@
       "createdAt": "2026-11-03T17:27:23.729Z",
       "readBy": [
         "u_C08TK0113",
-        "u_C08TK0104"
+        "u_C08TK0104",
+        "u_C08TK0106"
       ]
     },
     {
@@ -1895,7 +2653,8 @@
       "submittedAt": "2026-11-03T16:52:53.230Z",
       "createdAt": "2026-11-03T16:52:53.230Z",
       "readBy": [
-        "u_C08TK0113"
+        "u_C08TK0113",
+        "u_C08TK0106"
       ]
     },
     {
@@ -1911,7 +2670,8 @@
       "submittedAt": "2026-11-03T16:52:51.458Z",
       "createdAt": "2026-11-03T16:52:51.458Z",
       "readBy": [
-        "u_C08TK0113"
+        "u_C08TK0113",
+        "u_C08TK0106"
       ]
     },
     {
@@ -1927,23 +2687,8 @@
       "submittedAt": "2026-11-03T16:52:47.759Z",
       "createdAt": "2026-11-03T16:52:47.759Z",
       "readBy": [
-        "u_C08TK0113"
-      ]
-    },
-    {
-      "id": "notif_1793723665139",
-      "type": "NEW_ASSIGNMENT",
-      "assignmentId": "asm_1793723665139",
-      "title": "abc",
-      "description": "abc",
-      "targetClass": "C08TK01",
-      "subject": "Ví dụ Mẫu",
-      "dueDate": "2026-11-04T16:34",
-      "teacherName": "Nguyễn Tâm",
-      "teacherId": "u_teacher_1793722738431",
-      "createdAt": "2026-11-03T16:34:25.139Z",
-      "readBy": [
-        "u_C08TK0113"
+        "u_C08TK0113",
+        "u_C08TK0106"
       ]
     },
     {
@@ -1959,7 +2704,8 @@
       "submittedAt": "2026-11-03T16:30:38.951Z",
       "createdAt": "2026-11-03T16:30:38.951Z",
       "readBy": [
-        "u_C08TK0112"
+        "u_C08TK0112",
+        "u_C08TK0106"
       ]
     },
     {
@@ -1974,7 +2720,9 @@
       "studentCode": "C08TK0118",
       "submittedAt": "2026-11-03T16:30:37.876Z",
       "createdAt": "2026-11-03T16:30:37.876Z",
-      "readBy": []
+      "readBy": [
+        "u_C08TK0106"
+      ]
     },
     {
       "id": "notif_sub_1793721204555_l6c2",
@@ -1989,7 +2737,9 @@
       "submittedAt": "2026-11-03T15:53:24.555Z",
       "createdAt": "2026-11-03T15:53:24.555Z",
       "readBy": [
-        "u_C08TK0118"
+        "u_C08TK0118",
+        "u_C08TK0107",
+        "u_C08TK0106"
       ]
     },
     {
@@ -2077,7 +2827,10 @@
         "filename": "1793615179843_C08TK0105_NguyenDucHieu.pptx",
         "originalName": "C08TK0105_NguyenDucHieu.pptx",
         "size": 1266912,
-        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1793691370/educlass_submissions/C08TK01/1793615179843_C08TK0105_NguyenDucHieu_z61ljz.pptx"
+        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1793691370/educlass_submissions/C08TK01/L%C3%A0m%20b%C3%A0i%20b%C3%A1o%20c%C3%A1o%20v%E1%BB%81%2010%20nguy%C3%AAn%20l%C3%BD%20chuy%E1%BB%83n%20%C4%91%E1%BB%99ng%20trong%20motion%20graphics/1793615179843_C08TK0105_NguyenDucHieu_z61ljz.pptx",
+        "publicId": "educlass_submissions/C08TK01/Làm bài báo cáo về 10 nguyên lý chuyển động trong motion graphics/1793615179843_C08TK0105_NguyenDucHieu_z61ljz.pptx",
+        "storageKey": "educlass_submissions/C08TK01/Làm bài báo cáo về 10 nguyên lý chuyển động trong motion graphics/1793615179843_C08TK0105_NguyenDucHieu_z61ljz.pptx",
+        "provider": "cloudinary"
       },
       "submittedAt": "2026-11-02T10:26:20.091Z",
       "grade": 9,
@@ -2095,7 +2848,10 @@
         "filename": "catalog.indd",
         "originalName": "catalog.indd",
         "size": 7421952,
-        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1793691394/educlass_submissions/T14TK01/1793677316388_bai_catalog_gom_vs1_k98ahf.indd"
+        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1793691394/educlass_submissions/T14TK01/Thi%E1%BA%BFt%20k%E1%BA%BF%20Catalog%2016%20trang%20v%E1%BB%81%20ch%E1%BB%A7%20%C4%91%E1%BB%81%20b%E1%BA%A5t%20k%E1%BB%B3/1793677316388_bai_catalog_gom_vs1_k98ahf.indd",
+        "publicId": "educlass_submissions/T14TK01/Thiết kế Catalog 16 trang về chủ đề bất kỳ/1793677316388_bai_catalog_gom_vs1_k98ahf.indd",
+        "storageKey": "educlass_submissions/T14TK01/Thiết kế Catalog 16 trang về chủ đề bất kỳ/1793677316388_bai_catalog_gom_vs1_k98ahf.indd",
+        "provider": "cloudinary"
       },
       "submittedAt": "2026-11-03T03:45:00.000Z",
       "grade": null,
@@ -2178,7 +2934,10 @@
         "filename": "1793693777711_T14TK0102_MINHANHVH_VERSION_1.indd",
         "originalName": "T14TK0102-MINHANHVH-VERSION 1.indd",
         "size": 6672384,
-        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1793693779/educlass_submissions/T14TK01/Thi%E1%BA%BFt%20K%E1%BA%BF%20Catalog/1793693777711_T14TK0102_MINHANHVH_VERSION_1_d2o52f.indd"
+        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1793693779/educlass_submissions/T14TK01/Thi%E1%BA%BFt%20K%E1%BA%BF%20Catalog/Thi%E1%BA%BFt%20k%E1%BA%BF%20Catalog%2016%20trang%20v%E1%BB%81%20ch%E1%BB%A7%20%C4%91%E1%BB%81%20b%E1%BA%A5t%20k%E1%BB%B3/1793693777711_T14TK0102_MINHANHVH_VERSION_1_d2o52f.indd",
+        "publicId": "educlass_submissions/T14TK01/Thiết Kế Catalog/Thiết kế Catalog 16 trang về chủ đề bất kỳ/1793693777711_T14TK0102_MINHANHVH_VERSION_1_d2o52f.indd",
+        "storageKey": "educlass_submissions/T14TK01/Thiết Kế Catalog/Thiết kế Catalog 16 trang về chủ đề bất kỳ/1793693777711_T14TK0102_MINHANHVH_VERSION_1_d2o52f.indd",
+        "provider": "cloudinary"
       },
       "submittedAt": "2026-11-03T08:16:20.027Z",
       "grade": null,
@@ -2213,7 +2972,10 @@
         "filename": "1793694415063_T14TK0112_mainhathoang.rar",
         "originalName": "T14TK0112_mainhathoang.rar",
         "size": 1247519,
-        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1793694415/educlass_submissions/T14TK01/Thi%E1%BA%BFt%20K%E1%BA%BF%20Catalog/1793694415063_T14TK0112_mainhathoang_jbbbbm.rar"
+        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1793694415/educlass_submissions/T14TK01/Thi%E1%BA%BFt%20K%E1%BA%BF%20Catalog/Thi%E1%BA%BFt%20k%E1%BA%BF%20Catalog%2016%20trang%20v%E1%BB%81%20ch%E1%BB%A7%20%C4%91%E1%BB%81%20b%E1%BA%A5t%20k%E1%BB%B3/1793694415063_T14TK0112_mainhathoang_jbbbbm.rar",
+        "publicId": "educlass_submissions/T14TK01/Thiết Kế Catalog/Thiết kế Catalog 16 trang về chủ đề bất kỳ/1793694415063_T14TK0112_mainhathoang_jbbbbm.rar",
+        "storageKey": "educlass_submissions/T14TK01/Thiết Kế Catalog/Thiết kế Catalog 16 trang về chủ đề bất kỳ/1793694415063_T14TK0112_mainhathoang_jbbbbm.rar",
+        "provider": "cloudinary"
       },
       "submittedAt": "2026-11-03T08:26:56.535Z",
       "grade": null,
@@ -2231,7 +2993,10 @@
         "filename": "1793694823041_T14TK0109_VuNgocThanhHang_Version1.indd",
         "originalName": "T14TK0109_VuNgocThanhHang_Version1.indd",
         "size": 2744320,
-        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1793694824/educlass_submissions/T14TK01/Thi%E1%BA%BFt%20K%E1%BA%BF%20Catalog/1793694823041_T14TK0109_VuNgocThanhHang_Version1_wcjovj.indd"
+        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1793694824/educlass_submissions/T14TK01/Thi%E1%BA%BFt%20K%E1%BA%BF%20Catalog/Thi%E1%BA%BFt%20k%E1%BA%BF%20Catalog%2016%20trang%20v%E1%BB%81%20ch%E1%BB%A7%20%C4%91%E1%BB%81%20b%E1%BA%A5t%20k%E1%BB%B3/1793694823041_T14TK0109_VuNgocThanhHang_Version1_wcjovj.indd",
+        "publicId": "educlass_submissions/T14TK01/Thiết Kế Catalog/Thiết kế Catalog 16 trang về chủ đề bất kỳ/1793694823041_T14TK0109_VuNgocThanhHang_Version1_wcjovj.indd",
+        "storageKey": "educlass_submissions/T14TK01/Thiết Kế Catalog/Thiết kế Catalog 16 trang về chủ đề bất kỳ/1793694823041_T14TK0109_VuNgocThanhHang_Version1_wcjovj.indd",
+        "provider": "cloudinary"
       },
       "submittedAt": "2026-11-03T08:33:44.795Z",
       "grade": null,
@@ -2249,7 +3014,10 @@
         "filename": "1793694822079_T14TK0109_VuNgocThanhHang_Version1.indd",
         "originalName": "T14TK0109_VuNgocThanhHang_Version1.indd",
         "size": 2744320,
-        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1793694823/educlass_submissions/T14TK01/Thi%E1%BA%BFt%20K%E1%BA%BF%20Catalog/1793694822079_T14TK0109_VuNgocThanhHang_Version1_jiropp.indd"
+        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1793694823/educlass_submissions/T14TK01/Thi%E1%BA%BFt%20K%E1%BA%BF%20Catalog/Thi%E1%BA%BFt%20k%E1%BA%BF%20Catalog%2016%20trang%20v%E1%BB%81%20ch%E1%BB%A7%20%C4%91%E1%BB%81%20b%E1%BA%A5t%20k%E1%BB%B3/1793694822079_T14TK0109_VuNgocThanhHang_Version1_jiropp.indd",
+        "publicId": "educlass_submissions/T14TK01/Thiết Kế Catalog/Thiết kế Catalog 16 trang về chủ đề bất kỳ/1793694822079_T14TK0109_VuNgocThanhHang_Version1_jiropp.indd",
+        "storageKey": "educlass_submissions/T14TK01/Thiết Kế Catalog/Thiết kế Catalog 16 trang về chủ đề bất kỳ/1793694822079_T14TK0109_VuNgocThanhHang_Version1_jiropp.indd",
+        "provider": "cloudinary"
       },
       "submittedAt": "2026-11-03T08:33:44.541Z",
       "grade": null,
@@ -2267,7 +3035,10 @@
         "filename": "1793697054482_T14TK0123_PhamThiHuongNgoc_Version1.indd",
         "originalName": "T14TK0123-PhamThiHuongNgoc-Version1.indd",
         "size": 4870144,
-        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1793697057/educlass_submissions/T14TK01/Thi%E1%BA%BFt%20K%E1%BA%BF%20Catalog/1793697054482_T14TK0123_PhamThiHuongNgoc_Version1_qhsjox.indd"
+        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1793697057/educlass_submissions/T14TK01/Thi%E1%BA%BFt%20K%E1%BA%BF%20Catalog/Thi%E1%BA%BFt%20k%E1%BA%BF%20Catalog%2016%20trang%20v%E1%BB%81%20ch%E1%BB%A7%20%C4%91%E1%BB%81%20b%E1%BA%A5t%20k%E1%BB%B3/1793697054482_T14TK0123_PhamThiHuongNgoc_Version1_qhsjox.indd",
+        "publicId": "educlass_submissions/T14TK01/Thiết Kế Catalog/Thiết kế Catalog 16 trang về chủ đề bất kỳ/1793697054482_T14TK0123_PhamThiHuongNgoc_Version1_qhsjox.indd",
+        "storageKey": "educlass_submissions/T14TK01/Thiết Kế Catalog/Thiết kế Catalog 16 trang về chủ đề bất kỳ/1793697054482_T14TK0123_PhamThiHuongNgoc_Version1_qhsjox.indd",
+        "provider": "cloudinary"
       },
       "submittedAt": "2026-11-03T09:10:57.801Z",
       "grade": null,
@@ -2285,7 +3056,10 @@
         "filename": "1793697055058_T14TK0123_PhamThiHuongNgoc_Version1.indd",
         "originalName": "T14TK0123-PhamThiHuongNgoc-Version1.indd",
         "size": 4870144,
-        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1793697057/educlass_submissions/T14TK01/Thi%E1%BA%BFt%20K%E1%BA%BF%20Catalog/1793697055058_T14TK0123_PhamThiHuongNgoc_Version1_gulfwj.indd"
+        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1793697057/educlass_submissions/T14TK01/Thi%E1%BA%BFt%20K%E1%BA%BF%20Catalog/Thi%E1%BA%BFt%20k%E1%BA%BF%20Catalog%2016%20trang%20v%E1%BB%81%20ch%E1%BB%A7%20%C4%91%E1%BB%81%20b%E1%BA%A5t%20k%E1%BB%B3/1793697055058_T14TK0123_PhamThiHuongNgoc_Version1_gulfwj.indd",
+        "publicId": "educlass_submissions/T14TK01/Thiết Kế Catalog/Thiết kế Catalog 16 trang về chủ đề bất kỳ/1793697055058_T14TK0123_PhamThiHuongNgoc_Version1_gulfwj.indd",
+        "storageKey": "educlass_submissions/T14TK01/Thiết Kế Catalog/Thiết kế Catalog 16 trang về chủ đề bất kỳ/1793697055058_T14TK0123_PhamThiHuongNgoc_Version1_gulfwj.indd",
+        "provider": "cloudinary"
       },
       "submittedAt": "2026-11-03T09:10:58.206Z",
       "grade": null,
@@ -2303,7 +3077,10 @@
         "filename": "1793697055999_T14TK0123_PhamThiHuongNgoc_Version1.indd",
         "originalName": "T14TK0123-PhamThiHuongNgoc-Version1.indd",
         "size": 4870144,
-        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1793697058/educlass_submissions/T14TK01/Thi%E1%BA%BFt%20K%E1%BA%BF%20Catalog/1793697055999_T14TK0123_PhamThiHuongNgoc_Version1_qk8oqc.indd"
+        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1793697058/educlass_submissions/T14TK01/Thi%E1%BA%BFt%20K%E1%BA%BF%20Catalog/Thi%E1%BA%BFt%20k%E1%BA%BF%20Catalog%2016%20trang%20v%E1%BB%81%20ch%E1%BB%A7%20%C4%91%E1%BB%81%20b%E1%BA%A5t%20k%E1%BB%B3/1793697055999_T14TK0123_PhamThiHuongNgoc_Version1_qk8oqc.indd",
+        "publicId": "educlass_submissions/T14TK01/Thiết Kế Catalog/Thiết kế Catalog 16 trang về chủ đề bất kỳ/1793697055999_T14TK0123_PhamThiHuongNgoc_Version1_qk8oqc.indd",
+        "storageKey": "educlass_submissions/T14TK01/Thiết Kế Catalog/Thiết kế Catalog 16 trang về chủ đề bất kỳ/1793697055999_T14TK0123_PhamThiHuongNgoc_Version1_qk8oqc.indd",
+        "provider": "cloudinary"
       },
       "submittedAt": "2026-11-03T09:10:58.599Z",
       "grade": null,
@@ -2321,7 +3098,10 @@
         "filename": "1793697056598_T14TK0123_PhamThiHuongNgoc_Version1.indd",
         "originalName": "T14TK0123-PhamThiHuongNgoc-Version1.indd",
         "size": 4870144,
-        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1793697058/educlass_submissions/T14TK01/Thi%E1%BA%BFt%20K%E1%BA%BF%20Catalog/1793697056598_T14TK0123_PhamThiHuongNgoc_Version1_oi6nlu.indd"
+        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1793697058/educlass_submissions/T14TK01/Thi%E1%BA%BFt%20K%E1%BA%BF%20Catalog/Thi%E1%BA%BFt%20k%E1%BA%BF%20Catalog%2016%20trang%20v%E1%BB%81%20ch%E1%BB%A7%20%C4%91%E1%BB%81%20b%E1%BA%A5t%20k%E1%BB%B3/1793697056598_T14TK0123_PhamThiHuongNgoc_Version1_oi6nlu.indd",
+        "publicId": "educlass_submissions/T14TK01/Thiết Kế Catalog/Thiết kế Catalog 16 trang về chủ đề bất kỳ/1793697056598_T14TK0123_PhamThiHuongNgoc_Version1_oi6nlu.indd",
+        "storageKey": "educlass_submissions/T14TK01/Thiết Kế Catalog/Thiết kế Catalog 16 trang về chủ đề bất kỳ/1793697056598_T14TK0123_PhamThiHuongNgoc_Version1_oi6nlu.indd",
+        "provider": "cloudinary"
       },
       "submittedAt": "2026-11-03T09:10:58.643Z",
       "grade": null,
@@ -2356,7 +3136,10 @@
         "filename": "1793708018069_C08TK0106.pptx",
         "originalName": "C08TK0106.pptx",
         "size": 1439477,
-        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1793708018/educlass_submissions/C08TK01/X%E1%BB%AD%20L%C3%BD%20K%E1%BB%B9%20X%E1%BA%A3o%20v%E1%BB%9Bi%20After%20Effects/1793708018069_C08TK0106_dqneqy.pptx"
+        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1793708018/educlass_submissions/C08TK01/X%E1%BB%AD%20L%C3%BD%20K%E1%BB%B9%20X%E1%BA%A3o%20v%E1%BB%9Bi%20After%20Effects/L%C3%A0m%20b%C3%A0i%20b%C3%A1o%20c%C3%A1o%20v%E1%BB%81%2010%20nguy%C3%AAn%20l%C3%BD%20chuy%E1%BB%83n%20%C4%91%E1%BB%99ng%20trong%20motion%20graphics/1793708018069_C08TK0106_dqneqy.pptx",
+        "publicId": "educlass_submissions/C08TK01/Xử Lý Kỹ Xảo với After Effects/Làm bài báo cáo về 10 nguyên lý chuyển động trong motion graphics/1793708018069_C08TK0106_dqneqy.pptx",
+        "storageKey": "educlass_submissions/C08TK01/Xử Lý Kỹ Xảo với After Effects/Làm bài báo cáo về 10 nguyên lý chuyển động trong motion graphics/1793708018069_C08TK0106_dqneqy.pptx",
+        "provider": "cloudinary"
       },
       "submittedAt": "2026-11-03T12:13:39.320Z",
       "grade": 8,
@@ -2374,7 +3157,10 @@
         "filename": "1793708016694_C08TK0106.pptx",
         "originalName": "C08TK0106.pptx",
         "size": 1439477,
-        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1793708017/educlass_submissions/C08TK01/X%E1%BB%AD%20L%C3%BD%20K%E1%BB%B9%20X%E1%BA%A3o%20v%E1%BB%9Bi%20After%20Effects/1793708016694_C08TK0106_j4w2rv.pptx"
+        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1793708017/educlass_submissions/C08TK01/X%E1%BB%AD%20L%C3%BD%20K%E1%BB%B9%20X%E1%BA%A3o%20v%E1%BB%9Bi%20After%20Effects/L%C3%A0m%20b%C3%A0i%20b%C3%A1o%20c%C3%A1o%20v%E1%BB%81%2010%20nguy%C3%AAn%20l%C3%BD%20chuy%E1%BB%83n%20%C4%91%E1%BB%99ng%20trong%20motion%20graphics/1793708016694_C08TK0106_j4w2rv.pptx",
+        "publicId": "educlass_submissions/C08TK01/Xử Lý Kỹ Xảo với After Effects/Làm bài báo cáo về 10 nguyên lý chuyển động trong motion graphics/1793708016694_C08TK0106_j4w2rv.pptx",
+        "storageKey": "educlass_submissions/C08TK01/Xử Lý Kỹ Xảo với After Effects/Làm bài báo cáo về 10 nguyên lý chuyển động trong motion graphics/1793708016694_C08TK0106_j4w2rv.pptx",
+        "provider": "cloudinary"
       },
       "submittedAt": "2026-11-03T12:13:38.157Z",
       "grade": null,
@@ -2392,7 +3178,10 @@
         "filename": "1793708537668_PERSONA__ALL_.pdf",
         "originalName": "PERSONA (ALL).pdf",
         "size": 6773052,
-        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1793708540/educlass_submissions/T14TK01/Thi%E1%BA%BFt%20K%E1%BA%BF%20Catalog/1793708537668_PERSONA__ALL__w8vja0.pdf"
+        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1793708540/educlass_submissions/T14TK01/Thi%E1%BA%BFt%20K%E1%BA%BF%20Catalog/Thi%E1%BA%BFt%20k%E1%BA%BF%20Catalog%2016%20trang%20v%E1%BB%81%20ch%E1%BB%A7%20%C4%91%E1%BB%81%20b%E1%BA%A5t%20k%E1%BB%B3/1793708537668_PERSONA__ALL__w8vja0.pdf",
+        "publicId": "educlass_submissions/T14TK01/Thiết Kế Catalog/Thiết kế Catalog 16 trang về chủ đề bất kỳ/1793708537668_PERSONA__ALL__w8vja0.pdf",
+        "storageKey": "educlass_submissions/T14TK01/Thiết Kế Catalog/Thiết kế Catalog 16 trang về chủ đề bất kỳ/1793708537668_PERSONA__ALL__w8vja0.pdf",
+        "provider": "cloudinary"
       },
       "submittedAt": "2026-11-03T12:22:20.499Z",
       "grade": null,
@@ -2410,7 +3199,10 @@
         "filename": "1793714714365_10_Nguyên_Tắc_Thiết_Kế_Trong_Animation.pptx",
         "originalName": "10 Nguyên Tắc Thiết Kế Trong Animation.pptx",
         "size": 1386959,
-        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1793714715/educlass_submissions/C08TK01/X%E1%BB%AD%20L%C3%BD%20K%E1%BB%B9%20X%E1%BA%A3o%20v%E1%BB%9Bi%20After%20Effects/d4rrfksgwqa7dbdzt9u1"
+        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1793714715/educlass_submissions/C08TK01/X%E1%BB%AD%20L%C3%BD%20K%E1%BB%B9%20X%E1%BA%A3o%20v%E1%BB%9Bi%20After%20Effects/L%C3%A0m%20b%C3%A0i%20b%C3%A1o%20c%C3%A1o%20v%E1%BB%81%2010%20nguy%C3%AAn%20l%C3%BD%20chuy%E1%BB%83n%20%C4%91%E1%BB%99ng%20trong%20motion%20graphics/d4rrfksgwqa7dbdzt9u1",
+        "publicId": "educlass_submissions/C08TK01/Xử Lý Kỹ Xảo với After Effects/Làm bài báo cáo về 10 nguyên lý chuyển động trong motion graphics/d4rrfksgwqa7dbdzt9u1",
+        "storageKey": "educlass_submissions/C08TK01/Xử Lý Kỹ Xảo với After Effects/Làm bài báo cáo về 10 nguyên lý chuyển động trong motion graphics/d4rrfksgwqa7dbdzt9u1",
+        "provider": "cloudinary"
       },
       "submittedAt": "2026-11-03T14:05:16.248Z",
       "grade": 8,
@@ -2441,8 +3233,16 @@
       "studentName": "Nguyễn Thị Duyên",
       "content": "",
       "link": "",
-      "file": null,
-      "submittedAt": "2026-11-03T15:14:26.046Z",
+      "file": {
+        "filename": "1793758524656_10_Nguyên_Lý_Chuyển_Động.pptx",
+        "originalName": "10 Nguyên Lý Chuyển Động.pptx",
+        "size": 1689428,
+        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1793758525/educlass_submissions/C08TK01/X%E1%BB%AD%20L%C3%BD%20K%E1%BB%B9%20X%E1%BA%A3o%20v%E1%BB%9Bi%20After%20Effects/L%C3%A0m%20b%C3%A0i%20b%C3%A1o%20c%C3%A1o%20v%E1%BB%81%2010%20nguy%C3%AAn%20l%C3%BD%20chuy%E1%BB%83n%20%C4%91%E1%BB%99ng%20trong%20motion%20graphics/joqji7i8zhfnlaaukroj",
+        "storageKey": "educlass_submissions/C08TK01/Xử Lý Kỹ Xảo với After Effects/Làm bài báo cáo về 10 nguyên lý chuyển động trong motion graphics/joqji7i8zhfnlaaukroj",
+        "provider": "cloudinary",
+        "publicId": "educlass_submissions/C08TK01/Xử Lý Kỹ Xảo với After Effects/Làm bài báo cáo về 10 nguyên lý chuyển động trong motion graphics/joqji7i8zhfnlaaukroj"
+      },
+      "submittedAt": "2026-11-04T02:15:26.725Z",
       "grade": null,
       "feedback": "",
       "gradedAt": "2026-11-03T15:14:26.046Z"
@@ -2480,8 +3280,16 @@
       "studentName": "Nguyễn Văn Tâm",
       "content": "",
       "link": "",
-      "file": null,
-      "submittedAt": "2026-11-03T15:14:26.046Z",
+      "file": {
+        "filename": "1793757797858_nguyenvantam.pptx",
+        "originalName": "nguyenvantam.pptx",
+        "size": 2515808,
+        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1793757799/educlass_submissions/C08TK01/X%E1%BB%AD%20L%C3%BD%20K%E1%BB%B9%20X%E1%BA%A3o%20v%E1%BB%9Bi%20After%20Effects/L%C3%A0m%20b%C3%A0i%20b%C3%A1o%20c%C3%A1o%20v%E1%BB%81%2010%20nguy%C3%AAn%20l%C3%BD%20chuy%E1%BB%83n%20%C4%91%E1%BB%99ng%20trong%20motion%20graphics/1793757797858_nguyenvantam_dfciyu.pptx",
+        "storageKey": "educlass_submissions/C08TK01/Xử Lý Kỹ Xảo với After Effects/Làm bài báo cáo về 10 nguyên lý chuyển động trong motion graphics/1793757797858_nguyenvantam_dfciyu.pptx",
+        "provider": "cloudinary",
+        "publicId": "educlass_submissions/C08TK01/Xử Lý Kỹ Xảo với After Effects/Làm bài báo cáo về 10 nguyên lý chuyển động trong motion graphics/1793757797858_nguyenvantam_dfciyu.pptx"
+      },
+      "submittedAt": "2026-11-04T02:03:20.016Z",
       "grade": null,
       "feedback": "",
       "gradedAt": "2026-11-03T15:14:26.046Z"
@@ -2553,7 +3361,10 @@
         "filename": "1793721202302_NguyenNgocTran_C08TK0115.pdf",
         "originalName": "NguyenNgocTran-C08TK0115.pdf",
         "size": 2748196,
-        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1793721203/educlass_submissions/C08TK01/X%E1%BB%AD%20L%C3%BD%20K%E1%BB%B9%20X%E1%BA%A3o%20v%E1%BB%9Bi%20After%20Effects/1793721202302_NguyenNgocTran_C08TK0115_lhyli9.pdf"
+        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1793721203/educlass_submissions/C08TK01/X%E1%BB%AD%20L%C3%BD%20K%E1%BB%B9%20X%E1%BA%A3o%20v%E1%BB%9Bi%20After%20Effects/L%C3%A0m%20b%C3%A0i%20b%C3%A1o%20c%C3%A1o%20v%E1%BB%81%2010%20nguy%C3%AAn%20l%C3%BD%20chuy%E1%BB%83n%20%C4%91%E1%BB%99ng%20trong%20motion%20graphics/1793721202302_NguyenNgocTran_C08TK0115_lhyli9.pdf",
+        "publicId": "educlass_submissions/C08TK01/Xử Lý Kỹ Xảo với After Effects/Làm bài báo cáo về 10 nguyên lý chuyển động trong motion graphics/1793721202302_NguyenNgocTran_C08TK0115_lhyli9.pdf",
+        "storageKey": "educlass_submissions/C08TK01/Xử Lý Kỹ Xảo với After Effects/Làm bài báo cáo về 10 nguyên lý chuyển động trong motion graphics/1793721202302_NguyenNgocTran_C08TK0115_lhyli9.pdf",
+        "provider": "cloudinary"
       },
       "submittedAt": "2026-11-03T15:53:24.555Z",
       "grade": null,
@@ -2567,8 +3378,16 @@
       "studentName": "Võ Thị Mỹ Xuyên",
       "content": "",
       "link": "",
-      "file": null,
-      "submittedAt": "2026-11-03T15:14:26.046Z",
+      "file": {
+        "filename": "1793757912110_C08TK0117_VOTHIMYXUYEN.pptx",
+        "originalName": "C08TK0117-VOTHIMYXUYEN.pptx",
+        "size": 97888,
+        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1793757912/educlass_submissions/C08TK01/X%E1%BB%AD%20L%C3%BD%20K%E1%BB%B9%20X%E1%BA%A3o%20v%E1%BB%9Bi%20After%20Effects/L%C3%A0m%20b%C3%A0i%20b%C3%A1o%20c%C3%A1o%20v%E1%BB%81%2010%20nguy%C3%AAn%20l%C3%BD%20chuy%E1%BB%83n%20%C4%91%E1%BB%99ng%20trong%20motion%20graphics/1793757912110_C08TK0117_VOTHIMYXUYEN_k723xa.pptx",
+        "storageKey": "educlass_submissions/C08TK01/Xử Lý Kỹ Xảo với After Effects/Làm bài báo cáo về 10 nguyên lý chuyển động trong motion graphics/1793757912110_C08TK0117_VOTHIMYXUYEN_k723xa.pptx",
+        "provider": "cloudinary",
+        "publicId": "educlass_submissions/C08TK01/Xử Lý Kỹ Xảo với After Effects/Làm bài báo cáo về 10 nguyên lý chuyển động trong motion graphics/1793757912110_C08TK0117_VOTHIMYXUYEN_k723xa.pptx"
+      },
+      "submittedAt": "2026-11-04T02:05:12.926Z",
       "grade": null,
       "feedback": "",
       "gradedAt": "2026-11-03T15:14:26.046Z"
@@ -2584,7 +3403,10 @@
         "filename": "1793723437103_Animation__Tran_Tuan_Anh_.pptx",
         "originalName": "Animation  Tran Tuan Anh .pptx",
         "size": 6433537,
-        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1793723438/educlass_submissions/C08TK01/X%E1%BB%AD%20L%C3%BD%20K%E1%BB%B9%20X%E1%BA%A3o%20v%E1%BB%9Bi%20After%20Effects/1793723437103_Animation__Tran_Tuan_Anh__m5npy1.pptx"
+        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1793723438/educlass_submissions/C08TK01/X%E1%BB%AD%20L%C3%BD%20K%E1%BB%B9%20X%E1%BA%A3o%20v%E1%BB%9Bi%20After%20Effects/L%C3%A0m%20b%C3%A0i%20b%C3%A1o%20c%C3%A1o%20v%E1%BB%81%2010%20nguy%C3%AAn%20l%C3%BD%20chuy%E1%BB%83n%20%C4%91%E1%BB%99ng%20trong%20motion%20graphics/1793723437103_Animation__Tran_Tuan_Anh__m5npy1.pptx",
+        "publicId": "educlass_submissions/C08TK01/Xử Lý Kỹ Xảo với After Effects/Làm bài báo cáo về 10 nguyên lý chuyển động trong motion graphics/1793723437103_Animation__Tran_Tuan_Anh__m5npy1.pptx",
+        "storageKey": "educlass_submissions/C08TK01/Xử Lý Kỹ Xảo với After Effects/Làm bài báo cáo về 10 nguyên lý chuyển động trong motion graphics/1793723437103_Animation__Tran_Tuan_Anh__m5npy1.pptx",
+        "provider": "cloudinary"
       },
       "submittedAt": "2026-11-03T16:30:38.951Z",
       "grade": null,
@@ -2644,37 +3466,6 @@
       "gradedAt": "2026-11-03T15:14:26.046Z"
     },
     {
-      "id": "sub_1793727103111",
-      "assignmentId": "asm_1793723665139",
-      "studentId": "u_C08TK0113",
-      "studentName": "C08TK0113",
-      "content": "Nguyenvuanhthu- nopbai ạ",
-      "link": "https://canva.link/2dt4w9svdnxjhuv",
-      "file": null,
-      "submittedAt": "2026-11-03T17:31:43.111Z",
-      "grade": null,
-      "feedback": null,
-      "gradedAt": null
-    },
-    {
-      "id": "sub_1793752671576",
-      "assignmentId": "asm_1793723665139",
-      "studentId": "u_C08TK0114",
-      "studentName": "C08TK0114",
-      "content": "Phạm Ngọc Thảo Trâm",
-      "link": "",
-      "file": {
-        "filename": "1793752673360_12_Nguyen_ly_Animation_no_gamma.pptx",
-        "originalName": "12-Nguyen-ly-Animation_no_gamma.pptx",
-        "size": 4924652,
-        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1793752675/educlass_submissions/C08TK01/V%C3%AD%20d%E1%BB%A5%20M%E1%BA%ABu/1793752673360_12_Nguyen_ly_Animation_no_gamma_jd8opm.pptx"
-      },
-      "submittedAt": "2026-11-04T00:37:56.506Z",
-      "grade": null,
-      "feedback": null,
-      "gradedAt": null
-    },
-    {
       "id": "sub_1793756925035",
       "assignmentId": "asm_1793752994063",
       "studentId": "u_C08TK0107",
@@ -2685,9 +3476,10 @@
         "filename": "1793756925409_POSTER.psd",
         "originalName": "POSTER.psd",
         "size": 4666799,
-        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1793756934/educlass_submissions/C08TK01/X%E1%BB%AD%20L%C3%BD%20K%E1%BB%B9%20X%E1%BA%A3o%20v%E1%BB%9Bi%20After%20Effects/1793756925409_POSTER_fxqjen.psd",
-        "storageKey": "educlass_submissions/C08TK01/Xử Lý Kỹ Xảo với After Effects/1793756925409_POSTER_fxqjen.psd",
-        "provider": "cloudinary"
+        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1793756934/educlass_submissions/C08TK01/X%E1%BB%AD%20L%C3%BD%20K%E1%BB%B9%20X%E1%BA%A3o%20v%E1%BB%9Bi%20After%20Effects/T%E1%BA%A1o%20Thi%E1%BA%BFt%20k%E1%BA%BF%20banner%20ho%E1%BA%B7c%20poster%20%C4%91%E1%BB%83%20t%E1%BA%A1o%20chuy%E1%BB%83n%20%C4%91%E1%BB%99ng/1793756925409_POSTER_fxqjen.psd",
+        "storageKey": "educlass_submissions/C08TK01/Xử Lý Kỹ Xảo với After Effects/Tạo Thiết kế banner hoặc poster để tạo chuyển động/1793756925409_POSTER_fxqjen.psd",
+        "provider": "cloudinary",
+        "publicId": "educlass_submissions/C08TK01/Xử Lý Kỹ Xảo với After Effects/Tạo Thiết kế banner hoặc poster để tạo chuyển động/1793756925409_POSTER_fxqjen.psd"
       },
       "submittedAt": "2026-11-04T01:48:54.606Z",
       "grade": null,
@@ -2725,17 +3517,120 @@
         "filename": "1793756963126_character.ai",
         "originalName": "character.ai",
         "size": 1871054,
-        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1793756964/educlass_submissions/C08TK01/X%E1%BB%AD%20L%C3%BD%20K%E1%BB%B9%20X%E1%BA%A3o%20v%E1%BB%9Bi%20After%20Effects/1793756963126_character_fhi6uc.ai",
-        "storageKey": "educlass_submissions/C08TK01/Xử Lý Kỹ Xảo với After Effects/1793756963126_character_fhi6uc.ai",
-        "provider": "cloudinary"
+        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1793756964/educlass_submissions/C08TK01/X%E1%BB%AD%20L%C3%BD%20K%E1%BB%B9%20X%E1%BA%A3o%20v%E1%BB%9Bi%20After%20Effects/T%E1%BA%A1o%20Thi%E1%BA%BFt%20k%E1%BA%BF%20banner%20ho%E1%BA%B7c%20poster%20%C4%91%E1%BB%83%20t%E1%BA%A1o%20chuy%E1%BB%83n%20%C4%91%E1%BB%99ng/1793756963126_character_fhi6uc.ai",
+        "storageKey": "educlass_submissions/C08TK01/Xử Lý Kỹ Xảo với After Effects/Tạo Thiết kế banner hoặc poster để tạo chuyển động/1793756963126_character_fhi6uc.ai",
+        "provider": "cloudinary",
+        "publicId": "educlass_submissions/C08TK01/Xử Lý Kỹ Xảo với After Effects/Tạo Thiết kế banner hoặc poster để tạo chuyển động/1793756963126_character_fhi6uc.ai"
       },
       "submittedAt": "2026-11-04T01:49:24.766Z",
       "grade": null,
       "feedback": null,
       "gradedAt": null
+    },
+    {
+      "id": "sub_1793757350395",
+      "assignmentId": "asm_1793752994063",
+      "studentId": "u_C08TK0109",
+      "studentName": "C08TK0109",
+      "content": "",
+      "link": "",
+      "file": {
+        "filename": "1793757348272_poster.ai",
+        "originalName": "poster.ai",
+        "size": 2338899,
+        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1793757350/educlass_submissions/C08TK01/X%E1%BB%AD%20L%C3%BD%20K%E1%BB%B9%20X%E1%BA%A3o%20v%E1%BB%9Bi%20After%20Effects/T%E1%BA%A1o%20Thi%E1%BA%BFt%20k%E1%BA%BF%20banner%20ho%E1%BA%B7c%20poster%20%C4%91%E1%BB%83%20t%E1%BA%A1o%20chuy%E1%BB%83n%20%C4%91%E1%BB%99ng/1793757348272_poster_lsh3pk.ai",
+        "storageKey": "educlass_submissions/C08TK01/Xử Lý Kỹ Xảo với After Effects/Tạo Thiết kế banner hoặc poster để tạo chuyển động/1793757348272_poster_lsh3pk.ai",
+        "provider": "cloudinary",
+        "publicId": "educlass_submissions/C08TK01/Xử Lý Kỹ Xảo với After Effects/Tạo Thiết kế banner hoặc poster để tạo chuyển động/1793757348272_poster_lsh3pk.ai"
+      },
+      "submittedAt": "2026-11-04T01:55:50.395Z",
+      "grade": null,
+      "feedback": null,
+      "gradedAt": null
+    },
+    {
+      "id": "sub_1793757441048",
+      "assignmentId": "asm_1793752994063",
+      "studentId": "u_C08TK0111",
+      "studentName": "C08TK0111",
+      "content": "",
+      "link": "",
+      "file": {
+        "filename": "1793757862351_CAO_TINHN_NGHE.psd",
+        "originalName": "CAO TINHN NGHE.psd",
+        "size": 11773823,
+        "url": "https://pub-cd6bf46bdf5c4034bdac614cd4ea7b35.r2.dev/educlass_submissions/C08TK01/Xử Lý Kỹ Xảo với After Effects/Tạo Thiết kế banner hoặc poster để tạo chuyển động/1793757877651_CAO_TINHN_NGHE.psd",
+        "storageKey": "educlass_submissions/C08TK01/Xử Lý Kỹ Xảo với After Effects/Tạo Thiết kế banner hoặc poster để tạo chuyển động/1793757877651_CAO_TINHN_NGHE.psd",
+        "provider": "r2"
+      },
+      "submittedAt": "2026-11-04T02:04:41.571Z",
+      "grade": null,
+      "feedback": null,
+      "gradedAt": null
+    },
+    {
+      "id": "sub_1793757752085",
+      "assignmentId": "asm_1793752994063",
+      "studentId": "u_C08TK0117",
+      "studentName": "C08TK0117",
+      "content": "",
+      "link": "",
+      "file": {
+        "filename": "1793757731600_BANNER.psd",
+        "originalName": "BANNER.psd",
+        "size": 74724060,
+        "url": "https://pub-cd6bf46bdf5c4034bdac614cd4ea7b35.r2.dev/educlass_submissions/C08TK01/Xử Lý Kỹ Xảo với After Effects/Tạo Thiết kế banner hoặc poster để tạo chuyển động/1793757745248_BANNER.psd",
+        "storageKey": "educlass_submissions/C08TK01/Xử Lý Kỹ Xảo với After Effects/Tạo Thiết kế banner hoặc poster để tạo chuyển động/1793757745248_BANNER.psd",
+        "provider": "r2"
+      },
+      "submittedAt": "2026-11-04T02:02:32.085Z",
+      "grade": null,
+      "feedback": null,
+      "gradedAt": null
+    },
+    {
+      "id": "sub_1793758358219",
+      "assignmentId": "asm_1793752994063",
+      "studentId": "u_C08TK0106",
+      "studentName": "C08TK0106",
+      "content": "",
+      "link": "",
+      "file": {
+        "filename": "1793758361540_C08TK0106.psd",
+        "originalName": "C08TK0106.psd",
+        "size": 24752706,
+        "url": "https://pub-cd6bf46bdf5c4034bdac614cd4ea7b35.r2.dev/educlass_submissions/C08TK01/Xử Lý Kỹ Xảo với After Effects/Tạo Thiết kế banner hoặc poster để tạo chuyển động/1793758365845_C08TK0106.psd",
+        "storageKey": "educlass_submissions/C08TK01/Xử Lý Kỹ Xảo với After Effects/Tạo Thiết kế banner hoặc poster để tạo chuyển động/1793758365845_C08TK0106.psd",
+        "provider": "r2"
+      },
+      "submittedAt": "2026-11-04T02:12:48.844Z",
+      "grade": null,
+      "feedback": null,
+      "gradedAt": null
+    },
+    {
+      "id": "sub_1793759026497",
+      "assignmentId": "asm_1793752994063",
+      "studentId": "u_C08TK0124",
+      "studentName": "C08TK0124",
+      "content": "",
+      "link": "",
+      "file": {
+        "filename": "1793759023689_banner.ai",
+        "originalName": "banner.ai",
+        "size": 960068,
+        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1793759025/educlass_submissions/C08TK01/X%E1%BB%AD%20L%C3%BD%20K%E1%BB%B9%20X%E1%BA%A3o%20v%E1%BB%9Bi%20After%20Effects/T%E1%BA%A1o%20Thi%E1%BA%BFt%20k%E1%BA%BF%20banner%20ho%E1%BA%B7c%20poster%20%C4%91%E1%BB%83%20t%E1%BA%A1o%20chuy%E1%BB%83n%20%C4%91%E1%BB%99ng/1793759023689_banner_n0pn8b.ai",
+        "storageKey": "educlass_submissions/C08TK01/Xử Lý Kỹ Xảo với After Effects/Tạo Thiết kế banner hoặc poster để tạo chuyển động/1793759023689_banner_n0pn8b.ai",
+        "provider": "cloudinary",
+        "publicId": "educlass_submissions/C08TK01/Xử Lý Kỹ Xảo với After Effects/Tạo Thiết kế banner hoặc poster để tạo chuyển động/1793759023689_banner_n0pn8b.ai"
+      },
+      "submittedAt": "2026-11-04T02:23:46.497Z",
+      "grade": null,
+      "feedback": null,
+      "gradedAt": null
     }
   ],
-  "updatedAt": "2026-11-04T01:51:03.858Z",
+  "updatedAt": "2026-11-04T02:32:21.501Z",
   "users": [
     {
       "id": "u_teacher_danh",
@@ -4447,6 +5342,20 @@
       "className": "T15TH01",
       "status": "ACTIVE",
       "createdAt": "2026-11-04T01:51:03.858Z"
+    },
+    {
+      "id": "u_teacher_1793759462044",
+      "username": "Thesun",
+      "studentCode": null,
+      "password": "123",
+      "name": "Phạm Thái Dương",
+      "dob": null,
+      "email": "phamthaiduong999@gmail.com",
+      "role": "teacher",
+      "className": null,
+      "subject": "THIẾT KẾ MINH HỌA VỚI CORELDRAW",
+      "status": "ACTIVE",
+      "createdAt": "2026-11-04T02:31:02.044Z"
     }
   ],
   "industryGroups": [
