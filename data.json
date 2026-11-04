@@ -1403,6 +1403,34 @@
   ],
   "notifications": [
     {
+      "id": "notif_sub_1793754690590_bczt",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793609039129",
+      "assignmentTitle": "Làm bài báo cáo về 10 nguyên lý chuyển động trong motion graphics",
+      "targetClass": "C08TK01",
+      "subject": "Xử Lý Kỹ Xảo với After Effects",
+      "studentId": "u_C08TK0101",
+      "studentName": "Nguyễn Doãn Lê Anh",
+      "studentCode": "C08TK0101",
+      "submittedAt": "2026-11-04T01:11:30.589Z",
+      "createdAt": "2026-11-04T01:11:30.589Z",
+      "readBy": []
+    },
+    {
+      "id": "notif_sub_1793754681644_a517",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793609039129",
+      "assignmentTitle": "Làm bài báo cáo về 10 nguyên lý chuyển động trong motion graphics",
+      "targetClass": "C08TK01",
+      "subject": "Xử Lý Kỹ Xảo với After Effects",
+      "studentId": "u_C08TK0101",
+      "studentName": "Nguyễn Doãn Lê Anh",
+      "studentCode": "C08TK0101",
+      "submittedAt": "2026-11-04T01:11:21.643Z",
+      "createdAt": "2026-11-04T01:11:21.643Z",
+      "readBy": []
+    },
+    {
       "id": "notif_sub_1793754501694_pa29",
       "type": "STUDENT_SUBMITTED",
       "assignmentId": "asm_1793609039129",
@@ -2275,7 +2303,7 @@
       "gradedAt": null
     }
   ],
-  "updatedAt": "2026-11-04T01:08:21.695Z",
+  "updatedAt": "2026-11-04T01:11:30.592Z",
   "users": [
     {
       "id": "u_teacher_danh",

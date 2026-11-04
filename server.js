@@ -345,24 +345,26 @@ async function uploadFileToCloudinary(filePath, originalName, className, subject
   }
 }
 
-// Hàm tải tệp tin lên đám mây đa tầng: Ưu tiên Cloudflare R2 (hỗ trợ tới 100MB), dự phòng Cloudinary nếu <= 10MB
+// Hàm tải tệp tin lên đám mây phân luồng theo dung lượng:
+// 1. File có dung lượng <= 10MB: Tự động lưu ở Cloudinary (Tận dụng 25GB miễn phí)
+// 2. File có dung lượng > 10MB: Tự động chuyển sang Cloudflare R2 (Hỗ trợ file nặng tới 100MB)
 async function uploadFileToCloud(filePath, originalName, className, subjectName, fileSize = 0) {
-  // 1. Tải lên Cloudflare R2 trước (Tốc độ cao, hỗ trợ 100MB, không bị giới hạn 10MB)
-  const r2Res = await uploadFileToR2(filePath, originalName, className, subjectName);
-  if (r2Res && r2Res.url) {
-    return r2Res;
-  }
+  const TEN_MB = 10 * 1024 * 1024; // 10 MB = 10,485,760 bytes
+  const sizeMB = (fileSize / (1024 * 1024)).toFixed(2);
 
-  // 2. Dự phòng qua Cloudinary nếu file <= 10MB
-  if (fileSize <= 10 * 1024 * 1024) {
-    console.log('[Storage Fallback] Thử tải lên Cloudinary dự phòng...');
+  if (fileSize <= TEN_MB) {
+    console.log(`[Storage Routing] 📦 File "${originalName}" (${sizeMB} MB <= 10MB) -> Lưu trữ tại Cloudinary...`);
     const cldRes = await uploadFileToCloudinary(filePath, originalName, className, subjectName);
     if (cldRes && cldRes.url) {
       return cldRes;
     }
+    // Dự phòng: Nếu Cloudinary gặp sự cố, tự động lưu sang Cloudflare R2 để bài nộp không bao giờ bị mất
+    console.log('[Storage Fallback] Cloudinary gặp sự cố, tự động chuyển lưu sang Cloudflare R2 dự phòng...');
+    return await uploadFileToR2(filePath, originalName, className, subjectName);
+  } else {
+    console.log(`[Storage Routing] ⚡ File "${originalName}" (${sizeMB} MB > 10MB) -> Tự động chuyển sang Cloudflare R2...`);
+    return await uploadFileToR2(filePath, originalName, className, subjectName);
   }
-
-  return null;
 }
 
 // Đọc CSDL từ file JSON cục bộ
