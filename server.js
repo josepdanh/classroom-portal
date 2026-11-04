@@ -68,7 +68,7 @@ const storage = multer.diskStorage({
 
 const upload = multer({
   storage: storage,
-  limits: { fileSize: 20 * 1024 * 1024 } // 20MB
+  limits: { fileSize: 100 * 1024 * 1024 } // Hỗ trợ tải file tới 100MB cho Cloudflare R2
 });
 
 // Middleware
@@ -243,7 +243,77 @@ async function initMongoConnection() {
   }
 }
 
-// Cấu hình Cloudinary lưu trữ file đám mây vĩnh viễn (25GB Free, không mất file khi Render restart)
+// Cấu hình Cloudflare R2 Storage (10GB Free, hỗ trợ file 100MB+, $0 băng thông tải về)
+const { S3Client, PutObjectCommand, DeleteObjectCommand, ListObjectsV2Command } = require('@aws-sdk/client-s3');
+
+const R2_ACCOUNT_ID = process.env.R2_ACCOUNT_ID || "de3c89754598ddfb68c7b5947df665ef";
+const R2_ACCESS_KEY_ID = process.env.R2_ACCESS_KEY_ID || "006fbb0b78af8772fcc2d9953068aa1e";
+const R2_SECRET_ACCESS_KEY = process.env.R2_SECRET_ACCESS_KEY || "dc86e1ecf54214db0697fa84f88dec94d4d1e506e11c56487bbb1435f35727b9";
+const R2_BUCKET_NAME = process.env.R2_BUCKET_NAME || "educlass-files";
+const R2_PUBLIC_DOMAIN = process.env.R2_PUBLIC_DOMAIN || "https://pub-cd6bf46bdf5c4034bdac614cd4ea7b35.r2.dev";
+
+const r2Client = new S3Client({
+  region: 'auto',
+  endpoint: `https://${R2_ACCOUNT_ID}.r2.cloudflarestorage.com`,
+  credentials: {
+    accessKeyId: R2_ACCESS_KEY_ID,
+    secretAccessKey: R2_SECRET_ACCESS_KEY
+  }
+});
+
+function getMimeType(fileName) {
+  const ext = (path.extname(fileName || '')).toLowerCase();
+  const map = {
+    '.pdf': 'application/pdf',
+    '.psd': 'image/vnd.adobe.photoshop',
+    '.ai': 'application/postscript',
+    '.indd': 'application/x-indesign',
+    '.idml': 'application/vnd.adobe.indesign-idml-package',
+    '.cdr': 'application/coreldraw',
+    '.zip': 'application/zip',
+    '.rar': 'application/x-rar-compressed',
+    '.7z': 'application/x-7z-compressed',
+    '.pptx': 'application/vnd.openxmlformats-officedocument.presentationml.presentation',
+    '.docx': 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+    '.xlsx': 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+    '.png': 'image/png',
+    '.jpg': 'image/jpeg',
+    '.jpeg': 'image/jpeg',
+    '.gif': 'image/gif',
+    '.webp': 'image/webp',
+    '.mp4': 'video/mp4',
+    '.mov': 'video/quicktime'
+  };
+  return map[ext] || 'application/octet-stream';
+}
+
+async function uploadFileToR2(filePath, originalName, className, subjectName) {
+  try {
+    const cleanClass = sanitizeFolderName(className || 'Chung');
+    const cleanSubject = sanitizeFolderName(subjectName || 'MonHoc');
+    const ext = path.extname(originalName || filePath);
+    const base = path.basename(originalName || filePath, ext).replace(/[^a-zA-Z0-9_\u00C0-\u024F\u1E00-\u1EFF]/g, '_');
+    const uniqueName = `${Date.now()}_${base}${ext}`;
+    const key = `educlass_submissions/${cleanClass}/${cleanSubject}/${uniqueName}`;
+
+    const fileBuffer = fs.readFileSync(filePath);
+    await r2Client.send(new PutObjectCommand({
+      Bucket: R2_BUCKET_NAME,
+      Key: key,
+      Body: fileBuffer,
+      ContentType: getMimeType(originalName)
+    }));
+
+    const publicUrl = `${R2_PUBLIC_DOMAIN.replace(/\/$/, '')}/${key}`;
+    console.log(`[Cloudflare R2] ⚡ Đã lưu file vĩnh viễn lên Cloudflare R2 (Hỗ trợ 100MB): ${publicUrl}`);
+    return { url: publicUrl, key, provider: 'r2' };
+  } catch (err) {
+    console.error('[Cloudflare R2 Lỗi Upload]:', err.message);
+    return null;
+  }
+}
+
+// Cấu hình Cloudinary lưu trữ file đám mây dự phòng (25GB Free)
 const cloudinary = require('cloudinary').v2;
 const CLOUDINARY_URL = process.env.CLOUDINARY_URL || "cloudinary://935592411136868:ZbzIp26WqTM0dlRDGbgNm2Jh9hk@riddonyi";
 process.env.CLOUDINARY_URL = CLOUDINARY_URL;
@@ -267,12 +337,32 @@ async function uploadFileToCloudinary(filePath, originalName, className, subject
       use_filename: true,
       unique_filename: true
     });
-    console.log(`[Cloudinary] ☁️ Đã lưu file vĩnh viễn lên Cloudinary: ${result.secure_url}`);
-    return result.secure_url;
+    console.log(`[Cloudinary] ☁️ Đã lưu file lên Cloudinary: ${result.secure_url}`);
+    return { url: result.secure_url, key: result.public_id, provider: 'cloudinary' };
   } catch (err) {
     console.error('[Cloudinary Lỗi Upload]:', err.message);
     return null;
   }
+}
+
+// Hàm tải tệp tin lên đám mây đa tầng: Ưu tiên Cloudflare R2 (hỗ trợ tới 100MB), dự phòng Cloudinary nếu <= 10MB
+async function uploadFileToCloud(filePath, originalName, className, subjectName, fileSize = 0) {
+  // 1. Tải lên Cloudflare R2 trước (Tốc độ cao, hỗ trợ 100MB, không bị giới hạn 10MB)
+  const r2Res = await uploadFileToR2(filePath, originalName, className, subjectName);
+  if (r2Res && r2Res.url) {
+    return r2Res;
+  }
+
+  // 2. Dự phòng qua Cloudinary nếu file <= 10MB
+  if (fileSize <= 10 * 1024 * 1024) {
+    console.log('[Storage Fallback] Thử tải lên Cloudinary dự phòng...');
+    const cldRes = await uploadFileToCloudinary(filePath, originalName, className, subjectName);
+    if (cldRes && cldRes.url) {
+      return cldRes;
+    }
+  }
+
+  return null;
 }
 
 // Đọc CSDL từ file JSON cục bộ
@@ -1035,9 +1125,15 @@ app.post('/api/assignments', upload.single('attachment'), async (req, res) => {
       size: req.file.size
     };
     try {
-      const cloudUrl = await uploadFileToCloudinary(req.file.path, attachment.originalName, cleanTargetClass, cleanSubject);
-      if (cloudUrl) attachment.url = cloudUrl;
-    } catch (e) {}
+      const cloudRes = await uploadFileToCloud(req.file.path, attachment.originalName, cleanTargetClass, cleanSubject, req.file.size);
+      if (cloudRes && cloudRes.url) {
+        attachment.url = cloudRes.url;
+        attachment.storageKey = cloudRes.key;
+        attachment.provider = cloudRes.provider;
+      }
+    } catch (e) {
+      console.error("[Storage] Lỗi tải file đính kèm đề bài:", e.message);
+    }
   }
 
   const newAssignment = {
@@ -1202,14 +1298,16 @@ app.post('/api/submissions', upload.single('submissionFile'), async (req, res) =
       size: req.file.size
     };
 
-    // Tải ngay lên Cloudinary lưu trữ đám mây vĩnh viễn (25GB Free, không bao giờ mất)
+    // Tải ngay lên Cloudflare R2 / Cloudinary lưu trữ đám mây vĩnh viễn (Hỗ trợ tới 100MB)
     try {
-      const cloudUrl = await uploadFileToCloudinary(req.file.path, fileData.originalName, targetClassName, targetSubjectName);
-      if (cloudUrl) {
-        fileData.url = cloudUrl;
+      const cloudRes = await uploadFileToCloud(req.file.path, fileData.originalName, targetClassName, targetSubjectName, req.file.size);
+      if (cloudRes && cloudRes.url) {
+        fileData.url = cloudRes.url;
+        fileData.storageKey = cloudRes.key;
+        fileData.provider = cloudRes.provider;
       }
     } catch (e) {
-      console.error("[Cloudinary] Lỗi tải file học sinh:", e.message);
+      console.error("[Storage] Lỗi tải file học sinh:", e.message);
     }
 
     // Lưu bản sao cục bộ nếu server đang chạy trên máy Mac
@@ -1875,7 +1973,37 @@ async function findCloudUrlForFile(filename, db) {
     }
   }
 
-  // 4. Tra cứu trực tiếp trên Cloudinary (Auto-Recovery qua Cloudinary API nếu CSDL bị mất URL)
+  // 4. Tra cứu trực tiếp trên Cloudflare R2 (Auto-Recovery qua R2 API)
+  if (r2Client) {
+    try {
+      const r2List = await r2Client.send(new ListObjectsV2Command({
+        Bucket: R2_BUCKET_NAME,
+        Prefix: 'educlass_submissions/'
+      }));
+      const match = (r2List.Contents || []).find(c => {
+        const k = c.Key || '';
+        return k.includes(filename) || k.includes(decodedName) || (cleanBase.length > 3 && (k.includes(cleanBase) || k.includes(encodeURIComponent(cleanBase))));
+      });
+      if (match) {
+        const publicUrl = `${R2_PUBLIC_DOMAIN.replace(/\/$/, '')}/${match.Key}`;
+        console.log(`[Cloud Auto-Recovery] ⚡ Đã tìm thấy file "${filename}" trên Cloudflare R2: ${publicUrl}`);
+        for (const s of (db.submissions || [])) {
+          if (s.file && !s.file.url && (s.file.filename === filename || s.file.originalName === filename || s.file.filename === decodedName || s.file.originalName === decodedName)) {
+            s.file.url = publicUrl;
+            s.file.storageKey = match.Key;
+            s.file.provider = 'r2';
+            writeDatabase(db);
+            break;
+          }
+        }
+        return publicUrl;
+      }
+    } catch (err) {
+      console.error('[Cloud Auto-Recovery R2 Error]:', err.message);
+    }
+  }
+
+  // 5. Tra cứu trực tiếp trên Cloudinary (Auto-Recovery qua Cloudinary API nếu CSDL bị mất URL)
   if (cloudinary) {
     try {
       const resCloud = await cloudinary.api.resources({

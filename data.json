@@ -1,6 +1,18 @@
 {
+  "_id": "6ae9852bc149813cbbfa0830",
   "id": "main",
   "assignments": [
+    {
+      "id": "asm_1793752994063",
+      "title": "Tạo Thiết kế banner hoặc poster để tạo chuyển động",
+      "description": "Tách mỗi đối tượng muốn tạo chuyển động ra thành từng Layer riêng biệt",
+      "targetClass": "C08TK01",
+      "subject": "Xử Lý Kỹ Xảo với After Effects",
+      "dueDate": "2026-11-04T12:00",
+      "createdAt": "2026-11-04T00:43:14.063Z",
+      "attachment": null,
+      "createdBy": "u_teacher_danh"
+    },
     {
       "id": "asm_1793723665139",
       "title": "abc",
@@ -1391,6 +1403,62 @@
   ],
   "notifications": [
     {
+      "id": "notif_sub_1793754501694_pa29",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793609039129",
+      "assignmentTitle": "Làm bài báo cáo về 10 nguyên lý chuyển động trong motion graphics",
+      "targetClass": "C08TK01",
+      "subject": "Xử Lý Kỹ Xảo với After Effects",
+      "studentId": "u_C08TK0101",
+      "studentName": "Nguyễn Doãn Lê Anh",
+      "studentCode": "C08TK0101",
+      "submittedAt": "2026-11-04T01:08:21.694Z",
+      "createdAt": "2026-11-04T01:08:21.694Z",
+      "readBy": []
+    },
+    {
+      "id": "notif_1793752994063",
+      "type": "NEW_ASSIGNMENT",
+      "assignmentId": "asm_1793752994063",
+      "title": "Tạo Thiết kế banner hoặc poster để tạo chuyển động",
+      "description": "Tách mỗi đối tượng muốn tạo chuyển động ra thành từng Layer riêng biệt",
+      "targetClass": "C08TK01",
+      "subject": "Xử Lý Kỹ Xảo với After Effects",
+      "dueDate": "2026-11-04T12:00",
+      "teacherName": "Thầy Nguyễn Công Danh",
+      "teacherId": "u_teacher_danh",
+      "createdAt": "2026-11-04T00:43:14.063Z",
+      "readBy": []
+    },
+    {
+      "id": "notif_sub_1793752676506_rnlw",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793723665139",
+      "assignmentTitle": "abc",
+      "targetClass": "C08TK01",
+      "subject": "Ví dụ Mẫu",
+      "studentId": "u_C08TK0114",
+      "studentName": "Phạm Ngọc Thảo Trâm",
+      "studentCode": "C08TK0114",
+      "submittedAt": "2026-11-04T00:37:56.506Z",
+      "createdAt": "2026-11-04T00:37:56.506Z",
+      "readBy": []
+    },
+    {
+      "id": "notif_sub_1793752671576_ve8h",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793723665139",
+      "assignmentTitle": "abc",
+      "targetClass": "C08TK01",
+      "subject": "Ví dụ Mẫu",
+      "studentId": "u_C08TK0114",
+      "studentName": "Phạm Ngọc Thảo Trâm",
+      "studentCode": "C08TK0114",
+      "submittedAt": "2026-11-04T00:37:51.576Z",
+      "createdAt": "2026-11-04T00:37:51.576Z",
+      "readBy": []
+    },
+    {
       "id": "notif_sub_1793727103111_1kgo",
       "type": "STUDENT_SUBMITTED",
       "assignmentId": "asm_1793723665139",
@@ -1545,7 +1613,9 @@
       "studentCode": "T14TK0101",
       "submittedAt": "2026-11-03T15:26:11.166Z",
       "createdAt": "2026-11-03T15:26:11.166Z",
-      "readBy": []
+      "readBy": [
+        "u_T14TK0119"
+      ]
     }
   ],
   "subjects": [
@@ -1965,19 +2035,6 @@
       "gradedAt": "2026-11-03T15:14:26.046Z"
     },
     {
-      "id": "sub_1793718866046_flxoz",
-      "assignmentId": "asm_1793609039129",
-      "studentId": "u_C08TK0101",
-      "studentName": "Nguyễn Doãn Lê Anh",
-      "content": "",
-      "link": "",
-      "file": null,
-      "submittedAt": "2026-11-03T15:14:26.046Z",
-      "grade": null,
-      "feedback": "",
-      "gradedAt": "2026-11-03T15:14:26.046Z"
-    },
-    {
       "id": "sub_1793718866046_5wkop",
       "assignmentId": "asm_1793609039129",
       "studentId": "u_C08TK0102",
@@ -2198,9 +2255,27 @@
       "grade": null,
       "feedback": null,
       "gradedAt": null
+    },
+    {
+      "id": "sub_1793752671576",
+      "assignmentId": "asm_1793723665139",
+      "studentId": "u_C08TK0114",
+      "studentName": "C08TK0114",
+      "content": "Phạm Ngọc Thảo Trâm",
+      "link": "",
+      "file": {
+        "filename": "1793752673360_12_Nguyen_ly_Animation_no_gamma.pptx",
+        "originalName": "12-Nguyen-ly-Animation_no_gamma.pptx",
+        "size": 4924652,
+        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1793752675/educlass_submissions/C08TK01/V%C3%AD%20d%E1%BB%A5%20M%E1%BA%ABu/1793752673360_12_Nguyen_ly_Animation_no_gamma_jd8opm.pptx"
+      },
+      "submittedAt": "2026-11-04T00:37:56.506Z",
+      "grade": null,
+      "feedback": null,
+      "gradedAt": null
     }
   ],
-  "updatedAt": "2026-11-03T23:16:17.880Z",
+  "updatedAt": "2026-11-04T01:08:21.695Z",
   "users": [
     {
       "id": "u_teacher_danh",

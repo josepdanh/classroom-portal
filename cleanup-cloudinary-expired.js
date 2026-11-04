@@ -7,6 +7,32 @@ const fs = require('fs');
 const path = require('path');
 const cloudinary = require('cloudinary').v2;
 const { MongoClient } = require('mongodb');
+const { S3Client, DeleteObjectCommand } = require('@aws-sdk/client-s3');
+
+// Cấu hình Cloudflare R2
+const R2_ACCOUNT_ID = process.env.R2_ACCOUNT_ID || "de3c89754598ddfb68c7b5947df665ef";
+const R2_ACCESS_KEY_ID = process.env.R2_ACCESS_KEY_ID || "006fbb0b78af8772fcc2d9953068aa1e";
+const R2_SECRET_ACCESS_KEY = process.env.R2_SECRET_ACCESS_KEY || "dc86e1ecf54214db0697fa84f88dec94d4d1e506e11c56487bbb1435f35727b9";
+const R2_BUCKET_NAME = process.env.R2_BUCKET_NAME || "educlass-files";
+
+const r2Client = new S3Client({
+  region: 'auto',
+  endpoint: `https://${R2_ACCOUNT_ID}.r2.cloudflarestorage.com`,
+  credentials: {
+    accessKeyId: R2_ACCESS_KEY_ID,
+    secretAccessKey: R2_SECRET_ACCESS_KEY
+  }
+});
+
+async function destroyR2File(key) {
+  if (!key) return { success: false, reason: 'No key' };
+  try {
+    await r2Client.send(new DeleteObjectCommand({ Bucket: R2_BUCKET_NAME, Key: key }));
+    return { success: true, provider: 'r2' };
+  } catch (err) {
+    return { success: false, error: err.message };
+  }
+}
 
 // Cấu hình Cloudinary
 const CLOUDINARY_URL = process.env.CLOUDINARY_URL || "cloudinary://935592411136868:ZbzIp26WqTM0dlRDGbgNm2Jh9hk@riddonyi";
@@ -37,21 +63,29 @@ function extractCloudinaryPublicId(url) {
 async function destroyCloudinaryFile(publicId) {
   if (!publicId) return { success: false, reason: 'No publicId' };
   try {
-    // Thử xóa dạng raw (hầu hết bài tập PSD, AI, ZIP, CDR, PDF)
     let res = await cloudinary.uploader.destroy(publicId, { resource_type: 'raw' });
     if (res && res.result === 'ok') return { success: true, resource_type: 'raw' };
     
-    // Thử xóa dạng image
     res = await cloudinary.uploader.destroy(publicId, { resource_type: 'image' });
     if (res && res.result === 'ok') return { success: true, resource_type: 'image' };
 
-    // Thử xóa dạng video
     res = await cloudinary.uploader.destroy(publicId, { resource_type: 'video' });
     if (res && res.result === 'ok') return { success: true, resource_type: 'video' };
 
     return { success: false, result: res ? res.result : 'not_found' };
   } catch (err) {
     return { success: false, error: err.message };
+  }
+}
+
+async function destroyCloudFile(fileObj) {
+  if (!fileObj || !fileObj.url) return { success: false, reason: 'No file' };
+  if (fileObj.url.includes('r2.dev') || fileObj.provider === 'r2') {
+    const key = fileObj.storageKey || fileObj.url.replace(/^https:\/\/[^/]+\//, '');
+    return await destroyR2File(key);
+  } else {
+    const publicId = fileObj.publicId || extractCloudinaryPublicId(fileObj.url);
+    return await destroyCloudinaryFile(publicId);
   }
 }
 
@@ -115,23 +149,20 @@ async function cleanupExpiredFiles() {
 
       // 1. Xóa file đính kèm của đề bài (nếu có)
       if (asm.attachment && asm.attachment.url && !asm.attachment.cloudinaryDeleted) {
-        const publicId = asm.attachment.publicId || extractCloudinaryPublicId(asm.attachment.url);
-        if (publicId) {
-          console.log(`   - Đang xóa file đề bài Cloudinary: ${publicId}...`);
-          const res = await destroyCloudinaryFile(publicId);
-          asm.attachment.cloudinaryDeleted = true;
-          asm.attachment.deletedAt = now.toISOString();
-          asm.attachment.cleanupReason = `Tự động xóa sau ${diffDays} ngày kể từ ngày kết thúc nhiệm vụ`;
-          deletedFilesCount++;
-          freedBytesEstimate += (asm.attachment.size || 0);
-          deletedDetails.push({
-            type: 'assignment_attachment',
-            assignmentId: asm.id,
-            title: asm.title,
-            publicId,
-            result: res
-          });
-        }
+        console.log(`   - Đang xóa file đề bài đám mây: ${asm.attachment.url}...`);
+        const res = await destroyCloudFile(asm.attachment);
+        asm.attachment.cloudinaryDeleted = true;
+        asm.attachment.deletedAt = now.toISOString();
+        asm.attachment.cleanupReason = `Tự động xóa sau ${diffDays} ngày kể từ ngày kết thúc nhiệm vụ`;
+        deletedFilesCount++;
+        freedBytesEstimate += (asm.attachment.size || 0);
+        deletedDetails.push({
+          type: 'assignment_attachment',
+          assignmentId: asm.id,
+          title: asm.title,
+          url: asm.attachment.url,
+          result: res
+        });
       }
 
       // 2. Xóa các file nộp của học sinh thuộc bài tập này
@@ -141,24 +172,21 @@ async function cleanupExpiredFiles() {
       for (const sub of relatedSubmissions) {
         const fileObj = sub.file || sub.fileData;
         if (fileObj && fileObj.url && !fileObj.cloudinaryDeleted) {
-          const publicId = fileObj.publicId || extractCloudinaryPublicId(fileObj.url);
-          if (publicId) {
-            console.log(`     + Xóa bài nộp [${sub.studentName || sub.studentId}]: ${publicId}...`);
-            const res = await destroyCloudinaryFile(publicId);
-            fileObj.cloudinaryDeleted = true;
-            fileObj.deletedAt = now.toISOString();
-            fileObj.cleanupReason = `Tự động xóa sau ${diffDays} ngày kể từ ngày kết thúc nhiệm vụ`;
-            deletedFilesCount++;
-            freedBytesEstimate += (fileObj.size || 0);
-            deletedDetails.push({
-              type: 'submission_file',
-              assignmentId: asm.id,
-              submissionId: sub.id,
-              studentName: sub.studentName,
-              publicId,
-              result: res
-            });
-          }
+          console.log(`     + Xóa bài nộp [${sub.studentName || sub.studentId}]: ${fileObj.url}...`);
+          const res = await destroyCloudFile(fileObj);
+          fileObj.cloudinaryDeleted = true;
+          fileObj.deletedAt = now.toISOString();
+          fileObj.cleanupReason = `Tự động xóa sau ${diffDays} ngày kể từ ngày kết thúc nhiệm vụ`;
+          deletedFilesCount++;
+          freedBytesEstimate += (fileObj.size || 0);
+          deletedDetails.push({
+            type: 'submission_file',
+            assignmentId: asm.id,
+            submissionId: sub.id,
+            studentName: sub.studentName,
+            url: fileObj.url,
+            result: res
+          });
         }
       }
     }
