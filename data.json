@@ -109,8 +109,6 @@
     "T15TH02",
     "T15TK01",
     "T15TK02",
-    "T15TK0209",
-    "T15TK0212",
     "TIN HỌC ĐẠI CƯƠNG"
   ],
   "gradeSheets": [
@@ -7227,7 +7225,7 @@
       "gradedAt": null
     }
   ],
-  "updatedAt": "2026-11-05T11:03:16.779Z",
+  "updatedAt": "2026-11-05T11:05:21.298Z",
   "users": [
     {
       "id": "u_teacher_danh",
@@ -10193,9 +10191,7 @@
         "T14TK01",
         "T14TK02",
         "T15TK01",
-        "T15TK02",
-        "T15TK0209",
-        "T15TK0212"
+        "T15TK02"
       ]
     },
     {
