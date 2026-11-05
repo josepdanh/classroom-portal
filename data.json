@@ -1,5 +1,4 @@
 {
-  "_id": "6ae9852bc149813cbbfa0830",
   "id": "main",
   "assignments": [
     {
@@ -109,7 +108,10 @@
     "T15TH01",
     "T15TH02",
     "T15TK01",
-    "T15TK02"
+    "T15TK02",
+    "T15TK0209",
+    "T15TK0212",
+    "TIN HỌC ĐẠI CƯƠNG"
   ],
   "gradeSheets": [
     {
@@ -2335,6 +2337,1161 @@
   ],
   "notifications": [
     {
+      "id": "notif_sub_1793873609811_y6k5",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793769990154",
+      "assignmentTitle": "Tạo kỹ xảo cho banner",
+      "targetClass": "C08TK01",
+      "subject": "Xử Lý Kỹ Xảo với After Effects",
+      "studentId": "u_C08TK0124",
+      "studentName": "Nguyễn Tất Việt",
+      "studentCode": "C08TK0124",
+      "submittedAt": "2026-11-05T10:13:29.811Z",
+      "createdAt": "2026-11-05T10:13:29.811Z",
+      "readBy": [
+        "u_C08TK0106"
+      ]
+    },
+    {
+      "id": "notif_sub_1793860881008_6mvk",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793769990154",
+      "assignmentTitle": "Tạo kỹ xảo cho banner",
+      "targetClass": "C08TK01",
+      "subject": "Xử Lý Kỹ Xảo với After Effects",
+      "studentId": "u_C08TK0117",
+      "studentName": "Võ Thị Mỹ Xuyên",
+      "studentCode": "C08TK0117",
+      "submittedAt": "2026-11-05T06:41:21.007Z",
+      "createdAt": "2026-11-05T06:41:21.007Z",
+      "readBy": [
+        "u_C08TK0111"
+      ]
+    },
+    {
+      "id": "notif_sub_1793802681802_rat3",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793769990154",
+      "assignmentTitle": "Tạo kỹ xảo cho banner",
+      "targetClass": "C08TK01",
+      "subject": "Xử Lý Kỹ Xảo với After Effects",
+      "studentId": "u_C08TK0108",
+      "studentName": "Lương Ngọc Nhi",
+      "studentCode": "C08TK0108",
+      "submittedAt": "2026-11-04T14:31:21.802Z",
+      "createdAt": "2026-11-04T14:31:21.802Z",
+      "readBy": [
+        "u_C08TK0107",
+        "u_C08TK0108",
+        "u_C08TK0111"
+      ]
+    },
+    {
+      "id": "notif_sub_1793802619463_tltu",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793769990154",
+      "assignmentTitle": "Tạo kỹ xảo cho banner",
+      "targetClass": "C08TK01",
+      "subject": "Xử Lý Kỹ Xảo với After Effects",
+      "studentId": "u_C08TK0108",
+      "studentName": "Lương Ngọc Nhi",
+      "studentCode": "C08TK0108",
+      "submittedAt": "2026-11-04T14:30:19.462Z",
+      "createdAt": "2026-11-04T14:30:19.462Z",
+      "readBy": [
+        "u_C08TK0107",
+        "u_C08TK0111"
+      ]
+    },
+    {
+      "id": "notif_sub_1793801223041_yqud",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793769990154",
+      "assignmentTitle": "Tạo kỹ xảo cho banner",
+      "targetClass": "C08TK01",
+      "subject": "Xử Lý Kỹ Xảo với After Effects",
+      "studentId": "u_C08TK0111",
+      "studentName": "Đoàn Thị Thúy",
+      "studentCode": "C08TK0111",
+      "submittedAt": "2026-11-04T14:07:03.041Z",
+      "createdAt": "2026-11-04T14:07:03.041Z",
+      "readBy": [
+        "u_C08TK0107",
+        "u_C08TK0108",
+        "u_C08TK0111"
+      ]
+    },
+    {
+      "id": "notif_sub_1793801221143_aeec",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793769990154",
+      "assignmentTitle": "Tạo kỹ xảo cho banner",
+      "targetClass": "C08TK01",
+      "subject": "Xử Lý Kỹ Xảo với After Effects",
+      "studentId": "u_C08TK0111",
+      "studentName": "Đoàn Thị Thúy",
+      "studentCode": "C08TK0111",
+      "submittedAt": "2026-11-04T14:07:01.143Z",
+      "createdAt": "2026-11-04T14:07:01.143Z",
+      "readBy": [
+        "u_C08TK0107",
+        "u_C08TK0111"
+      ]
+    },
+    {
+      "id": "notif_sub_1793797248463_83hh",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793609039129",
+      "assignmentTitle": "Làm bài báo cáo về 10 nguyên lý chuyển động trong motion graphics",
+      "targetClass": "C08TK01",
+      "subject": "Xử Lý Kỹ Xảo với After Effects",
+      "studentId": "u_C08TK0101",
+      "studentName": "Nguyễn Doãn Lê Anh",
+      "studentCode": "C08TK0101",
+      "submittedAt": "2026-11-04T13:00:48.463Z",
+      "createdAt": "2026-11-04T13:00:48.463Z",
+      "readBy": [
+        "u_C08TK0107",
+        "u_C08TK0111"
+      ]
+    },
+    {
+      "id": "notif_sub_1793783579205_au6d",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793774399970",
+      "assignmentTitle": "Vẽ Logo trường Hòa Bình",
+      "targetClass": "T15TK02",
+      "subject": "Thiết kế minh họa với Corel Draw",
+      "studentId": "u_student_T15TK0211",
+      "studentName": "Ngô Ngân Khánh",
+      "studentCode": "T15TK0211",
+      "submittedAt": "2026-11-04T09:12:59.205Z",
+      "createdAt": "2026-11-04T09:12:59.205Z",
+      "readBy": []
+    },
+    {
+      "id": "notif_sub_1793783579107_17mm",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793774399970",
+      "assignmentTitle": "Vẽ Logo trường Hòa Bình",
+      "targetClass": "T15TK02",
+      "subject": "Thiết kế minh họa với Corel Draw",
+      "studentId": "u_student_T15TK0211",
+      "studentName": "Ngô Ngân Khánh",
+      "studentCode": "T15TK0211",
+      "submittedAt": "2026-11-04T09:12:59.107Z",
+      "createdAt": "2026-11-04T09:12:59.107Z",
+      "readBy": []
+    },
+    {
+      "id": "notif_sub_1793783578939_5drg",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793774399970",
+      "assignmentTitle": "Vẽ Logo trường Hòa Bình",
+      "targetClass": "T15TK02",
+      "subject": "Thiết kế minh họa với Corel Draw",
+      "studentId": "u_student_T15TK0211",
+      "studentName": "Ngô Ngân Khánh",
+      "studentCode": "T15TK0211",
+      "submittedAt": "2026-11-04T09:12:58.939Z",
+      "createdAt": "2026-11-04T09:12:58.939Z",
+      "readBy": []
+    },
+    {
+      "id": "notif_sub_1793783578510_d45r",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793774399970",
+      "assignmentTitle": "Vẽ Logo trường Hòa Bình",
+      "targetClass": "T15TK02",
+      "subject": "Thiết kế minh họa với Corel Draw",
+      "studentId": "u_student_T15TK0211",
+      "studentName": "Ngô Ngân Khánh",
+      "studentCode": "T15TK0211",
+      "submittedAt": "2026-11-04T09:12:58.510Z",
+      "createdAt": "2026-11-04T09:12:58.510Z",
+      "readBy": []
+    },
+    {
+      "id": "notif_sub_1793783526702_nje0",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793774399970",
+      "assignmentTitle": "Vẽ Logo trường Hòa Bình",
+      "targetClass": "T15TK02",
+      "subject": "Thiết kế minh họa với Corel Draw",
+      "studentId": "u_student_T15TK0208",
+      "studentName": "Lê Ngọc Gia Hân",
+      "studentCode": "T15TK0208",
+      "submittedAt": "2026-11-04T09:12:06.702Z",
+      "createdAt": "2026-11-04T09:12:06.702Z",
+      "readBy": []
+    },
+    {
+      "id": "notif_sub_1793783526477_3vf1",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793774399970",
+      "assignmentTitle": "Vẽ Logo trường Hòa Bình",
+      "targetClass": "T15TK02",
+      "subject": "Thiết kế minh họa với Corel Draw",
+      "studentId": "u_student_T15TK0208",
+      "studentName": "Lê Ngọc Gia Hân",
+      "studentCode": "T15TK0208",
+      "submittedAt": "2026-11-04T09:12:06.477Z",
+      "createdAt": "2026-11-04T09:12:06.477Z",
+      "readBy": []
+    },
+    {
+      "id": "notif_sub_1793783525808_zi9e",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793774399970",
+      "assignmentTitle": "Vẽ Logo trường Hòa Bình",
+      "targetClass": "T15TK02",
+      "subject": "Thiết kế minh họa với Corel Draw",
+      "studentId": "u_student_T15TK0208",
+      "studentName": "Lê Ngọc Gia Hân",
+      "studentCode": "T15TK0208",
+      "submittedAt": "2026-11-04T09:12:05.807Z",
+      "createdAt": "2026-11-04T09:12:05.807Z",
+      "readBy": []
+    },
+    {
+      "id": "notif_sub_1793783525417_b877",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793774399970",
+      "assignmentTitle": "Vẽ Logo trường Hòa Bình",
+      "targetClass": "T15TK02",
+      "subject": "Thiết kế minh họa với Corel Draw",
+      "studentId": "u_student_T15TK0208",
+      "studentName": "Lê Ngọc Gia Hân",
+      "studentCode": "T15TK0208",
+      "submittedAt": "2026-11-04T09:12:05.417Z",
+      "createdAt": "2026-11-04T09:12:05.417Z",
+      "readBy": []
+    },
+    {
+      "id": "notif_sub_1793783525139_z35a",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793774399970",
+      "assignmentTitle": "Vẽ Logo trường Hòa Bình",
+      "targetClass": "T15TK02",
+      "subject": "Thiết kế minh họa với Corel Draw",
+      "studentId": "u_student_T15TK0208",
+      "studentName": "Lê Ngọc Gia Hân",
+      "studentCode": "T15TK0208",
+      "submittedAt": "2026-11-04T09:12:05.139Z",
+      "createdAt": "2026-11-04T09:12:05.139Z",
+      "readBy": []
+    },
+    {
+      "id": "notif_sub_1793783524837_fjdd",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793774399970",
+      "assignmentTitle": "Vẽ Logo trường Hòa Bình",
+      "targetClass": "T15TK02",
+      "subject": "Thiết kế minh họa với Corel Draw",
+      "studentId": "u_student_T15TK0208",
+      "studentName": "Lê Ngọc Gia Hân",
+      "studentCode": "T15TK0208",
+      "submittedAt": "2026-11-04T09:12:04.837Z",
+      "createdAt": "2026-11-04T09:12:04.837Z",
+      "readBy": []
+    },
+    {
+      "id": "notif_sub_1793783500111_17yj",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793774399970",
+      "assignmentTitle": "Vẽ Logo trường Hòa Bình",
+      "targetClass": "T15TK02",
+      "subject": "Thiết kế minh họa với Corel Draw",
+      "studentId": "u_student_T15TK0227",
+      "studentName": "Trần Hoàng Thanh Thảo",
+      "studentCode": "T15TK0227",
+      "submittedAt": "2026-11-04T09:11:40.111Z",
+      "createdAt": "2026-11-04T09:11:40.111Z",
+      "readBy": []
+    },
+    {
+      "id": "notif_sub_1793783429020_68c6",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793774399970",
+      "assignmentTitle": "Vẽ Logo trường Hòa Bình",
+      "targetClass": "T15TK02",
+      "subject": "Thiết kế minh họa với Corel Draw",
+      "studentId": "u_student_T15TK0204",
+      "studentName": "Bùi Quốc Bảo",
+      "studentCode": "T15TK0204",
+      "submittedAt": "2026-11-04T09:10:29.020Z",
+      "createdAt": "2026-11-04T09:10:29.020Z",
+      "readBy": []
+    },
+    {
+      "id": "notif_sub_1793783392936_r1fs",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793774399970",
+      "assignmentTitle": "Vẽ Logo trường Hòa Bình",
+      "targetClass": "T15TK02",
+      "subject": "Thiết kế minh họa với Corel Draw",
+      "studentId": "u_student_T15TK0233",
+      "studentName": "Phan Nguyễn Thảo Vy",
+      "studentCode": "T15TK0233",
+      "submittedAt": "2026-11-04T09:09:52.936Z",
+      "createdAt": "2026-11-04T09:09:52.936Z",
+      "readBy": []
+    },
+    {
+      "id": "notif_sub_1793783333362_mj6v",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793774399970",
+      "assignmentTitle": "Vẽ Logo trường Hòa Bình",
+      "targetClass": "T15TK02",
+      "subject": "Thiết kế minh họa với Corel Draw",
+      "studentId": "u_student_T15TK0213",
+      "studentName": "Đỗ Anh Khoa",
+      "studentCode": "T15TK0213",
+      "submittedAt": "2026-11-04T09:08:53.362Z",
+      "createdAt": "2026-11-04T09:08:53.362Z",
+      "readBy": []
+    },
+    {
+      "id": "notif_sub_1793783332813_2hsd",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793774399970",
+      "assignmentTitle": "Vẽ Logo trường Hòa Bình",
+      "targetClass": "T15TK02",
+      "subject": "Thiết kế minh họa với Corel Draw",
+      "studentId": "u_student_T15TK0213",
+      "studentName": "Đỗ Anh Khoa",
+      "studentCode": "T15TK0213",
+      "submittedAt": "2026-11-04T09:08:52.813Z",
+      "createdAt": "2026-11-04T09:08:52.813Z",
+      "readBy": []
+    },
+    {
+      "id": "notif_sub_1793783332424_wdy9",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793774399970",
+      "assignmentTitle": "Vẽ Logo trường Hòa Bình",
+      "targetClass": "T15TK02",
+      "subject": "Thiết kế minh họa với Corel Draw",
+      "studentId": "u_student_T15TK0213",
+      "studentName": "Đỗ Anh Khoa",
+      "studentCode": "T15TK0213",
+      "submittedAt": "2026-11-04T09:08:52.424Z",
+      "createdAt": "2026-11-04T09:08:52.424Z",
+      "readBy": []
+    },
+    {
+      "id": "notif_sub_1793783331540_g8vo",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793774399970",
+      "assignmentTitle": "Vẽ Logo trường Hòa Bình",
+      "targetClass": "T15TK02",
+      "subject": "Thiết kế minh họa với Corel Draw",
+      "studentId": "u_student_T15TK0213",
+      "studentName": "Đỗ Anh Khoa",
+      "studentCode": "T15TK0213",
+      "submittedAt": "2026-11-04T09:08:51.540Z",
+      "createdAt": "2026-11-04T09:08:51.540Z",
+      "readBy": []
+    },
+    {
+      "id": "notif_sub_1793783330542_139g",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793774399970",
+      "assignmentTitle": "Vẽ Logo trường Hòa Bình",
+      "targetClass": "T15TK02",
+      "subject": "Thiết kế minh họa với Corel Draw",
+      "studentId": "u_student_T15TK0213",
+      "studentName": "Đỗ Anh Khoa",
+      "studentCode": "T15TK0213",
+      "submittedAt": "2026-11-04T09:08:50.542Z",
+      "createdAt": "2026-11-04T09:08:50.542Z",
+      "readBy": []
+    },
+    {
+      "id": "notif_sub_1793783330024_vjrj",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793774399970",
+      "assignmentTitle": "Vẽ Logo trường Hòa Bình",
+      "targetClass": "T15TK02",
+      "subject": "Thiết kế minh họa với Corel Draw",
+      "studentId": "u_student_T15TK0213",
+      "studentName": "Đỗ Anh Khoa",
+      "studentCode": "T15TK0213",
+      "submittedAt": "2026-11-04T09:08:50.024Z",
+      "createdAt": "2026-11-04T09:08:50.024Z",
+      "readBy": []
+    },
+    {
+      "id": "notif_sub_1793783329925_7kgf",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793774399970",
+      "assignmentTitle": "Vẽ Logo trường Hòa Bình",
+      "targetClass": "T15TK02",
+      "subject": "Thiết kế minh họa với Corel Draw",
+      "studentId": "u_student_T15TK0213",
+      "studentName": "Đỗ Anh Khoa",
+      "studentCode": "T15TK0213",
+      "submittedAt": "2026-11-04T09:08:49.925Z",
+      "createdAt": "2026-11-04T09:08:49.925Z",
+      "readBy": []
+    },
+    {
+      "id": "notif_sub_1793783302558_7gur",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793774399970",
+      "assignmentTitle": "Vẽ Logo trường Hòa Bình",
+      "targetClass": "T15TK02",
+      "subject": "Thiết kế minh họa với Corel Draw",
+      "studentId": "u_student_T15TK0223",
+      "studentName": "Chu Hoàng Quyên Nhi",
+      "studentCode": "T15TK0223",
+      "submittedAt": "2026-11-04T09:08:22.558Z",
+      "createdAt": "2026-11-04T09:08:22.558Z",
+      "readBy": []
+    },
+    {
+      "id": "notif_sub_1793783290830_xju7",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793774399970",
+      "assignmentTitle": "Vẽ Logo trường Hòa Bình",
+      "targetClass": "T15TK02",
+      "subject": "Thiết kế minh họa với Corel Draw",
+      "studentId": "u_student_T15TK0226",
+      "studentName": "Trần Nguyễn Minh Quân",
+      "studentCode": "T15TK0226",
+      "submittedAt": "2026-11-04T09:08:10.830Z",
+      "createdAt": "2026-11-04T09:08:10.830Z",
+      "readBy": []
+    },
+    {
+      "id": "notif_sub_1793783290486_f3rt",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793774399970",
+      "assignmentTitle": "Vẽ Logo trường Hòa Bình",
+      "targetClass": "T15TK02",
+      "subject": "Thiết kế minh họa với Corel Draw",
+      "studentId": "u_student_T15TK0226",
+      "studentName": "Trần Nguyễn Minh Quân",
+      "studentCode": "T15TK0226",
+      "submittedAt": "2026-11-04T09:08:10.486Z",
+      "createdAt": "2026-11-04T09:08:10.486Z",
+      "readBy": []
+    },
+    {
+      "id": "notif_sub_1793783290026_s4sp",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793774399970",
+      "assignmentTitle": "Vẽ Logo trường Hòa Bình",
+      "targetClass": "T15TK02",
+      "subject": "Thiết kế minh họa với Corel Draw",
+      "studentId": "u_student_T15TK0226",
+      "studentName": "Trần Nguyễn Minh Quân",
+      "studentCode": "T15TK0226",
+      "submittedAt": "2026-11-04T09:08:10.026Z",
+      "createdAt": "2026-11-04T09:08:10.026Z",
+      "readBy": []
+    },
+    {
+      "id": "notif_sub_1793783289931_feqo",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793774399970",
+      "assignmentTitle": "Vẽ Logo trường Hòa Bình",
+      "targetClass": "T15TK02",
+      "subject": "Thiết kế minh họa với Corel Draw",
+      "studentId": "u_student_T15TK0226",
+      "studentName": "Trần Nguyễn Minh Quân",
+      "studentCode": "T15TK0226",
+      "submittedAt": "2026-11-04T09:08:09.931Z",
+      "createdAt": "2026-11-04T09:08:09.931Z",
+      "readBy": []
+    },
+    {
+      "id": "notif_sub_1793783289724_8xju",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793774399970",
+      "assignmentTitle": "Vẽ Logo trường Hòa Bình",
+      "targetClass": "T15TK02",
+      "subject": "Thiết kế minh họa với Corel Draw",
+      "studentId": "u_student_T15TK0226",
+      "studentName": "Trần Nguyễn Minh Quân",
+      "studentCode": "T15TK0226",
+      "submittedAt": "2026-11-04T09:08:09.724Z",
+      "createdAt": "2026-11-04T09:08:09.724Z",
+      "readBy": []
+    },
+    {
+      "id": "notif_sub_1793783289450_piyz",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793774399970",
+      "assignmentTitle": "Vẽ Logo trường Hòa Bình",
+      "targetClass": "T15TK02",
+      "subject": "Thiết kế minh họa với Corel Draw",
+      "studentId": "u_student_T15TK0226",
+      "studentName": "Trần Nguyễn Minh Quân",
+      "studentCode": "T15TK0226",
+      "submittedAt": "2026-11-04T09:08:09.450Z",
+      "createdAt": "2026-11-04T09:08:09.450Z",
+      "readBy": []
+    },
+    {
+      "id": "notif_sub_1793783289027_9kwl",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793774399970",
+      "assignmentTitle": "Vẽ Logo trường Hòa Bình",
+      "targetClass": "T15TK02",
+      "subject": "Thiết kế minh họa với Corel Draw",
+      "studentId": "u_student_T15TK0226",
+      "studentName": "Trần Nguyễn Minh Quân",
+      "studentCode": "T15TK0226",
+      "submittedAt": "2026-11-04T09:08:09.027Z",
+      "createdAt": "2026-11-04T09:08:09.027Z",
+      "readBy": []
+    },
+    {
+      "id": "notif_sub_1793783288715_jqyh",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793774399970",
+      "assignmentTitle": "Vẽ Logo trường Hòa Bình",
+      "targetClass": "T15TK02",
+      "subject": "Thiết kế minh họa với Corel Draw",
+      "studentId": "u_student_T15TK0226",
+      "studentName": "Trần Nguyễn Minh Quân",
+      "studentCode": "T15TK0226",
+      "submittedAt": "2026-11-04T09:08:08.715Z",
+      "createdAt": "2026-11-04T09:08:08.715Z",
+      "readBy": []
+    },
+    {
+      "id": "notif_sub_1793783287705_p03t",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793774399970",
+      "assignmentTitle": "Vẽ Logo trường Hòa Bình",
+      "targetClass": "T15TK02",
+      "subject": "Thiết kế minh họa với Corel Draw",
+      "studentId": "u_student_T15TK0226",
+      "studentName": "Trần Nguyễn Minh Quân",
+      "studentCode": "T15TK0226",
+      "submittedAt": "2026-11-04T09:08:07.705Z",
+      "createdAt": "2026-11-04T09:08:07.705Z",
+      "readBy": []
+    },
+    {
+      "id": "notif_sub_1793783287214_q9np",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793774399970",
+      "assignmentTitle": "Vẽ Logo trường Hòa Bình",
+      "targetClass": "T15TK02",
+      "subject": "Thiết kế minh họa với Corel Draw",
+      "studentId": "u_student_T15TK0226",
+      "studentName": "Trần Nguyễn Minh Quân",
+      "studentCode": "T15TK0226",
+      "submittedAt": "2026-11-04T09:08:07.214Z",
+      "createdAt": "2026-11-04T09:08:07.214Z",
+      "readBy": []
+    },
+    {
+      "id": "notif_sub_1793783283956_vur2",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793774399970",
+      "assignmentTitle": "Vẽ Logo trường Hòa Bình",
+      "targetClass": "T15TK02",
+      "subject": "Thiết kế minh họa với Corel Draw",
+      "studentId": "u_student_T15TK0226",
+      "studentName": "Trần Nguyễn Minh Quân",
+      "studentCode": "T15TK0226",
+      "submittedAt": "2026-11-04T09:08:03.956Z",
+      "createdAt": "2026-11-04T09:08:03.956Z",
+      "readBy": []
+    },
+    {
+      "id": "notif_sub_1793783283113_fbvp",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793774399970",
+      "assignmentTitle": "Vẽ Logo trường Hòa Bình",
+      "targetClass": "T15TK02",
+      "subject": "Thiết kế minh họa với Corel Draw",
+      "studentId": "u_student_T15TK0226",
+      "studentName": "Trần Nguyễn Minh Quân",
+      "studentCode": "T15TK0226",
+      "submittedAt": "2026-11-04T09:08:03.113Z",
+      "createdAt": "2026-11-04T09:08:03.113Z",
+      "readBy": []
+    },
+    {
+      "id": "notif_sub_1793783281967_vkhx",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793774399970",
+      "assignmentTitle": "Vẽ Logo trường Hòa Bình",
+      "targetClass": "T15TK02",
+      "subject": "Thiết kế minh họa với Corel Draw",
+      "studentId": "u_student_T15TK0228",
+      "studentName": "Nguyễn Ngọc Hoài Thu",
+      "studentCode": "T15TK0228",
+      "submittedAt": "2026-11-04T09:08:01.967Z",
+      "createdAt": "2026-11-04T09:08:01.967Z",
+      "readBy": []
+    },
+    {
+      "id": "notif_sub_1793783173329_0jrx",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793774399970",
+      "assignmentTitle": "Vẽ Logo trường Hòa Bình",
+      "targetClass": "T15TK02",
+      "subject": "Thiết kế minh họa với Corel Draw",
+      "studentId": "u_student_T15TK0210",
+      "studentName": "Trần Diệu Hương",
+      "studentCode": "T15TK0210",
+      "submittedAt": "2026-11-04T09:06:13.329Z",
+      "createdAt": "2026-11-04T09:06:13.329Z",
+      "readBy": []
+    },
+    {
+      "id": "notif_sub_1793783172986_f9x2",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793774399970",
+      "assignmentTitle": "Vẽ Logo trường Hòa Bình",
+      "targetClass": "T15TK02",
+      "subject": "Thiết kế minh họa với Corel Draw",
+      "studentId": "u_student_T15TK0210",
+      "studentName": "Trần Diệu Hương",
+      "studentCode": "T15TK0210",
+      "submittedAt": "2026-11-04T09:06:12.986Z",
+      "createdAt": "2026-11-04T09:06:12.986Z",
+      "readBy": []
+    },
+    {
+      "id": "notif_sub_1793783172889_opy7",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793774399970",
+      "assignmentTitle": "Vẽ Logo trường Hòa Bình",
+      "targetClass": "T15TK02",
+      "subject": "Thiết kế minh họa với Corel Draw",
+      "studentId": "u_student_T15TK0210",
+      "studentName": "Trần Diệu Hương",
+      "studentCode": "T15TK0210",
+      "submittedAt": "2026-11-04T09:06:12.889Z",
+      "createdAt": "2026-11-04T09:06:12.889Z",
+      "readBy": []
+    },
+    {
+      "id": "notif_sub_1793783172377_5qbo",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793774399970",
+      "assignmentTitle": "Vẽ Logo trường Hòa Bình",
+      "targetClass": "T15TK02",
+      "subject": "Thiết kế minh họa với Corel Draw",
+      "studentId": "u_student_T15TK0210",
+      "studentName": "Trần Diệu Hương",
+      "studentCode": "T15TK0210",
+      "submittedAt": "2026-11-04T09:06:12.377Z",
+      "createdAt": "2026-11-04T09:06:12.377Z",
+      "readBy": []
+    },
+    {
+      "id": "notif_sub_1793783172157_p1mi",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793774399970",
+      "assignmentTitle": "Vẽ Logo trường Hòa Bình",
+      "targetClass": "T15TK02",
+      "subject": "Thiết kế minh họa với Corel Draw",
+      "studentId": "u_student_T15TK0210",
+      "studentName": "Trần Diệu Hương",
+      "studentCode": "T15TK0210",
+      "submittedAt": "2026-11-04T09:06:12.157Z",
+      "createdAt": "2026-11-04T09:06:12.157Z",
+      "readBy": []
+    },
+    {
+      "id": "notif_sub_1793783171756_hab5",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793774399970",
+      "assignmentTitle": "Vẽ Logo trường Hòa Bình",
+      "targetClass": "T15TK02",
+      "subject": "Thiết kế minh họa với Corel Draw",
+      "studentId": "u_student_T15TK0210",
+      "studentName": "Trần Diệu Hương",
+      "studentCode": "T15TK0210",
+      "submittedAt": "2026-11-04T09:06:11.756Z",
+      "createdAt": "2026-11-04T09:06:11.756Z",
+      "readBy": []
+    },
+    {
+      "id": "notif_sub_1793783141494_krxc",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793774399970",
+      "assignmentTitle": "Vẽ Logo trường Hòa Bình",
+      "targetClass": "T15TK02",
+      "subject": "Thiết kế minh họa với Corel Draw",
+      "studentId": "u_student_T15TK0216",
+      "studentName": "Lê Nhã Kỳ",
+      "studentCode": "T15TK0216",
+      "submittedAt": "2026-11-04T09:05:41.494Z",
+      "createdAt": "2026-11-04T09:05:41.494Z",
+      "readBy": []
+    },
+    {
+      "id": "notif_sub_1793783140148_i2pv",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793774399970",
+      "assignmentTitle": "Vẽ Logo trường Hòa Bình",
+      "targetClass": "T15TK02",
+      "subject": "Thiết kế minh họa với Corel Draw",
+      "studentId": "u_student_T15TK0216",
+      "studentName": "Lê Nhã Kỳ",
+      "studentCode": "T15TK0216",
+      "submittedAt": "2026-11-04T09:05:40.148Z",
+      "createdAt": "2026-11-04T09:05:40.148Z",
+      "readBy": []
+    },
+    {
+      "id": "notif_sub_1793782986276_3et8",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793774399970",
+      "assignmentTitle": "Vẽ Logo trường Hòa Bình",
+      "targetClass": "T15TK02",
+      "subject": "Thiết kế minh họa với Corel Draw",
+      "studentId": "u_student_T15TK0207",
+      "studentName": "Vũ Thị Ngọc Hằng",
+      "studentCode": "T15TK0207",
+      "submittedAt": "2026-11-04T09:03:06.276Z",
+      "createdAt": "2026-11-04T09:03:06.276Z",
+      "readBy": []
+    },
+    {
+      "id": "notif_sub_1793782985987_4fm6",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793774399970",
+      "assignmentTitle": "Vẽ Logo trường Hòa Bình",
+      "targetClass": "T15TK02",
+      "subject": "Thiết kế minh họa với Corel Draw",
+      "studentId": "u_student_T15TK0207",
+      "studentName": "Vũ Thị Ngọc Hằng",
+      "studentCode": "T15TK0207",
+      "submittedAt": "2026-11-04T09:03:05.987Z",
+      "createdAt": "2026-11-04T09:03:05.987Z",
+      "readBy": []
+    },
+    {
+      "id": "notif_sub_1793782983513_2c74",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793774399970",
+      "assignmentTitle": "Vẽ Logo trường Hòa Bình",
+      "targetClass": "T15TK02",
+      "subject": "Thiết kế minh họa với Corel Draw",
+      "studentId": "u_student_T15TK0207",
+      "studentName": "Vũ Thị Ngọc Hằng",
+      "studentCode": "T15TK0207",
+      "submittedAt": "2026-11-04T09:03:03.513Z",
+      "createdAt": "2026-11-04T09:03:03.513Z",
+      "readBy": []
+    },
+    {
+      "id": "notif_sub_1793782842805_p473",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793774399970",
+      "assignmentTitle": "Vẽ Logo trường Hòa Bình",
+      "targetClass": "T15TK02",
+      "subject": "Thiết kế minh họa với Corel Draw",
+      "studentId": "u_student_T15TK0215",
+      "studentName": "Lê Anh Kiệt",
+      "studentCode": "T15TK0215",
+      "submittedAt": "2026-11-04T09:00:42.805Z",
+      "createdAt": "2026-11-04T09:00:42.805Z",
+      "readBy": []
+    },
+    {
+      "id": "notif_sub_1793782842512_ultr",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793774399970",
+      "assignmentTitle": "Vẽ Logo trường Hòa Bình",
+      "targetClass": "T15TK02",
+      "subject": "Thiết kế minh họa với Corel Draw",
+      "studentId": "u_student_T15TK0224",
+      "studentName": "Phạm Ngọc Nhi",
+      "studentCode": "T15TK0224",
+      "submittedAt": "2026-11-04T09:00:42.511Z",
+      "createdAt": "2026-11-04T09:00:42.511Z",
+      "readBy": []
+    },
+    {
+      "id": "notif_sub_1793782833048_tdje",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793774399970",
+      "assignmentTitle": "Vẽ Logo trường Hòa Bình",
+      "targetClass": "T15TK02",
+      "subject": "Thiết kế minh họa với Corel Draw",
+      "studentId": "u_student_T15TK0206",
+      "studentName": "Nguyễn Ngọc Kỳ Duyên",
+      "studentCode": "T15TK0206",
+      "submittedAt": "2026-11-04T09:00:33.048Z",
+      "createdAt": "2026-11-04T09:00:33.048Z",
+      "readBy": []
+    },
+    {
+      "id": "notif_sub_1793782831552_6p3b",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793774399970",
+      "assignmentTitle": "Vẽ Logo trường Hòa Bình",
+      "targetClass": "T15TK02",
+      "subject": "Thiết kế minh họa với Corel Draw",
+      "studentId": "u_student_T15TK0206",
+      "studentName": "Nguyễn Ngọc Kỳ Duyên",
+      "studentCode": "T15TK0206",
+      "submittedAt": "2026-11-04T09:00:31.552Z",
+      "createdAt": "2026-11-04T09:00:31.552Z",
+      "readBy": []
+    },
+    {
+      "id": "notif_sub_1793782830278_qhba",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793774399970",
+      "assignmentTitle": "Vẽ Logo trường Hòa Bình",
+      "targetClass": "T15TK02",
+      "subject": "Thiết kế minh họa với Corel Draw",
+      "studentId": "u_student_T15TK0206",
+      "studentName": "Nguyễn Ngọc Kỳ Duyên",
+      "studentCode": "T15TK0206",
+      "submittedAt": "2026-11-04T09:00:30.277Z",
+      "createdAt": "2026-11-04T09:00:30.277Z",
+      "readBy": []
+    },
+    {
+      "id": "notif_sub_1793782747372_2so1",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793774399970",
+      "assignmentTitle": "Vẽ Logo trường Hòa Bình",
+      "targetClass": "T15TK02",
+      "subject": "Thiết kế minh họa với Corel Draw",
+      "studentId": "u_student_T15TK0201",
+      "studentName": "Hà Kiều Anh",
+      "studentCode": "T15TK0201",
+      "submittedAt": "2026-11-04T08:59:07.372Z",
+      "createdAt": "2026-11-04T08:59:07.372Z",
+      "readBy": []
+    },
+    {
+      "id": "notif_sub_1793782746689_0z04",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793774399970",
+      "assignmentTitle": "Vẽ Logo trường Hòa Bình",
+      "targetClass": "T15TK02",
+      "subject": "Thiết kế minh họa với Corel Draw",
+      "studentId": "u_student_T15TK0201",
+      "studentName": "Hà Kiều Anh",
+      "studentCode": "T15TK0201",
+      "submittedAt": "2026-11-04T08:59:06.689Z",
+      "createdAt": "2026-11-04T08:59:06.689Z",
+      "readBy": []
+    },
+    {
+      "id": "notif_sub_1793782744489_hav3",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793774399970",
+      "assignmentTitle": "Vẽ Logo trường Hòa Bình",
+      "targetClass": "T15TK02",
+      "subject": "Thiết kế minh họa với Corel Draw",
+      "studentId": "u_student_T15TK0201",
+      "studentName": "Hà Kiều Anh",
+      "studentCode": "T15TK0201",
+      "submittedAt": "2026-11-04T08:59:04.489Z",
+      "createdAt": "2026-11-04T08:59:04.489Z",
+      "readBy": []
+    },
+    {
+      "id": "notif_sub_1793782729699_7wxd",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793774399970",
+      "assignmentTitle": "Vẽ Logo trường Hòa Bình",
+      "targetClass": "T15TK02",
+      "subject": "Thiết kế minh họa với Corel Draw",
+      "studentId": "u_student_T15TK0218",
+      "studentName": "Nguyễn Trần Diệu Linh",
+      "studentCode": "T15TK0218",
+      "submittedAt": "2026-11-04T08:58:49.699Z",
+      "createdAt": "2026-11-04T08:58:49.699Z",
+      "readBy": []
+    },
+    {
+      "id": "notif_sub_1793782727790_6yet",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793774399970",
+      "assignmentTitle": "Vẽ Logo trường Hòa Bình",
+      "targetClass": "T15TK02",
+      "subject": "Thiết kế minh họa với Corel Draw",
+      "studentId": "u_student_T15TK0218",
+      "studentName": "Nguyễn Trần Diệu Linh",
+      "studentCode": "T15TK0218",
+      "submittedAt": "2026-11-04T08:58:47.790Z",
+      "createdAt": "2026-11-04T08:58:47.790Z",
+      "readBy": []
+    },
+    {
+      "id": "notif_sub_1793782616651_wvuv",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793774399970",
+      "assignmentTitle": "Vẽ Logo trường Hòa Bình",
+      "targetClass": "T15TK02",
+      "subject": "Thiết kế minh họa với Corel Draw",
+      "studentId": "u_student_T15TK0221",
+      "studentName": "Nguyễn Cao Lê Hồng Ngọc",
+      "studentCode": "T15TK0221",
+      "submittedAt": "2026-11-04T08:56:56.651Z",
+      "createdAt": "2026-11-04T08:56:56.651Z",
+      "readBy": []
+    },
+    {
+      "id": "notif_sub_1793782448485_hhya",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793774399970",
+      "assignmentTitle": "Vẽ Logo trường Hòa Bình",
+      "targetClass": "T15TK02",
+      "subject": "Thiết kế minh họa với Corel Draw",
+      "studentId": "u_student_T15TK0217",
+      "studentName": "Trần Ánh Ngọc Lan",
+      "studentCode": "T15TK0217",
+      "submittedAt": "2026-11-04T08:54:08.485Z",
+      "createdAt": "2026-11-04T08:54:08.485Z",
+      "readBy": []
+    },
+    {
+      "id": "notif_sub_1793782448371_9avr",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793774399970",
+      "assignmentTitle": "Vẽ Logo trường Hòa Bình",
+      "targetClass": "T15TK02",
+      "subject": "Thiết kế minh họa với Corel Draw",
+      "studentId": "u_student_T15TK0217",
+      "studentName": "Trần Ánh Ngọc Lan",
+      "studentCode": "T15TK0217",
+      "submittedAt": "2026-11-04T08:54:08.371Z",
+      "createdAt": "2026-11-04T08:54:08.371Z",
+      "readBy": []
+    },
+    {
+      "id": "notif_sub_1793782447768_fgt9",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793774399970",
+      "assignmentTitle": "Vẽ Logo trường Hòa Bình",
+      "targetClass": "T15TK02",
+      "subject": "Thiết kế minh họa với Corel Draw",
+      "studentId": "u_student_T15TK0217",
+      "studentName": "Trần Ánh Ngọc Lan",
+      "studentCode": "T15TK0217",
+      "submittedAt": "2026-11-04T08:54:07.768Z",
+      "createdAt": "2026-11-04T08:54:07.768Z",
+      "readBy": []
+    },
+    {
+      "id": "notif_sub_1793782396897_0fa5",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793774399970",
+      "assignmentTitle": "Vẽ Logo trường Hòa Bình",
+      "targetClass": "T15TK02",
+      "subject": "Thiết kế minh họa với Corel Draw",
+      "studentId": "u_student_T15TK0229",
+      "studentName": "Nguyễn Hoài Thương",
+      "studentCode": "T15TK0229",
+      "submittedAt": "2026-11-04T08:53:16.897Z",
+      "createdAt": "2026-11-04T08:53:16.897Z",
+      "readBy": []
+    },
+    {
+      "id": "notif_sub_1793782396157_68ax",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793774399970",
+      "assignmentTitle": "Vẽ Logo trường Hòa Bình",
+      "targetClass": "T15TK02",
+      "subject": "Thiết kế minh họa với Corel Draw",
+      "studentId": "u_student_T15TK0229",
+      "studentName": "Nguyễn Hoài Thương",
+      "studentCode": "T15TK0229",
+      "submittedAt": "2026-11-04T08:53:16.157Z",
+      "createdAt": "2026-11-04T08:53:16.157Z",
+      "readBy": []
+    },
+    {
+      "id": "notif_sub_1793782394475_jotq",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793774399970",
+      "assignmentTitle": "Vẽ Logo trường Hòa Bình",
+      "targetClass": "T15TK02",
+      "subject": "Thiết kế minh họa với Corel Draw",
+      "studentId": "u_student_T15TK0229",
+      "studentName": "Nguyễn Hoài Thương",
+      "studentCode": "T15TK0229",
+      "submittedAt": "2026-11-04T08:53:14.475Z",
+      "createdAt": "2026-11-04T08:53:14.475Z",
+      "readBy": []
+    },
+    {
+      "id": "notif_sub_1793782284606_a4ax",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793774399970",
+      "assignmentTitle": "Vẽ Logo trường Hòa Bình",
+      "targetClass": "T15TK02",
+      "subject": "Thiết kế minh họa với Corel Draw",
+      "studentId": "u_student_T15TK0203",
+      "studentName": "Vũ Thị Lan Anh",
+      "studentCode": "T15TK0203",
+      "submittedAt": "2026-11-04T08:51:24.606Z",
+      "createdAt": "2026-11-04T08:51:24.606Z",
+      "readBy": []
+    },
+    {
+      "id": "notif_sub_1793782284443_zgmn",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793774399970",
+      "assignmentTitle": "Vẽ Logo trường Hòa Bình",
+      "targetClass": "T15TK02",
+      "subject": "Thiết kế minh họa với Corel Draw",
+      "studentId": "u_student_T15TK0217",
+      "studentName": "Trần Ánh Ngọc Lan",
+      "studentCode": "T15TK0217",
+      "submittedAt": "2026-11-04T08:51:24.443Z",
+      "createdAt": "2026-11-04T08:51:24.443Z",
+      "readBy": []
+    },
+    {
+      "id": "notif_sub_1793782283489_rj7z",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793774399970",
+      "assignmentTitle": "Vẽ Logo trường Hòa Bình",
+      "targetClass": "T15TK02",
+      "subject": "Thiết kế minh họa với Corel Draw",
+      "studentId": "u_student_T15TK0217",
+      "studentName": "Trần Ánh Ngọc Lan",
+      "studentCode": "T15TK0217",
+      "submittedAt": "2026-11-04T08:51:23.489Z",
+      "createdAt": "2026-11-04T08:51:23.489Z",
+      "readBy": []
+    },
+    {
+      "id": "notif_sub_1793782282366_64oy",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793774399970",
+      "assignmentTitle": "Vẽ Logo trường Hòa Bình",
+      "targetClass": "T15TK02",
+      "subject": "Thiết kế minh họa với Corel Draw",
+      "studentId": "u_student_T15TK0217",
+      "studentName": "Trần Ánh Ngọc Lan",
+      "studentCode": "T15TK0217",
+      "submittedAt": "2026-11-04T08:51:22.366Z",
+      "createdAt": "2026-11-04T08:51:22.366Z",
+      "readBy": []
+    },
+    {
+      "id": "notif_sub_1793781995214_ch36",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793774399970",
+      "assignmentTitle": "Vẽ Logo trường Hòa Bình",
+      "targetClass": "T15TK02",
+      "subject": "Thiết kế minh họa với Corel Draw",
+      "studentId": "u_student_T15TK0202",
+      "studentName": "Phan Nguyễn Hoài Anh",
+      "studentCode": "T15TK0202",
+      "submittedAt": "2026-11-04T08:46:35.214Z",
+      "createdAt": "2026-11-04T08:46:35.214Z",
+      "readBy": []
+    },
+    {
+      "id": "notif_sub_1793781993712_b5sw",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793774399970",
+      "assignmentTitle": "Vẽ Logo trường Hòa Bình",
+      "targetClass": "T15TK02",
+      "subject": "Thiết kế minh họa với Corel Draw",
+      "studentId": "u_student_T15TK0202",
+      "studentName": "Phan Nguyễn Hoài Anh",
+      "studentCode": "T15TK0202",
+      "submittedAt": "2026-11-04T08:46:33.712Z",
+      "createdAt": "2026-11-04T08:46:33.712Z",
+      "readBy": []
+    },
+    {
+      "id": "notif_sub_1793781878691_0z7a",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793774399970",
+      "assignmentTitle": "Vẽ Logo trường Hòa Bình",
+      "targetClass": "T15TK02",
+      "subject": "Thiết kế minh họa với Corel Draw",
+      "studentId": "u_student_T15TK0219",
+      "studentName": "Lê Nguyễn Thảo Ly",
+      "studentCode": "T15TK0219",
+      "submittedAt": "2026-11-04T08:44:38.691Z",
+      "createdAt": "2026-11-04T08:44:38.691Z",
+      "readBy": []
+    },
+    {
+      "id": "notif_sub_1793781875988_93mc",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793774399970",
+      "assignmentTitle": "Vẽ Logo trường Hòa Bình",
+      "targetClass": "T15TK02",
+      "subject": "Thiết kế minh họa với Corel Draw",
+      "studentId": "u_student_T15TK0219",
+      "studentName": "Lê Nguyễn Thảo Ly",
+      "studentCode": "T15TK0219",
+      "submittedAt": "2026-11-04T08:44:35.988Z",
+      "createdAt": "2026-11-04T08:44:35.988Z",
+      "readBy": []
+    },
+    {
+      "id": "notif_sub_1793781875515_iw5a",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793774399970",
+      "assignmentTitle": "Vẽ Logo trường Hòa Bình",
+      "targetClass": "T15TK02",
+      "subject": "Thiết kế minh họa với Corel Draw",
+      "studentId": "u_student_T15TK0219",
+      "studentName": "Lê Nguyễn Thảo Ly",
+      "studentCode": "T15TK0219",
+      "submittedAt": "2026-11-04T08:44:35.515Z",
+      "createdAt": "2026-11-04T08:44:35.515Z",
+      "readBy": []
+    },
+    {
+      "id": "notif_sub_1793781875330_376v",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793774399970",
+      "assignmentTitle": "Vẽ Logo trường Hòa Bình",
+      "targetClass": "T15TK02",
+      "subject": "Thiết kế minh họa với Corel Draw",
+      "studentId": "u_student_T15TK0219",
+      "studentName": "Lê Nguyễn Thảo Ly",
+      "studentCode": "T15TK0219",
+      "submittedAt": "2026-11-04T08:44:35.330Z",
+      "createdAt": "2026-11-04T08:44:35.330Z",
+      "readBy": []
+    },
+    {
+      "id": "notif_sub_1793781874724_viyc",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793774399970",
+      "assignmentTitle": "Vẽ Logo trường Hòa Bình",
+      "targetClass": "T15TK02",
+      "subject": "Thiết kế minh họa với Corel Draw",
+      "studentId": "u_student_T15TK0219",
+      "studentName": "Lê Nguyễn Thảo Ly",
+      "studentCode": "T15TK0219",
+      "submittedAt": "2026-11-04T08:44:34.724Z",
+      "createdAt": "2026-11-04T08:44:34.724Z",
+      "readBy": []
+    },
+    {
+      "id": "notif_sub_1793781874451_3pz9",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793774399970",
+      "assignmentTitle": "Vẽ Logo trường Hòa Bình",
+      "targetClass": "T15TK02",
+      "subject": "Thiết kế minh họa với Corel Draw",
+      "studentId": "u_student_T15TK0219",
+      "studentName": "Lê Nguyễn Thảo Ly",
+      "studentCode": "T15TK0219",
+      "submittedAt": "2026-11-04T08:44:34.451Z",
+      "createdAt": "2026-11-04T08:44:34.451Z",
+      "readBy": []
+    },
+    {
       "id": "notif_sub_1793781630958_58ub",
       "type": "STUDENT_SUBMITTED",
       "assignmentId": "asm_1793774399970",
@@ -2445,7 +3602,9 @@
       "submittedAt": "2026-11-04T07:27:33.512Z",
       "createdAt": "2026-11-04T07:27:33.512Z",
       "readBy": [
-        "u_C08TK0107"
+        "u_C08TK0107",
+        "u_C08TK0106",
+        "u_C08TK0111"
       ]
     },
     {
@@ -2477,7 +3636,8 @@
       "submittedAt": "2026-11-04T06:10:12.669Z",
       "createdAt": "2026-11-04T06:10:12.669Z",
       "readBy": [
-        "u_C08TK0107"
+        "u_C08TK0107",
+        "u_C08TK0111"
       ]
     },
     {
@@ -2493,7 +3653,8 @@
       "submittedAt": "2026-11-04T06:10:07.377Z",
       "createdAt": "2026-11-04T06:10:07.377Z",
       "readBy": [
-        "u_C08TK0107"
+        "u_C08TK0107",
+        "u_C08TK0111"
       ]
     },
     {
@@ -2509,7 +3670,8 @@
       "submittedAt": "2026-11-04T06:03:51.175Z",
       "createdAt": "2026-11-04T06:03:51.175Z",
       "readBy": [
-        "u_C08TK0107"
+        "u_C08TK0107",
+        "u_C08TK0111"
       ]
     },
     {
@@ -2525,7 +3687,8 @@
       "teacherId": "u_teacher_danh",
       "createdAt": "2026-11-04T05:26:30.154Z",
       "readBy": [
-        "u_C08TK0107"
+        "u_C08TK0107",
+        "u_C08TK0111"
       ]
     },
     {
@@ -2541,7 +3704,8 @@
       "submittedAt": "2026-11-04T04:13:14.891Z",
       "createdAt": "2026-11-04T04:13:14.891Z",
       "readBy": [
-        "u_C08TK0107"
+        "u_C08TK0107",
+        "u_C08TK0111"
       ]
     },
     {
@@ -2557,7 +3721,8 @@
       "submittedAt": "2026-11-04T04:13:14.055Z",
       "createdAt": "2026-11-04T04:13:14.055Z",
       "readBy": [
-        "u_C08TK0107"
+        "u_C08TK0107",
+        "u_C08TK0111"
       ]
     },
     {
@@ -2574,7 +3739,8 @@
       "createdAt": "2026-11-04T03:05:48.075Z",
       "readBy": [
         "u_C08TK0109",
-        "u_C08TK0107"
+        "u_C08TK0107",
+        "u_C08TK0111"
       ]
     },
     {
@@ -2590,7 +3756,8 @@
       "submittedAt": "2026-11-04T03:05:47.330Z",
       "createdAt": "2026-11-04T03:05:47.330Z",
       "readBy": [
-        "u_C08TK0107"
+        "u_C08TK0107",
+        "u_C08TK0111"
       ]
     },
     {
@@ -2606,7 +3773,8 @@
       "submittedAt": "2026-11-04T03:05:45.888Z",
       "createdAt": "2026-11-04T03:05:45.888Z",
       "readBy": [
-        "u_C08TK0107"
+        "u_C08TK0107",
+        "u_C08TK0111"
       ]
     },
     {
@@ -2622,7 +3790,8 @@
       "submittedAt": "2026-11-04T03:05:40.086Z",
       "createdAt": "2026-11-04T03:05:40.086Z",
       "readBy": [
-        "u_C08TK0107"
+        "u_C08TK0107",
+        "u_C08TK0111"
       ]
     },
     {
@@ -2638,7 +3807,8 @@
       "submittedAt": "2026-11-04T03:05:34.386Z",
       "createdAt": "2026-11-04T03:05:34.386Z",
       "readBy": [
-        "u_C08TK0107"
+        "u_C08TK0107",
+        "u_C08TK0111"
       ]
     },
     {
@@ -2654,7 +3824,8 @@
       "submittedAt": "2026-11-04T02:56:58.295Z",
       "createdAt": "2026-11-04T02:56:58.295Z",
       "readBy": [
-        "u_C08TK0107"
+        "u_C08TK0107",
+        "u_C08TK0111"
       ]
     },
     {
@@ -2670,7 +3841,8 @@
       "submittedAt": "2026-11-04T02:56:56.678Z",
       "createdAt": "2026-11-04T02:56:56.678Z",
       "readBy": [
-        "u_C08TK0107"
+        "u_C08TK0107",
+        "u_C08TK0111"
       ]
     },
     {
@@ -2686,7 +3858,8 @@
       "submittedAt": "2026-11-04T02:53:57.149Z",
       "createdAt": "2026-11-04T02:53:57.149Z",
       "readBy": [
-        "u_C08TK0107"
+        "u_C08TK0107",
+        "u_C08TK0111"
       ]
     },
     {
@@ -2702,7 +3875,8 @@
       "submittedAt": "2026-11-04T02:53:52.990Z",
       "createdAt": "2026-11-04T02:53:52.990Z",
       "readBy": [
-        "u_C08TK0107"
+        "u_C08TK0107",
+        "u_C08TK0111"
       ]
     },
     {
@@ -2733,7 +3907,8 @@
       "createdAt": "2026-11-04T02:40:47.868Z",
       "readBy": [
         "u_C08TK0118",
-        "u_C08TK0107"
+        "u_C08TK0107",
+        "u_C08TK0111"
       ]
     },
     {
@@ -2750,7 +3925,8 @@
       "createdAt": "2026-11-04T02:40:39.152Z",
       "readBy": [
         "u_C08TK0118",
-        "u_C08TK0107"
+        "u_C08TK0107",
+        "u_C08TK0111"
       ]
     },
     {
@@ -2766,7 +3942,8 @@
       "submittedAt": "2026-11-04T02:40:34.262Z",
       "createdAt": "2026-11-04T02:40:34.262Z",
       "readBy": [
-        "u_C08TK0107"
+        "u_C08TK0107",
+        "u_C08TK0111"
       ]
     },
     {
@@ -2782,7 +3959,8 @@
       "submittedAt": "2026-11-04T02:40:32.263Z",
       "createdAt": "2026-11-04T02:40:32.263Z",
       "readBy": [
-        "u_C08TK0107"
+        "u_C08TK0107",
+        "u_C08TK0111"
       ]
     },
     {
@@ -2798,7 +3976,8 @@
       "submittedAt": "2026-11-04T02:40:31.465Z",
       "createdAt": "2026-11-04T02:40:31.465Z",
       "readBy": [
-        "u_C08TK0107"
+        "u_C08TK0107",
+        "u_C08TK0111"
       ]
     },
     {
@@ -2814,7 +3993,8 @@
       "submittedAt": "2026-11-04T02:40:18.645Z",
       "createdAt": "2026-11-04T02:40:18.645Z",
       "readBy": [
-        "u_C08TK0107"
+        "u_C08TK0107",
+        "u_C08TK0111"
       ]
     },
     {
@@ -2830,7 +4010,8 @@
       "submittedAt": "2026-11-04T02:40:07.673Z",
       "createdAt": "2026-11-04T02:40:07.673Z",
       "readBy": [
-        "u_C08TK0107"
+        "u_C08TK0107",
+        "u_C08TK0111"
       ]
     },
     {
@@ -2846,7 +4027,8 @@
       "submittedAt": "2026-11-04T02:40:03.661Z",
       "createdAt": "2026-11-04T02:40:03.661Z",
       "readBy": [
-        "u_C08TK0107"
+        "u_C08TK0107",
+        "u_C08TK0111"
       ]
     },
     {
@@ -2862,7 +4044,8 @@
       "submittedAt": "2026-11-04T02:40:02.557Z",
       "createdAt": "2026-11-04T02:40:02.557Z",
       "readBy": [
-        "u_C08TK0107"
+        "u_C08TK0107",
+        "u_C08TK0111"
       ]
     },
     {
@@ -2878,7 +4061,8 @@
       "submittedAt": "2026-11-04T02:39:59.161Z",
       "createdAt": "2026-11-04T02:39:59.161Z",
       "readBy": [
-        "u_C08TK0107"
+        "u_C08TK0107",
+        "u_C08TK0111"
       ]
     },
     {
@@ -2894,7 +4078,8 @@
       "submittedAt": "2026-11-04T02:39:56.945Z",
       "createdAt": "2026-11-04T02:39:56.945Z",
       "readBy": [
-        "u_C08TK0107"
+        "u_C08TK0107",
+        "u_C08TK0111"
       ]
     },
     {
@@ -2910,7 +4095,8 @@
       "submittedAt": "2026-11-04T02:39:39.881Z",
       "createdAt": "2026-11-04T02:39:39.881Z",
       "readBy": [
-        "u_C08TK0107"
+        "u_C08TK0107",
+        "u_C08TK0111"
       ]
     },
     {
@@ -2926,7 +4112,8 @@
       "submittedAt": "2026-11-04T02:39:37.881Z",
       "createdAt": "2026-11-04T02:39:37.881Z",
       "readBy": [
-        "u_C08TK0107"
+        "u_C08TK0107",
+        "u_C08TK0111"
       ]
     },
     {
@@ -2942,7 +4129,8 @@
       "submittedAt": "2026-11-04T02:37:52.384Z",
       "createdAt": "2026-11-04T02:37:52.384Z",
       "readBy": [
-        "u_C08TK0107"
+        "u_C08TK0107",
+        "u_C08TK0111"
       ]
     },
     {
@@ -2958,7 +4146,8 @@
       "submittedAt": "2026-11-04T02:37:52.279Z",
       "createdAt": "2026-11-04T02:37:52.279Z",
       "readBy": [
-        "u_C08TK0107"
+        "u_C08TK0107",
+        "u_C08TK0111"
       ]
     },
     {
@@ -2974,7 +4163,8 @@
       "submittedAt": "2026-11-04T02:37:52.195Z",
       "createdAt": "2026-11-04T02:37:52.195Z",
       "readBy": [
-        "u_C08TK0107"
+        "u_C08TK0107",
+        "u_C08TK0111"
       ]
     },
     {
@@ -2990,7 +4180,8 @@
       "submittedAt": "2026-11-04T02:37:52.094Z",
       "createdAt": "2026-11-04T02:37:52.094Z",
       "readBy": [
-        "u_C08TK0107"
+        "u_C08TK0107",
+        "u_C08TK0111"
       ]
     },
     {
@@ -3006,7 +4197,8 @@
       "submittedAt": "2026-11-04T02:37:51.979Z",
       "createdAt": "2026-11-04T02:37:51.979Z",
       "readBy": [
-        "u_C08TK0107"
+        "u_C08TK0107",
+        "u_C08TK0111"
       ]
     },
     {
@@ -3022,7 +4214,8 @@
       "submittedAt": "2026-11-04T02:37:51.878Z",
       "createdAt": "2026-11-04T02:37:51.878Z",
       "readBy": [
-        "u_C08TK0107"
+        "u_C08TK0107",
+        "u_C08TK0111"
       ]
     },
     {
@@ -3038,7 +4231,8 @@
       "submittedAt": "2026-11-04T02:37:51.774Z",
       "createdAt": "2026-11-04T02:37:51.774Z",
       "readBy": [
-        "u_C08TK0107"
+        "u_C08TK0107",
+        "u_C08TK0111"
       ]
     },
     {
@@ -3054,7 +4248,8 @@
       "submittedAt": "2026-11-04T02:37:51.659Z",
       "createdAt": "2026-11-04T02:37:51.659Z",
       "readBy": [
-        "u_C08TK0107"
+        "u_C08TK0107",
+        "u_C08TK0111"
       ]
     },
     {
@@ -3070,7 +4265,8 @@
       "submittedAt": "2026-11-04T02:37:51.186Z",
       "createdAt": "2026-11-04T02:37:51.186Z",
       "readBy": [
-        "u_C08TK0107"
+        "u_C08TK0107",
+        "u_C08TK0111"
       ]
     },
     {
@@ -3086,7 +4282,8 @@
       "submittedAt": "2026-11-04T02:37:51.087Z",
       "createdAt": "2026-11-04T02:37:51.087Z",
       "readBy": [
-        "u_C08TK0107"
+        "u_C08TK0107",
+        "u_C08TK0111"
       ]
     },
     {
@@ -3102,7 +4299,8 @@
       "submittedAt": "2026-11-04T02:37:50.988Z",
       "createdAt": "2026-11-04T02:37:50.988Z",
       "readBy": [
-        "u_C08TK0107"
+        "u_C08TK0107",
+        "u_C08TK0111"
       ]
     },
     {
@@ -3118,7 +4316,8 @@
       "submittedAt": "2026-11-04T02:37:50.789Z",
       "createdAt": "2026-11-04T02:37:50.789Z",
       "readBy": [
-        "u_C08TK0107"
+        "u_C08TK0107",
+        "u_C08TK0111"
       ]
     },
     {
@@ -3134,7 +4333,8 @@
       "submittedAt": "2026-11-04T02:37:50.288Z",
       "createdAt": "2026-11-04T02:37:50.288Z",
       "readBy": [
-        "u_C08TK0107"
+        "u_C08TK0107",
+        "u_C08TK0111"
       ]
     },
     {
@@ -3150,7 +4350,8 @@
       "submittedAt": "2026-11-04T02:37:49.489Z",
       "createdAt": "2026-11-04T02:37:49.489Z",
       "readBy": [
-        "u_C08TK0107"
+        "u_C08TK0107",
+        "u_C08TK0111"
       ]
     },
     {
@@ -3166,7 +4367,8 @@
       "submittedAt": "2026-11-04T02:37:49.394Z",
       "createdAt": "2026-11-04T02:37:49.394Z",
       "readBy": [
-        "u_C08TK0107"
+        "u_C08TK0107",
+        "u_C08TK0111"
       ]
     },
     {
@@ -3182,7 +4384,8 @@
       "submittedAt": "2026-11-04T02:37:49.292Z",
       "createdAt": "2026-11-04T02:37:49.292Z",
       "readBy": [
-        "u_C08TK0107"
+        "u_C08TK0107",
+        "u_C08TK0111"
       ]
     },
     {
@@ -3198,7 +4401,8 @@
       "submittedAt": "2026-11-04T02:37:49.088Z",
       "createdAt": "2026-11-04T02:37:49.088Z",
       "readBy": [
-        "u_C08TK0107"
+        "u_C08TK0107",
+        "u_C08TK0111"
       ]
     },
     {
@@ -3214,7 +4418,8 @@
       "submittedAt": "2026-11-04T02:37:48.288Z",
       "createdAt": "2026-11-04T02:37:48.288Z",
       "readBy": [
-        "u_C08TK0107"
+        "u_C08TK0107",
+        "u_C08TK0111"
       ]
     },
     {
@@ -3230,7 +4435,8 @@
       "submittedAt": "2026-11-04T02:37:47.991Z",
       "createdAt": "2026-11-04T02:37:47.991Z",
       "readBy": [
-        "u_C08TK0107"
+        "u_C08TK0107",
+        "u_C08TK0111"
       ]
     },
     {
@@ -3246,7 +4452,8 @@
       "submittedAt": "2026-11-04T02:37:45.986Z",
       "createdAt": "2026-11-04T02:37:45.986Z",
       "readBy": [
-        "u_C08TK0107"
+        "u_C08TK0107",
+        "u_C08TK0111"
       ]
     },
     {
@@ -3262,7 +4469,8 @@
       "submittedAt": "2026-11-04T02:37:43.787Z",
       "createdAt": "2026-11-04T02:37:43.787Z",
       "readBy": [
-        "u_C08TK0107"
+        "u_C08TK0107",
+        "u_C08TK0111"
       ]
     },
     {
@@ -3278,7 +4486,8 @@
       "submittedAt": "2026-11-04T02:37:42.689Z",
       "createdAt": "2026-11-04T02:37:42.689Z",
       "readBy": [
-        "u_C08TK0107"
+        "u_C08TK0107",
+        "u_C08TK0111"
       ]
     },
     {
@@ -3294,7 +4503,8 @@
       "submittedAt": "2026-11-04T02:37:42.188Z",
       "createdAt": "2026-11-04T02:37:42.188Z",
       "readBy": [
-        "u_C08TK0107"
+        "u_C08TK0107",
+        "u_C08TK0111"
       ]
     },
     {
@@ -3310,7 +4520,8 @@
       "submittedAt": "2026-11-04T02:37:39.690Z",
       "createdAt": "2026-11-04T02:37:39.690Z",
       "readBy": [
-        "u_C08TK0107"
+        "u_C08TK0107",
+        "u_C08TK0111"
       ]
     },
     {
@@ -3326,7 +4537,8 @@
       "submittedAt": "2026-11-04T02:36:56.695Z",
       "createdAt": "2026-11-04T02:36:56.695Z",
       "readBy": [
-        "u_C08TK0107"
+        "u_C08TK0107",
+        "u_C08TK0111"
       ]
     },
     {
@@ -3342,7 +4554,8 @@
       "submittedAt": "2026-11-04T02:36:39.315Z",
       "createdAt": "2026-11-04T02:36:39.315Z",
       "readBy": [
-        "u_C08TK0107"
+        "u_C08TK0107",
+        "u_C08TK0111"
       ]
     },
     {
@@ -3358,7 +4571,8 @@
       "submittedAt": "2026-11-04T02:36:39.201Z",
       "createdAt": "2026-11-04T02:36:39.201Z",
       "readBy": [
-        "u_C08TK0107"
+        "u_C08TK0107",
+        "u_C08TK0111"
       ]
     },
     {
@@ -3374,7 +4588,8 @@
       "submittedAt": "2026-11-04T02:36:39.101Z",
       "createdAt": "2026-11-04T02:36:39.101Z",
       "readBy": [
-        "u_C08TK0107"
+        "u_C08TK0107",
+        "u_C08TK0111"
       ]
     },
     {
@@ -3390,7 +4605,8 @@
       "submittedAt": "2026-11-04T02:36:38.996Z",
       "createdAt": "2026-11-04T02:36:38.996Z",
       "readBy": [
-        "u_C08TK0107"
+        "u_C08TK0107",
+        "u_C08TK0111"
       ]
     },
     {
@@ -3406,7 +4622,8 @@
       "submittedAt": "2026-11-04T02:36:38.889Z",
       "createdAt": "2026-11-04T02:36:38.889Z",
       "readBy": [
-        "u_C08TK0107"
+        "u_C08TK0107",
+        "u_C08TK0111"
       ]
     },
     {
@@ -3422,7 +4639,8 @@
       "submittedAt": "2026-11-04T02:36:38.775Z",
       "createdAt": "2026-11-04T02:36:38.775Z",
       "readBy": [
-        "u_C08TK0107"
+        "u_C08TK0107",
+        "u_C08TK0111"
       ]
     },
     {
@@ -3438,7 +4656,8 @@
       "submittedAt": "2026-11-04T02:36:38.355Z",
       "createdAt": "2026-11-04T02:36:38.355Z",
       "readBy": [
-        "u_C08TK0107"
+        "u_C08TK0107",
+        "u_C08TK0111"
       ]
     },
     {
@@ -3454,7 +4673,8 @@
       "submittedAt": "2026-11-04T02:36:38.031Z",
       "createdAt": "2026-11-04T02:36:38.031Z",
       "readBy": [
-        "u_C08TK0107"
+        "u_C08TK0107",
+        "u_C08TK0111"
       ]
     },
     {
@@ -3470,7 +4690,8 @@
       "submittedAt": "2026-11-04T02:36:37.632Z",
       "createdAt": "2026-11-04T02:36:37.632Z",
       "readBy": [
-        "u_C08TK0107"
+        "u_C08TK0107",
+        "u_C08TK0111"
       ]
     },
     {
@@ -3486,7 +4707,8 @@
       "submittedAt": "2026-11-04T02:36:35.311Z",
       "createdAt": "2026-11-04T02:36:35.311Z",
       "readBy": [
-        "u_C08TK0107"
+        "u_C08TK0107",
+        "u_C08TK0111"
       ]
     },
     {
@@ -3502,7 +4724,8 @@
       "submittedAt": "2026-11-04T02:36:35.207Z",
       "createdAt": "2026-11-04T02:36:35.207Z",
       "readBy": [
-        "u_C08TK0107"
+        "u_C08TK0107",
+        "u_C08TK0111"
       ]
     },
     {
@@ -3518,7 +4741,8 @@
       "submittedAt": "2026-11-04T02:36:35.094Z",
       "createdAt": "2026-11-04T02:36:35.094Z",
       "readBy": [
-        "u_C08TK0107"
+        "u_C08TK0107",
+        "u_C08TK0111"
       ]
     },
     {
@@ -3534,7 +4758,8 @@
       "submittedAt": "2026-11-04T02:36:34.231Z",
       "createdAt": "2026-11-04T02:36:34.231Z",
       "readBy": [
-        "u_C08TK0107"
+        "u_C08TK0107",
+        "u_C08TK0111"
       ]
     },
     {
@@ -3550,7 +4775,8 @@
       "submittedAt": "2026-11-04T02:36:31.834Z",
       "createdAt": "2026-11-04T02:36:31.834Z",
       "readBy": [
-        "u_C08TK0107"
+        "u_C08TK0107",
+        "u_C08TK0111"
       ]
     },
     {
@@ -3566,7 +4792,8 @@
       "submittedAt": "2026-11-04T02:36:07.862Z",
       "createdAt": "2026-11-04T02:36:07.862Z",
       "readBy": [
-        "u_C08TK0107"
+        "u_C08TK0107",
+        "u_C08TK0111"
       ]
     },
     {
@@ -3582,7 +4809,8 @@
       "submittedAt": "2026-11-04T02:33:39.245Z",
       "createdAt": "2026-11-04T02:33:39.245Z",
       "readBy": [
-        "u_C08TK0107"
+        "u_C08TK0107",
+        "u_C08TK0111"
       ]
     },
     {
@@ -3599,7 +4827,8 @@
       "createdAt": "2026-11-04T02:23:46.497Z",
       "readBy": [
         "u_C08TK0104",
-        "u_C08TK0107"
+        "u_C08TK0107",
+        "u_C08TK0111"
       ]
     },
     {
@@ -3616,7 +4845,8 @@
       "createdAt": "2026-11-04T02:15:26.725Z",
       "readBy": [
         "u_C08TK0106",
-        "u_C08TK0107"
+        "u_C08TK0107",
+        "u_C08TK0111"
       ]
     },
     {
@@ -3633,7 +4863,8 @@
       "createdAt": "2026-11-04T02:12:48.844Z",
       "readBy": [
         "u_C08TK0106",
-        "u_C08TK0107"
+        "u_C08TK0107",
+        "u_C08TK0111"
       ]
     },
     {
@@ -3650,7 +4881,8 @@
       "createdAt": "2026-11-04T02:12:38.219Z",
       "readBy": [
         "u_C08TK0106",
-        "u_C08TK0107"
+        "u_C08TK0107",
+        "u_C08TK0111"
       ]
     },
     {
@@ -3667,7 +4899,8 @@
       "createdAt": "2026-11-04T02:05:12.926Z",
       "readBy": [
         "u_C08TK0106",
-        "u_C08TK0107"
+        "u_C08TK0107",
+        "u_C08TK0111"
       ]
     },
     {
@@ -3684,7 +4917,8 @@
       "createdAt": "2026-11-04T02:04:41.571Z",
       "readBy": [
         "u_C08TK0106",
-        "u_C08TK0107"
+        "u_C08TK0107",
+        "u_C08TK0111"
       ]
     },
     {
@@ -3701,7 +4935,8 @@
       "createdAt": "2026-11-04T02:04:41.390Z",
       "readBy": [
         "u_C08TK0106",
-        "u_C08TK0107"
+        "u_C08TK0107",
+        "u_C08TK0111"
       ]
     },
     {
@@ -3718,7 +4953,8 @@
       "createdAt": "2026-11-04T02:04:41.237Z",
       "readBy": [
         "u_C08TK0106",
-        "u_C08TK0107"
+        "u_C08TK0107",
+        "u_C08TK0111"
       ]
     },
     {
@@ -3735,7 +4971,8 @@
       "createdAt": "2026-11-04T02:04:41.020Z",
       "readBy": [
         "u_C08TK0106",
-        "u_C08TK0107"
+        "u_C08TK0107",
+        "u_C08TK0111"
       ]
     },
     {
@@ -3752,7 +4989,8 @@
       "createdAt": "2026-11-04T02:04:39.588Z",
       "readBy": [
         "u_C08TK0106",
-        "u_C08TK0107"
+        "u_C08TK0107",
+        "u_C08TK0111"
       ]
     },
     {
@@ -3769,7 +5007,8 @@
       "createdAt": "2026-11-04T02:04:39.453Z",
       "readBy": [
         "u_C08TK0106",
-        "u_C08TK0107"
+        "u_C08TK0107",
+        "u_C08TK0111"
       ]
     },
     {
@@ -3786,7 +5025,8 @@
       "createdAt": "2026-11-04T02:04:38.248Z",
       "readBy": [
         "u_C08TK0106",
-        "u_C08TK0107"
+        "u_C08TK0107",
+        "u_C08TK0111"
       ]
     },
     {
@@ -3803,7 +5043,8 @@
       "createdAt": "2026-11-04T02:04:37.546Z",
       "readBy": [
         "u_C08TK0106",
-        "u_C08TK0107"
+        "u_C08TK0107",
+        "u_C08TK0111"
       ]
     },
     {
@@ -3820,7 +5061,8 @@
       "createdAt": "2026-11-04T02:04:37.344Z",
       "readBy": [
         "u_C08TK0106",
-        "u_C08TK0107"
+        "u_C08TK0107",
+        "u_C08TK0111"
       ]
     },
     {
@@ -3837,7 +5079,8 @@
       "createdAt": "2026-11-04T02:04:35.782Z",
       "readBy": [
         "u_C08TK0106",
-        "u_C08TK0107"
+        "u_C08TK0107",
+        "u_C08TK0111"
       ]
     },
     {
@@ -3854,7 +5097,8 @@
       "createdAt": "2026-11-04T02:04:33.654Z",
       "readBy": [
         "u_C08TK0106",
-        "u_C08TK0107"
+        "u_C08TK0107",
+        "u_C08TK0111"
       ]
     },
     {
@@ -3871,7 +5115,8 @@
       "createdAt": "2026-11-04T02:04:32.643Z",
       "readBy": [
         "u_C08TK0106",
-        "u_C08TK0107"
+        "u_C08TK0107",
+        "u_C08TK0111"
       ]
     },
     {
@@ -3888,7 +5133,8 @@
       "createdAt": "2026-11-04T02:04:32.384Z",
       "readBy": [
         "u_C08TK0106",
-        "u_C08TK0107"
+        "u_C08TK0107",
+        "u_C08TK0111"
       ]
     },
     {
@@ -3905,7 +5151,8 @@
       "createdAt": "2026-11-04T02:04:31.486Z",
       "readBy": [
         "u_C08TK0106",
-        "u_C08TK0107"
+        "u_C08TK0107",
+        "u_C08TK0111"
       ]
     },
     {
@@ -3922,7 +5169,8 @@
       "createdAt": "2026-11-04T02:04:31.157Z",
       "readBy": [
         "u_C08TK0106",
-        "u_C08TK0107"
+        "u_C08TK0107",
+        "u_C08TK0111"
       ]
     },
     {
@@ -3939,7 +5187,8 @@
       "createdAt": "2026-11-04T02:04:30.146Z",
       "readBy": [
         "u_C08TK0106",
-        "u_C08TK0107"
+        "u_C08TK0107",
+        "u_C08TK0111"
       ]
     },
     {
@@ -3956,7 +5205,8 @@
       "createdAt": "2026-11-04T02:04:28.046Z",
       "readBy": [
         "u_C08TK0106",
-        "u_C08TK0107"
+        "u_C08TK0107",
+        "u_C08TK0111"
       ]
     },
     {
@@ -3973,7 +5223,8 @@
       "createdAt": "2026-11-04T02:04:21.958Z",
       "readBy": [
         "u_C08TK0106",
-        "u_C08TK0107"
+        "u_C08TK0107",
+        "u_C08TK0111"
       ]
     },
     {
@@ -3990,7 +5241,8 @@
       "createdAt": "2026-11-04T02:03:20.016Z",
       "readBy": [
         "u_C08TK0106",
-        "u_C08TK0107"
+        "u_C08TK0107",
+        "u_C08TK0111"
       ]
     },
     {
@@ -4007,7 +5259,8 @@
       "createdAt": "2026-11-04T02:02:32.085Z",
       "readBy": [
         "u_C08TK0106",
-        "u_C08TK0107"
+        "u_C08TK0107",
+        "u_C08TK0111"
       ]
     },
     {
@@ -4024,7 +5277,8 @@
       "createdAt": "2026-11-04T02:01:18.379Z",
       "readBy": [
         "u_C08TK0106",
-        "u_C08TK0107"
+        "u_C08TK0107",
+        "u_C08TK0111"
       ]
     },
     {
@@ -4041,7 +5295,8 @@
       "createdAt": "2026-11-04T01:59:06.968Z",
       "readBy": [
         "u_C08TK0106",
-        "u_C08TK0107"
+        "u_C08TK0107",
+        "u_C08TK0111"
       ]
     },
     {
@@ -4058,7 +5313,8 @@
       "createdAt": "2026-11-04T01:58:55.444Z",
       "readBy": [
         "u_C08TK0106",
-        "u_C08TK0107"
+        "u_C08TK0107",
+        "u_C08TK0111"
       ]
     },
     {
@@ -4075,7 +5331,8 @@
       "createdAt": "2026-11-04T01:58:51.963Z",
       "readBy": [
         "u_C08TK0106",
-        "u_C08TK0107"
+        "u_C08TK0107",
+        "u_C08TK0111"
       ]
     }
   ],
@@ -4151,6 +5408,15 @@
       "teacherName": "Nguyễn Văn Quang",
       "teacherEmail": "nvquang24@gmail.com",
       "createdAt": "2026-11-04T03:04:46.309Z"
+    },
+    {
+      "id": "subj_1793876596777",
+      "name": "Tin Học Đại Cương",
+      "className": "TIN HỌC ĐẠI CƯƠNG",
+      "teacherId": "u_teacher_danh",
+      "teacherName": "Thầy Nguyễn Công Danh",
+      "teacherEmail": "josepdanh@gmail.com",
+      "createdAt": "2026-11-05T11:03:16.777Z"
     }
   ],
   "submissions": [
@@ -5159,9 +6425,809 @@
       "grade": null,
       "feedback": null,
       "gradedAt": null
+    },
+    {
+      "id": "sub_1793781874451",
+      "assignmentId": "asm_1793774399970",
+      "studentId": "u_student_T15TK0219",
+      "studentName": "T15TK0219",
+      "content": "T15TK0219-LE NGUYEN THAO LY",
+      "link": "",
+      "file": {
+        "filename": "1793781871653_T15TK0219_LENGUYENTHAOLY.cdr",
+        "originalName": "T15TK0219-LENGUYENTHAOLY.cdr",
+        "size": 972224,
+        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1793781878/educlass_submissions/T15TK02/Thi%E1%BA%BFt%20k%E1%BA%BF%20minh%20h%E1%BB%8Da%20v%E1%BB%9Bi%20Corel%20Draw/V%E1%BA%BD%20Logo%20tr%C6%B0%E1%BB%9Dng%20H%C3%B2a%20B%C3%ACnh/1793781871653_T15TK0219_LENGUYENTHAOLY_mflhv9.cdr",
+        "storageKey": "educlass_submissions/T15TK02/Thiết kế minh họa với Corel Draw/Vẽ Logo trường Hòa Bình/1793781871653_T15TK0219_LENGUYENTHAOLY_mflhv9.cdr",
+        "provider": "cloudinary"
+      },
+      "submittedAt": "2026-11-04T08:44:38.691Z",
+      "grade": null,
+      "feedback": null,
+      "gradedAt": null
+    },
+    {
+      "id": "sub_1793781874724",
+      "assignmentId": "asm_1793774399970",
+      "studentId": "u_student_T15TK0219",
+      "studentName": "T15TK0219",
+      "content": "T15TK0219-LE NGUYEN THAO LY",
+      "link": "",
+      "file": {
+        "filename": "1793781872846_T15TK0219_LENGUYENTHAOLY.cdr",
+        "originalName": "T15TK0219-LENGUYENTHAOLY.cdr",
+        "size": 972224,
+        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1793781874/educlass_submissions/T15TK02/Thi%E1%BA%BFt%20k%E1%BA%BF%20minh%20h%E1%BB%8Da%20v%E1%BB%9Bi%20Corel%20Draw/V%E1%BA%BD%20Logo%20tr%C6%B0%E1%BB%9Dng%20H%C3%B2a%20B%C3%ACnh/1793781872846_T15TK0219_LENGUYENTHAOLY_k8yjau.cdr",
+        "storageKey": "educlass_submissions/T15TK02/Thiết kế minh họa với Corel Draw/Vẽ Logo trường Hòa Bình/1793781872846_T15TK0219_LENGUYENTHAOLY_k8yjau.cdr",
+        "provider": "cloudinary"
+      },
+      "submittedAt": "2026-11-04T08:44:34.724Z",
+      "grade": null,
+      "feedback": null,
+      "gradedAt": null
+    },
+    {
+      "id": "sub_1793781875330",
+      "assignmentId": "asm_1793774399970",
+      "studentId": "u_student_T15TK0219",
+      "studentName": "T15TK0219",
+      "content": "T15TK0219-LE NGUYEN THAO LY",
+      "link": "",
+      "file": {
+        "filename": "1793781873819_T15TK0219_LENGUYENTHAOLY.cdr",
+        "originalName": "T15TK0219-LENGUYENTHAOLY.cdr",
+        "size": 972224,
+        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1793781875/educlass_submissions/T15TK02/Thi%E1%BA%BFt%20k%E1%BA%BF%20minh%20h%E1%BB%8Da%20v%E1%BB%9Bi%20Corel%20Draw/V%E1%BA%BD%20Logo%20tr%C6%B0%E1%BB%9Dng%20H%C3%B2a%20B%C3%ACnh/1793781873819_T15TK0219_LENGUYENTHAOLY_d5oqbp.cdr",
+        "storageKey": "educlass_submissions/T15TK02/Thiết kế minh họa với Corel Draw/Vẽ Logo trường Hòa Bình/1793781873819_T15TK0219_LENGUYENTHAOLY_d5oqbp.cdr",
+        "provider": "cloudinary"
+      },
+      "submittedAt": "2026-11-04T08:44:35.330Z",
+      "grade": null,
+      "feedback": null,
+      "gradedAt": null
+    },
+    {
+      "id": "sub_1793781993712",
+      "assignmentId": "asm_1793774399970",
+      "studentId": "u_student_T15TK0202",
+      "studentName": "T15TK0202",
+      "content": "T15TK0202-PhanNguyenHoaiAnh",
+      "link": "",
+      "file": {
+        "filename": "1793781993747_T15TK0202_PHAN_NGUYEN_HOAI_ANH.cdr",
+        "originalName": "T15TK0202-PHAN NGUYEN HOAI ANH.cdr",
+        "size": 2163086,
+        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1793781994/educlass_submissions/T15TK02/Thi%E1%BA%BFt%20k%E1%BA%BF%20minh%20h%E1%BB%8Da%20v%E1%BB%9Bi%20Corel%20Draw/V%E1%BA%BD%20Logo%20tr%C6%B0%E1%BB%9Dng%20H%C3%B2a%20B%C3%ACnh/1793781993747_T15TK0202_PHAN_NGUYEN_HOAI_ANH_bnlod0.cdr",
+        "storageKey": "educlass_submissions/T15TK02/Thiết kế minh họa với Corel Draw/Vẽ Logo trường Hòa Bình/1793781993747_T15TK0202_PHAN_NGUYEN_HOAI_ANH_bnlod0.cdr",
+        "provider": "cloudinary"
+      },
+      "submittedAt": "2026-11-04T08:46:35.214Z",
+      "grade": null,
+      "feedback": null,
+      "gradedAt": null
+    },
+    {
+      "id": "sub_1793782282366",
+      "assignmentId": "asm_1793774399970",
+      "studentId": "u_student_T15TK0217",
+      "studentName": "T15TK0217",
+      "content": "Tra\r\nn Anh Ngoc Lan - T15TK0217",
+      "link": "",
+      "file": {
+        "filename": "1793782447336_T15TK0217_TRAN_ANH_NGOC_LAN_T15TK0229_NGUYEN__HOAI_THUONG.cdr",
+        "originalName": "T15TK0217 TRAN ANH NGOC LAN T15TK0229 NGUYEN  HOAI THUONG.cdr",
+        "size": 1455314,
+        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1793782448/educlass_submissions/T15TK02/Thi%E1%BA%BFt%20k%E1%BA%BF%20minh%20h%E1%BB%8Da%20v%E1%BB%9Bi%20Corel%20Draw/V%E1%BA%BD%20Logo%20tr%C6%B0%E1%BB%9Dng%20H%C3%B2a%20B%C3%ACnh/1793782447336_T15TK0217_TRAN_ANH_NGOC_LAN_T15TK0229_NGUYEN__HOAI_THUONG_blhyht.cdr",
+        "storageKey": "educlass_submissions/T15TK02/Thiết kế minh họa với Corel Draw/Vẽ Logo trường Hòa Bình/1793782447336_T15TK0217_TRAN_ANH_NGOC_LAN_T15TK0229_NGUYEN__HOAI_THUONG_blhyht.cdr",
+        "provider": "cloudinary"
+      },
+      "submittedAt": "2026-11-04T08:54:08.485Z",
+      "grade": null,
+      "feedback": null,
+      "gradedAt": null
+    },
+    {
+      "id": "sub_1793782284606",
+      "assignmentId": "asm_1793774399970",
+      "studentId": "u_student_T15TK0203",
+      "studentName": "T15TK0203",
+      "content": "Vu Thi Lan Anh T15TK0203",
+      "link": "",
+      "file": {
+        "filename": "1793782282332_T15TK0203_Vu_Thi_Lan_Anh.cdr",
+        "originalName": "T15TK0203-Vu Thi Lan Anh.cdr",
+        "size": 2027783,
+        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1793782283/educlass_submissions/T15TK02/Thi%E1%BA%BFt%20k%E1%BA%BF%20minh%20h%E1%BB%8Da%20v%E1%BB%9Bi%20Corel%20Draw/V%E1%BA%BD%20Logo%20tr%C6%B0%E1%BB%9Dng%20H%C3%B2a%20B%C3%ACnh/1793782282332_T15TK0203_Vu_Thi_Lan_Anh_qbezqs.cdr",
+        "storageKey": "educlass_submissions/T15TK02/Thiết kế minh họa với Corel Draw/Vẽ Logo trường Hòa Bình/1793782282332_T15TK0203_Vu_Thi_Lan_Anh_qbezqs.cdr",
+        "provider": "cloudinary"
+      },
+      "submittedAt": "2026-11-04T08:51:24.606Z",
+      "grade": null,
+      "feedback": null,
+      "gradedAt": null
+    },
+    {
+      "id": "sub_1793782394475",
+      "assignmentId": "asm_1793774399970",
+      "studentId": "u_student_T15TK0229",
+      "studentName": "T15TK0229",
+      "content": "Nguyen Hoai Thuong - T15TK0229",
+      "link": "",
+      "file": {
+        "filename": "1793782395066_T15TK0217_TRAN_ANH_NGOC_LAN_T15TK0229_NGUYEN__HOAI_THUONG.cdr",
+        "originalName": "T15TK0217 TRAN ANH NGOC LAN T15TK0229 NGUYEN  HOAI THUONG.cdr",
+        "size": 1455314,
+        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1793782396/educlass_submissions/T15TK02/Thi%E1%BA%BFt%20k%E1%BA%BF%20minh%20h%E1%BB%8Da%20v%E1%BB%9Bi%20Corel%20Draw/V%E1%BA%BD%20Logo%20tr%C6%B0%E1%BB%9Dng%20H%C3%B2a%20B%C3%ACnh/1793782395066_T15TK0217_TRAN_ANH_NGOC_LAN_T15TK0229_NGUYEN__HOAI_THUONG_wvxyrz.cdr",
+        "storageKey": "educlass_submissions/T15TK02/Thiết kế minh họa với Corel Draw/Vẽ Logo trường Hòa Bình/1793782395066_T15TK0217_TRAN_ANH_NGOC_LAN_T15TK0229_NGUYEN__HOAI_THUONG_wvxyrz.cdr",
+        "provider": "cloudinary"
+      },
+      "submittedAt": "2026-11-04T08:53:16.897Z",
+      "grade": null,
+      "feedback": null,
+      "gradedAt": null
+    },
+    {
+      "id": "sub_1793782616651",
+      "assignmentId": "asm_1793774399970",
+      "studentId": "u_student_T15TK0221",
+      "studentName": "T15TK0221",
+      "content": "T15TK0221",
+      "link": "",
+      "file": {
+        "filename": "1793782614451_Backup_of_TK15_nguyen_cao_le_hong_ngoc.cdr",
+        "originalName": "Backup_of_TK15-nguyen cao le hong ngoc.cdr",
+        "size": 2018255,
+        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1793782616/educlass_submissions/T15TK02/Thi%E1%BA%BFt%20k%E1%BA%BF%20minh%20h%E1%BB%8Da%20v%E1%BB%9Bi%20Corel%20Draw/V%E1%BA%BD%20Logo%20tr%C6%B0%E1%BB%9Dng%20H%C3%B2a%20B%C3%ACnh/1793782614451_Backup_of_TK15_nguyen_cao_le_hong_ngoc_w530xs.cdr",
+        "storageKey": "educlass_submissions/T15TK02/Thiết kế minh họa với Corel Draw/Vẽ Logo trường Hòa Bình/1793782614451_Backup_of_TK15_nguyen_cao_le_hong_ngoc_w530xs.cdr",
+        "provider": "cloudinary"
+      },
+      "submittedAt": "2026-11-04T08:56:56.651Z",
+      "grade": null,
+      "feedback": null,
+      "gradedAt": null
+    },
+    {
+      "id": "sub_1793782727790",
+      "assignmentId": "asm_1793774399970",
+      "studentId": "u_student_T15TK0218",
+      "studentName": "T15TK0218",
+      "content": "Nguyen Tran Dieu Linh T15TK0218",
+      "link": "",
+      "file": {
+        "filename": "1793782728327_T15TK0218_Nguyen_Tran_Dieu_Linh.cdr",
+        "originalName": "T15TK0218 Nguyen Tran Dieu Linh.cdr",
+        "size": 2027783,
+        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1793782729/educlass_submissions/T15TK02/Thi%E1%BA%BFt%20k%E1%BA%BF%20minh%20h%E1%BB%8Da%20v%E1%BB%9Bi%20Corel%20Draw/V%E1%BA%BD%20Logo%20tr%C6%B0%E1%BB%9Dng%20H%C3%B2a%20B%C3%ACnh/1793782728327_T15TK0218_Nguyen_Tran_Dieu_Linh_givhvu.cdr",
+        "storageKey": "educlass_submissions/T15TK02/Thiết kế minh họa với Corel Draw/Vẽ Logo trường Hòa Bình/1793782728327_T15TK0218_Nguyen_Tran_Dieu_Linh_givhvu.cdr",
+        "provider": "cloudinary"
+      },
+      "submittedAt": "2026-11-04T08:58:49.699Z",
+      "grade": null,
+      "feedback": null,
+      "gradedAt": null
+    },
+    {
+      "id": "sub_1793782744489",
+      "assignmentId": "asm_1793774399970",
+      "studentId": "u_student_T15TK0201",
+      "studentName": "T15TK0201",
+      "content": "Ha Kieu Anh\r\nT15TK0201",
+      "link": "",
+      "file": {
+        "filename": "1793782745841_T15TK0201_Ha_Kieu_Anh.cdr",
+        "originalName": "T15TK0201 Ha Kieu Anh.cdr",
+        "size": 1627834,
+        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1793782746/educlass_submissions/T15TK02/Thi%E1%BA%BFt%20k%E1%BA%BF%20minh%20h%E1%BB%8Da%20v%E1%BB%9Bi%20Corel%20Draw/V%E1%BA%BD%20Logo%20tr%C6%B0%E1%BB%9Dng%20H%C3%B2a%20B%C3%ACnh/1793782745841_T15TK0201_Ha_Kieu_Anh_u3ecll.cdr",
+        "storageKey": "educlass_submissions/T15TK02/Thiết kế minh họa với Corel Draw/Vẽ Logo trường Hòa Bình/1793782745841_T15TK0201_Ha_Kieu_Anh_u3ecll.cdr",
+        "provider": "cloudinary"
+      },
+      "submittedAt": "2026-11-04T08:59:07.372Z",
+      "grade": null,
+      "feedback": null,
+      "gradedAt": null
+    },
+    {
+      "id": "sub_1793782830278",
+      "assignmentId": "asm_1793774399970",
+      "studentId": "u_student_T15TK0206",
+      "studentName": "T15TK0206",
+      "content": "Nguyễn Ngọc Kỳ Duyên T15TK0206",
+      "link": "",
+      "file": {
+        "filename": "1793782831192_T15TK0206_Nguyen_Ngoc_Ky_Duyen.cdr",
+        "originalName": "T15TK0206 Nguyen Ngoc Ky Duyen.cdr",
+        "size": 2062741,
+        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1793782832/educlass_submissions/T15TK02/Thi%E1%BA%BFt%20k%E1%BA%BF%20minh%20h%E1%BB%8Da%20v%E1%BB%9Bi%20Corel%20Draw/V%E1%BA%BD%20Logo%20tr%C6%B0%E1%BB%9Dng%20H%C3%B2a%20B%C3%ACnh/1793782831192_T15TK0206_Nguyen_Ngoc_Ky_Duyen_i2cm2y.cdr",
+        "storageKey": "educlass_submissions/T15TK02/Thiết kế minh họa với Corel Draw/Vẽ Logo trường Hòa Bình/1793782831192_T15TK0206_Nguyen_Ngoc_Ky_Duyen_i2cm2y.cdr",
+        "provider": "cloudinary"
+      },
+      "submittedAt": "2026-11-04T09:00:33.048Z",
+      "grade": null,
+      "feedback": null,
+      "gradedAt": null
+    },
+    {
+      "id": "sub_1793782842512",
+      "assignmentId": "asm_1793774399970",
+      "studentId": "u_student_T15TK0224",
+      "studentName": "T15TK0224",
+      "content": "T15TK0224 - PHẠM NGỌC NHI",
+      "link": "",
+      "file": {
+        "filename": "1793782840646_BÀI_1_T15TK0221__NGUYỄN_CAO_LÊ_HỒNG_NGỌC__T15TK0224___PHẠM_NGỌC_NHI.cdr",
+        "originalName": "BÀI 1 T15TK0221- NGUYỄN CAO LÊ HỒNG NGỌC, T15TK0224 - PHẠM NGỌC NHI.cdr",
+        "size": 2018255,
+        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1793782842/educlass_submissions/T15TK02/Thi%E1%BA%BFt%20k%E1%BA%BF%20minh%20h%E1%BB%8Da%20v%E1%BB%9Bi%20Corel%20Draw/V%E1%BA%BD%20Logo%20tr%C6%B0%E1%BB%9Dng%20H%C3%B2a%20B%C3%ACnh/qnl6jmdh22ntgozmopco",
+        "storageKey": "educlass_submissions/T15TK02/Thiết kế minh họa với Corel Draw/Vẽ Logo trường Hòa Bình/qnl6jmdh22ntgozmopco",
+        "provider": "cloudinary"
+      },
+      "submittedAt": "2026-11-04T09:00:42.511Z",
+      "grade": null,
+      "feedback": null,
+      "gradedAt": null
+    },
+    {
+      "id": "sub_1793782842805",
+      "assignmentId": "asm_1793774399970",
+      "studentId": "u_student_T15TK0215",
+      "studentName": "T15TK0215",
+      "content": "Bài làm của Lê Anh Kiệt",
+      "link": "",
+      "file": {
+        "filename": "1793782841031_T15TK0215_LE_ANH_KIET.cdr",
+        "originalName": "T15TK0215 LE ANH KIET.cdr",
+        "size": 2048811,
+        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1793782842/educlass_submissions/T15TK02/Thi%E1%BA%BFt%20k%E1%BA%BF%20minh%20h%E1%BB%8Da%20v%E1%BB%9Bi%20Corel%20Draw/V%E1%BA%BD%20Logo%20tr%C6%B0%E1%BB%9Dng%20H%C3%B2a%20B%C3%ACnh/1793782841031_T15TK0215_LE_ANH_KIET_xqjy0b.cdr",
+        "storageKey": "educlass_submissions/T15TK02/Thiết kế minh họa với Corel Draw/Vẽ Logo trường Hòa Bình/1793782841031_T15TK0215_LE_ANH_KIET_xqjy0b.cdr",
+        "provider": "cloudinary"
+      },
+      "submittedAt": "2026-11-04T09:00:42.805Z",
+      "grade": null,
+      "feedback": null,
+      "gradedAt": null
+    },
+    {
+      "id": "sub_1793782983513",
+      "assignmentId": "asm_1793774399970",
+      "studentId": "u_student_T15TK0207",
+      "studentName": "T15TK0207",
+      "content": "Bài làm của Vu Thi Ngoc Hang T15TK0207",
+      "link": "",
+      "file": {
+        "filename": "1793782984594_T15TK0207_Vu_Thi_Ngoc_Hang.cdr",
+        "originalName": "T15TK0207-Vu Thi Ngoc Hang.cdr",
+        "size": 2062741,
+        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1793782985/educlass_submissions/T15TK02/Thi%E1%BA%BFt%20k%E1%BA%BF%20minh%20h%E1%BB%8Da%20v%E1%BB%9Bi%20Corel%20Draw/V%E1%BA%BD%20Logo%20tr%C6%B0%E1%BB%9Dng%20H%C3%B2a%20B%C3%ACnh/1793782984594_T15TK0207_Vu_Thi_Ngoc_Hang_jof51x.cdr",
+        "storageKey": "educlass_submissions/T15TK02/Thiết kế minh họa với Corel Draw/Vẽ Logo trường Hòa Bình/1793782984594_T15TK0207_Vu_Thi_Ngoc_Hang_jof51x.cdr",
+        "provider": "cloudinary"
+      },
+      "submittedAt": "2026-11-04T09:03:06.276Z",
+      "grade": null,
+      "feedback": null,
+      "gradedAt": null
+    },
+    {
+      "id": "sub_1793783140148",
+      "assignmentId": "asm_1793774399970",
+      "studentId": "u_student_T15TK0216",
+      "studentName": "T15TK0216",
+      "content": "le nha ky- T15TK0216",
+      "link": "",
+      "file": {
+        "filename": "1793783139358_T15TK0216LeNhaKy.cdr",
+        "originalName": "T15TK0216LeNhaKy.cdr",
+        "size": 2036632,
+        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1793783140/educlass_submissions/T15TK02/Thi%E1%BA%BFt%20k%E1%BA%BF%20minh%20h%E1%BB%8Da%20v%E1%BB%9Bi%20Corel%20Draw/V%E1%BA%BD%20Logo%20tr%C6%B0%E1%BB%9Dng%20H%C3%B2a%20B%C3%ACnh/1793783139358_T15TK0216LeNhaKy_lkl7et.cdr",
+        "storageKey": "educlass_submissions/T15TK02/Thiết kế minh họa với Corel Draw/Vẽ Logo trường Hòa Bình/1793783139358_T15TK0216LeNhaKy_lkl7et.cdr",
+        "provider": "cloudinary"
+      },
+      "submittedAt": "2026-11-04T09:05:41.494Z",
+      "grade": null,
+      "feedback": null,
+      "gradedAt": null
+    },
+    {
+      "id": "sub_1793783171756",
+      "assignmentId": "asm_1793774399970",
+      "studentId": "u_student_T15TK0210",
+      "studentName": "T15TK0210",
+      "content": "T15TK0210 TRAN DIEU HUONG",
+      "link": "",
+      "file": {
+        "filename": "1793783172168_T15TK0210_TRANDIEUHUONG.cdr",
+        "originalName": "T15TK0210-TRANDIEUHUONG.cdr",
+        "size": 972243,
+        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1793783172/educlass_submissions/T15TK02/Thi%E1%BA%BFt%20k%E1%BA%BF%20minh%20h%E1%BB%8Da%20v%E1%BB%9Bi%20Corel%20Draw/V%E1%BA%BD%20Logo%20tr%C6%B0%E1%BB%9Dng%20H%C3%B2a%20B%C3%ACnh/1793783172168_T15TK0210_TRANDIEUHUONG_t08jkn.cdr",
+        "storageKey": "educlass_submissions/T15TK02/Thiết kế minh họa với Corel Draw/Vẽ Logo trường Hòa Bình/1793783172168_T15TK0210_TRANDIEUHUONG_t08jkn.cdr",
+        "provider": "cloudinary"
+      },
+      "submittedAt": "2026-11-04T09:06:13.329Z",
+      "grade": null,
+      "feedback": null,
+      "gradedAt": null
+    },
+    {
+      "id": "sub_1793783172157",
+      "assignmentId": "asm_1793774399970",
+      "studentId": "u_student_T15TK0210",
+      "studentName": "T15TK0210",
+      "content": "T15TK0210 TRAN DIEU HUONG",
+      "link": "",
+      "file": {
+        "filename": "1793783170854_T15TK0210_TRANDIEUHUONG.cdr",
+        "originalName": "T15TK0210-TRANDIEUHUONG.cdr",
+        "size": 972243,
+        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1793783171/educlass_submissions/T15TK02/Thi%E1%BA%BFt%20k%E1%BA%BF%20minh%20h%E1%BB%8Da%20v%E1%BB%9Bi%20Corel%20Draw/V%E1%BA%BD%20Logo%20tr%C6%B0%E1%BB%9Dng%20H%C3%B2a%20B%C3%ACnh/1793783170854_T15TK0210_TRANDIEUHUONG_xv5qz0.cdr",
+        "storageKey": "educlass_submissions/T15TK02/Thiết kế minh họa với Corel Draw/Vẽ Logo trường Hòa Bình/1793783170854_T15TK0210_TRANDIEUHUONG_xv5qz0.cdr",
+        "provider": "cloudinary"
+      },
+      "submittedAt": "2026-11-04T09:06:12.157Z",
+      "grade": null,
+      "feedback": null,
+      "gradedAt": null
+    },
+    {
+      "id": "sub_1793783172889",
+      "assignmentId": "asm_1793774399970",
+      "studentId": "u_student_T15TK0210",
+      "studentName": "T15TK0210",
+      "content": "T15TK0210 TRAN DIEU HUONG",
+      "link": "",
+      "file": {
+        "filename": "1793783171567_T15TK0210_TRANDIEUHUONG.cdr",
+        "originalName": "T15TK0210-TRANDIEUHUONG.cdr",
+        "size": 972243,
+        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1793783172/educlass_submissions/T15TK02/Thi%E1%BA%BFt%20k%E1%BA%BF%20minh%20h%E1%BB%8Da%20v%E1%BB%9Bi%20Corel%20Draw/V%E1%BA%BD%20Logo%20tr%C6%B0%E1%BB%9Dng%20H%C3%B2a%20B%C3%ACnh/1793783171567_T15TK0210_TRANDIEUHUONG_nhjvpw.cdr",
+        "storageKey": "educlass_submissions/T15TK02/Thiết kế minh họa với Corel Draw/Vẽ Logo trường Hòa Bình/1793783171567_T15TK0210_TRANDIEUHUONG_nhjvpw.cdr",
+        "provider": "cloudinary"
+      },
+      "submittedAt": "2026-11-04T09:06:12.889Z",
+      "grade": null,
+      "feedback": null,
+      "gradedAt": null
+    },
+    {
+      "id": "sub_1793783281967",
+      "assignmentId": "asm_1793774399970",
+      "studentId": "u_student_T15TK0228",
+      "studentName": "T15TK0228",
+      "content": "NGUYEN NGOC HOAI THU-T15TK0228",
+      "link": "",
+      "file": {
+        "filename": "1793783280103_T15TK0228_NGUYEN_NGOC_HOAI_THU.cdr",
+        "originalName": "T15TK0228-NGUYEN NGOC HOAI THU.cdr",
+        "size": 2050253,
+        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1793783281/educlass_submissions/T15TK02/Thi%E1%BA%BFt%20k%E1%BA%BF%20minh%20h%E1%BB%8Da%20v%E1%BB%9Bi%20Corel%20Draw/V%E1%BA%BD%20Logo%20tr%C6%B0%E1%BB%9Dng%20H%C3%B2a%20B%C3%ACnh/1793783280103_T15TK0228_NGUYEN_NGOC_HOAI_THU_mdmu0l.cdr",
+        "storageKey": "educlass_submissions/T15TK02/Thiết kế minh họa với Corel Draw/Vẽ Logo trường Hòa Bình/1793783280103_T15TK0228_NGUYEN_NGOC_HOAI_THU_mdmu0l.cdr",
+        "provider": "cloudinary"
+      },
+      "submittedAt": "2026-11-04T09:08:01.967Z",
+      "grade": null,
+      "feedback": null,
+      "gradedAt": null
+    },
+    {
+      "id": "sub_1793783283113",
+      "assignmentId": "asm_1793774399970",
+      "studentId": "u_student_T15TK0226",
+      "studentName": "T15TK0226",
+      "content": "T15TK0226-TRẦN NGUYỄN MINH QUÂN",
+      "link": "",
+      "file": {
+        "filename": "1793783288026_T15TK0026_TranNguyen_Minh_Quan__T15TK0233_Phan_Nguyen_Thao_Vy_.cdr",
+        "originalName": "T15TK0026-TranNguyen Minh Quan, T15TK0233-Phan Nguyen Thao Vy .cdr",
+        "size": 2022852,
+        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1793783290/educlass_submissions/T15TK02/Thi%E1%BA%BFt%20k%E1%BA%BF%20minh%20h%E1%BB%8Da%20v%E1%BB%9Bi%20Corel%20Draw/V%E1%BA%BD%20Logo%20tr%C6%B0%E1%BB%9Dng%20H%C3%B2a%20B%C3%ACnh/1793783288026_T15TK0026_TranNguyen_Minh_Quan__T15TK0233_Phan_Nguyen_Thao_Vy__nzm38z.cdr",
+        "storageKey": "educlass_submissions/T15TK02/Thiết kế minh họa với Corel Draw/Vẽ Logo trường Hòa Bình/1793783288026_T15TK0026_TranNguyen_Minh_Quan__T15TK0233_Phan_Nguyen_Thao_Vy__nzm38z.cdr",
+        "provider": "cloudinary"
+      },
+      "submittedAt": "2026-11-04T09:08:10.830Z",
+      "grade": null,
+      "feedback": null,
+      "gradedAt": null
+    },
+    {
+      "id": "sub_1793783283956",
+      "assignmentId": "asm_1793774399970",
+      "studentId": "u_student_T15TK0226",
+      "studentName": "T15TK0226",
+      "content": "T15TK0226-TRẦN NGUYỄN MINH QUÂN",
+      "link": "",
+      "file": {
+        "filename": "1793783281956_T15TK0026_TranNguyen_Minh_Quan__T15TK0233_Phan_Nguyen_Thao_Vy_.cdr",
+        "originalName": "T15TK0026-TranNguyen Minh Quan, T15TK0233-Phan Nguyen Thao Vy .cdr",
+        "size": 2022852,
+        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1793783283/educlass_submissions/T15TK02/Thi%E1%BA%BFt%20k%E1%BA%BF%20minh%20h%E1%BB%8Da%20v%E1%BB%9Bi%20Corel%20Draw/V%E1%BA%BD%20Logo%20tr%C6%B0%E1%BB%9Dng%20H%C3%B2a%20B%C3%ACnh/1793783281956_T15TK0026_TranNguyen_Minh_Quan__T15TK0233_Phan_Nguyen_Thao_Vy__wwsl3e.cdr",
+        "storageKey": "educlass_submissions/T15TK02/Thiết kế minh họa với Corel Draw/Vẽ Logo trường Hòa Bình/1793783281956_T15TK0026_TranNguyen_Minh_Quan__T15TK0233_Phan_Nguyen_Thao_Vy__wwsl3e.cdr",
+        "provider": "cloudinary"
+      },
+      "submittedAt": "2026-11-04T09:08:03.956Z",
+      "grade": null,
+      "feedback": null,
+      "gradedAt": null
+    },
+    {
+      "id": "sub_1793783302558",
+      "assignmentId": "asm_1793774399970",
+      "studentId": "u_student_T15TK0223",
+      "studentName": "T15TK0223",
+      "content": "T15TK0223-CHU HOANG QUYEN NHI",
+      "link": "",
+      "file": {
+        "filename": "1793783300317_T15TK0223_CHU_HOANG_QUYEN_NHI.cdr",
+        "originalName": "T15TK0223-CHU HOANG QUYEN NHI.cdr",
+        "size": 2692454,
+        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1793783302/educlass_submissions/T15TK02/Thi%E1%BA%BFt%20k%E1%BA%BF%20minh%20h%E1%BB%8Da%20v%E1%BB%9Bi%20Corel%20Draw/V%E1%BA%BD%20Logo%20tr%C6%B0%E1%BB%9Dng%20H%C3%B2a%20B%C3%ACnh/1793783300317_T15TK0223_CHU_HOANG_QUYEN_NHI_sxogdz.cdr",
+        "storageKey": "educlass_submissions/T15TK02/Thiết kế minh họa với Corel Draw/Vẽ Logo trường Hòa Bình/1793783300317_T15TK0223_CHU_HOANG_QUYEN_NHI_sxogdz.cdr",
+        "provider": "cloudinary"
+      },
+      "submittedAt": "2026-11-04T09:08:22.558Z",
+      "grade": null,
+      "feedback": null,
+      "gradedAt": null
+    },
+    {
+      "id": "sub_1793783329925",
+      "assignmentId": "asm_1793774399970",
+      "studentId": "u_student_T15TK0213",
+      "studentName": "T15TK0213",
+      "content": "bài làm của ĐỖ ANH KHOA",
+      "link": "",
+      "file": {
+        "filename": "1793783331390_T15TK0213_DO_ANH_KHOA.cdr",
+        "originalName": "T15TK0213 DO ANH KHOA.cdr",
+        "size": 2054908,
+        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1793783332/educlass_submissions/T15TK02/Thi%E1%BA%BFt%20k%E1%BA%BF%20minh%20h%E1%BB%8Da%20v%E1%BB%9Bi%20Corel%20Draw/V%E1%BA%BD%20Logo%20tr%C6%B0%E1%BB%9Dng%20H%C3%B2a%20B%C3%ACnh/1793783331390_T15TK0213_DO_ANH_KHOA_x77rak.cdr",
+        "storageKey": "educlass_submissions/T15TK02/Thiết kế minh họa với Corel Draw/Vẽ Logo trường Hòa Bình/1793783331390_T15TK0213_DO_ANH_KHOA_x77rak.cdr",
+        "provider": "cloudinary"
+      },
+      "submittedAt": "2026-11-04T09:08:53.362Z",
+      "grade": null,
+      "feedback": null,
+      "gradedAt": null
+    },
+    {
+      "id": "sub_1793783330024",
+      "assignmentId": "asm_1793774399970",
+      "studentId": "u_student_T15TK0213",
+      "studentName": "T15TK0213",
+      "content": "bài làm của ĐỖ ANH KHOA",
+      "link": "",
+      "file": {
+        "filename": "1793783328158_T15TK0213_DO_ANH_KHOA.cdr",
+        "originalName": "T15TK0213 DO ANH KHOA.cdr",
+        "size": 2054908,
+        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1793783329/educlass_submissions/T15TK02/Thi%E1%BA%BFt%20k%E1%BA%BF%20minh%20h%E1%BB%8Da%20v%E1%BB%9Bi%20Corel%20Draw/V%E1%BA%BD%20Logo%20tr%C6%B0%E1%BB%9Dng%20H%C3%B2a%20B%C3%ACnh/1793783328158_T15TK0213_DO_ANH_KHOA_fwkhkk.cdr",
+        "storageKey": "educlass_submissions/T15TK02/Thiết kế minh họa với Corel Draw/Vẽ Logo trường Hòa Bình/1793783328158_T15TK0213_DO_ANH_KHOA_fwkhkk.cdr",
+        "provider": "cloudinary"
+      },
+      "submittedAt": "2026-11-04T09:08:50.024Z",
+      "grade": null,
+      "feedback": null,
+      "gradedAt": null
+    },
+    {
+      "id": "sub_1793783392936",
+      "assignmentId": "asm_1793774399970",
+      "studentId": "u_student_T15TK0233",
+      "studentName": "T15TK0233",
+      "content": "T15TK0233 - Phan Nguyễn Thảo Vy",
+      "link": "",
+      "file": {
+        "filename": "1793783391029_T15TK0026_TranNguyen_Minh_Quan__T15TK0233_Phan_Nguyen_Thao_Vy_.cdr",
+        "originalName": "T15TK0026-TranNguyen Minh Quan, T15TK0233-Phan Nguyen Thao Vy .cdr",
+        "size": 2022852,
+        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1793783392/educlass_submissions/T15TK02/Thi%E1%BA%BFt%20k%E1%BA%BF%20minh%20h%E1%BB%8Da%20v%E1%BB%9Bi%20Corel%20Draw/V%E1%BA%BD%20Logo%20tr%C6%B0%E1%BB%9Dng%20H%C3%B2a%20B%C3%ACnh/1793783391029_T15TK0026_TranNguyen_Minh_Quan__T15TK0233_Phan_Nguyen_Thao_Vy__lr9juv.cdr",
+        "storageKey": "educlass_submissions/T15TK02/Thiết kế minh họa với Corel Draw/Vẽ Logo trường Hòa Bình/1793783391029_T15TK0026_TranNguyen_Minh_Quan__T15TK0233_Phan_Nguyen_Thao_Vy__lr9juv.cdr",
+        "provider": "cloudinary"
+      },
+      "submittedAt": "2026-11-04T09:09:52.936Z",
+      "grade": null,
+      "feedback": null,
+      "gradedAt": null
+    },
+    {
+      "id": "sub_1793783429020",
+      "assignmentId": "asm_1793774399970",
+      "studentId": "u_student_T15TK0204",
+      "studentName": "T15TK0204",
+      "content": "BAI LAM BÙI QUỐC BẢO",
+      "link": "",
+      "file": {
+        "filename": "1793783427294_T15TK0204BUIQUOCBAO.cdr",
+        "originalName": "T15TK0204BUIQUOCBAO.cdr",
+        "size": 2573924,
+        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1793783428/educlass_submissions/T15TK02/Thi%E1%BA%BFt%20k%E1%BA%BF%20minh%20h%E1%BB%8Da%20v%E1%BB%9Bi%20Corel%20Draw/V%E1%BA%BD%20Logo%20tr%C6%B0%E1%BB%9Dng%20H%C3%B2a%20B%C3%ACnh/1793783427294_T15TK0204BUIQUOCBAO_mzfhng.cdr",
+        "storageKey": "educlass_submissions/T15TK02/Thiết kế minh họa với Corel Draw/Vẽ Logo trường Hòa Bình/1793783427294_T15TK0204BUIQUOCBAO_mzfhng.cdr",
+        "provider": "cloudinary"
+      },
+      "submittedAt": "2026-11-04T09:10:29.020Z",
+      "grade": null,
+      "feedback": null,
+      "gradedAt": null
+    },
+    {
+      "id": "sub_1793783500111",
+      "assignmentId": "asm_1793774399970",
+      "studentId": "u_student_T15TK0227",
+      "studentName": "T15TK0227",
+      "content": "Bài làm của Trần Hoàng Thanh Thảo",
+      "link": "",
+      "file": {
+        "filename": "1793783498045_T15TK0227TranHoangThanhThao.cdr",
+        "originalName": "T15TK0227TranHoangThanhThao.cdr",
+        "size": 2586128,
+        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1793783499/educlass_submissions/T15TK02/Thi%E1%BA%BFt%20k%E1%BA%BF%20minh%20h%E1%BB%8Da%20v%E1%BB%9Bi%20Corel%20Draw/V%E1%BA%BD%20Logo%20tr%C6%B0%E1%BB%9Dng%20H%C3%B2a%20B%C3%ACnh/1793783498045_T15TK0227TranHoangThanhThao_sb5kar.cdr",
+        "storageKey": "educlass_submissions/T15TK02/Thiết kế minh họa với Corel Draw/Vẽ Logo trường Hòa Bình/1793783498045_T15TK0227TranHoangThanhThao_sb5kar.cdr",
+        "provider": "cloudinary"
+      },
+      "submittedAt": "2026-11-04T09:11:40.111Z",
+      "grade": null,
+      "feedback": null,
+      "gradedAt": null
+    },
+    {
+      "id": "sub_1793783524837",
+      "assignmentId": "asm_1793774399970",
+      "studentId": "u_student_T15TK0208",
+      "studentName": "T15TK0208",
+      "content": "T15TK0208LE NGOC GIA HAN",
+      "link": "",
+      "file": {
+        "filename": "1793783525110_T15TK0208_LENGOCGIAHAN.cdr",
+        "originalName": "T15TK0208-LENGOCGIAHAN.cdr",
+        "size": 972217,
+        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1793783525/educlass_submissions/T15TK02/Thi%E1%BA%BFt%20k%E1%BA%BF%20minh%20h%E1%BB%8Da%20v%E1%BB%9Bi%20Corel%20Draw/V%E1%BA%BD%20Logo%20tr%C6%B0%E1%BB%9Dng%20H%C3%B2a%20B%C3%ACnh/1793783525110_T15TK0208_LENGOCGIAHAN_ydfsod.cdr",
+        "storageKey": "educlass_submissions/T15TK02/Thiết kế minh họa với Corel Draw/Vẽ Logo trường Hòa Bình/1793783525110_T15TK0208_LENGOCGIAHAN_ydfsod.cdr",
+        "provider": "cloudinary"
+      },
+      "submittedAt": "2026-11-04T09:12:06.702Z",
+      "grade": null,
+      "feedback": null,
+      "gradedAt": null
+    },
+    {
+      "id": "sub_1793783525139",
+      "assignmentId": "asm_1793774399970",
+      "studentId": "u_student_T15TK0208",
+      "studentName": "T15TK0208",
+      "content": "T15TK0208LE NGOC GIA HAN",
+      "link": "",
+      "file": {
+        "filename": "1793783523621_T15TK0208_LENGOCGIAHAN.cdr",
+        "originalName": "T15TK0208-LENGOCGIAHAN.cdr",
+        "size": 972217,
+        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1793783524/educlass_submissions/T15TK02/Thi%E1%BA%BFt%20k%E1%BA%BF%20minh%20h%E1%BB%8Da%20v%E1%BB%9Bi%20Corel%20Draw/V%E1%BA%BD%20Logo%20tr%C6%B0%E1%BB%9Dng%20H%C3%B2a%20B%C3%ACnh/1793783523621_T15TK0208_LENGOCGIAHAN_fm4kls.cdr",
+        "storageKey": "educlass_submissions/T15TK02/Thiết kế minh họa với Corel Draw/Vẽ Logo trường Hòa Bình/1793783523621_T15TK0208_LENGOCGIAHAN_fm4kls.cdr",
+        "provider": "cloudinary"
+      },
+      "submittedAt": "2026-11-04T09:12:05.139Z",
+      "grade": null,
+      "feedback": null,
+      "gradedAt": null
+    },
+    {
+      "id": "sub_1793783525417",
+      "assignmentId": "asm_1793774399970",
+      "studentId": "u_student_T15TK0208",
+      "studentName": "T15TK0208",
+      "content": "T15TK0208LE NGOC GIA HAN",
+      "link": "",
+      "file": {
+        "filename": "1793783523356_T15TK0208_LENGOCGIAHAN.cdr",
+        "originalName": "T15TK0208-LENGOCGIAHAN.cdr",
+        "size": 972217,
+        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1793783524/educlass_submissions/T15TK02/Thi%E1%BA%BFt%20k%E1%BA%BF%20minh%20h%E1%BB%8Da%20v%E1%BB%9Bi%20Corel%20Draw/V%E1%BA%BD%20Logo%20tr%C6%B0%E1%BB%9Dng%20H%C3%B2a%20B%C3%ACnh/1793783523356_T15TK0208_LENGOCGIAHAN_sygifh.cdr",
+        "storageKey": "educlass_submissions/T15TK02/Thiết kế minh họa với Corel Draw/Vẽ Logo trường Hòa Bình/1793783523356_T15TK0208_LENGOCGIAHAN_sygifh.cdr",
+        "provider": "cloudinary"
+      },
+      "submittedAt": "2026-11-04T09:12:05.417Z",
+      "grade": null,
+      "feedback": null,
+      "gradedAt": null
+    },
+    {
+      "id": "sub_1793783525808",
+      "assignmentId": "asm_1793774399970",
+      "studentId": "u_student_T15TK0208",
+      "studentName": "T15TK0208",
+      "content": "T15TK0208LE NGOC GIA HAN",
+      "link": "",
+      "file": {
+        "filename": "1793783524231_T15TK0208_LENGOCGIAHAN.cdr",
+        "originalName": "T15TK0208-LENGOCGIAHAN.cdr",
+        "size": 972217,
+        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1793783525/educlass_submissions/T15TK02/Thi%E1%BA%BFt%20k%E1%BA%BF%20minh%20h%E1%BB%8Da%20v%E1%BB%9Bi%20Corel%20Draw/V%E1%BA%BD%20Logo%20tr%C6%B0%E1%BB%9Dng%20H%C3%B2a%20B%C3%ACnh/1793783524231_T15TK0208_LENGOCGIAHAN_f0hbvc.cdr",
+        "storageKey": "educlass_submissions/T15TK02/Thiết kế minh họa với Corel Draw/Vẽ Logo trường Hòa Bình/1793783524231_T15TK0208_LENGOCGIAHAN_f0hbvc.cdr",
+        "provider": "cloudinary"
+      },
+      "submittedAt": "2026-11-04T09:12:05.807Z",
+      "grade": null,
+      "feedback": null,
+      "gradedAt": null
+    },
+    {
+      "id": "sub_1793783526477",
+      "assignmentId": "asm_1793774399970",
+      "studentId": "u_student_T15TK0208",
+      "studentName": "T15TK0208",
+      "content": "T15TK0208LE NGOC GIA HAN",
+      "link": "",
+      "file": {
+        "filename": "1793783524094_T15TK0208_LENGOCGIAHAN.cdr",
+        "originalName": "T15TK0208-LENGOCGIAHAN.cdr",
+        "size": 972217,
+        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1793783525/educlass_submissions/T15TK02/Thi%E1%BA%BFt%20k%E1%BA%BF%20minh%20h%E1%BB%8Da%20v%E1%BB%9Bi%20Corel%20Draw/V%E1%BA%BD%20Logo%20tr%C6%B0%E1%BB%9Dng%20H%C3%B2a%20B%C3%ACnh/1793783524094_T15TK0208_LENGOCGIAHAN_pevkt0.cdr",
+        "storageKey": "educlass_submissions/T15TK02/Thiết kế minh họa với Corel Draw/Vẽ Logo trường Hòa Bình/1793783524094_T15TK0208_LENGOCGIAHAN_pevkt0.cdr",
+        "provider": "cloudinary"
+      },
+      "submittedAt": "2026-11-04T09:12:06.477Z",
+      "grade": null,
+      "feedback": null,
+      "gradedAt": null
+    },
+    {
+      "id": "sub_1793783578510",
+      "assignmentId": "asm_1793774399970",
+      "studentId": "u_student_T15TK0211",
+      "studentName": "T15TK0211",
+      "content": "T15TK0211-NGO NGAN KHANH",
+      "link": "",
+      "file": {
+        "filename": "1793783578179_T15TK0211_NGONGANKHANH.cdr",
+        "originalName": "T15TK0211-NGONGANKHANH.cdr",
+        "size": 972209,
+        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1793783578/educlass_submissions/T15TK02/Thi%E1%BA%BFt%20k%E1%BA%BF%20minh%20h%E1%BB%8Da%20v%E1%BB%9Bi%20Corel%20Draw/V%E1%BA%BD%20Logo%20tr%C6%B0%E1%BB%9Dng%20H%C3%B2a%20B%C3%ACnh/1793783578179_T15TK0211_NGONGANKHANH_qxhyvs.cdr",
+        "storageKey": "educlass_submissions/T15TK02/Thiết kế minh họa với Corel Draw/Vẽ Logo trường Hòa Bình/1793783578179_T15TK0211_NGONGANKHANH_qxhyvs.cdr",
+        "provider": "cloudinary"
+      },
+      "submittedAt": "2026-11-04T09:12:59.205Z",
+      "grade": null,
+      "feedback": null,
+      "gradedAt": null
+    },
+    {
+      "id": "sub_1793783578939",
+      "assignmentId": "asm_1793774399970",
+      "studentId": "u_student_T15TK0211",
+      "studentName": "T15TK0211",
+      "content": "T15TK0211-NGO NGAN KHANH",
+      "link": "",
+      "file": {
+        "filename": "1793783577028_T15TK0211_NGONGANKHANH.cdr",
+        "originalName": "T15TK0211-NGONGANKHANH.cdr",
+        "size": 972209,
+        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1793783578/educlass_submissions/T15TK02/Thi%E1%BA%BFt%20k%E1%BA%BF%20minh%20h%E1%BB%8Da%20v%E1%BB%9Bi%20Corel%20Draw/V%E1%BA%BD%20Logo%20tr%C6%B0%E1%BB%9Dng%20H%C3%B2a%20B%C3%ACnh/1793783577028_T15TK0211_NGONGANKHANH_qdq61b.cdr",
+        "storageKey": "educlass_submissions/T15TK02/Thiết kế minh họa với Corel Draw/Vẽ Logo trường Hòa Bình/1793783577028_T15TK0211_NGONGANKHANH_qdq61b.cdr",
+        "provider": "cloudinary"
+      },
+      "submittedAt": "2026-11-04T09:12:58.939Z",
+      "grade": null,
+      "feedback": null,
+      "gradedAt": null
+    },
+    {
+      "id": "sub_1793783579107",
+      "assignmentId": "asm_1793774399970",
+      "studentId": "u_student_T15TK0211",
+      "studentName": "T15TK0211",
+      "content": "T15TK0211-NGO NGAN KHANH",
+      "link": "",
+      "file": {
+        "filename": "1793783577837_T15TK0211_NGONGANKHANH.cdr",
+        "originalName": "T15TK0211-NGONGANKHANH.cdr",
+        "size": 972209,
+        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1793783578/educlass_submissions/T15TK02/Thi%E1%BA%BFt%20k%E1%BA%BF%20minh%20h%E1%BB%8Da%20v%E1%BB%9Bi%20Corel%20Draw/V%E1%BA%BD%20Logo%20tr%C6%B0%E1%BB%9Dng%20H%C3%B2a%20B%C3%ACnh/1793783577837_T15TK0211_NGONGANKHANH_pv6pzl.cdr",
+        "storageKey": "educlass_submissions/T15TK02/Thiết kế minh họa với Corel Draw/Vẽ Logo trường Hòa Bình/1793783577837_T15TK0211_NGONGANKHANH_pv6pzl.cdr",
+        "provider": "cloudinary"
+      },
+      "submittedAt": "2026-11-04T09:12:59.107Z",
+      "grade": null,
+      "feedback": null,
+      "gradedAt": null
+    },
+    {
+      "id": "sub_1793797248463",
+      "assignmentId": "asm_1793609039129",
+      "studentId": "u_C08TK0101",
+      "studentName": "C08TK0101",
+      "content": "",
+      "link": "",
+      "file": {
+        "filename": "1793797246564_C08TK0101_NGUYENDOANLEANH.pptx",
+        "originalName": "C08TK0101-NGUYENDOANLEANH.pptx",
+        "size": 1453533,
+        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1793797247/educlass_submissions/C08TK01/X%E1%BB%AD%20L%C3%BD%20K%E1%BB%B9%20X%E1%BA%A3o%20v%E1%BB%9Bi%20After%20Effects/L%C3%A0m%20b%C3%A0i%20b%C3%A1o%20c%C3%A1o%20v%E1%BB%81%2010%20nguy%C3%AAn%20l%C3%BD%20chuy%E1%BB%83n%20%C4%91%E1%BB%99ng%20trong%20motion%20graphics/1793797246564_C08TK0101_NGUYENDOANLEANH_dgwgh6.pptx",
+        "storageKey": "educlass_submissions/C08TK01/Xử Lý Kỹ Xảo với After Effects/Làm bài báo cáo về 10 nguyên lý chuyển động trong motion graphics/1793797246564_C08TK0101_NGUYENDOANLEANH_dgwgh6.pptx",
+        "provider": "cloudinary"
+      },
+      "submittedAt": "2026-11-04T13:00:48.463Z",
+      "grade": null,
+      "feedback": null,
+      "gradedAt": null
+    },
+    {
+      "id": "sub_1793801221143",
+      "assignmentId": "asm_1793769990154",
+      "studentId": "u_C08TK0111",
+      "studentName": "C08TK0111",
+      "content": "",
+      "link": "",
+      "file": {
+        "filename": "1793801221109_bài_1.ecproj",
+        "originalName": "bài 1.ecproj",
+        "size": 1023439,
+        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1793801222/educlass_submissions/C08TK01/X%E1%BB%AD%20L%C3%BD%20K%E1%BB%B9%20X%E1%BA%A3o%20v%E1%BB%9Bi%20After%20Effects/T%E1%BA%A1o%20k%E1%BB%B9%20x%E1%BA%A3o%20cho%20banner/wmbjzbxknpn3tsbdrf9z",
+        "storageKey": "educlass_submissions/C08TK01/Xử Lý Kỹ Xảo với After Effects/Tạo kỹ xảo cho banner/wmbjzbxknpn3tsbdrf9z",
+        "provider": "cloudinary"
+      },
+      "submittedAt": "2026-11-04T14:07:03.041Z",
+      "grade": null,
+      "feedback": null,
+      "gradedAt": null
+    },
+    {
+      "id": "sub_1793802619463",
+      "assignmentId": "asm_1793769990154",
+      "studentId": "u_C08TK0108",
+      "studentName": "C08TK0108",
+      "content": "",
+      "link": "",
+      "file": {
+        "filename": "1793802679997_banner.rar",
+        "originalName": "banner.rar",
+        "size": 5488722,
+        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1793802681/educlass_submissions/C08TK01/X%E1%BB%AD%20L%C3%BD%20K%E1%BB%B9%20X%E1%BA%A3o%20v%E1%BB%9Bi%20After%20Effects/T%E1%BA%A1o%20k%E1%BB%B9%20x%E1%BA%A3o%20cho%20banner/1793802679997_banner_jsi4ns.rar",
+        "storageKey": "educlass_submissions/C08TK01/Xử Lý Kỹ Xảo với After Effects/Tạo kỹ xảo cho banner/1793802679997_banner_jsi4ns.rar",
+        "provider": "cloudinary"
+      },
+      "submittedAt": "2026-11-04T14:31:21.802Z",
+      "grade": null,
+      "feedback": null,
+      "gradedAt": null
+    },
+    {
+      "id": "sub_1793860881007",
+      "assignmentId": "asm_1793769990154",
+      "studentId": "u_C08TK0117",
+      "studentName": "C08TK0117",
+      "content": "",
+      "link": "",
+      "file": {
+        "filename": "1793860879230_mxien.aep",
+        "originalName": "mxien.aep",
+        "size": 772707,
+        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1793860880/educlass_submissions/C08TK01/X%E1%BB%AD%20L%C3%BD%20K%E1%BB%B9%20X%E1%BA%A3o%20v%E1%BB%9Bi%20After%20Effects/T%E1%BA%A1o%20k%E1%BB%B9%20x%E1%BA%A3o%20cho%20banner/1793860879230_mxien_gb9btj.aep",
+        "storageKey": "educlass_submissions/C08TK01/Xử Lý Kỹ Xảo với After Effects/Tạo kỹ xảo cho banner/1793860879230_mxien_gb9btj.aep",
+        "provider": "cloudinary"
+      },
+      "submittedAt": "2026-11-05T06:41:21.007Z",
+      "grade": null,
+      "feedback": null,
+      "gradedAt": null
+    },
+    {
+      "id": "sub_1793873609811",
+      "assignmentId": "asm_1793769990154",
+      "studentId": "u_C08TK0124",
+      "studentName": "C08TK0124",
+      "content": "Tạo kỹ xảo cho banner",
+      "link": "",
+      "file": {
+        "filename": "1793873608581_banner.aep",
+        "originalName": "banner.aep",
+        "size": 333982,
+        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1793873609/educlass_submissions/C08TK01/X%E1%BB%AD%20L%C3%BD%20K%E1%BB%B9%20X%E1%BA%A3o%20v%E1%BB%9Bi%20After%20Effects/T%E1%BA%A1o%20k%E1%BB%B9%20x%E1%BA%A3o%20cho%20banner/1793873608581_banner_ry8tb6.aep",
+        "storageKey": "educlass_submissions/C08TK01/Xử Lý Kỹ Xảo với After Effects/Tạo kỹ xảo cho banner/1793873608581_banner_ry8tb6.aep",
+        "provider": "cloudinary"
+      },
+      "submittedAt": "2026-11-05T10:13:29.811Z",
+      "grade": null,
+      "feedback": null,
+      "gradedAt": null
     }
   ],
-  "updatedAt": "2026-11-04T08:41:32.088Z",
+  "updatedAt": "2026-11-05T11:03:16.779Z",
   "users": [
     {
       "id": "u_teacher_danh",
@@ -7667,6 +9733,450 @@
       "className": "T15TH02",
       "status": "ACTIVE",
       "createdAt": "2026-11-04T03:22:42.328Z"
+    },
+    {
+      "id": "u_26710832",
+      "username": "26710832",
+      "studentCode": "26710832",
+      "password": "123",
+      "name": "Đỗ Văn Bảo",
+      "dob": "",
+      "role": "student",
+      "className": "TIN HỌC ĐẠI CƯƠNG",
+      "status": "ACTIVE",
+      "createdAt": "2026-11-05T11:03:16.778Z"
+    },
+    {
+      "id": "u_26710249",
+      "username": "26710249",
+      "studentCode": "26710249",
+      "password": "123",
+      "name": "Nguyễn Thiên Bảo",
+      "dob": "",
+      "role": "student",
+      "className": "TIN HỌC ĐẠI CƯƠNG",
+      "status": "ACTIVE",
+      "createdAt": "2026-11-05T11:03:16.778Z"
+    },
+    {
+      "id": "u_26710910",
+      "username": "26710910",
+      "studentCode": "26710910",
+      "password": "123",
+      "name": "Trịnh Gia Bảo",
+      "dob": "",
+      "role": "student",
+      "className": "TIN HỌC ĐẠI CƯƠNG",
+      "status": "ACTIVE",
+      "createdAt": "2026-11-05T11:03:16.778Z"
+    },
+    {
+      "id": "u_26710897",
+      "username": "26710897",
+      "studentCode": "26710897",
+      "password": "123",
+      "name": "Trần Hoàng Nam",
+      "dob": "",
+      "role": "student",
+      "className": "TIN HỌC ĐẠI CƯƠNG",
+      "status": "ACTIVE",
+      "createdAt": "2026-11-05T11:03:16.779Z"
+    },
+    {
+      "id": "u_26710656",
+      "username": "26710656",
+      "studentCode": "26710656",
+      "password": "123",
+      "name": "Đỗ Trọng Nghĩa",
+      "dob": "",
+      "role": "student",
+      "className": "TIN HỌC ĐẠI CƯƠNG",
+      "status": "ACTIVE",
+      "createdAt": "2026-11-05T11:03:16.779Z"
+    },
+    {
+      "id": "u_26710685",
+      "username": "26710685",
+      "studentCode": "26710685",
+      "password": "123",
+      "name": "Huỳnh Khánh Nguyên",
+      "dob": "",
+      "role": "student",
+      "className": "TIN HỌC ĐẠI CƯƠNG",
+      "status": "ACTIVE",
+      "createdAt": "2026-11-05T11:03:16.779Z"
+    },
+    {
+      "id": "u_26710287",
+      "username": "26710287",
+      "studentCode": "26710287",
+      "password": "123",
+      "name": "Đào Ngọc Minh Nhật",
+      "dob": "",
+      "role": "student",
+      "className": "TIN HỌC ĐẠI CƯƠNG",
+      "status": "ACTIVE",
+      "createdAt": "2026-11-05T11:03:16.779Z"
+    },
+    {
+      "id": "u_26710428",
+      "username": "26710428",
+      "studentCode": "26710428",
+      "password": "123",
+      "name": "Dương Công Thuận Phát",
+      "dob": "",
+      "role": "student",
+      "className": "TIN HỌC ĐẠI CƯƠNG",
+      "status": "ACTIVE",
+      "createdAt": "2026-11-05T11:03:16.779Z"
+    },
+    {
+      "id": "u_26711149",
+      "username": "26711149",
+      "studentCode": "26711149",
+      "password": "123",
+      "name": "Phạm Minh Phát",
+      "dob": "",
+      "role": "student",
+      "className": "TIN HỌC ĐẠI CƯƠNG",
+      "status": "ACTIVE",
+      "createdAt": "2026-11-05T11:03:16.779Z"
+    },
+    {
+      "id": "u_25710396",
+      "username": "25710396",
+      "studentCode": "25710396",
+      "password": "123",
+      "name": "Nguyễn Quốc Phong",
+      "dob": "",
+      "role": "student",
+      "className": "TIN HỌC ĐẠI CƯƠNG",
+      "status": "ACTIVE",
+      "createdAt": "2026-11-05T11:03:16.779Z"
+    },
+    {
+      "id": "u_26710466",
+      "username": "26710466",
+      "studentCode": "26710466",
+      "password": "123",
+      "name": "Lê Văn Phúc",
+      "dob": "",
+      "role": "student",
+      "className": "TIN HỌC ĐẠI CƯƠNG",
+      "status": "ACTIVE",
+      "createdAt": "2026-11-05T11:03:16.779Z"
+    },
+    {
+      "id": "u_26710111",
+      "username": "26710111",
+      "studentCode": "26710111",
+      "password": "123",
+      "name": "Nguyễn Trọng Phúc",
+      "dob": "",
+      "role": "student",
+      "className": "TIN HỌC ĐẠI CƯƠNG",
+      "status": "ACTIVE",
+      "createdAt": "2026-11-05T11:03:16.779Z"
+    },
+    {
+      "id": "u_26710526",
+      "username": "26710526",
+      "studentCode": "26710526",
+      "password": "123",
+      "name": "Đỗ Nguyễn Mạnh Quân",
+      "dob": "",
+      "role": "student",
+      "className": "TIN HỌC ĐẠI CƯƠNG",
+      "status": "ACTIVE",
+      "createdAt": "2026-11-05T11:03:16.779Z"
+    },
+    {
+      "id": "u_26710697",
+      "username": "26710697",
+      "studentCode": "26710697",
+      "password": "123",
+      "name": "Nguyễn Minh Quân",
+      "dob": "",
+      "role": "student",
+      "className": "TIN HỌC ĐẠI CƯƠNG",
+      "status": "ACTIVE",
+      "createdAt": "2026-11-05T11:03:16.779Z"
+    },
+    {
+      "id": "u_26710101",
+      "username": "26710101",
+      "studentCode": "26710101",
+      "password": "123",
+      "name": "Đinh Quang",
+      "dob": "",
+      "role": "student",
+      "className": "TIN HỌC ĐẠI CƯƠNG",
+      "status": "ACTIVE",
+      "createdAt": "2026-11-05T11:03:16.779Z"
+    },
+    {
+      "id": "u_26710100",
+      "username": "26710100",
+      "studentCode": "26710100",
+      "password": "123",
+      "name": "Lê Duy Quang",
+      "dob": "",
+      "role": "student",
+      "className": "TIN HỌC ĐẠI CƯƠNG",
+      "status": "ACTIVE",
+      "createdAt": "2026-11-05T11:03:16.779Z"
+    },
+    {
+      "id": "u_26710308",
+      "username": "26710308",
+      "studentCode": "26710308",
+      "password": "123",
+      "name": "Nguyễn Phúc Sang",
+      "dob": "",
+      "role": "student",
+      "className": "TIN HỌC ĐẠI CƯƠNG",
+      "status": "ACTIVE",
+      "createdAt": "2026-11-05T11:03:16.779Z"
+    },
+    {
+      "id": "u_26711065",
+      "username": "26711065",
+      "studentCode": "26711065",
+      "password": "123",
+      "name": "Nguyễn Quang Sáng",
+      "dob": "",
+      "role": "student",
+      "className": "TIN HỌC ĐẠI CƯƠNG",
+      "status": "ACTIVE",
+      "createdAt": "2026-11-05T11:03:16.779Z"
+    },
+    {
+      "id": "u_26710709",
+      "username": "26710709",
+      "studentCode": "26710709",
+      "password": "123",
+      "name": "Trần Trung Tài",
+      "dob": "",
+      "role": "student",
+      "className": "TIN HỌC ĐẠI CƯƠNG",
+      "status": "ACTIVE",
+      "createdAt": "2026-11-05T11:03:16.779Z"
+    },
+    {
+      "id": "u_26710412",
+      "username": "26710412",
+      "studentCode": "26710412",
+      "password": "123",
+      "name": "Nguyễn Thành Tâm",
+      "dob": "",
+      "role": "student",
+      "className": "TIN HỌC ĐẠI CƯƠNG",
+      "status": "ACTIVE",
+      "createdAt": "2026-11-05T11:03:16.779Z"
+    },
+    {
+      "id": "u_26710053",
+      "username": "26710053",
+      "studentCode": "26710053",
+      "password": "123",
+      "name": "Phạm Ngọc Thái",
+      "dob": "",
+      "role": "student",
+      "className": "TIN HỌC ĐẠI CƯƠNG",
+      "status": "ACTIVE",
+      "createdAt": "2026-11-05T11:03:16.779Z"
+    },
+    {
+      "id": "u_26710396",
+      "username": "26710396",
+      "studentCode": "26710396",
+      "password": "123",
+      "name": "Nguyễn Hồng Thắng",
+      "dob": "",
+      "role": "student",
+      "className": "TIN HỌC ĐẠI CƯƠNG",
+      "status": "ACTIVE",
+      "createdAt": "2026-11-05T11:03:16.779Z"
+    },
+    {
+      "id": "u_26710506",
+      "username": "26710506",
+      "studentCode": "26710506",
+      "password": "123",
+      "name": "Nguyễn Phước Hoàn Thanh",
+      "dob": "",
+      "role": "student",
+      "className": "TIN HỌC ĐẠI CƯƠNG",
+      "status": "ACTIVE",
+      "createdAt": "2026-11-05T11:03:16.779Z"
+    },
+    {
+      "id": "u_26711024",
+      "username": "26711024",
+      "studentCode": "26711024",
+      "password": "123",
+      "name": "Phạm Hiếu Thiên",
+      "dob": "",
+      "role": "student",
+      "className": "TIN HỌC ĐẠI CƯƠNG",
+      "status": "ACTIVE",
+      "createdAt": "2026-11-05T11:03:16.779Z"
+    },
+    {
+      "id": "u_26710267",
+      "username": "26710267",
+      "studentCode": "26710267",
+      "password": "123",
+      "name": "Trương Đức Thịnh",
+      "dob": "",
+      "role": "student",
+      "className": "TIN HỌC ĐẠI CƯƠNG",
+      "status": "ACTIVE",
+      "createdAt": "2026-11-05T11:03:16.779Z"
+    },
+    {
+      "id": "u_26710574",
+      "username": "26710574",
+      "studentCode": "26710574",
+      "password": "123",
+      "name": "Trần Trung Thuận",
+      "dob": "",
+      "role": "student",
+      "className": "TIN HỌC ĐẠI CƯƠNG",
+      "status": "ACTIVE",
+      "createdAt": "2026-11-05T11:03:16.779Z"
+    },
+    {
+      "id": "u_26711148",
+      "username": "26711148",
+      "studentCode": "26711148",
+      "password": "123",
+      "name": "Phạm Phú Tiến",
+      "dob": "",
+      "role": "student",
+      "className": "TIN HỌC ĐẠI CƯƠNG",
+      "status": "ACTIVE",
+      "createdAt": "2026-11-05T11:03:16.779Z"
+    },
+    {
+      "id": "u_26710240",
+      "username": "26710240",
+      "studentCode": "26710240",
+      "password": "123",
+      "name": "Nguyễn Đức Toàn",
+      "dob": "",
+      "role": "student",
+      "className": "TIN HỌC ĐẠI CƯƠNG",
+      "status": "ACTIVE",
+      "createdAt": "2026-11-05T11:03:16.779Z"
+    },
+    {
+      "id": "u_26710175",
+      "username": "26710175",
+      "studentCode": "26710175",
+      "password": "123",
+      "name": "Lê Nguyễn Minh Trí",
+      "dob": "",
+      "role": "student",
+      "className": "TIN HỌC ĐẠI CƯƠNG",
+      "status": "ACTIVE",
+      "createdAt": "2026-11-05T11:03:16.779Z"
+    },
+    {
+      "id": "u_26710844",
+      "username": "26710844",
+      "studentCode": "26710844",
+      "password": "123",
+      "name": "Trương Duy Minh Trí",
+      "dob": "",
+      "role": "student",
+      "className": "TIN HỌC ĐẠI CƯƠNG",
+      "status": "ACTIVE",
+      "createdAt": "2026-11-05T11:03:16.779Z"
+    },
+    {
+      "id": "u_26710498",
+      "username": "26710498",
+      "studentCode": "26710498",
+      "password": "123",
+      "name": "Nguyễn Hoàng Huy Triệu",
+      "dob": "",
+      "role": "student",
+      "className": "TIN HỌC ĐẠI CƯƠNG",
+      "status": "ACTIVE",
+      "createdAt": "2026-11-05T11:03:16.779Z"
+    },
+    {
+      "id": "u_26710451",
+      "username": "26710451",
+      "studentCode": "26710451",
+      "password": "123",
+      "name": "Phan Nhựt Trung",
+      "dob": "",
+      "role": "student",
+      "className": "TIN HỌC ĐẠI CƯƠNG",
+      "status": "ACTIVE",
+      "createdAt": "2026-11-05T11:03:16.779Z"
+    },
+    {
+      "id": "u_26710507",
+      "username": "26710507",
+      "studentCode": "26710507",
+      "password": "123",
+      "name": "Phạm Nguyễn Anh Tú",
+      "dob": "",
+      "role": "student",
+      "className": "TIN HỌC ĐẠI CƯƠNG",
+      "status": "ACTIVE",
+      "createdAt": "2026-11-05T11:03:16.779Z"
+    },
+    {
+      "id": "u_26710214",
+      "username": "26710214",
+      "studentCode": "26710214",
+      "password": "123",
+      "name": "Nguyễn Đặng Quốc Việt",
+      "dob": "",
+      "role": "student",
+      "className": "TIN HỌC ĐẠI CƯƠNG",
+      "status": "ACTIVE",
+      "createdAt": "2026-11-05T11:03:16.779Z"
+    },
+    {
+      "id": "u_26711120",
+      "username": "26711120",
+      "studentCode": "26711120",
+      "password": "123",
+      "name": "Nguyễn Văn Vinh",
+      "dob": "",
+      "role": "student",
+      "className": "TIN HỌC ĐẠI CƯƠNG",
+      "status": "ACTIVE",
+      "createdAt": "2026-11-05T11:03:16.779Z"
+    },
+    {
+      "id": "u_26710727",
+      "username": "26710727",
+      "studentCode": "26710727",
+      "password": "123",
+      "name": "Trần Lê Quốc Vũ",
+      "dob": "",
+      "role": "student",
+      "className": "TIN HỌC ĐẠI CƯƠNG",
+      "status": "ACTIVE",
+      "createdAt": "2026-11-05T11:03:16.779Z"
+    },
+    {
+      "id": "u_26710480",
+      "username": "26710480",
+      "studentCode": "26710480",
+      "password": "123",
+      "name": "Nguyễn Đức Vượng",
+      "dob": "",
+      "role": "student",
+      "className": "TIN HỌC ĐẠI CƯƠNG",
+      "status": "ACTIVE",
+      "createdAt": "2026-11-05T11:03:16.779Z"
     }
   ],
   "industryGroups": [
@@ -7694,17 +10204,18 @@
       "icon": "fa-laptop-code",
       "color": "blue",
       "classes": [
+        "L09MG01",
+        "T14MG01",
+        "T14MT01",
         "T14TH01",
         "T14TH02",
-        "T14MT01",
-        "T14MG01",
-        "T15TH01",
-        "T15TH02",
-        "T15MT01",
-        "T15MT02",
         "T15MG01",
         "T15MG02",
-        "L09MG01"
+        "T15MT01",
+        "T15MT02",
+        "T15TH01",
+        "T15TH02",
+        "TIN HỌC ĐẠI CƯƠNG"
       ]
     },
     {
