@@ -2,6 +2,24 @@
   "id": "main",
   "assignments": [
     {
+      "id": "asm_1793877081018",
+      "title": "Bài tập về chia cột - tạo dropcap - tạo bảng",
+      "description": "dựa vào file bài tập để thực hiện",
+      "targetClass": "TIN HỌC ĐẠI CƯƠNG",
+      "subject": "Tin Học Đại Cương",
+      "dueDate": "2026-11-05T21:00",
+      "createdAt": "2026-11-05T11:11:21.018Z",
+      "attachment": {
+        "filename": "1793877078664_tindc_bai_tap_word_21.pdf",
+        "originalName": "tindc_bai_tap_word_21.pdf",
+        "size": 1795550,
+        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1793877080/educlass_submissions/TIN%20H%E1%BB%8CC%20%C4%90%E1%BA%A0I%20C%C6%AF%C6%A0NG/Tin%20H%E1%BB%8Dc%20%C4%90%E1%BA%A1i%20C%C6%B0%C6%A1ng/B%C3%A0i%20t%E1%BA%ADp%20v%E1%BB%81%20chia%20c%E1%BB%99t%20-%20t%E1%BA%A1o%20dropcap%20-%20t%E1%BA%A1o%20b%E1%BA%A3ng/1793877078664_tindc_bai_tap_word_21_pjxrsj.pdf",
+        "storageKey": "educlass_submissions/TIN HỌC ĐẠI CƯƠNG/Tin Học Đại Cương/Bài tập về chia cột - tạo dropcap - tạo bảng/1793877078664_tindc_bai_tap_word_21_pjxrsj.pdf",
+        "provider": "cloudinary"
+      },
+      "createdBy": "u_teacher_danh"
+    },
+    {
       "id": "asm_1793774399970",
       "title": "Vẽ Logo trường Hòa Bình",
       "description": "vẽ đúng đường cong",
@@ -2335,6 +2353,526 @@
   ],
   "notifications": [
     {
+      "id": "notif_sub_1793887312701_r1jd",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793877081018",
+      "assignmentTitle": "Bài tập về chia cột - tạo dropcap - tạo bảng",
+      "targetClass": "TIN HỌC ĐẠI CƯƠNG",
+      "subject": "Tin Học Đại Cương",
+      "studentId": "u_26710101",
+      "studentName": "Đinh Quang",
+      "studentCode": "26710101",
+      "submittedAt": "2026-11-05T14:01:52.701Z",
+      "createdAt": "2026-11-05T14:01:52.701Z",
+      "readBy": []
+    },
+    {
+      "id": "notif_sub_1793887285251_xghw",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793877081018",
+      "assignmentTitle": "Bài tập về chia cột - tạo dropcap - tạo bảng",
+      "targetClass": "TIN HỌC ĐẠI CƯƠNG",
+      "subject": "Tin Học Đại Cương",
+      "studentId": "u_26710897",
+      "studentName": "Trần Hoàng Nam",
+      "studentCode": "26710897",
+      "submittedAt": "2026-11-05T14:01:25.251Z",
+      "createdAt": "2026-11-05T14:01:25.251Z",
+      "readBy": []
+    },
+    {
+      "id": "notif_sub_1793887271539_owlu",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793877081018",
+      "assignmentTitle": "Bài tập về chia cột - tạo dropcap - tạo bảng",
+      "targetClass": "TIN HỌC ĐẠI CƯƠNG",
+      "subject": "Tin Học Đại Cương",
+      "studentId": "u_26710685",
+      "studentName": "Huỳnh Khánh Nguyên",
+      "studentCode": "26710685",
+      "submittedAt": "2026-11-05T14:01:11.539Z",
+      "createdAt": "2026-11-05T14:01:11.539Z",
+      "readBy": []
+    },
+    {
+      "id": "notif_sub_1793887251670_dvow",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793877081018",
+      "assignmentTitle": "Bài tập về chia cột - tạo dropcap - tạo bảng",
+      "targetClass": "TIN HỌC ĐẠI CƯƠNG",
+      "subject": "Tin Học Đại Cương",
+      "studentId": "u_26710267",
+      "studentName": "Trương Đức Thịnh",
+      "studentCode": "26710267",
+      "submittedAt": "2026-11-05T14:00:51.670Z",
+      "createdAt": "2026-11-05T14:00:51.670Z",
+      "readBy": []
+    },
+    {
+      "id": "notif_sub_1793887248589_qer7",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793877081018",
+      "assignmentTitle": "Bài tập về chia cột - tạo dropcap - tạo bảng",
+      "targetClass": "TIN HỌC ĐẠI CƯƠNG",
+      "subject": "Tin Học Đại Cương",
+      "studentId": "u_26710396",
+      "studentName": "Nguyễn Hồng Thắng",
+      "studentCode": "26710396",
+      "submittedAt": "2026-11-05T14:00:48.589Z",
+      "createdAt": "2026-11-05T14:00:48.589Z",
+      "readBy": []
+    },
+    {
+      "id": "notif_sub_1793887225387_s2pn",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793877081018",
+      "assignmentTitle": "Bài tập về chia cột - tạo dropcap - tạo bảng",
+      "targetClass": "TIN HỌC ĐẠI CƯƠNG",
+      "subject": "Tin Học Đại Cương",
+      "studentId": "u_26710100",
+      "studentName": "Lê Duy Quang",
+      "studentCode": "26710100",
+      "submittedAt": "2026-11-05T14:00:25.387Z",
+      "createdAt": "2026-11-05T14:00:25.387Z",
+      "readBy": []
+    },
+    {
+      "id": "notif_sub_1793887224912_8jf2",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793877081018",
+      "assignmentTitle": "Bài tập về chia cột - tạo dropcap - tạo bảng",
+      "targetClass": "TIN HỌC ĐẠI CƯƠNG",
+      "subject": "Tin Học Đại Cương",
+      "studentId": "u_26710111",
+      "studentName": "Nguyễn Trọng Phúc",
+      "studentCode": "26710111",
+      "submittedAt": "2026-11-05T14:00:24.912Z",
+      "createdAt": "2026-11-05T14:00:24.912Z",
+      "readBy": []
+    },
+    {
+      "id": "notif_sub_1793887224061_ezrs",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793877081018",
+      "assignmentTitle": "Bài tập về chia cột - tạo dropcap - tạo bảng",
+      "targetClass": "TIN HỌC ĐẠI CƯƠNG",
+      "subject": "Tin Học Đại Cương",
+      "studentId": "u_26710100",
+      "studentName": "Lê Duy Quang",
+      "studentCode": "26710100",
+      "submittedAt": "2026-11-05T14:00:24.061Z",
+      "createdAt": "2026-11-05T14:00:24.061Z",
+      "readBy": []
+    },
+    {
+      "id": "notif_sub_1793887199546_gch9",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793877081018",
+      "assignmentTitle": "Bài tập về chia cột - tạo dropcap - tạo bảng",
+      "targetClass": "TIN HỌC ĐẠI CƯƠNG",
+      "subject": "Tin Học Đại Cương",
+      "studentId": "u_26710412",
+      "studentName": "Nguyễn Thành Tâm",
+      "studentCode": "26710412",
+      "submittedAt": "2026-11-05T13:59:59.546Z",
+      "createdAt": "2026-11-05T13:59:59.546Z",
+      "readBy": []
+    },
+    {
+      "id": "notif_sub_1793887199493_na72",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793877081018",
+      "assignmentTitle": "Bài tập về chia cột - tạo dropcap - tạo bảng",
+      "targetClass": "TIN HỌC ĐẠI CƯƠNG",
+      "subject": "Tin Học Đại Cương",
+      "studentId": "u_26710249",
+      "studentName": "Nguyễn Thiên Bảo",
+      "studentCode": "26710249",
+      "submittedAt": "2026-11-05T13:59:59.493Z",
+      "createdAt": "2026-11-05T13:59:59.493Z",
+      "readBy": []
+    },
+    {
+      "id": "notif_sub_1793887199005_pe7h",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793877081018",
+      "assignmentTitle": "Bài tập về chia cột - tạo dropcap - tạo bảng",
+      "targetClass": "TIN HỌC ĐẠI CƯƠNG",
+      "subject": "Tin Học Đại Cương",
+      "studentId": "u_26710656",
+      "studentName": "Đỗ Trọng Nghĩa",
+      "studentCode": "26710656",
+      "submittedAt": "2026-11-05T13:59:59.005Z",
+      "createdAt": "2026-11-05T13:59:59.005Z",
+      "readBy": []
+    },
+    {
+      "id": "notif_sub_1793887197364_z7h2",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793877081018",
+      "assignmentTitle": "Bài tập về chia cột - tạo dropcap - tạo bảng",
+      "targetClass": "TIN HỌC ĐẠI CƯƠNG",
+      "subject": "Tin Học Đại Cương",
+      "studentId": "u_26710656",
+      "studentName": "Đỗ Trọng Nghĩa",
+      "studentCode": "26710656",
+      "submittedAt": "2026-11-05T13:59:57.364Z",
+      "createdAt": "2026-11-05T13:59:57.364Z",
+      "readBy": []
+    },
+    {
+      "id": "notif_sub_1793887197172_nemm",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793877081018",
+      "assignmentTitle": "Bài tập về chia cột - tạo dropcap - tạo bảng",
+      "targetClass": "TIN HỌC ĐẠI CƯƠNG",
+      "subject": "Tin Học Đại Cương",
+      "studentId": "u_26710175",
+      "studentName": "Lê Nguyễn Minh Trí",
+      "studentCode": "26710175",
+      "submittedAt": "2026-11-05T13:59:57.172Z",
+      "createdAt": "2026-11-05T13:59:57.172Z",
+      "readBy": []
+    },
+    {
+      "id": "notif_sub_1793887185777_szlm",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793877081018",
+      "assignmentTitle": "Bài tập về chia cột - tạo dropcap - tạo bảng",
+      "targetClass": "TIN HỌC ĐẠI CƯƠNG",
+      "subject": "Tin Học Đại Cương",
+      "studentId": "u_26710526",
+      "studentName": "Đỗ Nguyễn Mạnh Quân",
+      "studentCode": "26710526",
+      "submittedAt": "2026-11-05T13:59:45.777Z",
+      "createdAt": "2026-11-05T13:59:45.777Z",
+      "readBy": []
+    },
+    {
+      "id": "notif_sub_1793887185632_ofaw",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793877081018",
+      "assignmentTitle": "Bài tập về chia cột - tạo dropcap - tạo bảng",
+      "targetClass": "TIN HỌC ĐẠI CƯƠNG",
+      "subject": "Tin Học Đại Cương",
+      "studentId": "u_26710506",
+      "studentName": "Nguyễn Phước Hoàn Thanh",
+      "studentCode": "26710506",
+      "submittedAt": "2026-11-05T13:59:45.632Z",
+      "createdAt": "2026-11-05T13:59:45.632Z",
+      "readBy": []
+    },
+    {
+      "id": "notif_sub_1793887185000_hn9d",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793877081018",
+      "assignmentTitle": "Bài tập về chia cột - tạo dropcap - tạo bảng",
+      "targetClass": "TIN HỌC ĐẠI CƯƠNG",
+      "subject": "Tin Học Đại Cương",
+      "studentId": "u_26710526",
+      "studentName": "Đỗ Nguyễn Mạnh Quân",
+      "studentCode": "26710526",
+      "submittedAt": "2026-11-05T13:59:45.000Z",
+      "createdAt": "2026-11-05T13:59:45.000Z",
+      "readBy": []
+    },
+    {
+      "id": "notif_sub_1793887169324_2igk",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793877081018",
+      "assignmentTitle": "Bài tập về chia cột - tạo dropcap - tạo bảng",
+      "targetClass": "TIN HỌC ĐẠI CƯƠNG",
+      "subject": "Tin Học Đại Cương",
+      "studentId": "u_26710053",
+      "studentName": "Phạm Ngọc Thái",
+      "studentCode": "26710053",
+      "submittedAt": "2026-11-05T13:59:29.324Z",
+      "createdAt": "2026-11-05T13:59:29.324Z",
+      "readBy": []
+    },
+    {
+      "id": "notif_sub_1793887168480_zq5i",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793877081018",
+      "assignmentTitle": "Bài tập về chia cột - tạo dropcap - tạo bảng",
+      "targetClass": "TIN HỌC ĐẠI CƯƠNG",
+      "subject": "Tin Học Đại Cương",
+      "studentId": "u_26710451",
+      "studentName": "Phan Nhựt Trung",
+      "studentCode": "26710451",
+      "submittedAt": "2026-11-05T13:59:28.480Z",
+      "createdAt": "2026-11-05T13:59:28.480Z",
+      "readBy": []
+    },
+    {
+      "id": "notif_sub_1793887167779_k9yp",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793877081018",
+      "assignmentTitle": "Bài tập về chia cột - tạo dropcap - tạo bảng",
+      "targetClass": "TIN HỌC ĐẠI CƯƠNG",
+      "subject": "Tin Học Đại Cương",
+      "studentId": "u_26710451",
+      "studentName": "Phan Nhựt Trung",
+      "studentCode": "26710451",
+      "submittedAt": "2026-11-05T13:59:27.779Z",
+      "createdAt": "2026-11-05T13:59:27.779Z",
+      "readBy": []
+    },
+    {
+      "id": "notif_sub_1793887161235_4mp3",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793877081018",
+      "assignmentTitle": "Bài tập về chia cột - tạo dropcap - tạo bảng",
+      "targetClass": "TIN HỌC ĐẠI CƯƠNG",
+      "subject": "Tin Học Đại Cương",
+      "studentId": "u_26710697",
+      "studentName": "Nguyễn Minh Quân",
+      "studentCode": "26710697",
+      "submittedAt": "2026-11-05T13:59:21.235Z",
+      "createdAt": "2026-11-05T13:59:21.235Z",
+      "readBy": []
+    },
+    {
+      "id": "notif_sub_1793887160734_h6m1",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793877081018",
+      "assignmentTitle": "Bài tập về chia cột - tạo dropcap - tạo bảng",
+      "targetClass": "TIN HỌC ĐẠI CƯƠNG",
+      "subject": "Tin Học Đại Cương",
+      "studentId": "u_26710240",
+      "studentName": "Nguyễn Đức Toàn",
+      "studentCode": "26710240",
+      "submittedAt": "2026-11-05T13:59:20.734Z",
+      "createdAt": "2026-11-05T13:59:20.734Z",
+      "readBy": []
+    },
+    {
+      "id": "notif_sub_1793887146414_tddp",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793877081018",
+      "assignmentTitle": "Bài tập về chia cột - tạo dropcap - tạo bảng",
+      "targetClass": "TIN HỌC ĐẠI CƯƠNG",
+      "subject": "Tin Học Đại Cương",
+      "studentId": "u_26710214",
+      "studentName": "Nguyễn Đặng Quốc Việt",
+      "studentCode": "26710214",
+      "submittedAt": "2026-11-05T13:59:06.414Z",
+      "createdAt": "2026-11-05T13:59:06.414Z",
+      "readBy": []
+    },
+    {
+      "id": "notif_sub_1793887144721_twkq",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793877081018",
+      "assignmentTitle": "Bài tập về chia cột - tạo dropcap - tạo bảng",
+      "targetClass": "TIN HỌC ĐẠI CƯƠNG",
+      "subject": "Tin Học Đại Cương",
+      "studentId": "u_26710507",
+      "studentName": "Phạm Nguyễn Anh Tú",
+      "studentCode": "26710507",
+      "submittedAt": "2026-11-05T13:59:04.721Z",
+      "createdAt": "2026-11-05T13:59:04.721Z",
+      "readBy": []
+    },
+    {
+      "id": "notif_sub_1793887132874_bma2",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793877081018",
+      "assignmentTitle": "Bài tập về chia cột - tạo dropcap - tạo bảng",
+      "targetClass": "TIN HỌC ĐẠI CƯƠNG",
+      "subject": "Tin Học Đại Cương",
+      "studentId": "u_26710308",
+      "studentName": "Nguyễn Phúc Sang",
+      "studentCode": "26710308",
+      "submittedAt": "2026-11-05T13:58:52.874Z",
+      "createdAt": "2026-11-05T13:58:52.874Z",
+      "readBy": []
+    },
+    {
+      "id": "notif_sub_1793887126256_bojn",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793877081018",
+      "assignmentTitle": "Bài tập về chia cột - tạo dropcap - tạo bảng",
+      "targetClass": "TIN HỌC ĐẠI CƯƠNG",
+      "subject": "Tin Học Đại Cương",
+      "studentId": "u_26710498",
+      "studentName": "Nguyễn Hoàng Huy Triệu",
+      "studentCode": "26710498",
+      "submittedAt": "2026-11-05T13:58:46.256Z",
+      "createdAt": "2026-11-05T13:58:46.256Z",
+      "readBy": []
+    },
+    {
+      "id": "notif_sub_1793887124148_lm9w",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793877081018",
+      "assignmentTitle": "Bài tập về chia cột - tạo dropcap - tạo bảng",
+      "targetClass": "TIN HỌC ĐẠI CƯƠNG",
+      "subject": "Tin Học Đại Cương",
+      "studentId": "u_26710526",
+      "studentName": "Đỗ Nguyễn Mạnh Quân",
+      "studentCode": "26710526",
+      "submittedAt": "2026-11-05T13:58:44.148Z",
+      "createdAt": "2026-11-05T13:58:44.148Z",
+      "readBy": []
+    },
+    {
+      "id": "notif_sub_1793887108474_ar6o",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793877081018",
+      "assignmentTitle": "Bài tập về chia cột - tạo dropcap - tạo bảng",
+      "targetClass": "TIN HỌC ĐẠI CƯƠNG",
+      "subject": "Tin Học Đại Cương",
+      "studentId": "u_26710466",
+      "studentName": "Lê Văn Phúc",
+      "studentCode": "26710466",
+      "submittedAt": "2026-11-05T13:58:28.473Z",
+      "createdAt": "2026-11-05T13:58:28.473Z",
+      "readBy": []
+    },
+    {
+      "id": "notif_sub_1793887103555_syvo",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793877081018",
+      "assignmentTitle": "Bài tập về chia cột - tạo dropcap - tạo bảng",
+      "targetClass": "TIN HỌC ĐẠI CƯƠNG",
+      "subject": "Tin Học Đại Cương",
+      "studentId": "u_26710428",
+      "studentName": "Dương Công Thuận Phát",
+      "studentCode": "26710428",
+      "submittedAt": "2026-11-05T13:58:23.555Z",
+      "createdAt": "2026-11-05T13:58:23.555Z",
+      "readBy": []
+    },
+    {
+      "id": "notif_sub_1793887082766_2snx",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793877081018",
+      "assignmentTitle": "Bài tập về chia cột - tạo dropcap - tạo bảng",
+      "targetClass": "TIN HỌC ĐẠI CƯƠNG",
+      "subject": "Tin Học Đại Cương",
+      "studentId": "u_26710832",
+      "studentName": "Đỗ Văn Bảo",
+      "studentCode": "26710832",
+      "submittedAt": "2026-11-05T13:58:02.766Z",
+      "createdAt": "2026-11-05T13:58:02.766Z",
+      "readBy": []
+    },
+    {
+      "id": "notif_sub_1793887080597_io9u",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793877081018",
+      "assignmentTitle": "Bài tập về chia cột - tạo dropcap - tạo bảng",
+      "targetClass": "TIN HỌC ĐẠI CƯƠNG",
+      "subject": "Tin Học Đại Cương",
+      "studentId": "u_26710832",
+      "studentName": "Đỗ Văn Bảo",
+      "studentCode": "26710832",
+      "submittedAt": "2026-11-05T13:58:00.597Z",
+      "createdAt": "2026-11-05T13:58:00.597Z",
+      "readBy": []
+    },
+    {
+      "id": "notif_sub_1793887078524_scxx",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793877081018",
+      "assignmentTitle": "Bài tập về chia cột - tạo dropcap - tạo bảng",
+      "targetClass": "TIN HỌC ĐẠI CƯƠNG",
+      "subject": "Tin Học Đại Cương",
+      "studentId": "u_26710214",
+      "studentName": "Nguyễn Đặng Quốc Việt",
+      "studentCode": "26710214",
+      "submittedAt": "2026-11-05T13:57:58.524Z",
+      "createdAt": "2026-11-05T13:57:58.524Z",
+      "readBy": []
+    },
+    {
+      "id": "notif_sub_1793887038539_jrsy",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793877081018",
+      "assignmentTitle": "Bài tập về chia cột - tạo dropcap - tạo bảng",
+      "targetClass": "TIN HỌC ĐẠI CƯƠNG",
+      "subject": "Tin Học Đại Cương",
+      "studentId": "u_26710287",
+      "studentName": "Đào Ngọc Minh Nhật",
+      "studentCode": "26710287",
+      "submittedAt": "2026-11-05T13:57:18.539Z",
+      "createdAt": "2026-11-05T13:57:18.539Z",
+      "readBy": []
+    },
+    {
+      "id": "notif_sub_1793887037683_7qyz",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793877081018",
+      "assignmentTitle": "Bài tập về chia cột - tạo dropcap - tạo bảng",
+      "targetClass": "TIN HỌC ĐẠI CƯƠNG",
+      "subject": "Tin Học Đại Cương",
+      "studentId": "u_26710727",
+      "studentName": "Trần Lê Quốc Vũ",
+      "studentCode": "26710727",
+      "submittedAt": "2026-11-05T13:57:17.683Z",
+      "createdAt": "2026-11-05T13:57:17.683Z",
+      "readBy": []
+    },
+    {
+      "id": "notif_sub_1793887025437_yx7d",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793877081018",
+      "assignmentTitle": "Bài tập về chia cột - tạo dropcap - tạo bảng",
+      "targetClass": "TIN HỌC ĐẠI CƯƠNG",
+      "subject": "Tin Học Đại Cương",
+      "studentId": "u_26710844",
+      "studentName": "Trương Duy Minh Trí",
+      "studentCode": "26710844",
+      "submittedAt": "2026-11-05T13:57:05.437Z",
+      "createdAt": "2026-11-05T13:57:05.437Z",
+      "readBy": []
+    },
+    {
+      "id": "notif_sub_1793887024117_zskk",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793877081018",
+      "assignmentTitle": "Bài tập về chia cột - tạo dropcap - tạo bảng",
+      "targetClass": "TIN HỌC ĐẠI CƯƠNG",
+      "subject": "Tin Học Đại Cương",
+      "studentId": "u_26711149",
+      "studentName": "Phạm Minh Phát",
+      "studentCode": "26711149",
+      "submittedAt": "2026-11-05T13:57:04.117Z",
+      "createdAt": "2026-11-05T13:57:04.117Z",
+      "readBy": []
+    },
+    {
+      "id": "notif_sub_1793886281135_4bb5",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793769990154",
+      "assignmentTitle": "Tạo kỹ xảo cho banner",
+      "targetClass": "C08TK01",
+      "subject": "Xử Lý Kỹ Xảo với After Effects",
+      "studentId": "u_C08TK0102",
+      "studentName": "Nguyễn Thị Duyên",
+      "studentCode": "C08TK0102",
+      "submittedAt": "2026-11-05T13:44:41.135Z",
+      "createdAt": "2026-11-05T13:44:41.135Z",
+      "readBy": [
+        "u_C08TK0111"
+      ]
+    },
+    {
+      "id": "notif_1793877081019",
+      "type": "NEW_ASSIGNMENT",
+      "assignmentId": "asm_1793877081018",
+      "title": "Bài tập về chia cột - tạo dropcap - tạo bảng",
+      "description": "dựa vào file bài tập để thực hiện",
+      "targetClass": "TIN HỌC ĐẠI CƯƠNG",
+      "subject": "Tin Học Đại Cương",
+      "dueDate": "2026-11-05T21:00",
+      "teacherName": "Thầy Nguyễn Công Danh",
+      "teacherId": "u_teacher_danh",
+      "createdAt": "2026-11-05T11:11:21.019Z",
+      "readBy": []
+    },
+    {
       "id": "notif_sub_1793873609811_y6k5",
       "type": "STUDENT_SUBMITTED",
       "assignmentId": "asm_1793769990154",
@@ -2347,7 +2885,8 @@
       "submittedAt": "2026-11-05T10:13:29.811Z",
       "createdAt": "2026-11-05T10:13:29.811Z",
       "readBy": [
-        "u_C08TK0106"
+        "u_C08TK0106",
+        "u_C08TK0111"
       ]
     },
     {
@@ -3771,1564 +4310,6 @@
       "submittedAt": "2026-11-04T03:05:45.888Z",
       "createdAt": "2026-11-04T03:05:45.888Z",
       "readBy": [
-        "u_C08TK0107",
-        "u_C08TK0111"
-      ]
-    },
-    {
-      "id": "notif_sub_1793761540086_9ila",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1793752994063",
-      "assignmentTitle": "Tạo Thiết kế banner hoặc poster để tạo chuyển động",
-      "targetClass": "C08TK01",
-      "subject": "Xử Lý Kỹ Xảo với After Effects",
-      "studentId": "u_C08TK0113",
-      "studentName": "Nguyễn Vũ Anh Thư",
-      "studentCode": "C08TK0113",
-      "submittedAt": "2026-11-04T03:05:40.086Z",
-      "createdAt": "2026-11-04T03:05:40.086Z",
-      "readBy": [
-        "u_C08TK0107",
-        "u_C08TK0111"
-      ]
-    },
-    {
-      "id": "notif_sub_1793761534386_5c1i",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1793752994063",
-      "assignmentTitle": "Tạo Thiết kế banner hoặc poster để tạo chuyển động",
-      "targetClass": "C08TK01",
-      "subject": "Xử Lý Kỹ Xảo với After Effects",
-      "studentId": "u_C08TK0113",
-      "studentName": "Nguyễn Vũ Anh Thư",
-      "studentCode": "C08TK0113",
-      "submittedAt": "2026-11-04T03:05:34.386Z",
-      "createdAt": "2026-11-04T03:05:34.386Z",
-      "readBy": [
-        "u_C08TK0107",
-        "u_C08TK0111"
-      ]
-    },
-    {
-      "id": "notif_sub_1793761018295_fiyw",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1793752994063",
-      "assignmentTitle": "Tạo Thiết kế banner hoặc poster để tạo chuyển động",
-      "targetClass": "C08TK01",
-      "subject": "Xử Lý Kỹ Xảo với After Effects",
-      "studentId": "u_C08TK0105",
-      "studentName": "Nguyễn Đức Hiếu",
-      "studentCode": "C08TK0105",
-      "submittedAt": "2026-11-04T02:56:58.295Z",
-      "createdAt": "2026-11-04T02:56:58.295Z",
-      "readBy": [
-        "u_C08TK0107",
-        "u_C08TK0111"
-      ]
-    },
-    {
-      "id": "notif_sub_1793761016678_gpqf",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1793752994063",
-      "assignmentTitle": "Tạo Thiết kế banner hoặc poster để tạo chuyển động",
-      "targetClass": "C08TK01",
-      "subject": "Xử Lý Kỹ Xảo với After Effects",
-      "studentId": "u_C08TK0105",
-      "studentName": "Nguyễn Đức Hiếu",
-      "studentCode": "C08TK0105",
-      "submittedAt": "2026-11-04T02:56:56.678Z",
-      "createdAt": "2026-11-04T02:56:56.678Z",
-      "readBy": [
-        "u_C08TK0107",
-        "u_C08TK0111"
-      ]
-    },
-    {
-      "id": "notif_sub_1793760837149_fjh4",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1793752994063",
-      "assignmentTitle": "Tạo Thiết kế banner hoặc poster để tạo chuyển động",
-      "targetClass": "C08TK01",
-      "subject": "Xử Lý Kỹ Xảo với After Effects",
-      "studentId": "u_C08TK0112",
-      "studentName": "Ngô Đỗ Minh Thùy",
-      "studentCode": "C08TK0112",
-      "submittedAt": "2026-11-04T02:53:57.149Z",
-      "createdAt": "2026-11-04T02:53:57.149Z",
-      "readBy": [
-        "u_C08TK0107",
-        "u_C08TK0111"
-      ]
-    },
-    {
-      "id": "notif_sub_1793760832990_xyll",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1793752994063",
-      "assignmentTitle": "Tạo Thiết kế banner hoặc poster để tạo chuyển động",
-      "targetClass": "C08TK01",
-      "subject": "Xử Lý Kỹ Xảo với After Effects",
-      "studentId": "u_C08TK0112",
-      "studentName": "Ngô Đỗ Minh Thùy",
-      "studentCode": "C08TK0112",
-      "submittedAt": "2026-11-04T02:53:52.990Z",
-      "createdAt": "2026-11-04T02:53:52.990Z",
-      "readBy": [
-        "u_C08TK0107",
-        "u_C08TK0111"
-      ]
-    },
-    {
-      "id": "notif_1793760704118",
-      "type": "NEW_ASSIGNMENT",
-      "assignmentId": "asm_1793760704116",
-      "title": "BÀI TẬP THỰC HÀNH SHAPE TOOL",
-      "description": "SỬ DỤNG CÁC LỆNH VẼ ĐƯỜNG, HÌNH KHỐI CƠ BẢN VÀ MÀU SẮC HOÀN THÀNH BÀI TẬP",
-      "targetClass": "T15TK01",
-      "subject": "THIẾT KẾ MINH HỌA VỚI CORELDRAW",
-      "dueDate": "2026-11-07T02:49",
-      "teacherName": "Phạm Thái Dương",
-      "teacherId": "u_teacher_1793759462044",
-      "createdAt": "2026-11-04T02:51:44.118Z",
-      "readBy": []
-    },
-    {
-      "id": "notif_sub_1793760047880_ep7d",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1793609039129",
-      "assignmentTitle": "Làm bài báo cáo về 10 nguyên lý chuyển động trong motion graphics",
-      "targetClass": "C08TK01",
-      "subject": "Xử Lý Kỹ Xảo với After Effects",
-      "studentId": "u_C08TK0119",
-      "studentName": "Nguyễn Viết Vửng",
-      "studentCode": "C08TK0119",
-      "submittedAt": "2026-11-04T02:40:47.868Z",
-      "createdAt": "2026-11-04T02:40:47.868Z",
-      "readBy": [
-        "u_C08TK0118",
-        "u_C08TK0107",
-        "u_C08TK0111"
-      ]
-    },
-    {
-      "id": "notif_sub_1793760039152_ihol",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1793609039129",
-      "assignmentTitle": "Làm bài báo cáo về 10 nguyên lý chuyển động trong motion graphics",
-      "targetClass": "C08TK01",
-      "subject": "Xử Lý Kỹ Xảo với After Effects",
-      "studentId": "u_C08TK0119",
-      "studentName": "Nguyễn Viết Vửng",
-      "studentCode": "C08TK0119",
-      "submittedAt": "2026-11-04T02:40:39.152Z",
-      "createdAt": "2026-11-04T02:40:39.152Z",
-      "readBy": [
-        "u_C08TK0118",
-        "u_C08TK0107",
-        "u_C08TK0111"
-      ]
-    },
-    {
-      "id": "notif_sub_1793760034262_y0np",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1793609039129",
-      "assignmentTitle": "Làm bài báo cáo về 10 nguyên lý chuyển động trong motion graphics",
-      "targetClass": "C08TK01",
-      "subject": "Xử Lý Kỹ Xảo với After Effects",
-      "studentId": "u_C08TK0119",
-      "studentName": "Nguyễn Viết Vửng",
-      "studentCode": "C08TK0119",
-      "submittedAt": "2026-11-04T02:40:34.262Z",
-      "createdAt": "2026-11-04T02:40:34.262Z",
-      "readBy": [
-        "u_C08TK0107",
-        "u_C08TK0111"
-      ]
-    },
-    {
-      "id": "notif_sub_1793760032263_dgbm",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1793609039129",
-      "assignmentTitle": "Làm bài báo cáo về 10 nguyên lý chuyển động trong motion graphics",
-      "targetClass": "C08TK01",
-      "subject": "Xử Lý Kỹ Xảo với After Effects",
-      "studentId": "u_C08TK0119",
-      "studentName": "Nguyễn Viết Vửng",
-      "studentCode": "C08TK0119",
-      "submittedAt": "2026-11-04T02:40:32.263Z",
-      "createdAt": "2026-11-04T02:40:32.263Z",
-      "readBy": [
-        "u_C08TK0107",
-        "u_C08TK0111"
-      ]
-    },
-    {
-      "id": "notif_sub_1793760031465_mxgh",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1793609039129",
-      "assignmentTitle": "Làm bài báo cáo về 10 nguyên lý chuyển động trong motion graphics",
-      "targetClass": "C08TK01",
-      "subject": "Xử Lý Kỹ Xảo với After Effects",
-      "studentId": "u_C08TK0119",
-      "studentName": "Nguyễn Viết Vửng",
-      "studentCode": "C08TK0119",
-      "submittedAt": "2026-11-04T02:40:31.465Z",
-      "createdAt": "2026-11-04T02:40:31.465Z",
-      "readBy": [
-        "u_C08TK0107",
-        "u_C08TK0111"
-      ]
-    },
-    {
-      "id": "notif_sub_1793760018645_c7wh",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1793609039129",
-      "assignmentTitle": "Làm bài báo cáo về 10 nguyên lý chuyển động trong motion graphics",
-      "targetClass": "C08TK01",
-      "subject": "Xử Lý Kỹ Xảo với After Effects",
-      "studentId": "u_C08TK0119",
-      "studentName": "Nguyễn Viết Vửng",
-      "studentCode": "C08TK0119",
-      "submittedAt": "2026-11-04T02:40:18.645Z",
-      "createdAt": "2026-11-04T02:40:18.645Z",
-      "readBy": [
-        "u_C08TK0107",
-        "u_C08TK0111"
-      ]
-    },
-    {
-      "id": "notif_sub_1793760007673_ljj2",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1793609039129",
-      "assignmentTitle": "Làm bài báo cáo về 10 nguyên lý chuyển động trong motion graphics",
-      "targetClass": "C08TK01",
-      "subject": "Xử Lý Kỹ Xảo với After Effects",
-      "studentId": "u_C08TK0119",
-      "studentName": "Nguyễn Viết Vửng",
-      "studentCode": "C08TK0119",
-      "submittedAt": "2026-11-04T02:40:07.673Z",
-      "createdAt": "2026-11-04T02:40:07.673Z",
-      "readBy": [
-        "u_C08TK0107",
-        "u_C08TK0111"
-      ]
-    },
-    {
-      "id": "notif_sub_1793760003661_ugam",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1793609039129",
-      "assignmentTitle": "Làm bài báo cáo về 10 nguyên lý chuyển động trong motion graphics",
-      "targetClass": "C08TK01",
-      "subject": "Xử Lý Kỹ Xảo với After Effects",
-      "studentId": "u_C08TK0119",
-      "studentName": "Nguyễn Viết Vửng",
-      "studentCode": "C08TK0119",
-      "submittedAt": "2026-11-04T02:40:03.661Z",
-      "createdAt": "2026-11-04T02:40:03.661Z",
-      "readBy": [
-        "u_C08TK0107",
-        "u_C08TK0111"
-      ]
-    },
-    {
-      "id": "notif_sub_1793760002557_dawe",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1793609039129",
-      "assignmentTitle": "Làm bài báo cáo về 10 nguyên lý chuyển động trong motion graphics",
-      "targetClass": "C08TK01",
-      "subject": "Xử Lý Kỹ Xảo với After Effects",
-      "studentId": "u_C08TK0119",
-      "studentName": "Nguyễn Viết Vửng",
-      "studentCode": "C08TK0119",
-      "submittedAt": "2026-11-04T02:40:02.557Z",
-      "createdAt": "2026-11-04T02:40:02.557Z",
-      "readBy": [
-        "u_C08TK0107",
-        "u_C08TK0111"
-      ]
-    },
-    {
-      "id": "notif_sub_1793759999161_k7ia",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1793609039129",
-      "assignmentTitle": "Làm bài báo cáo về 10 nguyên lý chuyển động trong motion graphics",
-      "targetClass": "C08TK01",
-      "subject": "Xử Lý Kỹ Xảo với After Effects",
-      "studentId": "u_C08TK0119",
-      "studentName": "Nguyễn Viết Vửng",
-      "studentCode": "C08TK0119",
-      "submittedAt": "2026-11-04T02:39:59.161Z",
-      "createdAt": "2026-11-04T02:39:59.161Z",
-      "readBy": [
-        "u_C08TK0107",
-        "u_C08TK0111"
-      ]
-    },
-    {
-      "id": "notif_sub_1793759996945_vlee",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1793609039129",
-      "assignmentTitle": "Làm bài báo cáo về 10 nguyên lý chuyển động trong motion graphics",
-      "targetClass": "C08TK01",
-      "subject": "Xử Lý Kỹ Xảo với After Effects",
-      "studentId": "u_C08TK0119",
-      "studentName": "Nguyễn Viết Vửng",
-      "studentCode": "C08TK0119",
-      "submittedAt": "2026-11-04T02:39:56.945Z",
-      "createdAt": "2026-11-04T02:39:56.945Z",
-      "readBy": [
-        "u_C08TK0107",
-        "u_C08TK0111"
-      ]
-    },
-    {
-      "id": "notif_sub_1793759979881_gxy6",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1793609039129",
-      "assignmentTitle": "Làm bài báo cáo về 10 nguyên lý chuyển động trong motion graphics",
-      "targetClass": "C08TK01",
-      "subject": "Xử Lý Kỹ Xảo với After Effects",
-      "studentId": "u_C08TK0119",
-      "studentName": "Nguyễn Viết Vửng",
-      "studentCode": "C08TK0119",
-      "submittedAt": "2026-11-04T02:39:39.881Z",
-      "createdAt": "2026-11-04T02:39:39.881Z",
-      "readBy": [
-        "u_C08TK0107",
-        "u_C08TK0111"
-      ]
-    },
-    {
-      "id": "notif_sub_1793759977881_7gcg",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1793609039129",
-      "assignmentTitle": "Làm bài báo cáo về 10 nguyên lý chuyển động trong motion graphics",
-      "targetClass": "C08TK01",
-      "subject": "Xử Lý Kỹ Xảo với After Effects",
-      "studentId": "u_C08TK0119",
-      "studentName": "Nguyễn Viết Vửng",
-      "studentCode": "C08TK0119",
-      "submittedAt": "2026-11-04T02:39:37.881Z",
-      "createdAt": "2026-11-04T02:39:37.881Z",
-      "readBy": [
-        "u_C08TK0107",
-        "u_C08TK0111"
-      ]
-    },
-    {
-      "id": "notif_sub_1793759872384_a2zj",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1793609039129",
-      "assignmentTitle": "Làm bài báo cáo về 10 nguyên lý chuyển động trong motion graphics",
-      "targetClass": "C08TK01",
-      "subject": "Xử Lý Kỹ Xảo với After Effects",
-      "studentId": "u_C08TK0104",
-      "studentName": "Nguyễn Hải Đăng",
-      "studentCode": "C08TK0104",
-      "submittedAt": "2026-11-04T02:37:52.384Z",
-      "createdAt": "2026-11-04T02:37:52.384Z",
-      "readBy": [
-        "u_C08TK0107",
-        "u_C08TK0111"
-      ]
-    },
-    {
-      "id": "notif_sub_1793759872279_4pmj",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1793609039129",
-      "assignmentTitle": "Làm bài báo cáo về 10 nguyên lý chuyển động trong motion graphics",
-      "targetClass": "C08TK01",
-      "subject": "Xử Lý Kỹ Xảo với After Effects",
-      "studentId": "u_C08TK0104",
-      "studentName": "Nguyễn Hải Đăng",
-      "studentCode": "C08TK0104",
-      "submittedAt": "2026-11-04T02:37:52.279Z",
-      "createdAt": "2026-11-04T02:37:52.279Z",
-      "readBy": [
-        "u_C08TK0107",
-        "u_C08TK0111"
-      ]
-    },
-    {
-      "id": "notif_sub_1793759872196_43f6",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1793609039129",
-      "assignmentTitle": "Làm bài báo cáo về 10 nguyên lý chuyển động trong motion graphics",
-      "targetClass": "C08TK01",
-      "subject": "Xử Lý Kỹ Xảo với After Effects",
-      "studentId": "u_C08TK0104",
-      "studentName": "Nguyễn Hải Đăng",
-      "studentCode": "C08TK0104",
-      "submittedAt": "2026-11-04T02:37:52.195Z",
-      "createdAt": "2026-11-04T02:37:52.195Z",
-      "readBy": [
-        "u_C08TK0107",
-        "u_C08TK0111"
-      ]
-    },
-    {
-      "id": "notif_sub_1793759872094_wmbe",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1793609039129",
-      "assignmentTitle": "Làm bài báo cáo về 10 nguyên lý chuyển động trong motion graphics",
-      "targetClass": "C08TK01",
-      "subject": "Xử Lý Kỹ Xảo với After Effects",
-      "studentId": "u_C08TK0104",
-      "studentName": "Nguyễn Hải Đăng",
-      "studentCode": "C08TK0104",
-      "submittedAt": "2026-11-04T02:37:52.094Z",
-      "createdAt": "2026-11-04T02:37:52.094Z",
-      "readBy": [
-        "u_C08TK0107",
-        "u_C08TK0111"
-      ]
-    },
-    {
-      "id": "notif_sub_1793759871979_2wjh",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1793609039129",
-      "assignmentTitle": "Làm bài báo cáo về 10 nguyên lý chuyển động trong motion graphics",
-      "targetClass": "C08TK01",
-      "subject": "Xử Lý Kỹ Xảo với After Effects",
-      "studentId": "u_C08TK0104",
-      "studentName": "Nguyễn Hải Đăng",
-      "studentCode": "C08TK0104",
-      "submittedAt": "2026-11-04T02:37:51.979Z",
-      "createdAt": "2026-11-04T02:37:51.979Z",
-      "readBy": [
-        "u_C08TK0107",
-        "u_C08TK0111"
-      ]
-    },
-    {
-      "id": "notif_sub_1793759871878_fl7g",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1793609039129",
-      "assignmentTitle": "Làm bài báo cáo về 10 nguyên lý chuyển động trong motion graphics",
-      "targetClass": "C08TK01",
-      "subject": "Xử Lý Kỹ Xảo với After Effects",
-      "studentId": "u_C08TK0104",
-      "studentName": "Nguyễn Hải Đăng",
-      "studentCode": "C08TK0104",
-      "submittedAt": "2026-11-04T02:37:51.878Z",
-      "createdAt": "2026-11-04T02:37:51.878Z",
-      "readBy": [
-        "u_C08TK0107",
-        "u_C08TK0111"
-      ]
-    },
-    {
-      "id": "notif_sub_1793759871774_7bps",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1793609039129",
-      "assignmentTitle": "Làm bài báo cáo về 10 nguyên lý chuyển động trong motion graphics",
-      "targetClass": "C08TK01",
-      "subject": "Xử Lý Kỹ Xảo với After Effects",
-      "studentId": "u_C08TK0104",
-      "studentName": "Nguyễn Hải Đăng",
-      "studentCode": "C08TK0104",
-      "submittedAt": "2026-11-04T02:37:51.774Z",
-      "createdAt": "2026-11-04T02:37:51.774Z",
-      "readBy": [
-        "u_C08TK0107",
-        "u_C08TK0111"
-      ]
-    },
-    {
-      "id": "notif_sub_1793759871659_pf0w",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1793609039129",
-      "assignmentTitle": "Làm bài báo cáo về 10 nguyên lý chuyển động trong motion graphics",
-      "targetClass": "C08TK01",
-      "subject": "Xử Lý Kỹ Xảo với After Effects",
-      "studentId": "u_C08TK0104",
-      "studentName": "Nguyễn Hải Đăng",
-      "studentCode": "C08TK0104",
-      "submittedAt": "2026-11-04T02:37:51.659Z",
-      "createdAt": "2026-11-04T02:37:51.659Z",
-      "readBy": [
-        "u_C08TK0107",
-        "u_C08TK0111"
-      ]
-    },
-    {
-      "id": "notif_sub_1793759871186_gib5",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1793609039129",
-      "assignmentTitle": "Làm bài báo cáo về 10 nguyên lý chuyển động trong motion graphics",
-      "targetClass": "C08TK01",
-      "subject": "Xử Lý Kỹ Xảo với After Effects",
-      "studentId": "u_C08TK0104",
-      "studentName": "Nguyễn Hải Đăng",
-      "studentCode": "C08TK0104",
-      "submittedAt": "2026-11-04T02:37:51.186Z",
-      "createdAt": "2026-11-04T02:37:51.186Z",
-      "readBy": [
-        "u_C08TK0107",
-        "u_C08TK0111"
-      ]
-    },
-    {
-      "id": "notif_sub_1793759871087_dzla",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1793609039129",
-      "assignmentTitle": "Làm bài báo cáo về 10 nguyên lý chuyển động trong motion graphics",
-      "targetClass": "C08TK01",
-      "subject": "Xử Lý Kỹ Xảo với After Effects",
-      "studentId": "u_C08TK0104",
-      "studentName": "Nguyễn Hải Đăng",
-      "studentCode": "C08TK0104",
-      "submittedAt": "2026-11-04T02:37:51.087Z",
-      "createdAt": "2026-11-04T02:37:51.087Z",
-      "readBy": [
-        "u_C08TK0107",
-        "u_C08TK0111"
-      ]
-    },
-    {
-      "id": "notif_sub_1793759870988_2j2j",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1793609039129",
-      "assignmentTitle": "Làm bài báo cáo về 10 nguyên lý chuyển động trong motion graphics",
-      "targetClass": "C08TK01",
-      "subject": "Xử Lý Kỹ Xảo với After Effects",
-      "studentId": "u_C08TK0104",
-      "studentName": "Nguyễn Hải Đăng",
-      "studentCode": "C08TK0104",
-      "submittedAt": "2026-11-04T02:37:50.988Z",
-      "createdAt": "2026-11-04T02:37:50.988Z",
-      "readBy": [
-        "u_C08TK0107",
-        "u_C08TK0111"
-      ]
-    },
-    {
-      "id": "notif_sub_1793759870789_ayp5",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1793609039129",
-      "assignmentTitle": "Làm bài báo cáo về 10 nguyên lý chuyển động trong motion graphics",
-      "targetClass": "C08TK01",
-      "subject": "Xử Lý Kỹ Xảo với After Effects",
-      "studentId": "u_C08TK0104",
-      "studentName": "Nguyễn Hải Đăng",
-      "studentCode": "C08TK0104",
-      "submittedAt": "2026-11-04T02:37:50.789Z",
-      "createdAt": "2026-11-04T02:37:50.789Z",
-      "readBy": [
-        "u_C08TK0107",
-        "u_C08TK0111"
-      ]
-    },
-    {
-      "id": "notif_sub_1793759870288_dnw9",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1793609039129",
-      "assignmentTitle": "Làm bài báo cáo về 10 nguyên lý chuyển động trong motion graphics",
-      "targetClass": "C08TK01",
-      "subject": "Xử Lý Kỹ Xảo với After Effects",
-      "studentId": "u_C08TK0104",
-      "studentName": "Nguyễn Hải Đăng",
-      "studentCode": "C08TK0104",
-      "submittedAt": "2026-11-04T02:37:50.288Z",
-      "createdAt": "2026-11-04T02:37:50.288Z",
-      "readBy": [
-        "u_C08TK0107",
-        "u_C08TK0111"
-      ]
-    },
-    {
-      "id": "notif_sub_1793759869489_eg3l",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1793609039129",
-      "assignmentTitle": "Làm bài báo cáo về 10 nguyên lý chuyển động trong motion graphics",
-      "targetClass": "C08TK01",
-      "subject": "Xử Lý Kỹ Xảo với After Effects",
-      "studentId": "u_C08TK0104",
-      "studentName": "Nguyễn Hải Đăng",
-      "studentCode": "C08TK0104",
-      "submittedAt": "2026-11-04T02:37:49.489Z",
-      "createdAt": "2026-11-04T02:37:49.489Z",
-      "readBy": [
-        "u_C08TK0107",
-        "u_C08TK0111"
-      ]
-    },
-    {
-      "id": "notif_sub_1793759869394_9pes",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1793609039129",
-      "assignmentTitle": "Làm bài báo cáo về 10 nguyên lý chuyển động trong motion graphics",
-      "targetClass": "C08TK01",
-      "subject": "Xử Lý Kỹ Xảo với After Effects",
-      "studentId": "u_C08TK0104",
-      "studentName": "Nguyễn Hải Đăng",
-      "studentCode": "C08TK0104",
-      "submittedAt": "2026-11-04T02:37:49.394Z",
-      "createdAt": "2026-11-04T02:37:49.394Z",
-      "readBy": [
-        "u_C08TK0107",
-        "u_C08TK0111"
-      ]
-    },
-    {
-      "id": "notif_sub_1793759869292_ffyx",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1793609039129",
-      "assignmentTitle": "Làm bài báo cáo về 10 nguyên lý chuyển động trong motion graphics",
-      "targetClass": "C08TK01",
-      "subject": "Xử Lý Kỹ Xảo với After Effects",
-      "studentId": "u_C08TK0104",
-      "studentName": "Nguyễn Hải Đăng",
-      "studentCode": "C08TK0104",
-      "submittedAt": "2026-11-04T02:37:49.292Z",
-      "createdAt": "2026-11-04T02:37:49.292Z",
-      "readBy": [
-        "u_C08TK0107",
-        "u_C08TK0111"
-      ]
-    },
-    {
-      "id": "notif_sub_1793759869088_3nsx",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1793609039129",
-      "assignmentTitle": "Làm bài báo cáo về 10 nguyên lý chuyển động trong motion graphics",
-      "targetClass": "C08TK01",
-      "subject": "Xử Lý Kỹ Xảo với After Effects",
-      "studentId": "u_C08TK0104",
-      "studentName": "Nguyễn Hải Đăng",
-      "studentCode": "C08TK0104",
-      "submittedAt": "2026-11-04T02:37:49.088Z",
-      "createdAt": "2026-11-04T02:37:49.088Z",
-      "readBy": [
-        "u_C08TK0107",
-        "u_C08TK0111"
-      ]
-    },
-    {
-      "id": "notif_sub_1793759868288_3mqk",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1793609039129",
-      "assignmentTitle": "Làm bài báo cáo về 10 nguyên lý chuyển động trong motion graphics",
-      "targetClass": "C08TK01",
-      "subject": "Xử Lý Kỹ Xảo với After Effects",
-      "studentId": "u_C08TK0104",
-      "studentName": "Nguyễn Hải Đăng",
-      "studentCode": "C08TK0104",
-      "submittedAt": "2026-11-04T02:37:48.288Z",
-      "createdAt": "2026-11-04T02:37:48.288Z",
-      "readBy": [
-        "u_C08TK0107",
-        "u_C08TK0111"
-      ]
-    },
-    {
-      "id": "notif_sub_1793759867991_rzp6",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1793609039129",
-      "assignmentTitle": "Làm bài báo cáo về 10 nguyên lý chuyển động trong motion graphics",
-      "targetClass": "C08TK01",
-      "subject": "Xử Lý Kỹ Xảo với After Effects",
-      "studentId": "u_C08TK0104",
-      "studentName": "Nguyễn Hải Đăng",
-      "studentCode": "C08TK0104",
-      "submittedAt": "2026-11-04T02:37:47.991Z",
-      "createdAt": "2026-11-04T02:37:47.991Z",
-      "readBy": [
-        "u_C08TK0107",
-        "u_C08TK0111"
-      ]
-    },
-    {
-      "id": "notif_sub_1793759865986_v0na",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1793609039129",
-      "assignmentTitle": "Làm bài báo cáo về 10 nguyên lý chuyển động trong motion graphics",
-      "targetClass": "C08TK01",
-      "subject": "Xử Lý Kỹ Xảo với After Effects",
-      "studentId": "u_C08TK0104",
-      "studentName": "Nguyễn Hải Đăng",
-      "studentCode": "C08TK0104",
-      "submittedAt": "2026-11-04T02:37:45.986Z",
-      "createdAt": "2026-11-04T02:37:45.986Z",
-      "readBy": [
-        "u_C08TK0107",
-        "u_C08TK0111"
-      ]
-    },
-    {
-      "id": "notif_sub_1793759863787_2wfs",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1793609039129",
-      "assignmentTitle": "Làm bài báo cáo về 10 nguyên lý chuyển động trong motion graphics",
-      "targetClass": "C08TK01",
-      "subject": "Xử Lý Kỹ Xảo với After Effects",
-      "studentId": "u_C08TK0104",
-      "studentName": "Nguyễn Hải Đăng",
-      "studentCode": "C08TK0104",
-      "submittedAt": "2026-11-04T02:37:43.787Z",
-      "createdAt": "2026-11-04T02:37:43.787Z",
-      "readBy": [
-        "u_C08TK0107",
-        "u_C08TK0111"
-      ]
-    },
-    {
-      "id": "notif_sub_1793759862689_ymia",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1793609039129",
-      "assignmentTitle": "Làm bài báo cáo về 10 nguyên lý chuyển động trong motion graphics",
-      "targetClass": "C08TK01",
-      "subject": "Xử Lý Kỹ Xảo với After Effects",
-      "studentId": "u_C08TK0104",
-      "studentName": "Nguyễn Hải Đăng",
-      "studentCode": "C08TK0104",
-      "submittedAt": "2026-11-04T02:37:42.689Z",
-      "createdAt": "2026-11-04T02:37:42.689Z",
-      "readBy": [
-        "u_C08TK0107",
-        "u_C08TK0111"
-      ]
-    },
-    {
-      "id": "notif_sub_1793759862188_5i5w",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1793609039129",
-      "assignmentTitle": "Làm bài báo cáo về 10 nguyên lý chuyển động trong motion graphics",
-      "targetClass": "C08TK01",
-      "subject": "Xử Lý Kỹ Xảo với After Effects",
-      "studentId": "u_C08TK0104",
-      "studentName": "Nguyễn Hải Đăng",
-      "studentCode": "C08TK0104",
-      "submittedAt": "2026-11-04T02:37:42.188Z",
-      "createdAt": "2026-11-04T02:37:42.188Z",
-      "readBy": [
-        "u_C08TK0107",
-        "u_C08TK0111"
-      ]
-    },
-    {
-      "id": "notif_sub_1793759859690_qmli",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1793609039129",
-      "assignmentTitle": "Làm bài báo cáo về 10 nguyên lý chuyển động trong motion graphics",
-      "targetClass": "C08TK01",
-      "subject": "Xử Lý Kỹ Xảo với After Effects",
-      "studentId": "u_C08TK0104",
-      "studentName": "Nguyễn Hải Đăng",
-      "studentCode": "C08TK0104",
-      "submittedAt": "2026-11-04T02:37:39.690Z",
-      "createdAt": "2026-11-04T02:37:39.690Z",
-      "readBy": [
-        "u_C08TK0107",
-        "u_C08TK0111"
-      ]
-    },
-    {
-      "id": "notif_sub_1793759816695_fk8x",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1793609039129",
-      "assignmentTitle": "Làm bài báo cáo về 10 nguyên lý chuyển động trong motion graphics",
-      "targetClass": "C08TK01",
-      "subject": "Xử Lý Kỹ Xảo với After Effects",
-      "studentId": "u_C08TK0104",
-      "studentName": "Nguyễn Hải Đăng",
-      "studentCode": "C08TK0104",
-      "submittedAt": "2026-11-04T02:36:56.695Z",
-      "createdAt": "2026-11-04T02:36:56.695Z",
-      "readBy": [
-        "u_C08TK0107",
-        "u_C08TK0111"
-      ]
-    },
-    {
-      "id": "notif_sub_1793759799315_828h",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1793609039129",
-      "assignmentTitle": "Làm bài báo cáo về 10 nguyên lý chuyển động trong motion graphics",
-      "targetClass": "C08TK01",
-      "subject": "Xử Lý Kỹ Xảo với After Effects",
-      "studentId": "u_C08TK0104",
-      "studentName": "Nguyễn Hải Đăng",
-      "studentCode": "C08TK0104",
-      "submittedAt": "2026-11-04T02:36:39.315Z",
-      "createdAt": "2026-11-04T02:36:39.315Z",
-      "readBy": [
-        "u_C08TK0107",
-        "u_C08TK0111"
-      ]
-    },
-    {
-      "id": "notif_sub_1793759799202_mtt1",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1793609039129",
-      "assignmentTitle": "Làm bài báo cáo về 10 nguyên lý chuyển động trong motion graphics",
-      "targetClass": "C08TK01",
-      "subject": "Xử Lý Kỹ Xảo với After Effects",
-      "studentId": "u_C08TK0104",
-      "studentName": "Nguyễn Hải Đăng",
-      "studentCode": "C08TK0104",
-      "submittedAt": "2026-11-04T02:36:39.201Z",
-      "createdAt": "2026-11-04T02:36:39.201Z",
-      "readBy": [
-        "u_C08TK0107",
-        "u_C08TK0111"
-      ]
-    },
-    {
-      "id": "notif_sub_1793759799101_o54u",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1793609039129",
-      "assignmentTitle": "Làm bài báo cáo về 10 nguyên lý chuyển động trong motion graphics",
-      "targetClass": "C08TK01",
-      "subject": "Xử Lý Kỹ Xảo với After Effects",
-      "studentId": "u_C08TK0104",
-      "studentName": "Nguyễn Hải Đăng",
-      "studentCode": "C08TK0104",
-      "submittedAt": "2026-11-04T02:36:39.101Z",
-      "createdAt": "2026-11-04T02:36:39.101Z",
-      "readBy": [
-        "u_C08TK0107",
-        "u_C08TK0111"
-      ]
-    },
-    {
-      "id": "notif_sub_1793759798996_phn2",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1793609039129",
-      "assignmentTitle": "Làm bài báo cáo về 10 nguyên lý chuyển động trong motion graphics",
-      "targetClass": "C08TK01",
-      "subject": "Xử Lý Kỹ Xảo với After Effects",
-      "studentId": "u_C08TK0104",
-      "studentName": "Nguyễn Hải Đăng",
-      "studentCode": "C08TK0104",
-      "submittedAt": "2026-11-04T02:36:38.996Z",
-      "createdAt": "2026-11-04T02:36:38.996Z",
-      "readBy": [
-        "u_C08TK0107",
-        "u_C08TK0111"
-      ]
-    },
-    {
-      "id": "notif_sub_1793759798889_jfm3",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1793609039129",
-      "assignmentTitle": "Làm bài báo cáo về 10 nguyên lý chuyển động trong motion graphics",
-      "targetClass": "C08TK01",
-      "subject": "Xử Lý Kỹ Xảo với After Effects",
-      "studentId": "u_C08TK0104",
-      "studentName": "Nguyễn Hải Đăng",
-      "studentCode": "C08TK0104",
-      "submittedAt": "2026-11-04T02:36:38.889Z",
-      "createdAt": "2026-11-04T02:36:38.889Z",
-      "readBy": [
-        "u_C08TK0107",
-        "u_C08TK0111"
-      ]
-    },
-    {
-      "id": "notif_sub_1793759798775_oa5r",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1793609039129",
-      "assignmentTitle": "Làm bài báo cáo về 10 nguyên lý chuyển động trong motion graphics",
-      "targetClass": "C08TK01",
-      "subject": "Xử Lý Kỹ Xảo với After Effects",
-      "studentId": "u_C08TK0104",
-      "studentName": "Nguyễn Hải Đăng",
-      "studentCode": "C08TK0104",
-      "submittedAt": "2026-11-04T02:36:38.775Z",
-      "createdAt": "2026-11-04T02:36:38.775Z",
-      "readBy": [
-        "u_C08TK0107",
-        "u_C08TK0111"
-      ]
-    },
-    {
-      "id": "notif_sub_1793759798355_e5q5",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1793609039129",
-      "assignmentTitle": "Làm bài báo cáo về 10 nguyên lý chuyển động trong motion graphics",
-      "targetClass": "C08TK01",
-      "subject": "Xử Lý Kỹ Xảo với After Effects",
-      "studentId": "u_C08TK0104",
-      "studentName": "Nguyễn Hải Đăng",
-      "studentCode": "C08TK0104",
-      "submittedAt": "2026-11-04T02:36:38.355Z",
-      "createdAt": "2026-11-04T02:36:38.355Z",
-      "readBy": [
-        "u_C08TK0107",
-        "u_C08TK0111"
-      ]
-    },
-    {
-      "id": "notif_sub_1793759798031_jrbq",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1793609039129",
-      "assignmentTitle": "Làm bài báo cáo về 10 nguyên lý chuyển động trong motion graphics",
-      "targetClass": "C08TK01",
-      "subject": "Xử Lý Kỹ Xảo với After Effects",
-      "studentId": "u_C08TK0104",
-      "studentName": "Nguyễn Hải Đăng",
-      "studentCode": "C08TK0104",
-      "submittedAt": "2026-11-04T02:36:38.031Z",
-      "createdAt": "2026-11-04T02:36:38.031Z",
-      "readBy": [
-        "u_C08TK0107",
-        "u_C08TK0111"
-      ]
-    },
-    {
-      "id": "notif_sub_1793759797632_137e",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1793609039129",
-      "assignmentTitle": "Làm bài báo cáo về 10 nguyên lý chuyển động trong motion graphics",
-      "targetClass": "C08TK01",
-      "subject": "Xử Lý Kỹ Xảo với After Effects",
-      "studentId": "u_C08TK0104",
-      "studentName": "Nguyễn Hải Đăng",
-      "studentCode": "C08TK0104",
-      "submittedAt": "2026-11-04T02:36:37.632Z",
-      "createdAt": "2026-11-04T02:36:37.632Z",
-      "readBy": [
-        "u_C08TK0107",
-        "u_C08TK0111"
-      ]
-    },
-    {
-      "id": "notif_sub_1793759795311_x660",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1793609039129",
-      "assignmentTitle": "Làm bài báo cáo về 10 nguyên lý chuyển động trong motion graphics",
-      "targetClass": "C08TK01",
-      "subject": "Xử Lý Kỹ Xảo với After Effects",
-      "studentId": "u_C08TK0104",
-      "studentName": "Nguyễn Hải Đăng",
-      "studentCode": "C08TK0104",
-      "submittedAt": "2026-11-04T02:36:35.311Z",
-      "createdAt": "2026-11-04T02:36:35.311Z",
-      "readBy": [
-        "u_C08TK0107",
-        "u_C08TK0111"
-      ]
-    },
-    {
-      "id": "notif_sub_1793759795207_80y8",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1793609039129",
-      "assignmentTitle": "Làm bài báo cáo về 10 nguyên lý chuyển động trong motion graphics",
-      "targetClass": "C08TK01",
-      "subject": "Xử Lý Kỹ Xảo với After Effects",
-      "studentId": "u_C08TK0104",
-      "studentName": "Nguyễn Hải Đăng",
-      "studentCode": "C08TK0104",
-      "submittedAt": "2026-11-04T02:36:35.207Z",
-      "createdAt": "2026-11-04T02:36:35.207Z",
-      "readBy": [
-        "u_C08TK0107",
-        "u_C08TK0111"
-      ]
-    },
-    {
-      "id": "notif_sub_1793759795094_x97o",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1793609039129",
-      "assignmentTitle": "Làm bài báo cáo về 10 nguyên lý chuyển động trong motion graphics",
-      "targetClass": "C08TK01",
-      "subject": "Xử Lý Kỹ Xảo với After Effects",
-      "studentId": "u_C08TK0104",
-      "studentName": "Nguyễn Hải Đăng",
-      "studentCode": "C08TK0104",
-      "submittedAt": "2026-11-04T02:36:35.094Z",
-      "createdAt": "2026-11-04T02:36:35.094Z",
-      "readBy": [
-        "u_C08TK0107",
-        "u_C08TK0111"
-      ]
-    },
-    {
-      "id": "notif_sub_1793759794231_9h1l",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1793609039129",
-      "assignmentTitle": "Làm bài báo cáo về 10 nguyên lý chuyển động trong motion graphics",
-      "targetClass": "C08TK01",
-      "subject": "Xử Lý Kỹ Xảo với After Effects",
-      "studentId": "u_C08TK0104",
-      "studentName": "Nguyễn Hải Đăng",
-      "studentCode": "C08TK0104",
-      "submittedAt": "2026-11-04T02:36:34.231Z",
-      "createdAt": "2026-11-04T02:36:34.231Z",
-      "readBy": [
-        "u_C08TK0107",
-        "u_C08TK0111"
-      ]
-    },
-    {
-      "id": "notif_sub_1793759791834_o5kn",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1793609039129",
-      "assignmentTitle": "Làm bài báo cáo về 10 nguyên lý chuyển động trong motion graphics",
-      "targetClass": "C08TK01",
-      "subject": "Xử Lý Kỹ Xảo với After Effects",
-      "studentId": "u_C08TK0104",
-      "studentName": "Nguyễn Hải Đăng",
-      "studentCode": "C08TK0104",
-      "submittedAt": "2026-11-04T02:36:31.834Z",
-      "createdAt": "2026-11-04T02:36:31.834Z",
-      "readBy": [
-        "u_C08TK0107",
-        "u_C08TK0111"
-      ]
-    },
-    {
-      "id": "notif_sub_1793759767862_x8iv",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1793609039129",
-      "assignmentTitle": "Làm bài báo cáo về 10 nguyên lý chuyển động trong motion graphics",
-      "targetClass": "C08TK01",
-      "subject": "Xử Lý Kỹ Xảo với After Effects",
-      "studentId": "u_C08TK0104",
-      "studentName": "Nguyễn Hải Đăng",
-      "studentCode": "C08TK0104",
-      "submittedAt": "2026-11-04T02:36:07.862Z",
-      "createdAt": "2026-11-04T02:36:07.862Z",
-      "readBy": [
-        "u_C08TK0107",
-        "u_C08TK0111"
-      ]
-    },
-    {
-      "id": "notif_sub_1793759619246_fnso",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1793609039129",
-      "assignmentTitle": "Làm bài báo cáo về 10 nguyên lý chuyển động trong motion graphics",
-      "targetClass": "C08TK01",
-      "subject": "Xử Lý Kỹ Xảo với After Effects",
-      "studentId": "u_C08TK0123",
-      "studentName": "Trần Hoàng Long",
-      "studentCode": "C08TK0123",
-      "submittedAt": "2026-11-04T02:33:39.245Z",
-      "createdAt": "2026-11-04T02:33:39.245Z",
-      "readBy": [
-        "u_C08TK0107",
-        "u_C08TK0111"
-      ]
-    },
-    {
-      "id": "notif_sub_1793759026497_1yjp",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1793752994063",
-      "assignmentTitle": "Tạo Thiết kế banner hoặc poster để tạo chuyển động",
-      "targetClass": "C08TK01",
-      "subject": "Xử Lý Kỹ Xảo với After Effects",
-      "studentId": "u_C08TK0124",
-      "studentName": "Nguyễn Tất Việt",
-      "studentCode": "C08TK0124",
-      "submittedAt": "2026-11-04T02:23:46.497Z",
-      "createdAt": "2026-11-04T02:23:46.497Z",
-      "readBy": [
-        "u_C08TK0104",
-        "u_C08TK0107",
-        "u_C08TK0111"
-      ]
-    },
-    {
-      "id": "notif_sub_1793758526725_4cca",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1793609039129",
-      "assignmentTitle": "Làm bài báo cáo về 10 nguyên lý chuyển động trong motion graphics",
-      "targetClass": "C08TK01",
-      "subject": "Xử Lý Kỹ Xảo với After Effects",
-      "studentId": "u_C08TK0102",
-      "studentName": "Nguyễn Thị Duyên",
-      "studentCode": "C08TK0102",
-      "submittedAt": "2026-11-04T02:15:26.725Z",
-      "createdAt": "2026-11-04T02:15:26.725Z",
-      "readBy": [
-        "u_C08TK0106",
-        "u_C08TK0107",
-        "u_C08TK0111"
-      ]
-    },
-    {
-      "id": "notif_sub_1793758368844_npta",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1793752994063",
-      "assignmentTitle": "Tạo Thiết kế banner hoặc poster để tạo chuyển động",
-      "targetClass": "C08TK01",
-      "subject": "Xử Lý Kỹ Xảo với After Effects",
-      "studentId": "u_C08TK0106",
-      "studentName": "Đỗ Ngọc Khuê",
-      "studentCode": "C08TK0106",
-      "submittedAt": "2026-11-04T02:12:48.844Z",
-      "createdAt": "2026-11-04T02:12:48.844Z",
-      "readBy": [
-        "u_C08TK0106",
-        "u_C08TK0107",
-        "u_C08TK0111"
-      ]
-    },
-    {
-      "id": "notif_sub_1793758358219_ja5t",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1793752994063",
-      "assignmentTitle": "Tạo Thiết kế banner hoặc poster để tạo chuyển động",
-      "targetClass": "C08TK01",
-      "subject": "Xử Lý Kỹ Xảo với After Effects",
-      "studentId": "u_C08TK0106",
-      "studentName": "Đỗ Ngọc Khuê",
-      "studentCode": "C08TK0106",
-      "submittedAt": "2026-11-04T02:12:38.219Z",
-      "createdAt": "2026-11-04T02:12:38.219Z",
-      "readBy": [
-        "u_C08TK0106",
-        "u_C08TK0107",
-        "u_C08TK0111"
-      ]
-    },
-    {
-      "id": "notif_sub_1793757912926_5mhs",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1793609039129",
-      "assignmentTitle": "Làm bài báo cáo về 10 nguyên lý chuyển động trong motion graphics",
-      "targetClass": "C08TK01",
-      "subject": "Xử Lý Kỹ Xảo với After Effects",
-      "studentId": "u_C08TK0117",
-      "studentName": "Võ Thị Mỹ Xuyên",
-      "studentCode": "C08TK0117",
-      "submittedAt": "2026-11-04T02:05:12.926Z",
-      "createdAt": "2026-11-04T02:05:12.926Z",
-      "readBy": [
-        "u_C08TK0106",
-        "u_C08TK0107",
-        "u_C08TK0111"
-      ]
-    },
-    {
-      "id": "notif_sub_1793757881571_3hju",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1793752994063",
-      "assignmentTitle": "Tạo Thiết kế banner hoặc poster để tạo chuyển động",
-      "targetClass": "C08TK01",
-      "subject": "Xử Lý Kỹ Xảo với After Effects",
-      "studentId": "u_C08TK0111",
-      "studentName": "Đoàn Thị Thúy",
-      "studentCode": "C08TK0111",
-      "submittedAt": "2026-11-04T02:04:41.571Z",
-      "createdAt": "2026-11-04T02:04:41.571Z",
-      "readBy": [
-        "u_C08TK0106",
-        "u_C08TK0107",
-        "u_C08TK0111"
-      ]
-    },
-    {
-      "id": "notif_sub_1793757881390_i58s",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1793752994063",
-      "assignmentTitle": "Tạo Thiết kế banner hoặc poster để tạo chuyển động",
-      "targetClass": "C08TK01",
-      "subject": "Xử Lý Kỹ Xảo với After Effects",
-      "studentId": "u_C08TK0111",
-      "studentName": "Đoàn Thị Thúy",
-      "studentCode": "C08TK0111",
-      "submittedAt": "2026-11-04T02:04:41.390Z",
-      "createdAt": "2026-11-04T02:04:41.390Z",
-      "readBy": [
-        "u_C08TK0106",
-        "u_C08TK0107",
-        "u_C08TK0111"
-      ]
-    },
-    {
-      "id": "notif_sub_1793757881237_kasw",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1793752994063",
-      "assignmentTitle": "Tạo Thiết kế banner hoặc poster để tạo chuyển động",
-      "targetClass": "C08TK01",
-      "subject": "Xử Lý Kỹ Xảo với After Effects",
-      "studentId": "u_C08TK0111",
-      "studentName": "Đoàn Thị Thúy",
-      "studentCode": "C08TK0111",
-      "submittedAt": "2026-11-04T02:04:41.237Z",
-      "createdAt": "2026-11-04T02:04:41.237Z",
-      "readBy": [
-        "u_C08TK0106",
-        "u_C08TK0107",
-        "u_C08TK0111"
-      ]
-    },
-    {
-      "id": "notif_sub_1793757881020_g9we",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1793752994063",
-      "assignmentTitle": "Tạo Thiết kế banner hoặc poster để tạo chuyển động",
-      "targetClass": "C08TK01",
-      "subject": "Xử Lý Kỹ Xảo với After Effects",
-      "studentId": "u_C08TK0111",
-      "studentName": "Đoàn Thị Thúy",
-      "studentCode": "C08TK0111",
-      "submittedAt": "2026-11-04T02:04:41.020Z",
-      "createdAt": "2026-11-04T02:04:41.020Z",
-      "readBy": [
-        "u_C08TK0106",
-        "u_C08TK0107",
-        "u_C08TK0111"
-      ]
-    },
-    {
-      "id": "notif_sub_1793757879588_3wx2",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1793752994063",
-      "assignmentTitle": "Tạo Thiết kế banner hoặc poster để tạo chuyển động",
-      "targetClass": "C08TK01",
-      "subject": "Xử Lý Kỹ Xảo với After Effects",
-      "studentId": "u_C08TK0111",
-      "studentName": "Đoàn Thị Thúy",
-      "studentCode": "C08TK0111",
-      "submittedAt": "2026-11-04T02:04:39.588Z",
-      "createdAt": "2026-11-04T02:04:39.588Z",
-      "readBy": [
-        "u_C08TK0106",
-        "u_C08TK0107",
-        "u_C08TK0111"
-      ]
-    },
-    {
-      "id": "notif_sub_1793757879453_o4c2",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1793752994063",
-      "assignmentTitle": "Tạo Thiết kế banner hoặc poster để tạo chuyển động",
-      "targetClass": "C08TK01",
-      "subject": "Xử Lý Kỹ Xảo với After Effects",
-      "studentId": "u_C08TK0111",
-      "studentName": "Đoàn Thị Thúy",
-      "studentCode": "C08TK0111",
-      "submittedAt": "2026-11-04T02:04:39.453Z",
-      "createdAt": "2026-11-04T02:04:39.453Z",
-      "readBy": [
-        "u_C08TK0106",
-        "u_C08TK0107",
-        "u_C08TK0111"
-      ]
-    },
-    {
-      "id": "notif_sub_1793757878248_ogqq",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1793752994063",
-      "assignmentTitle": "Tạo Thiết kế banner hoặc poster để tạo chuyển động",
-      "targetClass": "C08TK01",
-      "subject": "Xử Lý Kỹ Xảo với After Effects",
-      "studentId": "u_C08TK0111",
-      "studentName": "Đoàn Thị Thúy",
-      "studentCode": "C08TK0111",
-      "submittedAt": "2026-11-04T02:04:38.248Z",
-      "createdAt": "2026-11-04T02:04:38.248Z",
-      "readBy": [
-        "u_C08TK0106",
-        "u_C08TK0107",
-        "u_C08TK0111"
-      ]
-    },
-    {
-      "id": "notif_sub_1793757877546_43zw",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1793752994063",
-      "assignmentTitle": "Tạo Thiết kế banner hoặc poster để tạo chuyển động",
-      "targetClass": "C08TK01",
-      "subject": "Xử Lý Kỹ Xảo với After Effects",
-      "studentId": "u_C08TK0111",
-      "studentName": "Đoàn Thị Thúy",
-      "studentCode": "C08TK0111",
-      "submittedAt": "2026-11-04T02:04:37.546Z",
-      "createdAt": "2026-11-04T02:04:37.546Z",
-      "readBy": [
-        "u_C08TK0106",
-        "u_C08TK0107",
-        "u_C08TK0111"
-      ]
-    },
-    {
-      "id": "notif_sub_1793757877344_o6fk",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1793752994063",
-      "assignmentTitle": "Tạo Thiết kế banner hoặc poster để tạo chuyển động",
-      "targetClass": "C08TK01",
-      "subject": "Xử Lý Kỹ Xảo với After Effects",
-      "studentId": "u_C08TK0111",
-      "studentName": "Đoàn Thị Thúy",
-      "studentCode": "C08TK0111",
-      "submittedAt": "2026-11-04T02:04:37.344Z",
-      "createdAt": "2026-11-04T02:04:37.344Z",
-      "readBy": [
-        "u_C08TK0106",
-        "u_C08TK0107",
-        "u_C08TK0111"
-      ]
-    },
-    {
-      "id": "notif_sub_1793757875782_fyyw",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1793752994063",
-      "assignmentTitle": "Tạo Thiết kế banner hoặc poster để tạo chuyển động",
-      "targetClass": "C08TK01",
-      "subject": "Xử Lý Kỹ Xảo với After Effects",
-      "studentId": "u_C08TK0111",
-      "studentName": "Đoàn Thị Thúy",
-      "studentCode": "C08TK0111",
-      "submittedAt": "2026-11-04T02:04:35.782Z",
-      "createdAt": "2026-11-04T02:04:35.782Z",
-      "readBy": [
-        "u_C08TK0106",
-        "u_C08TK0107",
-        "u_C08TK0111"
-      ]
-    },
-    {
-      "id": "notif_sub_1793757873654_32xq",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1793752994063",
-      "assignmentTitle": "Tạo Thiết kế banner hoặc poster để tạo chuyển động",
-      "targetClass": "C08TK01",
-      "subject": "Xử Lý Kỹ Xảo với After Effects",
-      "studentId": "u_C08TK0111",
-      "studentName": "Đoàn Thị Thúy",
-      "studentCode": "C08TK0111",
-      "submittedAt": "2026-11-04T02:04:33.654Z",
-      "createdAt": "2026-11-04T02:04:33.654Z",
-      "readBy": [
-        "u_C08TK0106",
-        "u_C08TK0107",
-        "u_C08TK0111"
-      ]
-    },
-    {
-      "id": "notif_sub_1793757872643_7xzu",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1793752994063",
-      "assignmentTitle": "Tạo Thiết kế banner hoặc poster để tạo chuyển động",
-      "targetClass": "C08TK01",
-      "subject": "Xử Lý Kỹ Xảo với After Effects",
-      "studentId": "u_C08TK0111",
-      "studentName": "Đoàn Thị Thúy",
-      "studentCode": "C08TK0111",
-      "submittedAt": "2026-11-04T02:04:32.643Z",
-      "createdAt": "2026-11-04T02:04:32.643Z",
-      "readBy": [
-        "u_C08TK0106",
-        "u_C08TK0107",
-        "u_C08TK0111"
-      ]
-    },
-    {
-      "id": "notif_sub_1793757872384_8x6u",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1793752994063",
-      "assignmentTitle": "Tạo Thiết kế banner hoặc poster để tạo chuyển động",
-      "targetClass": "C08TK01",
-      "subject": "Xử Lý Kỹ Xảo với After Effects",
-      "studentId": "u_C08TK0111",
-      "studentName": "Đoàn Thị Thúy",
-      "studentCode": "C08TK0111",
-      "submittedAt": "2026-11-04T02:04:32.384Z",
-      "createdAt": "2026-11-04T02:04:32.384Z",
-      "readBy": [
-        "u_C08TK0106",
-        "u_C08TK0107",
-        "u_C08TK0111"
-      ]
-    },
-    {
-      "id": "notif_sub_1793757871486_0gmt",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1793752994063",
-      "assignmentTitle": "Tạo Thiết kế banner hoặc poster để tạo chuyển động",
-      "targetClass": "C08TK01",
-      "subject": "Xử Lý Kỹ Xảo với After Effects",
-      "studentId": "u_C08TK0111",
-      "studentName": "Đoàn Thị Thúy",
-      "studentCode": "C08TK0111",
-      "submittedAt": "2026-11-04T02:04:31.486Z",
-      "createdAt": "2026-11-04T02:04:31.486Z",
-      "readBy": [
-        "u_C08TK0106",
-        "u_C08TK0107",
-        "u_C08TK0111"
-      ]
-    },
-    {
-      "id": "notif_sub_1793757871157_yg42",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1793752994063",
-      "assignmentTitle": "Tạo Thiết kế banner hoặc poster để tạo chuyển động",
-      "targetClass": "C08TK01",
-      "subject": "Xử Lý Kỹ Xảo với After Effects",
-      "studentId": "u_C08TK0111",
-      "studentName": "Đoàn Thị Thúy",
-      "studentCode": "C08TK0111",
-      "submittedAt": "2026-11-04T02:04:31.157Z",
-      "createdAt": "2026-11-04T02:04:31.157Z",
-      "readBy": [
-        "u_C08TK0106",
-        "u_C08TK0107",
-        "u_C08TK0111"
-      ]
-    },
-    {
-      "id": "notif_sub_1793757870146_tuu2",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1793752994063",
-      "assignmentTitle": "Tạo Thiết kế banner hoặc poster để tạo chuyển động",
-      "targetClass": "C08TK01",
-      "subject": "Xử Lý Kỹ Xảo với After Effects",
-      "studentId": "u_C08TK0111",
-      "studentName": "Đoàn Thị Thúy",
-      "studentCode": "C08TK0111",
-      "submittedAt": "2026-11-04T02:04:30.146Z",
-      "createdAt": "2026-11-04T02:04:30.146Z",
-      "readBy": [
-        "u_C08TK0106",
-        "u_C08TK0107",
-        "u_C08TK0111"
-      ]
-    },
-    {
-      "id": "notif_sub_1793757868046_ionn",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1793752994063",
-      "assignmentTitle": "Tạo Thiết kế banner hoặc poster để tạo chuyển động",
-      "targetClass": "C08TK01",
-      "subject": "Xử Lý Kỹ Xảo với After Effects",
-      "studentId": "u_C08TK0111",
-      "studentName": "Đoàn Thị Thúy",
-      "studentCode": "C08TK0111",
-      "submittedAt": "2026-11-04T02:04:28.046Z",
-      "createdAt": "2026-11-04T02:04:28.046Z",
-      "readBy": [
-        "u_C08TK0106",
-        "u_C08TK0107",
-        "u_C08TK0111"
-      ]
-    },
-    {
-      "id": "notif_sub_1793757861958_r7x2",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1793752994063",
-      "assignmentTitle": "Tạo Thiết kế banner hoặc poster để tạo chuyển động",
-      "targetClass": "C08TK01",
-      "subject": "Xử Lý Kỹ Xảo với After Effects",
-      "studentId": "u_C08TK0111",
-      "studentName": "Đoàn Thị Thúy",
-      "studentCode": "C08TK0111",
-      "submittedAt": "2026-11-04T02:04:21.958Z",
-      "createdAt": "2026-11-04T02:04:21.958Z",
-      "readBy": [
-        "u_C08TK0106",
-        "u_C08TK0107",
-        "u_C08TK0111"
-      ]
-    },
-    {
-      "id": "notif_sub_1793757800016_yy2n",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1793609039129",
-      "assignmentTitle": "Làm bài báo cáo về 10 nguyên lý chuyển động trong motion graphics",
-      "targetClass": "C08TK01",
-      "subject": "Xử Lý Kỹ Xảo với After Effects",
-      "studentId": "u_C08TK0109",
-      "studentName": "Nguyễn Văn Tâm",
-      "studentCode": "C08TK0109",
-      "submittedAt": "2026-11-04T02:03:20.016Z",
-      "createdAt": "2026-11-04T02:03:20.016Z",
-      "readBy": [
-        "u_C08TK0106",
-        "u_C08TK0107",
-        "u_C08TK0111"
-      ]
-    },
-    {
-      "id": "notif_sub_1793757752085_mfxh",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1793752994063",
-      "assignmentTitle": "Tạo Thiết kế banner hoặc poster để tạo chuyển động",
-      "targetClass": "C08TK01",
-      "subject": "Xử Lý Kỹ Xảo với After Effects",
-      "studentId": "u_C08TK0117",
-      "studentName": "Võ Thị Mỹ Xuyên",
-      "studentCode": "C08TK0117",
-      "submittedAt": "2026-11-04T02:02:32.085Z",
-      "createdAt": "2026-11-04T02:02:32.085Z",
-      "readBy": [
-        "u_C08TK0106",
-        "u_C08TK0107",
-        "u_C08TK0111"
-      ]
-    },
-    {
-      "id": "notif_sub_1793757678379_n8mt",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1793752994063",
-      "assignmentTitle": "Tạo Thiết kế banner hoặc poster để tạo chuyển động",
-      "targetClass": "C08TK01",
-      "subject": "Xử Lý Kỹ Xảo với After Effects",
-      "studentId": "u_C08TK0111",
-      "studentName": "Đoàn Thị Thúy",
-      "studentCode": "C08TK0111",
-      "submittedAt": "2026-11-04T02:01:18.379Z",
-      "createdAt": "2026-11-04T02:01:18.379Z",
-      "readBy": [
-        "u_C08TK0106",
-        "u_C08TK0107",
-        "u_C08TK0111"
-      ]
-    },
-    {
-      "id": "notif_sub_1793757546968_hrpc",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1793752994063",
-      "assignmentTitle": "Tạo Thiết kế banner hoặc poster để tạo chuyển động",
-      "targetClass": "C08TK01",
-      "subject": "Xử Lý Kỹ Xảo với After Effects",
-      "studentId": "u_C08TK0111",
-      "studentName": "Đoàn Thị Thúy",
-      "studentCode": "C08TK0111",
-      "submittedAt": "2026-11-04T01:59:06.968Z",
-      "createdAt": "2026-11-04T01:59:06.968Z",
-      "readBy": [
-        "u_C08TK0106",
-        "u_C08TK0107",
-        "u_C08TK0111"
-      ]
-    },
-    {
-      "id": "notif_sub_1793757535444_bcon",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1793752994063",
-      "assignmentTitle": "Tạo Thiết kế banner hoặc poster để tạo chuyển động",
-      "targetClass": "C08TK01",
-      "subject": "Xử Lý Kỹ Xảo với After Effects",
-      "studentId": "u_C08TK0111",
-      "studentName": "Đoàn Thị Thúy",
-      "studentCode": "C08TK0111",
-      "submittedAt": "2026-11-04T01:58:55.444Z",
-      "createdAt": "2026-11-04T01:58:55.444Z",
-      "readBy": [
-        "u_C08TK0106",
-        "u_C08TK0107",
-        "u_C08TK0111"
-      ]
-    },
-    {
-      "id": "notif_sub_1793757531963_w6vx",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1793752994063",
-      "assignmentTitle": "Tạo Thiết kế banner hoặc poster để tạo chuyển động",
-      "targetClass": "C08TK01",
-      "subject": "Xử Lý Kỹ Xảo với After Effects",
-      "studentId": "u_C08TK0111",
-      "studentName": "Đoàn Thị Thúy",
-      "studentCode": "C08TK0111",
-      "submittedAt": "2026-11-04T01:58:51.963Z",
-      "createdAt": "2026-11-04T01:58:51.963Z",
-      "readBy": [
-        "u_C08TK0106",
         "u_C08TK0107",
         "u_C08TK0111"
       ]
@@ -7223,9 +6204,589 @@
       "grade": null,
       "feedback": null,
       "gradedAt": null
+    },
+    {
+      "id": "sub_1793886281135",
+      "assignmentId": "asm_1793769990154",
+      "studentId": "u_C08TK0102",
+      "studentName": "C08TK0102",
+      "content": "",
+      "link": "",
+      "file": {
+        "filename": "1793886279801_s.aep",
+        "originalName": "s.aep",
+        "size": 617947,
+        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1793886280/educlass_submissions/C08TK01/X%E1%BB%AD%20L%C3%BD%20K%E1%BB%B9%20X%E1%BA%A3o%20v%E1%BB%9Bi%20After%20Effects/T%E1%BA%A1o%20k%E1%BB%B9%20x%E1%BA%A3o%20cho%20banner/1793886279801_s_b9rqzu.aep",
+        "storageKey": "educlass_submissions/C08TK01/Xử Lý Kỹ Xảo với After Effects/Tạo kỹ xảo cho banner/1793886279801_s_b9rqzu.aep",
+        "provider": "cloudinary"
+      },
+      "submittedAt": "2026-11-05T13:44:41.135Z",
+      "grade": null,
+      "feedback": null,
+      "gradedAt": null
+    },
+    {
+      "id": "sub_1793887024117",
+      "assignmentId": "asm_1793877081018",
+      "studentId": "u_26711149",
+      "studentName": "26711149",
+      "content": "Nộp bài ngày 05/11/2026 cho thầy đẹp trai",
+      "link": "",
+      "file": {
+        "filename": "1793887022737_Bài_16.docx",
+        "originalName": "Bài 16.docx",
+        "size": 369404,
+        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1793887023/educlass_submissions/TIN%20H%E1%BB%8CC%20%C4%90%E1%BA%A0I%20C%C6%AF%C6%A0NG/Tin%20H%E1%BB%8Dc%20%C4%90%E1%BA%A1i%20C%C6%B0%C6%A1ng/B%C3%A0i%20t%E1%BA%ADp%20v%E1%BB%81%20chia%20c%E1%BB%99t%20-%20t%E1%BA%A1o%20dropcap%20-%20t%E1%BA%A1o%20b%E1%BA%A3ng/rdhujjmoivjg5hdactbi",
+        "storageKey": "educlass_submissions/TIN HỌC ĐẠI CƯƠNG/Tin Học Đại Cương/Bài tập về chia cột - tạo dropcap - tạo bảng/rdhujjmoivjg5hdactbi",
+        "provider": "cloudinary"
+      },
+      "submittedAt": "2026-11-05T13:57:04.117Z",
+      "grade": null,
+      "feedback": null,
+      "gradedAt": null
+    },
+    {
+      "id": "sub_1793887025437",
+      "assignmentId": "asm_1793877081018",
+      "studentId": "u_26710844",
+      "studentName": "26710844",
+      "content": "",
+      "link": "",
+      "file": {
+        "filename": "1793887024791_26710844_Trương_Duy_Minh_Trí.docx",
+        "originalName": "26710844-Trương Duy Minh Trí.docx",
+        "size": 26990,
+        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1793887025/educlass_submissions/TIN%20H%E1%BB%8CC%20%C4%90%E1%BA%A0I%20C%C6%AF%C6%A0NG/Tin%20H%E1%BB%8Dc%20%C4%90%E1%BA%A1i%20C%C6%B0%C6%A1ng/B%C3%A0i%20t%E1%BA%ADp%20v%E1%BB%81%20chia%20c%E1%BB%99t%20-%20t%E1%BA%A1o%20dropcap%20-%20t%E1%BA%A1o%20b%E1%BA%A3ng/zrkazgqsnszs7qwtopso",
+        "storageKey": "educlass_submissions/TIN HỌC ĐẠI CƯƠNG/Tin Học Đại Cương/Bài tập về chia cột - tạo dropcap - tạo bảng/zrkazgqsnszs7qwtopso",
+        "provider": "cloudinary"
+      },
+      "submittedAt": "2026-11-05T13:57:05.437Z",
+      "grade": null,
+      "feedback": null,
+      "gradedAt": null
+    },
+    {
+      "id": "sub_1793887037683",
+      "assignmentId": "asm_1793877081018",
+      "studentId": "u_26710727",
+      "studentName": "26710727",
+      "content": "",
+      "link": "",
+      "file": {
+        "filename": "1793887036838_26710727_Trần_Lê_Quốc_vũ.docx",
+        "originalName": "26710727_Trần Lê Quốc vũ.docx",
+        "size": 27008,
+        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1793887037/educlass_submissions/TIN%20H%E1%BB%8CC%20%C4%90%E1%BA%A0I%20C%C6%AF%C6%A0NG/Tin%20H%E1%BB%8Dc%20%C4%90%E1%BA%A1i%20C%C6%B0%C6%A1ng/B%C3%A0i%20t%E1%BA%ADp%20v%E1%BB%81%20chia%20c%E1%BB%99t%20-%20t%E1%BA%A1o%20dropcap%20-%20t%E1%BA%A1o%20b%E1%BA%A3ng/bpwlggrfxq7anok5pttb",
+        "storageKey": "educlass_submissions/TIN HỌC ĐẠI CƯƠNG/Tin Học Đại Cương/Bài tập về chia cột - tạo dropcap - tạo bảng/bpwlggrfxq7anok5pttb",
+        "provider": "cloudinary"
+      },
+      "submittedAt": "2026-11-05T13:57:17.683Z",
+      "grade": null,
+      "feedback": null,
+      "gradedAt": null
+    },
+    {
+      "id": "sub_1793887038539",
+      "assignmentId": "asm_1793877081018",
+      "studentId": "u_26710287",
+      "studentName": "26710287",
+      "content": "5/11/2026",
+      "link": "",
+      "file": {
+        "filename": "1793887037513_Chương_3.docx",
+        "originalName": "Chương 3.docx",
+        "size": 201472,
+        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1793887038/educlass_submissions/TIN%20H%E1%BB%8CC%20%C4%90%E1%BA%A0I%20C%C6%AF%C6%A0NG/Tin%20H%E1%BB%8Dc%20%C4%90%E1%BA%A1i%20C%C6%B0%C6%A1ng/B%C3%A0i%20t%E1%BA%ADp%20v%E1%BB%81%20chia%20c%E1%BB%99t%20-%20t%E1%BA%A1o%20dropcap%20-%20t%E1%BA%A1o%20b%E1%BA%A3ng/nkhpkutew0kh5ohqce7g",
+        "storageKey": "educlass_submissions/TIN HỌC ĐẠI CƯƠNG/Tin Học Đại Cương/Bài tập về chia cột - tạo dropcap - tạo bảng/nkhpkutew0kh5ohqce7g",
+        "provider": "cloudinary"
+      },
+      "submittedAt": "2026-11-05T13:57:18.539Z",
+      "grade": null,
+      "feedback": null,
+      "gradedAt": null
+    },
+    {
+      "id": "sub_1793887078524",
+      "assignmentId": "asm_1793877081018",
+      "studentId": "u_26710214",
+      "studentName": "26710214",
+      "content": "",
+      "link": "",
+      "file": {
+        "filename": "1793887145552_26710214_Nguyễn_Đặng_Quốc_Việt_2.rtf",
+        "originalName": "26710214_Nguyễn Đặng Quốc Việt 2.rtf",
+        "size": 349096,
+        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1793887146/educlass_submissions/TIN%20H%E1%BB%8CC%20%C4%90%E1%BA%A0I%20C%C6%AF%C6%A0NG/Tin%20H%E1%BB%8Dc%20%C4%90%E1%BA%A1i%20C%C6%B0%C6%A1ng/B%C3%A0i%20t%E1%BA%ADp%20v%E1%BB%81%20chia%20c%E1%BB%99t%20-%20t%E1%BA%A1o%20dropcap%20-%20t%E1%BA%A1o%20b%E1%BA%A3ng/cvy5khsmmijw41zkrpwl",
+        "storageKey": "educlass_submissions/TIN HỌC ĐẠI CƯƠNG/Tin Học Đại Cương/Bài tập về chia cột - tạo dropcap - tạo bảng/cvy5khsmmijw41zkrpwl",
+        "provider": "cloudinary"
+      },
+      "submittedAt": "2026-11-05T13:59:06.414Z",
+      "grade": null,
+      "feedback": null,
+      "gradedAt": null
+    },
+    {
+      "id": "sub_1793887080597",
+      "assignmentId": "asm_1793877081018",
+      "studentId": "u_26710832",
+      "studentName": "26710832",
+      "content": "Đỗ Văn Bảo btap Word",
+      "link": "",
+      "file": {
+        "filename": "1793887081225_26710832__Đỗ_Văn_Bảo.docx",
+        "originalName": "26710832_ Đỗ Văn Bảo.docx",
+        "size": 762344,
+        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1793887082/educlass_submissions/TIN%20H%E1%BB%8CC%20%C4%90%E1%BA%A0I%20C%C6%AF%C6%A0NG/Tin%20H%E1%BB%8Dc%20%C4%90%E1%BA%A1i%20C%C6%B0%C6%A1ng/B%C3%A0i%20t%E1%BA%ADp%20v%E1%BB%81%20chia%20c%E1%BB%99t%20-%20t%E1%BA%A1o%20dropcap%20-%20t%E1%BA%A1o%20b%E1%BA%A3ng/afi4yumimipqf9xm1n10",
+        "storageKey": "educlass_submissions/TIN HỌC ĐẠI CƯƠNG/Tin Học Đại Cương/Bài tập về chia cột - tạo dropcap - tạo bảng/afi4yumimipqf9xm1n10",
+        "provider": "cloudinary"
+      },
+      "submittedAt": "2026-11-05T13:58:02.766Z",
+      "grade": null,
+      "feedback": null,
+      "gradedAt": null
+    },
+    {
+      "id": "sub_1793887103555",
+      "assignmentId": "asm_1793877081018",
+      "studentId": "u_26710428",
+      "studentName": "26710428",
+      "content": "Dương Công Thuận Phát",
+      "link": "",
+      "file": {
+        "filename": "1793887102715_26710428_Dương_Công_Thuận_Phát.docx",
+        "originalName": "26710428-Dương Công Thuận Phát.docx",
+        "size": 16607,
+        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1793887103/educlass_submissions/TIN%20H%E1%BB%8CC%20%C4%90%E1%BA%A0I%20C%C6%AF%C6%A0NG/Tin%20H%E1%BB%8Dc%20%C4%90%E1%BA%A1i%20C%C6%B0%C6%A1ng/B%C3%A0i%20t%E1%BA%ADp%20v%E1%BB%81%20chia%20c%E1%BB%99t%20-%20t%E1%BA%A1o%20dropcap%20-%20t%E1%BA%A1o%20b%E1%BA%A3ng/w9ip271xtybmx7qs8qio",
+        "storageKey": "educlass_submissions/TIN HỌC ĐẠI CƯƠNG/Tin Học Đại Cương/Bài tập về chia cột - tạo dropcap - tạo bảng/w9ip271xtybmx7qs8qio",
+        "provider": "cloudinary"
+      },
+      "submittedAt": "2026-11-05T13:58:23.555Z",
+      "grade": null,
+      "feedback": null,
+      "gradedAt": null
+    },
+    {
+      "id": "sub_1793887108474",
+      "assignmentId": "asm_1793877081018",
+      "studentId": "u_26710466",
+      "studentName": "26710466",
+      "content": "1234",
+      "link": "",
+      "file": {
+        "filename": "1793887106932_bài_tập_2.docx",
+        "originalName": "bài tập 2.docx",
+        "size": 3567874,
+        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1793887108/educlass_submissions/TIN%20H%E1%BB%8CC%20%C4%90%E1%BA%A0I%20C%C6%AF%C6%A0NG/Tin%20H%E1%BB%8Dc%20%C4%90%E1%BA%A1i%20C%C6%B0%C6%A1ng/B%C3%A0i%20t%E1%BA%ADp%20v%E1%BB%81%20chia%20c%E1%BB%99t%20-%20t%E1%BA%A1o%20dropcap%20-%20t%E1%BA%A1o%20b%E1%BA%A3ng/ix6yiallp9j6yxibxztg",
+        "storageKey": "educlass_submissions/TIN HỌC ĐẠI CƯƠNG/Tin Học Đại Cương/Bài tập về chia cột - tạo dropcap - tạo bảng/ix6yiallp9j6yxibxztg",
+        "provider": "cloudinary"
+      },
+      "submittedAt": "2026-11-05T13:58:28.473Z",
+      "grade": null,
+      "feedback": null,
+      "gradedAt": null
+    },
+    {
+      "id": "sub_1793887124148",
+      "assignmentId": "asm_1793877081018",
+      "studentId": "u_26710526",
+      "studentName": "26710526",
+      "content": "",
+      "link": "",
+      "file": {
+        "filename": "1793887185235_26710526_Đỗ_Nguyễn_Mạnh_Quân.docx",
+        "originalName": "26710526-Đỗ Nguyễn Mạnh Quân.docx",
+        "size": 44537,
+        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1793887185/educlass_submissions/TIN%20H%E1%BB%8CC%20%C4%90%E1%BA%A0I%20C%C6%AF%C6%A0NG/Tin%20H%E1%BB%8Dc%20%C4%90%E1%BA%A1i%20C%C6%B0%C6%A1ng/B%C3%A0i%20t%E1%BA%ADp%20v%E1%BB%81%20chia%20c%E1%BB%99t%20-%20t%E1%BA%A1o%20dropcap%20-%20t%E1%BA%A1o%20b%E1%BA%A3ng/hqwsrugs2gk9zivofuan",
+        "storageKey": "educlass_submissions/TIN HỌC ĐẠI CƯƠNG/Tin Học Đại Cương/Bài tập về chia cột - tạo dropcap - tạo bảng/hqwsrugs2gk9zivofuan",
+        "provider": "cloudinary"
+      },
+      "submittedAt": "2026-11-05T13:59:45.777Z",
+      "grade": null,
+      "feedback": null,
+      "gradedAt": null
+    },
+    {
+      "id": "sub_1793887126256",
+      "assignmentId": "asm_1793877081018",
+      "studentId": "u_26710498",
+      "studentName": "26710498",
+      "content": "",
+      "link": "",
+      "file": {
+        "filename": "1793887125701_26710498_Nguyễn_Hoàng_Huy_Triệu_44.docx",
+        "originalName": "26710498-Nguyễn Hoàng Huy Triệu-44.docx",
+        "size": 38658,
+        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1793887125/educlass_submissions/TIN%20H%E1%BB%8CC%20%C4%90%E1%BA%A0I%20C%C6%AF%C6%A0NG/Tin%20H%E1%BB%8Dc%20%C4%90%E1%BA%A1i%20C%C6%B0%C6%A1ng/B%C3%A0i%20t%E1%BA%ADp%20v%E1%BB%81%20chia%20c%E1%BB%99t%20-%20t%E1%BA%A1o%20dropcap%20-%20t%E1%BA%A1o%20b%E1%BA%A3ng/mx9jdj8hytr9fterucve",
+        "storageKey": "educlass_submissions/TIN HỌC ĐẠI CƯƠNG/Tin Học Đại Cương/Bài tập về chia cột - tạo dropcap - tạo bảng/mx9jdj8hytr9fterucve",
+        "provider": "cloudinary"
+      },
+      "submittedAt": "2026-11-05T13:58:46.256Z",
+      "grade": null,
+      "feedback": null,
+      "gradedAt": null
+    },
+    {
+      "id": "sub_1793887132874",
+      "assignmentId": "asm_1793877081018",
+      "studentId": "u_26710308",
+      "studentName": "26710308",
+      "content": "nguyễn phúc sang-26710308",
+      "link": "",
+      "file": {
+        "filename": "1793887131614_chuong_3.docx",
+        "originalName": "chuong 3.docx",
+        "size": 444552,
+        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1793887132/educlass_submissions/TIN%20H%E1%BB%8CC%20%C4%90%E1%BA%A0I%20C%C6%AF%C6%A0NG/Tin%20H%E1%BB%8Dc%20%C4%90%E1%BA%A1i%20C%C6%B0%C6%A1ng/B%C3%A0i%20t%E1%BA%ADp%20v%E1%BB%81%20chia%20c%E1%BB%99t%20-%20t%E1%BA%A1o%20dropcap%20-%20t%E1%BA%A1o%20b%E1%BA%A3ng/1793887131614_chuong_3_pqs5kq.docx",
+        "storageKey": "educlass_submissions/TIN HỌC ĐẠI CƯƠNG/Tin Học Đại Cương/Bài tập về chia cột - tạo dropcap - tạo bảng/1793887131614_chuong_3_pqs5kq.docx",
+        "provider": "cloudinary"
+      },
+      "submittedAt": "2026-11-05T13:58:52.874Z",
+      "grade": null,
+      "feedback": null,
+      "gradedAt": null
+    },
+    {
+      "id": "sub_1793887144721",
+      "assignmentId": "asm_1793877081018",
+      "studentId": "u_26710507",
+      "studentName": "26710507",
+      "content": "",
+      "link": "",
+      "file": {
+        "filename": "1793887142332_26710507_pham_nguyen_anh_tu__2_.docx",
+        "originalName": "26710507 pham nguyen anh tu (2).docx",
+        "size": 1675191,
+        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1793887144/educlass_submissions/TIN%20H%E1%BB%8CC%20%C4%90%E1%BA%A0I%20C%C6%AF%C6%A0NG/Tin%20H%E1%BB%8Dc%20%C4%90%E1%BA%A1i%20C%C6%B0%C6%A1ng/B%C3%A0i%20t%E1%BA%ADp%20v%E1%BB%81%20chia%20c%E1%BB%99t%20-%20t%E1%BA%A1o%20dropcap%20-%20t%E1%BA%A1o%20b%E1%BA%A3ng/1793887142332_26710507_pham_nguyen_anh_tu__2__mprynf.docx",
+        "storageKey": "educlass_submissions/TIN HỌC ĐẠI CƯƠNG/Tin Học Đại Cương/Bài tập về chia cột - tạo dropcap - tạo bảng/1793887142332_26710507_pham_nguyen_anh_tu__2__mprynf.docx",
+        "provider": "cloudinary"
+      },
+      "submittedAt": "2026-11-05T13:59:04.721Z",
+      "grade": null,
+      "feedback": null,
+      "gradedAt": null
+    },
+    {
+      "id": "sub_1793887160734",
+      "assignmentId": "asm_1793877081018",
+      "studentId": "u_26710240",
+      "studentName": "26710240",
+      "content": "",
+      "link": "",
+      "file": {
+        "filename": "1793887158735_26710240_NguyenDucToan2.docx",
+        "originalName": "26710240-NguyenDucToan2.docx",
+        "size": 3224345,
+        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1793887160/educlass_submissions/TIN%20H%E1%BB%8CC%20%C4%90%E1%BA%A0I%20C%C6%AF%C6%A0NG/Tin%20H%E1%BB%8Dc%20%C4%90%E1%BA%A1i%20C%C6%B0%C6%A1ng/B%C3%A0i%20t%E1%BA%ADp%20v%E1%BB%81%20chia%20c%E1%BB%99t%20-%20t%E1%BA%A1o%20dropcap%20-%20t%E1%BA%A1o%20b%E1%BA%A3ng/1793887158735_26710240_NguyenDucToan2_potebv.docx",
+        "storageKey": "educlass_submissions/TIN HỌC ĐẠI CƯƠNG/Tin Học Đại Cương/Bài tập về chia cột - tạo dropcap - tạo bảng/1793887158735_26710240_NguyenDucToan2_potebv.docx",
+        "provider": "cloudinary"
+      },
+      "submittedAt": "2026-11-05T13:59:20.734Z",
+      "grade": null,
+      "feedback": null,
+      "gradedAt": null
+    },
+    {
+      "id": "sub_1793887161235",
+      "assignmentId": "asm_1793877081018",
+      "studentId": "u_26710697",
+      "studentName": "26710697",
+      "content": "",
+      "link": "",
+      "file": {
+        "filename": "1793887159877_NGUYENMINHQUAN_26710697.docx",
+        "originalName": "NGUYENMINHQUAN-26710697.docx",
+        "size": 564280,
+        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1793887160/educlass_submissions/TIN%20H%E1%BB%8CC%20%C4%90%E1%BA%A0I%20C%C6%AF%C6%A0NG/Tin%20H%E1%BB%8Dc%20%C4%90%E1%BA%A1i%20C%C6%B0%C6%A1ng/B%C3%A0i%20t%E1%BA%ADp%20v%E1%BB%81%20chia%20c%E1%BB%99t%20-%20t%E1%BA%A1o%20dropcap%20-%20t%E1%BA%A1o%20b%E1%BA%A3ng/1793887159877_NGUYENMINHQUAN_26710697_sknine.docx",
+        "storageKey": "educlass_submissions/TIN HỌC ĐẠI CƯƠNG/Tin Học Đại Cương/Bài tập về chia cột - tạo dropcap - tạo bảng/1793887159877_NGUYENMINHQUAN_26710697_sknine.docx",
+        "provider": "cloudinary"
+      },
+      "submittedAt": "2026-11-05T13:59:21.235Z",
+      "grade": null,
+      "feedback": null,
+      "gradedAt": null
+    },
+    {
+      "id": "sub_1793887167779",
+      "assignmentId": "asm_1793877081018",
+      "studentId": "u_26710451",
+      "studentName": "26710451",
+      "content": "",
+      "link": "",
+      "file": {
+        "filename": "1793887167953_26710451_Phan_Nhut_Trung_26DOT.docx",
+        "originalName": "26710451_Phan Nhut Trung_26DOT.docx",
+        "size": 35121,
+        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1793887168/educlass_submissions/TIN%20H%E1%BB%8CC%20%C4%90%E1%BA%A0I%20C%C6%AF%C6%A0NG/Tin%20H%E1%BB%8Dc%20%C4%90%E1%BA%A1i%20C%C6%B0%C6%A1ng/B%C3%A0i%20t%E1%BA%ADp%20v%E1%BB%81%20chia%20c%E1%BB%99t%20-%20t%E1%BA%A1o%20dropcap%20-%20t%E1%BA%A1o%20b%E1%BA%A3ng/1793887167953_26710451_Phan_Nhut_Trung_26DOT_dtsptn.docx",
+        "storageKey": "educlass_submissions/TIN HỌC ĐẠI CƯƠNG/Tin Học Đại Cương/Bài tập về chia cột - tạo dropcap - tạo bảng/1793887167953_26710451_Phan_Nhut_Trung_26DOT_dtsptn.docx",
+        "provider": "cloudinary"
+      },
+      "submittedAt": "2026-11-05T13:59:28.480Z",
+      "grade": null,
+      "feedback": null,
+      "gradedAt": null
+    },
+    {
+      "id": "sub_1793887169324",
+      "assignmentId": "asm_1793877081018",
+      "studentId": "u_26710053",
+      "studentName": "26710053",
+      "content": "",
+      "link": "",
+      "file": {
+        "filename": "1793887168126_26710053___Phạm_Ngọc_Thái.docx",
+        "originalName": "26710053 - Phạm Ngọc Thái.docx",
+        "size": 527560,
+        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1793887168/educlass_submissions/TIN%20H%E1%BB%8CC%20%C4%90%E1%BA%A0I%20C%C6%AF%C6%A0NG/Tin%20H%E1%BB%8Dc%20%C4%90%E1%BA%A1i%20C%C6%B0%C6%A1ng/B%C3%A0i%20t%E1%BA%ADp%20v%E1%BB%81%20chia%20c%E1%BB%99t%20-%20t%E1%BA%A1o%20dropcap%20-%20t%E1%BA%A1o%20b%E1%BA%A3ng/r9pr5mkakf9iknsb98m8",
+        "storageKey": "educlass_submissions/TIN HỌC ĐẠI CƯƠNG/Tin Học Đại Cương/Bài tập về chia cột - tạo dropcap - tạo bảng/r9pr5mkakf9iknsb98m8",
+        "provider": "cloudinary"
+      },
+      "submittedAt": "2026-11-05T13:59:29.324Z",
+      "grade": null,
+      "feedback": null,
+      "gradedAt": null
+    },
+    {
+      "id": "sub_1793887185632",
+      "assignmentId": "asm_1793877081018",
+      "studentId": "u_26710506",
+      "studentName": "26710506",
+      "content": "",
+      "link": "",
+      "file": {
+        "filename": "1793887184984_26710506_nguyen_phuoc_hoan_thanh.docx",
+        "originalName": "26710506-nguyen phuoc hoan thanh.docx",
+        "size": 26990,
+        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1793887185/educlass_submissions/TIN%20H%E1%BB%8CC%20%C4%90%E1%BA%A0I%20C%C6%AF%C6%A0NG/Tin%20H%E1%BB%8Dc%20%C4%90%E1%BA%A1i%20C%C6%B0%C6%A1ng/B%C3%A0i%20t%E1%BA%ADp%20v%E1%BB%81%20chia%20c%E1%BB%99t%20-%20t%E1%BA%A1o%20dropcap%20-%20t%E1%BA%A1o%20b%E1%BA%A3ng/1793887184984_26710506_nguyen_phuoc_hoan_thanh_lsfnhf.docx",
+        "storageKey": "educlass_submissions/TIN HỌC ĐẠI CƯƠNG/Tin Học Đại Cương/Bài tập về chia cột - tạo dropcap - tạo bảng/1793887184984_26710506_nguyen_phuoc_hoan_thanh_lsfnhf.docx",
+        "provider": "cloudinary"
+      },
+      "submittedAt": "2026-11-05T13:59:45.632Z",
+      "grade": null,
+      "feedback": null,
+      "gradedAt": null
+    },
+    {
+      "id": "sub_1793887197172",
+      "assignmentId": "asm_1793877081018",
+      "studentId": "u_26710175",
+      "studentName": "26710175",
+      "content": "",
+      "link": "",
+      "file": {
+        "filename": "1793887196087_26710175_LE_NGUYEN_MINH_TRI.docx",
+        "originalName": "26710175-LE NGUYEN MINH TRI.docx",
+        "size": 248264,
+        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1793887196/educlass_submissions/TIN%20H%E1%BB%8CC%20%C4%90%E1%BA%A0I%20C%C6%AF%C6%A0NG/Tin%20H%E1%BB%8Dc%20%C4%90%E1%BA%A1i%20C%C6%B0%C6%A1ng/B%C3%A0i%20t%E1%BA%ADp%20v%E1%BB%81%20chia%20c%E1%BB%99t%20-%20t%E1%BA%A1o%20dropcap%20-%20t%E1%BA%A1o%20b%E1%BA%A3ng/1793887196087_26710175_LE_NGUYEN_MINH_TRI_jireqj.docx",
+        "storageKey": "educlass_submissions/TIN HỌC ĐẠI CƯƠNG/Tin Học Đại Cương/Bài tập về chia cột - tạo dropcap - tạo bảng/1793887196087_26710175_LE_NGUYEN_MINH_TRI_jireqj.docx",
+        "provider": "cloudinary"
+      },
+      "submittedAt": "2026-11-05T13:59:57.172Z",
+      "grade": null,
+      "feedback": null,
+      "gradedAt": null
+    },
+    {
+      "id": "sub_1793887197364",
+      "assignmentId": "asm_1793877081018",
+      "studentId": "u_26710656",
+      "studentName": "26710656",
+      "content": "",
+      "link": "",
+      "file": {
+        "filename": "1793887197522_26710656_DO_TRONG_NGHIA.docx",
+        "originalName": "26710656_DO TRONG NGHIA.docx",
+        "size": 757261,
+        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1793887198/educlass_submissions/TIN%20H%E1%BB%8CC%20%C4%90%E1%BA%A0I%20C%C6%AF%C6%A0NG/Tin%20H%E1%BB%8Dc%20%C4%90%E1%BA%A1i%20C%C6%B0%C6%A1ng/B%C3%A0i%20t%E1%BA%ADp%20v%E1%BB%81%20chia%20c%E1%BB%99t%20-%20t%E1%BA%A1o%20dropcap%20-%20t%E1%BA%A1o%20b%E1%BA%A3ng/1793887197522_26710656_DO_TRONG_NGHIA_gaabzr.docx",
+        "storageKey": "educlass_submissions/TIN HỌC ĐẠI CƯƠNG/Tin Học Đại Cương/Bài tập về chia cột - tạo dropcap - tạo bảng/1793887197522_26710656_DO_TRONG_NGHIA_gaabzr.docx",
+        "provider": "cloudinary"
+      },
+      "submittedAt": "2026-11-05T13:59:59.005Z",
+      "grade": null,
+      "feedback": null,
+      "gradedAt": null
+    },
+    {
+      "id": "sub_1793887199493",
+      "assignmentId": "asm_1793877081018",
+      "studentId": "u_26710249",
+      "studentName": "26710249",
+      "content": "D:\\New Microsoft Word Document.docx",
+      "link": "D:\\New Microsoft Word Document.docx",
+      "file": {
+        "filename": "1793887198812_New_Microsoft_Word_Document.docx",
+        "originalName": "New Microsoft Word Document.docx",
+        "size": 32183,
+        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1793887199/educlass_submissions/TIN%20H%E1%BB%8CC%20%C4%90%E1%BA%A0I%20C%C6%AF%C6%A0NG/Tin%20H%E1%BB%8Dc%20%C4%90%E1%BA%A1i%20C%C6%B0%C6%A1ng/B%C3%A0i%20t%E1%BA%ADp%20v%E1%BB%81%20chia%20c%E1%BB%99t%20-%20t%E1%BA%A1o%20dropcap%20-%20t%E1%BA%A1o%20b%E1%BA%A3ng/1793887198812_New_Microsoft_Word_Document_pj3fzx.docx",
+        "storageKey": "educlass_submissions/TIN HỌC ĐẠI CƯƠNG/Tin Học Đại Cương/Bài tập về chia cột - tạo dropcap - tạo bảng/1793887198812_New_Microsoft_Word_Document_pj3fzx.docx",
+        "provider": "cloudinary"
+      },
+      "submittedAt": "2026-11-05T13:59:59.493Z",
+      "grade": null,
+      "feedback": null,
+      "gradedAt": null
+    },
+    {
+      "id": "sub_1793887199546",
+      "assignmentId": "asm_1793877081018",
+      "studentId": "u_26710412",
+      "studentName": "26710412",
+      "content": "123",
+      "link": "",
+      "file": {
+        "filename": "1793887198948_26710412_Nguyen_ThanhTam_3.docx",
+        "originalName": "26710412-Nguyen ThanhTam 3.docx",
+        "size": 27944,
+        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1793887199/educlass_submissions/TIN%20H%E1%BB%8CC%20%C4%90%E1%BA%A0I%20C%C6%AF%C6%A0NG/Tin%20H%E1%BB%8Dc%20%C4%90%E1%BA%A1i%20C%C6%B0%C6%A1ng/B%C3%A0i%20t%E1%BA%ADp%20v%E1%BB%81%20chia%20c%E1%BB%99t%20-%20t%E1%BA%A1o%20dropcap%20-%20t%E1%BA%A1o%20b%E1%BA%A3ng/1793887198948_26710412_Nguyen_ThanhTam_3_dgeag1.docx",
+        "storageKey": "educlass_submissions/TIN HỌC ĐẠI CƯƠNG/Tin Học Đại Cương/Bài tập về chia cột - tạo dropcap - tạo bảng/1793887198948_26710412_Nguyen_ThanhTam_3_dgeag1.docx",
+        "provider": "cloudinary"
+      },
+      "submittedAt": "2026-11-05T13:59:59.546Z",
+      "grade": null,
+      "feedback": null,
+      "gradedAt": null
+    },
+    {
+      "id": "sub_1793887224061",
+      "assignmentId": "asm_1793877081018",
+      "studentId": "u_26710100",
+      "studentName": "26710100",
+      "content": "123",
+      "link": "",
+      "file": {
+        "filename": "1793887224114_26710100_lê__duy_quang_1.docx",
+        "originalName": "26710100 lê  duy quang 1.docx",
+        "size": 764245,
+        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1793887224/educlass_submissions/TIN%20H%E1%BB%8CC%20%C4%90%E1%BA%A0I%20C%C6%AF%C6%A0NG/Tin%20H%E1%BB%8Dc%20%C4%90%E1%BA%A1i%20C%C6%B0%C6%A1ng/B%C3%A0i%20t%E1%BA%ADp%20v%E1%BB%81%20chia%20c%E1%BB%99t%20-%20t%E1%BA%A1o%20dropcap%20-%20t%E1%BA%A1o%20b%E1%BA%A3ng/a1xt6ixn7gslgjgirr8m",
+        "storageKey": "educlass_submissions/TIN HỌC ĐẠI CƯƠNG/Tin Học Đại Cương/Bài tập về chia cột - tạo dropcap - tạo bảng/a1xt6ixn7gslgjgirr8m",
+        "provider": "cloudinary"
+      },
+      "submittedAt": "2026-11-05T14:00:25.387Z",
+      "grade": null,
+      "feedback": null,
+      "gradedAt": null
+    },
+    {
+      "id": "sub_1793887224912",
+      "assignmentId": "asm_1793877081018",
+      "studentId": "u_26710111",
+      "studentName": "26710111",
+      "content": "",
+      "link": "",
+      "file": {
+        "filename": "1793887223625_26710111_NGUYỄN_TRỌNG_PHÚC.docx",
+        "originalName": "26710111_NGUYỄN TRỌNG PHÚC.docx",
+        "size": 217885,
+        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1793887224/educlass_submissions/TIN%20H%E1%BB%8CC%20%C4%90%E1%BA%A0I%20C%C6%AF%C6%A0NG/Tin%20H%E1%BB%8Dc%20%C4%90%E1%BA%A1i%20C%C6%B0%C6%A1ng/B%C3%A0i%20t%E1%BA%ADp%20v%E1%BB%81%20chia%20c%E1%BB%99t%20-%20t%E1%BA%A1o%20dropcap%20-%20t%E1%BA%A1o%20b%E1%BA%A3ng/xm5cmtbuvrvovzyzmmwc",
+        "storageKey": "educlass_submissions/TIN HỌC ĐẠI CƯƠNG/Tin Học Đại Cương/Bài tập về chia cột - tạo dropcap - tạo bảng/xm5cmtbuvrvovzyzmmwc",
+        "provider": "cloudinary"
+      },
+      "submittedAt": "2026-11-05T14:00:24.912Z",
+      "grade": null,
+      "feedback": null,
+      "gradedAt": null
+    },
+    {
+      "id": "sub_1793887248589",
+      "assignmentId": "asm_1793877081018",
+      "studentId": "u_26710396",
+      "studentName": "26710396",
+      "content": "",
+      "link": "",
+      "file": {
+        "filename": "1793887247945_New_Microsoft_Word_Document.docx",
+        "originalName": "New Microsoft Word Document.docx",
+        "size": 26978,
+        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1793887248/educlass_submissions/TIN%20H%E1%BB%8CC%20%C4%90%E1%BA%A0I%20C%C6%AF%C6%A0NG/Tin%20H%E1%BB%8Dc%20%C4%90%E1%BA%A1i%20C%C6%B0%C6%A1ng/B%C3%A0i%20t%E1%BA%ADp%20v%E1%BB%81%20chia%20c%E1%BB%99t%20-%20t%E1%BA%A1o%20dropcap%20-%20t%E1%BA%A1o%20b%E1%BA%A3ng/1793887247945_New_Microsoft_Word_Document_txojoe.docx",
+        "storageKey": "educlass_submissions/TIN HỌC ĐẠI CƯƠNG/Tin Học Đại Cương/Bài tập về chia cột - tạo dropcap - tạo bảng/1793887247945_New_Microsoft_Word_Document_txojoe.docx",
+        "provider": "cloudinary"
+      },
+      "submittedAt": "2026-11-05T14:00:48.589Z",
+      "grade": null,
+      "feedback": null,
+      "gradedAt": null
+    },
+    {
+      "id": "sub_1793887251670",
+      "assignmentId": "asm_1793877081018",
+      "studentId": "u_26710267",
+      "studentName": "26710267",
+      "content": "",
+      "link": "",
+      "file": {
+        "filename": "1793887250528_bài_10.docx",
+        "originalName": "bài 10.docx",
+        "size": 120267,
+        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1793887251/educlass_submissions/TIN%20H%E1%BB%8CC%20%C4%90%E1%BA%A0I%20C%C6%AF%C6%A0NG/Tin%20H%E1%BB%8Dc%20%C4%90%E1%BA%A1i%20C%C6%B0%C6%A1ng/B%C3%A0i%20t%E1%BA%ADp%20v%E1%BB%81%20chia%20c%E1%BB%99t%20-%20t%E1%BA%A1o%20dropcap%20-%20t%E1%BA%A1o%20b%E1%BA%A3ng/gyn0etvfnip2vytfymy1",
+        "storageKey": "educlass_submissions/TIN HỌC ĐẠI CƯƠNG/Tin Học Đại Cương/Bài tập về chia cột - tạo dropcap - tạo bảng/gyn0etvfnip2vytfymy1",
+        "provider": "cloudinary"
+      },
+      "submittedAt": "2026-11-05T14:00:51.670Z",
+      "grade": null,
+      "feedback": null,
+      "gradedAt": null
+    },
+    {
+      "id": "sub_1793887271539",
+      "assignmentId": "asm_1793877081018",
+      "studentId": "u_26710685",
+      "studentName": "26710685",
+      "content": "",
+      "link": "",
+      "file": {
+        "filename": "1793887270677_26710685.rtf",
+        "originalName": "26710685.rtf",
+        "size": 171853,
+        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1793887271/educlass_submissions/TIN%20H%E1%BB%8CC%20%C4%90%E1%BA%A0I%20C%C6%AF%C6%A0NG/Tin%20H%E1%BB%8Dc%20%C4%90%E1%BA%A1i%20C%C6%B0%C6%A1ng/B%C3%A0i%20t%E1%BA%ADp%20v%E1%BB%81%20chia%20c%E1%BB%99t%20-%20t%E1%BA%A1o%20dropcap%20-%20t%E1%BA%A1o%20b%E1%BA%A3ng/1793887270677_26710685_ronxx3.rtf",
+        "storageKey": "educlass_submissions/TIN HỌC ĐẠI CƯƠNG/Tin Học Đại Cương/Bài tập về chia cột - tạo dropcap - tạo bảng/1793887270677_26710685_ronxx3.rtf",
+        "provider": "cloudinary"
+      },
+      "submittedAt": "2026-11-05T14:01:11.539Z",
+      "grade": null,
+      "feedback": null,
+      "gradedAt": null
+    },
+    {
+      "id": "sub_1793887285251",
+      "assignmentId": "asm_1793877081018",
+      "studentId": "u_26710897",
+      "studentName": "26710897",
+      "content": "",
+      "link": "",
+      "file": {
+        "filename": "1793887284526_New_Microsoft_Word_Document.docx",
+        "originalName": "New Microsoft Word Document.docx",
+        "size": 28038,
+        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1793887284/educlass_submissions/TIN%20H%E1%BB%8CC%20%C4%90%E1%BA%A0I%20C%C6%AF%C6%A0NG/Tin%20H%E1%BB%8Dc%20%C4%90%E1%BA%A1i%20C%C6%B0%C6%A1ng/B%C3%A0i%20t%E1%BA%ADp%20v%E1%BB%81%20chia%20c%E1%BB%99t%20-%20t%E1%BA%A1o%20dropcap%20-%20t%E1%BA%A1o%20b%E1%BA%A3ng/1793887284526_New_Microsoft_Word_Document_ec0zjx.docx",
+        "storageKey": "educlass_submissions/TIN HỌC ĐẠI CƯƠNG/Tin Học Đại Cương/Bài tập về chia cột - tạo dropcap - tạo bảng/1793887284526_New_Microsoft_Word_Document_ec0zjx.docx",
+        "provider": "cloudinary"
+      },
+      "submittedAt": "2026-11-05T14:01:25.251Z",
+      "grade": null,
+      "feedback": null,
+      "gradedAt": null
+    },
+    {
+      "id": "sub_1793887312701",
+      "assignmentId": "asm_1793877081018",
+      "studentId": "u_26710101",
+      "studentName": "26710101",
+      "content": "",
+      "link": "",
+      "file": {
+        "filename": "1793887311548_26710101_DINHQUANG.docx",
+        "originalName": "26710101-DINHQUANG.docx",
+        "size": 279403,
+        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1793887312/educlass_submissions/TIN%20H%E1%BB%8CC%20%C4%90%E1%BA%A0I%20C%C6%AF%C6%A0NG/Tin%20H%E1%BB%8Dc%20%C4%90%E1%BA%A1i%20C%C6%B0%C6%A1ng/B%C3%A0i%20t%E1%BA%ADp%20v%E1%BB%81%20chia%20c%E1%BB%99t%20-%20t%E1%BA%A1o%20dropcap%20-%20t%E1%BA%A1o%20b%E1%BA%A3ng/1793887311548_26710101_DINHQUANG_iobjoa.docx",
+        "storageKey": "educlass_submissions/TIN HỌC ĐẠI CƯƠNG/Tin Học Đại Cương/Bài tập về chia cột - tạo dropcap - tạo bảng/1793887311548_26710101_DINHQUANG_iobjoa.docx",
+        "provider": "cloudinary"
+      },
+      "submittedAt": "2026-11-05T14:01:52.701Z",
+      "grade": null,
+      "feedback": null,
+      "gradedAt": null
     }
   ],
-  "updatedAt": "2026-11-05T11:05:21.298Z",
+  "updatedAt": "2026-11-06T08:20:17.315Z",
   "users": [
     {
       "id": "u_teacher_danh",

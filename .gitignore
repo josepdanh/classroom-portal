@@ -10,3 +10,5 @@ credentials.json
 *.key.json
 data.backup.json
 backups/
+dist/
+*.dmg

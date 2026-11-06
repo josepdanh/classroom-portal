@@ -8,10 +8,11 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 // Thư mục lưu trữ dữ liệu và tệp tin tải lên
-const DATA_FILE = path.join(__dirname, 'data.json');
-const BACKUP_FILE = path.join(__dirname, 'data.backup.json');
-const BACKUPS_DIR = path.join(__dirname, 'backups');
-const UPLOAD_DIR = path.join(__dirname, 'uploads');
+const BASE_DATA_DIR = process.env.EDUCLASS_DATA_DIR || __dirname;
+const DATA_FILE = path.join(BASE_DATA_DIR, 'data.json');
+const BACKUP_FILE = path.join(BASE_DATA_DIR, 'data.backup.json');
+const BACKUPS_DIR = path.join(BASE_DATA_DIR, 'backups');
+const UPLOAD_DIR = path.join(BASE_DATA_DIR, 'uploads');
 const MAC_LOCAL_DIR = path.join(os.homedir(), 'Downloads', 'EduClass_BaiTap');
 
 // Tự động tạo thư mục backups và uploads nếu chưa có
@@ -1334,7 +1335,7 @@ app.post('/api/submissions', upload.single('submissionFile'), async (req, res) =
   } else if (link || content) {
     // Nếu học sinh nộp bằng Link (Canva, Figma, Drive...) hoặc Ghi chú:
     // Tạo tệp lối tắt (.url) trên máy Mac để lưu trữ
-    const tempDir = path.join(__dirname, 'temp_submissions');
+    const tempDir = path.join(BASE_DATA_DIR, 'temp_submissions');
     if (!fs.existsSync(tempDir)) fs.mkdirSync(tempDir, { recursive: true });
 
     const safeName = studentDisplayName.replace(/[^a-zA-Z0-9_\u00C0-\u024F\u1E00-\u1EFF]/g, '_');
