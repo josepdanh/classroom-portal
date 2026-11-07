@@ -17,7 +17,11 @@
         "storageKey": "educlass_submissions/TIN HỌC ĐẠI CƯƠNG/Tin Học Đại Cương/Bài tập về chia cột - tạo dropcap - tạo bảng/1793877078664_tindc_bai_tap_word_21_pjxrsj.pdf",
         "provider": "cloudinary"
       },
-      "createdBy": "u_teacher_danh"
+      "createdBy": "u_teacher_danh",
+      "sharedWith": [
+        "u_phongkhaothi"
+      ],
+      "isArchivedForExaminer": true
     },
     {
       "id": "asm_1793774399970",
@@ -6786,7 +6790,7 @@
       "gradedAt": null
     }
   ],
-  "updatedAt": "2026-11-06T08:20:17.315Z",
+  "updatedAt": "2026-11-07T02:47:26.601Z",
   "users": [
     {
       "id": "u_teacher_danh",
@@ -9736,6 +9740,16 @@
       "className": "TIN HỌC ĐẠI CƯƠNG",
       "status": "ACTIVE",
       "createdAt": "2026-11-05T11:03:16.779Z"
+    },
+    {
+      "id": "u_phongkhaothi",
+      "username": "PhongKhaoThi",
+      "password": "12345",
+      "name": "Phòng Khảo Thí",
+      "role": "teacher",
+      "isExaminer": true,
+      "status": "ACTIVE",
+      "createdAt": "2026-11-07T02:47:26.600Z"
     }
   ],
   "industryGroups": [

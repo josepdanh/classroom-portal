@@ -1004,17 +1004,17 @@ setInterval(() => {
 
 // 2. Lấy danh sách bài tập (Phân tách độc lập theo từng Giáo viên và từng Lớp học)
 app.get('/api/assignments', (req, res) => {
-  const { studentId, teacherId, teacherFilterClass } = req.query;
+  const { studentId, teacherId, teacherFilterClass, viewAllTeachers } = req.query;
   const db = readDatabase();
 
-  let targetAssignments = db.assignments;
+  let targetAssignments = db.assignments || [];
 
   // PHÂN QUYỀN HỌC SINH: Học sinh chỉ thấy bài tập của đúng lớp mình (hoặc giao chung ALL)
   if (studentId) {
-    const student = db.users.find(u => u.id === studentId);
+    const student = (db.users || []).find(u => u.id === studentId);
     if (student && student.className) {
       const studentClass = student.className.trim().toUpperCase();
-      targetAssignments = db.assignments.filter(asm => {
+      targetAssignments = targetAssignments.filter(asm => {
         if (!asm.targetClass || asm.targetClass.toUpperCase() === 'ALL') return true;
         return asm.targetClass.trim().toUpperCase() === studentClass;
       });
@@ -1022,16 +1022,30 @@ app.get('/api/assignments', (req, res) => {
   } else if (teacherId) {
     const user = (db.users || []).find(u => u.id === teacherId);
     const isDanhOrAdmin = user && (user.isAdmin || (user.name && user.name.toLowerCase().includes('công danh')));
+    const isExaminer = user && (user.isExaminer || (user.username && user.username.toLowerCase() === 'phongkhaothi'));
 
-    if (!isDanhOrAdmin) {
-      targetAssignments = db.assignments.filter(asm => asm.createdBy === teacherId);
-    } else {
-      // Thầy Nguyễn Công Danh / Admin: Luôn thấy đầy đủ bài tập do mình tạo
-      targetAssignments = db.assignments.filter(asm => {
-        if (asm.createdBy === teacherId) return true;
-        const creator = (db.users || []).find(u => u.id === asm.createdBy);
-        return !creator || creator.isAdmin || (creator.name && creator.name.toLowerCase().includes('công danh'));
+    if (isExaminer) {
+      // PHÒNG KHẢO THÍ: Chỉ xem các bài tập do Admin chỉ định lưu trữ hoặc chia sẻ
+      targetAssignments = targetAssignments.filter(asm => {
+        return asm.isArchivedForExaminer === true ||
+          (Array.isArray(asm.sharedWith) && (asm.sharedWith.includes(teacherId) || asm.sharedWith.includes('u_phongkhaothi'))) ||
+          asm.createdBy === teacherId;
       });
+    } else if (isDanhOrAdmin) {
+      // QUẢN TRỊ VIÊN (Admin / Thầy Nguyễn Công Danh): Mặc định thấy tất cả bài tập để quản lý và phân quyền Khảo Thí
+      if (viewAllTeachers === 'false') {
+        targetAssignments = targetAssignments.filter(asm => {
+          if (asm.createdBy === teacherId) return true;
+          const creator = (db.users || []).find(u => u.id === asm.createdBy);
+          return !creator || creator.isAdmin || (creator.name && creator.name.toLowerCase().includes('công danh'));
+        });
+      } else {
+        // Xem toàn bộ bài tập của toàn bộ giáo viên
+        targetAssignments = db.assignments || [];
+      }
+    } else {
+      // Giáo viên thông thường: Chỉ xem bài tập do chính mình tạo
+      targetAssignments = targetAssignments.filter(asm => asm.createdBy === teacherId);
     }
 
     // Nếu giáo viên chọn lọc theo 1 lớp cụ thể
@@ -1044,19 +1058,19 @@ app.get('/api/assignments', (req, res) => {
   }
 
   const result = targetAssignments.map(asm => {
-    const submissions = db.submissions.filter(s => s.assignmentId === asm.id);
+    const submissions = (db.submissions || []).filter(s => s.assignmentId === asm.id);
     const submittedCount = submissions.length;
     const gradedCount = submissions.filter(s => s.grade !== null && s.grade !== undefined).length;
 
-    // Tìm thông tin giáo viên tạo bài để hiển thị cho học sinh
-    const teacher = db.users.find(u => u.id === asm.createdBy);
+    // Tìm thông tin giáo viên tạo bài để hiển thị cho học sinh và quản trị
+    const teacher = (db.users || []).find(u => u.id === asm.createdBy);
     const teacherName = teacher ? teacher.name : 'Giáo viên';
     const teacherSubject = teacher ? teacher.subject : '';
 
     // Tính sĩ số chuẩn theo từng lớp được giao bài tập
-    let totalStudents = db.users.filter(u => u.role === 'student').length;
+    let totalStudents = (db.users || []).filter(u => u.role === 'student').length;
     if (asm.targetClass && asm.targetClass.toUpperCase() !== 'ALL') {
-      totalStudents = db.users.filter(u => 
+      totalStudents = (db.users || []).filter(u => 
         u.role === 'student' && u.className && u.className.trim().toUpperCase() === asm.targetClass.trim().toUpperCase()
       ).length;
     }
@@ -1073,12 +1087,19 @@ app.get('/api/assignments', (req, res) => {
       }
     }
 
+    const isArchivedForExaminer = !!(
+      asm.isArchivedForExaminer === true || 
+      (Array.isArray(asm.sharedWith) && (asm.sharedWith.includes('u_phongkhaothi') || (teacherId && asm.sharedWith.includes(teacherId))))
+    );
+
     return {
       ...asm,
       targetClass: asm.targetClass || 'ALL',
       subject: asm.subject || teacherSubject || 'Tin học',
       teacherName,
+      creatorName: teacherName,
       teacherSubject,
+      isArchivedForExaminer,
       stats: {
         totalStudents,
         submittedCount,
@@ -1201,7 +1222,7 @@ app.post('/api/assignments', upload.single('attachment'), async (req, res) => {
   res.json({ success: true, message: `Giao bài tập mới cho lớp ${cleanTargetClass} thành công! Hệ thống đã phát thông báo tới thiết bị của học sinh.`, assignment: newAssignment });
 });
 
-// 4. Giáo viên xóa bài tập (Chỉ người tạo mới được xóa)
+// 4. Giáo viên xóa bài tập (Chỉ người tạo mới được xóa, trừ Khảo Thí)
 app.delete('/api/assignments/:id', (req, res) => {
   const { id } = req.params;
   const { teacherId } = req.query;
@@ -1212,8 +1233,15 @@ app.delete('/api/assignments/:id', (req, res) => {
     return res.status(404).json({ message: "Không tìm thấy bài tập cần xóa." });
   }
 
-  if (teacherId && target.createdBy && target.createdBy !== teacherId) {
-    return res.status(403).json({ message: "Bạn không có quyền xóa bài tập của giáo viên khác." });
+  if (teacherId) {
+    const user = (db.users || []).find(u => u.id === teacherId);
+    const isExaminer = user && (user.isExaminer || (user.username && user.username.toLowerCase() === 'phongkhaothi'));
+    if (isExaminer) {
+      return res.status(403).json({ message: "Tài khoản Phòng Khảo Thí chỉ có quyền lưu trữ, không được xóa bài tập." });
+    }
+    if (target.createdBy && target.createdBy !== teacherId) {
+      return res.status(403).json({ message: "Bạn không có quyền xóa bài tập của giáo viên khác." });
+    }
   }
 
   db.assignments = db.assignments.filter(a => a.id !== id);
@@ -1226,7 +1254,48 @@ app.delete('/api/assignments/:id', (req, res) => {
   res.json({ success: true, message: "Đã xóa bài tập thành công." });
 });
 
-// 5. Giáo viên xem danh sách học sinh nộp bài (Bảo mật: Chỉ giáo viên tạo bài mới được xem bài nộp & file)
+// 4b. Admin phân quyền / gỡ bài tập cho Phòng Khảo Thí lưu trữ
+app.post('/api/assignments/:id/toggle-examiner', (req, res) => {
+  const { id } = req.params;
+  const { adminId } = req.body;
+  const db = readDatabase();
+
+  const user = (db.users || []).find(u => u.id === adminId);
+  const isDanhOrAdmin = user && (user.isAdmin || (user.name && user.name.toLowerCase().includes('công danh')));
+  if (!isDanhOrAdmin) {
+    return res.status(403).json({ message: "Chỉ Quản trị viên (Admin) mới có quyền phân quyền bài tập cho Phòng Khảo Thí." });
+  }
+
+  const asm = (db.assignments || []).find(a => a.id === id);
+  if (!asm) {
+    return res.status(404).json({ message: "Không tìm thấy bài tập." });
+  }
+
+  if (!Array.isArray(asm.sharedWith)) asm.sharedWith = [];
+  const currentlyShared = !!(asm.isArchivedForExaminer === true || asm.sharedWith.includes('u_phongkhaothi'));
+
+  if (currentlyShared) {
+    asm.isArchivedForExaminer = false;
+    asm.sharedWith = asm.sharedWith.filter(uid => uid !== 'u_phongkhaothi');
+  } else {
+    asm.isArchivedForExaminer = true;
+    if (!asm.sharedWith.includes('u_phongkhaothi')) {
+      asm.sharedWith.push('u_phongkhaothi');
+    }
+  }
+
+  writeDatabase(db);
+
+  res.json({
+    success: true,
+    isArchivedForExaminer: asm.isArchivedForExaminer,
+    message: asm.isArchivedForExaminer
+      ? `Đã thêm bài tập "${asm.title}" vào danh sách lưu trữ của Phòng Khảo Thí thành công!`
+      : `Đã gỡ bài tập "${asm.title}" khỏi danh sách lưu trữ của Phòng Khảo Thí!`
+  });
+});
+
+// 5. Giáo viên xem danh sách học sinh nộp bài (Bảo mật: Chỉ giáo viên tạo bài, Admin hoặc Khảo Thí được cấp quyền mới được xem)
 app.get('/api/assignments/:id/submissions', (req, res) => {
   const { id } = req.params;
   const { teacherId } = req.query;
@@ -1237,9 +1306,17 @@ app.get('/api/assignments/:id/submissions', (req, res) => {
     return res.status(404).json({ message: "Không tìm thấy bài tập." });
   }
 
-  // BẢO VỆ: Giáo viên khác không được xem bài nộp hoặc file của bài tập này
+  // BẢO VỆ: Giáo viên khác không được xem bài nộp hoặc file của bài tập này (trừ Admin hoặc Phòng Khảo Thí được phân quyền)
   if (teacherId && assignment.createdBy && assignment.createdBy !== teacherId) {
-    return res.status(403).json({ message: "Bạn không có quyền xem bài tập hoặc bài nộp của giáo viên khác." });
+    const user = (db.users || []).find(u => u.id === teacherId);
+    const isDanhOrAdmin = user && (user.isAdmin || (user.name && user.name.toLowerCase().includes('công danh')));
+    const isExaminer = user && (user.isExaminer || (user.username && user.username.toLowerCase() === 'phongkhaothi'));
+    const isSharedWithExaminer = assignment.isArchivedForExaminer === true || 
+      (Array.isArray(assignment.sharedWith) && (assignment.sharedWith.includes(teacherId) || assignment.sharedWith.includes('u_phongkhaothi')));
+
+    if (!isDanhOrAdmin && !(isExaminer && isSharedWithExaminer)) {
+      return res.status(403).json({ message: "Bạn không có quyền xem bài tập hoặc bài nộp của giáo viên khác." });
+    }
   }
 
   // Lọc chỉ lấy học sinh của lớp nhận bài tập
@@ -2155,12 +2232,26 @@ app.get('/api/file-text/:filename', async (req, res) => {
 // 8d. Tải toàn bộ bài nộp của 1 bài tập dưới dạng file ZIP (gom theo lớp và môn)
 app.get('/api/assignments/:id/download-all-zip', (req, res) => {
   const { id } = req.params;
+  const { teacherId } = req.query;
   const db = readDatabase();
   const AdmZip = require('adm-zip');
 
   const asm = (db.assignments || []).find(a => a.id === id);
   if (!asm) {
     return res.status(404).send("Bài tập không tồn tại.");
+  }
+
+  // Bảo vệ: Chỉ người tạo, Admin hoặc Phòng Khảo Thí được cấp quyền mới được tải zip
+  if (teacherId && asm.createdBy && asm.createdBy !== teacherId) {
+    const user = (db.users || []).find(u => u.id === teacherId);
+    const isDanhOrAdmin = user && (user.isAdmin || (user.name && user.name.toLowerCase().includes('công danh')));
+    const isExaminer = user && (user.isExaminer || (user.username && user.username.toLowerCase() === 'phongkhaothi'));
+    const isSharedWithExaminer = asm.isArchivedForExaminer === true || 
+      (Array.isArray(asm.sharedWith) && (asm.sharedWith.includes(teacherId) || asm.sharedWith.includes('u_phongkhaothi')));
+
+    if (!isDanhOrAdmin && !(isExaminer && isSharedWithExaminer)) {
+      return res.status(403).send("Bạn không có quyền tải toàn bộ bài nộp của bài tập này.");
+    }
   }
 
   const submissions = (db.submissions || []).filter(s => s.assignmentId === id);
