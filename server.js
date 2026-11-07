@@ -2229,8 +2229,8 @@ app.get('/api/file-text/:filename', async (req, res) => {
   return res.status(404).json({ error: "Tệp tin không tồn tại." });
 });
 
-// 8d. Tải toàn bộ bài nộp của 1 bài tập dưới dạng file ZIP (gom theo lớp và môn)
-app.get('/api/assignments/:id/download-all-zip', (req, res) => {
+// 8d. Tải toàn bộ bài nộp của 1 bài tập dưới dạng file ZIP (gom theo lớp và môn, tự động lấy từ Đám mây nếu file cục bộ không có)
+app.get('/api/assignments/:id/download-all-zip', async (req, res) => {
   const { id } = req.params;
   const { teacherId } = req.query;
   const db = readDatabase();
@@ -2267,7 +2267,7 @@ app.get('/api/assignments/:id/download-all-zip', (req, res) => {
 
   let fileCount = 0;
 
-  submissions.forEach(sub => {
+  for (const sub of submissions) {
     const student = (db.users || []).find(u => u.id === sub.studentId);
     const studentCode = student ? (student.studentCode || student.username || '') : '';
     const studentName = student ? student.name : (sub.studentName || 'HocSinh');
@@ -2276,9 +2276,42 @@ app.get('/api/assignments/:id/download-all-zip', (req, res) => {
 
     if (sub.file && sub.file.filename) {
       const filePath = path.join(UPLOAD_DIR, sub.file.filename);
+      let fileAdded = false;
+
+      // 1. Thử đọc file từ ổ cứng cục bộ
       if (fs.existsSync(filePath)) {
-        const destName = `${prefix}_${sub.file.originalName}`;
-        zip.addLocalFile(filePath, folderPath, destName);
+        try {
+          const destName = `${prefix}_${sub.file.originalName}`;
+          zip.addLocalFile(filePath, folderPath, destName);
+          fileCount++;
+          fileAdded = true;
+        } catch (e) {}
+      }
+
+      // 2. Nếu không có file vật lý (trên Render Cloud), tải trực tiếp từ Cloud (Cloudflare R2 / Cloudinary)
+      if (!fileAdded) {
+        const cloudUrl = sub.file.url || await findCloudUrlForFile(sub.file.filename, db);
+        if (cloudUrl) {
+          try {
+            const fetchRes = await fetch(cloudUrl);
+            if (fetchRes.ok) {
+              const arrayBuf = await fetchRes.arrayBuffer();
+              const destName = `${prefix}_${sub.file.originalName || sub.file.filename}`;
+              zip.addFile(`${folderPath}/${destName}`, Buffer.from(arrayBuf));
+              fileCount++;
+              fileAdded = true;
+            }
+          } catch (err) {
+            console.warn(`[Zip Export] Lỗi kéo file từ Cloud (${cloudUrl}):`, err.message);
+          }
+        }
+      }
+
+      // 3. Dự phòng nếu tải file cloud thất bại: tạo file Shortcut .url
+      if (!fileAdded && (sub.file.url || sub.link)) {
+        const directUrl = sub.file.url || sub.link;
+        const urlContent = `[InternetShortcut]\nURL=${directUrl}\n\n[ThongTinBaiNop]\nMSSV=${studentCode}\nHoVaTen=${studentName}\nLop=${cleanClass}\nMon=${cleanSubject}\nBaiTap=${cleanAssignment}\nLinkCloud=${directUrl}\n`;
+        zip.addFile(`${folderPath}/${prefix}_LienKetCloud.url`, Buffer.from(urlContent, 'utf8'));
         fileCount++;
       }
     } else if (sub.link || sub.content) {
@@ -2286,10 +2319,10 @@ app.get('/api/assignments/:id/download-all-zip', (req, res) => {
       zip.addFile(`${folderPath}/${prefix}_LienKet.url`, Buffer.from(urlContent, 'utf8'));
       fileCount++;
     }
-  });
+  }
 
   if (fileCount === 0) {
-    return res.status(404).send("Không tìm thấy file bài nộp vật lý nào trên máy chủ.");
+    return res.status(404).send("Không tìm thấy file bài nộp nào trên hệ thống.");
   }
 
   const dateStr = new Date().toISOString().split('T')[0];
@@ -2305,7 +2338,7 @@ app.get('/api/assignments/:id/download-all-zip', (req, res) => {
 });
 
 // 8e. Tải toàn bộ bài nộp của TẤT CẢ các lớp/môn dưới dạng file ZIP
-app.get('/api/admin/download-all-submissions-zip', (req, res) => {
+app.get('/api/admin/download-all-submissions-zip', async (req, res) => {
   const db = readDatabase();
   const AdmZip = require('adm-zip');
 
@@ -2317,7 +2350,7 @@ app.get('/api/admin/download-all-submissions-zip', (req, res) => {
   const zip = new AdmZip();
   let fileCount = 0;
 
-  submissions.forEach(sub => {
+  for (const sub of submissions) {
     const asm = (db.assignments || []).find(a => a.id === sub.assignmentId);
     const cleanClass = sanitizeFolderName(asm ? asm.targetClass : 'Chung');
     const cleanSubject = sanitizeFolderName(asm ? asm.subject : 'MonHoc');
@@ -2332,9 +2365,37 @@ app.get('/api/admin/download-all-submissions-zip', (req, res) => {
 
     if (sub.file && sub.file.filename) {
       const filePath = path.join(UPLOAD_DIR, sub.file.filename);
+      let fileAdded = false;
+
       if (fs.existsSync(filePath)) {
-        const destName = `${prefix}_${sub.file.originalName}`;
-        zip.addLocalFile(filePath, folderPath, destName);
+        try {
+          const destName = `${prefix}_${sub.file.originalName}`;
+          zip.addLocalFile(filePath, folderPath, destName);
+          fileCount++;
+          fileAdded = true;
+        } catch (e) {}
+      }
+
+      if (!fileAdded) {
+        const cloudUrl = sub.file.url || await findCloudUrlForFile(sub.file.filename, db);
+        if (cloudUrl) {
+          try {
+            const fetchRes = await fetch(cloudUrl);
+            if (fetchRes.ok) {
+              const arrayBuf = await fetchRes.arrayBuffer();
+              const destName = `${prefix}_${sub.file.originalName || sub.file.filename}`;
+              zip.addFile(`${folderPath}/${destName}`, Buffer.from(arrayBuf));
+              fileCount++;
+              fileAdded = true;
+            }
+          } catch (err) {}
+        }
+      }
+
+      if (!fileAdded && (sub.file.url || sub.link)) {
+        const directUrl = sub.file.url || sub.link;
+        const urlContent = `[InternetShortcut]\nURL=${directUrl}\n\n[ThongTinBaiNop]\nMSSV=${studentCode}\nHoVaTen=${studentName}\nLop=${cleanClass}\nMon=${cleanSubject}\nBaiTap=${cleanAssignment}\nLinkCloud=${directUrl}\n`;
+        zip.addFile(`${folderPath}/${prefix}_LienKetCloud.url`, Buffer.from(urlContent, 'utf8'));
         fileCount++;
       }
     } else if (sub.link || sub.content) {
@@ -2342,7 +2403,7 @@ app.get('/api/admin/download-all-submissions-zip', (req, res) => {
       zip.addFile(`${folderPath}/${prefix}_LienKet.url`, Buffer.from(urlContent, 'utf8'));
       fileCount++;
     }
-  });
+  }
 
   if (fileCount === 0) {
     return res.status(404).send("Không tìm thấy file bài nộp nào.");
