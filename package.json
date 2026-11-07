@@ -41,6 +41,8 @@
     "files": [
       "desktop-main.js",
       "server.js",
+      "cleanup-cloudinary-expired.js",
+      "sync-to-mac.js",
       "public/**/*",
       "data.json",
       "data.backup.json",

@@ -98,7 +98,7 @@ async function startEmbeddedServer() {
 }
 
 // Tạo cửa sổ chính ứng dụng macOS
-function createMainWindow() {
+function createMainWindow(targetUrl = LOCAL_URL) {
   mainWindow = new BrowserWindow({
     width: 1360,
     height: 880,
@@ -123,8 +123,17 @@ function createMainWindow() {
     mainWindow.focus();
   });
 
-  // Tải giao diện portal cục bộ
-  mainWindow.loadURL(LOCAL_URL);
+  // Tự động chuyển sang Render Đám mây nếu local server không phản hồi
+  mainWindow.webContents.on('did-fail-load', (event, errorCode, errorDescription, validatedURL) => {
+    console.warn(`[Desktop] Lỗi tải URL ${validatedURL}: ${errorDescription} (${errorCode})`);
+    if (validatedURL && validatedURL.includes('localhost') && validatedURL !== RENDER_CLOUD_URL) {
+      console.log('[Desktop] Đang tự động chuyển sang Web Render Đám Mây...');
+      mainWindow.loadURL(RENDER_CLOUD_URL);
+    }
+  });
+
+  // Tải giao diện portal
+  mainWindow.loadURL(targetUrl);
 
   // Xử lý khi người dùng click vào các link ra ngoài
   mainWindow.webContents.setWindowOpenHandler(({ url }) => {
@@ -310,10 +319,10 @@ app.whenReady().then(async () => {
   buildApplicationMenu();
   await startEmbeddedServer();
 
-  // Đợi thêm một chút để đảm bảo server đã lắng nghe
+  // Đợi để đảm bảo server đã lắng nghe
   let ready = false;
   let attempts = 0;
-  while (!ready && attempts < 15) {
+  while (!ready && attempts < 20) {
     ready = await checkServerReady(LOCAL_URL, 400);
     if (!ready) {
       await new Promise((r) => setTimeout(r, 200));
@@ -321,11 +330,18 @@ app.whenReady().then(async () => {
     }
   }
 
-  createMainWindow();
+  const initialUrl = ready ? LOCAL_URL : RENDER_CLOUD_URL;
+  if (!ready) {
+    console.warn('[Desktop] Server cục bộ chưa sẵn sàng, mở giao diện qua Render Đám Mây');
+  } else {
+    console.log('[Desktop] Server cục bộ đã sẵn sàng tại:', LOCAL_URL);
+  }
+
+  createMainWindow(initialUrl);
 
   app.on('activate', () => {
     if (BrowserWindow.getAllWindows().length === 0) {
-      createMainWindow();
+      createMainWindow(ready ? LOCAL_URL : RENDER_CLOUD_URL);
     }
   });
 });

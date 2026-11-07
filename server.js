@@ -2533,7 +2533,13 @@ app.get('/api/admin/export-database', (req, res) => {
 });
 
 // 11. Tự động hóa công việc xóa file trên Cloudinary sau 60 ngày tính từ ngày kết thúc nhiệm vụ (dueDate)
-const { cleanupExpiredFiles } = require('./cleanup-cloudinary-expired');
+let cleanupExpiredFiles = async () => ({ deletedFilesCount: 0 });
+try {
+  const mod = require('./cleanup-cloudinary-expired');
+  if (mod && mod.cleanupExpiredFiles) cleanupExpiredFiles = mod.cleanupExpiredFiles;
+} catch (e) {
+  console.warn('[Server] Bỏ qua tác vụ dọn dẹp định kỳ (không tìm thấy module cleanup-cloudinary-expired):', e.message);
+}
 
 // API Kích hoạt dọn dẹp file Cloudinary quá hạn 60 ngày (Chỉ Quản trị viên)
 app.post('/api/admin/cleanup-expired-files', async (req, res) => {
