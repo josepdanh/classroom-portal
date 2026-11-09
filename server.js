@@ -2416,6 +2416,62 @@ function generateSessionToken() {
   return 'qr_' + Date.now() + '_' + Math.random().toString(36).substring(2, 9);
 }
 
+// Hàm kiểm tra khung giờ cho phép điểm danh học sinh theo Lịch Báo Giảng:
+// - Buổi sáng: 07:00 - 11:00 (đúng ngày trong tuần của môn học)
+// - Buổi chiều: 13:00 - 16:00 (đúng ngày trong tuần của môn học)
+// - Ngoài khung giờ này: KHÓA học sinh tự điểm danh, chỉ cho phép Giáo viên click Checkbox để điểm danh bù.
+function checkScheduleTimeWindow(scheduleItem) {
+  if (!scheduleItem) return { isAllowedForStudent: true, isSameDay: true, isWithinTime: true, reason: '' };
+
+  const now = new Date();
+  const jsDay = now.getDay(); // 0 = Chủ Nhật, 1 = Thứ Hai, ..., 6 = Thứ Bảy
+  const currentDayOfWeek = jsDay === 0 ? 8 : jsDay + 1; // 2 = Thứ Hai, ..., 8 = Chủ Nhật
+  const hour = now.getHours();
+  const minute = now.getMinutes();
+  const totalMinutes = hour * 60 + minute;
+
+  const dayNames = { 2: 'Thứ Hai', 3: 'Thứ Ba', 4: 'Thứ Tư', 5: 'Thứ Năm', 6: 'Thứ Sáu', 7: 'Thứ Bảy', 8: 'Chủ Nhật' };
+  const scheduleDay = Number(scheduleItem.dayOfWeek);
+  const scheduleDayLabel = dayNames[scheduleDay] || `Thứ ${scheduleDay}`;
+  const currentDayLabel = dayNames[currentDayOfWeek] || `Thứ ${currentDayOfWeek}`;
+
+  const isMorning = Boolean(scheduleItem.session === 'morning' || (scheduleItem.periods && String(scheduleItem.periods).includes('1')));
+  const allowedRangeStr = isMorning ? "07:00 - 11:00" : "13:00 - 16:00";
+
+  // 1. Phải đúng ngày trong tuần của buổi học
+  const isSameDay = (scheduleDay === currentDayOfWeek);
+
+  // 2. Phải trong khung giờ cho phép của buổi sáng hoặc buổi chiều:
+  // Ca Sáng: 7h00 - 11h00 (420 - 660 phút)
+  // Ca Chiều: 13h00 - 16h00 (780 - 960 phút)
+  let isWithinTime = false;
+  if (isMorning) {
+    isWithinTime = (totalMinutes >= 420 && totalMinutes <= 660);
+  } else {
+    isWithinTime = (totalMinutes >= 780 && totalMinutes <= 960);
+  }
+
+  const isAllowedForStudent = isSameDay && isWithinTime;
+  let reason = '';
+  if (!isSameDay) {
+    reason = `Lịch học của môn diễn ra vào ${scheduleDayLabel}, trong khi hôm nay là ${currentDayLabel}.`;
+  } else if (!isWithinTime) {
+    const curTimeStr = `${String(hour).padStart(2, '0')}:${String(minute).padStart(2, '0')}`;
+    reason = `Hiện tại là ${curTimeStr}, ngoài khung giờ cho phép học sinh tự điểm danh (${allowedRangeStr} ${isMorning ? 'Ca Sáng' : 'Ca Chiều'}).`;
+  }
+
+  return {
+    isAllowedForStudent,
+    isSameDay,
+    isWithinTime,
+    isMorning,
+    allowedRangeStr,
+    scheduleDayLabel,
+    currentDayLabel,
+    reason
+  };
+}
+
 // 4a. Giáo viên bắt đầu phiên điểm danh trực tiếp cho một lớp (BẮT BUỘC CÓ TRONG LỊCH BÁO GIẢNG)
 app.post('/api/attendance/session/start', (req, res) => {
   const { className, scheduleId, subjectName, lessonTitle, teacherId } = req.body;
@@ -2472,12 +2528,15 @@ app.post('/api/attendance/session/start', (req, res) => {
   const now = Date.now();
   const otp = generateRandomOtp();
   const token = generateSessionToken();
+  const timeStatus = checkScheduleTimeWindow(matchedSchedule);
 
   const session = {
     id: `attsess_${now}`,
     className: cleanClass,
     subjectName: finalSubjectName,
     scheduleId: matchedSchedule.id,
+    dayOfWeek: matchedSchedule.dayOfWeek,
+    session: matchedSchedule.session,
     room: finalRoom,
     periods: finalPeriods,
     lessonTitle: finalLessonTitle,
@@ -2490,7 +2549,9 @@ app.post('/api/attendance/session/start', (req, res) => {
     rotationIntervalSeconds: 60,
     totalStudents: classStudents.length,
     checkedInStudents: {},
-    isActive: true
+    isActive: true,
+    isAllowedForStudent: timeStatus.isAllowedForStudent,
+    timeStatus: timeStatus
   };
 
   activeAttendanceSessions[cleanClass] = session;
@@ -2546,6 +2607,12 @@ app.get('/api/attendance/session/current', (req, res) => {
     studentCheckinInfo = session.checkedInStudents[studentId];
   }
 
+  // Kiểm tra khung giờ điểm danh học sinh
+  const matchedSchedule = (db.schedule || []).find(s => s.id === session.scheduleId) || session;
+  const timeStatus = checkScheduleTimeWindow(matchedSchedule);
+  session.isAllowedForStudent = timeStatus.isAllowedForStudent;
+  session.timeStatus = timeStatus;
+
   res.json({
     success: true,
     active: true,
@@ -2554,6 +2621,8 @@ app.get('/api/attendance/session/current', (req, res) => {
       className: session.className,
       subjectName: session.subjectName,
       scheduleId: session.scheduleId,
+      dayOfWeek: session.dayOfWeek,
+      session: session.session,
       room: session.room,
       periods: session.periods,
       lessonTitle: session.lessonTitle,
@@ -2566,7 +2635,9 @@ app.get('/api/attendance/session/current', (req, res) => {
       checkedInCount: checkedInCount,
       students: studentList,
       isStudentCheckedIn,
-      studentCheckinInfo
+      studentCheckinInfo,
+      isAllowedForStudent: timeStatus.isAllowedForStudent,
+      timeStatus: timeStatus
     }
   });
 });
@@ -2609,6 +2680,19 @@ app.post('/api/attendance/session/checkin', (req, res) => {
 
   if (!session || !session.isActive) {
     return res.status(400).json({ message: "Phiên điểm danh của lớp chưa bắt đầu hoặc đã kết thúc!" });
+  }
+
+  // KIỂM TRA KHUNG GIỜ HỌC SINH THEO LỊCH BÁO GIẢNG: Sáng 7h-11h, Chiều 13h-16h (đúng ngày trong tuần)
+  const db = readDatabase();
+  const matchedSchedule = (db.schedule || []).find(s => s.id === session.scheduleId) || session;
+  const timeStatus = checkScheduleTimeWindow(matchedSchedule);
+
+  if (!timeStatus.isAllowedForStudent) {
+    return res.status(400).json({
+      success: false,
+      locked: true,
+      message: `Đã khóa chức năng tự điểm danh của học sinh! Buổi học theo lịch báo giảng chỉ cho phép học sinh điểm danh ${timeStatus.allowedRangeStr} (${timeStatus.isMorning ? 'Ca Sáng' : 'Ca Chiều'}) vào ${timeStatus.scheduleDayLabel}. ${timeStatus.reason} Vui lòng báo Thầy giáo để được điểm danh bù qua Checkbox!`
+    });
   }
 
   const cleanInput = codeOrToken.trim();
@@ -2871,13 +2955,20 @@ app.get('/api/schedule/for-class/:className', (req, res) => {
   const todayJsDay = new Date().getDay(); // 0-6
   const currentDayOfWeek = todayJsDay === 0 ? 8 : todayJsDay + 1;
 
-  const result = list.map(item => ({
-    ...item,
-    isToday: Number(item.dayOfWeek) === currentDayOfWeek
-  }));
+  const result = list.map(item => {
+    const timeStatus = checkScheduleTimeWindow(item);
+    return {
+      ...item,
+      isToday: Number(item.dayOfWeek) === currentDayOfWeek,
+      isAllowedForStudent: timeStatus.isAllowedForStudent,
+      timeStatus: timeStatus
+    };
+  });
 
-  // Sắp xếp: Tiết hôm nay lên đầu, sau đó theo thứ trong tuần
+  // Sắp xếp: Tiết đang trong giờ học sinh lên trước, sau đó tiết hôm nay, sau đó theo thứ trong tuần
   result.sort((a, b) => {
+    if (a.isAllowedForStudent && !b.isAllowedForStudent) return -1;
+    if (!a.isAllowedForStudent && b.isAllowedForStudent) return 1;
     if (a.isToday && !b.isToday) return -1;
     if (!a.isToday && b.isToday) return 1;
     return (Number(a.dayOfWeek) - Number(b.dayOfWeek)) || (a.session === 'morning' ? -1 : 1);

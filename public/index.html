@@ -892,6 +892,25 @@
             </div>
           </div>
         </div>
+
+        <!-- Trạng thái 4: Ngoài giờ học theo lịch báo giảng (Đã khóa tự điểm danh của học sinh) -->
+        <div id="student-att-state-locked-time" class="hidden p-4 rounded-xl bg-amber-50 border-2 border-amber-300 text-amber-900 text-xs space-y-2.5">
+          <div class="flex items-center gap-2.5 font-black text-amber-950 text-sm">
+            <div class="w-8 h-8 rounded-lg bg-amber-500 text-white flex items-center justify-center text-sm shadow-xs">
+              <i class="fa-solid fa-lock"></i>
+            </div>
+            <span>ĐÃ KHÓA TỰ ĐIỂM DANH CHO HỌC SINH</span>
+          </div>
+          <p class="text-slate-600 leading-relaxed text-[11px]" id="student-att-locked-reason">
+            Hiện tại ngoài khung giờ điểm danh theo lịch báo giảng (Sáng: 07h00 - 11h00, Chiều: 13h00 - 16h00). Hệ thống đã tự động khóa quyền quét QR và nhập mã của học sinh.
+          </p>
+          <div class="p-3 bg-white rounded-xl border border-amber-200 text-[11px] text-amber-900 flex items-start gap-2 shadow-xs">
+            <i class="fa-solid fa-circle-info text-amber-600 mt-0.5 shrink-0"></i>
+            <div>
+              <b>Hướng dẫn:</b> Nếu bạn có mặt trong buổi học hôm nay nhưng chưa được điểm danh, vui lòng <b>báo trực tiếp với Thầy giáo</b> để Thầy tích ô Checkbox [✓] <b>điểm danh bù</b> cho bạn trên máy Thầy.
+            </div>
+          </div>
+        </div>
       </div>
 
       <!-- Bộ lọc bài tập cho học sinh -->
@@ -4840,10 +4859,21 @@
       schedules.forEach(item => {
         const isMorning = item.session === 'morning';
         const dayLabel = dayNames[item.dayOfWeek] || `Thứ ${item.dayOfWeek}`;
-        const borderClass = item.isToday ? 'border-2 border-red-500 bg-red-50/40 shadow-sm' : 'border border-slate-200 bg-slate-50 hover:bg-slate-100';
-        const todayBadge = item.isToday
-          ? `<span class="px-2 py-0.5 rounded-full text-[10px] font-black bg-rose-600 text-white animate-pulse"><i class="fa-solid fa-star text-[8px] mr-1"></i>HÔM NAY (TIẾT NÀY)</span>`
-          : '';
+        const isAllowed = !!item.isAllowedForStudent;
+        const timeRange = isMorning ? "07:00 - 11:00" : "13:00 - 16:00";
+        const borderClass = isAllowed
+          ? 'border-2 border-emerald-500 bg-emerald-50/40 shadow-sm'
+          : (item.isToday ? 'border-2 border-amber-400 bg-amber-50/30' : 'border border-slate-200 bg-slate-50 hover:bg-slate-100');
+
+        const statusBadge = isAllowed
+          ? `<span class="px-2 py-0.5 rounded-full text-[10px] font-black bg-emerald-600 text-white shadow-xs animate-pulse"><i class="fa-solid fa-circle text-[6px] mr-1"></i>ĐANG TRONG GIỜ HỌC (${timeRange})</span>`
+          : `<span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-amber-100 text-amber-800 border border-amber-300"><i class="fa-solid fa-lock text-[8px] mr-1"></i>NGOÀI GIỜ (${timeRange}) - Điểm danh bù</span>`;
+
+        const btnClass = isAllowed
+          ? 'bg-gradient-to-r from-red-600 to-rose-700 text-white'
+          : 'bg-amber-600 hover:bg-amber-700 text-white';
+
+        const btnLabel = isAllowed ? 'Điểm Danh QR' : 'Điểm Danh Bù';
 
         html += `
           <div onclick="openLiveAttendanceModal('${escapeHtml(className)}', '${escapeHtml(item.subjectName || '')}', '${escapeHtml(item.currentLesson || '')}', '${escapeHtml(item.id)}'); closeSelectScheduleModal();"
@@ -4854,7 +4884,7 @@
                 <span class="px-2 py-0.5 rounded-md text-[10px] font-bold ${isMorning ? 'bg-amber-100 text-amber-800' : 'bg-blue-100 text-blue-800'}">
                   ${isMorning ? 'SÁNG (Tiết 1-5)' : 'CHIỀU (Tiết 6-10)'}
                 </span>
-                ${todayBadge}
+                ${statusBadge}
               </div>
               <div class="font-extrabold text-slate-900 text-sm group-hover:text-red-700 transition">
                 <i class="fa-solid fa-book-open text-indigo-600 mr-1.5"></i>${escapeHtml(item.subjectName)}
@@ -4865,8 +4895,8 @@
                 <span class="italic text-slate-600">${escapeHtml(item.currentLesson || 'Theo kế hoạch giảng dạy')}</span>
               </div>
             </div>
-            <button class="px-3 py-1.5 rounded-xl bg-gradient-to-r from-red-600 to-rose-700 text-white text-xs font-bold shrink-0 shadow-xs group-hover:scale-105 transition flex items-center gap-1">
-              <i class="fa-solid fa-qrcode text-[11px]"></i> Điểm Danh
+            <button class="px-3 py-1.5 rounded-xl ${btnClass} text-xs font-bold shrink-0 shadow-xs group-hover:scale-105 transition flex items-center gap-1">
+              <i class="fa-solid ${isAllowed ? 'fa-qrcode' : 'fa-square-check'} text-[11px]"></i> ${btnLabel}
             </button>
           </div>
         `;
@@ -5064,30 +5094,58 @@
         desc.textContent = `${session.subjectName || ''}${session.room ? ' • Phòng ' + session.room : ''}${session.periods ? ' • Tiết ' + session.periods : ''} • ${session.lessonTitle || ''}`;
       }
 
-      // Cập nhật thời gian còn lại
-      if (typeof session.timeLeft === 'number') {
-        liveRemainingSeconds = session.timeLeft;
-        updateLiveTimerUI(liveRemainingSeconds);
-      }
-
-      // Cập nhật dãy 4 số ngẫu nhiên
       const otpDisplay = document.getElementById('live-otp-display');
-      if (otpDisplay && session.otp) {
-        otpDisplay.textContent = session.otp;
-      }
+      const qrContainer = document.getElementById('live-qr-container');
+      const timerText = document.getElementById('live-qr-timer-text');
+      const timerBar = document.getElementById('live-qr-timer-bar');
 
-      // Cập nhật mã QR nếu token hoặc otp thay đổi
-      const codeKey = `${session.otp}_${session.token}`;
-      if (codeKey !== lastRenderedCodeOrToken) {
-        lastRenderedCodeOrToken = codeKey;
-        const qrPayload = JSON.stringify({
-          type: 'hbxlc_attendance',
-          className: session.className,
-          subjectName: session.subjectName,
-          token: session.token,
-          otp: session.otp
-        });
-        renderLiveQrCode(qrPayload);
+      // KIỂM TRA KHUNG GIỜ: Nếu ngoài giờ (Sáng 7h-11h, Chiều 13h-16h) -> Khóa mã QR & OTP học sinh, chuyển sang chế độ Điểm Danh Bù
+      if (session.isAllowedForStudent === false) {
+        if (otpDisplay) {
+          otpDisplay.innerHTML = `<span class="text-3xl sm:text-4xl font-black text-amber-700 tracking-wider">ĐÃ KHÓA</span>`;
+          const subText = otpDisplay.nextElementSibling;
+          if (subText) subText.innerHTML = `<span class="text-amber-700 font-bold"><i class="fa-solid fa-lock mr-1"></i>Ngoài khung giờ tự điểm danh (Sáng: 07h-11h, Chiều: 13h-16h)</span>`;
+        }
+        if (qrContainer) {
+          qrContainer.innerHTML = `
+            <div class="p-4 text-center space-y-2">
+              <div class="w-14 h-14 rounded-2xl bg-amber-100 text-amber-600 flex items-center justify-center text-2xl mx-auto shadow-inner">
+                <i class="fa-solid fa-lock"></i>
+              </div>
+              <div class="font-black text-xs text-amber-900">ĐÃ KHÓA MÃ QR HỌC SINH</div>
+              <div class="text-[11px] text-slate-500 leading-tight">
+                Hiện tại ngoài giờ học theo lịch báo giảng.<br>
+                <b class="text-amber-800">Thầy click vào ô Checkbox để điểm danh bù.</b>
+              </div>
+            </div>
+          `;
+        }
+        if (timerText) timerText.innerHTML = `<span class="text-amber-700 font-bold">Chế độ: Điểm danh bù</span>`;
+        if (timerBar) {
+          timerBar.style.width = '100%';
+          timerBar.className = 'h-full bg-amber-400 rounded-full transition-all duration-500';
+        }
+      } else {
+        // Trong giờ học sinh: hiển thị bình thường
+        if (otpDisplay && session.otp) {
+          otpDisplay.textContent = session.otp;
+          const subText = otpDisplay.nextElementSibling;
+          if (subText) subText.innerHTML = `Học sinh nhập 4 số này trên điện thoại để điểm danh`;
+        }
+
+        // Cập nhật thời gian còn lại
+        if (typeof session.timeLeft === 'number') {
+          liveRemainingSeconds = session.timeLeft;
+          updateLiveTimerUI(liveRemainingSeconds);
+        }
+
+        // Cập nhật mã QR (sử dụng chuỗi ASCII chuẩn ngắn gọn để không bao giờ bị tràn bộ đệm)
+        const codeKey = `${session.otp}_${session.token}`;
+        if (codeKey !== lastRenderedCodeOrToken) {
+          lastRenderedCodeOrToken = codeKey;
+          const qrPayload = `HBXLC:${session.className}:${session.otp}:${session.token}`;
+          renderLiveQrCode(qrPayload);
+        }
       }
 
       // Cập nhật thống kê sĩ số có mặt
@@ -5100,11 +5158,13 @@
       renderLiveAttendanceTable(session.students || []);
     }
 
-    // 6. Vẽ mã QR với thư viện QRCode.js
+    // 6. Vẽ mã QR với thư viện QRCode.js và API Fallback đảm bảo 100% luôn hiện mã QR
     function renderLiveQrCode(payloadText) {
       const container = document.getElementById('live-qr-container');
       if (!container) return;
       container.innerHTML = '';
+
+      let success = false;
       try {
         if (typeof QRCode !== 'undefined') {
           new QRCode(container, {
@@ -5113,14 +5173,21 @@
             height: 180,
             colorDark: '#991b1b', // Màu đỏ sẫm HBXLC
             colorLight: '#ffffff',
-            correctLevel: QRCode.CorrectLevel.M
+            correctLevel: (typeof QRCode.CorrectLevel !== 'undefined' ? QRCode.CorrectLevel.L : 1)
           });
-        } else {
-          container.innerHTML = `<div class="p-4 text-center text-xs text-rose-600 font-mono break-all">${escapeHtml(payloadText)}</div>`;
+          // Kiểm tra xem canvas hoặc img đã được sinh ra chưa
+          if (container.querySelector('canvas') || container.querySelector('img')) {
+            success = true;
+          }
         }
       } catch (err) {
-        console.error("Lỗi vẽ mã QR:", err);
-        container.innerHTML = `<div class="text-xs text-rose-600">Lỗi tạo mã QR: ${escapeHtml(err.message)}</div>`;
+        console.warn("Lỗi QRCodeJS, chuyển sang fallback:", err);
+      }
+
+      // Fallback: Nếu thư viện chưa load hoặc gặp lỗi, hiển thị ngay thẻ img mã QR
+      if (!success) {
+        const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=${encodeURIComponent(payloadText)}&color=99-27-27`;
+        container.innerHTML = `<img src="${qrUrl}" alt="Mã QR Điểm Danh" class="w-[180px] h-[180px] object-contain rounded-xl shadow-xs mx-auto" />`;
       }
     }
 
@@ -5433,6 +5500,7 @@
         const stateNoSession = document.getElementById('student-att-state-no-session');
         const stateCheckedIn = document.getElementById('student-att-state-checked-in');
         const stateActive = document.getElementById('student-att-state-active');
+        const stateLockedTime = document.getElementById('student-att-state-locked-time');
 
         if (!data.active || !data.session) {
           // Chưa có phiên điểm danh nào đang mở
@@ -5440,6 +5508,7 @@
           if (stateNoSession) stateNoSession.classList.remove('hidden');
           if (stateCheckedIn) stateCheckedIn.classList.add('hidden');
           if (stateActive) stateActive.classList.add('hidden');
+          if (stateLockedTime) stateLockedTime.classList.add('hidden');
           stopStudentCameraScanner();
           if (showToastOnCheck) {
             showToast("Hiện tại Thầy chưa mở phiên điểm danh cho lớp bạn.", "info");
@@ -5454,6 +5523,7 @@
         if (data.session.isStudentCheckedIn) {
           if (stateNoSession) stateNoSession.classList.add('hidden');
           if (stateActive) stateActive.classList.add('hidden');
+          if (stateLockedTime) stateLockedTime.classList.add('hidden');
           if (stateCheckedIn) {
             stateCheckedIn.classList.remove('hidden');
             const detail = document.getElementById('student-att-success-detail');
@@ -5468,15 +5538,35 @@
           // Đang mở và sinh viên CHƯA điểm danh
           if (stateNoSession) stateNoSession.classList.add('hidden');
           if (stateCheckedIn) stateCheckedIn.classList.add('hidden');
-          if (stateActive) {
-            stateActive.classList.remove('hidden');
-            const titleEl = document.getElementById('student-att-session-title');
-            if (titleEl) {
-              titleEl.innerHTML = `<span class="text-indigo-900 font-black"><i class="fa-solid fa-book-open mr-1"></i>${escapeHtml(data.session.subjectName || 'Môn học')}</span> • <span class="text-slate-700">${escapeHtml(data.session.lessonTitle || 'Buổi học')}</span>${data.session.room ? ' • <span class="text-rose-700 font-medium"><i class="fa-solid fa-location-dot mr-0.5"></i>' + escapeHtml(data.session.room) + '</span>' : ''}`;
+
+          // KIỂM TRA KHUNG GIỜ: Nếu ngoài khung giờ (Sáng 07h-11h, Chiều 13h-16h) -> Khóa tự điểm danh, hiện hướng dẫn báo Thầy
+          if (data.session.isAllowedForStudent === false) {
+            if (stateActive) stateActive.classList.add('hidden');
+            if (stateLockedTime) {
+              stateLockedTime.classList.remove('hidden');
+              const reasonEl = document.getElementById('student-att-locked-reason');
+              if (reasonEl) {
+                const ts = data.session.timeStatus;
+                reasonEl.innerHTML = `Buổi học môn <b>${escapeHtml(data.session.subjectName || '')}</b> theo lịch báo giảng diễn ra vào <b>${escapeHtml(ts?.scheduleDayLabel || '')} (${escapeHtml(ts?.allowedRangeStr || 'Sáng: 07h-11h, Chiều: 13h-16h')})</b>.<br><span class="text-rose-700 font-semibold mt-1 inline-block">${escapeHtml(ts?.reason || 'Hiện tại ngoài khung giờ học sinh tự điểm danh.')}</span>`;
+              }
             }
-          }
-          if (showToastOnCheck) {
-            showToast("Thầy đang mở điểm danh! Hãy nhập mã 4 số hoặc quét QR.", "info");
+            stopStudentCameraScanner();
+            if (showToastOnCheck) {
+              showToast("Hiện tại ngoài khung giờ cho phép học sinh tự điểm danh!", "info");
+            }
+          } else {
+            // Đang trong khung giờ cho phép học sinh điểm danh
+            if (stateLockedTime) stateLockedTime.classList.add('hidden');
+            if (stateActive) {
+              stateActive.classList.remove('hidden');
+              const titleEl = document.getElementById('student-att-session-title');
+              if (titleEl) {
+                titleEl.innerHTML = `<span class="text-indigo-900 font-black"><i class="fa-solid fa-book-open mr-1"></i>${escapeHtml(data.session.subjectName || 'Môn học')}</span> • <span class="text-slate-700">${escapeHtml(data.session.lessonTitle || 'Buổi học')}</span>${data.session.room ? ' • <span class="text-rose-700 font-medium"><i class="fa-solid fa-location-dot mr-0.5"></i>' + escapeHtml(data.session.room) + '</span>' : ''}`;
+              }
+            }
+            if (showToastOnCheck) {
+              showToast("Thầy đang mở điểm danh! Hãy nhập mã 4 số hoặc quét QR.", "info");
+            }
           }
         }
       } catch (err) {
@@ -5621,6 +5711,11 @@
           if (parsed.token) codeOrToken = parsed.token;
           else if (parsed.otp) codeOrToken = parsed.otp;
           if (parsed.className) targetClass = parsed.className.toUpperCase();
+        } else if (codeOrToken.startsWith('HBXLC:')) {
+          const parts = codeOrToken.split(':');
+          if (parts[1]) targetClass = parts[1].toUpperCase();
+          if (parts[3]) codeOrToken = parts[3];
+          else if (parts[2]) codeOrToken = parts[2];
         }
       } catch (e) {}
 
