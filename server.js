@@ -2402,6 +2402,290 @@ app.get('/api/attendance/summary/:className', (req, res) => {
   res.json({ success: true, className: clean, totalSessions: list.length, summary });
 });
 
+// =========================================================================
+// PHÂN HỆ ĐIỂM DANH THÔNG MINH BẰNG MÃ QR & DÃY 4 SỐ (TỰ ĐỔI MÃ MỖI 1 PHÚT)
+// =========================================================================
+
+let activeAttendanceSessions = {}; // { [className]: sessionObj }
+
+function generateRandomOtp() {
+  return Math.floor(1000 + Math.random() * 9000).toString();
+}
+
+function generateSessionToken() {
+  return 'qr_' + Date.now() + '_' + Math.random().toString(36).substring(2, 9);
+}
+
+// 4a. Giáo viên bắt đầu phiên điểm danh trực tiếp cho một lớp
+app.post('/api/attendance/session/start', (req, res) => {
+  const { className, subjectName, lessonTitle, teacherId } = req.body;
+  if (!className) return res.status(400).json({ message: "Vui lòng chọn lớp học." });
+
+  const cleanClass = className.trim().toUpperCase();
+  const db = readDatabase();
+  const users = db.users || [];
+  const classStudents = users
+    .filter(u => u.role === 'student' && u.className && u.className.toUpperCase() === cleanClass)
+    .sort((a, b) => (a.name || '').localeCompare(b.name || '', 'vi'));
+
+  const now = Date.now();
+  const otp = generateRandomOtp();
+  const token = generateSessionToken();
+
+  const session = {
+    id: `attsess_${now}`,
+    className: cleanClass,
+    subjectName: subjectName || '',
+    lessonTitle: lessonTitle || `Buổi học ngày ${new Date().toLocaleDateString('vi-VN')}`,
+    teacherId: teacherId || 'u_teacher_danh',
+    otp: otp,
+    token: token,
+    createdAt: now,
+    lastRefreshAt: now,
+    expiresAt: now + (60 * 1000), // 60 giây (1 phút)
+    rotationIntervalSeconds: 60,
+    totalStudents: classStudents.length,
+    checkedInStudents: {},
+    isActive: true
+  };
+
+  activeAttendanceSessions[cleanClass] = session;
+  res.json({ success: true, session });
+});
+
+// 4b. Lấy trạng thái phiên điểm danh trực tiếp (dùng cho cả màn hình Giáo viên và Học sinh)
+app.get('/api/attendance/session/current', (req, res) => {
+  const { className, studentId } = req.query;
+  if (!className) return res.status(400).json({ message: "Thiếu tên lớp." });
+  const cleanClass = className.trim().toUpperCase();
+  const session = activeAttendanceSessions[cleanClass];
+
+  if (!session || !session.isActive) {
+    return res.json({ success: true, active: false });
+  }
+
+  const now = Date.now();
+  // Tự động xoay mã sau mỗi 60 giây
+  if (now >= session.expiresAt) {
+    session.otp = generateRandomOtp();
+    session.token = generateSessionToken();
+    session.lastRefreshAt = now;
+    session.expiresAt = now + (session.rotationIntervalSeconds * 1000);
+  }
+
+  const timeLeft = Math.max(0, Math.ceil((session.expiresAt - now) / 1000));
+  const db = readDatabase();
+  const users = db.users || [];
+  const classStudents = users
+    .filter(u => u.role === 'student' && u.className && u.className.toUpperCase() === cleanClass)
+    .sort((a, b) => (a.name || '').localeCompare(b.name || '', 'vi'));
+
+  const studentList = classStudents.map((stu, index) => {
+    const checkin = session.checkedInStudents[stu.id];
+    return {
+      stt: index + 1,
+      id: stu.id,
+      studentCode: stu.studentCode || stu.username,
+      name: stu.name,
+      isChecked: !!checkin,
+      checkedInAt: checkin ? checkin.checkedInAt : null,
+      method: checkin ? checkin.method : null
+    };
+  });
+
+  const checkedInCount = Object.keys(session.checkedInStudents || {}).length;
+
+  let isStudentCheckedIn = false;
+  let studentCheckinInfo = null;
+  if (studentId && session.checkedInStudents[studentId]) {
+    isStudentCheckedIn = true;
+    studentCheckinInfo = session.checkedInStudents[studentId];
+  }
+
+  res.json({
+    success: true,
+    active: true,
+    session: {
+      id: session.id,
+      className: session.className,
+      subjectName: session.subjectName,
+      lessonTitle: session.lessonTitle,
+      otp: session.otp,
+      token: session.token,
+      expiresAt: session.expiresAt,
+      timeLeft: timeLeft,
+      rotationIntervalSeconds: session.rotationIntervalSeconds,
+      totalStudents: classStudents.length,
+      checkedInCount: checkedInCount,
+      students: studentList,
+      isStudentCheckedIn,
+      studentCheckinInfo
+    }
+  });
+});
+
+// 4c. Đổi mã ngay lập tức (Refresh OTP & QR)
+app.post('/api/attendance/session/refresh-code', (req, res) => {
+  const { className } = req.body;
+  if (!className) return res.status(400).json({ message: "Thiếu tên lớp." });
+  const cleanClass = className.trim().toUpperCase();
+  const session = activeAttendanceSessions[cleanClass];
+
+  if (!session || !session.isActive) {
+    return res.status(404).json({ message: "Không có phiên điểm danh đang mở cho lớp này." });
+  }
+
+  const now = Date.now();
+  session.otp = generateRandomOtp();
+  session.token = generateSessionToken();
+  session.lastRefreshAt = now;
+  session.expiresAt = now + (session.rotationIntervalSeconds * 1000);
+
+  res.json({
+    success: true,
+    otp: session.otp,
+    token: session.token,
+    expiresAt: session.expiresAt,
+    timeLeft: session.rotationIntervalSeconds
+  });
+});
+
+// 4d. Học sinh quét QR hoặc nhập 4 số để xác nhận có mặt
+app.post('/api/attendance/session/checkin', (req, res) => {
+  const { className, studentId, studentCode, studentName, codeOrToken } = req.body;
+  if (!className || !studentId || !codeOrToken) {
+    return res.status(400).json({ message: "Vui lòng nhập đầy đủ thông tin điểm danh." });
+  }
+
+  const cleanClass = className.trim().toUpperCase();
+  const session = activeAttendanceSessions[cleanClass];
+
+  if (!session || !session.isActive) {
+    return res.status(400).json({ message: "Phiên điểm danh của lớp chưa bắt đầu hoặc đã kết thúc!" });
+  }
+
+  const cleanInput = codeOrToken.trim();
+  const isMatchOtp = (cleanInput === session.otp);
+  const isMatchToken = (cleanInput === session.token || cleanInput.includes(session.token) || cleanInput.includes(session.otp));
+
+  if (!isMatchOtp && !isMatchToken) {
+    return res.status(400).json({
+      message: "Mã điểm danh không chính xác hoặc đã hết hạn 1 phút! Vui lòng nhìn lên màn hình thầy giáo để lấy mã mới."
+    });
+  }
+
+  if (session.checkedInStudents[studentId]) {
+    return res.json({
+      success: true,
+      alreadyCheckedIn: true,
+      message: "Bạn đã được ghi nhận có mặt trước đó!",
+      checkedInAt: session.checkedInStudents[studentId].checkedInAt
+    });
+  }
+
+  const now = new Date();
+  const checkinRecord = {
+    studentId,
+    studentCode: studentCode || '',
+    studentName: studentName || 'Học sinh',
+    checkedInAt: now.toLocaleTimeString('vi-VN', { hour: '2-digit', minute: '2-digit', second: '2-digit' }),
+    timestamp: now.getTime(),
+    method: isMatchOtp ? 'pin_4_digit' : 'qr_scanner'
+  };
+
+  session.checkedInStudents[studentId] = checkinRecord;
+
+  res.json({
+    success: true,
+    message: `Điểm danh thành công! Đã ghi nhận bạn có mặt lúc ${checkinRecord.checkedInAt}.`,
+    record: checkinRecord
+  });
+});
+
+// 4e. Giáo viên tự tay tích / bỏ tích Checkbox cho học sinh
+app.post('/api/attendance/session/manual-toggle', (req, res) => {
+  const { className, studentId, studentCode, studentName, isChecked } = req.body;
+  if (!className || !studentId) return res.status(400).json({ message: "Thiếu thông tin học sinh." });
+  const cleanClass = className.trim().toUpperCase();
+  const session = activeAttendanceSessions[cleanClass];
+
+  if (!session || !session.isActive) {
+    return res.status(400).json({ message: "Phiên điểm danh không còn hiệu lực." });
+  }
+
+  if (isChecked) {
+    const now = new Date();
+    session.checkedInStudents[studentId] = {
+      studentId,
+      studentCode: studentCode || '',
+      studentName: studentName || '',
+      checkedInAt: now.toLocaleTimeString('vi-VN', { hour: '2-digit', minute: '2-digit', second: '2-digit' }),
+      timestamp: now.getTime(),
+      method: 'teacher_manual'
+    };
+  } else {
+    delete session.checkedInStudents[studentId];
+  }
+
+  res.json({ success: true, isChecked: !!session.checkedInStudents[studentId] });
+});
+
+// 4f. Giáo viên kết thúc phiên & chốt sổ điểm danh lưu vào Database
+app.post('/api/attendance/session/close', (req, res) => {
+  const { className } = req.body;
+  if (!className) return res.status(400).json({ message: "Thiếu tên lớp." });
+  const cleanClass = className.trim().toUpperCase();
+  const session = activeAttendanceSessions[cleanClass];
+
+  if (!session) {
+    return res.status(404).json({ message: "Không tìm thấy phiên điểm danh." });
+  }
+
+  session.isActive = false;
+
+  const db = readDatabase();
+  if (!db.attendance) db.attendance = [];
+
+  const users = db.users || [];
+  const classStudents = users.filter(u => u.role === 'student' && u.className && u.className.toUpperCase() === cleanClass);
+  const dateStr = new Date().toISOString().split('T')[0];
+
+  const records = classStudents.map(stu => {
+    const isChecked = !!session.checkedInStudents[stu.id];
+    return {
+      studentId: stu.id,
+      studentCode: stu.studentCode || stu.username,
+      studentName: stu.name,
+      status: isChecked ? 'present' : null, // null nếu học sinh chưa quét hoặc chưa nhập mã
+      checkedInAt: isChecked ? session.checkedInStudents[stu.id].checkedInAt : null,
+      method: isChecked ? session.checkedInStudents[stu.id].method : null
+    };
+  });
+
+  const attendanceEntry = {
+    id: `att_${Date.now()}`,
+    className: cleanClass,
+    subjectName: session.subjectName,
+    date: dateStr,
+    lessonTitle: session.lessonTitle,
+    records: records,
+    createdAt: new Date().toISOString(),
+    teacherId: session.teacherId,
+    type: 'qr_4digit_live'
+  };
+
+  db.attendance.push(attendanceEntry);
+  writeDatabase(db);
+
+  delete activeAttendanceSessions[cleanClass];
+
+  res.json({
+    success: true,
+    message: "Đã chốt sổ điểm danh và lưu vào CSDL thành công!",
+    attendanceEntry
+  });
+});
+
 // Hàm hỗ trợ tìm kiếm URL đám mây của file (Tra cứu CSDL và Auto-Recovery trên Cloudinary)
 async function findCloudUrlForFile(filename, db) {
   if (!filename) return null;

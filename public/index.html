@@ -12,6 +12,9 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Tinos:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+  <!-- Thư viện tạo mã QR & quét mã QR qua Camera -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <script src="https://unpkg.com/html5-qrcode@2.3.8/html5-qrcode.min.js"></script>
   <style>
     body { font-family: 'Inter', sans-serif; }
 
@@ -800,6 +803,94 @@
             <i class="fa-solid fa-bell"></i> Bật thông báo thiết bị
           </button>
           <button onclick="dismissNotifBanner()" title="Đóng banner này" class="text-slate-400 hover:text-slate-600 text-sm px-2 py-1">✕</button>
+        </div>
+      </div>
+
+      <!-- THẺ ĐIỂM DANH LỚP HỌC TRỰC TUYẾN DÀNH CHO HỌC SINH (QR & DÃY 4 SỐ) -->
+      <div id="student-live-attendance-box" class="bg-white rounded-2xl border-2 border-indigo-200 p-5 shadow-sm space-y-3.5 transition-all">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-100 flex-wrap gap-2">
+          <div class="flex items-center gap-2.5">
+            <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-600 to-violet-700 text-white flex items-center justify-center text-lg shadow-md shadow-indigo-100">
+              <i class="fa-solid fa-qrcode"></i>
+            </div>
+            <div>
+              <div class="flex items-center gap-2">
+                <h3 class="font-extrabold text-slate-900 text-base">Điểm Danh Lớp Học</h3>
+                <span id="student-att-live-status-badge" class="hidden px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-rose-500 text-white animate-pulse">
+                  <i class="fa-solid fa-circle text-[7px] mr-1"></i>ĐANG MỞ ĐIỂM DANH
+                </span>
+              </div>
+              <p class="text-xs text-slate-500 mt-0.5" id="student-att-class-label">Lớp học của bạn: <b class="text-indigo-700 font-mono">...</b></p>
+            </div>
+          </div>
+          <button onclick="checkStudentLiveAttendanceStatus(true)" class="text-xs text-indigo-600 hover:text-indigo-800 font-semibold flex items-center gap-1">
+            <i class="fa-solid fa-rotate"></i> Kiểm tra lại
+          </button>
+        </div>
+
+        <!-- Trạng thái 1: Chưa có phiên điểm danh nào -->
+        <div id="student-att-state-no-session" class="p-4 rounded-xl bg-slate-50 border border-slate-200/80 text-center text-xs text-slate-500">
+          <i class="fa-solid fa-hourglass-half text-slate-400 text-xl mb-1.5"></i>
+          <p class="font-medium">Hiện tại Thầy chưa mở phiên điểm danh cho lớp của bạn.</p>
+          <p class="text-[11px] text-slate-400 mt-0.5">Khi thầy giáo phát mã trên màn hình lớp học, hệ thống sẽ tự động hiển thị ô nhập mã tại đây.</p>
+        </div>
+
+        <!-- Trạng thái 2: Đã điểm danh thành công -->
+        <div id="student-att-state-checked-in" class="hidden p-4 rounded-xl bg-emerald-50 border-2 border-emerald-300 text-emerald-900 text-xs">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-full bg-emerald-600 text-white flex items-center justify-center text-xl shrink-0 shadow-sm">
+              <i class="fa-solid fa-check"></i>
+            </div>
+            <div>
+              <h4 class="font-bold text-emerald-950 text-sm">BẠN ĐÃ ĐIỂM DANH CÓ MẶT THÀNH CÔNG!</h4>
+              <p class="text-emerald-800 mt-0.5" id="student-att-success-detail">Thời gian ghi nhận: lúc --:--:--</p>
+              <p class="text-[11px] text-emerald-700 font-medium mt-1">
+                <i class="fa-solid fa-square-check text-emerald-600 mr-1"></i>Nút checkbox trên máy Thầy giáo: <b>Đã đánh dấu [✓] Có Mặt</b>.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Trạng thái 3: Đang mở phiên điểm danh và bạn CHƯA điểm danh -->
+        <div id="student-att-state-active" class="hidden space-y-4">
+          <div class="p-3 bg-amber-50 border border-amber-200 rounded-xl flex items-center gap-2 text-xs text-amber-900">
+            <i class="fa-solid fa-bullhorn text-amber-600 text-sm shrink-0"></i>
+            <div>Thầy đang mở điểm danh cho buổi học: <b id="student-att-session-title" class="text-amber-950">...</b></div>
+          </div>
+
+          <!-- 2 Phương thức điểm danh: Nhập 4 số hoặc Quét QR -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <!-- Cách 1: Nhập dãy 4 số ngẫu nhiên -->
+            <div class="p-4 rounded-xl border border-indigo-200 bg-indigo-50/40 space-y-3">
+              <div class="flex items-center gap-2 text-xs font-bold text-indigo-900">
+                <i class="fa-solid fa-keyboard text-indigo-600"></i> Cách 1: Nhập mã 4 số trên bảng
+              </div>
+              <p class="text-[11px] text-slate-600">Nhìn lên màn hình hoặc máy chiếu của Thầy giáo để lấy mã 4 số (mã đổi mỗi 1 phút):</p>
+              <div class="flex items-center gap-2">
+                <input type="text" id="student-otp-input" maxlength="4" placeholder="VD: 4892" class="w-full text-center font-mono text-2xl font-black tracking-[0.2em] py-2 px-3 rounded-xl border-2 border-indigo-300 focus:border-indigo-600 focus:ring-2 focus:ring-indigo-500 outline-none uppercase bg-white">
+                <button type="button" onclick="handleStudentSubmitOtp()" id="btn-submit-student-otp" class="px-4 py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-xl text-xs shrink-0 shadow-sm transition flex items-center gap-1.5">
+                  <i class="fa-solid fa-paper-plane"></i> Gửi mã
+                </button>
+              </div>
+            </div>
+
+            <!-- Cách 2: Quét mã QR bằng Camera -->
+            <div class="p-4 rounded-xl border border-violet-200 bg-violet-50/40 space-y-3">
+              <div class="flex items-center gap-2 text-xs font-bold text-violet-900">
+                <i class="fa-solid fa-camera text-violet-600"></i> Cách 2: Quét mã QR bằng Camera
+              </div>
+              <p class="text-[11px] text-slate-600">Hướng camera điện thoại vào mã QR đang chiếu trên màn hình:</p>
+              <button type="button" onclick="toggleStudentCameraScanner()" id="btn-student-camera-toggle" class="w-full py-2.5 bg-violet-600 hover:bg-violet-700 text-white font-bold rounded-xl text-xs shadow-sm transition flex items-center justify-center gap-2">
+                <i class="fa-solid fa-camera"></i> Bật Camera Quét Mã QR
+              </button>
+              <div id="student-qr-camera-container" class="hidden overflow-hidden rounded-xl border-2 border-violet-400 bg-black max-w-xs mx-auto">
+                <div id="qr-camera-reader" class="w-full"></div>
+                <div class="p-2 bg-slate-900 text-center text-[10px] text-white">
+                  <button type="button" onclick="stopStudentCameraScanner()" class="text-rose-400 font-bold hover:underline">Tắt Camera</button>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -1868,10 +1959,136 @@
           <span>Không phép: <b id="att-count-unexcused" class="text-rose-600">0</b></span>
         </div>
         <div class="flex items-center gap-2">
+          <button type="button" onclick="closeAttendanceModal(); openLiveAttendanceModal(currentAttendanceClass);" class="px-3 py-1.5 bg-gradient-to-r from-red-700 to-rose-800 hover:from-red-800 hover:to-rose-900 text-white font-bold text-xs rounded-xl shadow-xs flex items-center gap-1.5">
+            <i class="fa-solid fa-qrcode"></i> Điểm Danh QR / 4 Số
+          </button>
           <button type="button" onclick="closeAttendanceModal()" class="px-3.5 py-1.5 text-slate-600 hover:bg-slate-100 rounded-xl text-xs font-semibold">Đóng</button>
           <button type="button" onclick="handleSaveAttendance()" class="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-xl text-xs transition shadow-sm">
             <i class="fa-solid fa-save mr-1"></i> Lưu Điểm Danh
           </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= MODAL ĐIỂM DANH TRỰC TIẾP BẰNG QR & DÃY 4 SỐ (TỰ ĐỔI MỖI 1 PHÚT) ================= -->
+  <div id="modal-live-attendance" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-md hidden items-center justify-center p-2 sm:p-4 overflow-y-auto">
+    <div class="bg-white rounded-3xl shadow-2xl max-w-5xl w-full border border-slate-200 overflow-hidden flex flex-col max-h-[95vh]">
+      <!-- Header -->
+      <div class="px-6 py-4 bg-gradient-to-r from-red-800 via-rose-900 to-slate-950 text-white flex items-center justify-between gap-4">
+        <div class="flex items-center gap-3">
+          <div class="w-11 h-11 rounded-2xl bg-white/10 flex items-center justify-center text-xl border border-white/20">
+            <i class="fa-solid fa-qrcode text-rose-300"></i>
+          </div>
+          <div>
+            <div class="flex items-center gap-2 flex-wrap">
+              <h3 class="text-lg sm:text-xl font-extrabold tracking-tight">Điểm Danh Bằng Mã QR & Dãy 4 Số</h3>
+              <span class="px-2.5 py-0.5 rounded-full text-xs font-black bg-rose-500 text-white font-mono" id="live-att-class-badge">LỚP C08TK01</span>
+              <span class="px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-white/20 text-rose-100 flex items-center gap-1">
+                <i class="fa-solid fa-arrows-rotate animate-spin text-[10px]"></i> Đổi mã mỗi 1 phút
+              </span>
+            </div>
+            <p class="text-xs text-rose-200 mt-0.5" id="live-att-lesson-desc">Sinh viên đăng nhập trên điện thoại để quét mã QR hoặc nhập dãy 4 số</p>
+          </div>
+        </div>
+        <button onclick="closeLiveAttendanceModal()" class="text-slate-300 hover:text-white text-2xl font-bold leading-none p-2">&times;</button>
+      </div>
+
+      <!-- Main Body: 2 Cột (Trái: Mã 4 số + QR + Timer | Phải: Bảng sinh viên & Checkbox) -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-0 flex-1 overflow-y-auto">
+        <!-- CỘT TRÁI: HIỂN THỊ CHIẾU LÊN BẢNG / MÁY CHIẾU (5 CỘT) -->
+        <div class="lg:col-span-5 p-6 bg-slate-50 border-r border-slate-200 flex flex-col items-center justify-between space-y-4 text-center">
+          <!-- 1. Dãy 4 số ngẫu nhiên cực lớn -->
+          <div class="w-full space-y-1.5">
+            <div class="text-xs font-extrabold uppercase tracking-widest text-slate-500 flex items-center justify-center gap-1.5">
+              <i class="fa-solid fa-hashtag text-red-600"></i> Dãy 4 Số Điểm Danh
+            </div>
+            <div id="live-otp-display" class="font-mono text-5xl sm:text-6xl font-black text-red-900 tracking-[0.25em] py-3 px-4 bg-white border-2 border-red-300 rounded-2xl shadow-inner select-all">
+              ----
+            </div>
+            <p class="text-[11px] text-slate-500">Học sinh nhập 4 số này trên điện thoại để điểm danh</p>
+          </div>
+
+          <!-- 2. Mã QR Động -->
+          <div class="w-full flex flex-col items-center justify-center space-y-2">
+            <div class="text-xs font-extrabold uppercase tracking-widest text-slate-500 flex items-center justify-center gap-1.5">
+              <i class="fa-solid fa-camera text-red-600"></i> Hoặc Quét Mã QR Này
+            </div>
+            <div id="live-qr-container" class="p-3 bg-white border-2 border-slate-200 rounded-2xl shadow-md min-h-[190px] min-w-[190px] flex items-center justify-center">
+              <!-- QRCode generated here -->
+            </div>
+          </div>
+
+          <!-- 3. Thanh đếm ngược 1 phút (Countdown Timer) -->
+          <div class="w-full space-y-2 bg-white p-3.5 rounded-2xl border border-slate-200 shadow-xs">
+            <div class="flex items-center justify-between text-xs font-bold text-slate-700">
+              <span class="flex items-center gap-1">
+                <i class="fa-regular fa-clock text-rose-600"></i> Đổi mã mới sau:
+              </span>
+              <span id="live-qr-timer-text" class="text-rose-600 font-mono font-black text-sm">60 giây</span>
+            </div>
+            <!-- Progress Bar -->
+            <div class="w-full h-2.5 bg-slate-100 rounded-full overflow-hidden border border-slate-200">
+              <div id="live-qr-timer-bar" class="h-full bg-gradient-to-r from-red-600 to-rose-500 transition-all duration-1000 rounded-full" style="width: 100%;"></div>
+            </div>
+            <div class="flex items-center justify-between pt-1">
+              <span class="text-[10px] text-slate-400">Chống gửi ảnh cho người vắng</span>
+              <button onclick="refreshLiveAttendanceCodeNow()" class="text-[11px] font-bold text-indigo-600 hover:text-indigo-800 flex items-center gap-1">
+                <i class="fa-solid fa-arrows-rotate"></i> Đổi mã ngay
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- CỘT PHẢI: BẢNG DANH SÁCH SINH VIÊN VỚI NÚT CHECKBOX CÓ MẶT / NULL (7 CỘT) -->
+        <div class="lg:col-span-7 p-6 flex flex-col justify-between space-y-4">
+          <!-- Thống kê sĩ số -->
+          <div class="flex items-center justify-between pb-3 border-b border-slate-100 flex-wrap gap-2">
+            <div>
+              <h4 class="font-extrabold text-slate-900 text-sm sm:text-base flex items-center gap-2">
+                <i class="fa-solid fa-users text-indigo-600"></i> Danh Sách Điểm Danh Lớp
+              </h4>
+              <p class="text-xs text-slate-500">Đã quét/nhập số = <span class="text-emerald-700 font-bold">[✓] Có mặt</span> | Chưa quét = <span class="text-slate-400 font-bold">[ ] NULL</span></p>
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="text-xs px-3 py-1 rounded-xl font-bold bg-emerald-50 text-emerald-800 border border-emerald-200">
+                Có mặt: <b id="live-att-checked-count" class="text-emerald-700 font-mono text-sm">0</b> / <span id="live-att-total-count" class="font-mono">0</span> SV
+              </span>
+            </div>
+          </div>
+
+          <!-- Bảng Sinh viên & Checkbox -->
+          <div class="flex-1 overflow-y-auto max-h-[50vh] border border-slate-100 rounded-2xl divide-y divide-slate-100">
+            <table class="w-full text-xs text-left">
+              <thead class="bg-slate-50 sticky top-0 text-slate-600 uppercase font-bold text-[10px] tracking-wider border-b border-slate-100">
+                <tr>
+                  <th class="p-3 w-16 text-center">Có Mặt</th>
+                  <th class="p-3 w-12 text-center">STT</th>
+                  <th class="p-3 w-28">Mã SV</th>
+                  <th class="p-3">Họ và Tên</th>
+                  <th class="p-3 text-right">Thời Gian</th>
+                </tr>
+              </thead>
+              <tbody id="live-att-students-tbody" class="divide-y divide-slate-100 font-medium">
+                <!-- Rendered dynamically -->
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Tác vụ hoàn tất -->
+          <div class="pt-3 border-t border-slate-100 flex items-center justify-between flex-wrap gap-2">
+            <div class="text-[11px] text-slate-500">
+              <i class="fa-solid fa-circle-info text-indigo-500 mr-1"></i>Thầy có thể bấm trực tiếp vào ô Checkbox để tích/bỏ tích cho sinh viên.
+            </div>
+            <div class="flex items-center gap-2">
+              <button onclick="closeLiveAttendanceModal()" class="px-4 py-2 rounded-xl text-xs font-semibold text-slate-600 hover:bg-slate-100 transition">
+                Đóng
+              </button>
+              <button onclick="handleFinishLiveAttendance()" class="px-5 py-2.5 rounded-xl text-xs font-bold bg-gradient-to-r from-emerald-600 to-teal-700 hover:from-emerald-700 hover:to-teal-800 text-white shadow-md shadow-emerald-200 transition flex items-center gap-1.5">
+                <i class="fa-solid fa-clipboard-check"></i> Chốt Sổ & Lưu CSDL
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -2709,6 +2926,16 @@
         studentEventSource.close();
         studentEventSource = null;
       }
+      if (typeof studentLivePollingInterval !== 'undefined' && studentLivePollingInterval) {
+        clearInterval(studentLivePollingInterval);
+        studentLivePollingInterval = null;
+      }
+      if (typeof stopStudentCameraScanner === 'function') {
+        stopStudentCameraScanner();
+      }
+      if (typeof stopLiveAttendanceMonitoring === 'function') {
+        stopLiveAttendanceMonitoring();
+      }
       closeNewAssignmentPopup();
       saveSessionUser(null);
       showToast("Đã đăng xuất tài khoản.", "success");
@@ -2822,6 +3049,14 @@
           }
         }
 
+        if (typeof studentLivePollingInterval !== 'undefined' && studentLivePollingInterval) {
+          clearInterval(studentLivePollingInterval);
+          studentLivePollingInterval = null;
+        }
+        if (typeof stopStudentCameraScanner === 'function') {
+          stopStudentCameraScanner();
+        }
+
         loadClasses();
         loadTeacherSubjects();
         loadTeacherData();
@@ -2854,6 +3089,18 @@
 
         loadClasses();
         loadStudentData();
+
+        // Khởi động kiểm tra điểm danh trực tiếp cho học sinh
+        if (typeof studentLivePollingInterval !== 'undefined' && studentLivePollingInterval) {
+          clearInterval(studentLivePollingInterval);
+          studentLivePollingInterval = null;
+        }
+        if (typeof checkStudentLiveAttendanceStatus === 'function') {
+          checkStudentLiveAttendanceStatus(false);
+          studentLivePollingInterval = setInterval(() => {
+            checkStudentLiveAttendanceStatus(false);
+          }, 4000);
+        }
       }
     }
 
@@ -3603,8 +3850,8 @@
             </div>
 
             <div class="mt-4 pt-3 border-t border-slate-100 grid grid-cols-2 gap-1.5 text-xs">
-              <button onclick="openAttendanceModal('${escapeHtml(item.className)}')" class="px-2.5 py-1.5 rounded-xl bg-indigo-50 hover:bg-indigo-100 text-indigo-700 font-bold transition flex items-center justify-center gap-1.5 text-[11px]">
-                <i class="fa-solid fa-clipboard-user"></i> Điểm danh
+              <button onclick="openLiveAttendanceModal('${escapeHtml(item.className)}')" class="px-2.5 py-1.5 rounded-xl bg-gradient-to-r from-red-600 to-rose-700 hover:from-red-700 hover:to-rose-800 text-white font-bold transition flex items-center justify-center gap-1.5 text-[11px] shadow-xs">
+                <i class="fa-solid fa-qrcode"></i> Điểm danh QR
               </button>
               <button onclick="filterLessonPlansByClass('${escapeHtml(item.className)}')" class="px-2.5 py-1.5 rounded-xl bg-rose-50 hover:bg-rose-100 text-rose-700 font-bold transition flex items-center justify-center gap-1.5 text-[11px]">
                 <i class="fa-solid fa-book-bookmark"></i> Giáo án
@@ -4006,8 +4253,8 @@
                 <div class="text-[11px] text-slate-500"><i class="fa-solid fa-location-dot text-rose-500 mr-1"></i>${escapeHtml(item.room || 'Phòng máy')} • ${escapeHtml(item.currentLesson || 'Theo bài dạy')}</div>
               </div>
             </div>
-            <button onclick="openAttendanceModal('${escapeHtml(item.className)}')" class="px-2.5 py-1 bg-white hover:bg-slate-100 border border-slate-200 text-indigo-700 font-bold rounded-lg text-xs shadow-xs">
-              Điểm danh
+            <button onclick="openLiveAttendanceModal('${escapeHtml(item.className)}', '${escapeHtml(item.subjectName || '')}', '${escapeHtml(item.currentLesson || '')}')" class="px-2.5 py-1 bg-gradient-to-r from-red-600 to-rose-700 hover:from-red-700 hover:to-rose-800 text-white font-bold rounded-lg text-xs shadow-xs flex items-center gap-1">
+              <i class="fa-solid fa-qrcode text-[10px]"></i> Điểm danh QR
             </button>
           </div>
         `;
@@ -4370,6 +4617,577 @@
         }
       } catch (err) {
         showToast("Lỗi kết nối máy chủ!", "error");
+      }
+    }
+
+    // ================= HỆ THỐNG ĐIỂM DANH ĐỘNG: QR & DÃY 4 SỐ (TỰ ĐỔI MỖI 1 PHÚT) =================
+    let liveAttendanceClass = null;
+    let liveAttendanceInterval = null;
+    let liveAttendanceCountdownInterval = null;
+    let liveRemainingSeconds = 60;
+    let lastRenderedCodeOrToken = null;
+    let studentLivePollingInterval = null;
+    let studentCameraScanner = null;
+    let isStudentCameraScanning = false;
+
+    // 1. Giáo viên mở màn hình Điểm Danh Trực Tiếp
+    async function openLiveAttendanceModal(className, subjectName, lessonTitle) {
+      if (!className) {
+        showToast("Vui lòng chọn lớp học để điểm danh!", "error");
+        return;
+      }
+      liveAttendanceClass = className.trim().toUpperCase();
+
+      const modal = document.getElementById('modal-live-attendance');
+      if (!modal) return;
+
+      // Cập nhật thông tin giao diện
+      const badge = document.getElementById('live-att-class-badge');
+      if (badge) badge.textContent = `LỚP ${liveAttendanceClass}`;
+      const desc = document.getElementById('live-att-lesson-desc');
+      if (desc) {
+        desc.textContent = `${subjectName ? subjectName + ' • ' : ''}${lessonTitle || 'Buổi học ngày ' + new Date().toLocaleDateString('vi-VN')}`;
+      }
+
+      // Đặt lại hiển thị ban đầu
+      const otpDisplay = document.getElementById('live-otp-display');
+      if (otpDisplay) otpDisplay.textContent = '----';
+      const qrContainer = document.getElementById('live-qr-container');
+      if (qrContainer) qrContainer.innerHTML = '<div class="text-xs text-slate-400"><i class="fa-solid fa-spinner animate-spin mr-1"></i>Đang tạo mã...</div>';
+      lastRenderedCodeOrToken = null;
+
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+
+      try {
+        // Gửi yêu cầu khởi động phiên điểm danh trên server
+        const res = await fetch('/api/attendance/session/start', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            className: liveAttendanceClass,
+            subjectName: subjectName || '',
+            lessonTitle: lessonTitle || `Buổi học ngày ${new Date().toLocaleDateString('vi-VN')}`,
+            teacherId: currentUser ? currentUser.id : 'u_teacher_danh'
+          })
+        });
+
+        const data = await res.json();
+        if (res.ok && data.success && data.session) {
+          applyLiveSessionData(data.session);
+          startLiveAttendanceMonitoring();
+        } else {
+          showToast(data.message || "Không thể khởi tạo phiên điểm danh!", "error");
+        }
+      } catch (err) {
+        console.error("Lỗi khởi tạo phiên điểm danh:", err);
+        showToast("Lỗi kết nối máy chủ điểm danh!", "error");
+      }
+    }
+
+    // 2. Giáo viên đóng màn hình Điểm Danh Trực Tiếp
+    function closeLiveAttendanceModal() {
+      const modal = document.getElementById('modal-live-attendance');
+      if (modal) {
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+      }
+      stopLiveAttendanceMonitoring();
+    }
+
+    // 3. Vòng lặp giám sát thời gian thực & đếm ngược 60 giây
+    function startLiveAttendanceMonitoring() {
+      stopLiveAttendanceMonitoring();
+
+      // Giám sát cập nhật sinh viên và mã mỗi 2.5 giây
+      liveAttendanceInterval = setInterval(fetchCurrentLiveAttendanceStatus, 2500);
+
+      // Đồng hồ đếm ngược từng giây cho thanh Progress Bar và chữ hiển thị
+      liveAttendanceCountdownInterval = setInterval(() => {
+        if (liveRemainingSeconds > 0) {
+          liveRemainingSeconds--;
+        } else {
+          // Khi đếm về 0, gọi server lấy mã mới ngay lập tức
+          fetchCurrentLiveAttendanceStatus();
+        }
+        updateLiveTimerUI(liveRemainingSeconds);
+      }, 1000);
+    }
+
+    function stopLiveAttendanceMonitoring() {
+      if (liveAttendanceInterval) {
+        clearInterval(liveAttendanceInterval);
+        liveAttendanceInterval = null;
+      }
+      if (liveAttendanceCountdownInterval) {
+        clearInterval(liveAttendanceCountdownInterval);
+        liveAttendanceCountdownInterval = null;
+      }
+    }
+
+    function updateLiveTimerUI(seconds) {
+      const timerText = document.getElementById('live-qr-timer-text');
+      const timerBar = document.getElementById('live-qr-timer-bar');
+      if (timerText) timerText.textContent = `${seconds} giây`;
+      if (timerBar) {
+        const pct = Math.max(0, Math.min(100, (seconds / 60) * 100));
+        timerBar.style.width = `${pct}%`;
+        if (seconds <= 10) {
+          timerBar.className = 'h-full bg-red-600 transition-all duration-1000 rounded-full animate-pulse';
+        } else if (seconds <= 25) {
+          timerBar.className = 'h-full bg-amber-500 transition-all duration-1000 rounded-full';
+        } else {
+          timerBar.className = 'h-full bg-gradient-to-r from-red-600 to-rose-500 transition-all duration-1000 rounded-full';
+        }
+      }
+    }
+
+    // 4. Lấy dữ liệu phiên điểm danh hiện tại từ server
+    async function fetchCurrentLiveAttendanceStatus() {
+      if (!liveAttendanceClass) return;
+      try {
+        const res = await fetch(`/api/attendance/session/current?className=${encodeURIComponent(liveAttendanceClass)}`);
+        const data = await res.json();
+        if (res.ok && data.success && data.session) {
+          applyLiveSessionData(data.session);
+        }
+      } catch (err) {
+        console.error("Lỗi cập nhật phiên điểm danh:", err);
+      }
+    }
+
+    // 5. Cập nhật dữ liệu lên giao diện máy chiếu / giáo viên
+    function applyLiveSessionData(session) {
+      if (!session) return;
+
+      // Cập nhật thời gian còn lại
+      if (typeof session.timeLeft === 'number') {
+        liveRemainingSeconds = session.timeLeft;
+        updateLiveTimerUI(liveRemainingSeconds);
+      }
+
+      // Cập nhật dãy 4 số ngẫu nhiên
+      const otpDisplay = document.getElementById('live-otp-display');
+      if (otpDisplay && session.otp) {
+        otpDisplay.textContent = session.otp;
+      }
+
+      // Cập nhật mã QR nếu token hoặc otp thay đổi
+      const codeKey = `${session.otp}_${session.token}`;
+      if (codeKey !== lastRenderedCodeOrToken) {
+        lastRenderedCodeOrToken = codeKey;
+        const qrPayload = JSON.stringify({
+          type: 'hbxlc_attendance',
+          className: session.className,
+          token: session.token,
+          otp: session.otp
+        });
+        renderLiveQrCode(qrPayload);
+      }
+
+      // Cập nhật thống kê sĩ số có mặt
+      const checkedCountEl = document.getElementById('live-att-checked-count');
+      const totalCountEl = document.getElementById('live-att-total-count');
+      if (checkedCountEl) checkedCountEl.textContent = session.checkedInCount || 0;
+      if (totalCountEl) totalCountEl.textContent = session.totalStudents || 0;
+
+      // Cập nhật danh sách học sinh & ô Checkbox
+      renderLiveAttendanceTable(session.students || []);
+    }
+
+    // 6. Vẽ mã QR với thư viện QRCode.js
+    function renderLiveQrCode(payloadText) {
+      const container = document.getElementById('live-qr-container');
+      if (!container) return;
+      container.innerHTML = '';
+      try {
+        if (typeof QRCode !== 'undefined') {
+          new QRCode(container, {
+            text: payloadText,
+            width: 180,
+            height: 180,
+            colorDark: '#991b1b', // Màu đỏ sẫm HBXLC
+            colorLight: '#ffffff',
+            correctLevel: QRCode.CorrectLevel.M
+          });
+        } else {
+          container.innerHTML = `<div class="p-4 text-center text-xs text-rose-600 font-mono break-all">${escapeHtml(payloadText)}</div>`;
+        }
+      } catch (err) {
+        console.error("Lỗi vẽ mã QR:", err);
+        container.innerHTML = `<div class="text-xs text-rose-600">Lỗi tạo mã QR: ${escapeHtml(err.message)}</div>`;
+      }
+    }
+
+    // 7. Vẽ bảng danh sách học sinh kèm ô Checkbox [✓] Có Mặt / [ ] NULL
+    function renderLiveAttendanceTable(students) {
+      const tbody = document.getElementById('live-att-students-tbody');
+      if (!tbody) return;
+
+      if (!students || students.length === 0) {
+        tbody.innerHTML = `
+          <tr>
+            <td colspan="5" class="p-6 text-center text-slate-400">
+              <i class="fa-solid fa-users-slash text-2xl mb-1 text-slate-300"></i>
+              <p>Chưa có danh sách sinh viên cho lớp này.</p>
+            </td>
+          </tr>
+        `;
+        return;
+      }
+
+      let html = '';
+      students.forEach(stu => {
+        const isChecked = !!stu.isChecked;
+        const rowBg = isChecked ? 'bg-emerald-50/60 hover:bg-emerald-100/50' : 'hover:bg-slate-50';
+        const nameClass = isChecked ? 'font-bold text-emerald-950' : 'text-slate-700';
+        const statusHtml = isChecked
+          ? `<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-black bg-emerald-100 text-emerald-800 border border-emerald-300">
+              <i class="fa-solid fa-check"></i> ${escapeHtml(stu.checkedInAt || 'Có mặt')}
+             </span>`
+          : `<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-semibold bg-slate-100 text-slate-400 border border-slate-200">
+              NULL (Chưa quét)
+             </span>`;
+
+        html += `
+          <tr class="transition ${rowBg}">
+            <td class="p-3 text-center">
+              <input type="checkbox"
+                ${isChecked ? 'checked' : ''}
+                onchange="handleTeacherManualCheckboxToggle('${escapeHtml(stu.id)}', '${escapeHtml(stu.studentCode || '')}', '${escapeHtml(stu.name || '').replace(/'/g, "\\'")}', this.checked)"
+                class="w-5 h-5 rounded-md text-emerald-600 focus:ring-emerald-500 border-2 border-slate-300 cursor-pointer transition transform active:scale-95"
+                title="${isChecked ? 'Đã có mặt (Bấm để hủy)' : 'Chưa điểm danh (Bấm để tích có mặt)'}">
+            </td>
+            <td class="p-3 text-center text-slate-400 font-mono">${stu.stt}</td>
+            <td class="p-3 font-mono font-bold text-slate-800">${escapeHtml(stu.studentCode || '-')}</td>
+            <td class="p-3 ${nameClass}">
+              <div class="flex items-center gap-1.5">
+                <span>${escapeHtml(stu.name)}</span>
+                ${stu.method === 'pin_4_digit' ? '<span class="text-[9px] px-1.5 py-0.2 rounded bg-indigo-100 text-indigo-700 font-mono" title="Nhập mã 4 số">4-SỐ</span>' : ''}
+                ${stu.method === 'qr_scanner' ? '<span class="text-[9px] px-1.5 py-0.2 rounded bg-violet-100 text-violet-700 font-mono" title="Quét mã QR">QR</span>' : ''}
+                ${stu.method === 'teacher_manual' ? '<span class="text-[9px] px-1.5 py-0.2 rounded bg-amber-100 text-amber-800 font-mono" title="Thầy tích tay">TAY</span>' : ''}
+              </div>
+            </td>
+            <td class="p-3 text-right">
+              ${statusHtml}
+            </td>
+          </tr>
+        `;
+      });
+
+      tbody.innerHTML = html;
+    }
+
+    // 8. Thầy tự tay bấm tích / bỏ tích Checkbox cho sinh viên
+    async function handleTeacherManualCheckboxToggle(studentId, studentCode, studentName, isChecked) {
+      if (!liveAttendanceClass) return;
+      try {
+        const res = await fetch('/api/attendance/session/manual-toggle', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            className: liveAttendanceClass,
+            studentId,
+            studentCode,
+            studentName,
+            isChecked
+          })
+        });
+        const data = await res.json();
+        if (res.ok && data.success) {
+          fetchCurrentLiveAttendanceStatus();
+        } else {
+          showToast(data.message || "Lỗi thao tác ô kiểm!", "error");
+          fetchCurrentLiveAttendanceStatus();
+        }
+      } catch (err) {
+        showToast("Lỗi kết nối máy chủ!", "error");
+        fetchCurrentLiveAttendanceStatus();
+      }
+    }
+
+    // 9. Nút "Đổi mã ngay"
+    async function refreshLiveAttendanceCodeNow() {
+      if (!liveAttendanceClass) return;
+      try {
+        const res = await fetch('/api/attendance/session/refresh-code', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ className: liveAttendanceClass })
+        });
+        const data = await res.json();
+        if (res.ok && data.success) {
+          liveRemainingSeconds = data.timeLeft || 60;
+          updateLiveTimerUI(liveRemainingSeconds);
+          fetchCurrentLiveAttendanceStatus();
+          showToast("Đã đổi mã 4 số và mã QR mới thành công!", "success");
+        } else {
+          showToast(data.message || "Không thể đổi mã!", "error");
+        }
+      } catch (err) {
+        showToast("Lỗi kết nối máy chủ!", "error");
+      }
+    }
+
+    // 10. Chốt sổ điểm danh và lưu vào CSDL
+    async function handleFinishLiveAttendance() {
+      if (!liveAttendanceClass) return;
+      if (!confirm(`Xác nhận chốt sổ điểm danh cho lớp ${liveAttendanceClass}?\n\nNhững học sinh có dấu [✓] sẽ được ghi nhận Có Mặt, các bạn còn lại (NULL) sẽ được ghi nhận Vắng Mặt.`)) {
+        return;
+      }
+
+      try {
+        const res = await fetch('/api/attendance/session/close', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ className: liveAttendanceClass })
+        });
+        const data = await res.json();
+        if (res.ok && data.success) {
+          showToast(`Đã chốt sổ điểm danh lớp ${liveAttendanceClass}! Có mặt: ${data.presentCount || 0}/${data.totalStudents || 0} SV`, "success");
+          closeLiveAttendanceModal();
+          loadClassesOverview();
+        } else {
+          showToast(data.message || "Lỗi chốt sổ điểm danh!", "error");
+        }
+      } catch (err) {
+        showToast("Lỗi kết nối máy chủ!", "error");
+      }
+    }
+
+    // ================= PHÂN HỆ ĐIỂM DANH HỌC SINH (QR CAMERA & NHẬP 4 SỐ) =================
+    // 11. Học sinh kiểm tra trạng thái điểm danh lớp của mình
+    async function checkStudentLiveAttendanceStatus(showToastOnCheck = false) {
+      if (!currentUser || currentUser.role !== 'student') return;
+      const studentClass = (currentUser.className || '').trim().toUpperCase();
+      if (!studentClass) return;
+
+      const label = document.getElementById('student-att-class-label');
+      if (label) label.innerHTML = `Lớp học của bạn: <b class="text-indigo-700 font-mono">${escapeHtml(studentClass)}</b>`;
+
+      try {
+        const res = await fetch(`/api/attendance/session/current?className=${encodeURIComponent(studentClass)}&studentId=${encodeURIComponent(currentUser.id)}`);
+        const data = await res.json();
+
+        const badgeLive = document.getElementById('student-att-live-status-badge');
+        const stateNoSession = document.getElementById('student-att-state-no-session');
+        const stateCheckedIn = document.getElementById('student-att-state-checked-in');
+        const stateActive = document.getElementById('student-att-state-active');
+
+        if (!data.active || !data.session) {
+          // Chưa có phiên điểm danh nào đang mở
+          if (badgeLive) badgeLive.classList.add('hidden');
+          if (stateNoSession) stateNoSession.classList.remove('hidden');
+          if (stateCheckedIn) stateCheckedIn.classList.add('hidden');
+          if (stateActive) stateActive.classList.add('hidden');
+          stopStudentCameraScanner();
+          if (showToastOnCheck) {
+            showToast("Hiện tại Thầy chưa mở phiên điểm danh cho lớp bạn.", "info");
+          }
+          return;
+        }
+
+        // Có phiên điểm danh đang mở
+        if (badgeLive) badgeLive.classList.remove('hidden');
+
+        // Kiểm tra xem sinh viên này đã có mặt chưa
+        if (data.session.isStudentCheckedIn) {
+          if (stateNoSession) stateNoSession.classList.add('hidden');
+          if (stateActive) stateActive.classList.add('hidden');
+          if (stateCheckedIn) {
+            stateCheckedIn.classList.remove('hidden');
+            const detail = document.getElementById('student-att-success-detail');
+            const checkinTime = (data.session.studentCheckinInfo && data.session.studentCheckinInfo.checkedInAt) || 'vừa xong';
+            if (detail) detail.textContent = `Thời gian ghi nhận có mặt: lúc ${checkinTime}`;
+          }
+          stopStudentCameraScanner();
+          if (showToastOnCheck) {
+            showToast("Bạn đã được ghi nhận có mặt trong buổi học!", "success");
+          }
+        } else {
+          // Đang mở và sinh viên CHƯA điểm danh
+          if (stateNoSession) stateNoSession.classList.add('hidden');
+          if (stateCheckedIn) stateCheckedIn.classList.add('hidden');
+          if (stateActive) {
+            stateActive.classList.remove('hidden');
+            const titleEl = document.getElementById('student-att-session-title');
+            if (titleEl) {
+              titleEl.textContent = `${data.session.subjectName ? data.session.subjectName + ' • ' : ''}${data.session.lessonTitle || 'Buổi học hôm nay'}`;
+            }
+          }
+          if (showToastOnCheck) {
+            showToast("Thầy đang mở điểm danh! Hãy nhập mã 4 số hoặc quét QR.", "info");
+          }
+        }
+      } catch (err) {
+        console.error("Lỗi kiểm tra phiên điểm danh học sinh:", err);
+      }
+    }
+
+    // 12. Học sinh gửi mã 4 số
+    async function handleStudentSubmitOtp() {
+      if (!currentUser || currentUser.role !== 'student') return;
+      const studentClass = (currentUser.className || '').trim().toUpperCase();
+      const input = document.getElementById('student-otp-input');
+      const otpVal = (input ? input.value : '').trim();
+
+      if (!otpVal || otpVal.length !== 4) {
+        showToast("Vui lòng nhập đúng dãy 4 số đang hiển thị trên bảng!", "error");
+        if (input) input.focus();
+        return;
+      }
+
+      const btn = document.getElementById('btn-submit-student-otp');
+      if (btn) {
+        btn.disabled = true;
+        btn.innerHTML = `<i class="fa-solid fa-spinner animate-spin"></i> Đang gửi...`;
+      }
+
+      try {
+        const res = await fetch('/api/attendance/session/checkin', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            className: studentClass,
+            studentId: currentUser.id,
+            studentCode: currentUser.studentCode || currentUser.username,
+            studentName: currentUser.name,
+            codeOrToken: otpVal
+          })
+        });
+
+        const data = await res.json();
+        if (res.ok && data.success) {
+          showToast(data.message || "Điểm danh có mặt thành công!", "success");
+          if (input) input.value = '';
+          checkStudentLiveAttendanceStatus();
+        } else {
+          showToast(data.message || "Mã điểm danh không chính xác!", "error");
+        }
+      } catch (err) {
+        showToast("Lỗi kết nối máy chủ điểm danh!", "error");
+      } finally {
+        if (btn) {
+          btn.disabled = false;
+          btn.innerHTML = `<i class="fa-solid fa-paper-plane"></i> Gửi mã`;
+        }
+      }
+    }
+
+    // 13. Học sinh bật / tắt Camera để quét mã QR
+    async function toggleStudentCameraScanner() {
+      if (isStudentCameraScanning) {
+        stopStudentCameraScanner();
+      } else {
+        startStudentCameraScanner();
+      }
+    }
+
+    async function startStudentCameraScanner() {
+      const container = document.getElementById('student-qr-camera-container');
+      const btn = document.getElementById('btn-student-camera-toggle');
+      if (!container) return;
+
+      if (typeof Html5Qrcode === 'undefined') {
+        showToast("Trình quét mã QR chưa sẵn sàng, vui lòng nhập mã 4 số!", "error");
+        return;
+      }
+
+      container.classList.remove('hidden');
+      if (btn) {
+        btn.innerHTML = `<i class="fa-solid fa-stop"></i> Đang bật Camera (Bấm để tắt)`;
+        btn.classList.remove('bg-violet-600', 'hover:bg-violet-700');
+        btn.classList.add('bg-rose-600', 'hover:bg-rose-700');
+      }
+
+      try {
+        if (studentCameraScanner) {
+          try { await studentCameraScanner.stop(); } catch(e) {}
+          studentCameraScanner = null;
+        }
+
+        studentCameraScanner = new Html5Qrcode("qr-camera-reader");
+        isStudentCameraScanning = true;
+
+        const qrConfig = { fps: 10, qrbox: { width: 220, height: 220 } };
+        await studentCameraScanner.start(
+          { facingMode: "environment" },
+          qrConfig,
+          (decodedText) => {
+            handleStudentQrScannedPayload(decodedText);
+          },
+          (errorMessage) => {
+            // Lỗi frame quét thông thường, bỏ qua
+          }
+        );
+      } catch (err) {
+        console.error("Lỗi khởi động camera:", err);
+        showToast("Không thể mở camera (kiểm tra quyền truy cập)! Bạn có thể nhập mã 4 số thay thế.", "error");
+        stopStudentCameraScanner();
+      }
+    }
+
+    async function stopStudentCameraScanner() {
+      isStudentCameraScanning = false;
+      const container = document.getElementById('student-qr-camera-container');
+      const btn = document.getElementById('btn-student-camera-toggle');
+
+      if (container) container.classList.add('hidden');
+      if (btn) {
+        btn.innerHTML = `<i class="fa-solid fa-camera"></i> Bật Camera Quét Mã QR`;
+        btn.classList.remove('bg-rose-600', 'hover:bg-rose-700');
+        btn.classList.add('bg-violet-600', 'hover:bg-violet-700');
+      }
+
+      if (studentCameraScanner) {
+        try {
+          await studentCameraScanner.stop();
+        } catch(e) {}
+        studentCameraScanner = null;
+      }
+    }
+
+    // 14. Xử lý khi camera đọc được nội dung QR
+    async function handleStudentQrScannedPayload(decodedText) {
+      if (!decodedText) return;
+      stopStudentCameraScanner();
+
+      let codeOrToken = decodedText.trim();
+      let targetClass = (currentUser.className || '').trim().toUpperCase();
+
+      try {
+        if (codeOrToken.startsWith('{') && codeOrToken.endsWith('}')) {
+          const parsed = JSON.parse(codeOrToken);
+          if (parsed.token) codeOrToken = parsed.token;
+          else if (parsed.otp) codeOrToken = parsed.otp;
+          if (parsed.className) targetClass = parsed.className.toUpperCase();
+        }
+      } catch (e) {}
+
+      showToast("Đã quét mã QR! Đang xác nhận có mặt...", "info");
+
+      try {
+        const res = await fetch('/api/attendance/session/checkin', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            className: targetClass,
+            studentId: currentUser.id,
+            studentCode: currentUser.studentCode || currentUser.username,
+            studentName: currentUser.name,
+            codeOrToken: codeOrToken
+          })
+        });
+
+        const data = await res.json();
+        if (res.ok && data.success) {
+          showToast(data.message || "Điểm danh có mặt thành công!", "success");
+          checkStudentLiveAttendanceStatus();
+        } else {
+          showToast(data.message || "Mã QR đã hết hạn 1 phút! Vui lòng quét lại mã mới.", "error");
+        }
+      } catch (err) {
+        showToast("Lỗi kết nối máy chủ điểm danh!", "error");
       }
     }
 
