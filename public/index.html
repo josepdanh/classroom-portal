@@ -683,6 +683,9 @@
               <!-- Tabs nhóm ngành: Tất Cả / Thiết Kế Đồ Họa / CNTT / May Thời Trang -->
             </div>
             <div class="flex items-center gap-2 self-start lg:self-auto shrink-0 flex-wrap">
+              <button onclick="openManageSubjectsModal()" class="text-xs font-semibold px-3 py-1.5 rounded-xl bg-slate-100 text-slate-700 hover:bg-slate-200 transition flex items-center gap-1.5 border border-slate-200 shadow-2xs" title="Quản lý danh sách và trạng thái kết thúc môn học">
+                <i class="fa-solid fa-sliders text-sm"></i> Quản Lý Môn Học
+              </button>
               <button id="btn-create-subject-header" onclick="openCreateSubjectModal()" class="text-xs font-semibold px-3.5 py-1.5 rounded-xl bg-violet-50 text-violet-700 hover:bg-violet-100 transition flex items-center gap-1.5 border border-violet-200 shadow-sm" title="Giáo viên tự tạo môn học cho lớp đang chọn">
                 <i class="fa-solid fa-book-bookmark text-sm"></i> + Tạo Môn Học Cho Lớp
               </button>
@@ -701,8 +704,8 @@
 
         <!-- Khung hiển thị các môn học giáo viên đang dạy ở lớp hiện tại -->
         <div id="teacher-subjects-bar" class="bg-indigo-50/50 border border-indigo-100 rounded-2xl p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs">
-          <div class="flex items-center gap-2 flex-wrap">
-            <span class="font-bold text-slate-700 flex items-center gap-1.5">
+          <div class="flex items-center gap-2 flex-wrap flex-1">
+            <span class="font-bold text-slate-700 flex items-center gap-1.5 shrink-0">
               <i class="fa-solid fa-graduation-cap text-indigo-600 text-sm"></i>
               Môn học của bạn tại lớp này:
             </span>
@@ -710,9 +713,14 @@
               <!-- Render qua JS -->
             </div>
           </div>
-          <button onclick="openCreateSubjectModal()" class="text-indigo-600 hover:text-indigo-800 font-semibold flex items-center gap-1 shrink-0">
-            <i class="fa-solid fa-plus-circle"></i> Thêm môn cho lớp này
-          </button>
+          <div class="flex items-center gap-2 shrink-0">
+            <button onclick="openManageSubjectsModal()" class="px-3 py-1.5 rounded-xl border border-indigo-200 bg-white hover:bg-indigo-50 text-indigo-800 font-bold flex items-center gap-1.5 transition shadow-2xs">
+              <i class="fa-solid fa-sliders"></i> Quản lý môn học
+            </button>
+            <button onclick="openCreateSubjectModal()" class="px-3 py-1.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-bold flex items-center gap-1.5 transition shadow-2xs">
+              <i class="fa-solid fa-plus-circle"></i> Thêm môn cho lớp này
+            </button>
+          </div>
         </div>
 
         <!-- Danh sách bài tập đã giao -->
@@ -1185,6 +1193,47 @@
             <div id="admin-cleanup-result" class="hidden"></div>
           </div>
         </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= MODAL: QUẢN LÝ MÔN HỌC & TRẠNG THÁI KẾT THÚC ================= -->
+  <div id="modal-manage-subjects" class="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm hidden items-center justify-center p-3 sm:p-4 overflow-y-auto">
+    <div class="bg-white rounded-2xl shadow-2xl max-w-2xl w-full p-5 sm:p-6 border border-slate-100 max-h-[90vh] flex flex-col">
+      <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+        <div>
+          <h3 class="text-base font-bold text-slate-900 flex items-center gap-2">
+            <i class="fa-solid fa-sliders text-indigo-600"></i>
+            Quản Lý Môn Học & Trạng Thái Kết Thúc
+          </h3>
+          <p class="text-xs text-slate-500 mt-0.5">Tích chọn [✓] để đánh dấu Kết Thúc Môn Học hoặc mở lại môn đang giảng dạy</p>
+        </div>
+        <button onclick="closeManageSubjectsModal()" class="p-1 text-slate-400 hover:text-slate-600 rounded-lg text-lg">&times;</button>
+      </div>
+
+      <div class="mt-4 flex items-center justify-between gap-3 flex-wrap">
+        <div class="flex items-center gap-2">
+          <label class="text-xs font-bold text-slate-600">Lọc theo lớp:</label>
+          <select id="manage-subj-filter-class" onchange="renderManageSubjectsTable()" class="px-2.5 py-1.5 rounded-xl border border-slate-200 text-xs font-bold text-slate-800 bg-white">
+            <!-- Render options lớp -->
+          </select>
+        </div>
+        <button onclick="closeManageSubjectsModal(); openCreateSubjectModal()" class="px-3 py-1.5 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl text-xs font-bold transition flex items-center gap-1 shadow-xs">
+          <i class="fa-solid fa-plus-circle"></i> + Tạo Môn Mới
+        </button>
+      </div>
+
+      <div class="mt-3 flex-1 overflow-y-auto border border-slate-200 rounded-xl">
+        <div id="manage-subjects-table-container">
+          <!-- Render table via JS -->
+        </div>
+      </div>
+
+      <div class="pt-3 border-t border-slate-100 flex items-center justify-between mt-4 text-xs text-slate-500">
+        <span><i class="fa-solid fa-circle-info text-indigo-500 mr-1"></i>Các môn đánh dấu <b>Đã kết thúc</b> sẽ được tự động ẩn khỏi danh sách khi lên Lịch Báo Giảng.</span>
+        <button type="button" onclick="closeManageSubjectsModal()" class="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold rounded-xl text-xs transition">
+          Đóng
+        </button>
       </div>
     </div>
   </div>
@@ -1881,7 +1930,7 @@
         <div class="grid grid-cols-2 gap-3">
           <div>
             <label class="block text-xs font-bold text-slate-700 mb-1">Lớp Học <span class="text-red-500">*</span></label>
-            <select id="sch-form-class" required class="w-full px-3 py-2 rounded-xl border border-slate-200 text-xs font-bold text-slate-800 bg-white">
+            <select id="sch-form-class" required onchange="handleScheduleClassChange()" class="w-full px-3 py-2 rounded-xl border border-slate-200 text-xs font-bold text-slate-800 bg-white">
               <!-- Render lớp -->
             </select>
           </div>
@@ -1891,9 +1940,43 @@
           </div>
         </div>
 
-        <div>
-          <label class="block text-xs font-bold text-slate-700 mb-1">Môn Học / Mô Đun <span class="text-red-500">*</span></label>
-          <input type="text" id="sch-form-subject" required placeholder="VD: Thiết Kế Catalog, After Effects..." class="w-full px-3 py-2 rounded-xl border border-slate-200 text-xs">
+        <!-- MÔN HỌC: Liệt kê các môn chưa kết thúc mà giáo viên đã đăng ký cho lớp học đó -->
+        <div class="space-y-2">
+          <div class="flex items-center justify-between">
+            <label class="block text-xs font-bold text-slate-700">Môn Học / Mô Đun Giảng Dạy <span class="text-red-500">*</span></label>
+            <span id="sch-subject-count-hint" class="text-[11px] font-semibold text-indigo-600"></span>
+          </div>
+
+          <!-- Khung liệt kê môn chưa kết thúc đã đăng ký cho lớp -->
+          <div id="sch-uncompleted-subjects-box" class="p-3 bg-gradient-to-br from-indigo-50/90 to-amber-50/70 rounded-xl border border-indigo-200/90 space-y-2 shadow-2xs">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-black text-indigo-950 flex items-center gap-1.5">
+                <i class="fa-solid fa-graduation-cap text-indigo-600"></i>
+                Môn chưa kết thúc Thầy đã đăng ký cho lớp <span id="sch-class-label" class="font-black text-rose-700 underline underline-offset-2">...</span>:
+              </span>
+              <span id="sch-uncompleted-badge" class="px-2 py-0.5 rounded-full text-[10px] font-black bg-emerald-100 text-emerald-800 border border-emerald-300">0 môn</span>
+            </div>
+
+            <!-- Danh sách nút bấm chọn nhanh các môn chưa kết thúc -->
+            <div id="sch-uncompleted-chips-list" class="flex flex-wrap gap-1.5">
+              <!-- Render qua JS: Danh sách nút môn chưa kết thúc -->
+            </div>
+
+            <!-- Ghi chú nếu có môn đã kết thúc bị ẩn -->
+            <div id="sch-completed-notice" class="text-[11px] text-slate-500 pt-1 border-t border-indigo-100 hidden">
+              <!-- Render qua JS -->
+            </div>
+          </div>
+
+          <!-- Dropdown chọn môn hoặc tự nhập môn khác -->
+          <div class="space-y-1.5">
+            <select id="sch-form-subject-select" onchange="handleScheduleSubjectSelectChange(this.value)" class="w-full px-3 py-2 rounded-xl border border-slate-200 text-xs font-bold text-slate-800 bg-white">
+              <!-- Options các môn chưa kết thúc + Tự nhập môn khác -->
+            </select>
+            <div id="sch-box-custom-subject" class="hidden">
+              <input type="text" id="sch-form-subject" required placeholder="Nhập tên môn học..." class="w-full px-3 py-2 rounded-xl border border-slate-200 text-xs font-medium">
+            </div>
+          </div>
         </div>
 
         <div>
@@ -3531,12 +3614,21 @@
       }
 
       container.innerHTML = list.map(s => {
+        const isCompleted = Boolean(s.isCompleted);
         return `
-          <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-white border border-indigo-200 text-indigo-900 font-bold shadow-xs">
-            <i class="fa-solid fa-book-open text-indigo-500 text-[11px]"></i>
-            <span>${escapeHtml(s.name)}</span>
-            ${teacherSelectedClass === 'ALL' ? `<span class="text-[10px] bg-slate-100 text-slate-600 px-1.5 py-0.2 rounded font-medium">Lớp ${escapeHtml(s.className)}</span>` : ''}
-            <button onclick="handleDeleteSubject('${s.id}', '${escapeHtml(s.name)}', '${escapeHtml(s.className)}')" title="Xóa môn này" class="text-slate-400 hover:text-rose-600 font-bold text-xs ml-0.5 transition">
+          <span class="inline-flex items-center gap-2 px-2.5 py-1.5 rounded-xl ${isCompleted ? 'bg-slate-100/90 border border-slate-300 text-slate-500' : 'bg-white border border-indigo-200 text-indigo-950'} font-bold shadow-xs transition-all hover:shadow-sm">
+            <i class="fa-solid ${isCompleted ? 'fa-flag-checkered text-slate-400' : 'fa-book-open text-indigo-600'} text-[11px]"></i>
+            <span class="${isCompleted ? 'line-through decoration-slate-400 text-slate-500' : ''}" title="${escapeHtml(s.name)}">${escapeHtml(s.name)}</span>
+            ${teacherSelectedClass === 'ALL' ? `<span class="text-[10px] bg-indigo-50 text-indigo-700 px-1.5 py-0.2 rounded font-bold">Lớp ${escapeHtml(s.className)}</span>` : ''}
+
+            <!-- Nút / Checkbox đánh dấu Kết Thúc Môn Học -->
+            <label class="inline-flex items-center gap-1 px-2 py-0.5 rounded-md text-[10px] font-bold cursor-pointer select-none transition ${isCompleted ? 'bg-slate-200 hover:bg-slate-300 text-slate-700' : 'bg-emerald-100 hover:bg-emerald-200 text-emerald-900 border border-emerald-300'}" title="${isCompleted ? 'Môn đã kết thúc. Bấm bỏ chọn [ ] để mở lại môn học' : 'Bấm đánh dấu tích [✓] để KẾT THÚC môn học này'}">
+              <input type="checkbox" ${isCompleted ? 'checked' : ''} onchange="handleToggleSubjectCompleted('${s.id}', '${escapeHtml(s.name)}', this.checked)" class="rounded text-emerald-600 focus:ring-emerald-500 w-3.5 h-3.5 cursor-pointer">
+              <span>${isCompleted ? 'Đã kết thúc' : 'Đang học'}</span>
+            </label>
+
+            <!-- Nút Xóa môn -->
+            <button onclick="handleDeleteSubject('${s.id}', '${escapeHtml(s.name)}', '${escapeHtml(s.className)}')" title="Xóa môn này" class="text-slate-400 hover:text-rose-600 font-bold text-sm ml-0.5 transition p-0.5 leading-none">
               &times;
             </button>
           </span>
@@ -3676,6 +3768,146 @@
       } catch (err) {
         showToast("Lỗi kết nối khi xóa môn học!", "error");
       }
+    }
+
+    // Đánh dấu kết thúc hoặc mở lại môn học
+    async function handleToggleSubjectCompleted(subjectId, subjectName, isChecked) {
+      if (!currentUser || currentUser.role !== 'teacher') return;
+
+      const actionText = isChecked ? "kết thúc môn" : "mở lại môn";
+      const confirmMsg = isChecked
+        ? `Xác nhận KẾT THÚC môn "${subjectName}"?\n\nMôn học sẽ được đánh dấu hoàn thành và tự động ẩn khỏi danh sách khi thêm Lịch Báo Giảng.`
+        : `Xác nhận MỞ LẠI môn "${subjectName}" (Chuyển sang trạng thái Đang học)?`;
+
+      if (!confirm(confirmMsg)) {
+        renderTeacherSubjectsChips();
+        renderManageSubjectsTable();
+        return;
+      }
+
+      try {
+        const res = await fetch(`/api/subjects/${subjectId}/toggle-completed`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ teacherId: currentUser.id, isCompleted: isChecked })
+        });
+        const data = await res.json();
+        if (!res.ok) {
+          showToast(data.message || `Lỗi khi ${actionText}!`, "error");
+          renderTeacherSubjectsChips();
+          renderManageSubjectsTable();
+          return;
+        }
+
+        showToast(data.message, "success");
+        await loadTeacherSubjects();
+        renderManageSubjectsTable();
+
+        // Nếu modal Lịch Báo Giảng đang mở, cập nhật ngay danh sách môn chưa kết thúc
+        const modalSch = document.getElementById('modal-schedule-item');
+        if (modalSch && !modalSch.classList.contains('hidden')) {
+          handleScheduleClassChange();
+        }
+      } catch (err) {
+        showToast(`Lỗi kết nối khi ${actionText}!`, "error");
+        renderTeacherSubjectsChips();
+        renderManageSubjectsTable();
+      }
+    }
+
+    // Quản lý môn học toàn diện
+    function openManageSubjectsModal() {
+      const modal = document.getElementById('modal-manage-subjects');
+      if (!modal) return;
+      populateManageSubjectsClassFilter();
+      renderManageSubjectsTable();
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+
+    function closeManageSubjectsModal() {
+      const modal = document.getElementById('modal-manage-subjects');
+      if (modal) {
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+      }
+    }
+
+    function populateManageSubjectsClassFilter() {
+      const select = document.getElementById('manage-subj-filter-class');
+      if (!select) return;
+      const cur = (teacherSelectedClass && teacherSelectedClass !== 'ALL') ? teacherSelectedClass : 'ALL';
+      select.innerHTML = `<option value="ALL">-- Tất Cả Các Lớp --</option>` + availableClasses.map(c => `
+        <option value="${escapeHtml(c)}" ${c === cur ? 'selected' : ''}>Lớp ${escapeHtml(c)}</option>
+      `).join('');
+    }
+
+    function renderManageSubjectsTable() {
+      const container = document.getElementById('manage-subjects-table-container');
+      const select = document.getElementById('manage-subj-filter-class');
+      if (!container) return;
+
+      const filterClass = select ? select.value : 'ALL';
+      let list = teacherSubjectsList || [];
+      if (filterClass && filterClass !== 'ALL') {
+        list = list.filter(s => s.className && s.className.toUpperCase() === filterClass.toUpperCase());
+      }
+
+      if (list.length === 0) {
+        container.innerHTML = `
+          <div class="p-8 text-center text-slate-400 text-xs">
+            <i class="fa-solid fa-book-open text-2xl text-slate-300 mb-2 block"></i>
+            Chưa có môn học nào ${filterClass !== 'ALL' ? `cho lớp ${escapeHtml(filterClass)}` : ''}.
+          </div>
+        `;
+        return;
+      }
+
+      let html = `
+        <table class="w-full text-xs text-left">
+          <thead class="bg-slate-50 text-slate-700 font-bold uppercase text-[11px] border-b border-slate-200">
+            <tr>
+              <th class="p-3 w-12 text-center">STT</th>
+              <th class="p-3">Tên Môn Học</th>
+              <th class="p-3 w-28 text-center">Lớp Học</th>
+              <th class="p-3 w-44 text-center">Trạng Thái Kết Thúc</th>
+              <th class="p-3 w-20 text-center">Thao Tác</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-100">
+      `;
+
+      list.forEach((sub, idx) => {
+        const isCompleted = Boolean(sub.isCompleted);
+        html += `
+          <tr class="hover:bg-slate-50/80 transition">
+            <td class="p-3 text-center text-slate-500 font-mono">${idx + 1}</td>
+            <td class="p-3 font-bold ${isCompleted ? 'text-slate-500 line-through' : 'text-slate-900'}">
+              <i class="fa-solid ${isCompleted ? 'fa-flag-checkered text-slate-400' : 'fa-book-open text-indigo-600'} mr-1.5"></i>
+              ${escapeHtml(sub.name)}
+            </td>
+            <td class="p-3 text-center">
+              <span class="px-2 py-0.5 rounded-md bg-indigo-50 text-indigo-800 font-extrabold text-[10px] uppercase">
+                ${escapeHtml(sub.className)}
+              </span>
+            </td>
+            <td class="p-3 text-center">
+              <label class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-xl text-xs font-bold cursor-pointer select-none transition ${isCompleted ? 'bg-slate-200 hover:bg-slate-300 text-slate-700' : 'bg-emerald-100 hover:bg-emerald-200 text-emerald-900 border border-emerald-300'}" title="${isCompleted ? 'Bỏ tích để mở lại môn học' : 'Tích chọn để kết thúc môn học'}">
+                <input type="checkbox" ${isCompleted ? 'checked' : ''} onchange="handleToggleSubjectCompleted('${sub.id}', '${escapeHtml(sub.name)}', this.checked)" class="rounded text-emerald-600 focus:ring-emerald-500 w-4 h-4 cursor-pointer">
+                <span>${isCompleted ? 'Đã kết thúc' : 'Đang học'}</span>
+              </label>
+            </td>
+            <td class="p-3 text-center">
+              <button onclick="handleDeleteSubject('${sub.id}', '${escapeHtml(sub.name)}', '${escapeHtml(sub.className)}')" class="p-1 text-slate-400 hover:text-rose-600 text-sm transition" title="Xóa môn">
+                <i class="fa-solid fa-trash-can"></i>
+              </button>
+            </td>
+          </tr>
+        `;
+      });
+
+      html += `</tbody></table>`;
+      container.innerHTML = html;
     }
 
     // Học sinh tự đổi hoặc chọn lớp học
@@ -4509,12 +4741,18 @@
       `).join('');
     }
 
-    function openScheduleModal(itemId = null) {
+    async function openScheduleModal(itemId = null) {
       const modal = document.getElementById('modal-schedule-item');
       const form = document.getElementById('form-schedule');
       if (!modal || !form) return;
       form.reset();
       populateClassDropdowns();
+
+      if (!teacherSubjectsList || teacherSubjectsList.length === 0) {
+        await loadTeacherSubjects();
+      }
+
+      const classSelect = document.getElementById('sch-form-class');
 
       if (itemId) {
         const item = scheduleData.find(s => s.id === itemId);
@@ -4523,19 +4761,220 @@
           document.getElementById('sch-form-id').value = item.id;
           document.getElementById('sch-form-day').value = item.dayOfWeek;
           document.getElementById('sch-form-session').value = item.session || 'morning';
-          document.getElementById('sch-form-class').value = item.className || '';
-          document.getElementById('sch-form-subject').value = item.subjectName || '';
+          if (classSelect) classSelect.value = item.className || '';
           document.getElementById('sch-form-room').value = item.room || '';
           document.getElementById('sch-form-lesson').value = item.currentLesson || '';
           document.getElementById('sch-form-notes').value = item.notes || '';
+
+          // Nạp danh sách môn chưa kết thúc của lớp này và chọn môn hiện tại
+          handleScheduleClassChange(item.subjectName || '');
         }
       } else {
         document.getElementById('modal-schedule-title').innerHTML = `<i class="fa-solid fa-calendar-plus text-amber-500"></i> Thêm Buổi Dạy Vào Lịch Báo Giảng`;
         document.getElementById('sch-form-id').value = "";
+
+        if (classSelect) {
+          if (teacherSelectedClass && teacherSelectedClass !== 'ALL') {
+            classSelect.value = teacherSelectedClass;
+          }
+        }
+        handleScheduleClassChange();
       }
 
       modal.classList.remove('hidden');
       modal.classList.add('flex');
+    }
+
+    async function handleScheduleClassChange(preferredSubject = null) {
+      const classSelect = document.getElementById('sch-form-class');
+      const classLabel = document.getElementById('sch-class-label');
+      const badge = document.getElementById('sch-uncompleted-badge');
+      const chipsList = document.getElementById('sch-uncompleted-chips-list');
+      const subjectSelect = document.getElementById('sch-form-subject-select');
+      const subjectInput = document.getElementById('sch-form-subject');
+      const customBox = document.getElementById('sch-box-custom-subject');
+      const completedNotice = document.getElementById('sch-completed-notice');
+
+      if (!classSelect) return;
+      const targetClass = (classSelect.value || '').trim().toUpperCase();
+      if (classLabel) classLabel.textContent = targetClass || '...';
+
+      if (!teacherSubjectsList || teacherSubjectsList.length === 0) {
+        await loadTeacherSubjects();
+      }
+
+      // Lọc các môn do giáo viên hiện tại phụ trách tại lớp này
+      const allClassSubs = teacherSubjectsList.filter(s =>
+        s.className && s.className.toUpperCase() === targetClass &&
+        (currentUser.isAdmin || s.teacherId === currentUser.id)
+      );
+
+      const uncompletedSubs = allClassSubs.filter(s => !s.isCompleted);
+      const completedSubs = allClassSubs.filter(s => Boolean(s.isCompleted));
+
+      if (badge) {
+        badge.textContent = `${uncompletedSubs.length} môn đang học`;
+        if (uncompletedSubs.length > 0) {
+          badge.className = 'px-2 py-0.5 rounded-full text-[10px] font-black bg-emerald-100 text-emerald-800 border border-emerald-300';
+        } else {
+          badge.className = 'px-2 py-0.5 rounded-full text-[10px] font-bold bg-slate-100 text-slate-600 border border-slate-300';
+        }
+      }
+
+      // 1. Render danh sách nút bấm chọn nhanh các môn chưa kết thúc
+      if (chipsList) {
+        if (uncompletedSubs.length > 0) {
+          chipsList.innerHTML = uncompletedSubs.map(sub => {
+            const isMatch = (preferredSubject && preferredSubject.trim().toLowerCase() === sub.name.trim().toLowerCase());
+            return `
+              <button type="button" onclick="selectScheduleSubject('${escapeHtml(sub.name)}')" 
+                class="sch-sub-chip px-2.5 py-1.5 rounded-xl border ${isMatch ? 'border-indigo-600 bg-indigo-600 text-white shadow-sm' : 'border-indigo-200 bg-white hover:border-indigo-400 text-indigo-950'} text-xs font-bold transition flex items-center gap-1.5 shadow-2xs group cursor-pointer"
+                data-sub-name="${escapeHtml(sub.name)}">
+                <i class="fa-solid fa-book-open ${isMatch ? 'text-white' : 'text-indigo-600 group-hover:text-indigo-800'} text-[11px]"></i>
+                <span>${escapeHtml(sub.name)}</span>
+                <span class="px-1.5 py-0.2 rounded-md ${isMatch ? 'bg-white/20 text-white' : 'bg-emerald-100 text-emerald-800'} text-[9px] font-semibold">Chưa kết thúc</span>
+              </button>
+            `;
+          }).join('');
+        } else if (completedSubs.length > 0) {
+          chipsList.innerHTML = `
+            <div class="text-xs text-amber-800 bg-amber-100/80 p-2.5 rounded-xl border border-amber-300 w-full flex items-center justify-between flex-wrap gap-2">
+              <span class="flex items-center gap-1.5">
+                <i class="fa-solid fa-circle-exclamation text-amber-600"></i>
+                Tất cả <b>${completedSubs.length} môn</b> Thầy đăng ký cho lớp <b>${escapeHtml(targetClass)}</b> đều đã KẾT THÚC.
+              </span>
+              <button type="button" onclick="openCreateSubjectFromSchedule('${escapeHtml(targetClass)}')" class="px-2.5 py-1 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg text-xs font-bold transition shadow-2xs">
+                + Tạo Môn Mới
+              </button>
+            </div>
+          `;
+        } else {
+          chipsList.innerHTML = `
+            <div class="text-xs text-slate-600 bg-white p-2.5 rounded-xl border border-dashed border-indigo-200 w-full flex items-center justify-between flex-wrap gap-2">
+              <span class="flex items-center gap-1.5">
+                <i class="fa-solid fa-info-circle text-indigo-500"></i>
+                Thầy chưa đăng ký môn học nào cho lớp <b>${escapeHtml(targetClass)}</b>.
+              </span>
+              <button type="button" onclick="openCreateSubjectFromSchedule('${escapeHtml(targetClass)}')" class="px-2.5 py-1 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg text-xs font-bold transition shadow-2xs">
+                <i class="fa-solid fa-plus-circle mr-1"></i> Tạo Môn Cho Lớp Này
+              </button>
+            </div>
+          `;
+        }
+      }
+
+      // 2. Ghi chú các môn đã kết thúc
+      if (completedNotice) {
+        if (completedSubs.length > 0) {
+          completedNotice.classList.remove('hidden');
+          completedNotice.innerHTML = `
+            <span class="flex items-center gap-1">
+              <i class="fa-solid fa-flag-checkered text-slate-400"></i>
+              Đã lọc bỏ <b>${completedSubs.length} môn đã kết thúc</b> của lớp này:
+              <span class="italic text-slate-600">${completedSubs.map(s => escapeHtml(s.name)).join(', ')}</span>.
+            </span>
+          `;
+        } else {
+          completedNotice.classList.add('hidden');
+        }
+      }
+
+      // 3. Dropdown chọn môn
+      if (subjectSelect) {
+        let opts = '';
+        if (uncompletedSubs.length > 0) {
+          opts += `<option value="">-- Bấm chọn nhanh môn chưa kết thúc bên trên (${uncompletedSubs.length} môn) --</option>`;
+          uncompletedSubs.forEach(s => {
+            opts += `<option value="${escapeHtml(s.name)}">📘 ${escapeHtml(s.name)} (Chưa kết thúc)</option>`;
+          });
+        } else {
+          opts += `<option value="">-- Không có môn chưa kết thúc nào --</option>`;
+        }
+        opts += `<option value="__CUSTOM__">✍️ Tự nhập tên môn khác...</option>`;
+        subjectSelect.innerHTML = opts;
+      }
+
+      // 4. Chọn giá trị ưu tiên hoặc mặc định
+      if (preferredSubject) {
+        selectScheduleSubject(preferredSubject);
+      } else if (uncompletedSubs.length > 0) {
+        selectScheduleSubject(uncompletedSubs[0].name);
+      } else {
+        if (subjectSelect) subjectSelect.value = '__CUSTOM__';
+        if (customBox) customBox.classList.remove('hidden');
+        if (subjectInput) subjectInput.value = '';
+      }
+    }
+
+    function selectScheduleSubject(subName) {
+      const subjectInput = document.getElementById('sch-form-subject');
+      const subjectSelect = document.getElementById('sch-form-subject-select');
+      const customBox = document.getElementById('sch-box-custom-subject');
+      if (!subjectInput) return;
+
+      subjectInput.value = subName;
+
+      // Đồng bộ với dropdown
+      if (subjectSelect) {
+        let found = false;
+        for (let i = 0; i < subjectSelect.options.length; i++) {
+          if (subjectSelect.options[i].value === subName) {
+            subjectSelect.selectedIndex = i;
+            found = true;
+            break;
+          }
+        }
+        if (!found) {
+          subjectSelect.value = '__CUSTOM__';
+          if (customBox) customBox.classList.remove('hidden');
+        } else {
+          if (customBox) customBox.classList.add('hidden');
+        }
+      }
+
+      // Highlight chip được chọn
+      const chips = document.querySelectorAll('.sch-sub-chip');
+      chips.forEach(chip => {
+        const name = chip.getAttribute('data-sub-name');
+        if (name && name.toLowerCase() === subName.toLowerCase()) {
+          chip.className = 'sch-sub-chip px-2.5 py-1.5 rounded-xl border border-indigo-600 bg-indigo-600 text-white shadow-sm text-xs font-bold transition flex items-center gap-1.5 group cursor-pointer';
+          const icon = chip.querySelector('i');
+          if (icon) icon.className = 'fa-solid fa-book-open text-white text-[11px]';
+          const badge = chip.querySelector('span:last-child');
+          if (badge) badge.className = 'px-1.5 py-0.2 rounded-md bg-white/25 text-white text-[9px] font-semibold';
+        } else {
+          chip.className = 'sch-sub-chip px-2.5 py-1.5 rounded-xl border border-indigo-200 bg-white hover:border-indigo-400 text-indigo-950 text-xs font-bold transition flex items-center gap-1.5 shadow-2xs group cursor-pointer';
+          const icon = chip.querySelector('i');
+          if (icon) icon.className = 'fa-solid fa-book-open text-indigo-600 group-hover:text-indigo-800 text-[11px]';
+          const badge = chip.querySelector('span:last-child');
+          if (badge) badge.className = 'px-1.5 py-0.2 rounded-md bg-emerald-100 text-emerald-800 text-[9px] font-semibold';
+        }
+      });
+    }
+
+    function handleScheduleSubjectSelectChange(val) {
+      const customBox = document.getElementById('sch-box-custom-subject');
+      const subjectInput = document.getElementById('sch-form-subject');
+      if (val === '__CUSTOM__') {
+        if (customBox) customBox.classList.remove('hidden');
+        if (subjectInput) {
+          subjectInput.value = '';
+          subjectInput.focus();
+        }
+        selectScheduleSubject('');
+      } else if (val) {
+        if (customBox) customBox.classList.add('hidden');
+        selectScheduleSubject(val);
+      }
+    }
+
+    function openCreateSubjectFromSchedule(targetClass) {
+      closeScheduleModal();
+      openCreateSubjectModal();
+      if (targetClass) {
+        const select = document.getElementById('subject-target-class');
+        if (select) select.value = targetClass;
+      }
     }
 
     function closeScheduleModal() {
@@ -4931,7 +5370,10 @@
       setTimeout(() => {
         openScheduleModal();
         const selClass = document.getElementById('sch-form-class');
-        if (selClass && targetClass) selClass.value = targetClass;
+        if (selClass && targetClass) {
+          selClass.value = targetClass;
+          handleScheduleClassChange();
+        }
       }, 300);
     }
 

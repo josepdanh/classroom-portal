@@ -775,7 +775,7 @@ app.post('/api/classes', (req, res) => {
 
 // 1e. Quản lý Môn học (Giáo viên tự tạo môn học cho từng lớp)
 app.get('/api/subjects', (req, res) => {
-  const { className, teacherId, forGradeSheet } = req.query;
+  const { className, teacherId, forGradeSheet, isCompleted } = req.query;
   const db = readDatabase();
   let subjects = db.subjects || [];
 
@@ -791,7 +791,19 @@ app.get('/api/subjects', (req, res) => {
     }
   }
 
-  res.json({ subjects });
+  // Lọc theo trạng thái kết thúc nếu có yêu cầu
+  if (typeof isCompleted !== 'undefined') {
+    const wantCompleted = isCompleted === 'true';
+    subjects = subjects.filter(s => Boolean(s.isCompleted) === wantCompleted);
+  }
+
+  // Đảm bảo thuộc tính isCompleted luôn là boolean
+  const mappedSubjects = subjects.map(s => ({
+    ...s,
+    isCompleted: Boolean(s.isCompleted)
+  }));
+
+  res.json({ subjects: mappedSubjects });
 });
 
 app.post('/api/subjects', async (req, res) => {
@@ -827,6 +839,7 @@ app.post('/api/subjects', async (req, res) => {
     teacherId: teacher.id,
     teacherName: teacher.name,
     teacherEmail: teacher.email || null,
+    isCompleted: false,
     createdAt: new Date().toISOString()
   };
 
@@ -879,6 +892,49 @@ app.delete('/api/subjects/:id', (req, res) => {
   writeDatabase(db);
 
   res.json({ success: true, message: `Đã xóa môn "${target.name}" của lớp ${target.className} thành công!` });
+});
+
+// Endpoint cho phép giáo viên đánh dấu KẾT THÚC hoặc MỞ LẠI môn học
+app.post('/api/subjects/:id/toggle-completed', (req, res) => {
+  const { id } = req.params;
+  const { teacherId, isCompleted } = req.body;
+  const db = readDatabase();
+
+  const user = (db.users || []).find(u => u.id === teacherId);
+  if (!user || user.role !== 'teacher') {
+    return res.status(403).json({ message: "Chỉ giáo viên mới có quyền thay đổi trạng thái môn học." });
+  }
+
+  const target = (db.subjects || []).find(s => s.id === id);
+  if (!target) {
+    return res.status(404).json({ message: "Không tìm thấy môn học." });
+  }
+
+  if (target.teacherId !== teacherId && !user.isAdmin) {
+    return res.status(403).json({ message: "Bạn chỉ có thể thay đổi trạng thái môn học do chính bạn phụ trách." });
+  }
+
+  if (typeof isCompleted === 'boolean') {
+    target.isCompleted = isCompleted;
+  } else {
+    target.isCompleted = !target.isCompleted;
+  }
+
+  if (target.isCompleted) {
+    target.completedAt = new Date().toISOString();
+  } else {
+    delete target.completedAt;
+  }
+
+  writeDatabase(db);
+
+  const statusLabel = target.isCompleted ? "ĐÃ KẾT THÚC" : "ĐANG HỌC (CHƯA KẾT THÚC)";
+  res.json({
+    success: true,
+    isCompleted: target.isCompleted,
+    subject: target,
+    message: `Đã chuyển môn "${target.name}" lớp ${target.className} sang trạng thái: ${statusLabel}!`
+  });
 });
 
 // Cho phép học sinh đổi / chọn lớp học
@@ -1151,6 +1207,7 @@ app.post('/api/assignments', upload.single('attachment'), async (req, res) => {
         className: cleanTargetClass,
         teacherId: teacher ? teacher.id : (teacherId || 'u_teacher_danh'),
         teacherName: teacher ? teacher.name : 'Giáo viên',
+        isCompleted: false,
         createdAt: new Date().toISOString()
       });
     }
