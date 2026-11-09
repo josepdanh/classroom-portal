@@ -7762,7 +7762,7 @@
       "gradedAt": null
     }
   ],
-  "updatedAt": "2026-11-09T13:56:39.598Z",
+  "updatedAt": "2026-11-09T14:34:07.274Z",
   "users": [
     {
       "id": "u_teacher_danh",
@@ -10794,6 +10794,513 @@
       "updatedAt": "2026-11-09T13:52:20.520Z",
       "teacherId": "u_teacher_danh",
       "createdAt": "2026-11-09T13:52:20.520Z"
+    },
+    {
+      "id": "att_1794234847261",
+      "className": "T14TK01",
+      "subjectName": "",
+      "date": "2026-11-09",
+      "lessonTitle": "Buổi học ngày 9/11/2026",
+      "records": [
+        {
+          "studentId": "u_student_T14TK0120",
+          "studentCode": "T14TK0120",
+          "studentName": "Đặng Thụy My",
+          "status": null,
+          "checkedInAt": null,
+          "method": null
+        },
+        {
+          "studentId": "u_T14TK0101",
+          "studentCode": "T14TK0101",
+          "studentName": "Lê Thị Vân Anh",
+          "status": null,
+          "checkedInAt": null,
+          "method": null
+        },
+        {
+          "studentId": "u_T14TK0102",
+          "studentCode": "T14TK0102",
+          "studentName": "Vũ Hoàng Minh Anh",
+          "status": null,
+          "checkedInAt": null,
+          "method": null
+        },
+        {
+          "studentId": "u_T14TK0103",
+          "studentCode": "T14TK0103",
+          "studentName": "Nguyễn Hoàng Gia Ân",
+          "status": null,
+          "checkedInAt": null,
+          "method": null
+        },
+        {
+          "studentId": "u_T14TK0104",
+          "studentCode": "T14TK0104",
+          "studentName": "Trần Thụ Ân",
+          "status": null,
+          "checkedInAt": null,
+          "method": null
+        },
+        {
+          "studentId": "u_T14TK0105",
+          "studentCode": "T14TK0105",
+          "studentName": "Phạm Gia Bảo",
+          "status": null,
+          "checkedInAt": null,
+          "method": null
+        },
+        {
+          "studentId": "u_T14TK0106",
+          "studentCode": "T14TK0106",
+          "studentName": "Hoàng Nguyễn Bảo Châu",
+          "status": null,
+          "checkedInAt": null,
+          "method": null
+        },
+        {
+          "studentId": "u_T14TK0107",
+          "studentCode": "T14TK0107",
+          "studentName": "Nguyễn Thành Đạt",
+          "status": "present",
+          "checkedInAt": "14:33:47",
+          "method": "qr_scanner"
+        },
+        {
+          "studentId": "u_T14TK0109",
+          "studentCode": "T14TK0109",
+          "studentName": "Vũ Ngọc Thanh Hằng",
+          "status": null,
+          "checkedInAt": null,
+          "method": null
+        },
+        {
+          "studentId": "u_T14TK0110",
+          "studentCode": "T14TK0110",
+          "studentName": "Bùi Thanh Hiền",
+          "status": null,
+          "checkedInAt": null,
+          "method": null
+        },
+        {
+          "studentId": "u_T14TK0111",
+          "studentCode": "T14TK0111",
+          "studentName": "Nguyễn Đăng Vinh Hiển",
+          "status": null,
+          "checkedInAt": null,
+          "method": null
+        },
+        {
+          "studentId": "u_T14TK0112",
+          "studentCode": "T14TK0112",
+          "studentName": "Mai Nhật Hoàng",
+          "status": null,
+          "checkedInAt": null,
+          "method": null
+        },
+        {
+          "studentId": "u_T14TK0113",
+          "studentCode": "T14TK0113",
+          "studentName": "Nguyễn Đăng Khoa",
+          "status": null,
+          "checkedInAt": null,
+          "method": null
+        },
+        {
+          "studentId": "u_T14TK0114",
+          "studentCode": "T14TK0114",
+          "studentName": "Võ Tuấn Khang",
+          "status": null,
+          "checkedInAt": null,
+          "method": null
+        },
+        {
+          "studentId": "u_T14TK0115",
+          "studentCode": "T14TK0115",
+          "studentName": "Nguyễn Hoàng Kiệt",
+          "status": null,
+          "checkedInAt": null,
+          "method": null
+        },
+        {
+          "studentId": "u_T14TK0116",
+          "studentCode": "T14TK0116",
+          "studentName": "Nguyễn Xuân Hoàng Kim",
+          "status": null,
+          "checkedInAt": null,
+          "method": null
+        },
+        {
+          "studentId": "u_T14TK0117",
+          "studentCode": "T14TK0117",
+          "studentName": "Ngô Trúc Linh",
+          "status": null,
+          "checkedInAt": null,
+          "method": null
+        },
+        {
+          "studentId": "u_T14TK0118",
+          "studentCode": "T14TK0118",
+          "studentName": "Nguyễn Nhật Linh",
+          "status": null,
+          "checkedInAt": null,
+          "method": null
+        },
+        {
+          "studentId": "u_T14TK0119",
+          "studentCode": "T14TK0119",
+          "studentName": "Đặng Quang Minh",
+          "status": null,
+          "checkedInAt": null,
+          "method": null
+        },
+        {
+          "studentId": "u_T14TK0121",
+          "studentCode": "T14TK0121",
+          "studentName": "Võ Trần Thúy Ngân",
+          "status": null,
+          "checkedInAt": null,
+          "method": null
+        },
+        {
+          "studentId": "u_T14TK0122",
+          "studentCode": "T14TK0122",
+          "studentName": "Đoàn Kim Ngọc",
+          "status": null,
+          "checkedInAt": null,
+          "method": null
+        },
+        {
+          "studentId": "u_T14TK0123",
+          "studentCode": "T14TK0123",
+          "studentName": "Phạm Thị Hương Ngọc",
+          "status": null,
+          "checkedInAt": null,
+          "method": null
+        },
+        {
+          "studentId": "u_T14TK0124",
+          "studentCode": "T14TK0124",
+          "studentName": "Đào Minh Nhật",
+          "status": null,
+          "checkedInAt": null,
+          "method": null
+        },
+        {
+          "studentId": "u_T14TK0125",
+          "studentCode": "T14TK0125",
+          "studentName": "Nguyễn Thị Quỳnh Nhi",
+          "status": null,
+          "checkedInAt": null,
+          "method": null
+        },
+        {
+          "studentId": "u_T14TK0126",
+          "studentCode": "T14TK0126",
+          "studentName": "Trịnh Minh Phi",
+          "status": null,
+          "checkedInAt": null,
+          "method": null
+        },
+        {
+          "studentId": "u_T14TK0127",
+          "studentCode": "T14TK0127",
+          "studentName": "Nguyễn Hoàng Thảo Quyên",
+          "status": null,
+          "checkedInAt": null,
+          "method": null
+        },
+        {
+          "studentId": "u_T14TK0129",
+          "studentCode": "T14TK0129",
+          "studentName": "Nguyễn Anh Thi",
+          "status": null,
+          "checkedInAt": null,
+          "method": null
+        },
+        {
+          "studentId": "u_T14TK0130",
+          "studentCode": "T14TK0130",
+          "studentName": "Trương Nguyễn Bảo Trân",
+          "status": null,
+          "checkedInAt": null,
+          "method": null
+        },
+        {
+          "studentId": "u_T14TK0131",
+          "studentCode": "T14TK0131",
+          "studentName": "Nguyễn Ngọc Tường Vy",
+          "status": null,
+          "checkedInAt": null,
+          "method": null
+        },
+        {
+          "studentId": "u_T14TK0132",
+          "studentCode": "T14TK0132",
+          "studentName": "Trần Lê Thanh Vy",
+          "status": null,
+          "checkedInAt": null,
+          "method": null
+        }
+      ],
+      "createdAt": "2026-11-09T14:34:07.261Z",
+      "teacherId": "u_teacher_danh",
+      "type": "qr_4digit_live"
+    },
+    {
+      "id": "att_1794235545146",
+      "className": "T14TK01",
+      "subjectName": "Thiết Kế Catalog",
+      "scheduleId": "sch_1794232568066",
+      "room": "G103",
+      "periods": "1 - 5",
+      "date": "2026-11-09",
+      "lessonTitle": "Thi Kết thúc môn",
+      "records": [
+        {
+          "studentId": "u_student_T14TK0120",
+          "studentCode": "T14TK0120",
+          "studentName": "Đặng Thụy My",
+          "status": null,
+          "checkedInAt": null,
+          "method": null
+        },
+        {
+          "studentId": "u_T14TK0101",
+          "studentCode": "T14TK0101",
+          "studentName": "Lê Thị Vân Anh",
+          "status": null,
+          "checkedInAt": null,
+          "method": null
+        },
+        {
+          "studentId": "u_T14TK0102",
+          "studentCode": "T14TK0102",
+          "studentName": "Vũ Hoàng Minh Anh",
+          "status": null,
+          "checkedInAt": null,
+          "method": null
+        },
+        {
+          "studentId": "u_T14TK0103",
+          "studentCode": "T14TK0103",
+          "studentName": "Nguyễn Hoàng Gia Ân",
+          "status": null,
+          "checkedInAt": null,
+          "method": null
+        },
+        {
+          "studentId": "u_T14TK0104",
+          "studentCode": "T14TK0104",
+          "studentName": "Trần Thụ Ân",
+          "status": null,
+          "checkedInAt": null,
+          "method": null
+        },
+        {
+          "studentId": "u_T14TK0105",
+          "studentCode": "T14TK0105",
+          "studentName": "Phạm Gia Bảo",
+          "status": null,
+          "checkedInAt": null,
+          "method": null
+        },
+        {
+          "studentId": "u_T14TK0106",
+          "studentCode": "T14TK0106",
+          "studentName": "Hoàng Nguyễn Bảo Châu",
+          "status": null,
+          "checkedInAt": null,
+          "method": null
+        },
+        {
+          "studentId": "u_T14TK0107",
+          "studentCode": "T14TK0107",
+          "studentName": "Nguyễn Thành Đạt",
+          "status": null,
+          "checkedInAt": null,
+          "method": null
+        },
+        {
+          "studentId": "u_T14TK0109",
+          "studentCode": "T14TK0109",
+          "studentName": "Vũ Ngọc Thanh Hằng",
+          "status": null,
+          "checkedInAt": null,
+          "method": null
+        },
+        {
+          "studentId": "u_T14TK0110",
+          "studentCode": "T14TK0110",
+          "studentName": "Bùi Thanh Hiền",
+          "status": "present",
+          "checkedInAt": "21:45:45",
+          "method": "pin_4_digit"
+        },
+        {
+          "studentId": "u_T14TK0111",
+          "studentCode": "T14TK0111",
+          "studentName": "Nguyễn Đăng Vinh Hiển",
+          "status": null,
+          "checkedInAt": null,
+          "method": null
+        },
+        {
+          "studentId": "u_T14TK0112",
+          "studentCode": "T14TK0112",
+          "studentName": "Mai Nhật Hoàng",
+          "status": null,
+          "checkedInAt": null,
+          "method": null
+        },
+        {
+          "studentId": "u_T14TK0113",
+          "studentCode": "T14TK0113",
+          "studentName": "Nguyễn Đăng Khoa",
+          "status": null,
+          "checkedInAt": null,
+          "method": null
+        },
+        {
+          "studentId": "u_T14TK0114",
+          "studentCode": "T14TK0114",
+          "studentName": "Võ Tuấn Khang",
+          "status": null,
+          "checkedInAt": null,
+          "method": null
+        },
+        {
+          "studentId": "u_T14TK0115",
+          "studentCode": "T14TK0115",
+          "studentName": "Nguyễn Hoàng Kiệt",
+          "status": null,
+          "checkedInAt": null,
+          "method": null
+        },
+        {
+          "studentId": "u_T14TK0116",
+          "studentCode": "T14TK0116",
+          "studentName": "Nguyễn Xuân Hoàng Kim",
+          "status": null,
+          "checkedInAt": null,
+          "method": null
+        },
+        {
+          "studentId": "u_T14TK0117",
+          "studentCode": "T14TK0117",
+          "studentName": "Ngô Trúc Linh",
+          "status": null,
+          "checkedInAt": null,
+          "method": null
+        },
+        {
+          "studentId": "u_T14TK0118",
+          "studentCode": "T14TK0118",
+          "studentName": "Nguyễn Nhật Linh",
+          "status": null,
+          "checkedInAt": null,
+          "method": null
+        },
+        {
+          "studentId": "u_T14TK0119",
+          "studentCode": "T14TK0119",
+          "studentName": "Đặng Quang Minh",
+          "status": null,
+          "checkedInAt": null,
+          "method": null
+        },
+        {
+          "studentId": "u_T14TK0121",
+          "studentCode": "T14TK0121",
+          "studentName": "Võ Trần Thúy Ngân",
+          "status": null,
+          "checkedInAt": null,
+          "method": null
+        },
+        {
+          "studentId": "u_T14TK0122",
+          "studentCode": "T14TK0122",
+          "studentName": "Đoàn Kim Ngọc",
+          "status": null,
+          "checkedInAt": null,
+          "method": null
+        },
+        {
+          "studentId": "u_T14TK0123",
+          "studentCode": "T14TK0123",
+          "studentName": "Phạm Thị Hương Ngọc",
+          "status": null,
+          "checkedInAt": null,
+          "method": null
+        },
+        {
+          "studentId": "u_T14TK0124",
+          "studentCode": "T14TK0124",
+          "studentName": "Đào Minh Nhật",
+          "status": null,
+          "checkedInAt": null,
+          "method": null
+        },
+        {
+          "studentId": "u_T14TK0125",
+          "studentCode": "T14TK0125",
+          "studentName": "Nguyễn Thị Quỳnh Nhi",
+          "status": null,
+          "checkedInAt": null,
+          "method": null
+        },
+        {
+          "studentId": "u_T14TK0126",
+          "studentCode": "T14TK0126",
+          "studentName": "Trịnh Minh Phi",
+          "status": null,
+          "checkedInAt": null,
+          "method": null
+        },
+        {
+          "studentId": "u_T14TK0127",
+          "studentCode": "T14TK0127",
+          "studentName": "Nguyễn Hoàng Thảo Quyên",
+          "status": null,
+          "checkedInAt": null,
+          "method": null
+        },
+        {
+          "studentId": "u_T14TK0129",
+          "studentCode": "T14TK0129",
+          "studentName": "Nguyễn Anh Thi",
+          "status": null,
+          "checkedInAt": null,
+          "method": null
+        },
+        {
+          "studentId": "u_T14TK0130",
+          "studentCode": "T14TK0130",
+          "studentName": "Trương Nguyễn Bảo Trân",
+          "status": null,
+          "checkedInAt": null,
+          "method": null
+        },
+        {
+          "studentId": "u_T14TK0131",
+          "studentCode": "T14TK0131",
+          "studentName": "Nguyễn Ngọc Tường Vy",
+          "status": null,
+          "checkedInAt": null,
+          "method": null
+        },
+        {
+          "studentId": "u_T14TK0132",
+          "studentCode": "T14TK0132",
+          "studentName": "Trần Lê Thanh Vy",
+          "status": null,
+          "checkedInAt": null,
+          "method": null
+        }
+      ],
+      "createdAt": "2026-11-09T14:45:45.146Z",
+      "teacherId": "u_teacher_danh",
+      "type": "qr_4digit_live"
     }
   ],
   "lessonPlans": [

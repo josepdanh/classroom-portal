@@ -1984,6 +1984,9 @@
             <div class="flex items-center gap-2 flex-wrap">
               <h3 class="text-lg sm:text-xl font-extrabold tracking-tight">Điểm Danh Bằng Mã QR & Dãy 4 Số</h3>
               <span class="px-2.5 py-0.5 rounded-full text-xs font-black bg-rose-500 text-white font-mono" id="live-att-class-badge">LỚP C08TK01</span>
+              <span class="px-2.5 py-0.5 rounded-full text-xs font-black bg-indigo-600 text-white flex items-center gap-1 shadow-xs" id="live-att-subject-badge">
+                <i class="fa-solid fa-book-open text-[10px]"></i> <span id="live-att-subject-text">MÔN HỌC</span>
+              </span>
               <span class="px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-white/20 text-rose-100 flex items-center gap-1">
                 <i class="fa-solid fa-arrows-rotate animate-spin text-[10px]"></i> Đổi mã mỗi 1 phút
               </span>
@@ -2089,6 +2092,154 @@
               </button>
             </div>
           </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= MODAL CHỌN MÔN HỌC TỪ LỊCH BÁO GIẢNG ĐỂ ĐIỂM DANH ================= -->
+  <div id="modal-select-schedule-for-attendance" class="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm hidden items-center justify-center p-3 sm:p-4 overflow-y-auto">
+    <div class="bg-white rounded-3xl max-w-xl w-full shadow-2xl border border-slate-200 overflow-hidden flex flex-col max-h-[90vh]">
+      <div class="px-6 py-4 bg-gradient-to-r from-red-800 to-rose-900 text-white flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center text-lg">
+            <i class="fa-solid fa-calendar-check text-rose-300"></i>
+          </div>
+          <div>
+            <h3 class="font-extrabold text-base sm:text-lg">Chọn Môn Điểm Danh - Lớp <span id="select-sch-class-title" class="font-mono underline">...</span></h3>
+            <p class="text-xs text-rose-200">Điểm danh gắn với môn học cụ thể trong Lịch Báo Giảng</p>
+          </div>
+        </div>
+        <button onclick="closeSelectScheduleModal()" class="text-slate-300 hover:text-white text-2xl font-bold leading-none">&times;</button>
+      </div>
+
+      <div class="p-6 space-y-4 overflow-y-auto">
+        <div class="p-3 bg-amber-50 border border-amber-200 rounded-2xl flex items-start gap-2.5 text-xs text-amber-900">
+          <i class="fa-solid fa-circle-exclamation text-amber-600 mt-0.5 shrink-0"></i>
+          <div>
+            Theo quy định, buổi điểm danh phải gắn liền với môn học cụ thể đã được lên thời khóa biểu. Thầy vui lòng bấm chọn buổi dạy dưới đây để phát mã điểm danh:
+          </div>
+        </div>
+
+        <div id="select-sch-list-container" class="space-y-2.5">
+          <!-- Render danh sách các môn đã lên lịch báo giảng -->
+        </div>
+      </div>
+
+      <div class="px-6 py-3 bg-slate-50 border-t border-slate-200 flex items-center justify-between">
+        <button onclick="goToScheduleToCreateForClass()" class="text-xs text-indigo-600 hover:text-indigo-800 font-bold flex items-center gap-1">
+          <i class="fa-solid fa-plus-circle"></i> Thêm môn vào Lịch Báo Giảng
+        </button>
+        <button onclick="closeSelectScheduleModal()" class="px-4 py-2 bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold rounded-xl text-xs transition">
+          Hủy
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= MODAL CẢNH BÁO CHƯA CÓ LỊCH BÁO GIẢNG ================= -->
+  <div id="modal-no-schedule-warning" class="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm hidden items-center justify-center p-4">
+    <div class="bg-white rounded-3xl p-6 max-w-md w-full shadow-2xl border-2 border-rose-200 text-center space-y-4">
+      <div class="w-16 h-16 rounded-full bg-rose-100 text-rose-600 flex items-center justify-center text-3xl mx-auto shadow-inner">
+        <i class="fa-solid fa-triangle-exclamation"></i>
+      </div>
+      <div>
+        <h3 class="text-lg font-black text-slate-900">Không Thể Điểm Danh!</h3>
+        <p class="text-xs text-slate-600 mt-2 leading-relaxed">
+          Lớp <b id="no-sch-class-name" class="text-rose-700 font-mono text-sm">...</b> hiện <b>chưa có môn học nào được lên thời khóa biểu tại Lịch Báo Giảng</b>.
+        </p>
+        <div class="p-3 bg-rose-50 border border-rose-200 rounded-xl text-[11px] text-rose-900 text-left mt-3">
+          <i class="fa-solid fa-shield-halved text-rose-600 mr-1"></i><b>Quy chế đào tạo:</b> Hệ thống chỉ cho phép điểm danh khi lớp học đã được lên lịch báo giảng chính thức để gắn số buổi nghỉ vào từng môn học cụ thể.
+        </div>
+      </div>
+      <div class="pt-2 flex items-center justify-center gap-2.5">
+        <button onclick="closeNoScheduleWarning()" class="px-4 py-2.5 rounded-xl text-xs font-bold text-slate-600 hover:bg-slate-100 border border-slate-200 transition">
+          Đóng
+        </button>
+        <button onclick="goToScheduleToCreateForClass()" class="px-5 py-2.5 rounded-xl text-xs font-bold bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white shadow-md shadow-indigo-200 transition flex items-center gap-1.5">
+          <i class="fa-solid fa-calendar-plus"></i> Đến Lịch Báo Giảng Tạo Ngay
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= MODAL BÁO CÁO THỐNG KÊ VẮNG MẶT MÔN HỌC SAU KHI CHỐT SỔ ================= -->
+  <div id="modal-attendance-summary" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-md hidden items-center justify-center p-2 sm:p-4 overflow-y-auto">
+    <div class="bg-white rounded-3xl max-w-4xl w-full shadow-2xl border border-slate-200 overflow-hidden flex flex-col max-h-[95vh]">
+      <!-- Header -->
+      <div class="px-6 py-4 bg-gradient-to-r from-red-800 via-rose-900 to-slate-950 text-white flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <div class="w-11 h-11 rounded-2xl bg-white/10 flex items-center justify-center text-xl border border-white/20">
+            <i class="fa-solid fa-clipboard-check text-emerald-300"></i>
+          </div>
+          <div>
+            <div class="flex items-center gap-2 flex-wrap">
+              <h3 class="text-base sm:text-lg font-extrabold">Báo Cáo Điểm Danh & Chuyên Cần Môn Học</h3>
+              <span class="px-2.5 py-0.5 rounded-full text-xs font-black bg-rose-500 text-white font-mono" id="sum-class-badge">LỚP ...</span>
+              <span class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-indigo-600 text-white truncate max-w-xs" id="sum-subject-badge">MÔN ...</span>
+            </div>
+            <p class="text-xs text-rose-200 mt-0.5" id="sum-session-subtitle">Buổi học ngày --/--/---- • Tổng hợp chuyên cần theo môn học</p>
+          </div>
+        </div>
+        <button onclick="closeAttendanceSummaryModal()" class="text-slate-300 hover:text-white text-2xl font-bold leading-none p-1">&times;</button>
+      </div>
+
+      <!-- Body: Thống kê số liệu + Bảng sinh viên nghỉ -->
+      <div class="p-6 space-y-5 overflow-y-auto flex-1">
+        <!-- 4 Thẻ thống kê tổng quan -->
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center">
+          <div class="p-3.5 rounded-2xl bg-slate-50 border border-slate-200">
+            <div class="text-[11px] font-bold text-slate-500 uppercase tracking-wider">Tổng Sĩ Số</div>
+            <div id="sum-stat-total" class="font-mono text-2xl font-black text-slate-900 mt-1">0</div>
+            <div class="text-[10px] text-slate-400">sinh viên</div>
+          </div>
+          <div class="p-3.5 rounded-2xl bg-emerald-50 border border-emerald-200">
+            <div class="text-[11px] font-bold text-emerald-700 uppercase tracking-wider">Có Mặt</div>
+            <div id="sum-stat-present" class="font-mono text-2xl font-black text-emerald-700 mt-1">0</div>
+            <div id="sum-stat-present-pct" class="text-[10px] text-emerald-600 font-bold">100%</div>
+          </div>
+          <div class="p-3.5 rounded-2xl bg-rose-50 border border-rose-200">
+            <div class="text-[11px] font-bold text-rose-700 uppercase tracking-wider">Vắng Buổi Này</div>
+            <div id="sum-stat-absent" class="font-mono text-2xl font-black text-rose-700 mt-1">0</div>
+            <div id="sum-stat-absent-pct" class="text-[10px] text-rose-600 font-bold">0%</div>
+          </div>
+          <div class="p-3.5 rounded-2xl bg-indigo-50 border border-indigo-200">
+            <div class="text-[11px] font-bold text-indigo-700 uppercase tracking-wider">Số Buổi Đã Dạy</div>
+            <div id="sum-stat-sessions" class="font-mono text-2xl font-black text-indigo-700 mt-1">1</div>
+            <div class="text-[10px] text-indigo-600 font-bold">buổi môn này</div>
+          </div>
+        </div>
+
+        <!-- Bảng danh sách các em nghỉ buổi hôm nay -->
+        <div class="space-y-2">
+          <div class="flex items-center justify-between flex-wrap gap-2">
+            <div>
+              <h4 class="font-extrabold text-slate-900 text-sm flex items-center gap-2">
+                <i class="fa-solid fa-user-xmark text-rose-600"></i> Danh Sách Sinh Viên Vắng Mặt Buổi Học Hôm Nay
+              </h4>
+              <p class="text-xs text-slate-500">Kèm thống kê lũy kế tổng số buổi đã nghỉ ở môn học này</p>
+            </div>
+            <button onclick="copyAbsentListToClipboard()" class="px-3 py-1.5 rounded-xl bg-indigo-50 hover:bg-indigo-100 text-indigo-700 font-bold text-xs flex items-center gap-1.5 transition border border-indigo-200 shadow-xs">
+              <i class="fa-solid fa-copy"></i> Sao chép gửi Zalo lớp
+            </button>
+          </div>
+
+          <!-- Khu vực hiển thị bảng hoặc banner 100% đi học -->
+          <div id="sum-absent-content-area" class="border border-slate-200 rounded-2xl overflow-hidden shadow-xs">
+            <!-- Render dynamically -->
+          </div>
+        </div>
+      </div>
+
+      <!-- Footer Buttons -->
+      <div class="px-6 py-4 bg-slate-50 border-t border-slate-200 flex items-center justify-between flex-wrap gap-3">
+        <div class="text-xs text-slate-500">
+          <i class="fa-solid fa-triangle-exclamation text-amber-500 mr-1"></i>Sinh viên nghỉ quá 20% số buổi của môn học sẽ không đủ điều kiện dự thi kết thúc môn.
+        </div>
+        <div class="flex items-center gap-2">
+          <button onclick="closeAttendanceSummaryModal()" class="px-5 py-2.5 bg-slate-900 hover:bg-slate-800 text-white font-bold rounded-xl text-xs transition shadow-sm">
+            <i class="fa-solid fa-check mr-1"></i> Hoàn Tất & Đóng
+          </button>
         </div>
       </div>
     </div>
@@ -3850,7 +4001,7 @@
             </div>
 
             <div class="mt-4 pt-3 border-t border-slate-100 grid grid-cols-2 gap-1.5 text-xs">
-              <button onclick="openLiveAttendanceModal('${escapeHtml(item.className)}')" class="px-2.5 py-1.5 rounded-xl bg-gradient-to-r from-red-600 to-rose-700 hover:from-red-700 hover:to-rose-800 text-white font-bold transition flex items-center justify-center gap-1.5 text-[11px] shadow-xs">
+              <button onclick="handlePromptLiveAttendanceForClass('${escapeHtml(item.className)}')" class="px-2.5 py-1.5 rounded-xl bg-gradient-to-r from-red-600 to-rose-700 hover:from-red-700 hover:to-rose-800 text-white font-bold transition flex items-center justify-center gap-1.5 text-[11px] shadow-xs">
                 <i class="fa-solid fa-qrcode"></i> Điểm danh QR
               </button>
               <button onclick="filterLessonPlansByClass('${escapeHtml(item.className)}')" class="px-2.5 py-1.5 rounded-xl bg-rose-50 hover:bg-rose-100 text-rose-700 font-bold transition flex items-center justify-center gap-1.5 text-[11px]">
@@ -4332,6 +4483,9 @@
           <div class="text-indigo-700 font-bold text-[11px] truncate">${escapeHtml(item.subjectName)}</div>
           <div class="text-slate-500 text-[10px] flex items-center gap-1"><i class="fa-solid fa-location-dot text-rose-500"></i> ${escapeHtml(item.room || 'Phòng máy')}</div>
           ${item.currentLesson ? `<div class="text-slate-600 text-[10px] italic truncate">${escapeHtml(item.currentLesson)}</div>` : ''}
+          <button onclick="openLiveAttendanceModal('${escapeHtml(item.className)}', '${escapeHtml(item.subjectName || '')}', '${escapeHtml(item.currentLesson || '')}', '${escapeHtml(item.id)}')" class="w-full mt-1 px-2 py-1 bg-gradient-to-r from-red-600 to-rose-700 hover:from-red-700 hover:to-rose-800 text-white font-bold rounded-lg text-[10px] flex items-center justify-center gap-1 transition shadow-xs">
+            <i class="fa-solid fa-qrcode text-[9px]"></i> Điểm danh QR
+          </button>
         </div>
       `).join('');
     }
@@ -4629,9 +4783,130 @@
     let studentLivePollingInterval = null;
     let studentCameraScanner = null;
     let isStudentCameraScanning = false;
+    let currentAttendanceSummaryData = null;
+    let targetNoScheduleClass = '';
+    let targetSelectScheduleClass = '';
+
+    // A. Kiểm tra Lịch Báo Giảng trước khi mở điểm danh (BẮT BUỘC CÓ MÔN HỌC ĐÃ LÊN LỊCH)
+    async function handlePromptLiveAttendanceForClass(className) {
+      if (!className) return;
+      const cleanClass = className.trim().toUpperCase();
+      targetNoScheduleClass = cleanClass;
+      targetSelectScheduleClass = cleanClass;
+
+      try {
+        const res = await fetch(`/api/schedule/for-class/${encodeURIComponent(cleanClass)}`);
+        const data = await res.json();
+
+        // 1. Nếu lớp chưa có bất kỳ môn nào trong Lịch Báo Giảng -> CHẶN KHÔNG CHO ĐIỂM DANH
+        if (!data.hasSchedule || !data.schedules || data.schedules.length === 0) {
+          const warnModal = document.getElementById('modal-no-schedule-warning');
+          const nameEl = document.getElementById('no-sch-class-name');
+          if (nameEl) nameEl.textContent = cleanClass;
+          if (warnModal) {
+            warnModal.classList.remove('hidden');
+            warnModal.classList.add('flex');
+          }
+          return;
+        }
+
+        // 2. Nếu lớp chỉ có duy nhất 1 môn trong Lịch Báo Giảng -> Mở điểm danh thẳng môn đó
+        if (data.schedules.length === 1) {
+          const item = data.schedules[0];
+          openLiveAttendanceModal(cleanClass, item.subjectName, item.currentLesson, item.id);
+          return;
+        }
+
+        // 3. Nếu lớp có nhiều môn / tiết -> Mở modal cho Thầy chọn buổi dạy
+        openSelectScheduleModal(cleanClass, data.schedules);
+      } catch (err) {
+        console.error("Lỗi kiểm tra lịch báo giảng:", err);
+        showToast("Lỗi kiểm tra lịch báo giảng của lớp!", "error");
+      }
+    }
+
+    function openSelectScheduleModal(className, schedules) {
+      targetSelectScheduleClass = className;
+      const modal = document.getElementById('modal-select-schedule-for-attendance');
+      const titleEl = document.getElementById('select-sch-class-title');
+      const listContainer = document.getElementById('select-sch-list-container');
+      if (!modal || !listContainer) return;
+
+      if (titleEl) titleEl.textContent = className;
+
+      const dayNames = { 2: 'Thứ Hai', 3: 'Thứ Ba', 4: 'Thứ Tư', 5: 'Thứ Năm', 6: 'Thứ Sáu', 7: 'Thứ Bảy', 8: 'Chủ Nhật' };
+
+      let html = '';
+      schedules.forEach(item => {
+        const isMorning = item.session === 'morning';
+        const dayLabel = dayNames[item.dayOfWeek] || `Thứ ${item.dayOfWeek}`;
+        const borderClass = item.isToday ? 'border-2 border-red-500 bg-red-50/40 shadow-sm' : 'border border-slate-200 bg-slate-50 hover:bg-slate-100';
+        const todayBadge = item.isToday
+          ? `<span class="px-2 py-0.5 rounded-full text-[10px] font-black bg-rose-600 text-white animate-pulse"><i class="fa-solid fa-star text-[8px] mr-1"></i>HÔM NAY (TIẾT NÀY)</span>`
+          : '';
+
+        html += `
+          <div onclick="openLiveAttendanceModal('${escapeHtml(className)}', '${escapeHtml(item.subjectName || '')}', '${escapeHtml(item.currentLesson || '')}', '${escapeHtml(item.id)}'); closeSelectScheduleModal();"
+               class="p-3.5 rounded-2xl ${borderClass} cursor-pointer transition flex items-center justify-between gap-3 group">
+            <div class="space-y-1">
+              <div class="flex items-center gap-2 flex-wrap">
+                <span class="font-bold text-slate-800 text-xs">${dayLabel}</span>
+                <span class="px-2 py-0.5 rounded-md text-[10px] font-bold ${isMorning ? 'bg-amber-100 text-amber-800' : 'bg-blue-100 text-blue-800'}">
+                  ${isMorning ? 'SÁNG (Tiết 1-5)' : 'CHIỀU (Tiết 6-10)'}
+                </span>
+                ${todayBadge}
+              </div>
+              <div class="font-extrabold text-slate-900 text-sm group-hover:text-red-700 transition">
+                <i class="fa-solid fa-book-open text-indigo-600 mr-1.5"></i>${escapeHtml(item.subjectName)}
+              </div>
+              <div class="text-[11px] text-slate-500 flex items-center gap-2">
+                <span><i class="fa-solid fa-location-dot text-rose-500 mr-1"></i>${escapeHtml(item.room || 'Phòng máy')}</span>
+                <span>•</span>
+                <span class="italic text-slate-600">${escapeHtml(item.currentLesson || 'Theo kế hoạch giảng dạy')}</span>
+              </div>
+            </div>
+            <button class="px-3 py-1.5 rounded-xl bg-gradient-to-r from-red-600 to-rose-700 text-white text-xs font-bold shrink-0 shadow-xs group-hover:scale-105 transition flex items-center gap-1">
+              <i class="fa-solid fa-qrcode text-[11px]"></i> Điểm Danh
+            </button>
+          </div>
+        `;
+      });
+
+      listContainer.innerHTML = html;
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+
+    function closeSelectScheduleModal() {
+      const modal = document.getElementById('modal-select-schedule-for-attendance');
+      if (modal) {
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+      }
+    }
+
+    function closeNoScheduleWarning() {
+      const modal = document.getElementById('modal-no-schedule-warning');
+      if (modal) {
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+      }
+    }
+
+    function goToScheduleToCreateForClass() {
+      closeNoScheduleWarning();
+      closeSelectScheduleModal();
+      switchTeacherMainTab('schedule');
+      const targetClass = targetNoScheduleClass || targetSelectScheduleClass;
+      setTimeout(() => {
+        openScheduleModal();
+        const selClass = document.getElementById('sch-form-class');
+        if (selClass && targetClass) selClass.value = targetClass;
+      }, 300);
+    }
 
     // 1. Giáo viên mở màn hình Điểm Danh Trực Tiếp
-    async function openLiveAttendanceModal(className, subjectName, lessonTitle) {
+    async function openLiveAttendanceModal(className, subjectName, lessonTitle, scheduleId) {
       if (!className) {
         showToast("Vui lòng chọn lớp học để điểm danh!", "error");
         return;
@@ -4641,9 +4916,11 @@
       const modal = document.getElementById('modal-live-attendance');
       if (!modal) return;
 
-      // Cập nhật thông tin giao diện
+      // Cập nhật thông tin giao diện ban đầu
       const badge = document.getElementById('live-att-class-badge');
       if (badge) badge.textContent = `LỚP ${liveAttendanceClass}`;
+      const subBadge = document.getElementById('live-att-subject-text');
+      if (subBadge) subBadge.textContent = subjectName || 'ĐANG TẢI MÔN...';
       const desc = document.getElementById('live-att-lesson-desc');
       if (desc) {
         desc.textContent = `${subjectName ? subjectName + ' • ' : ''}${lessonTitle || 'Buổi học ngày ' + new Date().toLocaleDateString('vi-VN')}`;
@@ -4666,6 +4943,7 @@
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
             className: liveAttendanceClass,
+            scheduleId: scheduleId || null,
             subjectName: subjectName || '',
             lessonTitle: lessonTitle || `Buổi học ngày ${new Date().toLocaleDateString('vi-VN')}`,
             teacherId: currentUser ? currentUser.id : 'u_teacher_danh'
@@ -4676,8 +4954,24 @@
         if (res.ok && data.success && data.session) {
           applyLiveSessionData(data.session);
           startLiveAttendanceMonitoring();
+        } else if (data.noSchedule) {
+          // Lớp chưa có lịch báo giảng -> đóng modal live và hiện cảnh báo
+          closeLiveAttendanceModal();
+          targetNoScheduleClass = liveAttendanceClass;
+          const nameEl = document.getElementById('no-sch-class-name');
+          if (nameEl) nameEl.textContent = liveAttendanceClass;
+          const warnModal = document.getElementById('modal-no-schedule-warning');
+          if (warnModal) {
+            warnModal.classList.remove('hidden');
+            warnModal.classList.add('flex');
+          }
+        } else if (data.requireSubjectSelection) {
+          // Yêu cầu chọn môn từ lịch báo giảng
+          closeLiveAttendanceModal();
+          openSelectScheduleModal(liveAttendanceClass, data.availableSchedules || []);
         } else {
           showToast(data.message || "Không thể khởi tạo phiên điểm danh!", "error");
+          closeLiveAttendanceModal();
         }
       } catch (err) {
         console.error("Lỗi khởi tạo phiên điểm danh:", err);
@@ -4760,6 +5054,16 @@
     function applyLiveSessionData(session) {
       if (!session) return;
 
+      // Cập nhật thông tin môn học & lớp
+      const subBadge = document.getElementById('live-att-subject-text');
+      if (subBadge && session.subjectName) {
+        subBadge.textContent = session.subjectName;
+      }
+      const desc = document.getElementById('live-att-lesson-desc');
+      if (desc) {
+        desc.textContent = `${session.subjectName || ''}${session.room ? ' • Phòng ' + session.room : ''}${session.periods ? ' • Tiết ' + session.periods : ''} • ${session.lessonTitle || ''}`;
+      }
+
       // Cập nhật thời gian còn lại
       if (typeof session.timeLeft === 'number') {
         liveRemainingSeconds = session.timeLeft;
@@ -4779,6 +5083,7 @@
         const qrPayload = JSON.stringify({
           type: 'hbxlc_attendance',
           className: session.className,
+          subjectName: session.subjectName,
           token: session.token,
           otp: session.otp
         });
@@ -4929,10 +5234,10 @@
       }
     }
 
-    // 10. Chốt sổ điểm danh và lưu vào CSDL
+    // 10. Chốt sổ điểm danh và hiển thị Báo Cáo Thống Kê Vắng Môn Học
     async function handleFinishLiveAttendance() {
       if (!liveAttendanceClass) return;
-      if (!confirm(`Xác nhận chốt sổ điểm danh cho lớp ${liveAttendanceClass}?\n\nNhững học sinh có dấu [✓] sẽ được ghi nhận Có Mặt, các bạn còn lại (NULL) sẽ được ghi nhận Vắng Mặt.`)) {
+      if (!confirm(`Xác nhận chốt sổ điểm danh cho lớp ${liveAttendanceClass}?\n\nNhững học sinh có dấu [✓] sẽ được ghi nhận Có Mặt, các bạn còn lại (NULL) sẽ được ghi nhận Vắng Mặt và lưu thống kê môn học.`)) {
         return;
       }
 
@@ -4944,14 +5249,169 @@
         });
         const data = await res.json();
         if (res.ok && data.success) {
-          showToast(`Đã chốt sổ điểm danh lớp ${liveAttendanceClass}! Có mặt: ${data.presentCount || 0}/${data.totalStudents || 0} SV`, "success");
+          showToast(`Đã chốt sổ điểm danh lớp ${liveAttendanceClass}!`, "success");
           closeLiveAttendanceModal();
           loadClassesOverview();
+          if (data.summary) {
+            openAttendanceSummaryModal(data.summary);
+          }
         } else {
           showToast(data.message || "Lỗi chốt sổ điểm danh!", "error");
         }
       } catch (err) {
         showToast("Lỗi kết nối máy chủ!", "error");
+      }
+    }
+
+    // B. Mở Modal Báo Cáo Thống Kê Điểm Danh & Chuyên Cần Môn Học
+    function openAttendanceSummaryModal(summary) {
+      if (!summary) return;
+      currentAttendanceSummaryData = summary;
+
+      const modal = document.getElementById('modal-attendance-summary');
+      if (!modal) return;
+
+      const classBadge = document.getElementById('sum-class-badge');
+      const subjectBadge = document.getElementById('sum-subject-badge');
+      const subtitle = document.getElementById('sum-session-subtitle');
+      if (classBadge) classBadge.textContent = `LỚP ${summary.className}`;
+      if (subjectBadge) subjectBadge.textContent = `MÔN: ${summary.subjectName}`;
+      if (subtitle) {
+        subtitle.textContent = `Buổi học ngày ${formatDateVn(summary.date)} • ${summary.room ? 'Phòng ' + summary.room + ' • ' : ''}${summary.lessonTitle || ''} (Buổi thứ ${summary.totalSubjectSessions} của môn)`;
+      }
+
+      // Thẻ số liệu
+      const totalEl = document.getElementById('sum-stat-total');
+      const presentEl = document.getElementById('sum-stat-present');
+      const presentPctEl = document.getElementById('sum-stat-present-pct');
+      const absentEl = document.getElementById('sum-stat-absent');
+      const absentPctEl = document.getElementById('sum-stat-absent-pct');
+      const sessEl = document.getElementById('sum-stat-sessions');
+
+      const total = summary.totalStudents || 0;
+      const present = summary.presentCount || 0;
+      const absent = summary.absentCount || 0;
+      const presentPct = total > 0 ? Math.round((present / total) * 100) : 0;
+      const absentPct = total > 0 ? Math.round((absent / total) * 100) : 0;
+
+      if (totalEl) totalEl.textContent = total;
+      if (presentEl) presentEl.textContent = present;
+      if (presentPctEl) presentPctEl.textContent = `${presentPct}% sĩ số`;
+      if (absentEl) absentEl.textContent = absent;
+      if (absentPctEl) absentPctEl.textContent = `${absentPct}% sĩ số`;
+      if (sessEl) sessEl.textContent = summary.totalSubjectSessions || 1;
+
+      // Bảng danh sách sinh viên vắng mặt
+      const contentArea = document.getElementById('sum-absent-content-area');
+      if (contentArea) {
+        if (!summary.absentStudents || summary.absentStudents.length === 0) {
+          contentArea.innerHTML = `
+            <div class="p-8 text-center bg-emerald-50 text-emerald-900">
+              <div class="w-14 h-14 rounded-full bg-emerald-600 text-white flex items-center justify-center text-2xl mx-auto mb-2 shadow-sm">
+                <i class="fa-solid fa-circle-check"></i>
+              </div>
+              <h4 class="font-black text-base text-emerald-950">Tuyệt Vời! Cả Lớp Đi Học Đầy Đủ 100%</h4>
+              <p class="text-xs text-emerald-700 mt-1">Không có sinh viên nào vắng mặt trong buổi học môn <b>${escapeHtml(summary.subjectName)}</b> hôm nay.</p>
+            </div>
+          `;
+        } else {
+          let rowsHtml = '';
+          summary.absentStudents.forEach(stu => {
+            const warningBadge = stu.isWarning
+              ? `<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-black bg-rose-100 text-rose-800 border border-rose-300 animate-pulse">
+                   <i class="fa-solid fa-triangle-exclamation"></i> CẢNH BÁO CẤM THI (${stu.absentPercent}%)
+                 </span>`
+              : `<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-semibold bg-slate-100 text-slate-600">
+                   Trong định mức (${stu.absentPercent}%)
+                 </span>`;
+
+            rowsHtml += `
+              <tr class="hover:bg-rose-50/40 transition">
+                <td class="p-3 text-center text-slate-400 font-mono">${stu.stt}</td>
+                <td class="p-3 font-mono font-bold text-slate-800">${escapeHtml(stu.studentCode || '-')}</td>
+                <td class="p-3 font-bold text-slate-900">${escapeHtml(stu.name)}</td>
+                <td class="p-3 text-center">
+                  <span class="px-2.5 py-0.5 rounded-full text-[10px] font-black bg-rose-500 text-white shadow-xs">
+                    VẮNG MẶT
+                  </span>
+                </td>
+                <td class="p-3 text-center">
+                  <div class="font-mono text-xs font-black text-rose-700">
+                    ${stu.totalAbsentInSubject} / ${stu.totalSubjectSessions} buổi
+                  </div>
+                  <div class="text-[10px] text-slate-400">nghỉ ở môn này</div>
+                </td>
+                <td class="p-3 text-right">
+                  ${warningBadge}
+                </td>
+              </tr>
+            `;
+          });
+
+          contentArea.innerHTML = `
+            <table class="w-full text-xs text-left">
+              <thead class="bg-slate-50 text-slate-600 uppercase font-bold text-[10px] tracking-wider border-b border-slate-200">
+                <tr>
+                  <th class="p-3 w-12 text-center">STT</th>
+                  <th class="p-3 w-28">Mã SV</th>
+                  <th class="p-3">Họ và Tên</th>
+                  <th class="p-3 w-28 text-center">Buổi Hôm Nay</th>
+                  <th class="p-3 w-36 text-center">Tổng Số Buổi Đã Nghỉ</th>
+                  <th class="p-3 text-right">Tình Trạng Môn Học</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-slate-100 bg-white">
+                ${rowsHtml}
+              </tbody>
+            </table>
+          `;
+        }
+      }
+
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+
+    function closeAttendanceSummaryModal() {
+      const modal = document.getElementById('modal-attendance-summary');
+      if (modal) {
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+      }
+    }
+
+    function copyAbsentListToClipboard() {
+      if (!currentAttendanceSummaryData) return;
+      const sum = currentAttendanceSummaryData;
+      if (!sum.absentStudents || sum.absentStudents.length === 0) {
+        showToast("Hôm nay cả lớp đi học đầy đủ 100%, không có sinh viên vắng mặt!", "info");
+        return;
+      }
+
+      let text = `📋 [HBXLC] THÔNG BÁO ĐIỂM DANH & CHUYÊN CẦN\n`;
+      text += `• Môn học: ${sum.subjectName}\n`;
+      text += `• Lớp: ${sum.className}\n`;
+      text += `• Ngày: ${formatDateVn(sum.date)} (Buổi thứ ${sum.totalSubjectSessions} của môn)\n`;
+      text += `• Sĩ số: ${sum.presentCount}/${sum.totalStudents} có mặt (${sum.absentCount} em vắng)\n`;
+      text += `------------------------------------\n`;
+      text += `DANH SÁCH SINH VIÊN VẮNG MẶT HÔM NAY:\n`;
+
+      sum.absentStudents.forEach((stu, idx) => {
+        const warn = stu.isWarning ? ` ⚠️ [CẢNH BÁO CẤM THI: ${stu.absentPercent}%]` : ``;
+        text += `${idx + 1}. ${stu.name} (${stu.studentCode}) - Tổng nghỉ ở môn này: ${stu.totalAbsentInSubject}/${stu.totalSubjectSessions} buổi${warn}\n`;
+      });
+
+      text += `------------------------------------\n`;
+      text += `Đề nghị các em chú ý chuyên cần để đảm bảo đủ điều kiện dự thi môn học!`;
+
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(() => {
+          showToast("Đã sao chép danh sách vắng! Thầy có thể dán ngay vào Zalo lớp.", "success");
+        }).catch(() => {
+          showToast("Không thể sao chép vào bộ nhớ tạm!", "error");
+        });
+      } else {
+        showToast("Trình duyệt không hỗ trợ sao chép tự động!", "error");
       }
     }
 
@@ -4998,7 +5458,7 @@
             stateCheckedIn.classList.remove('hidden');
             const detail = document.getElementById('student-att-success-detail');
             const checkinTime = (data.session.studentCheckinInfo && data.session.studentCheckinInfo.checkedInAt) || 'vừa xong';
-            if (detail) detail.textContent = `Thời gian ghi nhận có mặt: lúc ${checkinTime}`;
+            if (detail) detail.innerHTML = `Môn: <b>${escapeHtml(data.session.subjectName || '')}</b> • Ghi nhận lúc: <b>${checkinTime}</b>`;
           }
           stopStudentCameraScanner();
           if (showToastOnCheck) {
@@ -5012,7 +5472,7 @@
             stateActive.classList.remove('hidden');
             const titleEl = document.getElementById('student-att-session-title');
             if (titleEl) {
-              titleEl.textContent = `${data.session.subjectName ? data.session.subjectName + ' • ' : ''}${data.session.lessonTitle || 'Buổi học hôm nay'}`;
+              titleEl.innerHTML = `<span class="text-indigo-900 font-black"><i class="fa-solid fa-book-open mr-1"></i>${escapeHtml(data.session.subjectName || 'Môn học')}</span> • <span class="text-slate-700">${escapeHtml(data.session.lessonTitle || 'Buổi học')}</span>${data.session.room ? ' • <span class="text-rose-700 font-medium"><i class="fa-solid fa-location-dot mr-0.5"></i>' + escapeHtml(data.session.room) + '</span>' : ''}`;
             }
           }
           if (showToastOnCheck) {

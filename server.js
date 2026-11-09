@@ -2416,13 +2416,54 @@ function generateSessionToken() {
   return 'qr_' + Date.now() + '_' + Math.random().toString(36).substring(2, 9);
 }
 
-// 4a. Giáo viên bắt đầu phiên điểm danh trực tiếp cho một lớp
+// 4a. Giáo viên bắt đầu phiên điểm danh trực tiếp cho một lớp (BẮT BUỘC CÓ TRONG LỊCH BÁO GIẢNG)
 app.post('/api/attendance/session/start', (req, res) => {
-  const { className, subjectName, lessonTitle, teacherId } = req.body;
+  const { className, scheduleId, subjectName, lessonTitle, teacherId } = req.body;
   if (!className) return res.status(400).json({ message: "Vui lòng chọn lớp học." });
 
   const cleanClass = className.trim().toUpperCase();
   const db = readDatabase();
+
+  // 1. Kiểm tra Lịch Báo Giảng của lớp: Nếu lớp chưa có bất kỳ lịch báo giảng nào -> KHÔNG THỂ ĐIỂM DANH
+  const classSchedules = (db.schedule || []).filter(s => s.className && s.className.toUpperCase() === cleanClass);
+  if (classSchedules.length === 0) {
+    return res.status(400).json({
+      success: false,
+      noSchedule: true,
+      message: `Lớp ${cleanClass} chưa có môn học nào được lên lịch báo giảng! Theo quy định, Thầy cần lên thời khóa biểu tại mục Lịch Báo Giảng trước khi mở điểm danh.`
+    });
+  }
+
+  // 2. Tìm môn học cụ thể trong Lịch Báo Giảng
+  let matchedSchedule = null;
+  if (scheduleId) {
+    matchedSchedule = classSchedules.find(s => s.id === scheduleId);
+  }
+  if (!matchedSchedule && subjectName) {
+    const cleanSub = subjectName.trim().toLowerCase();
+    matchedSchedule = classSchedules.find(s => (s.subjectName || '').trim().toLowerCase() === cleanSub);
+  }
+
+  // Nếu chưa chọn môn hoặc môn không khớp trong lịch báo giảng
+  if (!matchedSchedule) {
+    // Nếu chỉ có duy nhất 1 môn trong lịch báo giảng thì tự động chọn môn đó
+    if (classSchedules.length === 1) {
+      matchedSchedule = classSchedules[0];
+    } else {
+      return res.status(400).json({
+        success: false,
+        requireSubjectSelection: true,
+        availableSchedules: classSchedules,
+        message: `Lớp ${cleanClass} có nhiều môn trong Lịch Báo Giảng. Vui lòng chọn môn học cụ thể để bắt đầu điểm danh!`
+      });
+    }
+  }
+
+  const finalSubjectName = matchedSchedule.subjectName;
+  const finalLessonTitle = lessonTitle || matchedSchedule.currentLesson || `Buổi học ngày ${new Date().toLocaleDateString('vi-VN')}`;
+  const finalRoom = matchedSchedule.room || '';
+  const finalPeriods = matchedSchedule.periods || '';
+
   const users = db.users || [];
   const classStudents = users
     .filter(u => u.role === 'student' && u.className && u.className.toUpperCase() === cleanClass)
@@ -2435,8 +2476,11 @@ app.post('/api/attendance/session/start', (req, res) => {
   const session = {
     id: `attsess_${now}`,
     className: cleanClass,
-    subjectName: subjectName || '',
-    lessonTitle: lessonTitle || `Buổi học ngày ${new Date().toLocaleDateString('vi-VN')}`,
+    subjectName: finalSubjectName,
+    scheduleId: matchedSchedule.id,
+    room: finalRoom,
+    periods: finalPeriods,
+    lessonTitle: finalLessonTitle,
     teacherId: teacherId || 'u_teacher_danh',
     otp: otp,
     token: token,
@@ -2509,6 +2553,9 @@ app.get('/api/attendance/session/current', (req, res) => {
       id: session.id,
       className: session.className,
       subjectName: session.subjectName,
+      scheduleId: session.scheduleId,
+      room: session.room,
+      periods: session.periods,
       lessonTitle: session.lessonTitle,
       otp: session.otp,
       token: session.token,
@@ -2630,7 +2677,7 @@ app.post('/api/attendance/session/manual-toggle', (req, res) => {
   res.json({ success: true, isChecked: !!session.checkedInStudents[studentId] });
 });
 
-// 4f. Giáo viên kết thúc phiên & chốt sổ điểm danh lưu vào Database
+// 4f. Giáo viên kết thúc phiên & chốt sổ điểm danh lưu vào Database (KÈM THỐNG KÊ VẮNG MẶT MÔN HỌC)
 app.post('/api/attendance/session/close', (req, res) => {
   const { className } = req.body;
   if (!className) return res.status(400).json({ message: "Thiếu tên lớp." });
@@ -2638,7 +2685,7 @@ app.post('/api/attendance/session/close', (req, res) => {
   const session = activeAttendanceSessions[cleanClass];
 
   if (!session) {
-    return res.status(404).json({ message: "Không tìm thấy phiên điểm danh." });
+    return res.status(404).json({ message: "Không tìm thấy phiên điểm danh đang hoạt động." });
   }
 
   session.isActive = false;
@@ -2656,7 +2703,7 @@ app.post('/api/attendance/session/close', (req, res) => {
       studentId: stu.id,
       studentCode: stu.studentCode || stu.username,
       studentName: stu.name,
-      status: isChecked ? 'present' : null, // null nếu học sinh chưa quét hoặc chưa nhập mã
+      status: isChecked ? 'present' : null, // null nếu học sinh chưa quét hoặc chưa nhập mã (vắng mặt)
       checkedInAt: isChecked ? session.checkedInStudents[stu.id].checkedInAt : null,
       method: isChecked ? session.checkedInStudents[stu.id].method : null
     };
@@ -2666,6 +2713,9 @@ app.post('/api/attendance/session/close', (req, res) => {
     id: `att_${Date.now()}`,
     className: cleanClass,
     subjectName: session.subjectName,
+    scheduleId: session.scheduleId || null,
+    room: session.room || '',
+    periods: session.periods || '',
     date: dateStr,
     lessonTitle: session.lessonTitle,
     records: records,
@@ -2677,12 +2727,167 @@ app.post('/api/attendance/session/close', (req, res) => {
   db.attendance.push(attendanceEntry);
   writeDatabase(db);
 
+  // ================= TÍNH TOÁN THỐNG KÊ CHUYÊN CẦN MÔN HỌC =================
+  // Lấy toàn bộ các buổi điểm danh của môn này đối với lớp cleanClass (đã bao gồm buổi vừa lưu)
+  const allSubjectSessions = (db.attendance || []).filter(a =>
+    a.className && a.className.toUpperCase() === cleanClass &&
+    a.subjectName && a.subjectName.trim().toLowerCase() === session.subjectName.trim().toLowerCase()
+  );
+  const totalSubjectSessions = allSubjectSessions.length;
+
+  const presentStudents = [];
+  const absentStudents = [];
+
+  classStudents.forEach((stu, index) => {
+    const isChecked = !!session.checkedInStudents[stu.id];
+    if (isChecked) {
+      presentStudents.push({
+        stt: index + 1,
+        id: stu.id,
+        studentCode: stu.studentCode || stu.username,
+        name: stu.name,
+        checkedInAt: session.checkedInStudents[stu.id].checkedInAt,
+        method: session.checkedInStudents[stu.id].method
+      });
+    } else {
+      // Học sinh VẮNG trong buổi học hôm nay -> Thống kê tổng số buổi đã nghỉ ở môn này
+      let totalAbsentInSubject = 0;
+      allSubjectSessions.forEach(sess => {
+        const r = (sess.records || []).find(rec => rec.studentId === stu.id || rec.studentCode === (stu.studentCode || stu.username));
+        // Nếu không có bản ghi hoặc status không phải là 'present' thì tính là vắng
+        if (!r || r.status !== 'present') {
+          totalAbsentInSubject++;
+        }
+      });
+
+      const absentPercent = totalSubjectSessions > 0 ? Math.round((totalAbsentInSubject / totalSubjectSessions) * 100) : 0;
+      // Cảnh báo nếu vắng từ 3 buổi hoặc vắng >= 20% tổng số buổi của môn
+      const isWarning = totalAbsentInSubject >= 3 || absentPercent >= 20;
+
+      absentStudents.push({
+        stt: index + 1,
+        id: stu.id,
+        studentCode: stu.studentCode || stu.username,
+        name: stu.name,
+        totalAbsentInSubject,
+        totalSubjectSessions,
+        absentPercent,
+        isWarning
+      });
+    }
+  });
+
   delete activeAttendanceSessions[cleanClass];
 
   res.json({
     success: true,
-    message: "Đã chốt sổ điểm danh và lưu vào CSDL thành công!",
-    attendanceEntry
+    message: `Đã chốt sổ điểm danh môn "${session.subjectName}" lớp ${cleanClass}!`,
+    attendanceEntry,
+    summary: {
+      className: cleanClass,
+      subjectName: session.subjectName,
+      lessonTitle: session.lessonTitle,
+      room: session.room,
+      periods: session.periods,
+      date: dateStr,
+      totalStudents: classStudents.length,
+      presentCount: presentStudents.length,
+      absentCount: absentStudents.length,
+      totalSubjectSessions,
+      absentStudents,
+      presentStudents
+    }
+  });
+});
+
+// 4g. Lấy báo cáo chuyên cần tổng hợp theo môn học và lớp
+app.get('/api/attendance/subject-summary', (req, res) => {
+  const { className, subjectName } = req.query;
+  if (!className || !subjectName) {
+    return res.status(400).json({ message: "Thiếu tên lớp hoặc tên môn học." });
+  }
+  const cleanClass = className.trim().toUpperCase();
+  const cleanSubject = subjectName.trim().toLowerCase();
+  const db = readDatabase();
+
+  const sessions = (db.attendance || []).filter(a =>
+    a.className && a.className.toUpperCase() === cleanClass &&
+    a.subjectName && a.subjectName.trim().toLowerCase() === cleanSubject
+  );
+
+  const users = db.users || [];
+  const classStudents = users
+    .filter(u => u.role === 'student' && u.className && u.className.toUpperCase() === cleanClass)
+    .sort((a, b) => (a.name || '').localeCompare(b.name || '', 'vi'));
+
+  const report = classStudents.map((stu, index) => {
+    let absentCount = 0;
+    let presentCount = 0;
+
+    sessions.forEach(sess => {
+      const r = (sess.records || []).find(rec => rec.studentId === stu.id || rec.studentCode === (stu.studentCode || stu.username));
+      if (r && r.status === 'present') {
+        presentCount++;
+      } else {
+        absentCount++;
+      }
+    });
+
+    const totalSessions = sessions.length;
+    const absentPercent = totalSessions > 0 ? Math.round((absentCount / totalSessions) * 100) : 0;
+    const isWarning = absentCount >= 3 || absentPercent >= 20;
+
+    return {
+      stt: index + 1,
+      id: stu.id,
+      studentCode: stu.studentCode || stu.username,
+      name: stu.name,
+      presentCount,
+      absentCount,
+      totalSessions,
+      absentPercent,
+      isWarning
+    };
+  });
+
+  res.json({
+    success: true,
+    className: cleanClass,
+    subjectName: subjectName,
+    totalSessions: sessions.length,
+    students: report
+  });
+});
+
+// 4h. Lấy danh sách lịch báo giảng của một lớp cụ thể kèm nhận diện buổi học hôm nay
+app.get('/api/schedule/for-class/:className', (req, res) => {
+  const { className } = req.params;
+  if (!className) return res.status(400).json({ message: "Thiếu tên lớp." });
+  const cleanClass = className.trim().toUpperCase();
+  const db = readDatabase();
+
+  const list = (db.schedule || []).filter(s => s.className && s.className.toUpperCase() === cleanClass);
+  // Ngày trong tuần hiện tại: 0 = CN, 1 = T2, 2 = T3, ..., 6 = T7. Lịch báo giảng: 2 = T2, 3 = T3, ..., 7 = T7.
+  const todayJsDay = new Date().getDay(); // 0-6
+  const currentDayOfWeek = todayJsDay === 0 ? 8 : todayJsDay + 1;
+
+  const result = list.map(item => ({
+    ...item,
+    isToday: Number(item.dayOfWeek) === currentDayOfWeek
+  }));
+
+  // Sắp xếp: Tiết hôm nay lên đầu, sau đó theo thứ trong tuần
+  result.sort((a, b) => {
+    if (a.isToday && !b.isToday) return -1;
+    if (!a.isToday && b.isToday) return 1;
+    return (Number(a.dayOfWeek) - Number(b.dayOfWeek)) || (a.session === 'morning' ? -1 : 1);
+  });
+
+  res.json({
+    success: true,
+    className: cleanClass,
+    hasSchedule: result.length > 0,
+    schedules: result
   });
 });
 
