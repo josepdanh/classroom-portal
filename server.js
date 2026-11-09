@@ -217,6 +217,9 @@ async function initMongoConnection() {
     const cloudDoc = await mongoDbCollection.findOne({ id: 'main' });
     if (cloudDoc) {
       delete cloudDoc._id;
+      if (!cloudDoc.lessonPlans) cloudDoc.lessonPlans = [];
+      if (!cloudDoc.schedule) cloudDoc.schedule = [];
+      if (!cloudDoc.attendance) cloudDoc.attendance = [];
       memoryCache = cloudDoc;
       try {
         fs.writeFileSync(DATA_FILE, JSON.stringify(cloudDoc, null, 2), 'utf8');
@@ -405,6 +408,9 @@ function readLocalJsonFile() {
     if (!data.notifications) data.notifications = [];
     if (!data.assignments) data.assignments = [];
     if (!data.submissions) data.submissions = [];
+    if (!data.lessonPlans) data.lessonPlans = [];
+    if (!data.schedule) data.schedule = [];
+    if (!data.attendance) data.attendance = [];
 
     // Tự động chuẩn hóa mã số sinh viên (studentCode) cho toàn bộ học sinh
     if (data.users && Array.isArray(data.users)) {
@@ -2026,6 +2032,376 @@ app.delete('/api/grade-sheets/:id', (req, res) => {
   res.json({ success: true, message: "Đã xóa bảng điểm." });
 });
 
+// =========================================================================
+// PHÂN HỆ MỚI: QUẢN LÝ LỚP HỌC, GIÁO ÁN ĐIỆN TỬ, THỜI KHÓA BIỂU & ĐIỂM DANH
+// (PHONG CÁCH CỔNG ĐÀO TẠO TRƯỜNG CAO ĐẲNG HÒA BÌNH XUÂN LỘC - HBXLC)
+// =========================================================================
+
+// 1. TỔNG QUAN CÁC LỚP HỌC (CLASS HUB OVERVIEW)
+app.get('/api/classes/overview', (req, res) => {
+  const db = readDatabase();
+  const classes = db.classes || [];
+  const users = db.users || [];
+  const subjects = db.subjects || [];
+  const assignments = db.assignments || [];
+  const gradeSheets = db.gradeSheets || [];
+  const lessonPlans = db.lessonPlans || [];
+  const industryGroups = db.industryGroups || DEFAULT_INDUSTRY_GROUPS;
+
+  const result = classes.map(cName => {
+    const clean = cName.toUpperCase();
+    const students = users.filter(u => u.role === 'student' && u.className && u.className.toUpperCase() === clean);
+    const classSubjects = subjects.filter(s => s.className && s.className.toUpperCase() === clean);
+    const classAssignments = assignments.filter(a => a.targetClass && (a.targetClass.toUpperCase() === clean || a.targetClass === 'ALL'));
+    const classGradeSheets = gradeSheets.filter(g => g.className && g.className.toUpperCase() === clean);
+    const classPlans = lessonPlans.filter(lp => lp.className && lp.className.toUpperCase() === clean);
+
+    let group = industryGroups.find(g => (g.classes || []).map(c => c.toUpperCase()).includes(clean));
+    if (!group) {
+      if (clean.includes("TK")) group = industryGroups.find(g => g.id === "thiet_ke_do_hoa");
+      else if (clean.includes("MA")) group = industryGroups.find(g => g.id === "may_thoi_trang");
+      else group = industryGroups.find(g => g.id === "cong_nghe_thong_tin");
+    }
+
+    return {
+      className: clean,
+      industryGroup: group ? group.name : 'Khác',
+      industryGroupId: group ? group.id : 'other',
+      icon: group ? group.icon : 'fa-graduation-cap',
+      color: group ? group.color : 'indigo',
+      studentCount: students.length,
+      subjectCount: classSubjects.length,
+      subjects: classSubjects.map(s => s.name),
+      assignmentCount: classAssignments.length,
+      gradeSheetCount: classGradeSheets.length,
+      lessonPlanCount: classPlans.length,
+      completedPlans: classPlans.filter(lp => lp.status === 'completed' || lp.status === 'approved').length
+    };
+  });
+
+  res.json({
+    success: true,
+    classes: result,
+    totalClasses: classes.length,
+    industryGroups: industryGroups
+  });
+});
+
+// 2. GIÁO ÁN ĐIỆN TỬ (LESSON PLANS)
+// 2a. Lấy danh sách giáo án
+app.get('/api/lesson-plans', (req, res) => {
+  const { className, subjectName, status, search, teacherId } = req.query;
+  const db = readDatabase();
+  let list = db.lessonPlans || [];
+
+  if (teacherId) {
+    const user = (db.users || []).find(u => u.id === teacherId);
+    if (user && user.role !== 'admin' && user.role !== 'examiner') {
+      list = list.filter(lp => lp.teacherId === teacherId || !lp.teacherId);
+    }
+  }
+
+  if (className && className !== 'ALL') {
+    list = list.filter(lp => lp.className && lp.className.toUpperCase() === className.toUpperCase());
+  }
+  if (subjectName && subjectName !== 'ALL') {
+    list = list.filter(lp => lp.subjectName && lp.subjectName.toLowerCase() === subjectName.toLowerCase());
+  }
+  if (status && status !== 'ALL') {
+    list = list.filter(lp => lp.status === status);
+  }
+  if (search && search.trim()) {
+    const q = search.trim().toLowerCase();
+    list = list.filter(lp =>
+      (lp.title && lp.title.toLowerCase().includes(q)) ||
+      (lp.objectives && lp.objectives.toLowerCase().includes(q)) ||
+      (lp.className && lp.className.toLowerCase().includes(q)) ||
+      (lp.subjectName && lp.subjectName.toLowerCase().includes(q))
+    );
+  }
+
+  // Sắp xếp: tuần tăng dần, rồi đến ngày
+  list.sort((a, b) => (Number(a.week) || 0) - (Number(b.week) || 0) || new Date(b.date || 0) - new Date(a.date || 0));
+
+  res.json({ success: true, lessonPlans: list });
+});
+
+// 2b. Thêm / Cập nhật giáo án
+app.post('/api/lesson-plans', upload.single('attachment'), async (req, res) => {
+  try {
+    const { id, title, className, subjectName, week, periodsTheory, periodsPractice, date, objectives, content, status, notes, teacherId } = req.body;
+
+    if (!title || !className || !subjectName) {
+      return res.status(400).json({ message: "Vui lòng nhập tên bài giảng, lớp học và môn học." });
+    }
+
+    const db = readDatabase();
+    if (!db.lessonPlans) db.lessonPlans = [];
+
+    const teacher = (db.users || []).find(u => u.id === teacherId) || { id: teacherId || 'u_teacher_danh', name: 'Thầy Nguyễn Công Danh' };
+    const cleanClass = className.trim().toUpperCase();
+    const cleanSubject = subjectName.trim();
+
+    ensureClassInIndustryGroup(db, cleanClass);
+
+    let attachment = null;
+    if (req.file) {
+      attachment = {
+        filename: req.file.filename,
+        originalName: decodeFileName(req.file.originalname),
+        size: req.file.size
+      };
+      try {
+        const cloudRes = await uploadFileToCloud(req.file.path, attachment.originalName, cleanClass, cleanSubject, req.file.size, `GiaoAn_${title.trim()}`);
+        if (cloudRes && cloudRes.url) {
+          attachment.url = cloudRes.url;
+          attachment.storageKey = cloudRes.key;
+          attachment.provider = cloudRes.provider;
+        }
+      } catch (e) {
+        console.error("[Storage] Lỗi tải file đính kèm giáo án:", e.message);
+      }
+    }
+
+    if (id) {
+      const idx = db.lessonPlans.findIndex(lp => lp.id === id);
+      if (idx !== -1) {
+        const existing = db.lessonPlans[idx];
+        db.lessonPlans[idx] = {
+          ...existing,
+          title: title.trim(),
+          className: cleanClass,
+          subjectName: cleanSubject,
+          week: Number(week) || 1,
+          periodsTheory: Number(periodsTheory) || 0,
+          periodsPractice: Number(periodsPractice) || 0,
+          date: date || existing.date || new Date().toISOString().split('T')[0],
+          objectives: objectives || '',
+          content: content || '',
+          status: status || existing.status || 'draft',
+          notes: notes || '',
+          attachment: attachment || existing.attachment || null,
+          updatedAt: new Date().toISOString()
+        };
+        writeDatabase(db);
+        return res.json({ success: true, lessonPlan: db.lessonPlans[idx], message: "Cập nhật giáo án thành công!" });
+      }
+    }
+
+    const newPlan = {
+      id: id || `lp_${Date.now()}`,
+      title: title.trim(),
+      className: cleanClass,
+      subjectName: cleanSubject,
+      week: Number(week) || 1,
+      periodsTheory: Number(periodsTheory) || 0,
+      periodsPractice: Number(periodsPractice) || 0,
+      date: date || new Date().toISOString().split('T')[0],
+      objectives: objectives || '',
+      content: content || '',
+      status: status || 'draft',
+      notes: notes || '',
+      attachment: attachment || null,
+      teacherId: teacher.id,
+      teacherName: teacher.name,
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString()
+    };
+
+    db.lessonPlans.push(newPlan);
+    writeDatabase(db);
+    res.json({ success: true, lessonPlan: newPlan, message: "Tạo giáo án điện tử thành công!" });
+  } catch (err) {
+    console.error("Lỗi lưu giáo án:", err);
+    res.status(500).json({ message: "Lỗi máy chủ khi lưu giáo án: " + err.message });
+  }
+});
+
+// 2c. Cập nhật nhanh trạng thái giáo án
+app.post('/api/lesson-plans/:id/status', (req, res) => {
+  const { id } = req.params;
+  const { status, notes } = req.body;
+  const db = readDatabase();
+  if (!db.lessonPlans) db.lessonPlans = [];
+  const plan = db.lessonPlans.find(lp => lp.id === id);
+  if (!plan) return res.status(404).json({ message: "Không tìm thấy giáo án." });
+
+  plan.status = status || plan.status;
+  if (notes !== undefined) plan.notes = notes;
+  plan.updatedAt = new Date().toISOString();
+  writeDatabase(db);
+  res.json({ success: true, lessonPlan: plan });
+});
+
+// 2d. Xóa giáo án
+app.delete('/api/lesson-plans/:id', (req, res) => {
+  const { id } = req.params;
+  const db = readDatabase();
+  if (!db.lessonPlans) db.lessonPlans = [];
+  db.lessonPlans = db.lessonPlans.filter(lp => lp.id !== id);
+  writeDatabase(db);
+  res.json({ success: true, message: "Đã xóa giáo án." });
+});
+
+// 3. THỜI KHÓA BIỂU / LỊCH BÁO GIẢNG (SCHEDULE)
+app.get('/api/schedule', (req, res) => {
+  const { className } = req.query;
+  const db = readDatabase();
+  let list = db.schedule || [];
+
+  if (className && className !== 'ALL') {
+    list = list.filter(s => s.className && s.className.toUpperCase() === className.toUpperCase());
+  }
+
+  list.sort((a, b) => (Number(a.dayOfWeek) - Number(b.dayOfWeek)) || (a.session === 'morning' ? -1 : 1));
+  res.json({ success: true, schedule: list });
+});
+
+app.post('/api/schedule', (req, res) => {
+  const { id, dayOfWeek, session, periods, timeRange, className, subjectName, room, currentLesson, notes, teacherName } = req.body;
+  if (!className || !subjectName || !dayOfWeek) {
+    return res.status(400).json({ message: "Vui lòng nhập đầy đủ thông tin buổi học (Thứ, Lớp, Môn)." });
+  }
+
+  const db = readDatabase();
+  if (!db.schedule) db.schedule = [];
+
+  const cleanClass = className.trim().toUpperCase();
+  ensureClassInIndustryGroup(db, cleanClass);
+
+  if (id) {
+    const idx = db.schedule.findIndex(s => s.id === id);
+    if (idx !== -1) {
+      db.schedule[idx] = {
+        ...db.schedule[idx],
+        dayOfWeek: Number(dayOfWeek),
+        session: session || 'morning',
+        periods: periods || (session === 'morning' ? '1 - 5' : '6 - 10'),
+        timeRange: timeRange || (session === 'morning' ? '07:00 - 11:15' : '12:45 - 17:00'),
+        className: cleanClass,
+        subjectName: subjectName.trim(),
+        room: room || 'Phòng máy',
+        currentLesson: currentLesson || '',
+        notes: notes || '',
+        teacherName: teacherName || 'Thầy Nguyễn Công Danh',
+        updatedAt: new Date().toISOString()
+      };
+      writeDatabase(db);
+      return res.json({ success: true, scheduleItem: db.schedule[idx], message: "Đã cập nhật thời khóa biểu!" });
+    }
+  }
+
+  const newItem = {
+    id: id || `sch_${Date.now()}`,
+    dayOfWeek: Number(dayOfWeek),
+    session: session || 'morning',
+    periods: periods || (session === 'morning' ? '1 - 5' : '6 - 10'),
+    timeRange: timeRange || (session === 'morning' ? '07:00 - 11:15' : '12:45 - 17:00'),
+    className: cleanClass,
+    subjectName: subjectName.trim(),
+    room: room || 'Phòng máy',
+    currentLesson: currentLesson || '',
+    notes: notes || '',
+    teacherName: teacherName || 'Thầy Nguyễn Công Danh',
+    createdAt: new Date().toISOString()
+  };
+
+  db.schedule.push(newItem);
+  writeDatabase(db);
+  res.json({ success: true, scheduleItem: newItem, message: "Đã thêm buổi dạy vào lịch báo giảng!" });
+});
+
+app.delete('/api/schedule/:id', (req, res) => {
+  const { id } = req.params;
+  const db = readDatabase();
+  if (!db.schedule) db.schedule = [];
+  db.schedule = db.schedule.filter(s => s.id !== id);
+  writeDatabase(db);
+  res.json({ success: true, message: "Đã xóa buổi dạy khỏi thời khóa biểu." });
+});
+
+// 4. ĐIỂM DANH LỚP HỌC (ATTENDANCE)
+app.get('/api/attendance', (req, res) => {
+  const { className, date } = req.query;
+  const db = readDatabase();
+  let list = db.attendance || [];
+  if (className && className !== 'ALL') {
+    list = list.filter(a => a.className && a.className.toUpperCase() === className.toUpperCase());
+  }
+  if (date) {
+    list = list.filter(a => a.date === date);
+  }
+  res.json({ success: true, attendance: list });
+});
+
+app.post('/api/attendance', (req, res) => {
+  const { className, subjectName, date, lessonTitle, records, teacherId } = req.body;
+  if (!className || !date || !records) {
+    return res.status(400).json({ message: "Dữ liệu điểm danh không hợp lệ." });
+  }
+  const db = readDatabase();
+  if (!db.attendance) db.attendance = [];
+
+  const cleanClass = className.trim().toUpperCase();
+  const existingIdx = db.attendance.findIndex(a => a.className === cleanClass && a.date === date);
+
+  const entry = {
+    id: existingIdx !== -1 ? db.attendance[existingIdx].id : `att_${Date.now()}`,
+    className: cleanClass,
+    subjectName: subjectName || '',
+    date: date,
+    lessonTitle: lessonTitle || '',
+    records: records,
+    updatedAt: new Date().toISOString(),
+    teacherId: teacherId || 'u_teacher_danh'
+  };
+
+  if (existingIdx !== -1) {
+    db.attendance[existingIdx] = entry;
+  } else {
+    entry.createdAt = new Date().toISOString();
+    db.attendance.push(entry);
+  }
+
+  writeDatabase(db);
+  res.json({ success: true, attendance: entry, message: "Đã lưu điểm danh lớp thành công!" });
+});
+
+app.get('/api/attendance/summary/:className', (req, res) => {
+  const { className } = req.params;
+  const clean = className.trim().toUpperCase();
+  const db = readDatabase();
+  const list = (db.attendance || []).filter(a => a.className === clean);
+  const users = (db.users || []).filter(u => u.role === 'student' && u.className && u.className.toUpperCase() === clean);
+
+  const summary = users.map(u => {
+    let presentCount = 0;
+    let excusedCount = 0;
+    let unexcusedCount = 0;
+
+    list.forEach(session => {
+      const rec = (session.records || []).find(r => r.studentId === u.id || r.studentCode === u.studentCode);
+      if (rec) {
+        if (rec.status === 'present') presentCount++;
+        else if (rec.status === 'excused') excusedCount++;
+        else if (rec.status === 'unexcused') unexcusedCount++;
+      }
+    });
+
+    return {
+      studentId: u.id,
+      studentName: u.name,
+      studentCode: u.studentCode || u.username,
+      totalSessions: list.length,
+      presentCount,
+      excusedCount,
+      unexcusedCount
+    };
+  });
+
+  res.json({ success: true, className: clean, totalSessions: list.length, summary });
+});
+
 // Hàm hỗ trợ tìm kiếm URL đám mây của file (Tra cứu CSDL và Auto-Recovery trên Cloudinary)
 async function findCloudUrlForFile(filename, db) {
   if (!filename) return null;
@@ -2043,6 +2419,13 @@ async function findCloudUrlForFile(filename, db) {
   for (const a of (db.assignments || [])) {
     if (a.attachment && (a.attachment.filename === filename || a.attachment.originalName === filename || a.attachment.filename === decodedName || a.attachment.originalName === decodedName)) {
       if (a.attachment.url) return a.attachment.url;
+    }
+  }
+
+  // 2b. Tìm trong giáo án điện tử (file đính kèm giáo án)
+  for (const lp of (db.lessonPlans || [])) {
+    if (lp.attachment && (lp.attachment.filename === filename || lp.attachment.originalName === filename || lp.attachment.filename === decodedName || lp.attachment.originalName === decodedName)) {
+      if (lp.attachment.url) return lp.attachment.url;
     }
   }
 

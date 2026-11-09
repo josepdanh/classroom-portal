@@ -115,16 +115,18 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex items-center justify-between min-h-[4rem] py-2 sm:py-0">
         <div class="flex items-center space-x-3">
-          <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-600 via-indigo-700 to-violet-600 flex items-center justify-center text-white shadow-md shadow-indigo-100 shrink-0">
+          <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-red-700 via-rose-800 to-red-950 flex items-center justify-center text-white shadow-md shadow-red-200 shrink-0 border border-red-300">
             <i class="fa-solid fa-graduation-cap text-lg"></i>
           </div>
           <div>
             <div class="flex items-center gap-1.5 flex-wrap leading-tight">
-              <span class="text-lg sm:text-xl font-extrabold bg-gradient-to-r from-indigo-600 to-violet-600 bg-clip-text text-transparent tracking-tight">EduClass</span>
-              <span class="text-xs sm:text-sm font-bold text-slate-700">- Hệ Thống Giao và Nhận Bài tập</span>
+              <span class="text-lg sm:text-xl font-extrabold bg-gradient-to-r from-red-700 to-rose-900 bg-clip-text text-transparent tracking-tight">HBXLC EduPortal</span>
+              <span class="text-xs sm:text-sm font-bold text-slate-700">- Cổng Quản Lý Lớp Học & Giáo Án</span>
             </div>
-            <div class="text-[10px] sm:text-[11px] text-slate-400 font-medium mt-0.5">
-              (design by <span class="font-bold text-indigo-600">Danh</span> and <span class="font-bold bg-gradient-to-r from-blue-500 via-indigo-500 to-violet-600 bg-clip-text text-transparent">Gemini</span>)
+            <div class="text-[10px] sm:text-[11px] text-slate-500 font-medium mt-0.5 flex items-center gap-2 flex-wrap">
+              <span class="font-bold text-red-800">CĐ Hòa Bình Xuân Lộc</span>
+              <span class="text-slate-300">•</span>
+              <span class="italic text-slate-400">"Thăng tiến con người toàn diện"</span>
             </div>
           </div>
         </div>
@@ -176,12 +178,12 @@
     <section id="view-login" class="max-w-md mx-auto my-8">
       <div class="bg-white rounded-2xl shadow-xl border border-slate-100 p-8">
         <div class="text-center mb-6">
-          <div class="w-14 h-14 bg-gradient-to-br from-indigo-500 to-violet-600 text-white rounded-2xl flex items-center justify-center mx-auto text-2xl mb-3 shadow-md shadow-indigo-100">
+          <div class="w-16 h-16 bg-gradient-to-br from-red-700 to-rose-900 text-white rounded-2xl flex items-center justify-center mx-auto text-2xl mb-3 shadow-lg shadow-red-200 border-2 border-red-200">
             <i class="fa-solid fa-graduation-cap"></i>
           </div>
-          <h2 class="text-2xl font-extrabold text-slate-900 tracking-tight">EduClass</h2>
-          <p class="text-xs font-semibold text-indigo-600 mt-1 uppercase tracking-wider">Hệ Thống Giao và Nhận Bài tập</p>
-          <p class="text-[11px] text-slate-400 mt-0.5">design by Danh and Gemini</p>
+          <h2 class="text-2xl font-extrabold text-slate-900 tracking-tight">HBXLC EduPortal</h2>
+          <p class="text-xs font-bold text-red-700 mt-1 uppercase tracking-wider">CỔNG ĐÀO TẠO & GIÁO ÁN ĐIỆN TỬ</p>
+          <p class="text-[11px] text-slate-500 font-medium mt-0.5">TRƯỜNG CAO ĐẲNG HÒA BÌNH XUÂN LỘC</p>
         </div>
 
         <!-- Tabs Chuyển đổi Đăng nhập / Đăng ký -->
@@ -336,168 +338,425 @@
       </div>
     </section>
 
-    <!-- 2. GIAO DIỆN PHÂN HỆ GIÁO VIÊN -->
+    <!-- 2. GIAO DIỆN PHÂN HỆ GIÁO VIÊN (CHUẨN HBXLC) -->
     <section id="view-teacher" class="hidden space-y-6">
-      <!-- Header Banner & Thống kê -->
-      <div class="bg-gradient-to-r from-indigo-700 to-violet-800 rounded-2xl p-6 text-white shadow-lg flex flex-col md:flex-row md:items-center justify-between gap-4">
-        <div>
-          <h1 id="teacher-banner-title" class="text-2xl font-bold flex items-center gap-2">
-            <i class="fa-solid fa-chalkboard-user"></i>
-            Bảng Điều Khiển Giáo Viên
-          </h1>
-          <p id="teacher-banner-desc" class="text-indigo-200 text-sm mt-1">Quản lý giao đề, theo dõi tỷ lệ nộp bài và trực tiếp chấm điểm học sinh</p>
-        </div>
-        <div class="flex items-center gap-2 flex-wrap">
-          <button id="btn-admin-panel" onclick="openAdminModal()" class="admin-only hidden px-4 py-2.5 bg-amber-500 hover:bg-amber-600 text-white font-semibold rounded-xl shadow-sm transition flex items-center gap-2 text-sm">
-            <i class="fa-solid fa-shield-halved"></i> Quản Trị & Duyệt User
-            <span id="admin-pending-badge" class="hidden bg-rose-600 text-white text-xs px-2 py-0.5 rounded-full font-bold">0</span>
-          </button>
-          <button id="btn-sync-mac" onclick="openSyncMacModal()" title="Thực thi lệnh 'npm run sync-mac' để tải và phân loại toàn bộ bài nộp về máy Mac" class="admin-only hidden px-3.5 py-2.5 bg-gradient-to-r from-sky-600 via-blue-600 to-indigo-700 hover:from-sky-700 hover:to-indigo-800 text-white font-semibold rounded-xl shadow-sm transition flex items-center justify-center gap-1.5 text-xs">
-            <i class="fa-solid fa-rotate"></i> <i class="fa-brands fa-apple text-sm"></i> Đồng Bộ Về Mac
-          </button>
-          <button onclick="openCloudFolder('local')" title="Mở thư mục bài nộp trên máy Mac" class="admin-only hidden px-3.5 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-semibold rounded-xl shadow-sm transition flex items-center justify-center gap-1.5 text-xs">
-            <i class="fa-solid fa-folder-open text-sm"></i> Mở Thư Mục Mac
-          </button>
-          <a href="/api/admin/download-all-submissions-zip" title="Tải toàn bộ bài nộp của tất cả các lớp về máy Mac dạng file ZIP" class="admin-only hidden px-3.5 py-2.5 bg-indigo-700 hover:bg-indigo-800 text-white font-semibold rounded-xl shadow-sm transition flex items-center justify-center gap-1.5 text-xs">
-            <i class="fa-solid fa-cloud-arrow-down text-sm"></i> Tải Bài Nộp (.ZIP)
-          </a>
-          <button id="btn-grade-sheet-header" onclick="openGradeSheetModal()" class="px-4 py-2.5 bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white font-semibold rounded-xl shadow-sm transition flex items-center justify-center gap-2 text-sm">
-            <i class="fa-solid fa-file-signature text-base"></i> Sổ Điểm Thành Phần
-          </button>
-          <button id="btn-create-assignment" onclick="openCreateModal()" class="px-4 py-2.5 bg-white text-indigo-700 hover:bg-indigo-50 font-semibold rounded-xl shadow-sm transition flex items-center justify-center gap-2 text-sm">
-            <i class="fa-solid fa-plus"></i> Giao Bài Tập Mới
-          </button>
-        </div>
-      </div>
-
-      <!-- BẢNG ĐIỂM THÀNH PHẦN MÔN HỌC / MÔ ĐUN (MẪU TRƯỜNG CĐ HÒA BÌNH XUÂN LỘC) -->
-      <div class="bg-gradient-to-br from-emerald-50/90 via-teal-50/60 to-white border border-emerald-200/80 rounded-2xl p-4 sm:p-5 shadow-sm space-y-3.5">
-        <!-- Dòng 1: Tiêu đề, Huy hiệu và Nút mở chính -->
-        <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-3">
-          <div class="flex items-center gap-3 min-w-0">
-            <div class="w-11 h-11 rounded-xl bg-gradient-to-br from-emerald-600 to-teal-700 text-white flex items-center justify-center text-lg shrink-0 shadow-md shadow-emerald-200">
-              <i class="fa-solid fa-table-list"></i>
-            </div>
-            <div class="min-w-0">
-              <div class="flex items-center gap-2 flex-wrap">
-                <h3 class="font-bold text-emerald-950 text-base leading-snug">Bảng Điểm Thành Phần Môn Học / Mô Đun</h3>
-                <span class="text-[11px] bg-emerald-100/90 text-emerald-800 border border-emerald-300 px-2.5 py-0.5 rounded-full font-bold shrink-0">Mẫu Trường CĐ Hòa Bình Xuân Lộc</span>
-                <span class="text-[11px] bg-blue-50 text-blue-700 border border-blue-200 px-2.5 py-0.5 rounded-full font-bold flex items-center gap-1 shrink-0">
-                  <i class="fa-solid fa-user-shield text-[10px]"></i> Riêng tư: Môn bạn dạy
-                </span>
-              </div>
-              <p class="text-xs text-emerald-800/80 mt-1 line-clamp-1 sm:line-clamp-none">Nhập điểm hệ số 1, hệ số 2 và tính điểm trung bình môn tự động theo quy chế đào tạo nghề.</p>
-            </div>
-          </div>
-          
-          <div class="shrink-0 flex items-center gap-2 self-start lg:self-auto">
-            <button onclick="openGradeSheetModal()" class="w-full sm:w-auto px-4 py-2 bg-gradient-to-r from-emerald-600 to-teal-700 hover:from-emerald-700 hover:to-teal-800 text-white font-bold rounded-xl text-xs transition flex items-center justify-center gap-2 shadow-sm hover:shadow">
-              <i class="fa-solid fa-folder-open text-sm"></i> Mở Sổ Điểm Thành Phần
-            </button>
-          </div>
-        </div>
-
-        <!-- Dòng 2: Mở nhanh các môn giáo viên đang phụ trách -->
-        <div class="pt-3 border-t border-emerald-100/80 flex flex-col sm:flex-row sm:items-center gap-2.5">
-          <span class="text-xs font-bold text-slate-500 uppercase tracking-wider shrink-0 flex items-center gap-1.5">
-            <i class="fa-solid fa-bolt text-amber-500"></i> Mở nhanh môn bạn dạy:
-          </span>
-          <div id="teacher-grade-sheet-shortcuts" class="flex items-center gap-2 flex-wrap flex-1">
-            <!-- Render các môn học giáo viên phụ trách dạng pills đẹp mắt qua JS -->
-          </div>
-        </div>
-      </div>
-
-      <!-- Thẻ tóm tắt thông số -->
-      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-        <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm flex items-center space-x-4">
-          <div class="w-12 h-12 rounded-lg bg-indigo-50 text-indigo-600 flex items-center justify-center text-xl">
-            <i class="fa-solid fa-book-open"></i>
-          </div>
-          <div>
-            <div id="stat-total-assignments" class="text-2xl font-bold text-slate-900">0</div>
-            <div class="text-xs text-slate-500 font-medium">Bài tập đã giao</div>
-          </div>
-        </div>
-        <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm flex items-center space-x-4">
-          <div class="w-12 h-12 rounded-lg bg-amber-50 text-amber-600 flex items-center justify-center text-xl">
-            <i class="fa-solid fa-file-circle-check"></i>
-          </div>
-          <div>
-            <div id="stat-total-submissions" class="text-2xl font-bold text-slate-900">0</div>
-            <div class="text-xs text-slate-500 font-medium">Lượt bài đã nộp</div>
-          </div>
-        </div>
-        <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm flex items-center space-x-4">
-          <div class="w-12 h-12 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center text-xl">
-            <i class="fa-solid fa-clipboard-check"></i>
-          </div>
-          <div>
-            <div id="stat-total-graded" class="text-2xl font-bold text-slate-900">0</div>
-            <div class="text-xs text-slate-500 font-medium">Bài đã chấm điểm</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Thanh quản lý & Lọc theo Nhóm Ngành và Lớp học (Hiển thị cho tất cả giáo viên) -->
-      <div class="bg-white rounded-2xl border border-slate-200 p-4 shadow-sm flex flex-col gap-3">
-        <!-- Dòng 1: Bộ lọc Nhóm Ngành Đào Tạo & Các nút tác vụ -->
-        <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-3 pb-3 border-b border-slate-100">
-          <div class="flex items-center gap-1.5 overflow-x-auto pb-1 lg:pb-0" id="teacher-industry-tabs">
-            <!-- Tabs nhóm ngành: Tất Cả / Thiết Kế Đồ Họa / CNTT / May Thời Trang -->
-          </div>
-          <div class="flex items-center gap-2 self-start lg:self-auto shrink-0 flex-wrap">
-            <button id="btn-create-subject-header" onclick="openCreateSubjectModal()" class="text-xs font-semibold px-3.5 py-1.5 rounded-xl bg-violet-50 text-violet-700 hover:bg-violet-100 transition flex items-center gap-1.5 border border-violet-200 shadow-sm" title="Giáo viên tự tạo môn học cho lớp đang chọn">
-              <i class="fa-solid fa-book-bookmark text-sm"></i> + Tạo Môn Học Cho Lớp
-            </button>
-            <!-- Nút chỉ hiển thị cho Quản trị viên (Thầy Nguyễn Công Danh) -->
-            <button id="btn-create-class" onclick="promptCreateClass()" class="hidden text-xs font-semibold px-3 py-1.5 rounded-xl bg-amber-500 hover:bg-amber-600 text-white transition flex items-center gap-1.5 shadow-sm" title="Chỉ Thầy Nguyễn Công Danh mới có quyền tạo thêm lớp">
-              <i class="fa-solid fa-folder-plus text-sm"></i> + Tạo Lớp Mới (Admin)
-            </button>
-          </div>
-        </div>
-
-        <!-- Dòng 2: Danh sách các lớp học thuộc nhóm ngành đang chọn -->
-        <div class="flex items-center gap-2 overflow-x-auto pb-1" id="teacher-class-tabs">
-          <!-- Render danh sách tab lớp học qua JS -->
-        </div>
-      </div>
-
-      <!-- Khung hiển thị các môn học giáo viên đang dạy ở lớp hiện tại -->
-      <div id="teacher-subjects-bar" class="bg-indigo-50/50 border border-indigo-100 rounded-2xl p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs">
-        <div class="flex items-center gap-2 flex-wrap">
-          <span class="font-bold text-slate-700 flex items-center gap-1.5">
-            <i class="fa-solid fa-graduation-cap text-indigo-600 text-sm"></i>
-            Môn học của bạn tại lớp này:
-          </span>
-          <div id="teacher-subjects-chips" class="flex items-center gap-1.5 flex-wrap">
-            <!-- Render qua JS -->
-          </div>
-        </div>
-        <button onclick="openCreateSubjectModal()" class="text-indigo-600 hover:text-indigo-800 font-semibold flex items-center gap-1 shrink-0">
-          <i class="fa-solid fa-plus-circle"></i> Thêm môn cho lớp này
+      
+      <!-- HBXLC TEACHER MAIN NAVIGATION TABS -->
+      <div class="bg-white rounded-2xl p-1.5 border border-slate-200 shadow-sm flex items-center gap-1.5 overflow-x-auto scrollbar-none sticky top-16 z-20">
+        <button onclick="switchTeacherMainTab('dashboard')" id="ttab-btn-dashboard" class="ttab-btn active flex items-center gap-2 px-4 py-2.5 rounded-xl font-bold text-xs sm:text-sm transition shrink-0 bg-red-800 text-white shadow-sm">
+          <i class="fa-solid fa-chart-pie"></i>
+          <span>Tổng Quan</span>
+        </button>
+        <button onclick="switchTeacherMainTab('classes')" id="ttab-btn-classes" class="ttab-btn flex items-center gap-2 px-4 py-2.5 rounded-xl font-bold text-xs sm:text-sm transition shrink-0 text-slate-600 hover:text-red-800 hover:bg-red-50">
+          <i class="fa-solid fa-chalkboard"></i>
+          <span>Quản Lý 25 Lớp Học</span>
+          <span class="bg-indigo-100 text-indigo-800 text-[10px] px-2 py-0.5 rounded-full font-bold">25</span>
+        </button>
+        <button onclick="switchTeacherMainTab('lesson-plans')" id="ttab-btn-lesson-plans" class="ttab-btn flex items-center gap-2 px-4 py-2.5 rounded-xl font-bold text-xs sm:text-sm transition shrink-0 text-slate-600 hover:text-red-800 hover:bg-red-50">
+          <i class="fa-solid fa-book-bookmark text-rose-600"></i>
+          <span>Giáo Án Điện Tử</span>
+          <span id="badge-lesson-plans-count" class="bg-rose-100 text-rose-800 text-[10px] px-2 py-0.5 rounded-full font-extrabold">0</span>
+        </button>
+        <button onclick="switchTeacherMainTab('schedule')" id="ttab-btn-schedule" class="ttab-btn flex items-center gap-2 px-4 py-2.5 rounded-xl font-bold text-xs sm:text-sm transition shrink-0 text-slate-600 hover:text-red-800 hover:bg-red-50">
+          <i class="fa-solid fa-calendar-days text-amber-600"></i>
+          <span>Lịch Báo Giảng / TKB</span>
+        </button>
+        <button onclick="switchTeacherMainTab('assignments')" id="ttab-btn-assignments" class="ttab-btn flex items-center gap-2 px-4 py-2.5 rounded-xl font-bold text-xs sm:text-sm transition shrink-0 text-slate-600 hover:text-red-800 hover:bg-red-50">
+          <i class="fa-solid fa-list-check text-indigo-600"></i>
+          <span>Bài Tập & Chấm Điểm</span>
+        </button>
+        <button onclick="switchTeacherMainTab('grade-sheets')" id="ttab-btn-grade-sheets" class="ttab-btn flex items-center gap-2 px-4 py-2.5 rounded-xl font-bold text-xs sm:text-sm transition shrink-0 text-slate-600 hover:text-red-800 hover:bg-red-50">
+          <i class="fa-solid fa-table-list text-emerald-600"></i>
+          <span>Sổ Điểm Thành Phần</span>
         </button>
       </div>
 
-      <!-- Danh sách bài tập đã giao -->
-      <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
-        <div class="px-6 py-4 border-b border-slate-100 flex items-center justify-between flex-wrap gap-2">
-          <div class="flex items-center gap-3 flex-wrap">
-            <h2 id="teacher-asm-title" class="font-bold text-slate-900 text-lg flex items-center gap-2">
-              <i class="fa-solid fa-list-check text-indigo-600"></i> Danh Sách Bài Tập Đã Giao
-            </h2>
-            <span id="teacher-asm-count" class="text-xs bg-slate-100 text-slate-600 px-2.5 py-1 rounded-full font-medium">0 bài tập</span>
-            <!-- Checkbox Quản trị viên (Thầy Danh) xem toàn trường & add Khảo Thí -->
-            <label id="admin-view-all-assignments-box" class="hidden items-center gap-1.5 text-xs text-slate-600 font-semibold cursor-pointer select-none ml-2 pl-3 border-l border-slate-200">
-              <input type="checkbox" id="admin-view-all-assignments" onchange="loadTeacherData()" class="rounded text-indigo-600 focus:ring-indigo-500 cursor-pointer" checked>
-              <span>Xem bài tập của tất cả giáo viên (Admin)</span>
-            </label>
+      <!-- TAB 1: TỔNG QUAN (DASHBOARD) -->
+      <div id="tsection-dashboard" class="space-y-6">
+        <!-- Header Banner & Thống kê -->
+        <div class="bg-gradient-to-r from-red-800 via-rose-900 to-slate-900 rounded-2xl p-6 text-white shadow-lg flex flex-col md:flex-row md:items-center justify-between gap-4 border border-red-900/50">
+          <div>
+            <div class="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-rose-300">
+              <i class="fa-solid fa-school"></i> TRƯỜNG CAO ĐẲNG HÒA BÌNH XUÂN LỘC
+            </div>
+            <h1 id="teacher-banner-title" class="text-2xl font-extrabold flex items-center gap-2 mt-1">
+              <i class="fa-solid fa-chalkboard-user text-rose-400"></i>
+              Bảng Điều Khiển Giảng Dạy - Thầy Nguyễn Công Danh
+            </h1>
+            <p id="teacher-banner-desc" class="text-rose-100/80 text-xs sm:text-sm mt-1">Khoa Mỹ Thuật - CNTT | Quản lý 25 lớp học, giáo án điện tử, lịch báo giảng & bảng điểm</p>
+          </div>
+          <div class="flex items-center gap-2 flex-wrap">
+            <button id="btn-admin-panel" onclick="openAdminModal()" class="admin-only hidden px-4 py-2.5 bg-amber-500 hover:bg-amber-600 text-white font-semibold rounded-xl shadow-sm transition flex items-center gap-2 text-sm">
+              <i class="fa-solid fa-shield-halved"></i> Quản Trị & Duyệt User
+              <span id="admin-pending-badge" class="hidden bg-rose-600 text-white text-xs px-2 py-0.5 rounded-full font-bold">0</span>
+            </button>
+            <button id="btn-sync-mac" onclick="openSyncMacModal()" title="Thực thi lệnh 'npm run sync-mac' để tải và phân loại toàn bộ bài nộp về máy Mac" class="admin-only hidden px-3.5 py-2.5 bg-gradient-to-r from-sky-600 via-blue-600 to-indigo-700 hover:from-sky-700 hover:to-indigo-800 text-white font-semibold rounded-xl shadow-sm transition flex items-center justify-center gap-1.5 text-xs">
+              <i class="fa-solid fa-rotate"></i> <i class="fa-brands fa-apple text-sm"></i> Đồng Bộ Về Mac
+            </button>
+            <button onclick="openCloudFolder('local')" title="Mở thư mục bài nộp trên máy Mac" class="admin-only hidden px-3.5 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-semibold rounded-xl shadow-sm transition flex items-center justify-center gap-1.5 text-xs">
+              <i class="fa-solid fa-folder-open text-sm"></i> Mở Thư Mục Mac
+            </button>
+            <a href="/api/admin/download-all-submissions-zip" title="Tải toàn bộ bài nộp của tất cả các lớp về máy Mac dạng file ZIP" class="admin-only hidden px-3.5 py-2.5 bg-indigo-700 hover:bg-indigo-800 text-white font-semibold rounded-xl shadow-sm transition flex items-center justify-center gap-1.5 text-xs">
+              <i class="fa-solid fa-cloud-arrow-down text-sm"></i> Tải Bài Nộp (.ZIP)
+            </a>
+            <button onclick="openCreateLessonPlanModal()" class="px-4 py-2.5 bg-rose-600 hover:bg-rose-700 text-white font-semibold rounded-xl shadow-sm transition flex items-center justify-center gap-2 text-sm">
+              <i class="fa-solid fa-file-circle-plus"></i> Soạn Giáo Án
+            </button>
+            <button id="btn-grade-sheet-header" onclick="openGradeSheetModal()" class="px-4 py-2.5 bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white font-semibold rounded-xl shadow-sm transition flex items-center justify-center gap-2 text-sm">
+              <i class="fa-solid fa-file-signature text-base"></i> Sổ Điểm
+            </button>
+            <button id="btn-create-assignment" onclick="openCreateModal()" class="px-4 py-2.5 bg-white text-red-900 hover:bg-red-50 font-semibold rounded-xl shadow-sm transition flex items-center justify-center gap-2 text-sm">
+              <i class="fa-solid fa-plus"></i> Giao Bài Mới
+            </button>
           </div>
         </div>
-        <div id="teacher-assignments-list" class="divide-y divide-slate-100">
-          <!-- Render bài tập qua JS -->
+
+        <!-- Thẻ tóm tắt thông số 4 Cột -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div onclick="switchTeacherMainTab('classes')" class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex items-center space-x-4 cursor-pointer hover:border-red-400 hover:shadow-md transition">
+            <div class="w-12 h-12 rounded-xl bg-red-50 text-red-700 flex items-center justify-center text-xl">
+              <i class="fa-solid fa-chalkboard"></i>
+            </div>
+            <div>
+              <div id="stat-total-classes" class="text-2xl font-bold text-slate-900">25</div>
+              <div class="text-xs text-slate-500 font-medium">Lớp học phụ trách</div>
+            </div>
+          </div>
+          <div onclick="switchTeacherMainTab('classes')" class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex items-center space-x-4 cursor-pointer hover:border-blue-400 hover:shadow-md transition">
+            <div class="w-12 h-12 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center text-xl">
+              <i class="fa-solid fa-users"></i>
+            </div>
+            <div>
+              <div id="stat-total-students" class="text-2xl font-bold text-slate-900">250+</div>
+              <div class="text-xs text-slate-500 font-medium">Sinh viên đang học</div>
+            </div>
+          </div>
+          <div onclick="switchTeacherMainTab('lesson-plans')" class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex items-center space-x-4 cursor-pointer hover:border-rose-400 hover:shadow-md transition">
+            <div class="w-12 h-12 rounded-xl bg-rose-50 text-rose-600 flex items-center justify-center text-xl">
+              <i class="fa-solid fa-book-bookmark"></i>
+            </div>
+            <div>
+              <div id="stat-total-lesson-plans" class="text-2xl font-bold text-slate-900">0</div>
+              <div class="text-xs text-slate-500 font-medium">Kế hoạch bài dạy</div>
+            </div>
+          </div>
+          <div onclick="switchTeacherMainTab('assignments')" class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex items-center space-x-4 cursor-pointer hover:border-indigo-400 hover:shadow-md transition">
+            <div class="w-12 h-12 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center text-xl">
+              <i class="fa-solid fa-file-circle-check"></i>
+            </div>
+            <div>
+              <div id="stat-total-submissions" class="text-2xl font-bold text-slate-900">0</div>
+              <div class="text-xs text-slate-500 font-medium">Lượt bài đã nộp (<span id="stat-total-assignments">0</span> đề)</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Khối hiển thị ẩn để tương thích code cũ cập nhật stat-total-graded -->
+        <span id="stat-total-graded" class="hidden">0</span>
+
+        <!-- 2 CỘT WIDGET: LỊCH DẠY HÔM NAY & PHÂN KHỐI 3 NHÓM NGÀNH -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-5">
+          <!-- Widget: Lịch Báo Giảng Hôm Nay -->
+          <div class="bg-white rounded-2xl border border-slate-200 p-5 shadow-sm space-y-3 flex flex-col justify-between">
+            <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+              <div class="flex items-center gap-2.5">
+                <div class="w-9 h-9 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center">
+                  <i class="fa-solid fa-calendar-day"></i>
+                </div>
+                <div>
+                  <h3 class="font-bold text-slate-800 text-sm">Lịch Giảng Dạy Hôm Nay</h3>
+                  <p id="dash-today-label" class="text-xs text-slate-500">Đang cập nhật theo thời gian thực...</p>
+                </div>
+              </div>
+              <button onclick="switchTeacherMainTab('schedule')" class="text-xs font-semibold text-amber-600 hover:underline flex items-center gap-1">
+                Xem tuần <i class="fa-solid fa-arrow-right"></i>
+              </button>
+            </div>
+            <div id="dash-today-schedule-list" class="space-y-2 py-1 flex-1">
+              <!-- Render lịch dạy hôm nay hoặc thông báo trống -->
+            </div>
+            <button onclick="openScheduleModal()" class="w-full py-2 bg-amber-50 hover:bg-amber-100 text-amber-800 rounded-xl text-xs font-bold transition flex items-center justify-center gap-1.5 border border-amber-200">
+              <i class="fa-solid fa-plus"></i> Thêm Buổi Dạy Vào Lịch Báo Giảng
+            </button>
+          </div>
+
+          <!-- Widget: 3 Khối Ngành Đào Tạo Trọng Tâm -->
+          <div class="bg-white rounded-2xl border border-slate-200 p-5 shadow-sm space-y-3">
+            <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+              <div class="flex items-center gap-2.5">
+                <div class="w-9 h-9 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center">
+                  <i class="fa-solid fa-graduation-cap"></i>
+                </div>
+                <div>
+                  <h3 class="font-bold text-slate-800 text-sm">3 Khối Ngành Đào Tạo - 25 Lớp</h3>
+                  <p class="text-xs text-slate-500">Khoa Mỹ Thuật - Công Nghệ Thông Tin</p>
+                </div>
+              </div>
+              <button onclick="switchTeacherMainTab('classes')" class="text-xs font-semibold text-indigo-600 hover:underline flex items-center gap-1">
+                Xem tất cả lớp <i class="fa-solid fa-arrow-right"></i>
+              </button>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5 pt-1">
+              <div onclick="switchTeacherMainTab('classes'); filterClassesByGroup('thiet_ke_do_hoa');" class="p-3 rounded-xl bg-indigo-50/70 border border-indigo-100 hover:border-indigo-300 cursor-pointer transition">
+                <div class="flex items-center gap-2 text-indigo-700 font-bold text-xs">
+                  <i class="fa-solid fa-palette"></i> Đồ Họa
+                </div>
+                <div class="text-[11px] text-slate-500 mt-1 font-medium">8 lớp: C08TK01, C09TK01, T14TK...</div>
+              </div>
+              <div onclick="switchTeacherMainTab('classes'); filterClassesByGroup('cong_nghe_thong_tin');" class="p-3 rounded-xl bg-blue-50/70 border border-blue-100 hover:border-blue-300 cursor-pointer transition">
+                <div class="flex items-center gap-2 text-blue-700 font-bold text-xs">
+                  <i class="fa-solid fa-laptop-code"></i> CNTT & Mạng
+                </div>
+                <div class="text-[11px] text-slate-500 mt-1 font-medium">11 lớp: T15MG02, T14TH, T15MT...</div>
+              </div>
+              <div onclick="switchTeacherMainTab('classes'); filterClassesByGroup('may_thoi_trang');" class="p-3 rounded-xl bg-pink-50/70 border border-pink-100 hover:border-pink-300 cursor-pointer transition">
+                <div class="flex items-center gap-2 text-pink-700 font-bold text-xs">
+                  <i class="fa-solid fa-shirt"></i> May Thời Trang
+                </div>
+                <div class="text-[11px] text-slate-500 mt-1 font-medium">5 lớp: T14MA, T15MA, L09MA...</div>
+              </div>
+            </div>
+            <div class="pt-2 flex items-center justify-between text-xs text-slate-500 border-t border-slate-100">
+              <span>Sổ điểm thành phần A4 Times New Roman:</span>
+              <button onclick="openGradeSheetModal()" class="font-bold text-emerald-700 hover:underline flex items-center gap-1">
+                <i class="fa-solid fa-table-list"></i> Mở Sổ Điểm A4
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- BẢNG ĐIỂM THÀNH PHẦN MÔN HỌC / MÔ ĐUN (MẪU TRƯỜNG CĐ HÒA BÌNH XUÂN LỘC) -->
+        <div class="bg-gradient-to-br from-emerald-50/90 via-teal-50/60 to-white border border-emerald-200/80 rounded-2xl p-4 sm:p-5 shadow-sm space-y-3.5">
+          <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-3">
+            <div class="flex items-center gap-3 min-w-0">
+              <div class="w-11 h-11 rounded-xl bg-gradient-to-br from-emerald-600 to-teal-700 text-white flex items-center justify-center text-lg shrink-0 shadow-md shadow-emerald-200">
+                <i class="fa-solid fa-table-list"></i>
+              </div>
+              <div class="min-w-0">
+                <div class="flex items-center gap-2 flex-wrap">
+                  <h3 class="font-bold text-emerald-950 text-base leading-snug">Bảng Điểm Thành Phần Môn Học / Mô Đun</h3>
+                  <span class="text-[11px] bg-emerald-100/90 text-emerald-800 border border-emerald-300 px-2.5 py-0.5 rounded-full font-bold shrink-0">Mẫu Trường CĐ Hòa Bình Xuân Lộc</span>
+                </div>
+                <p class="text-xs text-emerald-800/80 mt-1 line-clamp-1 sm:line-clamp-none">Nhập điểm hệ số 1, hệ số 2 và in ấn chuẩn trang in A4 font Times New Roman.</p>
+              </div>
+            </div>
+            <button onclick="openGradeSheetModal()" class="w-full sm:w-auto px-4 py-2 bg-gradient-to-r from-emerald-600 to-teal-700 hover:from-emerald-700 hover:to-teal-800 text-white font-bold rounded-xl text-xs transition flex items-center justify-center gap-2 shadow-sm">
+              <i class="fa-solid fa-folder-open text-sm"></i> Mở Sổ Điểm Thành Phần
+            </button>
+          </div>
+          <div class="pt-3 border-t border-emerald-100/80 flex flex-col sm:flex-row sm:items-center gap-2.5">
+            <span class="text-xs font-bold text-slate-500 uppercase tracking-wider shrink-0 flex items-center gap-1.5">
+              <i class="fa-solid fa-bolt text-amber-500"></i> Mở nhanh môn bạn dạy:
+            </span>
+            <div id="teacher-grade-sheet-shortcuts" class="flex items-center gap-2 flex-wrap flex-1">
+              <!-- Render các môn học giáo viên phụ trách qua JS -->
+            </div>
+          </div>
         </div>
       </div>
+
+      <!-- TAB 2: QUẢN LÝ 25 LỚP HỌC (CLASS HUB) -->
+      <div id="tsection-classes" class="hidden space-y-6">
+        <div class="bg-white rounded-2xl border border-slate-200 p-5 shadow-sm space-y-4">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+            <div>
+              <h2 class="text-xl font-extrabold text-slate-900 flex items-center gap-2">
+                <i class="fa-solid fa-chalkboard text-red-700"></i>
+                Quản Lý 25 Lớp Học Phụ Trách
+              </h2>
+              <p class="text-xs text-slate-500 mt-0.5">Danh sách toàn bộ các lớp thuộc Khoa Mỹ Thuật - CNTT & May Thời Trang</p>
+            </div>
+            <div class="flex items-center gap-2">
+              <button id="btn-create-class-hub" onclick="promptCreateClass()" class="admin-only hidden px-3.5 py-2 rounded-xl bg-amber-500 hover:bg-amber-600 text-white text-xs font-bold transition flex items-center gap-1.5 shadow-sm">
+                <i class="fa-solid fa-plus"></i> Tạo Lớp Mới (Admin)
+              </button>
+            </div>
+          </div>
+
+          <!-- Bộ lọc nhóm ngành cho Class Hub -->
+          <div class="flex items-center gap-1.5 overflow-x-auto pb-1" id="classes-hub-group-filter">
+            <button onclick="filterClassesHub('ALL')" id="chub-filter-all" class="px-3.5 py-1.5 rounded-xl text-xs font-bold bg-slate-900 text-white transition shrink-0">Tất Cả 25 Lớp</button>
+            <button onclick="filterClassesHub('thiet_ke_do_hoa')" id="chub-filter-thiet_ke_do_hoa" class="px-3.5 py-1.5 rounded-xl text-xs font-semibold bg-slate-100 hover:bg-indigo-50 text-slate-600 hover:text-indigo-700 transition shrink-0">Ngành Thiết Kế Đồ Họa</button>
+            <button onclick="filterClassesHub('cong_nghe_thong_tin')" id="chub-filter-cong_nghe_thong_tin" class="px-3.5 py-1.5 rounded-xl text-xs font-semibold bg-slate-100 hover:bg-blue-50 text-slate-600 hover:text-blue-700 transition shrink-0">Ngành CNTT & Mạng</button>
+            <button onclick="filterClassesHub('may_thoi_trang')" id="chub-filter-may_thoi_trang" class="px-3.5 py-1.5 rounded-xl text-xs font-semibold bg-slate-100 hover:bg-pink-50 text-slate-600 hover:text-pink-700 transition shrink-0">Ngành May Thời Trang</button>
+          </div>
+        </div>
+
+        <!-- Grid 25 Lớp Học Cards -->
+        <div id="classes-hub-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <!-- Render dynamically qua JS -->
+        </div>
+      </div>
+
+      <!-- TAB 3: GIÁO ÁN ĐIỆN TỬ (LESSON PLANS - CHUẨN HBXLC) -->
+      <div id="tsection-lesson-plans" class="hidden space-y-6">
+        <div class="bg-gradient-to-r from-red-800 to-rose-900 rounded-2xl p-6 text-white shadow-lg flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <div>
+            <div class="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-rose-300">
+              <i class="fa-solid fa-graduation-cap"></i> TRƯỜNG CAO ĐẲNG HÒA BÌNH XUÂN LỘC
+            </div>
+            <h2 class="text-2xl font-extrabold flex items-center gap-2 mt-1">
+              <i class="fa-solid fa-book-bookmark text-rose-300"></i>
+              Hệ Thống Kế Hoạch Bài Dạy & Giáo Án Điện Tử
+            </h2>
+            <p class="text-rose-100/80 text-xs sm:text-sm mt-1">Soạn thảo, nộp và theo dõi tiến độ bài giảng lý thuyết/thực hành, lưu trữ file Word/PDF trực tuyến</p>
+          </div>
+          <button onclick="openCreateLessonPlanModal()" class="px-4 py-2.5 bg-white text-red-900 hover:bg-rose-50 font-bold rounded-xl text-xs sm:text-sm shadow-md transition flex items-center justify-center gap-2 shrink-0">
+            <i class="fa-solid fa-plus-circle text-rose-700"></i> Soạn / Thêm Giáo Án Mới
+          </button>
+        </div>
+
+        <!-- Bộ lọc giáo án -->
+        <div class="bg-white rounded-2xl border border-slate-200 p-4 shadow-sm grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+          <div>
+            <label class="block text-[11px] font-bold text-slate-600 mb-1">Lọc Theo Lớp</label>
+            <select id="lp-filter-class" onchange="loadLessonPlans()" class="w-full px-3 py-2 rounded-xl border border-slate-200 text-xs font-bold text-slate-800 bg-white">
+              <option value="ALL">Tất Cả Các Lớp</option>
+              <!-- Populated via JS -->
+            </select>
+          </div>
+          <div>
+            <label class="block text-[11px] font-bold text-slate-600 mb-1">Lọc Theo Môn Học</label>
+            <select id="lp-filter-subject" onchange="loadLessonPlans()" class="w-full px-3 py-2 rounded-xl border border-slate-200 text-xs font-bold text-slate-800 bg-white">
+              <option value="ALL">Tất Cả Môn Học</option>
+              <!-- Populated via JS -->
+            </select>
+          </div>
+          <div>
+            <label class="block text-[11px] font-bold text-slate-600 mb-1">Trạng Thái Phê Duyệt</label>
+            <select id="lp-filter-status" onchange="loadLessonPlans()" class="w-full px-3 py-2 rounded-xl border border-slate-200 text-xs font-bold text-slate-800 bg-white">
+              <option value="ALL">Tất Cả Trạng Thái</option>
+              <option value="approved">Đã phê duyệt</option>
+              <option value="pending">Chờ phê duyệt</option>
+              <option value="draft">Bản nháp (Đang soạn)</option>
+              <option value="completed">Đã giảng dạy xong</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-[11px] font-bold text-slate-600 mb-1">Tìm Kiếm Bài Học</label>
+            <div class="relative">
+              <input type="text" id="lp-search-input" oninput="debounce(loadLessonPlans, 300)()" placeholder="Nhập tên bài, nội dung..." class="w-full pl-8 pr-3 py-2 rounded-xl border border-slate-200 text-xs">
+              <i class="fa-solid fa-search absolute left-2.5 top-2.5 text-slate-400 text-xs"></i>
+            </div>
+          </div>
+        </div>
+
+        <!-- Danh sách giáo án -->
+        <div id="lesson-plans-list" class="space-y-3">
+          <!-- Render via JS -->
+        </div>
+      </div>
+
+      <!-- TAB 4: LỊCH BÁO GIẢNG & THỜI KHÓA BIỂU -->
+      <div id="tsection-schedule" class="hidden space-y-6">
+        <div class="bg-white rounded-2xl border border-slate-200 p-5 shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div>
+            <h2 class="text-xl font-extrabold text-slate-900 flex items-center gap-2">
+              <i class="fa-solid fa-calendar-days text-amber-500"></i>
+              Lịch Báo Giảng & Thời Khóa Biểu Giảng Dạy Tuần
+            </h2>
+            <p class="text-xs text-slate-500 mt-0.5">Theo dõi lịch dạy các buổi từ Thứ 2 đến Thứ 7 (Ca Sáng: Tiết 1-5 | Ca Chiều: Tiết 6-10)</p>
+          </div>
+          <button onclick="openScheduleModal()" class="px-4 py-2 bg-amber-500 hover:bg-amber-600 text-white font-bold rounded-xl text-xs transition shadow-sm flex items-center gap-1.5 shrink-0">
+            <i class="fa-solid fa-plus"></i> Thêm Buổi Dạy
+          </button>
+        </div>
+
+        <!-- Bảng Lưới Thời Khóa Biểu Tuần -->
+        <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-x-auto">
+          <div id="schedule-table-container" class="min-w-[760px] p-4">
+            <!-- Render weekly timetable via JS -->
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB 5: BÀI TẬP & CHẤM ĐIỂM -->
+      <div id="tsection-assignments" class="hidden space-y-6">
+        <!-- Thanh quản lý & Lọc theo Nhóm Ngành và Lớp học (Hiển thị cho tất cả giáo viên) -->
+        <div class="bg-white rounded-2xl border border-slate-200 p-4 shadow-sm flex flex-col gap-3">
+          <!-- Dòng 1: Bộ lọc Nhóm Ngành Đào Tạo & Các nút tác vụ -->
+          <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-3 pb-3 border-b border-slate-100">
+            <div class="flex items-center gap-1.5 overflow-x-auto pb-1 lg:pb-0" id="teacher-industry-tabs">
+              <!-- Tabs nhóm ngành: Tất Cả / Thiết Kế Đồ Họa / CNTT / May Thời Trang -->
+            </div>
+            <div class="flex items-center gap-2 self-start lg:self-auto shrink-0 flex-wrap">
+              <button id="btn-create-subject-header" onclick="openCreateSubjectModal()" class="text-xs font-semibold px-3.5 py-1.5 rounded-xl bg-violet-50 text-violet-700 hover:bg-violet-100 transition flex items-center gap-1.5 border border-violet-200 shadow-sm" title="Giáo viên tự tạo môn học cho lớp đang chọn">
+                <i class="fa-solid fa-book-bookmark text-sm"></i> + Tạo Môn Học Cho Lớp
+              </button>
+              <!-- Nút chỉ hiển thị cho Quản trị viên (Thầy Nguyễn Công Danh) -->
+              <button id="btn-create-class" onclick="promptCreateClass()" class="hidden text-xs font-semibold px-3 py-1.5 rounded-xl bg-amber-500 hover:bg-amber-600 text-white transition flex items-center gap-1.5 shadow-sm" title="Chỉ Thầy Nguyễn Công Danh mới có quyền tạo thêm lớp">
+                <i class="fa-solid fa-folder-plus text-sm"></i> + Tạo Lớp Mới (Admin)
+              </button>
+            </div>
+          </div>
+
+          <!-- Dòng 2: Danh sách các lớp học thuộc nhóm ngành đang chọn -->
+          <div class="flex items-center gap-2 overflow-x-auto pb-1" id="teacher-class-tabs">
+            <!-- Render danh sách tab lớp học qua JS -->
+          </div>
+        </div>
+
+        <!-- Khung hiển thị các môn học giáo viên đang dạy ở lớp hiện tại -->
+        <div id="teacher-subjects-bar" class="bg-indigo-50/50 border border-indigo-100 rounded-2xl p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs">
+          <div class="flex items-center gap-2 flex-wrap">
+            <span class="font-bold text-slate-700 flex items-center gap-1.5">
+              <i class="fa-solid fa-graduation-cap text-indigo-600 text-sm"></i>
+              Môn học của bạn tại lớp này:
+            </span>
+            <div id="teacher-subjects-chips" class="flex items-center gap-1.5 flex-wrap">
+              <!-- Render qua JS -->
+            </div>
+          </div>
+          <button onclick="openCreateSubjectModal()" class="text-indigo-600 hover:text-indigo-800 font-semibold flex items-center gap-1 shrink-0">
+            <i class="fa-solid fa-plus-circle"></i> Thêm môn cho lớp này
+          </button>
+        </div>
+
+        <!-- Danh sách bài tập đã giao -->
+        <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+          <div class="px-6 py-4 border-b border-slate-100 flex items-center justify-between flex-wrap gap-2">
+            <div class="flex items-center gap-3 flex-wrap">
+              <h2 id="teacher-asm-title" class="font-bold text-slate-900 text-lg flex items-center gap-2">
+                <i class="fa-solid fa-list-check text-indigo-600"></i> Danh Sách Bài Tập Đã Giao
+              </h2>
+              <span id="teacher-asm-count" class="text-xs bg-slate-100 text-slate-600 px-2.5 py-1 rounded-full font-medium">0 bài tập</span>
+              <!-- Checkbox Quản trị viên (Thầy Danh) xem toàn trường & add Khảo Thí -->
+              <label id="admin-view-all-assignments-box" class="hidden items-center gap-1.5 text-xs text-slate-600 font-semibold cursor-pointer select-none ml-2 pl-3 border-l border-slate-200">
+                <input type="checkbox" id="admin-view-all-assignments" onchange="loadTeacherData()" class="rounded text-indigo-600 focus:ring-indigo-500 cursor-pointer" checked>
+                <span>Xem bài tập của tất cả giáo viên (Admin)</span>
+              </label>
+            </div>
+          </div>
+          <div id="teacher-assignments-list" class="divide-y divide-slate-100">
+            <!-- Render bài tập qua JS -->
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB 6: SỔ ĐIỂM THÀNH PHẦN (A4) -->
+      <div id="tsection-grade-sheets" class="hidden space-y-6">
+        <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm space-y-4">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-slate-100">
+            <div>
+              <h2 class="text-xl font-extrabold text-slate-900 flex items-center gap-2">
+                <i class="fa-solid fa-table-list text-emerald-600"></i>
+                Bảng Điểm Thành Phần Môn Học / Mô Đun
+              </h2>
+              <p class="text-xs text-slate-500 mt-1">Mẫu chuẩn Khoa Mỹ Thuật - CNTT / Trường CĐ Hòa Bình Xuân Lộc (Hỗ trợ in ấn A4 chuẩn font Times New Roman)</p>
+            </div>
+            <button onclick="openGradeSheetModal()" class="px-5 py-2.5 bg-gradient-to-r from-emerald-600 to-teal-700 hover:from-emerald-700 hover:to-teal-800 text-white font-bold rounded-xl text-xs transition shadow-md flex items-center gap-2 shrink-0">
+              <i class="fa-solid fa-folder-open text-sm"></i> Mở Sổ Điểm Thành Phần
+            </button>
+          </div>
+          <div class="text-xs text-slate-600 font-medium">
+            Chọn môn học để mở bảng điểm thành phần:
+          </div>
+          <div id="grade-sheets-tab-shortcuts" class="flex items-center gap-2 flex-wrap">
+            <!-- Render môn học qua JS -->
+          </div>
+        </div>
+      </div>
+
     </section>
 
     <!-- 3. GIAO DIỆN PHÂN HỆ HỌC SINH -->
@@ -1372,6 +1631,248 @@
         <button onclick="viewNewAssignmentFromPopup()" class="mt-3 w-full py-1.5 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-xl text-xs transition shadow-sm flex items-center justify-center gap-1.5">
           <i class="fa-solid fa-arrow-right"></i> Xem bài tập ngay
         </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= MODAL SOẠN / CẬP NHẬT GIÁO ÁN ĐIỆN TỬ ================= -->
+  <div id="modal-lesson-plan" class="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm hidden items-center justify-center p-3 sm:p-4 overflow-y-auto">
+    <div class="bg-white rounded-2xl shadow-2xl max-w-2xl w-full p-5 sm:p-6 border border-slate-100 max-h-[90vh] overflow-y-auto">
+      <div class="flex items-center justify-between pb-4 border-b border-slate-100">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-rose-600 to-red-800 text-white flex items-center justify-center shadow-md">
+            <i class="fa-solid fa-book-bookmark text-lg"></i>
+          </div>
+          <div>
+            <h3 id="modal-lesson-plan-title" class="text-lg font-bold text-slate-900">Soạn Kế Hoạch Bài Dạy / Giáo Án Điện Tử</h3>
+            <p class="text-xs text-slate-500">Trường Cao Đẳng Hòa Bình Xuân Lộc - Khoa Mỹ Thuật - CNTT</p>
+          </div>
+        </div>
+        <button onclick="closeLessonPlanModal()" class="p-2 text-slate-400 hover:text-slate-600 rounded-lg hover:bg-slate-100 transition text-lg">&times;</button>
+      </div>
+
+      <form id="form-lesson-plan" onsubmit="handleSaveLessonPlan(event)" class="mt-4 space-y-4">
+        <input type="hidden" id="lp-form-id" value="">
+
+        <div>
+          <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Tên Bài Giảng / Kế Hoạch Bài Dạy <span class="text-red-500">*</span></label>
+          <input type="text" id="lp-form-title" required placeholder="VD: Bài 4: Kỹ thuật Motion Tracking & Color Grading" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm focus:ring-2 focus:ring-rose-500 focus:border-rose-500 outline-none">
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Lớp Học <span class="text-red-500">*</span></label>
+            <select id="lp-form-class" required onchange="updateLessonPlanSubjectsDropdown()" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm focus:ring-2 focus:ring-rose-500 outline-none bg-white font-bold text-slate-800">
+              <!-- Render 25 lớp học -->
+            </select>
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Môn Học / Mô Đun <span class="text-red-500">*</span></label>
+            <input type="text" id="lp-form-subject" required list="lp-subjects-datalist" placeholder="VD: Xử Lý Kỹ Xảo với After Effects" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm focus:ring-2 focus:ring-rose-500 outline-none">
+            <datalist id="lp-subjects-datalist"></datalist>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-3 gap-3">
+          <div>
+            <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Tuần Học</label>
+            <input type="number" id="lp-form-week" min="1" max="30" value="1" class="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-sm focus:ring-2 focus:ring-rose-500 outline-none">
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Tiết Lý Thuyết</label>
+            <input type="number" id="lp-form-theory" min="0" value="2" class="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-sm focus:ring-2 focus:ring-rose-500 outline-none">
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Tiết Thực Hành</label>
+            <input type="number" id="lp-form-practice" min="0" value="3" class="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-sm focus:ring-2 focus:ring-rose-500 outline-none">
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Ngày Giảng Dạy</label>
+            <input type="date" id="lp-form-date" class="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-sm focus:ring-2 focus:ring-rose-500 outline-none">
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Trạng Thái Giáo Án</label>
+            <select id="lp-form-status" class="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-sm focus:ring-2 focus:ring-rose-500 outline-none bg-white">
+              <option value="draft">Bản nháp (Đang soạn)</option>
+              <option value="pending">Chờ phê duyệt</option>
+              <option value="approved">Đã phê duyệt</option>
+              <option value="completed">Đã giảng dạy</option>
+            </select>
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Mục Tiêu Bài Dạy</label>
+          <textarea id="lp-form-objectives" rows="2" placeholder="Về kiến thức, kỹ năng, thái độ sau khi học xong bài này..." class="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-sm focus:ring-2 focus:ring-rose-500 outline-none"></textarea>
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Tiến Trình & Nội Dung Chi Tiết</label>
+          <textarea id="lp-form-content" rows="3" placeholder="Chuẩn bị phương tiện, các bước lên lớp, hoạt động của GV và HSSV..." class="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-sm focus:ring-2 focus:ring-rose-500 outline-none"></textarea>
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Đính Kèm File Giáo Án (Word .docx, .doc hoặc PDF)</label>
+          <div class="mt-1 flex items-center gap-3">
+            <input type="file" id="lp-form-file" accept=".docx,.doc,.pdf,.pptx" class="text-xs text-slate-600 file:mr-3 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-rose-50 file:text-rose-700 hover:file:bg-rose-100 cursor-pointer">
+            <span id="lp-form-current-file" class="text-xs text-slate-500 italic hidden"></span>
+          </div>
+          <p class="text-[11px] text-slate-400 mt-1">Hệ thống hỗ trợ xem trực tiếp tài liệu Word và PDF trên trình duyệt.</p>
+        </div>
+
+        <div class="pt-4 border-t border-slate-100 flex items-center justify-end gap-2">
+          <button type="button" onclick="closeLessonPlanModal()" class="px-4 py-2 text-slate-600 hover:bg-slate-100 rounded-xl text-xs font-semibold transition">Hủy</button>
+          <button type="submit" id="btn-save-lesson-plan" class="px-5 py-2 bg-gradient-to-r from-red-700 to-rose-800 hover:from-red-800 hover:to-rose-900 text-white font-bold rounded-xl text-xs transition shadow-md shadow-red-200 flex items-center gap-2">
+            <i class="fa-solid fa-cloud-arrow-up"></i> Lưu Giáo Án
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ================= MODAL THÊM / SỬA THỜI KHÓA BIỂU ================= -->
+  <div id="modal-schedule-item" class="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm hidden items-center justify-center p-3 sm:p-4 overflow-y-auto">
+    <div class="bg-white rounded-2xl shadow-2xl max-w-lg w-full p-5 sm:p-6 border border-slate-100">
+      <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+        <h3 id="modal-schedule-title" class="text-base font-bold text-slate-900 flex items-center gap-2">
+          <i class="fa-solid fa-calendar-plus text-amber-500"></i>
+          Thêm Buổi Dạy Vào Lịch Báo Giảng
+        </h3>
+        <button onclick="closeScheduleModal()" class="p-1 text-slate-400 hover:text-slate-600 rounded-lg text-lg">&times;</button>
+      </div>
+
+      <form id="form-schedule" onsubmit="handleSaveSchedule(event)" class="mt-4 space-y-3.5">
+        <input type="hidden" id="sch-form-id" value="">
+
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs font-bold text-slate-700 mb-1">Thứ Trong Tuần <span class="text-red-500">*</span></label>
+            <select id="sch-form-day" required class="w-full px-3 py-2 rounded-xl border border-slate-200 text-xs font-bold text-slate-800 bg-white">
+              <option value="2">Thứ Hai</option>
+              <option value="3">Thứ Ba</option>
+              <option value="4">Thứ Tư</option>
+              <option value="5">Thứ Năm</option>
+              <option value="6">Thứ Sáu</option>
+              <option value="7">Thứ Bảy</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-slate-700 mb-1">Ca Học <span class="text-red-500">*</span></label>
+            <select id="sch-form-session" required onchange="updateScheduleTimeDefault()" class="w-full px-3 py-2 rounded-xl border border-slate-200 text-xs font-bold text-slate-800 bg-white">
+              <option value="morning">Sáng (Tiết 1 - 5)</option>
+              <option value="afternoon">Chiều (Tiết 6 - 10)</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs font-bold text-slate-700 mb-1">Lớp Học <span class="text-red-500">*</span></label>
+            <select id="sch-form-class" required class="w-full px-3 py-2 rounded-xl border border-slate-200 text-xs font-bold text-slate-800 bg-white">
+              <!-- Render lớp -->
+            </select>
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-slate-700 mb-1">Phòng Học</label>
+            <input type="text" id="sch-form-room" placeholder="VD: Lab Đồ Họa 1, Phòng A203" class="w-full px-3 py-2 rounded-xl border border-slate-200 text-xs">
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold text-slate-700 mb-1">Môn Học / Mô Đun <span class="text-red-500">*</span></label>
+          <input type="text" id="sch-form-subject" required placeholder="VD: Thiết Kế Catalog, After Effects..." class="w-full px-3 py-2 rounded-xl border border-slate-200 text-xs">
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold text-slate-700 mb-1">Nội Dung / Bài Dạy Dự Kiến</label>
+          <input type="text" id="sch-form-lesson" placeholder="VD: Bài 3: Bố cục dàn trang và xuất file in" class="w-full px-3 py-2 rounded-xl border border-slate-200 text-xs">
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold text-slate-700 mb-1">Ghi Chú</label>
+          <input type="text" id="sch-form-notes" placeholder="VD: Nhắc sinh viên mang tài liệu bài tập" class="w-full px-3 py-2 rounded-xl border border-slate-200 text-xs">
+        </div>
+
+        <div class="pt-3 border-t border-slate-100 flex items-center justify-end gap-2">
+          <button type="button" onclick="closeScheduleModal()" class="px-3.5 py-1.5 text-slate-600 hover:bg-slate-100 rounded-xl text-xs font-semibold">Hủy</button>
+          <button type="submit" class="px-4 py-2 bg-amber-500 hover:bg-amber-600 text-white font-bold rounded-xl text-xs transition shadow-sm">
+            <i class="fa-solid fa-save mr-1"></i> Lưu Buổi Dạy
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ================= MODAL ĐIỂM DANH LỚP HỌC ================= -->
+  <div id="modal-attendance" class="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm hidden items-center justify-center p-3 sm:p-4 overflow-y-auto">
+    <div class="bg-white rounded-2xl shadow-2xl max-w-3xl w-full p-5 sm:p-6 border border-slate-100 max-h-[92vh] flex flex-col">
+      <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+        <div>
+          <h3 class="text-base font-bold text-slate-900 flex items-center gap-2">
+            <i class="fa-solid fa-clipboard-user text-indigo-600"></i>
+            Điểm Danh Buổi Học - Lớp <span id="att-class-name" class="text-indigo-700 font-extrabold font-mono">C08TK01</span>
+          </h3>
+          <p class="text-xs text-slate-500 mt-0.5">Khoa Mỹ Thuật - CNTT | Trường Cao Đẳng Hòa Bình Xuân Lộc</p>
+        </div>
+        <button onclick="closeAttendanceModal()" class="p-1 text-slate-400 hover:text-slate-600 text-xl font-bold leading-none">&times;</button>
+      </div>
+
+      <div class="my-3 grid grid-cols-1 sm:grid-cols-3 gap-2.5">
+        <div>
+          <label class="block text-[11px] font-bold text-slate-600 mb-1">Ngày Điểm Danh</label>
+          <input type="date" id="att-date" onchange="loadAttendanceForCurrentClass()" class="w-full px-3 py-1.5 rounded-xl border border-slate-200 text-xs font-semibold">
+        </div>
+        <div>
+          <label class="block text-[11px] font-bold text-slate-600 mb-1">Môn Học</label>
+          <input type="text" id="att-subject" placeholder="VD: After Effects" class="w-full px-3 py-1.5 rounded-xl border border-slate-200 text-xs">
+        </div>
+        <div>
+          <label class="block text-[11px] font-bold text-slate-600 mb-1">Bài Học / Buổi Số</label>
+          <input type="text" id="att-lesson" placeholder="VD: Buổi 4: Motion Graphic" class="w-full px-3 py-1.5 rounded-xl border border-slate-200 text-xs">
+        </div>
+      </div>
+
+      <div class="flex items-center justify-between py-2 border-y border-slate-100 text-xs">
+        <span class="text-slate-600 font-medium">Sĩ số lớp: <b id="att-student-count" class="text-slate-900 font-bold">0</b> sinh viên</span>
+        <div class="flex items-center gap-1.5">
+          <button type="button" onclick="setAllAttendanceStatus('present')" class="px-2.5 py-1 bg-emerald-50 text-emerald-700 hover:bg-emerald-100 border border-emerald-200 rounded-lg text-xs font-bold transition">
+            <i class="fa-solid fa-check-double mr-1"></i> Tất cả có mặt
+          </button>
+        </div>
+      </div>
+
+      <div class="flex-1 overflow-y-auto my-2 divide-y divide-slate-100 border border-slate-100 rounded-xl max-h-[50vh]">
+        <table class="w-full text-xs text-left">
+          <thead class="bg-slate-50 sticky top-0 text-slate-600 uppercase font-bold text-[10px] tracking-wider">
+            <tr>
+              <th class="p-2.5 w-10 text-center">STT</th>
+              <th class="p-2.5 w-24">Mã SV</th>
+              <th class="p-2.5">Họ và Tên</th>
+              <th class="p-2.5 text-center w-48">Trạng Thái</th>
+              <th class="p-2.5 w-32">Ghi Chú</th>
+            </tr>
+          </thead>
+          <tbody id="att-students-tbody" class="divide-y divide-slate-100 font-medium">
+            <!-- Render danh sách sinh viên -->
+          </tbody>
+        </table>
+      </div>
+
+      <div class="pt-3 border-t border-slate-100 flex items-center justify-between">
+        <div class="flex items-center gap-3 text-xs text-slate-600">
+          <span>Có mặt: <b id="att-count-present" class="text-emerald-600">0</b></span>
+          <span>Có phép: <b id="att-count-excused" class="text-amber-600">0</b></span>
+          <span>Không phép: <b id="att-count-unexcused" class="text-rose-600">0</b></span>
+        </div>
+        <div class="flex items-center gap-2">
+          <button type="button" onclick="closeAttendanceModal()" class="px-3.5 py-1.5 text-slate-600 hover:bg-slate-100 rounded-xl text-xs font-semibold">Đóng</button>
+          <button type="button" onclick="handleSaveAttendance()" class="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-xl text-xs transition shadow-sm">
+            <i class="fa-solid fa-save mr-1"></i> Lưu Điểm Danh
+          </button>
+        </div>
       </div>
     </div>
   </div>
@@ -2270,12 +2771,15 @@
         // Nút Tạo Lớp Mới: Chỉ Admin (Thầy Nguyễn Công Danh) mới được tạo thêm lớp
         const btnCreateClass = document.getElementById('btn-create-class');
         const btnModalCreateClass = document.getElementById('btn-modal-create-class');
+        const btnCreateClassHub = document.getElementById('btn-create-class-hub');
         if (currentUser.isAdmin) {
           if (btnCreateClass) btnCreateClass.classList.remove('hidden');
           if (btnModalCreateClass) btnModalCreateClass.classList.remove('hidden');
+          if (btnCreateClassHub) btnCreateClassHub.classList.remove('hidden');
         } else {
           if (btnCreateClass) btnCreateClass.classList.add('hidden');
           if (btnModalCreateClass) btnModalCreateClass.classList.add('hidden');
+          if (btnCreateClassHub) btnCreateClassHub.classList.add('hidden');
         }
 
         // Tùy biến giao diện cho Phòng Khảo Thí hoặc Giáo viên
@@ -2321,6 +2825,7 @@
         loadClasses();
         loadTeacherSubjects();
         loadTeacherData();
+        switchTeacherMainTab(currentTeacherMainTab || 'dashboard');
       } else {
         // Hiển thị chuông thông báo và kết nối nhận thông báo thời gian thực cho học sinh
         const bellContainer = document.getElementById('student-notif-bell-container');
@@ -2519,6 +3024,26 @@
         selectSubjClass.innerHTML = buildGroupedClassOptionsHtml(curVal, false);
       }
 
+      // 4. Dropdown cho Giáo Án Điện Tử
+      const selectLpClass = document.getElementById('lp-form-class');
+      if (selectLpClass && availableClasses.length > 0) {
+        const curVal = selectLpClass.value || (teacherSelectedClass !== 'ALL' ? teacherSelectedClass : (availableClasses[0] || 'T15MG02'));
+        selectLpClass.innerHTML = buildGroupedClassOptionsHtml(curVal, false);
+      }
+
+      // 5. Dropdown bộ lọc Giáo Án
+      const filterLpClass = document.getElementById('lp-filter-class');
+      if (filterLpClass) {
+        const curVal = filterLpClass.value || 'ALL';
+        filterLpClass.innerHTML = buildGroupedClassOptionsHtml(curVal, true, "Tất Cả Các Lớp");
+      }
+
+      // 6. Dropdown cho Lịch Báo Giảng (Schedule)
+      const selectSchClass = document.getElementById('sch-form-class');
+      if (selectSchClass && availableClasses.length > 0) {
+        const curVal = selectSchClass.value || (teacherSelectedClass !== 'ALL' ? teacherSelectedClass : (availableClasses[0] || 'T15MG02'));
+        selectSchClass.innerHTML = buildGroupedClassOptionsHtml(curVal, false);
+      }
     }
 
     // ================= QUẢN LÝ MÔN HỌC (SUBJECTS) CHO GIÁO VIÊN =================
@@ -2570,6 +3095,8 @@
       });
 
       container.innerHTML = html;
+      const tabShortcuts = document.getElementById('grade-sheets-tab-shortcuts');
+      if (tabShortcuts) tabShortcuts.innerHTML = html;
     }
 
     function renderTeacherSubjectsChips() {
@@ -2899,6 +3426,953 @@
       }
     }
 
+    // =========================================================================
+    // PHÂN HỆ HBXLC: TỔNG QUAN, CLASS HUB, GIÁO ÁN ĐIỆN TỬ, LỊCH BÁO GIẢNG & ĐIỂM DANH
+    // =========================================================================
+
+    let currentTeacherMainTab = 'dashboard';
+    let classesOverviewData = [];
+    let lessonPlansData = [];
+    let scheduleData = [];
+    let currentAttendanceClass = null;
+    let currentAttendanceStudents = [];
+    let debounceTimer = null;
+
+    function debounce(func, delay = 300) {
+      return (...args) => {
+        clearTimeout(debounceTimer);
+        debounceTimer = setTimeout(() => func(...args), delay);
+      };
+    }
+
+    // 1. CHUYỂN TAB GIAO DIỆN CHÍNH CỦA GIÁO VIÊN
+    function switchTeacherMainTab(tabName) {
+      currentTeacherMainTab = tabName;
+      const tabs = ['dashboard', 'classes', 'lesson-plans', 'schedule', 'assignments', 'grade-sheets'];
+
+      tabs.forEach(t => {
+        const btn = document.getElementById(`ttab-btn-${t}`);
+        const sec = document.getElementById(`tsection-${t}`);
+        if (btn) {
+          if (t === tabName) {
+            btn.className = 'ttab-btn active flex items-center gap-2 px-4 py-2.5 rounded-xl font-bold text-xs sm:text-sm transition shrink-0 bg-red-800 text-white shadow-sm';
+          } else {
+            btn.className = 'ttab-btn flex items-center gap-2 px-4 py-2.5 rounded-xl font-bold text-xs sm:text-sm transition shrink-0 text-slate-600 hover:text-red-800 hover:bg-red-50';
+          }
+        }
+        if (sec) {
+          if (t === tabName) {
+            sec.classList.remove('hidden');
+          } else {
+            sec.classList.add('hidden');
+          }
+        }
+      });
+
+      // Tự động tải dữ liệu cho từng tab
+      if (tabName === 'dashboard') {
+        loadClassesOverview();
+        loadLessonPlans();
+        loadSchedule();
+      } else if (tabName === 'classes') {
+        loadClassesOverview();
+      } else if (tabName === 'lesson-plans') {
+        loadLessonPlans();
+      } else if (tabName === 'schedule') {
+        loadSchedule();
+      } else if (tabName === 'assignments') {
+        loadTeacherData();
+      }
+    }
+
+    // 2. TỔNG QUAN CLASS HUB & 25 LỚP HỌC
+    let selectedClassHubGroup = 'ALL';
+
+    function filterClassesHub(groupId) {
+      selectedClassHubGroup = groupId;
+      const btnAll = document.getElementById('chub-filter-all');
+      const btnTk = document.getElementById('chub-filter-thiet_ke_do_hoa');
+      const btnIt = document.getElementById('chub-filter-cong_nghe_thong_tin');
+      const btnMay = document.getElementById('chub-filter-may_thoi_trang');
+
+      [
+        { el: btnAll, id: 'ALL' },
+        { el: btnTk, id: 'thiet_ke_do_hoa' },
+        { el: btnIt, id: 'cong_nghe_thong_tin' },
+        { el: btnMay, id: 'may_thoi_trang' }
+      ].forEach(item => {
+        if (item.el) {
+          if (item.id === groupId) {
+            item.el.className = 'px-3.5 py-1.5 rounded-xl text-xs font-bold bg-slate-900 text-white transition shrink-0';
+          } else {
+            item.el.className = 'px-3.5 py-1.5 rounded-xl text-xs font-semibold bg-slate-100 hover:bg-slate-200 text-slate-600 transition shrink-0';
+          }
+        }
+      });
+
+      renderClassesHub();
+    }
+
+    function filterClassesByGroup(groupId) {
+      filterClassesHub(groupId);
+    }
+
+    async function loadClassesOverview() {
+      try {
+        const res = await fetch('/api/classes/overview');
+        const data = await res.json();
+        if (data.success) {
+          classesOverviewData = data.classes || [];
+          const totalClsEl = document.getElementById('stat-total-classes');
+          if (totalClsEl) totalClsEl.textContent = data.totalClasses || 25;
+
+          let totalStudents = 0;
+          classesOverviewData.forEach(c => totalStudents += (c.studentCount || 0));
+          const totalStuEl = document.getElementById('stat-total-students');
+          if (totalStuEl) totalStuEl.textContent = totalStudents > 0 ? `${totalStudents} SV` : '250+';
+
+          renderClassesHub();
+        }
+      } catch (e) {
+        console.error("Lỗi tải tổng quan lớp:", e);
+      }
+    }
+
+    function renderClassesHub() {
+      const container = document.getElementById('classes-hub-container');
+      if (!container) return;
+
+      let list = classesOverviewData;
+      if (selectedClassHubGroup !== 'ALL') {
+        list = list.filter(c => c.industryGroupId === selectedClassHubGroup);
+      }
+
+      if (list.length === 0) {
+        container.innerHTML = `
+          <div class="col-span-full p-8 text-center bg-white rounded-2xl border border-slate-200 text-slate-400 text-xs">
+            <i class="fa-solid fa-chalkboard text-2xl mb-2 text-slate-300"></i>
+            <p>Không có lớp học nào trong nhóm ngành này.</p>
+          </div>
+        `;
+        return;
+      }
+
+      let html = '';
+      list.forEach(item => {
+        const isTk = item.className.includes('TK');
+        const isMa = item.className.includes('MA');
+        const borderTopColor = isTk ? 'border-t-indigo-500' : (isMa ? 'border-t-pink-500' : 'border-t-blue-500');
+        const badgeColor = isTk ? 'bg-indigo-50 text-indigo-700 border-indigo-200' : (isMa ? 'bg-pink-50 text-pink-700 border-pink-200' : 'bg-blue-50 text-blue-700 border-blue-200');
+        const iconClass = isTk ? 'fa-palette text-indigo-600' : (isMa ? 'fa-shirt text-pink-600' : 'fa-laptop-code text-blue-600');
+
+        const subjectsList = item.subjects && item.subjects.length > 0
+          ? item.subjects.map(s => `<span class="px-2 py-0.5 rounded-md bg-slate-100 text-slate-700 text-[10px] font-medium truncate max-w-[150px] inline-block">${escapeHtml(s)}</span>`).join(' ')
+          : `<span class="text-[10px] text-slate-400 italic">Chưa tạo môn</span>`;
+
+        html += `
+          <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-4 hover:shadow-md transition flex flex-col justify-between border-t-4 ${borderTopColor}">
+            <div>
+              <div class="flex items-center justify-between gap-2">
+                <div class="flex items-center gap-2">
+                  <div class="w-8 h-8 rounded-lg bg-slate-100 flex items-center justify-center text-sm">
+                    <i class="fa-solid ${iconClass}"></i>
+                  </div>
+                  <div>
+                    <h3 class="font-bold text-slate-900 text-base leading-tight">Lớp ${escapeHtml(item.className)}</h3>
+                    <span class="text-[10px] font-semibold text-slate-500">${escapeHtml(item.industryGroup)}</span>
+                  </div>
+                </div>
+                <span class="text-xs px-2.5 py-0.5 rounded-full font-bold border ${badgeColor}">
+                  <i class="fa-solid fa-users text-[10px] mr-1"></i>${item.studentCount} SV
+                </span>
+              </div>
+
+              <div class="mt-3 pt-2.5 border-t border-slate-100 space-y-1.5 text-xs">
+                <div class="flex items-start gap-1 flex-wrap">
+                  <span class="text-[11px] font-bold text-slate-500 shrink-0">Môn phụ trách:</span>
+                  <div class="flex items-center gap-1 flex-wrap">
+                    ${subjectsList}
+                  </div>
+                </div>
+                <div class="flex items-center justify-between text-[11px] text-slate-500 pt-1">
+                  <span>Bài tập: <b class="text-slate-800">${item.assignmentCount || 0}</b></span>
+                  <span>Giáo án: <b class="text-rose-700">${item.lessonPlanCount || 0}</b></span>
+                  <span>Bảng điểm: <b class="text-emerald-700">${item.gradeSheetCount || 0}</b></span>
+                </div>
+              </div>
+            </div>
+
+            <div class="mt-4 pt-3 border-t border-slate-100 grid grid-cols-2 gap-1.5 text-xs">
+              <button onclick="openAttendanceModal('${escapeHtml(item.className)}')" class="px-2.5 py-1.5 rounded-xl bg-indigo-50 hover:bg-indigo-100 text-indigo-700 font-bold transition flex items-center justify-center gap-1.5 text-[11px]">
+                <i class="fa-solid fa-clipboard-user"></i> Điểm danh
+              </button>
+              <button onclick="filterLessonPlansByClass('${escapeHtml(item.className)}')" class="px-2.5 py-1.5 rounded-xl bg-rose-50 hover:bg-rose-100 text-rose-700 font-bold transition flex items-center justify-center gap-1.5 text-[11px]">
+                <i class="fa-solid fa-book-bookmark"></i> Giáo án
+              </button>
+              <button onclick="openGradeSheetForClass('${escapeHtml(item.className)}')" class="px-2.5 py-1.5 rounded-xl bg-emerald-50 hover:bg-emerald-100 text-emerald-700 font-bold transition flex items-center justify-center gap-1.5 text-[11px]">
+                <i class="fa-solid fa-table-list"></i> Sổ điểm A4
+              </button>
+              <button onclick="openCreateModalForClass('${escapeHtml(item.className)}')" class="px-2.5 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold transition flex items-center justify-center gap-1.5 text-[11px]">
+                <i class="fa-solid fa-plus"></i> Giao bài
+              </button>
+            </div>
+          </div>
+        `;
+      });
+
+      container.innerHTML = html;
+    }
+
+    function filterLessonPlansByClass(className) {
+      switchTeacherMainTab('lesson-plans');
+      const filter = document.getElementById('lp-filter-class');
+      if (filter) {
+        filter.value = className;
+        loadLessonPlans();
+      }
+    }
+
+    function openGradeSheetForClass(className) {
+      openGradeSheetModal();
+      const selClass = document.getElementById('gs-class-select');
+      if (selClass) {
+        selClass.value = className;
+        updateGradeSheetSubjectsDropdown();
+      }
+    }
+
+    function openCreateModalForClass(className) {
+      openCreateModal();
+      const selClass = document.getElementById('create-target-class');
+      if (selClass) {
+        selClass.value = className;
+      }
+    }
+
+    // 3. GIÁO ÁN ĐIỆN TỬ (LESSON PLANS - CHUẨN HBXLC)
+    async function loadLessonPlans() {
+      try {
+        const classFilter = document.getElementById('lp-filter-class')?.value || 'ALL';
+        const subjFilter = document.getElementById('lp-filter-subject')?.value || 'ALL';
+        const statusFilter = document.getElementById('lp-filter-status')?.value || 'ALL';
+        const searchVal = document.getElementById('lp-search-input')?.value || '';
+
+        let url = `/api/lesson-plans?teacherId=${encodeURIComponent(currentUser ? currentUser.id : 'u_teacher_danh')}`;
+        if (classFilter !== 'ALL') url += `&className=${encodeURIComponent(classFilter)}`;
+        if (subjFilter !== 'ALL') url += `&subjectName=${encodeURIComponent(subjFilter)}`;
+        if (statusFilter !== 'ALL') url += `&status=${encodeURIComponent(statusFilter)}`;
+        if (searchVal.trim()) url += `&search=${encodeURIComponent(searchVal.trim())}`;
+
+        const res = await fetch(url);
+        const data = await res.json();
+        if (data.success) {
+          lessonPlansData = data.lessonPlans || [];
+          const statLp = document.getElementById('stat-total-lesson-plans');
+          if (statLp) statLp.textContent = lessonPlansData.length;
+          const badgeCount = document.getElementById('badge-lesson-plans-count');
+          if (badgeCount) badgeCount.textContent = lessonPlansData.length;
+          renderLessonPlans();
+          populateLessonPlansSubjectsFilter();
+        }
+      } catch (e) {
+        console.error("Lỗi tải giáo án:", e);
+      }
+    }
+
+    function populateLessonPlansSubjectsFilter() {
+      const select = document.getElementById('lp-filter-subject');
+      if (!select) return;
+      const cur = select.value;
+      const subjects = new Set();
+      lessonPlansData.forEach(lp => {
+        if (lp.subjectName) subjects.add(lp.subjectName);
+      });
+
+      let html = '<option value="ALL">Tất Cả Môn Học</option>';
+      subjects.forEach(s => {
+        const isSel = (s === cur) ? 'selected' : '';
+        html += `<option value="${escapeHtml(s)}" ${isSel}>${escapeHtml(s)}</option>`;
+      });
+      select.innerHTML = html;
+    }
+
+    function renderLessonPlans() {
+      const container = document.getElementById('lesson-plans-list');
+      if (!container) return;
+
+      if (lessonPlansData.length === 0) {
+        container.innerHTML = `
+          <div class="p-12 text-center bg-white rounded-2xl border border-slate-200 text-slate-400">
+            <i class="fa-solid fa-book-open text-3xl mb-2 text-rose-300"></i>
+            <p class="font-bold text-slate-600 text-sm">Chưa có kế hoạch bài dạy nào được lưu</p>
+            <p class="text-xs text-slate-400 mt-1">Bấm nút "Soạn / Thêm Giáo Án Mới" để tạo bài giảng đầu tiên chuẩn CĐ Hòa Bình Xuân Lộc</p>
+            <button onclick="openCreateLessonPlanModal()" class="mt-4 px-4 py-2 bg-rose-600 hover:bg-rose-700 text-white rounded-xl text-xs font-bold transition shadow-sm inline-flex items-center gap-1.5">
+              <i class="fa-solid fa-plus-circle"></i> Soạn Giáo Án Mới
+            </button>
+          </div>
+        `;
+        return;
+      }
+
+      let html = '';
+      lessonPlansData.forEach(lp => {
+        const statusMap = {
+          'approved': { text: 'Đã phê duyệt', color: 'bg-emerald-50 text-emerald-700 border-emerald-200', icon: 'fa-circle-check' },
+          'pending': { text: 'Chờ duyệt', color: 'bg-purple-50 text-purple-700 border-purple-200', icon: 'fa-clock' },
+          'draft': { text: 'Bản nháp', color: 'bg-amber-50 text-amber-700 border-amber-200', icon: 'fa-pencil' },
+          'completed': { text: 'Đã giảng dạy', color: 'bg-blue-50 text-blue-700 border-blue-200', icon: 'fa-circle-check' }
+        };
+        const st = statusMap[lp.status] || statusMap['draft'];
+
+        let fileBlock = '';
+        if (lp.attachment && lp.attachment.originalName) {
+          const fname = lp.attachment.originalName;
+          const ext = fname.split('.').pop().toLowerCase();
+          const isDocx = ['docx', 'doc'].includes(ext);
+          const icon = isDocx ? 'fa-file-word text-blue-600' : (ext === 'pdf' ? 'fa-file-pdf text-red-600' : 'fa-file text-slate-600');
+
+          fileBlock = `
+            <div class="mt-2.5 p-2 bg-slate-50 border border-slate-200/80 rounded-xl flex items-center justify-between gap-2 text-xs">
+              <div class="flex items-center gap-2 min-w-0">
+                <i class="fa-solid ${icon} text-base shrink-0"></i>
+                <span class="font-semibold text-slate-800 truncate" title="${escapeHtml(fname)}">${escapeHtml(fname)}</span>
+                <span class="text-[10px] text-slate-400 shrink-0">(${formatBytes(lp.attachment.size || 0)})</span>
+              </div>
+              <div class="flex items-center gap-1 shrink-0">
+                <button onclick="previewFile('${escapeHtml(lp.attachment.filename)}', '${escapeHtml(fname)}', ${lp.attachment.size || 0}, '${escapeHtml(lp.attachment.url || '')}')" class="px-2.5 py-1 bg-white hover:bg-slate-100 border border-slate-200 text-indigo-700 rounded-lg text-xs font-bold transition flex items-center gap-1 shadow-xs" title="Xem trực tiếp trên trình duyệt">
+                  <i class="fa-solid fa-eye text-[11px]"></i> Xem
+                </button>
+                <a href="${lp.attachment.url || `/api/download/${lp.attachment.filename}?name=${encodeURIComponent(fname)}`}" target="_blank" download class="p-1 text-slate-500 hover:text-slate-800 rounded-lg hover:bg-slate-200 transition" title="Tải file về máy">
+                  <i class="fa-solid fa-download text-xs"></i>
+                </a>
+              </div>
+            </div>
+          `;
+        }
+
+        html += `
+          <div class="bg-white rounded-2xl border border-slate-200 p-5 shadow-sm hover:shadow transition space-y-3">
+            <div class="flex flex-col sm:flex-row sm:items-start justify-between gap-2">
+              <div class="space-y-1">
+                <div class="flex items-center gap-2 flex-wrap">
+                  <span class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-rose-50 text-rose-800 border border-rose-200">
+                    Tuần ${lp.week || 1}
+                  </span>
+                  <span class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-slate-900 text-white">
+                    Lớp ${escapeHtml(lp.className)}
+                  </span>
+                  <span class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-indigo-50 text-indigo-700 border border-indigo-200">
+                    ${escapeHtml(lp.subjectName)}
+                  </span>
+                  <span class="text-xs px-2.5 py-0.5 rounded-full font-bold border ${st.color} flex items-center gap-1">
+                    <i class="fa-solid ${st.icon} text-[10px]"></i> ${st.text}
+                  </span>
+                </div>
+                <h3 class="text-base sm:text-lg font-bold text-slate-900 pt-0.5">${escapeHtml(lp.title)}</h3>
+              </div>
+
+              <div class="flex items-center gap-1 self-start shrink-0">
+                <button onclick="handleUpdateLessonPlanStatus('${escapeHtml(lp.id)}', 'approved')" title="Đánh dấu đã phê duyệt" class="px-2.5 py-1 text-xs font-bold rounded-lg bg-emerald-50 text-emerald-700 hover:bg-emerald-100 transition">
+                  <i class="fa-solid fa-check mr-1"></i>Duyệt
+                </button>
+                <button onclick="handleUpdateLessonPlanStatus('${escapeHtml(lp.id)}', 'completed')" title="Đánh dấu đã giảng dạy" class="px-2.5 py-1 text-xs font-bold rounded-lg bg-blue-50 text-blue-700 hover:bg-blue-100 transition">
+                  <i class="fa-solid fa-chalkboard-user mr-1"></i>Đã dạy
+                </button>
+                <button onclick="openCreateLessonPlanModal('${escapeHtml(lp.id)}')" title="Chỉnh sửa giáo án" class="p-1.5 text-slate-500 hover:text-slate-800 rounded-lg hover:bg-slate-100 transition">
+                  <i class="fa-solid fa-pen-to-square"></i>
+                </button>
+                <button onclick="handleDeleteLessonPlan('${escapeHtml(lp.id)}')" title="Xóa giáo án" class="p-1.5 text-rose-500 hover:text-rose-700 rounded-lg hover:bg-rose-50 transition">
+                  <i class="fa-solid fa-trash-can"></i>
+                </button>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-xs text-slate-600 bg-slate-50/70 p-2.5 rounded-xl border border-slate-100">
+              <div><span class="text-slate-400">Thời lượng:</span> <b class="text-slate-800">${(lp.periodsTheory || 0) + (lp.periodsPractice || 0)} tiết</b></div>
+              <div><span class="text-slate-400">Lý thuyết:</span> <b class="text-slate-800">${lp.periodsTheory || 0} tiết</b></div>
+              <div><span class="text-slate-400">Thực hành:</span> <b class="text-slate-800">${lp.periodsPractice || 0} tiết</b></div>
+              <div><span class="text-slate-400">Ngày dạy:</span> <b class="text-slate-800">${lp.date || 'Theo TKB'}</b></div>
+            </div>
+
+            ${lp.objectives ? `<div class="text-xs text-slate-600"><span class="font-bold text-slate-700">Mục tiêu:</span> ${escapeHtml(lp.objectives)}</div>` : ''}
+            ${lp.content ? `<div class="text-xs text-slate-600"><span class="font-bold text-slate-700">Tiến trình giảng dạy:</span> <span class="line-clamp-2">${escapeHtml(lp.content)}</span></div>` : ''}
+
+            ${fileBlock}
+          </div>
+        `;
+      });
+
+      container.innerHTML = html;
+    }
+
+    function openCreateLessonPlanModal(planId = null) {
+      const modal = document.getElementById('modal-lesson-plan');
+      const form = document.getElementById('form-lesson-plan');
+      const titleEl = document.getElementById('modal-lesson-plan-title');
+      if (!modal || !form) return;
+
+      form.reset();
+      populateClassDropdowns();
+
+      if (planId) {
+        const plan = lessonPlansData.find(p => p.id === planId);
+        if (plan) {
+          titleEl.textContent = "Chỉnh Sửa Kế Hoạch Bài Dạy";
+          document.getElementById('lp-form-id').value = plan.id;
+          document.getElementById('lp-form-title').value = plan.title || '';
+          document.getElementById('lp-form-class').value = plan.className || '';
+          document.getElementById('lp-form-subject').value = plan.subjectName || '';
+          document.getElementById('lp-form-week').value = plan.week || 1;
+          document.getElementById('lp-form-theory').value = plan.periodsTheory || 0;
+          document.getElementById('lp-form-practice').value = plan.periodsPractice || 0;
+          document.getElementById('lp-form-date').value = plan.date || '';
+          document.getElementById('lp-form-status').value = plan.status || 'draft';
+          document.getElementById('lp-form-objectives').value = plan.objectives || '';
+          document.getElementById('lp-form-content').value = plan.content || '';
+          const curFile = document.getElementById('lp-form-current-file');
+          if (plan.attachment && plan.attachment.originalName) {
+            curFile.textContent = `File hiện tại: ${plan.attachment.originalName}`;
+            curFile.classList.remove('hidden');
+          } else {
+            curFile.classList.add('hidden');
+          }
+        }
+      } else {
+        titleEl.textContent = "Soạn Kế Hoạch Bài Dạy / Giáo Án Điện Tử";
+        document.getElementById('lp-form-id').value = "";
+        document.getElementById('lp-form-current-file').classList.add('hidden');
+        document.getElementById('lp-form-date').value = new Date().toISOString().split('T')[0];
+        if (teacherSelectedClass && teacherSelectedClass !== 'ALL') {
+          document.getElementById('lp-form-class').value = teacherSelectedClass;
+        }
+      }
+
+      updateLessonPlanSubjectsDropdown();
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+
+    function closeLessonPlanModal() {
+      const modal = document.getElementById('modal-lesson-plan');
+      if (modal) {
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+      }
+    }
+
+    function updateLessonPlanSubjectsDropdown() {
+      const cls = document.getElementById('lp-form-class')?.value;
+      const datalist = document.getElementById('lp-subjects-datalist');
+      if (!datalist || !cls) return;
+
+      const classSubjects = (teacherSubjectsList || []).filter(s => s.className && s.className.toUpperCase() === cls.toUpperCase());
+      let html = '';
+      classSubjects.forEach(s => {
+        html += `<option value="${escapeHtml(s.name)}">`;
+      });
+      datalist.innerHTML = html;
+    }
+
+    async function handleSaveLessonPlan(e) {
+      e.preventDefault();
+      const btn = document.getElementById('btn-save-lesson-plan');
+      const origText = btn.innerHTML;
+      btn.disabled = true;
+      btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> Đang lưu...`;
+
+      try {
+        const formData = new FormData();
+        formData.append('id', document.getElementById('lp-form-id').value);
+        formData.append('title', document.getElementById('lp-form-title').value.trim());
+        formData.append('className', document.getElementById('lp-form-class').value.trim());
+        formData.append('subjectName', document.getElementById('lp-form-subject').value.trim());
+        formData.append('week', document.getElementById('lp-form-week').value);
+        formData.append('periodsTheory', document.getElementById('lp-form-theory').value);
+        formData.append('periodsPractice', document.getElementById('lp-form-practice').value);
+        formData.append('date', document.getElementById('lp-form-date').value);
+        formData.append('status', document.getElementById('lp-form-status').value);
+        formData.append('objectives', document.getElementById('lp-form-objectives').value.trim());
+        formData.append('content', document.getElementById('lp-form-content').value.trim());
+        formData.append('teacherId', currentUser ? currentUser.id : 'u_teacher_danh');
+
+        const fileInput = document.getElementById('lp-form-file');
+        if (fileInput && fileInput.files[0]) {
+          formData.append('attachment', fileInput.files[0]);
+        }
+
+        const res = await fetch('/api/lesson-plans', {
+          method: 'POST',
+          body: formData
+        });
+        const data = await res.json();
+        if (res.ok && data.success) {
+          showToast(data.message || "Đã lưu giáo án thành công!", "success");
+          closeLessonPlanModal();
+          await loadLessonPlans();
+        } else {
+          showToast(data.message || "Lỗi lưu giáo án!", "error");
+        }
+      } catch (err) {
+        showToast("Lỗi kết nối máy chủ: " + err.message, "error");
+      } finally {
+        btn.disabled = false;
+        btn.innerHTML = origText;
+      }
+    }
+
+    async function handleUpdateLessonPlanStatus(id, newStatus) {
+      try {
+        const res = await fetch(`/api/lesson-plans/${id}/status`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ status: newStatus })
+        });
+        const data = await res.json();
+        if (res.ok && data.success) {
+          showToast("Đã cập nhật trạng thái giáo án!", "success");
+          await loadLessonPlans();
+        }
+      } catch (e) {
+        showToast("Lỗi cập nhật trạng thái!", "error");
+      }
+    }
+
+    async function handleDeleteLessonPlan(id) {
+      if (!confirm("Thầy có chắc chắn muốn xóa bài giáo án này?")) return;
+      try {
+        const res = await fetch(`/api/lesson-plans/${id}`, { method: 'DELETE' });
+        const data = await res.json();
+        if (res.ok && data.success) {
+          showToast("Đã xóa giáo án thành công!", "success");
+          await loadLessonPlans();
+        }
+      } catch (e) {
+        showToast("Lỗi xóa giáo án!", "error");
+      }
+    }
+
+    // 4. THỜI KHÓA BIỂU / LỊCH BÁO GIẢNG (SCHEDULE)
+    async function loadSchedule() {
+      try {
+        const res = await fetch('/api/schedule');
+        const data = await res.json();
+        if (data.success) {
+          scheduleData = data.schedule || [];
+          renderSchedule();
+          renderDashboardTodaySchedule();
+        }
+      } catch (e) {
+        console.error("Lỗi tải thời khóa biểu:", e);
+      }
+    }
+
+    function renderDashboardTodaySchedule() {
+      const label = document.getElementById('dash-today-label');
+      const listContainer = document.getElementById('dash-today-schedule-list');
+      if (!listContainer) return;
+
+      const daysOfWeek = ['Chủ Nhật', 'Thứ Hai', 'Thứ Ba', 'Thứ Tư', 'Thứ Năm', 'Thứ Sáu', 'Thứ Bảy'];
+      const now = new Date();
+      const currentDay = now.getDay();
+      const mappedDay = currentDay === 0 ? 8 : currentDay + 1;
+
+      if (label) {
+        label.textContent = `${daysOfWeek[currentDay]}, ngày ${now.getDate()}/${now.getMonth() + 1}/${now.getFullYear()}`;
+      }
+
+      const todayClasses = scheduleData.filter(s => Number(s.dayOfWeek) === mappedDay);
+
+      if (todayClasses.length === 0) {
+        listContainer.innerHTML = `
+          <div class="py-4 text-center text-slate-400 text-xs bg-slate-50 rounded-xl">
+            <i class="fa-solid fa-mug-hot text-amber-500 text-lg mb-1"></i>
+            <p>Hôm nay Thầy không có lịch dạy trên thời khóa biểu.</p>
+          </div>
+        `;
+        return;
+      }
+
+      let html = '';
+      todayClasses.forEach(item => {
+        const isMorning = item.session === 'morning';
+        html += `
+          <div class="p-2.5 rounded-xl border border-slate-200 bg-slate-50 flex items-center justify-between gap-2 text-xs">
+            <div class="flex items-center gap-2.5">
+              <span class="px-2 py-0.5 rounded-md font-bold text-[10px] ${isMorning ? 'bg-amber-100 text-amber-800' : 'bg-blue-100 text-blue-800'}">
+                ${isMorning ? 'SÁNG (1-5)' : 'CHIỀU (6-10)'}
+              </span>
+              <div>
+                <div class="font-bold text-slate-800">Lớp ${escapeHtml(item.className)} - ${escapeHtml(item.subjectName)}</div>
+                <div class="text-[11px] text-slate-500"><i class="fa-solid fa-location-dot text-rose-500 mr-1"></i>${escapeHtml(item.room || 'Phòng máy')} • ${escapeHtml(item.currentLesson || 'Theo bài dạy')}</div>
+              </div>
+            </div>
+            <button onclick="openAttendanceModal('${escapeHtml(item.className)}')" class="px-2.5 py-1 bg-white hover:bg-slate-100 border border-slate-200 text-indigo-700 font-bold rounded-lg text-xs shadow-xs">
+              Điểm danh
+            </button>
+          </div>
+        `;
+      });
+
+      listContainer.innerHTML = html;
+    }
+
+    function renderSchedule() {
+      const container = document.getElementById('schedule-table-container');
+      if (!container) return;
+
+      const days = [
+        { num: 2, label: 'Thứ Hai' },
+        { num: 3, label: 'Thứ Ba' },
+        { num: 4, label: 'Thứ Tư' },
+        { num: 5, label: 'Thứ Năm' },
+        { num: 6, label: 'Thứ Sáu' },
+        { num: 7, label: 'Thứ Bảy' }
+      ];
+
+      let html = `
+        <table class="w-full text-xs text-left border-collapse border border-slate-200">
+          <thead>
+            <tr class="bg-slate-100 text-slate-700 font-bold uppercase text-[11px] border-b border-slate-200">
+              <th class="p-3 w-28 text-center border-r border-slate-200">Buổi / Tiết</th>
+              ${days.map(d => `<th class="p-3 text-center border-r border-slate-200">${d.label}</th>`).join('')}
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-200">
+            <!-- CA SÁNG -->
+            <tr>
+              <td class="p-3 bg-amber-50/70 border-r border-slate-200 font-bold text-amber-900 text-center">
+                <div class="text-xs font-bold">CA SÁNG</div>
+                <div class="text-[10px] text-slate-500 font-medium">Tiết 1 - 5</div>
+                <div class="text-[10px] text-slate-400">07:00 - 11:15</div>
+              </td>
+              ${days.map(d => {
+                const items = scheduleData.filter(s => Number(s.dayOfWeek) === d.num && s.session === 'morning');
+                return `<td class="p-2 border-r border-slate-200 align-top h-28 bg-white">${renderScheduleCell(items)}</td>`;
+              }).join('')}
+            </tr>
+            <!-- CA CHIỀU -->
+            <tr>
+              <td class="p-3 bg-blue-50/70 border-r border-slate-200 font-bold text-blue-900 text-center">
+                <div class="text-xs font-bold">CA CHIỀU</div>
+                <div class="text-[10px] text-slate-500 font-medium">Tiết 6 - 10</div>
+                <div class="text-[10px] text-slate-400">12:45 - 17:00</div>
+              </td>
+              ${days.map(d => {
+                const items = scheduleData.filter(s => Number(s.dayOfWeek) === d.num && s.session === 'afternoon');
+                return `<td class="p-2 border-r border-slate-200 align-top h-28 bg-white">${renderScheduleCell(items)}</td>`;
+              }).join('')}
+            </tr>
+          </tbody>
+        </table>
+      `;
+
+      container.innerHTML = html;
+    }
+
+    function renderScheduleCell(items) {
+      if (!items || items.length === 0) {
+        return `<div class="h-full flex items-center justify-center text-slate-300 text-[10px] italic">Trống</div>`;
+      }
+      return items.map(item => `
+        <div class="p-2 rounded-xl bg-slate-50 border border-slate-200 mb-1.5 shadow-xs space-y-1">
+          <div class="flex items-center justify-between gap-1">
+            <span class="font-extrabold text-slate-900 text-xs">Lớp ${escapeHtml(item.className)}</span>
+            <div class="flex items-center gap-1">
+              <button onclick="openScheduleModal('${escapeHtml(item.id)}')" class="text-slate-400 hover:text-slate-700 text-[10px]"><i class="fa-solid fa-pen"></i></button>
+              <button onclick="handleDeleteSchedule('${escapeHtml(item.id)}')" class="text-rose-400 hover:text-rose-700 text-[10px]"><i class="fa-solid fa-trash"></i></button>
+            </div>
+          </div>
+          <div class="text-indigo-700 font-bold text-[11px] truncate">${escapeHtml(item.subjectName)}</div>
+          <div class="text-slate-500 text-[10px] flex items-center gap-1"><i class="fa-solid fa-location-dot text-rose-500"></i> ${escapeHtml(item.room || 'Phòng máy')}</div>
+          ${item.currentLesson ? `<div class="text-slate-600 text-[10px] italic truncate">${escapeHtml(item.currentLesson)}</div>` : ''}
+        </div>
+      `).join('');
+    }
+
+    function openScheduleModal(itemId = null) {
+      const modal = document.getElementById('modal-schedule-item');
+      const form = document.getElementById('form-schedule');
+      if (!modal || !form) return;
+      form.reset();
+      populateClassDropdowns();
+
+      if (itemId) {
+        const item = scheduleData.find(s => s.id === itemId);
+        if (item) {
+          document.getElementById('modal-schedule-title').innerHTML = `<i class="fa-solid fa-calendar-check text-amber-500"></i> Chỉnh Sửa Buổi Dạy`;
+          document.getElementById('sch-form-id').value = item.id;
+          document.getElementById('sch-form-day').value = item.dayOfWeek;
+          document.getElementById('sch-form-session').value = item.session || 'morning';
+          document.getElementById('sch-form-class').value = item.className || '';
+          document.getElementById('sch-form-subject').value = item.subjectName || '';
+          document.getElementById('sch-form-room').value = item.room || '';
+          document.getElementById('sch-form-lesson').value = item.currentLesson || '';
+          document.getElementById('sch-form-notes').value = item.notes || '';
+        }
+      } else {
+        document.getElementById('modal-schedule-title').innerHTML = `<i class="fa-solid fa-calendar-plus text-amber-500"></i> Thêm Buổi Dạy Vào Lịch Báo Giảng`;
+        document.getElementById('sch-form-id').value = "";
+      }
+
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+
+    function closeScheduleModal() {
+      const modal = document.getElementById('modal-schedule-item');
+      if (modal) {
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+      }
+    }
+
+    function updateScheduleTimeDefault() {}
+
+    async function handleSaveSchedule(e) {
+      e.preventDefault();
+      try {
+        const body = {
+          id: document.getElementById('sch-form-id').value,
+          dayOfWeek: document.getElementById('sch-form-day').value,
+          session: document.getElementById('sch-form-session').value,
+          className: document.getElementById('sch-form-class').value.trim(),
+          subjectName: document.getElementById('sch-form-subject').value.trim(),
+          room: document.getElementById('sch-form-room').value.trim(),
+          currentLesson: document.getElementById('sch-form-lesson').value.trim(),
+          notes: document.getElementById('sch-form-notes').value.trim(),
+          teacherName: currentUser ? currentUser.name : 'Thầy Nguyễn Công Danh'
+        };
+
+        const res = await fetch('/api/schedule', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(body)
+        });
+        const data = await res.json();
+        if (res.ok && data.success) {
+          showToast(data.message || "Đã lưu lịch dạy thành công!", "success");
+          closeScheduleModal();
+          await loadSchedule();
+        } else {
+          showToast(data.message || "Lỗi lưu lịch dạy!", "error");
+        }
+      } catch (err) {
+        showToast("Lỗi kết nối máy chủ!", "error");
+      }
+    }
+
+    async function handleDeleteSchedule(id) {
+      if (!confirm("Thầy có muốn xóa buổi học này khỏi thời khóa biểu?")) return;
+      try {
+        const res = await fetch(`/api/schedule/${id}`, { method: 'DELETE' });
+        const data = await res.json();
+        if (res.ok && data.success) {
+          showToast("Đã xóa buổi học thành công!", "success");
+          await loadSchedule();
+        }
+      } catch (e) {
+        showToast("Lỗi xóa lịch dạy!", "error");
+      }
+    }
+
+    // 5. ĐIỂM DANH LỚP HỌC (ATTENDANCE)
+    async function openAttendanceModal(className) {
+      currentAttendanceClass = className;
+      const modal = document.getElementById('modal-attendance');
+      if (!modal) return;
+
+      document.getElementById('att-class-name').textContent = className;
+      document.getElementById('att-date').value = new Date().toISOString().split('T')[0];
+
+      const matchSub = (teacherSubjectsList || []).find(s => s.className && s.className.toUpperCase() === className.toUpperCase());
+      document.getElementById('att-subject').value = matchSub ? matchSub.name : '';
+      document.getElementById('att-lesson').value = '';
+
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+
+      await loadAttendanceForCurrentClass();
+    }
+
+    function closeAttendanceModal() {
+      const modal = document.getElementById('modal-attendance');
+      if (modal) {
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+      }
+    }
+
+    async function loadAttendanceForCurrentClass() {
+      if (!currentAttendanceClass) return;
+      const date = document.getElementById('att-date').value;
+
+      try {
+        const uRes = await fetch('/api/admin/users');
+        const uData = await uRes.json();
+        const allUsers = uData.users || [];
+        currentAttendanceStudents = allUsers.filter(u => u.role === 'student' && u.className && u.className.toUpperCase() === currentAttendanceClass.toUpperCase());
+
+        document.getElementById('att-student-count').textContent = currentAttendanceStudents.length;
+
+        const attRes = await fetch(`/api/attendance?className=${encodeURIComponent(currentAttendanceClass)}&date=${encodeURIComponent(date)}`);
+        const attData = await attRes.json();
+        const existingSession = (attData.attendance && attData.attendance.length > 0) ? attData.attendance[0] : null;
+
+        if (existingSession && existingSession.lessonTitle) {
+          document.getElementById('att-lesson').value = existingSession.lessonTitle;
+        }
+
+        renderAttendanceTable(currentAttendanceStudents, existingSession ? existingSession.records : []);
+      } catch (e) {
+        console.error("Lỗi tải điểm danh:", e);
+      }
+    }
+
+    function renderAttendanceTable(students, existingRecords = []) {
+      const tbody = document.getElementById('att-students-tbody');
+      if (!tbody) return;
+
+      if (!students || students.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="5" class="p-6 text-center text-slate-400">Không có sinh viên nào trong lớp ${escapeHtml(currentAttendanceClass)}.</td></tr>`;
+        return;
+      }
+
+      let html = '';
+      students.forEach((stu, idx) => {
+        const rec = existingRecords.find(r => r.studentId === stu.id || r.studentCode === (stu.studentCode || stu.username));
+        const status = rec ? rec.status : 'present';
+        const note = rec ? (rec.note || '') : '';
+
+        html += `
+          <tr class="hover:bg-slate-50 transition" data-student-id="${escapeHtml(stu.id)}" data-student-code="${escapeHtml(stu.studentCode || stu.username)}" data-student-name="${escapeHtml(stu.name)}">
+            <td class="p-2.5 text-center text-slate-400 font-mono">${idx + 1}</td>
+            <td class="p-2.5 font-bold font-mono text-slate-800">${escapeHtml(stu.studentCode || stu.username)}</td>
+            <td class="p-2.5 font-bold text-slate-900">${escapeHtml(stu.name)}</td>
+            <td class="p-2.5 text-center">
+              <div class="inline-flex items-center gap-1 bg-slate-100 p-1 rounded-xl">
+                <label class="px-2 py-1 rounded-lg text-xs font-bold cursor-pointer transition select-none flex items-center gap-1 ${status === 'present' ? 'bg-emerald-600 text-white shadow-xs' : 'text-slate-600 hover:bg-slate-200'}">
+                  <input type="radio" name="att_status_${stu.id}" value="present" ${status === 'present' ? 'checked' : ''} onchange="updateAttendanceCounts()" class="hidden">
+                  <span>Có mặt</span>
+                </label>
+                <label class="px-2 py-1 rounded-lg text-xs font-bold cursor-pointer transition select-none flex items-center gap-1 ${status === 'excused' ? 'bg-amber-500 text-white shadow-xs' : 'text-slate-600 hover:bg-slate-200'}">
+                  <input type="radio" name="att_status_${stu.id}" value="excused" ${status === 'excused' ? 'checked' : ''} onchange="updateAttendanceCounts()" class="hidden">
+                  <span>Có phép</span>
+                </label>
+                <label class="px-2 py-1 rounded-lg text-xs font-bold cursor-pointer transition select-none flex items-center gap-1 ${status === 'unexcused' ? 'bg-rose-600 text-white shadow-xs' : 'text-slate-600 hover:bg-slate-200'}">
+                  <input type="radio" name="att_status_${stu.id}" value="unexcused" ${status === 'unexcused' ? 'checked' : ''} onchange="updateAttendanceCounts()" class="hidden">
+                  <span>Vắng</span>
+                </label>
+              </div>
+            </td>
+            <td class="p-2.5">
+              <input type="text" value="${escapeHtml(note)}" placeholder="Ghi chú..." class="att-note-input w-full px-2 py-1 text-xs border border-slate-200 rounded-lg">
+            </td>
+          </tr>
+        `;
+      });
+
+      tbody.innerHTML = html;
+      updateAttendanceCounts();
+    }
+
+    function updateAttendanceCounts() {
+      let present = 0;
+      let excused = 0;
+      let unexcused = 0;
+
+      const rows = document.querySelectorAll('#att-students-tbody tr');
+      rows.forEach(r => {
+        const checked = r.querySelector('input[type="radio"]:checked');
+        if (checked) {
+          if (checked.value === 'present') present++;
+          else if (checked.value === 'excused') excused++;
+          else if (checked.value === 'unexcused') unexcused++;
+
+          const labels = r.querySelectorAll('label');
+          labels.forEach(lbl => {
+            const inp = lbl.querySelector('input');
+            if (inp.checked) {
+              if (inp.value === 'present') lbl.className = 'px-2 py-1 rounded-lg text-xs font-bold cursor-pointer transition select-none flex items-center gap-1 bg-emerald-600 text-white shadow-xs';
+              else if (inp.value === 'excused') lbl.className = 'px-2 py-1 rounded-lg text-xs font-bold cursor-pointer transition select-none flex items-center gap-1 bg-amber-500 text-white shadow-xs';
+              else if (inp.value === 'unexcused') lbl.className = 'px-2 py-1 rounded-lg text-xs font-bold cursor-pointer transition select-none flex items-center gap-1 bg-rose-600 text-white shadow-xs';
+            } else {
+              lbl.className = 'px-2 py-1 rounded-lg text-xs font-bold cursor-pointer transition select-none flex items-center gap-1 text-slate-600 hover:bg-slate-200';
+            }
+          });
+        }
+      });
+
+      const presEl = document.getElementById('att-count-present');
+      if (presEl) presEl.textContent = present;
+      const excEl = document.getElementById('att-count-excused');
+      if (excEl) excEl.textContent = excused;
+      const unexcEl = document.getElementById('att-count-unexcused');
+      if (unexcEl) unexcEl.textContent = unexcused;
+    }
+
+    function setAllAttendanceStatus(status) {
+      const rows = document.querySelectorAll('#att-students-tbody tr');
+      rows.forEach(r => {
+        const targetRadio = r.querySelector(`input[value="${status}"]`);
+        if (targetRadio) {
+          targetRadio.checked = true;
+        }
+      });
+      updateAttendanceCounts();
+    }
+
+    async function handleSaveAttendance() {
+      if (!currentAttendanceClass) return;
+      const date = document.getElementById('att-date').value;
+      const subjectName = document.getElementById('att-subject').value.trim();
+      const lessonTitle = document.getElementById('att-lesson').value.trim();
+
+      const records = [];
+      const rows = document.querySelectorAll('#att-students-tbody tr');
+      rows.forEach(r => {
+        const studentId = r.getAttribute('data-student-id');
+        const studentCode = r.getAttribute('data-student-code');
+        const studentName = r.getAttribute('data-student-name');
+        const checked = r.querySelector('input[type="radio"]:checked');
+        const note = r.querySelector('.att-note-input')?.value.trim() || '';
+
+        if (studentId) {
+          records.push({
+            studentId,
+            studentCode,
+            studentName,
+            status: checked ? checked.value : 'present',
+            note
+          });
+        }
+      });
+
+      try {
+        const res = await fetch('/api/attendance', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            className: currentAttendanceClass,
+            subjectName,
+            date,
+            lessonTitle,
+            records,
+            teacherId: currentUser ? currentUser.id : 'u_teacher_danh'
+          })
+        });
+
+        const data = await res.json();
+        if (res.ok && data.success) {
+          showToast("Đã lưu điểm danh lớp thành công!", "success");
+          closeAttendanceModal();
+        } else {
+          showToast(data.message || "Lỗi lưu điểm danh!", "error");
+        }
+      } catch (err) {
+        showToast("Lỗi kết nối máy chủ!", "error");
+      }
+    }
+
     // ================= PHÂN HỆ GIÁO VIÊN =================
     async function loadTeacherData() {
       try {
@@ -2927,6 +4401,9 @@
         document.getElementById('teacher-asm-count').textContent = `${assignmentsData.length} bài tập`;
 
         renderTeacherAssignments();
+        loadClassesOverview();
+        loadLessonPlans();
+        loadSchedule();
       } catch (e) {
         showToast("Không thể tải danh sách bài tập!", "error");
       }

@@ -39,7 +39,11 @@
         "storageKey": "educlass_submissions/T15TK02/Thiết kế minh họa với Corel Draw/Vẽ Logo trường Hòa Bình/1793774399127_logo_hoa_binh_d0ipeg.jpg",
         "provider": "cloudinary"
       },
-      "createdBy": "u_teacher_danh"
+      "createdBy": "u_teacher_danh",
+      "sharedWith": [
+        "u_phongkhaothi"
+      ],
+      "isArchivedForExaminer": true
     },
     {
       "id": "asm_1793769990154",
@@ -2356,6 +2360,654 @@
     }
   ],
   "notifications": [
+    {
+      "id": "notif_sub_1794216983258_107u",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793677200000",
+      "assignmentTitle": "Thiết kế Catalog 16 trang về chủ đề bất kỳ",
+      "targetClass": "T14TK01",
+      "subject": "Thiết Kế Catalog",
+      "studentId": "u_T14TK0115",
+      "studentName": "Nguyễn Hoàng Kiệt",
+      "studentCode": "T14TK0115",
+      "submittedAt": "2026-11-09T09:36:23.258Z",
+      "createdAt": "2026-11-09T09:36:23.258Z",
+      "readBy": []
+    },
+    {
+      "id": "notif_sub_1794216981746_0f0o",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793677200000",
+      "assignmentTitle": "Thiết kế Catalog 16 trang về chủ đề bất kỳ",
+      "targetClass": "T14TK01",
+      "subject": "Thiết Kế Catalog",
+      "studentId": "u_T14TK0115",
+      "studentName": "Nguyễn Hoàng Kiệt",
+      "studentCode": "T14TK0115",
+      "submittedAt": "2026-11-09T09:36:21.746Z",
+      "createdAt": "2026-11-09T09:36:21.746Z",
+      "readBy": []
+    },
+    {
+      "id": "notif_sub_1794216979958_5yzo",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793677200000",
+      "assignmentTitle": "Thiết kế Catalog 16 trang về chủ đề bất kỳ",
+      "targetClass": "T14TK01",
+      "subject": "Thiết Kế Catalog",
+      "studentId": "u_T14TK0115",
+      "studentName": "Nguyễn Hoàng Kiệt",
+      "studentCode": "T14TK0115",
+      "submittedAt": "2026-11-09T09:36:19.958Z",
+      "createdAt": "2026-11-09T09:36:19.958Z",
+      "readBy": []
+    },
+    {
+      "id": "notif_sub_1794214884073_j87o",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793752994063",
+      "assignmentTitle": "Tạo Thiết kế banner hoặc poster để tạo chuyển động",
+      "targetClass": "C08TK01",
+      "subject": "Xử Lý Kỹ Xảo với After Effects",
+      "studentId": "u_C08TK0118",
+      "studentName": "Trần Tuấn Anh",
+      "studentCode": "C08TK0118",
+      "submittedAt": "2026-11-09T09:01:24.073Z",
+      "createdAt": "2026-11-09T09:01:24.073Z",
+      "readBy": []
+    },
+    {
+      "id": "notif_sub_1794214883663_ycqy",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793752994063",
+      "assignmentTitle": "Tạo Thiết kế banner hoặc poster để tạo chuyển động",
+      "targetClass": "C08TK01",
+      "subject": "Xử Lý Kỹ Xảo với After Effects",
+      "studentId": "u_C08TK0118",
+      "studentName": "Trần Tuấn Anh",
+      "studentCode": "C08TK0118",
+      "submittedAt": "2026-11-09T09:01:23.663Z",
+      "createdAt": "2026-11-09T09:01:23.663Z",
+      "readBy": []
+    },
+    {
+      "id": "notif_sub_1794214881041_qdah",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793752994063",
+      "assignmentTitle": "Tạo Thiết kế banner hoặc poster để tạo chuyển động",
+      "targetClass": "C08TK01",
+      "subject": "Xử Lý Kỹ Xảo với After Effects",
+      "studentId": "u_C08TK0118",
+      "studentName": "Trần Tuấn Anh",
+      "studentCode": "C08TK0118",
+      "submittedAt": "2026-11-09T09:01:21.041Z",
+      "createdAt": "2026-11-09T09:01:21.041Z",
+      "readBy": []
+    },
+    {
+      "id": "notif_sub_1794214879877_ry0b",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793752994063",
+      "assignmentTitle": "Tạo Thiết kế banner hoặc poster để tạo chuyển động",
+      "targetClass": "C08TK01",
+      "subject": "Xử Lý Kỹ Xảo với After Effects",
+      "studentId": "u_C08TK0118",
+      "studentName": "Trần Tuấn Anh",
+      "studentCode": "C08TK0118",
+      "submittedAt": "2026-11-09T09:01:19.877Z",
+      "createdAt": "2026-11-09T09:01:19.877Z",
+      "readBy": []
+    },
+    {
+      "id": "notif_sub_1794214853050_ynnn",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793769990154",
+      "assignmentTitle": "Tạo kỹ xảo cho banner",
+      "targetClass": "C08TK01",
+      "subject": "Xử Lý Kỹ Xảo với After Effects",
+      "studentId": "u_C08TK0118",
+      "studentName": "Trần Tuấn Anh",
+      "studentCode": "C08TK0118",
+      "submittedAt": "2026-11-09T09:00:53.050Z",
+      "createdAt": "2026-11-09T09:00:53.050Z",
+      "readBy": []
+    },
+    {
+      "id": "notif_sub_1794214840691_60uk",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793769990154",
+      "assignmentTitle": "Tạo kỹ xảo cho banner",
+      "targetClass": "C08TK01",
+      "subject": "Xử Lý Kỹ Xảo với After Effects",
+      "studentId": "u_C08TK0106",
+      "studentName": "Đỗ Ngọc Khuê",
+      "studentCode": "C08TK0106",
+      "submittedAt": "2026-11-09T09:00:40.691Z",
+      "createdAt": "2026-11-09T09:00:40.691Z",
+      "readBy": []
+    },
+    {
+      "id": "notif_sub_1794214520127_7opk",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793752994063",
+      "assignmentTitle": "Tạo Thiết kế banner hoặc poster để tạo chuyển động",
+      "targetClass": "C08TK01",
+      "subject": "Xử Lý Kỹ Xảo với After Effects",
+      "studentId": "u_C08TK0119",
+      "studentName": "Nguyễn Viết Vửng",
+      "studentCode": "C08TK0119",
+      "submittedAt": "2026-11-09T08:55:20.127Z",
+      "createdAt": "2026-11-09T08:55:20.127Z",
+      "readBy": []
+    },
+    {
+      "id": "notif_sub_1794214214662_ve6l",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793752994063",
+      "assignmentTitle": "Tạo Thiết kế banner hoặc poster để tạo chuyển động",
+      "targetClass": "C08TK01",
+      "subject": "Xử Lý Kỹ Xảo với After Effects",
+      "studentId": "u_C08TK0104",
+      "studentName": "Nguyễn Hải Đăng",
+      "studentCode": "C08TK0104",
+      "submittedAt": "2026-11-09T08:50:14.662Z",
+      "createdAt": "2026-11-09T08:50:14.662Z",
+      "readBy": []
+    },
+    {
+      "id": "notif_sub_1794214182831_mqee",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793769990154",
+      "assignmentTitle": "Tạo kỹ xảo cho banner",
+      "targetClass": "C08TK01",
+      "subject": "Xử Lý Kỹ Xảo với After Effects",
+      "studentId": "u_C08TK0115",
+      "studentName": "Nguyễn Ngọc Trân",
+      "studentCode": "C08TK0115",
+      "submittedAt": "2026-11-09T08:49:42.831Z",
+      "createdAt": "2026-11-09T08:49:42.831Z",
+      "readBy": []
+    },
+    {
+      "id": "notif_sub_1794214173457_40rl",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793752994063",
+      "assignmentTitle": "Tạo Thiết kế banner hoặc poster để tạo chuyển động",
+      "targetClass": "C08TK01",
+      "subject": "Xử Lý Kỹ Xảo với After Effects",
+      "studentId": "u_C08TK0115",
+      "studentName": "Nguyễn Ngọc Trân",
+      "studentCode": "C08TK0115",
+      "submittedAt": "2026-11-09T08:49:33.457Z",
+      "createdAt": "2026-11-09T08:49:33.457Z",
+      "readBy": []
+    },
+    {
+      "id": "notif_sub_1794214171495_l9yz",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793752994063",
+      "assignmentTitle": "Tạo Thiết kế banner hoặc poster để tạo chuyển động",
+      "targetClass": "C08TK01",
+      "subject": "Xử Lý Kỹ Xảo với After Effects",
+      "studentId": "u_C08TK0115",
+      "studentName": "Nguyễn Ngọc Trân",
+      "studentCode": "C08TK0115",
+      "submittedAt": "2026-11-09T08:49:31.495Z",
+      "createdAt": "2026-11-09T08:49:31.495Z",
+      "readBy": []
+    },
+    {
+      "id": "notif_sub_1794213152826_aoqg",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793769990154",
+      "assignmentTitle": "Tạo kỹ xảo cho banner",
+      "targetClass": "C08TK01",
+      "subject": "Xử Lý Kỹ Xảo với After Effects",
+      "studentId": "u_C08TK0115",
+      "studentName": "Nguyễn Ngọc Trân",
+      "studentCode": "C08TK0115",
+      "submittedAt": "2026-11-09T08:32:32.826Z",
+      "createdAt": "2026-11-09T08:32:32.826Z",
+      "readBy": []
+    },
+    {
+      "id": "notif_sub_1794213114457_sji1",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793769990154",
+      "assignmentTitle": "Tạo kỹ xảo cho banner",
+      "targetClass": "C08TK01",
+      "subject": "Xử Lý Kỹ Xảo với After Effects",
+      "studentId": "u_C08TK0114",
+      "studentName": "Phạm Ngọc Thảo Trâm",
+      "studentCode": "C08TK0114",
+      "submittedAt": "2026-11-09T08:31:54.457Z",
+      "createdAt": "2026-11-09T08:31:54.457Z",
+      "readBy": []
+    },
+    {
+      "id": "notif_sub_1794213110640_9us7",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793752994063",
+      "assignmentTitle": "Tạo Thiết kế banner hoặc poster để tạo chuyển động",
+      "targetClass": "C08TK01",
+      "subject": "Xử Lý Kỹ Xảo với After Effects",
+      "studentId": "u_C08TK0115",
+      "studentName": "Nguyễn Ngọc Trân",
+      "studentCode": "C08TK0115",
+      "submittedAt": "2026-11-09T08:31:50.640Z",
+      "createdAt": "2026-11-09T08:31:50.640Z",
+      "readBy": []
+    },
+    {
+      "id": "notif_sub_1794213085900_iycx",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793752994063",
+      "assignmentTitle": "Tạo Thiết kế banner hoặc poster để tạo chuyển động",
+      "targetClass": "C08TK01",
+      "subject": "Xử Lý Kỹ Xảo với After Effects",
+      "studentId": "u_C08TK0114",
+      "studentName": "Phạm Ngọc Thảo Trâm",
+      "studentCode": "C08TK0114",
+      "submittedAt": "2026-11-09T08:31:25.900Z",
+      "createdAt": "2026-11-09T08:31:25.900Z",
+      "readBy": []
+    },
+    {
+      "id": "notif_sub_1794213084240_d6u0",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793752994063",
+      "assignmentTitle": "Tạo Thiết kế banner hoặc poster để tạo chuyển động",
+      "targetClass": "C08TK01",
+      "subject": "Xử Lý Kỹ Xảo với After Effects",
+      "studentId": "u_C08TK0114",
+      "studentName": "Phạm Ngọc Thảo Trâm",
+      "studentCode": "C08TK0114",
+      "submittedAt": "2026-11-09T08:31:24.240Z",
+      "createdAt": "2026-11-09T08:31:24.240Z",
+      "readBy": []
+    },
+    {
+      "id": "notif_sub_1794212059411_pkv3",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793769990154",
+      "assignmentTitle": "Tạo kỹ xảo cho banner",
+      "targetClass": "C08TK01",
+      "subject": "Xử Lý Kỹ Xảo với After Effects",
+      "studentId": "u_C08TK0112",
+      "studentName": "Ngô Đỗ Minh Thùy",
+      "studentCode": "C08TK0112",
+      "submittedAt": "2026-11-09T08:14:19.411Z",
+      "createdAt": "2026-11-09T08:14:19.411Z",
+      "readBy": []
+    },
+    {
+      "id": "notif_sub_1794211141498_8u27",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793677200000",
+      "assignmentTitle": "Thiết kế Catalog 16 trang về chủ đề bất kỳ",
+      "targetClass": "T14TK01",
+      "subject": "Thiết Kế Catalog",
+      "studentId": "u_T14TK0105",
+      "studentName": "Phạm Gia Bảo",
+      "studentCode": "T14TK0105",
+      "submittedAt": "2026-11-09T07:59:01.498Z",
+      "createdAt": "2026-11-09T07:59:01.498Z",
+      "readBy": []
+    },
+    {
+      "id": "notif_sub_1794211139022_4fj4",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793677200000",
+      "assignmentTitle": "Thiết kế Catalog 16 trang về chủ đề bất kỳ",
+      "targetClass": "T14TK01",
+      "subject": "Thiết Kế Catalog",
+      "studentId": "u_T14TK0105",
+      "studentName": "Phạm Gia Bảo",
+      "studentCode": "T14TK0105",
+      "submittedAt": "2026-11-09T07:58:59.022Z",
+      "createdAt": "2026-11-09T07:58:59.022Z",
+      "readBy": []
+    },
+    {
+      "id": "notif_sub_1794047681892_jo2c",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793677200000",
+      "assignmentTitle": "Thiết kế Catalog 16 trang về chủ đề bất kỳ",
+      "targetClass": "T14TK01",
+      "subject": "Thiết Kế Catalog",
+      "studentId": "u_T14TK0113",
+      "studentName": "Nguyễn Đăng Khoa",
+      "studentCode": "T14TK0113",
+      "submittedAt": "2026-11-07T10:34:41.892Z",
+      "createdAt": "2026-11-07T10:34:41.892Z",
+      "readBy": [
+        "u_T14TK0104",
+        "u_T14TK0114"
+      ]
+    },
+    {
+      "id": "notif_sub_1794047681285_rwlg",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793677200000",
+      "assignmentTitle": "Thiết kế Catalog 16 trang về chủ đề bất kỳ",
+      "targetClass": "T14TK01",
+      "subject": "Thiết Kế Catalog",
+      "studentId": "u_T14TK0113",
+      "studentName": "Nguyễn Đăng Khoa",
+      "studentCode": "T14TK0113",
+      "submittedAt": "2026-11-07T10:34:41.285Z",
+      "createdAt": "2026-11-07T10:34:41.285Z",
+      "readBy": [
+        "u_T14TK0104",
+        "u_T14TK0114"
+      ]
+    },
+    {
+      "id": "notif_sub_1794047680316_kw3b",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793677200000",
+      "assignmentTitle": "Thiết kế Catalog 16 trang về chủ đề bất kỳ",
+      "targetClass": "T14TK01",
+      "subject": "Thiết Kế Catalog",
+      "studentId": "u_T14TK0113",
+      "studentName": "Nguyễn Đăng Khoa",
+      "studentCode": "T14TK0113",
+      "submittedAt": "2026-11-07T10:34:40.316Z",
+      "createdAt": "2026-11-07T10:34:40.316Z",
+      "readBy": [
+        "u_T14TK0104",
+        "u_T14TK0114"
+      ]
+    },
+    {
+      "id": "notif_sub_1794047679971_g8o9",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793677200000",
+      "assignmentTitle": "Thiết kế Catalog 16 trang về chủ đề bất kỳ",
+      "targetClass": "T14TK01",
+      "subject": "Thiết Kế Catalog",
+      "studentId": "u_T14TK0113",
+      "studentName": "Nguyễn Đăng Khoa",
+      "studentCode": "T14TK0113",
+      "submittedAt": "2026-11-07T10:34:39.888Z",
+      "createdAt": "2026-11-07T10:34:39.888Z",
+      "readBy": [
+        "u_T14TK0104",
+        "u_T14TK0114"
+      ]
+    },
+    {
+      "id": "notif_sub_1794047679783_5mi6",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793677200000",
+      "assignmentTitle": "Thiết kế Catalog 16 trang về chủ đề bất kỳ",
+      "targetClass": "T14TK01",
+      "subject": "Thiết Kế Catalog",
+      "studentId": "u_T14TK0113",
+      "studentName": "Nguyễn Đăng Khoa",
+      "studentCode": "T14TK0113",
+      "submittedAt": "2026-11-07T10:34:39.783Z",
+      "createdAt": "2026-11-07T10:34:39.783Z",
+      "readBy": [
+        "u_T14TK0104",
+        "u_T14TK0114"
+      ]
+    },
+    {
+      "id": "notif_sub_1794047679470_5ipp",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793677200000",
+      "assignmentTitle": "Thiết kế Catalog 16 trang về chủ đề bất kỳ",
+      "targetClass": "T14TK01",
+      "subject": "Thiết Kế Catalog",
+      "studentId": "u_T14TK0113",
+      "studentName": "Nguyễn Đăng Khoa",
+      "studentCode": "T14TK0113",
+      "submittedAt": "2026-11-07T10:34:39.470Z",
+      "createdAt": "2026-11-07T10:34:39.470Z",
+      "readBy": [
+        "u_T14TK0104",
+        "u_T14TK0114"
+      ]
+    },
+    {
+      "id": "notif_sub_1794047678974_3bb7",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793677200000",
+      "assignmentTitle": "Thiết kế Catalog 16 trang về chủ đề bất kỳ",
+      "targetClass": "T14TK01",
+      "subject": "Thiết Kế Catalog",
+      "studentId": "u_T14TK0113",
+      "studentName": "Nguyễn Đăng Khoa",
+      "studentCode": "T14TK0113",
+      "submittedAt": "2026-11-07T10:34:38.974Z",
+      "createdAt": "2026-11-07T10:34:38.974Z",
+      "readBy": [
+        "u_T14TK0104",
+        "u_T14TK0114"
+      ]
+    },
+    {
+      "id": "notif_sub_1794047674876_5w2u",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793677200000",
+      "assignmentTitle": "Thiết kế Catalog 16 trang về chủ đề bất kỳ",
+      "targetClass": "T14TK01",
+      "subject": "Thiết Kế Catalog",
+      "studentId": "u_T14TK0113",
+      "studentName": "Nguyễn Đăng Khoa",
+      "studentCode": "T14TK0113",
+      "submittedAt": "2026-11-07T10:34:34.876Z",
+      "createdAt": "2026-11-07T10:34:34.876Z",
+      "readBy": [
+        "u_T14TK0104",
+        "u_T14TK0114"
+      ]
+    },
+    {
+      "id": "notif_sub_1794047673083_op7b",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793677200000",
+      "assignmentTitle": "Thiết kế Catalog 16 trang về chủ đề bất kỳ",
+      "targetClass": "T14TK01",
+      "subject": "Thiết Kế Catalog",
+      "studentId": "u_T14TK0113",
+      "studentName": "Nguyễn Đăng Khoa",
+      "studentCode": "T14TK0113",
+      "submittedAt": "2026-11-07T10:34:33.083Z",
+      "createdAt": "2026-11-07T10:34:33.083Z",
+      "readBy": [
+        "u_T14TK0104",
+        "u_T14TK0114"
+      ]
+    },
+    {
+      "id": "notif_sub_1794047669470_enii",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793677200000",
+      "assignmentTitle": "Thiết kế Catalog 16 trang về chủ đề bất kỳ",
+      "targetClass": "T14TK01",
+      "subject": "Thiết Kế Catalog",
+      "studentId": "u_T14TK0113",
+      "studentName": "Nguyễn Đăng Khoa",
+      "studentCode": "T14TK0113",
+      "submittedAt": "2026-11-07T10:34:29.470Z",
+      "createdAt": "2026-11-07T10:34:29.470Z",
+      "readBy": [
+        "u_T14TK0104",
+        "u_T14TK0114"
+      ]
+    },
+    {
+      "id": "notif_sub_1794047661432_nqcs",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793677200000",
+      "assignmentTitle": "Thiết kế Catalog 16 trang về chủ đề bất kỳ",
+      "targetClass": "T14TK01",
+      "subject": "Thiết Kế Catalog",
+      "studentId": "u_T14TK0113",
+      "studentName": "Nguyễn Đăng Khoa",
+      "studentCode": "T14TK0113",
+      "submittedAt": "2026-11-07T10:34:21.432Z",
+      "createdAt": "2026-11-07T10:34:21.432Z",
+      "readBy": [
+        "u_T14TK0104",
+        "u_T14TK0114"
+      ]
+    },
+    {
+      "id": "notif_sub_1794047647512_umi2",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793677200000",
+      "assignmentTitle": "Thiết kế Catalog 16 trang về chủ đề bất kỳ",
+      "targetClass": "T14TK01",
+      "subject": "Thiết Kế Catalog",
+      "studentId": "u_T14TK0113",
+      "studentName": "Nguyễn Đăng Khoa",
+      "studentCode": "T14TK0113",
+      "submittedAt": "2026-11-07T10:34:07.512Z",
+      "createdAt": "2026-11-07T10:34:07.512Z",
+      "readBy": [
+        "u_T14TK0104",
+        "u_T14TK0114"
+      ]
+    },
+    {
+      "id": "notif_sub_1794047646086_td46",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793677200000",
+      "assignmentTitle": "Thiết kế Catalog 16 trang về chủ đề bất kỳ",
+      "targetClass": "T14TK01",
+      "subject": "Thiết Kế Catalog",
+      "studentId": "u_T14TK0113",
+      "studentName": "Nguyễn Đăng Khoa",
+      "studentCode": "T14TK0113",
+      "submittedAt": "2026-11-07T10:34:06.085Z",
+      "createdAt": "2026-11-07T10:34:06.085Z",
+      "readBy": [
+        "u_T14TK0104",
+        "u_T14TK0114"
+      ]
+    },
+    {
+      "id": "notif_sub_1794022974224_az49",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793677200000",
+      "assignmentTitle": "Thiết kế Catalog 16 trang về chủ đề bất kỳ",
+      "targetClass": "T14TK01",
+      "subject": "Thiết Kế Catalog",
+      "studentId": "u_T14TK0110",
+      "studentName": "Bùi Thanh Hiền",
+      "studentCode": "T14TK0110",
+      "submittedAt": "2026-11-07T03:42:54.224Z",
+      "createdAt": "2026-11-07T03:42:54.224Z",
+      "readBy": [
+        "u_T14TK0104",
+        "u_T14TK0114"
+      ]
+    },
+    {
+      "id": "notif_sub_1794022973231_vike",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793677200000",
+      "assignmentTitle": "Thiết kế Catalog 16 trang về chủ đề bất kỳ",
+      "targetClass": "T14TK01",
+      "subject": "Thiết Kế Catalog",
+      "studentId": "u_T14TK0110",
+      "studentName": "Bùi Thanh Hiền",
+      "studentCode": "T14TK0110",
+      "submittedAt": "2026-11-07T03:42:53.231Z",
+      "createdAt": "2026-11-07T03:42:53.231Z",
+      "readBy": [
+        "u_T14TK0104",
+        "u_T14TK0114"
+      ]
+    },
+    {
+      "id": "notif_sub_1794022970081_96ti",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793677200000",
+      "assignmentTitle": "Thiết kế Catalog 16 trang về chủ đề bất kỳ",
+      "targetClass": "T14TK01",
+      "subject": "Thiết Kế Catalog",
+      "studentId": "u_T14TK0110",
+      "studentName": "Bùi Thanh Hiền",
+      "studentCode": "T14TK0110",
+      "submittedAt": "2026-11-07T03:42:50.081Z",
+      "createdAt": "2026-11-07T03:42:50.081Z",
+      "readBy": [
+        "u_T14TK0104",
+        "u_T14TK0114"
+      ]
+    },
+    {
+      "id": "notif_sub_1794022966794_we3g",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793677200000",
+      "assignmentTitle": "Thiết kế Catalog 16 trang về chủ đề bất kỳ",
+      "targetClass": "T14TK01",
+      "subject": "Thiết Kế Catalog",
+      "studentId": "u_T14TK0110",
+      "studentName": "Bùi Thanh Hiền",
+      "studentCode": "T14TK0110",
+      "submittedAt": "2026-11-07T03:42:46.794Z",
+      "createdAt": "2026-11-07T03:42:46.794Z",
+      "readBy": [
+        "u_T14TK0104",
+        "u_T14TK0114"
+      ]
+    },
+    {
+      "id": "notif_sub_1794022961447_5cli",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793677200000",
+      "assignmentTitle": "Thiết kế Catalog 16 trang về chủ đề bất kỳ",
+      "targetClass": "T14TK01",
+      "subject": "Thiết Kế Catalog",
+      "studentId": "u_T14TK0110",
+      "studentName": "Bùi Thanh Hiền",
+      "studentCode": "T14TK0110",
+      "submittedAt": "2026-11-07T03:42:41.447Z",
+      "createdAt": "2026-11-07T03:42:41.447Z",
+      "readBy": [
+        "u_T14TK0104",
+        "u_T14TK0114"
+      ]
+    },
+    {
+      "id": "notif_sub_1794022957552_rp0z",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793677200000",
+      "assignmentTitle": "Thiết kế Catalog 16 trang về chủ đề bất kỳ",
+      "targetClass": "T14TK01",
+      "subject": "Thiết Kế Catalog",
+      "studentId": "u_T14TK0110",
+      "studentName": "Bùi Thanh Hiền",
+      "studentCode": "T14TK0110",
+      "submittedAt": "2026-11-07T03:42:37.551Z",
+      "createdAt": "2026-11-07T03:42:37.551Z",
+      "readBy": [
+        "u_T14TK0104",
+        "u_T14TK0114"
+      ]
+    },
+    {
+      "id": "notif_sub_1794022955677_ocvp",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1793677200000",
+      "assignmentTitle": "Thiết kế Catalog 16 trang về chủ đề bất kỳ",
+      "targetClass": "T14TK01",
+      "subject": "Thiết Kế Catalog",
+      "studentId": "u_T14TK0110",
+      "studentName": "Bùi Thanh Hiền",
+      "studentCode": "T14TK0110",
+      "submittedAt": "2026-11-07T03:42:35.677Z",
+      "createdAt": "2026-11-07T03:42:35.677Z",
+      "readBy": [
+        "u_T14TK0104",
+        "u_T14TK0114"
+      ]
+    },
     {
       "id": "notif_sub_1793887312701_r1jd",
       "type": "STUDENT_SUBMITTED",
@@ -6788,9 +7440,329 @@
       "grade": null,
       "feedback": null,
       "gradedAt": null
+    },
+    {
+      "id": "sub_1794022955677",
+      "assignmentId": "asm_1793677200000",
+      "studentId": "u_T14TK0110",
+      "studentName": "T14TK0110",
+      "content": "Bài catalog",
+      "link": "",
+      "file": {
+        "filename": "1794022973049_ThanhHin.pdf",
+        "originalName": "ThanhHin.pdf",
+        "size": 2874093,
+        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1794022973/educlass_submissions/T14TK01/Thi%E1%BA%BFt%20K%E1%BA%BF%20Catalog/Thi%E1%BA%BFt%20k%E1%BA%BF%20Catalog%2016%20trang%20v%E1%BB%81%20ch%E1%BB%A7%20%C4%91%E1%BB%81%20b%E1%BA%A5t%20k%E1%BB%B3/1794022973049_ThanhHin_ruknks.pdf",
+        "storageKey": "educlass_submissions/T14TK01/Thiết Kế Catalog/Thiết kế Catalog 16 trang về chủ đề bất kỳ/1794022973049_ThanhHin_ruknks.pdf",
+        "provider": "cloudinary"
+      },
+      "submittedAt": "2026-11-07T03:42:54.224Z",
+      "grade": null,
+      "feedback": null,
+      "gradedAt": null
+    },
+    {
+      "id": "sub_1794047646085",
+      "assignmentId": "asm_1793677200000",
+      "studentId": "u_T14TK0113",
+      "studentName": "T14TK0113",
+      "content": "BAI CATALOG VERSION 2",
+      "link": "",
+      "file": {
+        "filename": "1794047647090_T14TK0113_BAITHICATALOG.rar",
+        "originalName": "T14TK0113_BAITHICATALOG.rar",
+        "size": 14021406,
+        "url": "https://pub-cd6bf46bdf5c4034bdac614cd4ea7b35.r2.dev/educlass_submissions/T14TK01/Thiết Kế Catalog/Thiết kế Catalog 16 trang về chủ đề bất kỳ/1794047677972_T14TK0113_BAITHICATALOG.rar",
+        "storageKey": "educlass_submissions/T14TK01/Thiết Kế Catalog/Thiết kế Catalog 16 trang về chủ đề bất kỳ/1794047677972_T14TK0113_BAITHICATALOG.rar",
+        "provider": "r2"
+      },
+      "submittedAt": "2026-11-07T10:34:41.892Z",
+      "grade": null,
+      "feedback": null,
+      "gradedAt": null
+    },
+    {
+      "id": "sub_1794047647512",
+      "assignmentId": "asm_1793677200000",
+      "studentId": "u_T14TK0113",
+      "studentName": "T14TK0113",
+      "content": "BAI CATALOG VERSION 2",
+      "link": "",
+      "file": {
+        "filename": "1794047616808_T14TK0113_BAITHICATALOG.rar",
+        "originalName": "T14TK0113_BAITHICATALOG.rar",
+        "size": 14021406,
+        "url": "https://pub-cd6bf46bdf5c4034bdac614cd4ea7b35.r2.dev/educlass_submissions/T14TK01/Thiết Kế Catalog/Thiết kế Catalog 16 trang về chủ đề bất kỳ/1794047645074_T14TK0113_BAITHICATALOG.rar",
+        "storageKey": "educlass_submissions/T14TK01/Thiết Kế Catalog/Thiết kế Catalog 16 trang về chủ đề bất kỳ/1794047645074_T14TK0113_BAITHICATALOG.rar",
+        "provider": "r2"
+      },
+      "submittedAt": "2026-11-07T10:34:07.512Z",
+      "grade": null,
+      "feedback": null,
+      "gradedAt": null
+    },
+    {
+      "id": "sub_1794211139022",
+      "assignmentId": "asm_1793677200000",
+      "studentId": "u_T14TK0105",
+      "studentName": "T14TK0105",
+      "content": "",
+      "link": "",
+      "file": {
+        "filename": "1794211133112_T14TK0105_PHAMGIABAO.rar",
+        "originalName": "T14TK0105-PHAMGIABAO.rar",
+        "size": 20942338,
+        "url": "https://pub-cd6bf46bdf5c4034bdac614cd4ea7b35.r2.dev/educlass_submissions/T14TK01/Thiết Kế Catalog/Thiết kế Catalog 16 trang về chủ đề bất kỳ/1794211135037_T14TK0105_PHAMGIABAO.rar",
+        "storageKey": "educlass_submissions/T14TK01/Thiết Kế Catalog/Thiết kế Catalog 16 trang về chủ đề bất kỳ/1794211135037_T14TK0105_PHAMGIABAO.rar",
+        "provider": "r2"
+      },
+      "submittedAt": "2026-11-09T07:58:59.022Z",
+      "grade": null,
+      "feedback": null,
+      "gradedAt": null
+    },
+    {
+      "id": "sub_1794211141498",
+      "assignmentId": "asm_1793677200000",
+      "studentId": "u_T14TK0105",
+      "studentName": "T14TK0105",
+      "content": "",
+      "link": "",
+      "file": {
+        "filename": "1794211136325_T14TK0105_PHAMGIABAO.rar",
+        "originalName": "T14TK0105-PHAMGIABAO.rar",
+        "size": 20942338,
+        "url": "https://pub-cd6bf46bdf5c4034bdac614cd4ea7b35.r2.dev/educlass_submissions/T14TK01/Thiết Kế Catalog/Thiết kế Catalog 16 trang về chủ đề bất kỳ/1794211137825_T14TK0105_PHAMGIABAO.rar",
+        "storageKey": "educlass_submissions/T14TK01/Thiết Kế Catalog/Thiết kế Catalog 16 trang về chủ đề bất kỳ/1794211137825_T14TK0105_PHAMGIABAO.rar",
+        "provider": "r2"
+      },
+      "submittedAt": "2026-11-09T07:59:01.498Z",
+      "grade": null,
+      "feedback": null,
+      "gradedAt": null
+    },
+    {
+      "id": "sub_1794212059411",
+      "assignmentId": "asm_1793769990154",
+      "studentId": "u_C08TK0112",
+      "studentName": "C08TK0112",
+      "content": "nộp bài kỹ xảo",
+      "link": "",
+      "file": {
+        "filename": "1794212058428_Banner.aep",
+        "originalName": "Banner.aep",
+        "size": 161076,
+        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1794212059/educlass_submissions/C08TK01/X%E1%BB%AD%20L%C3%BD%20K%E1%BB%B9%20X%E1%BA%A3o%20v%E1%BB%9Bi%20After%20Effects/T%E1%BA%A1o%20k%E1%BB%B9%20x%E1%BA%A3o%20cho%20banner/1794212058428_Banner_vehvjo.aep",
+        "storageKey": "educlass_submissions/C08TK01/Xử Lý Kỹ Xảo với After Effects/Tạo kỹ xảo cho banner/1794212058428_Banner_vehvjo.aep",
+        "provider": "cloudinary"
+      },
+      "submittedAt": "2026-11-09T08:14:19.411Z",
+      "grade": null,
+      "feedback": null,
+      "gradedAt": null
+    },
+    {
+      "id": "sub_1794213084240",
+      "assignmentId": "asm_1793752994063",
+      "studentId": "u_C08TK0114",
+      "studentName": "C08TK0114",
+      "content": "PhamNgocThaoTram nop bai AI",
+      "link": "",
+      "file": {
+        "filename": "1794213084388_tram.ai",
+        "originalName": "tram.ai",
+        "size": 1999368,
+        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1794213085/educlass_submissions/C08TK01/X%E1%BB%AD%20L%C3%BD%20K%E1%BB%B9%20X%E1%BA%A3o%20v%E1%BB%9Bi%20After%20Effects/T%E1%BA%A1o%20Thi%E1%BA%BFt%20k%E1%BA%BF%20banner%20ho%E1%BA%B7c%20poster%20%C4%91%E1%BB%83%20t%E1%BA%A1o%20chuy%E1%BB%83n%20%C4%91%E1%BB%99ng/1794213084388_tram_misftt.ai",
+        "storageKey": "educlass_submissions/C08TK01/Xử Lý Kỹ Xảo với After Effects/Tạo Thiết kế banner hoặc poster để tạo chuyển động/1794213084388_tram_misftt.ai",
+        "provider": "cloudinary"
+      },
+      "submittedAt": "2026-11-09T08:31:25.900Z",
+      "grade": null,
+      "feedback": null,
+      "gradedAt": null
+    },
+    {
+      "id": "sub_1794213110640",
+      "assignmentId": "asm_1793752994063",
+      "studentId": "u_C08TK0115",
+      "studentName": "C08TK0115",
+      "content": "AI",
+      "link": "",
+      "file": {
+        "filename": "1794214172019_NTR.ai",
+        "originalName": "NTR.ai",
+        "size": 1803784,
+        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1794214173/educlass_submissions/C08TK01/X%E1%BB%AD%20L%C3%BD%20K%E1%BB%B9%20X%E1%BA%A3o%20v%E1%BB%9Bi%20After%20Effects/T%E1%BA%A1o%20Thi%E1%BA%BFt%20k%E1%BA%BF%20banner%20ho%E1%BA%B7c%20poster%20%C4%91%E1%BB%83%20t%E1%BA%A1o%20chuy%E1%BB%83n%20%C4%91%E1%BB%99ng/1794214172019_NTR_quq7hd.ai",
+        "storageKey": "educlass_submissions/C08TK01/Xử Lý Kỹ Xảo với After Effects/Tạo Thiết kế banner hoặc poster để tạo chuyển động/1794214172019_NTR_quq7hd.ai",
+        "provider": "cloudinary"
+      },
+      "submittedAt": "2026-11-09T08:49:33.457Z",
+      "grade": null,
+      "feedback": null,
+      "gradedAt": null
+    },
+    {
+      "id": "sub_1794213114457",
+      "assignmentId": "asm_1793769990154",
+      "studentId": "u_C08TK0114",
+      "studentName": "C08TK0114",
+      "content": "PhamNgocThaoTram nop bai AE",
+      "link": "",
+      "file": {
+        "filename": "1794213113880_Tram.aep",
+        "originalName": "Tram.aep",
+        "size": 143309,
+        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1794213114/educlass_submissions/C08TK01/X%E1%BB%AD%20L%C3%BD%20K%E1%BB%B9%20X%E1%BA%A3o%20v%E1%BB%9Bi%20After%20Effects/T%E1%BA%A1o%20k%E1%BB%B9%20x%E1%BA%A3o%20cho%20banner/1794213113880_Tram_vpmwpo.aep",
+        "storageKey": "educlass_submissions/C08TK01/Xử Lý Kỹ Xảo với After Effects/Tạo kỹ xảo cho banner/1794213113880_Tram_vpmwpo.aep",
+        "provider": "cloudinary"
+      },
+      "submittedAt": "2026-11-09T08:31:54.457Z",
+      "grade": null,
+      "feedback": null,
+      "gradedAt": null
+    },
+    {
+      "id": "sub_1794213152826",
+      "assignmentId": "asm_1793769990154",
+      "studentId": "u_C08TK0115",
+      "studentName": "C08TK0115",
+      "content": "AE",
+      "link": "",
+      "file": {
+        "filename": "1794214181900_NguyenNgocTran_C08YK0115.aep",
+        "originalName": "NguyenNgocTran_C08YK0115.aep",
+        "size": 144808,
+        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1794214182/educlass_submissions/C08TK01/X%E1%BB%AD%20L%C3%BD%20K%E1%BB%B9%20X%E1%BA%A3o%20v%E1%BB%9Bi%20After%20Effects/T%E1%BA%A1o%20k%E1%BB%B9%20x%E1%BA%A3o%20cho%20banner/1794214181900_NguyenNgocTran_C08YK0115_wwzbih.aep",
+        "storageKey": "educlass_submissions/C08TK01/Xử Lý Kỹ Xảo với After Effects/Tạo kỹ xảo cho banner/1794214181900_NguyenNgocTran_C08YK0115_wwzbih.aep",
+        "provider": "cloudinary"
+      },
+      "submittedAt": "2026-11-09T08:49:42.831Z",
+      "grade": null,
+      "feedback": null,
+      "gradedAt": null
+    },
+    {
+      "id": "sub_1794214214662",
+      "assignmentId": "asm_1793752994063",
+      "studentId": "u_C08TK0104",
+      "studentName": "C08TK0104",
+      "content": "",
+      "link": "",
+      "file": {
+        "filename": "1794214211125_C08TK0104_NGUYENHAIDANG.psd",
+        "originalName": "C08TK0104_NGUYENHAIDANG.psd",
+        "size": 13668232,
+        "url": "https://pub-cd6bf46bdf5c4034bdac614cd4ea7b35.r2.dev/educlass_submissions/C08TK01/Xử Lý Kỹ Xảo với After Effects/Tạo Thiết kế banner hoặc poster để tạo chuyển động/1794214212584_C08TK0104_NGUYENHAIDANG.psd",
+        "storageKey": "educlass_submissions/C08TK01/Xử Lý Kỹ Xảo với After Effects/Tạo Thiết kế banner hoặc poster để tạo chuyển động/1794214212584_C08TK0104_NGUYENHAIDANG.psd",
+        "provider": "r2"
+      },
+      "submittedAt": "2026-11-09T08:50:14.662Z",
+      "grade": null,
+      "feedback": null,
+      "gradedAt": null
+    },
+    {
+      "id": "sub_1794214520127",
+      "assignmentId": "asm_1793752994063",
+      "studentId": "u_C08TK0119",
+      "studentName": "C08TK0119",
+      "content": "",
+      "link": "",
+      "file": {
+        "filename": "1794214515680_C08TK0119_NGUYENVIETVUNG.psd",
+        "originalName": "C08TK0119-NGUYENVIETVUNG.psd",
+        "size": 14704256,
+        "url": "https://pub-cd6bf46bdf5c4034bdac614cd4ea7b35.r2.dev/educlass_submissions/C08TK01/Xử Lý Kỹ Xảo với After Effects/Tạo Thiết kế banner hoặc poster để tạo chuyển động/1794214517178_C08TK0119_NGUYENVIETVUNG.psd",
+        "storageKey": "educlass_submissions/C08TK01/Xử Lý Kỹ Xảo với After Effects/Tạo Thiết kế banner hoặc poster để tạo chuyển động/1794214517178_C08TK0119_NGUYENVIETVUNG.psd",
+        "provider": "r2"
+      },
+      "submittedAt": "2026-11-09T08:55:20.127Z",
+      "grade": null,
+      "feedback": null,
+      "gradedAt": null
+    },
+    {
+      "id": "sub_1794214840691",
+      "assignmentId": "asm_1793769990154",
+      "studentId": "u_C08TK0106",
+      "studentName": "C08TK0106",
+      "content": "",
+      "link": "",
+      "file": {
+        "filename": "1794214840153_BANNER_CHUYỂN_ĐỘNG.zip",
+        "originalName": "BANNER CHUYỂN ĐỘNG.zip",
+        "size": 10082,
+        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1794214840/educlass_submissions/C08TK01/X%E1%BB%AD%20L%C3%BD%20K%E1%BB%B9%20X%E1%BA%A3o%20v%E1%BB%9Bi%20After%20Effects/T%E1%BA%A1o%20k%E1%BB%B9%20x%E1%BA%A3o%20cho%20banner/nniuvy42uuqahnllhpwk",
+        "storageKey": "educlass_submissions/C08TK01/Xử Lý Kỹ Xảo với After Effects/Tạo kỹ xảo cho banner/nniuvy42uuqahnllhpwk",
+        "provider": "cloudinary"
+      },
+      "submittedAt": "2026-11-09T09:00:40.691Z",
+      "grade": null,
+      "feedback": null,
+      "gradedAt": null
+    },
+    {
+      "id": "sub_1794214853050",
+      "assignmentId": "asm_1793769990154",
+      "studentId": "u_C08TK0118",
+      "studentName": "C08TK0118",
+      "content": "",
+      "link": "",
+      "file": {
+        "filename": "1794214852166_C08TK0118_TRANTUANANH.aep",
+        "originalName": "C08TK0118-TRANTUANANH.aep",
+        "size": 149900,
+        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1794214852/educlass_submissions/C08TK01/X%E1%BB%AD%20L%C3%BD%20K%E1%BB%B9%20X%E1%BA%A3o%20v%E1%BB%9Bi%20After%20Effects/T%E1%BA%A1o%20k%E1%BB%B9%20x%E1%BA%A3o%20cho%20banner/1794214852166_C08TK0118_TRANTUANANH_sij4wz.aep",
+        "storageKey": "educlass_submissions/C08TK01/Xử Lý Kỹ Xảo với After Effects/Tạo kỹ xảo cho banner/1794214852166_C08TK0118_TRANTUANANH_sij4wz.aep",
+        "provider": "cloudinary"
+      },
+      "submittedAt": "2026-11-09T09:00:53.050Z",
+      "grade": null,
+      "feedback": null,
+      "gradedAt": null
+    },
+    {
+      "id": "sub_1794214879877",
+      "assignmentId": "asm_1793752994063",
+      "studentId": "u_C08TK0118",
+      "studentName": "C08TK0118",
+      "content": "",
+      "link": "",
+      "file": {
+        "filename": "1794214881344_C08TK0118_TRANTUANANH.ai",
+        "originalName": "C08TK0118-TRANTUANANH.ai",
+        "size": 8749491,
+        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1794214883/educlass_submissions/C08TK01/X%E1%BB%AD%20L%C3%BD%20K%E1%BB%B9%20X%E1%BA%A3o%20v%E1%BB%9Bi%20After%20Effects/T%E1%BA%A1o%20Thi%E1%BA%BFt%20k%E1%BA%BF%20banner%20ho%E1%BA%B7c%20poster%20%C4%91%E1%BB%83%20t%E1%BA%A1o%20chuy%E1%BB%83n%20%C4%91%E1%BB%99ng/1794214881344_C08TK0118_TRANTUANANH_cw7u7f.ai",
+        "storageKey": "educlass_submissions/C08TK01/Xử Lý Kỹ Xảo với After Effects/Tạo Thiết kế banner hoặc poster để tạo chuyển động/1794214881344_C08TK0118_TRANTUANANH_cw7u7f.ai",
+        "provider": "cloudinary"
+      },
+      "submittedAt": "2026-11-09T09:01:24.073Z",
+      "grade": null,
+      "feedback": null,
+      "gradedAt": null
+    },
+    {
+      "id": "sub_1794216979958",
+      "assignmentId": "asm_1793677200000",
+      "studentId": "u_T14TK0115",
+      "studentName": "T14TK0115",
+      "content": "EM NỘP FILE BÀi THI Ạ",
+      "link": "",
+      "file": {
+        "filename": "1794216980759_T14tk0115_NGUYENHOANGKIET.rar",
+        "originalName": "T14tk0115_NGUYENHOANGKIET.rar",
+        "size": 10221350,
+        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1794216982/educlass_submissions/T14TK01/Thi%E1%BA%BFt%20K%E1%BA%BF%20Catalog/Thi%E1%BA%BFt%20k%E1%BA%BF%20Catalog%2016%20trang%20v%E1%BB%81%20ch%E1%BB%A7%20%C4%91%E1%BB%81%20b%E1%BA%A5t%20k%E1%BB%B3/1794216980759_T14tk0115_NGUYENHOANGKIET_tfbxip.rar",
+        "storageKey": "educlass_submissions/T14TK01/Thiết Kế Catalog/Thiết kế Catalog 16 trang về chủ đề bất kỳ/1794216980759_T14tk0115_NGUYENHOANGKIET_tfbxip.rar",
+        "provider": "cloudinary"
+      },
+      "submittedAt": "2026-11-09T09:36:23.258Z",
+      "grade": null,
+      "feedback": null,
+      "gradedAt": null
     }
   ],
-  "updatedAt": "2026-11-07T02:47:26.601Z",
+  "updatedAt": "2026-11-09T09:36:23.261Z",
   "users": [
     {
       "id": "u_teacher_danh",
@@ -9801,6 +10773,64 @@
         "T15MA02",
         "L09MA01"
       ]
+    }
+  ],
+  "lessonPlans": [
+    {
+      "id": "lp_1794232315777",
+      "title": "Bài 1: Tổng quan về Kỹ xảo Điện ảnh & After Effects",
+      "className": "C08TK01",
+      "subjectName": "Xử Lý Kỹ Xảo với After Effects",
+      "week": 1,
+      "periodsTheory": 2,
+      "periodsPractice": 3,
+      "date": "2026-11-10",
+      "objectives": "Nắm vững giao diện After Effects, các khái niệm Composition, Timeline, Layer và Keyframe cơ bản.",
+      "content": "1. Giới thiệu tổng quan môn học. 2. Làm quen giao diện AE. 3. Thực hành tạo Composition và chuyển động cơ bản.",
+      "status": "approved",
+      "notes": "",
+      "attachment": null,
+      "teacherId": "u_teacher_danh",
+      "teacherName": "Thầy Nguyễn Công Danh",
+      "createdAt": "2026-11-09T13:51:55.777Z",
+      "updatedAt": "2026-11-09T13:51:55.777Z"
+    }
+  ],
+  "schedule": [
+    {
+      "id": "sch_1794232329350",
+      "dayOfWeek": 3,
+      "session": "morning",
+      "periods": "1 - 5",
+      "timeRange": "07:00 - 11:15",
+      "className": "C08TK01",
+      "subjectName": "Xử Lý Kỹ Xảo với After Effects",
+      "room": "Phòng Lab Đồ Họa 1",
+      "currentLesson": "Bài 1: Tổng quan về Kỹ xảo Điện ảnh",
+      "notes": "Mang bảng vẽ Wacom",
+      "teacherName": "Thầy Nguyễn Công Danh",
+      "createdAt": "2026-11-09T13:52:09.350Z"
+    }
+  ],
+  "attendance": [
+    {
+      "id": "att_1794232340520",
+      "className": "C08TK01",
+      "subjectName": "Xử Lý Kỹ Xảo với After Effects",
+      "date": "2026-11-10",
+      "lessonTitle": "Bài 1: Giao diện và Composition",
+      "records": [
+        {
+          "studentId": "u_student_1",
+          "studentCode": "C08TK0101",
+          "studentName": "Trần Minh Quân",
+          "status": "present",
+          "note": ""
+        }
+      ],
+      "updatedAt": "2026-11-09T13:52:20.520Z",
+      "teacherId": "u_teacher_danh",
+      "createdAt": "2026-11-09T13:52:20.520Z"
     }
   ]
 }
