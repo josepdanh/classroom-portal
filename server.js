@@ -261,7 +261,9 @@ async function initMongoConnection() {
 }
 
 // Cấu hình Cloudflare R2 Storage (10GB Free, hỗ trợ file 100MB+, $0 băng thông tải về)
-const { S3Client, PutObjectCommand, DeleteObjectCommand, ListObjectsV2Command } = require('@aws-sdk/client-s3');
+const { S3Client, PutObjectCommand, DeleteObjectCommand, ListObjectsV2Command, GetObjectCommand } = require('@aws-sdk/client-s3');
+const https = require('https');
+const http = require('http');
 
 const R2_ACCOUNT_ID = process.env.R2_ACCOUNT_ID || "de3c89754598ddfb68c7b5947df665ef";
 const R2_ACCESS_KEY_ID = process.env.R2_ACCESS_KEY_ID || "006fbb0b78af8772fcc2d9953068aa1e";
@@ -3065,52 +3067,103 @@ app.get('/api/schedule/for-class/:className', (req, res) => {
   });
 });
 
-// Hàm hỗ trợ tìm kiếm URL đám mây của file (Tra cứu CSDL và Auto-Recovery trên Cloudinary)
-async function findCloudUrlForFile(filename, db) {
+// Hàm hỗ trợ tải stream qua giao thức HTTP/HTTPS (tự động theo dõi chuyển hướng)
+function getHttpsStream(url, maxRedirects = 5) {
+  return new Promise((resolve, reject) => {
+    if (maxRedirects <= 0) return reject(new Error('Quá nhiều lần chuyển hướng'));
+    const client = url.startsWith('http:') ? http : https;
+    client.get(url, (res) => {
+      if (res.statusCode >= 300 && res.statusCode < 400 && res.headers.location) {
+        let redirectUrl = res.headers.location;
+        if (!redirectUrl.startsWith('http')) {
+          const parsed = new URL(url);
+          redirectUrl = new URL(redirectUrl, parsed.origin).href;
+        }
+        res.resume();
+        return getHttpsStream(redirectUrl, maxRedirects - 1).then(resolve).catch(reject);
+      }
+      if (res.statusCode !== 200) {
+        res.resume();
+        return reject(new Error(`HTTP ${res.statusCode}`));
+      }
+      resolve(res);
+    }).on('error', reject);
+  });
+}
+
+// Hàm hỗ trợ tìm kiếm nguồn lưu trữ thực tế của file (Local, Cloudflare R2 hoặc Cloudinary)
+async function resolveFileSource(filename, db) {
   if (!filename) return null;
   const decodedName = decodeURIComponent(filename);
   const cleanBase = filename.replace(/\.[^/.]+$/, "").replace(/^\d+_/, "");
 
+  // 0. File vật lý cục bộ
+  const localPath = path.join(UPLOAD_DIR, filename);
+  if (fs.existsSync(localPath)) {
+    return { type: 'local', filePath: localPath };
+  }
+
   // 1. Tìm chính xác trong submissions
   for (const s of (db.submissions || [])) {
     if (s.file && (s.file.filename === filename || s.file.originalName === filename || s.file.filename === decodedName || s.file.originalName === decodedName)) {
-      if (s.file.url) return s.file.url;
+      if (s.file.provider === 'r2' || (s.file.url && s.file.url.includes('r2.dev'))) {
+        const r2Key = s.file.storageKey || (s.file.url ? decodeURIComponent(s.file.url.replace(/^.*r2\.dev\//, '')) : null);
+        return { type: 'r2', r2Key, url: s.file.url, originalName: s.file.originalName, size: s.file.size };
+      }
+      if (s.file.provider === 'cloudinary' || (s.file.url && s.file.url.includes('cloudinary.com'))) {
+        const publicId = s.file.publicId || s.file.storageKey || (s.file.url ? decodeURIComponent(s.file.url.replace(/^.*\/upload\/(v\d+\/)?/, '')) : null);
+        return { type: 'cloudinary', publicId, url: s.file.url, originalName: s.file.originalName, size: s.file.size };
+      }
+      if (s.file.url) {
+        return { type: 'external', url: s.file.url, originalName: s.file.originalName, size: s.file.size };
+      }
     }
   }
 
   // 2. Tìm chính xác trong assignments (file đính kèm đề bài)
   for (const a of (db.assignments || [])) {
     if (a.attachment && (a.attachment.filename === filename || a.attachment.originalName === filename || a.attachment.filename === decodedName || a.attachment.originalName === decodedName)) {
-      if (a.attachment.url) return a.attachment.url;
+      if (a.attachment.provider === 'r2' || (a.attachment.url && a.attachment.url.includes('r2.dev'))) {
+        const r2Key = a.attachment.storageKey || (a.attachment.url ? decodeURIComponent(a.attachment.url.replace(/^.*r2\.dev\//, '')) : null);
+        return { type: 'r2', r2Key, url: a.attachment.url, originalName: a.attachment.originalName };
+      }
+      if (a.attachment.provider === 'cloudinary' || (a.attachment.url && a.attachment.url.includes('cloudinary.com'))) {
+        const publicId = a.attachment.publicId || a.attachment.storageKey || (a.attachment.url ? decodeURIComponent(a.attachment.url.replace(/^.*\/upload\/(v\d+\/)?/, '')) : null);
+        return { type: 'cloudinary', publicId, url: a.attachment.url, originalName: a.attachment.originalName };
+      }
+      if (a.attachment.url) {
+        return { type: 'external', url: a.attachment.url, originalName: a.attachment.originalName };
+      }
     }
   }
 
-  // 2b. Tìm trong giáo án điện tử (file đính kèm giáo án)
+  // 2b. Tìm trong giáo án điện tử
   for (const lp of (db.lessonPlans || [])) {
     if (lp.attachment && (lp.attachment.filename === filename || lp.attachment.originalName === filename || lp.attachment.filename === decodedName || lp.attachment.originalName === decodedName)) {
-      if (lp.attachment.url) return lp.attachment.url;
+      if (lp.attachment.url) return { type: 'external', url: lp.attachment.url, originalName: lp.attachment.originalName };
     }
   }
 
-  // 3. Tìm tương đối trong submissions và assignments (nếu có URL chứa tên file)
+  // 3. Tìm tương đối trong submissions (theo phần mã SV / tên tệp)
   if (cleanBase.length > 3) {
     for (const s of (db.submissions || [])) {
-      if (s.file && s.file.url) {
-        if (s.file.url.includes(cleanBase) || s.file.url.includes(encodeURIComponent(cleanBase))) {
-          return s.file.url;
-        }
-      }
-    }
-    for (const a of (db.assignments || [])) {
-      if (a.attachment && a.attachment.url) {
-        if (a.attachment.url.includes(cleanBase) || a.attachment.url.includes(encodeURIComponent(cleanBase))) {
-          return a.attachment.url;
+      if (s.file) {
+        const match = (s.file.filename && s.file.filename.includes(cleanBase)) || (s.file.originalName && s.file.originalName.includes(cleanBase)) || (s.file.url && s.file.url.includes(cleanBase));
+        if (match) {
+          if (s.file.provider === 'r2' || (s.file.url && s.file.url.includes('r2.dev'))) {
+            const r2Key = s.file.storageKey || (s.file.url ? decodeURIComponent(s.file.url.replace(/^.*r2\.dev\//, '')) : null);
+            return { type: 'r2', r2Key, url: s.file.url, originalName: s.file.originalName, size: s.file.size };
+          }
+          if (s.file.provider === 'cloudinary' || (s.file.url && s.file.url.includes('cloudinary.com'))) {
+            const publicId = s.file.publicId || s.file.storageKey || (s.file.url ? decodeURIComponent(s.file.url.replace(/^.*\/upload\/(v\d+\/)?/, '')) : null);
+            return { type: 'cloudinary', publicId, url: s.file.url, originalName: s.file.originalName, size: s.file.size };
+          }
         }
       }
     }
   }
 
-  // 4. Tra cứu trực tiếp trên Cloudflare R2 (Auto-Recovery qua R2 API)
+  // 4. Auto-Recovery trên Cloudflare R2
   if (r2Client) {
     try {
       const r2List = await r2Client.send(new ListObjectsV2Command({
@@ -3122,25 +3175,12 @@ async function findCloudUrlForFile(filename, db) {
         return k.includes(filename) || k.includes(decodedName) || (cleanBase.length > 3 && (k.includes(cleanBase) || k.includes(encodeURIComponent(cleanBase))));
       });
       if (match) {
-        const publicUrl = `${R2_PUBLIC_DOMAIN.replace(/\/$/, '')}/${match.Key}`;
-        console.log(`[Cloud Auto-Recovery] ⚡ Đã tìm thấy file "${filename}" trên Cloudflare R2: ${publicUrl}`);
-        for (const s of (db.submissions || [])) {
-          if (s.file && !s.file.url && (s.file.filename === filename || s.file.originalName === filename || s.file.filename === decodedName || s.file.originalName === decodedName)) {
-            s.file.url = publicUrl;
-            s.file.storageKey = match.Key;
-            s.file.provider = 'r2';
-            writeDatabase(db);
-            break;
-          }
-        }
-        return publicUrl;
+        return { type: 'r2', r2Key: match.Key, size: match.Size };
       }
-    } catch (err) {
-      console.error('[Cloud Auto-Recovery R2 Error]:', err.message);
-    }
+    } catch (e) {}
   }
 
-  // 5. Tra cứu trực tiếp trên Cloudinary (Auto-Recovery qua Cloudinary API nếu CSDL bị mất URL)
+  // 5. Auto-Recovery trên Cloudinary
   if (cloudinary) {
     try {
       const resCloud = await cloudinary.api.resources({
@@ -3154,42 +3194,77 @@ async function findCloudUrlForFile(filename, db) {
         return pid.includes(filename) || pid.includes(decodedName) || (cleanBase.length > 3 && (pid.includes(cleanBase) || pid.includes(encodeURIComponent(cleanBase))));
       });
       if (match) {
-        console.log(`[Cloud Auto-Recovery] ☁️ Đã tìm thấy file "${filename}" trên Cloudinary: ${match.secure_url}`);
-        // Tự động khôi phục URL cho submission nếu chưa có
-        for (const s of (db.submissions || [])) {
-          if (s.file && !s.file.url && (s.file.filename === filename || s.file.originalName === filename || s.file.filename === decodedName || s.file.originalName === decodedName)) {
-            s.file.url = match.secure_url;
-            s.file.publicId = match.public_id;
-            writeDatabase(db);
-            break;
-          }
-        }
-        return match.secure_url;
+        return { type: 'cloudinary', publicId: match.public_id, size: match.bytes };
       }
-    } catch (err) {
-      console.error('[Cloud Auto-Recovery Error]:', err.message);
-    }
+    } catch (e) {}
   }
 
   return null;
 }
 
-// 8. Tải tệp tin
+// Hàm hỗ trợ tìm kiếm URL đám mây của file
+async function findCloudUrlForFile(filename, db) {
+  const source = await resolveFileSource(filename, db);
+  if (!source) return null;
+  if (source.type === 'cloudinary' && source.publicId && cloudinary) {
+    return cloudinary.utils.private_download_url(source.publicId, '', { resource_type: 'raw', type: 'upload' });
+  }
+  if (source.type === 'r2' && source.r2Key) {
+    return `${R2_PUBLIC_DOMAIN.replace(/\/$/, '')}/${encodeURI(source.r2Key)}`;
+  }
+  return source.url || null;
+}
+
+// 8. Tải tệp tin (Tối ưu hóa: Stream trực tiếp từ R2 hoặc Signed Private URL từ Cloudinary)
 app.get('/api/download/:filename', async (req, res) => {
   const { filename } = req.params;
   const downloadName = req.query.name || filename;
   const filePath = path.join(UPLOAD_DIR, filename);
 
+  // 1. Nếu có file vật lý trên ổ cứng cục bộ
   if (fs.existsSync(filePath)) {
     return res.download(filePath, downloadName);
   }
 
-  // Nếu file vật lý không còn trên ổ cứng tạm của Render, tìm URL lưu trên Cloudinary
   const db = readDatabase();
-  const cloudUrl = await findCloudUrlForFile(filename, db);
+  const fileSource = await resolveFileSource(filename, db);
 
-  if (cloudUrl) {
-    return res.redirect(cloudUrl);
+  if (fileSource) {
+    // 2. File trên Cloudflare R2 -> Stream trực tiếp với header attachment
+    if (fileSource.type === 'r2' && fileSource.r2Key && r2Client) {
+      try {
+        const cmd = new GetObjectCommand({
+          Bucket: R2_BUCKET_NAME,
+          Key: fileSource.r2Key
+        });
+        const r2Res = await r2Client.send(cmd);
+        res.set({
+          'Content-Type': r2Res.ContentType || 'application/octet-stream',
+          'Content-Length': r2Res.ContentLength,
+          'Content-Disposition': `attachment; filename="${encodeURIComponent(downloadName)}"`
+        });
+        return r2Res.Body.pipe(res);
+      } catch (r2Err) {
+        console.error('[Download R2 Error]:', r2Err.message);
+      }
+    }
+
+    // 3. File trên Cloudinary -> Chuyển hướng sang Signed Private URL bảo mật
+    if (fileSource.type === 'cloudinary' && fileSource.publicId && cloudinary) {
+      try {
+        const signedUrl = cloudinary.utils.private_download_url(fileSource.publicId, '', {
+          resource_type: 'raw',
+          type: 'upload'
+        });
+        return res.redirect(signedUrl);
+      } catch (cldErr) {
+        console.error('[Download Cloudinary Error]:', cldErr.message);
+      }
+    }
+
+    if (fileSource.url) {
+      return res.redirect(fileSource.url);
+    }
   }
 
   // Trang thông báo thân thiện giải thích nếu tệp tin bị xoá trên ổ cứng tạm
@@ -3227,6 +3302,70 @@ app.get('/api/download/:filename', async (req, res) => {
   `);
 });
 
+// 8a. Tải tệp tin theo ID bài nộp (Đảm bảo chính xác 100% không bao giờ nhầm lẫn)
+app.get('/api/download-submission/:id', async (req, res) => {
+  const { id } = req.params;
+  const db = readDatabase();
+  const sub = (db.submissions || []).find(s => s.id === id);
+  if (!sub || !sub.file) {
+    return res.status(404).send("Bài nộp không tồn tại hoặc không đính kèm tệp tin.");
+  }
+
+  const downloadName = req.query.name || sub.file.originalName || sub.file.filename;
+
+  // 1. Kiểm tra file cục bộ
+  if (sub.file.filename) {
+    const filePath = path.join(UPLOAD_DIR, sub.file.filename);
+    if (fs.existsSync(filePath)) {
+      return res.download(filePath, downloadName);
+    }
+  }
+
+  // 2. Stream từ Cloudflare R2
+  if (sub.file.provider === 'r2' || (sub.file.url && sub.file.url.includes('r2.dev'))) {
+    const r2Key = sub.file.storageKey || (sub.file.url ? decodeURIComponent(sub.file.url.replace(/^.*r2\.dev\//, '')) : null);
+    if (r2Key && r2Client) {
+      try {
+        const cmd = new GetObjectCommand({
+          Bucket: R2_BUCKET_NAME,
+          Key: r2Key
+        });
+        const r2Res = await r2Client.send(cmd);
+        res.set({
+          'Content-Type': r2Res.ContentType || 'application/octet-stream',
+          'Content-Length': r2Res.ContentLength,
+          'Content-Disposition': `attachment; filename="${encodeURIComponent(downloadName)}"`
+        });
+        return r2Res.Body.pipe(res);
+      } catch (err) {
+        console.error('[Download Sub R2 Error]:', err.message);
+      }
+    }
+  }
+
+  // 3. Chuyển hướng sang Signed URL Cloudinary
+  if (sub.file.provider === 'cloudinary' || (sub.file.url && sub.file.url.includes('cloudinary.com'))) {
+    const publicId = sub.file.publicId || sub.file.storageKey || (sub.file.url ? decodeURIComponent(sub.file.url.replace(/^.*\/upload\/(v\d+\/)?/, '')) : null);
+    if (publicId && cloudinary) {
+      try {
+        const signedUrl = cloudinary.utils.private_download_url(publicId, '', {
+          resource_type: 'raw',
+          type: 'upload'
+        });
+        return res.redirect(signedUrl);
+      } catch (err) {
+        console.error('[Download Sub Cloudinary Error]:', err.message);
+      }
+    }
+  }
+
+  if (sub.file.url) {
+    return res.redirect(sub.file.url);
+  }
+
+  return res.redirect(`/api/download/${encodeURIComponent(sub.file.filename || sub.file.originalName)}?name=${encodeURIComponent(downloadName)}`);
+});
+
 // 8b. Xem nội dung file trực tiếp trên Web (Xem Inline / Preview)
 app.get('/api/raw-file/:filename', async (req, res) => {
   const { filename } = req.params;
@@ -3237,10 +3376,35 @@ app.get('/api/raw-file/:filename', async (req, res) => {
   }
 
   const db = readDatabase();
-  const cloudUrl = await findCloudUrlForFile(filename, db);
+  const fileSource = await resolveFileSource(filename, db);
 
-  if (cloudUrl) {
-    return res.redirect(cloudUrl);
+  if (fileSource) {
+    if (fileSource.type === 'r2' && fileSource.r2Key && r2Client) {
+      try {
+        const cmd = new GetObjectCommand({
+          Bucket: R2_BUCKET_NAME,
+          Key: fileSource.r2Key
+        });
+        const r2Res = await r2Client.send(cmd);
+        if (r2Res.ContentType) res.setHeader('Content-Type', r2Res.ContentType);
+        if (r2Res.ContentLength) res.setHeader('Content-Length', r2Res.ContentLength);
+        return r2Res.Body.pipe(res);
+      } catch (e) {}
+    }
+
+    if (fileSource.type === 'cloudinary' && fileSource.publicId && cloudinary) {
+      try {
+        const signedUrl = cloudinary.utils.private_download_url(fileSource.publicId, '', {
+          resource_type: 'raw',
+          type: 'upload'
+        });
+        return res.redirect(signedUrl);
+      } catch (e) {}
+    }
+
+    if (fileSource.url) {
+      return res.redirect(fileSource.url);
+    }
   }
 
   return res.status(404).send("Tệp tin không tồn tại trên hệ thống.");
@@ -3261,26 +3425,38 @@ app.get('/api/file-text/:filename', async (req, res) => {
   }
 
   const db = readDatabase();
-  const cloudUrl = await findCloudUrlForFile(filename, db);
-  if (cloudUrl) {
-    try {
-      const fetchRes = await fetch(cloudUrl);
-      if (fetchRes.ok) {
-        const content = await fetchRes.text();
+  const fileSource = await resolveFileSource(filename, db);
+  if (fileSource) {
+    if (fileSource.type === 'r2' && fileSource.r2Key && r2Client) {
+      try {
+        const cmd = new GetObjectCommand({ Bucket: R2_BUCKET_NAME, Key: fileSource.r2Key });
+        const r2Res = await r2Client.send(cmd);
+        const stream = r2Res.Body;
+        let content = '';
+        for await (const chunk of stream) content += chunk.toString('utf8');
         return res.json({ success: true, content, size: content.length });
-      }
-    } catch (e) {}
+      } catch (e) {}
+    }
+    const cloudUrl = await findCloudUrlForFile(filename, db);
+    if (cloudUrl) {
+      try {
+        const fetchRes = await fetch(cloudUrl);
+        if (fetchRes.ok) {
+          const content = await fetchRes.text();
+          return res.json({ success: true, content, size: content.length });
+        }
+      } catch (e) {}
+    }
   }
 
   return res.status(404).json({ error: "Tệp tin không tồn tại." });
 });
 
-// 8d. Tải toàn bộ bài nộp của 1 bài tập dưới dạng file ZIP (gom theo lớp và môn, tự động lấy từ Đám mây nếu file cục bộ không có)
+// 8d. Tải toàn bộ bài nộp của 1 bài tập dưới dạng file ZIP (Streaming qua Archiver - Siêu nhẹ < 15MB RAM, chống sập Render)
 app.get('/api/assignments/:id/download-all-zip', async (req, res) => {
   const { id } = req.params;
   const { teacherId } = req.query;
   const db = readDatabase();
-  const AdmZip = require('adm-zip');
 
   const asm = (db.assignments || []).find(a => a.id === id);
   if (!asm) {
@@ -3305,96 +3481,147 @@ app.get('/api/assignments/:id/download-all-zip', async (req, res) => {
     return res.status(400).send("Chưa có học sinh nào nộp bài cho bài tập này.");
   }
 
-  const zip = new AdmZip();
+  const { ZipArchive } = require('archiver');
   const cleanClass = sanitizeFolderName(asm.targetClass || 'Chung');
   const cleanSubject = sanitizeFolderName(asm.subject || 'MonHoc');
   const cleanAssignment = sanitizeFolderName(asm.title || 'BaiTap');
   const folderPath = `${cleanClass}/${cleanSubject}/${cleanAssignment}`;
 
-  let fileCount = 0;
+  const dateStr = new Date().toISOString().split('T')[0];
+  const zipFileName = `BaiNop_${cleanClass}_${cleanSubject}_${cleanAssignment}_${dateStr}.zip`;
 
-  for (const sub of submissions) {
+  // Thiết lập HTTP Header cho Streaming ZIP
+  res.set({
+    'Content-Type': 'application/zip',
+    'Content-Disposition': `attachment; filename="${encodeURIComponent(zipFileName)}"`,
+    'Cache-Control': 'no-cache'
+  });
+
+  const archive = new ZipArchive({ zlib: { level: 1 } });
+  archive.on('error', (err) => {
+    console.error('[Archiver Zip Error]:', err.message);
+  });
+  archive.pipe(res);
+
+  const summaryRows = [];
+  const studentMap = {};
+  submissions.forEach(s => {
+    if (!studentMap[s.studentId]) studentMap[s.studentId] = [];
+    studentMap[s.studentId].push(s);
+  });
+
+  for (let i = 0; i < submissions.length; i++) {
+    const sub = submissions[i];
     const student = (db.users || []).find(u => u.id === sub.studentId);
     const studentCode = student ? (student.studentCode || student.username || '') : '';
     const studentName = student ? student.name : (sub.studentName || 'HocSinh');
     const safeStudentName = studentName.replace(/[/\\?%*:|"<>]/g, '_');
-    const prefix = studentCode ? `${studentCode}_${safeStudentName}` : safeStudentName;
+    
+    const userSubs = studentMap[sub.studentId] || [sub];
+    const subIdx = userSubs.findIndex(x => x.id === sub.id);
+    const ver = userSubs.length > 1 ? `_Lan${subIdx + 1}` : '';
+    const prefix = studentCode ? `${studentCode}_${safeStudentName}${ver}` : `${safeStudentName}${ver}`;
 
-    if (sub.file && sub.file.filename) {
-      const filePath = path.join(UPLOAD_DIR, sub.file.filename);
+    if (sub.file && (sub.file.filename || sub.file.originalName)) {
+      const origName = sub.file.originalName || sub.file.filename;
+      const safeOrigName = origName.replace(/[/\\?%*:|"<>]/g, '_');
+      const entryName = `${folderPath}/${prefix}_${safeOrigName}`;
       let fileAdded = false;
 
-      // 1. Thử đọc file từ ổ cứng cục bộ
-      if (fs.existsSync(filePath)) {
+      // 1. Kiểm tra ổ cứng cục bộ
+      const localPath = path.join(UPLOAD_DIR, sub.file.filename);
+      if (fs.existsSync(localPath)) {
         try {
-          const destName = `${prefix}_${sub.file.originalName}`;
-          zip.addLocalFile(filePath, folderPath, destName);
-          fileCount++;
+          archive.file(localPath, { name: entryName });
           fileAdded = true;
+          summaryRows.push({ code: studentCode, name: studentName, file: `${prefix}_${safeOrigName}`, status: 'Thành công (Local)' });
         } catch (e) {}
       }
 
-      // 2. Nếu không có file vật lý (trên Render Cloud), tải trực tiếp từ Cloud (Cloudflare R2 / Cloudinary)
+      // 2. Kiểm tra Cloudflare R2 hoặc Cloudinary
       if (!fileAdded) {
-        const cloudUrl = sub.file.url || await findCloudUrlForFile(sub.file.filename, db);
-        if (cloudUrl) {
-          try {
-            const fetchRes = await fetch(cloudUrl);
-            if (fetchRes.ok) {
-              const arrayBuf = await fetchRes.arrayBuffer();
-              const destName = `${prefix}_${sub.file.originalName || sub.file.filename}`;
-              zip.addFile(`${folderPath}/${destName}`, Buffer.from(arrayBuf));
-              fileCount++;
+        const fileSource = await resolveFileSource(sub.file.filename || sub.file.originalName, db);
+        if (fileSource) {
+          if (fileSource.type === 'r2' && fileSource.r2Key && r2Client) {
+            try {
+              const cmd = new GetObjectCommand({ Bucket: R2_BUCKET_NAME, Key: fileSource.r2Key });
+              const r2Res = await r2Client.send(cmd);
+              archive.append(r2Res.Body, { name: entryName });
               fileAdded = true;
+              summaryRows.push({ code: studentCode, name: studentName, file: `${prefix}_${safeOrigName}`, status: 'Thành công (Cloudflare R2)' });
+            } catch (err) {
+              console.warn(`[Zip Export R2] Lỗi kéo file ${fileSource.r2Key}:`, err.message);
             }
-          } catch (err) {
-            console.warn(`[Zip Export] Lỗi kéo file từ Cloud (${cloudUrl}):`, err.message);
+          } else if (fileSource.type === 'cloudinary' && fileSource.publicId && cloudinary) {
+            try {
+              const signedUrl = cloudinary.utils.private_download_url(fileSource.publicId, '', {
+                resource_type: 'raw',
+                type: 'upload'
+              });
+              const cldStream = await getHttpsStream(signedUrl);
+              archive.append(cldStream, { name: entryName });
+              fileAdded = true;
+              summaryRows.push({ code: studentCode, name: studentName, file: `${prefix}_${safeOrigName}`, status: 'Thành công (Cloudinary)' });
+            } catch (err) {
+              console.warn(`[Zip Export Cloudinary] Lỗi kéo file ${fileSource.publicId}:`, err.message);
+            }
           }
         }
       }
 
-      // 3. Dự phòng nếu tải file cloud thất bại: tạo file Shortcut .url
+      // 3. Fallback: Nếu không kéo được file, tạo file Shortcut .url
       if (!fileAdded && (sub.file.url || sub.link)) {
         const directUrl = sub.file.url || sub.link;
         const urlContent = `[InternetShortcut]\nURL=${directUrl}\n\n[ThongTinBaiNop]\nMSSV=${studentCode}\nHoVaTen=${studentName}\nLop=${cleanClass}\nMon=${cleanSubject}\nBaiTap=${cleanAssignment}\nLinkCloud=${directUrl}\n`;
-        zip.addFile(`${folderPath}/${prefix}_LienKetCloud.url`, Buffer.from(urlContent, 'utf8'));
-        fileCount++;
+        archive.append(Buffer.from(urlContent, 'utf8'), { name: `${folderPath}/${prefix}_LienKetCloud.url` });
+        summaryRows.push({ code: studentCode, name: studentName, file: `${prefix}_LienKetCloud.url`, status: 'Lưu dạng liên kết Cloud' });
       }
     } else if (sub.link || sub.content) {
       const urlContent = `[InternetShortcut]\nURL=${sub.link || ''}\n\n[ThongTinBaiNop]\nMSSV=${studentCode}\nHoVaTen=${studentName}\nLop=${cleanClass}\nMon=${cleanSubject}\nBaiTap=${cleanAssignment}\nThoiGianNop=${sub.submittedAt || ''}\nLink=${sub.link || ''}\nGhiChu=${sub.content || ''}\n`;
-      zip.addFile(`${folderPath}/${prefix}_LienKet.url`, Buffer.from(urlContent, 'utf8'));
-      fileCount++;
+      archive.append(Buffer.from(urlContent, 'utf8'), { name: `${folderPath}/${prefix}_LienKet.url` });
+      summaryRows.push({ code: studentCode, name: studentName, file: `${prefix}_LienKet.url`, status: 'Lưu dạng liên kết văn bản' });
     }
   }
 
-  if (fileCount === 0) {
-    return res.status(404).send("Không tìm thấy file bài nộp nào trên hệ thống.");
-  }
-
-  const dateStr = new Date().toISOString().split('T')[0];
-  const zipFileName = `BaiNop_${cleanClass}_${cleanSubject}_${cleanAssignment}_${dateStr}.zip`;
-  const buffer = zip.toBuffer();
-
-  res.set({
-    'Content-Type': 'application/zip',
-    'Content-Disposition': `attachment; filename="${encodeURIComponent(zipFileName)}"`,
-    'Content-Length': buffer.length
+  // Đính kèm file DANH_SACH_NOP_BAI.txt
+  let reportContent = `========================================================================================\n`;
+  reportContent += `BẢNG TỔNG HỢP BÀI NỘP: ${cleanAssignment}\n`;
+  reportContent += `Lớp: ${cleanClass} | Môn: ${cleanSubject} | Thời gian xuất: ${new Date().toLocaleString('vi-VN')}\n`;
+  reportContent += `Tổng số bài nộp: ${summaryRows.length}\n`;
+  reportContent += `========================================================================================\n\n`;
+  reportContent += `STT | MÃ SV     | HỌ VÀ TÊN                | TÊN FILE LƯU TRỮ                                    | TRẠNG THÁI\n`;
+  reportContent += `----+-----------+--------------------------+-----------------------------------------------------+--------------------\n`;
+  summaryRows.forEach((r, idx) => {
+    reportContent += `${String(idx + 1).padStart(3, ' ')} | ${(r.code || '-').padEnd(9, ' ')} | ${(r.name || '-').padEnd(24, ' ')} | ${(r.file || '-').padEnd(51, ' ')} | ${r.status}\n`;
   });
-  res.send(buffer);
+  archive.append(Buffer.from(reportContent, 'utf8'), { name: `${folderPath}/DANH_SACH_NOP_BAI.txt` });
+
+  await archive.finalize();
 });
 
-// 8e. Tải toàn bộ bài nộp của TẤT CẢ các lớp/môn dưới dạng file ZIP
+// 8e. Tải toàn bộ bài nộp của TẤT CẢ các lớp/môn dưới dạng file ZIP (Streaming qua Archiver)
 app.get('/api/admin/download-all-submissions-zip', async (req, res) => {
   const db = readDatabase();
-  const AdmZip = require('adm-zip');
-
   const submissions = (db.submissions || []).filter(s => s.file || s.link);
   if (submissions.length === 0) {
     return res.status(400).send("Chưa có bài nộp nào trên hệ thống.");
   }
 
-  const zip = new AdmZip();
-  let fileCount = 0;
+  const { ZipArchive } = require('archiver');
+  const dateStr = new Date().toISOString().split('T')[0];
+  const zipFileName = `ToanBo_BaiNop_${dateStr}.zip`;
+
+  res.set({
+    'Content-Type': 'application/zip',
+    'Content-Disposition': `attachment; filename="${encodeURIComponent(zipFileName)}"`,
+    'Cache-Control': 'no-cache'
+  });
+
+  const archive = new ZipArchive({ zlib: { level: 1 } });
+  archive.on('error', (err) => {
+    console.error('[Archiver All Submissions Error]:', err.message);
+  });
+  archive.pipe(res);
 
   for (const sub of submissions) {
     const asm = (db.assignments || []).find(a => a.id === sub.assignmentId);
@@ -3410,61 +3637,55 @@ app.get('/api/admin/download-all-submissions-zip', async (req, res) => {
     const prefix = studentCode ? `${studentCode}_${safeStudentName}` : safeStudentName;
 
     if (sub.file && sub.file.filename) {
-      const filePath = path.join(UPLOAD_DIR, sub.file.filename);
+      const origName = sub.file.originalName || sub.file.filename;
+      const safeOrigName = origName.replace(/[/\\?%*:|"<>]/g, '_');
+      const entryName = `${folderPath}/${prefix}_${safeOrigName}`;
       let fileAdded = false;
 
-      if (fs.existsSync(filePath)) {
+      const localPath = path.join(UPLOAD_DIR, sub.file.filename);
+      if (fs.existsSync(localPath)) {
         try {
-          const destName = `${prefix}_${sub.file.originalName}`;
-          zip.addLocalFile(filePath, folderPath, destName);
-          fileCount++;
+          archive.file(localPath, { name: entryName });
           fileAdded = true;
         } catch (e) {}
       }
 
       if (!fileAdded) {
-        const cloudUrl = sub.file.url || await findCloudUrlForFile(sub.file.filename, db);
-        if (cloudUrl) {
-          try {
-            const fetchRes = await fetch(cloudUrl);
-            if (fetchRes.ok) {
-              const arrayBuf = await fetchRes.arrayBuffer();
-              const destName = `${prefix}_${sub.file.originalName || sub.file.filename}`;
-              zip.addFile(`${folderPath}/${destName}`, Buffer.from(arrayBuf));
-              fileCount++;
+        const fileSource = await resolveFileSource(sub.file.filename, db);
+        if (fileSource) {
+          if (fileSource.type === 'r2' && fileSource.r2Key && r2Client) {
+            try {
+              const cmd = new GetObjectCommand({ Bucket: R2_BUCKET_NAME, Key: fileSource.r2Key });
+              const r2Res = await r2Client.send(cmd);
+              archive.append(r2Res.Body, { name: entryName });
               fileAdded = true;
-            }
-          } catch (err) {}
+            } catch (err) {}
+          } else if (fileSource.type === 'cloudinary' && fileSource.publicId && cloudinary) {
+            try {
+              const signedUrl = cloudinary.utils.private_download_url(fileSource.publicId, '', {
+                resource_type: 'raw',
+                type: 'upload'
+              });
+              const cldStream = await getHttpsStream(signedUrl);
+              archive.append(cldStream, { name: entryName });
+              fileAdded = true;
+            } catch (err) {}
+          }
         }
       }
 
       if (!fileAdded && (sub.file.url || sub.link)) {
         const directUrl = sub.file.url || sub.link;
         const urlContent = `[InternetShortcut]\nURL=${directUrl}\n\n[ThongTinBaiNop]\nMSSV=${studentCode}\nHoVaTen=${studentName}\nLop=${cleanClass}\nMon=${cleanSubject}\nBaiTap=${cleanAssignment}\nLinkCloud=${directUrl}\n`;
-        zip.addFile(`${folderPath}/${prefix}_LienKetCloud.url`, Buffer.from(urlContent, 'utf8'));
-        fileCount++;
+        archive.append(Buffer.from(urlContent, 'utf8'), { name: `${folderPath}/${prefix}_LienKetCloud.url` });
       }
     } else if (sub.link || sub.content) {
       const urlContent = `[InternetShortcut]\nURL=${sub.link || ''}\n\n[ThongTinBaiNop]\nMSSV=${studentCode}\nHoVaTen=${studentName}\nLop=${cleanClass}\nMon=${cleanSubject}\nBaiTap=${cleanAssignment}\nThoiGianNop=${sub.submittedAt || ''}\nLink=${sub.link || ''}\nGhiChu=${sub.content || ''}\n`;
-      zip.addFile(`${folderPath}/${prefix}_LienKet.url`, Buffer.from(urlContent, 'utf8'));
-      fileCount++;
+      archive.append(Buffer.from(urlContent, 'utf8'), { name: `${folderPath}/${prefix}_LienKet.url` });
     }
   }
 
-  if (fileCount === 0) {
-    return res.status(404).send("Không tìm thấy file bài nộp nào.");
-  }
-
-  const dateStr = new Date().toISOString().split('T')[0];
-  const zipFileName = `ToanBo_BaiNop_${dateStr}.zip`;
-  const buffer = zip.toBuffer();
-
-  res.set({
-    'Content-Type': 'application/zip',
-    'Content-Disposition': `attachment; filename="${encodeURIComponent(zipFileName)}"`,
-    'Content-Length': buffer.length
-  });
-  res.send(buffer);
+  await archive.finalize();
 });
 
 // 8d. API lấy URL công khai hỗ trợ xem trước Office & Google Docs

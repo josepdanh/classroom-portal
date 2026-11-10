@@ -2405,8 +2405,8 @@
       document.getElementById('preview-file-title').textContent = originalName || filename;
       document.getElementById('preview-file-size').textContent = size ? formatBytes(size) : '';
 
-      const downloadUrl = customUrl || `/api/download/${filename}?name=${encodeURIComponent(originalName || filename)}`;
-      const rawUrl = customUrl || `/api/raw-file/${filename}`;
+      const downloadUrl = `/api/download/${encodeURIComponent(filename)}?name=${encodeURIComponent(originalName || filename)}`;
+      const rawUrl = customUrl || `/api/raw-file/${encodeURIComponent(filename)}`;
 
       document.getElementById('btn-preview-download').href = downloadUrl;
       document.getElementById('btn-preview-newtab').href = rawUrl;
@@ -6550,7 +6550,7 @@
                   <button type="button" onclick="previewFile('${sub.file.filename}', '${escapeHtml(sub.file.originalName)}', ${sub.file.size || 0}, '${sub.file.url || ''}')" class="px-2 py-0.5 ${viewBtnBg} font-semibold rounded text-xs transition inline-flex items-center gap-1 border shadow-xs" title="Xem trực tiếp trên web">
                     <i class="fa-solid ${viewBtnIcon}"></i> ${viewBtnText}
                   </button>
-                  <a href="${sub.file.url || `/api/download/${sub.file.filename}?name=${encodeURIComponent(sub.file.originalName)}`}" ${sub.file.url ? 'target="_blank"' : ''} class="text-slate-500 hover:text-indigo-600 font-medium hover:underline inline-flex items-center gap-1 text-xs" title="Tải về máy">
+                  <a href="/api/download-submission/${sub.id}?name=${encodeURIComponent(sub.file.originalName || sub.file.filename)}" class="text-slate-500 hover:text-indigo-600 font-medium hover:underline inline-flex items-center gap-1 text-xs" title="Tải về máy">
                     <i class="fa-solid fa-download"></i> ${escapeHtml(sub.file.originalName)}
                   </a>
                 </div>
@@ -7488,7 +7488,7 @@
                     <button type="button" onclick="previewFile('${sub.file.filename}', '${escapeHtml(sub.file.originalName)}', ${sub.file.size || 0}, '${sub.file.url || ''}')" class="px-2.5 py-1 ${bBg} font-semibold rounded-lg text-xs transition inline-flex items-center gap-1 border">
                       <i class="fa-solid ${bIcon}"></i> ${bText}
                     </button>
-                    <a href="${sub.file.url || `/api/download/${sub.file.filename}?name=${encodeURIComponent(sub.file.originalName)}`}" ${sub.file.url ? 'target="_blank"' : ''} class="px-2.5 py-1 bg-white hover:bg-slate-100 text-slate-600 font-semibold rounded-lg text-xs transition inline-flex items-center gap-1 border border-slate-200">
+                    <a href="/api/download-submission/${sub.id}?name=${encodeURIComponent(sub.file.originalName || sub.file.filename)}" class="px-2.5 py-1 bg-white hover:bg-slate-100 text-slate-600 font-semibold rounded-lg text-xs transition inline-flex items-center gap-1 border border-slate-200">
                       <i class="fa-solid fa-download"></i> Tải về
                     </a>
                   </div>
