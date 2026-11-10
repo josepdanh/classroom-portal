@@ -1345,8 +1345,11 @@
           <h3 id="grading-modal-title" class="font-bold text-slate-900 text-lg">Danh Sách Học Sinh Nộp Bài</h3>
           <p id="grading-modal-subtitle" class="text-xs text-slate-500 mt-0.5"></p>
         </div>
-        <div class="flex items-center gap-2.5">
-          <a id="grading-modal-download-zip" href="#" target="_blank" class="px-3.5 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl text-xs font-bold shadow-sm transition flex items-center gap-1.5">
+        <div class="flex items-center gap-2.5 flex-wrap">
+          <button type="button" onclick="batchDownloadSubmissions()" class="px-3.5 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-300 rounded-xl text-xs font-bold shadow-sm transition flex items-center gap-1.5" title="Tải trực tiếp từng bài thi của học sinh qua trình duyệt">
+            <i class="fa-solid fa-cloud-arrow-down text-indigo-600"></i> Tải Trực Tiếp Từng File
+          </button>
+          <a id="grading-modal-download-zip" href="#" target="_blank" class="px-3.5 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl text-xs font-bold shadow-sm transition flex items-center gap-1.5" title="Tải toàn bộ bài nộp nén trong 1 file ZIP">
             <i class="fa-solid fa-file-zipper"></i> Tải Về Máy Tính (.ZIP)
           </a>
           <button type="button" onclick="saveAllInlineGrades()" class="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-bold shadow-sm transition flex items-center gap-1.5">
@@ -2383,6 +2386,7 @@
     let assignmentsData = [];
     let currentStudentFilter = 'ALL';
     let currentViewingAssignmentId = null;
+    let currentGradingData = null;
     let teacherSelectedClass = 'ALL';
     let availableClasses = [];
     let availableIndustryGroups = [];
@@ -6493,6 +6497,8 @@
           return;
         }
 
+        currentGradingData = data;
+
         const isExaminer = currentUser && (currentUser.isExaminer || (currentUser.username && currentUser.username.toLowerCase() === 'phongkhaothi'));
         const modalTitle = isExaminer ? `Lưu Trữ & Kiểm Tra Bài Thi: ${data.assignment.title}` : data.assignment.title;
         document.getElementById('grading-modal-title').textContent = modalTitle;
@@ -6619,6 +6625,53 @@
       } catch (e) {
         showToast("Không thể tải danh sách bài nộp!", "error");
       }
+    }
+
+    // Tải trực tiếp song song từng bài nộp của học sinh về máy (chạy độc lập, không sợ timeout server ZIP)
+    function batchDownloadSubmissions() {
+      if (!currentGradingData || !currentGradingData.studentsStatus) {
+        showToast("Không tìm thấy dữ liệu bài nộp để tải.", "warning");
+        return;
+      }
+
+      const submittedItems = currentGradingData.studentsStatus.filter(item => {
+        return item.hasSubmitted && item.submission && item.submission.file && (item.submission.file.filename || item.submission.file.originalName);
+      });
+
+      if (submittedItems.length === 0) {
+        showToast("Chưa có học sinh nào nộp tệp tin cho bài tập này.", "warning");
+        return;
+      }
+
+      if (!confirm(`Bạn có muốn tải trực tiếp ${submittedItems.length} file bài nộp về máy tính không?\n(Trình duyệt sẽ tự động lưu từng tệp về thư mục Downloads của bạn)`)) {
+        return;
+      }
+
+      showToast(`Đang bắt đầu tải ${submittedItems.length} bài nộp về máy...`, "info");
+
+      submittedItems.forEach((item, index) => {
+        const s = item.student || {};
+        const sub = item.submission;
+        const studentCode = s.studentCode || s.username || '';
+        const studentName = (s.name || sub.studentName || 'HocSinh').replace(/[/\\?%*:|"<>]/g, '_');
+        const origName = (sub.file.originalName || sub.file.filename || 'bai-nop.rar').replace(/[/\\?%*:|"<>]/g, '_');
+        const finalName = studentCode ? `${studentCode}_${studentName}_${origName}` : `${studentName}_${origName}`;
+
+        setTimeout(() => {
+          const downloadUrl = `/api/download-submission/${sub.id}?name=${encodeURIComponent(finalName)}`;
+          const link = document.createElement('a');
+          link.href = downloadUrl;
+          link.setAttribute('download', finalName);
+          link.style.display = 'none';
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
+        }, index * 400);
+      });
+
+      setTimeout(() => {
+        showToast(`Đã gửi lệnh tải ${submittedItems.length} file! Vui lòng kiểm tra thư mục Downloads.`, "success");
+      }, submittedItems.length * 400 + 500);
     }
 
     // Tự động lưu điểm 1 học sinh trên form nộp bài tập
