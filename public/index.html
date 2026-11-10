@@ -5559,6 +5559,9 @@
                 Hiện tại ngoài giờ học theo lịch báo giảng.<br>
                 <b class="text-amber-800">Thầy click vào ô Checkbox để điểm danh bù.</b>
               </div>
+              <button onclick="forceUnlockCurrentSession('${escapeHtml(session.className)}')" class="mt-2.5 px-3 py-1.5 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl text-xs font-bold transition shadow-xs flex items-center justify-center gap-1.5 mx-auto active:scale-95">
+                <i class="fa-solid fa-qrcode"></i> Bật Mã QR Cho Học Sinh Ngay
+              </button>
             </div>
           `;
         }
@@ -5630,6 +5633,29 @@
       if (!success) {
         const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=${encodeURIComponent(payloadText)}&color=99-27-27`;
         container.innerHTML = `<img src="${qrUrl}" alt="Mã QR Điểm Danh" class="w-[180px] h-[180px] object-contain rounded-xl shadow-xs mx-auto" />`;
+      }
+    }
+
+    // Giáo viên chủ động mở khóa mã QR cho học sinh khi cần
+    async function forceUnlockCurrentSession(className) {
+      if (!className) return;
+      try {
+        const res = await fetch('/api/attendance/session/force-unlock', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ className })
+        });
+        const data = await res.json();
+        if (res.ok && data.success) {
+          showToast(data.message || "Đã mở khóa mã QR!", "success");
+          if (data.session) {
+            applyLiveSessionData(data.session);
+          }
+        } else {
+          showToast(data.message || "Lỗi mở khóa", "error");
+        }
+      } catch (err) {
+        showToast("Lỗi kết nối khi mở khóa", "error");
       }
     }
 

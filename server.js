@@ -1,8 +1,18 @@
+// Thiết lập múi giờ Việt Nam (Asia/Ho_Chi_Minh, GMT+7) cho toàn bộ hệ thống
+process.env.TZ = 'Asia/Ho_Chi_Minh';
+
 const express = require('express');
 const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
 const os = require('os');
+
+// Hàm lấy thời gian hiện tại chuẩn giờ Việt Nam (UTC+7) bất kể máy chủ Cloud chạy ở múi giờ nào (Render UTC)
+function getVietnamNow() {
+  const now = new Date();
+  const utc = now.getTime() + (now.getTimezoneOffset() * 60000);
+  return new Date(utc + (7 * 3600000));
+}
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -2480,7 +2490,8 @@ function generateSessionToken() {
 function checkScheduleTimeWindow(scheduleItem) {
   if (!scheduleItem) return { isAllowedForStudent: true, isSameDay: true, isWithinTime: true, reason: '' };
 
-  const now = new Date();
+  // Luôn lấy thời gian theo chuẩn giờ Việt Nam (UTC+7)
+  const now = getVietnamNow();
   const jsDay = now.getDay(); // 0 = Chủ Nhật, 1 = Thứ Hai, ..., 6 = Thứ Bảy
   const currentDayOfWeek = jsDay === 0 ? 8 : jsDay + 1; // 2 = Thứ Hai, ..., 8 = Chủ Nhật
   const hour = now.getHours();
@@ -2667,7 +2678,7 @@ app.get('/api/attendance/session/current', (req, res) => {
   // Kiểm tra khung giờ điểm danh học sinh
   const matchedSchedule = (db.schedule || []).find(s => s.id === session.scheduleId) || session;
   const timeStatus = checkScheduleTimeWindow(matchedSchedule);
-  session.isAllowedForStudent = timeStatus.isAllowedForStudent;
+  session.isAllowedForStudent = session.forceUnlock ? true : timeStatus.isAllowedForStudent;
   session.timeStatus = timeStatus;
 
   res.json({
@@ -2693,10 +2704,24 @@ app.get('/api/attendance/session/current', (req, res) => {
       students: studentList,
       isStudentCheckedIn,
       studentCheckinInfo,
-      isAllowedForStudent: timeStatus.isAllowedForStudent,
+      isAllowedForStudent: session.isAllowedForStudent,
       timeStatus: timeStatus
     }
   });
+});
+
+// Endpoint cho phép giáo viên chủ động mở khóa phiên điểm danh cho học sinh khi cần
+app.post('/api/attendance/session/force-unlock', (req, res) => {
+  const { className } = req.body;
+  if (!className) return res.status(400).json({ message: "Thiếu tên lớp." });
+  const cleanClass = className.trim().toUpperCase();
+  const session = activeAttendanceSessions[cleanClass];
+  if (!session || !session.isActive) {
+    return res.status(404).json({ message: "Không tìm thấy phiên điểm danh." });
+  }
+  session.forceUnlock = true;
+  session.isAllowedForStudent = true;
+  res.json({ success: true, message: "Đã mở khóa phiên điểm danh cho học sinh!", session });
 });
 
 // 4c. Đổi mã ngay lập tức (Refresh OTP & QR)
@@ -2744,7 +2769,7 @@ app.post('/api/attendance/session/checkin', (req, res) => {
   const matchedSchedule = (db.schedule || []).find(s => s.id === session.scheduleId) || session;
   const timeStatus = checkScheduleTimeWindow(matchedSchedule);
 
-  if (!timeStatus.isAllowedForStudent) {
+  if (!timeStatus.isAllowedForStudent && !session.forceUnlock) {
     return res.status(400).json({
       success: false,
       locked: true,
@@ -3008,8 +3033,9 @@ app.get('/api/schedule/for-class/:className', (req, res) => {
   const db = readDatabase();
 
   const list = (db.schedule || []).filter(s => s.className && s.className.toUpperCase() === cleanClass);
-  // Ngày trong tuần hiện tại: 0 = CN, 1 = T2, 2 = T3, ..., 6 = T7. Lịch báo giảng: 2 = T2, 3 = T3, ..., 7 = T7.
-  const todayJsDay = new Date().getDay(); // 0-6
+  // Ngày trong tuần hiện tại theo giờ Việt Nam (UTC+7): 0 = CN, 1 = T2, 2 = T3, ..., 6 = T7. Lịch báo giảng: 2 = T2, 3 = T3, ..., 7 = T7.
+  const nowVn = getVietnamNow();
+  const todayJsDay = nowVn.getDay(); // 0-6
   const currentDayOfWeek = todayJsDay === 0 ? 8 : todayJsDay + 1;
 
   const result = list.map(item => {
