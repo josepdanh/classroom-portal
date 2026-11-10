@@ -261,7 +261,7 @@ async function initMongoConnection() {
 }
 
 // Cấu hình Cloudflare R2 Storage (10GB Free, hỗ trợ file 100MB+, $0 băng thông tải về)
-const { S3Client, PutObjectCommand, DeleteObjectCommand, ListObjectsV2Command, GetObjectCommand } = require('@aws-sdk/client-s3');
+const { S3Client, PutObjectCommand, DeleteObjectCommand, DeleteObjectsCommand, ListObjectsV2Command, GetObjectCommand } = require('@aws-sdk/client-s3');
 const https = require('https');
 const http = require('http');
 
@@ -1297,26 +1297,250 @@ app.post('/api/assignments', upload.single('attachment'), async (req, res) => {
   res.json({ success: true, message: `Giao bài tập mới cho lớp ${cleanTargetClass} thành công! Hệ thống đã phát thông báo tới thiết bị của học sinh.`, assignment: newAssignment });
 });
 
-// 4. Giáo viên xóa bài tập (Chỉ người tạo mới được xóa, trừ Khảo Thí)
-app.delete('/api/assignments/:id', (req, res) => {
+// Hàm hỗ trợ dọn dẹp toàn bộ tệp tin liên quan đến bài tập trên Cloudflare R2, Cloudinary và Local
+async function deleteAssignmentFilesFromCloud(assignment, relatedSubmissions = []) {
+  const stats = { r2Count: 0, cloudinaryCount: 0, localCount: 0 };
+  const r2KeysToDelete = new Set();
+  const cldPublicIdsToDelete = new Set();
+  const localFilesToDelete = new Set();
+
+  const cleanClass = sanitizeFolderName(assignment.targetClass || 'Chung');
+  const cleanSubject = sanitizeFolderName(assignment.subject || 'MonHoc');
+  const cleanAssignment = assignment.title ? sanitizeFolderName(assignment.title) : '';
+
+  // 1. Thu thập tệp đính kèm của đề bài
+  if (assignment.attachment) {
+    const att = assignment.attachment;
+    if (att.filename) {
+      localFilesToDelete.add(path.join(UPLOAD_DIR, att.filename));
+    }
+    if (att.storageKey) {
+      if (att.provider === 'r2' || att.storageKey.startsWith('educlass_')) {
+        r2KeysToDelete.add(att.storageKey);
+      } else if (att.provider === 'cloudinary') {
+        cldPublicIdsToDelete.add(att.storageKey);
+      }
+    }
+    if (att.publicId) {
+      cldPublicIdsToDelete.add(att.publicId);
+    }
+    if (att.url) {
+      if (att.url.includes('r2.dev')) {
+        const k = decodeURIComponent(att.url.replace(/^.*r2\.dev\//, ''));
+        if (k) r2KeysToDelete.add(k);
+      } else if (att.url.includes('cloudinary.com')) {
+        const pid = decodeURIComponent(att.url.replace(/^.*\/upload\/(v\d+\/)?/, ''));
+        if (pid) {
+          cldPublicIdsToDelete.add(pid);
+          cldPublicIdsToDelete.add(pid.replace(/\.[^/.]+$/, ''));
+        }
+      }
+    }
+  }
+
+  // 2. Thu thập tệp đính kèm của toàn bộ học sinh nộp bài
+  for (const sub of relatedSubmissions) {
+    if (sub.file) {
+      const f = sub.file;
+      if (f.filename) {
+        localFilesToDelete.add(path.join(UPLOAD_DIR, f.filename));
+      }
+      if (f.storageKey) {
+        if (f.provider === 'r2' || f.storageKey.startsWith('educlass_')) {
+          r2KeysToDelete.add(f.storageKey);
+        } else if (f.provider === 'cloudinary') {
+          cldPublicIdsToDelete.add(f.storageKey);
+        }
+      }
+      if (f.publicId) {
+        cldPublicIdsToDelete.add(f.publicId);
+      }
+      if (f.url) {
+        if (f.url.includes('r2.dev')) {
+          const k = decodeURIComponent(f.url.replace(/^.*r2\.dev\//, ''));
+          if (k) r2KeysToDelete.add(k);
+        } else if (f.url.includes('cloudinary.com')) {
+          const pid = decodeURIComponent(f.url.replace(/^.*\/upload\/(v\d+\/)?/, ''));
+          if (pid) {
+            cldPublicIdsToDelete.add(pid);
+            cldPublicIdsToDelete.add(pid.replace(/\.[^/.]+$/, ''));
+          }
+        }
+      }
+    }
+  }
+
+  // 3. Quét toàn bộ tiền tố thư mục trên Cloudflare R2 (educlass_submissions/Lớp/Môn/BàiTập/)
+  if (r2Client && cleanAssignment) {
+    const r2Prefix = `educlass_submissions/${cleanClass}/${cleanSubject}/${cleanAssignment}/`;
+    try {
+      let isTruncated = true;
+      let continuationToken = null;
+      while (isTruncated) {
+        const listCmd = new ListObjectsV2Command({
+          Bucket: R2_BUCKET_NAME,
+          Prefix: r2Prefix,
+          ContinuationToken: continuationToken
+        });
+        const listRes = await r2Client.send(listCmd);
+        if (listRes.Contents && listRes.Contents.length > 0) {
+          for (const item of listRes.Contents) {
+            if (item.Key) r2KeysToDelete.add(item.Key);
+          }
+        }
+        isTruncated = !!listRes.IsTruncated;
+        continuationToken = listRes.NextContinuationToken;
+      }
+    } catch (e) {
+      console.warn(`[R2 Cleanup Prefix Error]:`, e.message);
+    }
+  }
+
+  // 4. Quét toàn bộ tiền tố thư mục trên Cloudinary (educlass_submissions/Lớp/Môn/BàiTập)
+  if (cloudinary && cleanAssignment) {
+    const cldPrefix = `educlass_submissions/${cleanClass}/${cleanSubject}/${cleanAssignment}`;
+    try {
+      const resRaw = await cloudinary.api.resources({
+        resource_type: 'raw',
+        type: 'upload',
+        prefix: cldPrefix,
+        max_results: 500
+      });
+      if (resRaw && resRaw.resources) {
+        for (const item of resRaw.resources) {
+          if (item.public_id) cldPublicIdsToDelete.add(item.public_id);
+        }
+      }
+    } catch (e) {}
+
+    try {
+      const resImg = await cloudinary.api.resources({
+        resource_type: 'image',
+        type: 'upload',
+        prefix: cldPrefix,
+        max_results: 500
+      });
+      if (resImg && resImg.resources) {
+        for (const item of resImg.resources) {
+          if (item.public_id) cldPublicIdsToDelete.add(item.public_id);
+        }
+      }
+    } catch (e) {}
+  }
+
+  // 5. Thực hiện xóa tệp trên Cloudflare R2
+  if (r2Client && r2KeysToDelete.size > 0) {
+    const keys = Array.from(r2KeysToDelete);
+    console.log(`[R2 Cleanup] 🗑️ Bắt đầu xóa ${keys.length} tệp trên Cloudflare R2...`);
+    for (let i = 0; i < keys.length; i += 1000) {
+      const batch = keys.slice(i, i + 1000).map(k => ({ Key: k }));
+      try {
+        const delRes = await r2Client.send(new DeleteObjectsCommand({
+          Bucket: R2_BUCKET_NAME,
+          Delete: { Objects: batch }
+        }));
+        stats.r2Count += (delRes.Deleted || []).length;
+      } catch (err) {
+        console.warn("[R2 Batch Delete Fallback]:", err.message);
+        for (const item of batch) {
+          try {
+            await r2Client.send(new DeleteObjectCommand({ Bucket: R2_BUCKET_NAME, Key: item.Key }));
+            stats.r2Count++;
+          } catch (e2) {}
+        }
+      }
+    }
+    console.log(`[R2 Cleanup] ✅ Đã xóa thành công ${stats.r2Count} tệp trên Cloudflare R2.`);
+  }
+
+  // 6. Thực hiện xóa tệp trên Cloudinary
+  if (cloudinary && cldPublicIdsToDelete.size > 0) {
+    const publicIds = Array.from(cldPublicIdsToDelete);
+    console.log(`[Cloudinary Cleanup] 🗑️ Bắt đầu xóa ${publicIds.length} tệp trên Cloudinary...`);
+    for (let i = 0; i < publicIds.length; i += 100) {
+      const batch = publicIds.slice(i, i + 100);
+      try {
+        const resRaw = await cloudinary.api.delete_resources(batch, { resource_type: 'raw', type: 'upload' });
+        if (resRaw && resRaw.deleted) {
+          Object.values(resRaw.deleted).forEach(st => {
+            if (st === 'deleted') stats.cloudinaryCount++;
+          });
+        }
+      } catch (e) {}
+
+      try {
+        const resImg = await cloudinary.api.delete_resources(batch, { resource_type: 'image', type: 'upload' });
+        if (resImg && resImg.deleted) {
+          Object.values(resImg.deleted).forEach(st => {
+            if (st === 'deleted') stats.cloudinaryCount++;
+          });
+        }
+      } catch (e) {}
+    }
+
+    // Xóa thư mục trên Cloudinary nếu rỗng
+    if (cleanAssignment) {
+      const cldFolder = `educlass_submissions/${cleanClass}/${cleanSubject}/${cleanAssignment}`;
+      try {
+        await cloudinary.api.delete_resources_by_prefix(cldFolder, { resource_type: 'raw', type: 'upload' });
+      } catch (e) {}
+      try {
+        await cloudinary.api.delete_resources_by_prefix(cldFolder, { resource_type: 'image', type: 'upload' });
+      } catch (e) {}
+      try {
+        await cloudinary.api.delete_folder(cldFolder);
+      } catch (e) {}
+    }
+    console.log(`[Cloudinary Cleanup] ✅ Đã hoàn tất xóa tệp trên Cloudinary (xác nhận xóa: ${stats.cloudinaryCount}).`);
+  }
+
+  // 7. Thực hiện xóa tệp cục bộ nếu có trong UPLOAD_DIR
+  for (const filePath of localFilesToDelete) {
+    try {
+      if (fs.existsSync(filePath)) {
+        fs.unlinkSync(filePath);
+        stats.localCount++;
+      }
+    } catch (e) {}
+  }
+
+  return stats;
+}
+
+// 4. Giáo viên / Quản trị viên xóa bài tập (Tự động xóa sạch file trên Cloudflare R2, Cloudinary và hệ thống)
+app.delete('/api/assignments/:id', async (req, res) => {
   const { id } = req.params;
   const { teacherId } = req.query;
   const db = readDatabase();
 
-  const target = db.assignments.find(a => a.id === id);
+  const target = (db.assignments || []).find(a => a.id === id);
   if (!target) {
     return res.status(404).json({ message: "Không tìm thấy bài tập cần xóa." });
   }
 
   if (teacherId) {
     const user = (db.users || []).find(u => u.id === teacherId);
+    const isDanhOrAdmin = user && (user.isAdmin || (user.name && user.name.toLowerCase().includes('công danh')));
     const isExaminer = user && (user.isExaminer || (user.username && user.username.toLowerCase() === 'phongkhaothi'));
     if (isExaminer) {
       return res.status(403).json({ message: "Tài khoản Phòng Khảo Thí chỉ có quyền lưu trữ, không được xóa bài tập." });
     }
-    if (target.createdBy && target.createdBy !== teacherId) {
+    if (!isDanhOrAdmin && target.createdBy && target.createdBy !== teacherId) {
       return res.status(403).json({ message: "Bạn không có quyền xóa bài tập của giáo viên khác." });
     }
+  }
+
+  // Thu thập các bài nộp liên quan của bài tập này
+  const relatedSubmissions = (db.submissions || []).filter(s => s.assignmentId === id);
+
+  console.log(`[Delete Assignment] 🛑 Bắt đầu xóa bài tập "${target.title}" (ID: ${id}) cùng ${relatedSubmissions.length} bài nộp liên quan...`);
+
+  // Xóa toàn bộ file liên quan trên Cloudflare R2, Cloudinary và máy chủ
+  let deleteStats = { r2Count: 0, cloudinaryCount: 0, localCount: 0 };
+  try {
+    deleteStats = await deleteAssignmentFilesFromCloud(target, relatedSubmissions);
+  } catch (err) {
+    console.error("[Delete Assignment Cloud Cleanup Error]:", err.message);
   }
 
   db.assignments = db.assignments.filter(a => a.id !== id);
@@ -1326,7 +1550,21 @@ app.delete('/api/assignments/:id', (req, res) => {
   }
 
   writeDatabase(db);
-  res.json({ success: true, message: "Đã xóa bài tập thành công." });
+
+  let msg = `Đã xóa bài tập "${target.title}" thành công.`;
+  const details = [];
+  if (deleteStats.r2Count > 0) details.push(`${deleteStats.r2Count} tệp trên Cloudflare R2`);
+  if (deleteStats.cloudinaryCount > 0) details.push(`${deleteStats.cloudinaryCount} tệp trên Cloudinary`);
+  if (deleteStats.localCount > 0) details.push(`${deleteStats.localCount} tệp cục bộ`);
+  if (details.length > 0) {
+    msg += ` Đã dọn sạch: ${details.join(', ')}.`;
+  }
+
+  res.json({
+    success: true,
+    message: msg,
+    stats: deleteStats
+  });
 });
 
 // 4b. Admin phân quyền / gỡ bài tập cho Phòng Khảo Thí lưu trữ

@@ -6322,7 +6322,7 @@
         let deleteBtn = '';
         if (!isExaminer && (isAdmin || asm.createdBy === currentUser.id)) {
           deleteBtn = `
-            <button onclick="handleDeleteAssignment('${asm.id}')" title="Xóa bài tập" class="p-2 text-slate-400 hover:text-rose-600 hover:bg-rose-50 rounded-xl text-xs transition">
+            <button onclick="handleDeleteAssignment('${asm.id}')" title="Xóa bài tập & dọn sạch file trên Cloud (R2 & Cloudinary)" class="p-2 text-slate-400 hover:text-rose-600 hover:bg-rose-50 rounded-xl text-xs transition">
               <i class="fa-solid fa-trash-can"></i>
             </button>
           `;
@@ -6471,18 +6471,31 @@
     }
 
     async function handleDeleteAssignment(id) {
-      if (!confirm("Bạn có chắc chắn muốn xóa bài tập này cùng toàn bộ bài nộp liên quan?")) return;
+      const asm = (assignmentsData || []).find(a => a.id === id);
+      const titleText = asm ? `"${asm.title}"` : 'này';
+      const confirmed = confirm(
+        `⚠️ CẢNH BÁO QUAN TRỌNG:\n\n` +
+        `Bạn có chắc chắn muốn xóa bài tập ${titleText} không?\n\n` +
+        `Hành động này sẽ XÓA VĨNH VIỄN:\n` +
+        `• Nội dung đề bài & toàn bộ kết quả nộp bài của sinh viên.\n` +
+        `• TẤT CẢ các tệp tin đính kèm (đề bài, bài nộp RAR/ZIP/PSD...) lưu trữ trên đám mây Cloudflare R2 và Cloudinary.\n\n` +
+        `Dữ liệu đã xóa trên Cloud sẽ KHÔNG THỂ KHÔI PHỤC. Bạn có đồng ý xóa không?`
+      );
+      if (!confirmed) return;
+
+      showToast("Đang xóa bài tập và dọn dẹp các tệp tin trên Cloudflare R2 & Cloudinary...", "info");
+
       try {
         const res = await fetch(`/api/assignments/${id}?teacherId=${encodeURIComponent(currentUser.id)}`, { method: 'DELETE' });
         const data = await res.json();
         if (res.ok) {
-          showToast(data.message, "success");
+          showToast(data.message || "Đã xóa bài tập và dọn dẹp các tệp trên Cloud thành công!", "success");
           loadTeacherData();
         } else {
-          showToast(data.message, "error");
+          showToast(data.message || "Lỗi khi xóa bài tập", "error");
         }
       } catch (err) {
-        showToast("Lỗi khi xóa bài tập", "error");
+        showToast("Lỗi khi kết nối tới máy chủ để xóa bài tập", "error");
       }
     }
 
