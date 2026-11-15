@@ -7,7 +7,7 @@ echo "=========================================================="
 
 # 1. Dừng các tiến trình cũ nếu còn đang chạy ở cổng 3000 hoặc cloudflared
 lsof -ti :3000 | xargs kill -9 2>/dev/null
-pkill -f "cloudflared tunnel --url" 2>/dev/null
+pkill -9 -f "cloudflared tunnel --url" 2>/dev/null
 sleep 1
 
 # 2. Khởi động Node.js Server
@@ -37,6 +37,22 @@ if [ -n "$PUBLIC_URL" ]; then
     echo "   👉 $PUBLIC_URL"
     echo "=========================================================="
     echo ""
+    
+    # Cập nhật file trên Desktop
+    echo "ĐƯỜNG LINK TRUY CẬP LỚP HỌC (EDUCLASS PORTAL):
+$PUBLIC_URL
+
+(Thầy chỉ cần copy link trên và gửi cho học sinh trong lớp)" > /Users/Danh/Desktop/LINK-LOP-HOC.txt
+
+    echo "<?xml version=\"1.0\" encoding=\"UTF-8\"?>
+<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">
+<plist version=\"1.0\">
+<dict>
+	<key>URL</key>
+	<string>$PUBLIC_URL</string>
+</dict>
+</plist>" > /Users/Danh/Desktop/LINK-LOP-HOC.webloc
+
     # Tự động copy vào Clipboard
     echo "$PUBLIC_URL" | pbcopy
     echo "📋 Đã tự động sao chép đường link vào bộ nhớ tạm (Clipboard) của Mac!"
