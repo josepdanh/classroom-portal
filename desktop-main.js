@@ -123,12 +123,14 @@ function createMainWindow(targetUrl = LOCAL_URL) {
     mainWindow.focus();
   });
 
-  // Tự động chuyển sang Render Đám mây nếu local server không phản hồi
+  // Tự động thử tải lại local server nếu khởi động chậm
   mainWindow.webContents.on('did-fail-load', (event, errorCode, errorDescription, validatedURL) => {
     console.warn(`[Desktop] Lỗi tải URL ${validatedURL}: ${errorDescription} (${errorCode})`);
-    if (validatedURL && validatedURL.includes('localhost') && validatedURL !== RENDER_CLOUD_URL) {
-      console.log('[Desktop] Đang tự động chuyển sang Web Render Đám Mây...');
-      mainWindow.loadURL(RENDER_CLOUD_URL);
+    if (validatedURL && validatedURL.includes('localhost')) {
+      console.log('[Desktop] Đang thử kết nối lại Local Server sau 2 giây...');
+      setTimeout(() => {
+        if (mainWindow) mainWindow.loadURL(LOCAL_URL);
+      }, 2000);
     }
   });
 
