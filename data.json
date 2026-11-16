@@ -2,6 +2,17 @@
   "id": "main",
   "assignments": [
     {
+      "id": "asm_1794705892122",
+      "title": "Bài tập về Tab",
+      "description": "Bài số 12,13,14",
+      "targetClass": "TIN HỌC ĐẠI CƯƠNG 2",
+      "subject": "Tin Học Đại Cương",
+      "dueDate": "2026-11-19T20:00",
+      "createdAt": "2026-11-15T01:24:52.122Z",
+      "attachment": null,
+      "createdBy": "u_teacher_danh"
+    },
+    {
       "id": "asm_1794388048302",
       "title": "Nộp Menu Highland",
       "description": "nộp file nén",
@@ -185,6 +196,7 @@
     "T15TK01",
     "T15TK02",
     "TIN HỌC ĐẠI CƯƠNG",
+    "TIN HỌC ĐẠI CƯƠNG 1",
     "TIN HỌC ĐẠI CƯƠNG 2"
   ],
   "gradeSheets": [
@@ -2411,6 +2423,357 @@
   ],
   "notifications": [
     {
+      "id": "notif_sub_1794723800781_rko3",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1794705892122",
+      "assignmentTitle": "Bài tập về Tab",
+      "targetClass": "TIN HỌC ĐẠI CƯƠNG 2",
+      "subject": "Tin Học Đại Cương",
+      "studentId": "u_26DH1515",
+      "studentName": "Bùi Đức Sơn",
+      "studentCode": "26DH1515",
+      "submittedAt": "2026-11-15T06:23:20.781Z",
+      "createdAt": "2026-11-15T06:23:20.781Z",
+      "readBy": []
+    },
+    {
+      "id": "notif_sub_1794723799251_ycdi",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1794705892122",
+      "assignmentTitle": "Bài tập về Tab",
+      "targetClass": "TIN HỌC ĐẠI CƯƠNG 2",
+      "subject": "Tin Học Đại Cương",
+      "studentId": "u_26DH1515",
+      "studentName": "Bùi Đức Sơn",
+      "studentCode": "26DH1515",
+      "submittedAt": "2026-11-15T06:23:19.251Z",
+      "createdAt": "2026-11-15T06:23:19.251Z",
+      "readBy": []
+    },
+    {
+      "id": "notif_sub_1794722266983_oyft",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1794705892122",
+      "assignmentTitle": "Bài tập về Tab",
+      "targetClass": "TIN HỌC ĐẠI CƯƠNG 2",
+      "subject": "Tin Học Đại Cương",
+      "studentId": "u_26711179",
+      "studentName": "Đinh Gia Trường",
+      "studentCode": "26711179",
+      "submittedAt": "2026-11-15T05:57:46.983Z",
+      "createdAt": "2026-11-15T05:57:46.983Z",
+      "readBy": []
+    },
+    {
+      "id": "notif_sub_1794721951976_c8ev",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1794705892122",
+      "assignmentTitle": "Bài tập về Tab",
+      "targetClass": "TIN HỌC ĐẠI CƯƠNG 2",
+      "subject": "Tin Học Đại Cương",
+      "studentId": "u_26710137",
+      "studentName": "Hoàng Minh Đức",
+      "studentCode": "26710137",
+      "submittedAt": "2026-11-15T05:52:31.976Z",
+      "createdAt": "2026-11-15T05:52:31.976Z",
+      "readBy": []
+    },
+    {
+      "id": "notif_sub_1794715550551_cy6t",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1794705892122",
+      "assignmentTitle": "Bài tập về Tab",
+      "targetClass": "TIN HỌC ĐẠI CƯƠNG 2",
+      "subject": "Tin Học Đại Cương",
+      "studentId": "u_26710226",
+      "studentName": "Ngô Văn Thao",
+      "studentCode": "26710226",
+      "submittedAt": "2026-11-15T04:05:50.551Z",
+      "createdAt": "2026-11-15T04:05:50.551Z",
+      "readBy": []
+    },
+    {
+      "id": "notif_sub_1794715107200_r3j7",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1794705892122",
+      "assignmentTitle": "Bài tập về Tab",
+      "targetClass": "TIN HỌC ĐẠI CƯƠNG 2",
+      "subject": "Tin Học Đại Cương",
+      "studentId": "u_26710927",
+      "studentName": "Phan Thanh Tùng",
+      "studentCode": "26710927",
+      "submittedAt": "2026-11-15T03:58:27.200Z",
+      "createdAt": "2026-11-15T03:58:27.200Z",
+      "readBy": []
+    },
+    {
+      "id": "notif_sub_1794715106437_spoe",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1794705892122",
+      "assignmentTitle": "Bài tập về Tab",
+      "targetClass": "TIN HỌC ĐẠI CƯƠNG 2",
+      "subject": "Tin Học Đại Cương",
+      "studentId": "u_26710927",
+      "studentName": "Phan Thanh Tùng",
+      "studentCode": "26710927",
+      "submittedAt": "2026-11-15T03:58:26.437Z",
+      "createdAt": "2026-11-15T03:58:26.437Z",
+      "readBy": []
+    },
+    {
+      "id": "notif_sub_1794714620413_jwlj",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1794705892122",
+      "assignmentTitle": "Bài tập về Tab",
+      "targetClass": "TIN HỌC ĐẠI CƯƠNG 2",
+      "subject": "Tin Học Đại Cương",
+      "studentId": "u_26711146",
+      "studentName": "Trần Quốc Bảo",
+      "studentCode": "26711146",
+      "submittedAt": "2026-11-15T03:50:20.413Z",
+      "createdAt": "2026-11-15T03:50:20.413Z",
+      "readBy": []
+    },
+    {
+      "id": "notif_sub_1794713795624_76os",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1794705892122",
+      "assignmentTitle": "Bài tập về Tab",
+      "targetClass": "TIN HỌC ĐẠI CƯƠNG 2",
+      "subject": "Tin Học Đại Cương",
+      "studentId": "u_26710671",
+      "studentName": "Trần Phan Gia Bảo",
+      "studentCode": "26710671",
+      "submittedAt": "2026-11-15T03:36:35.624Z",
+      "createdAt": "2026-11-15T03:36:35.624Z",
+      "readBy": []
+    },
+    {
+      "id": "notif_sub_1794712822323_ol38",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1794705892122",
+      "assignmentTitle": "Bài tập về Tab",
+      "targetClass": "TIN HỌC ĐẠI CƯƠNG 2",
+      "subject": "Tin Học Đại Cương",
+      "studentId": "u_26710592",
+      "studentName": "Triệu Quốc Đồng",
+      "studentCode": "26710592",
+      "submittedAt": "2026-11-15T03:20:22.323Z",
+      "createdAt": "2026-11-15T03:20:22.323Z",
+      "readBy": []
+    },
+    {
+      "id": "notif_sub_1794712820450_38j2",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1794705892122",
+      "assignmentTitle": "Bài tập về Tab",
+      "targetClass": "TIN HỌC ĐẠI CƯƠNG 2",
+      "subject": "Tin Học Đại Cương",
+      "studentId": "u_26710592",
+      "studentName": "Triệu Quốc Đồng",
+      "studentCode": "26710592",
+      "submittedAt": "2026-11-15T03:20:20.450Z",
+      "createdAt": "2026-11-15T03:20:20.450Z",
+      "readBy": []
+    },
+    {
+      "id": "notif_sub_1794712794220_cyo3",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1794705892122",
+      "assignmentTitle": "Bài tập về Tab",
+      "targetClass": "TIN HỌC ĐẠI CƯƠNG 2",
+      "subject": "Tin Học Đại Cương",
+      "studentId": "u_26711203",
+      "studentName": "Bùi Công Trường",
+      "studentCode": "26711203",
+      "submittedAt": "2026-11-15T03:19:54.220Z",
+      "createdAt": "2026-11-15T03:19:54.220Z",
+      "readBy": []
+    },
+    {
+      "id": "notif_sub_1794712538457_cnx9",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1794705892122",
+      "assignmentTitle": "Bài tập về Tab",
+      "targetClass": "TIN HỌC ĐẠI CƯƠNG 2",
+      "subject": "Tin Học Đại Cương",
+      "studentId": "u_26711203",
+      "studentName": "Bùi Công Trường",
+      "studentCode": "26711203",
+      "submittedAt": "2026-11-15T03:15:38.456Z",
+      "createdAt": "2026-11-15T03:15:38.456Z",
+      "readBy": []
+    },
+    {
+      "id": "notif_sub_1794712406629_ngq2",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1794705892122",
+      "assignmentTitle": "Bài tập về Tab",
+      "targetClass": "TIN HỌC ĐẠI CƯƠNG 2",
+      "subject": "Tin Học Đại Cương",
+      "studentId": "u_26710395",
+      "studentName": "Phạm Ngọc Châu",
+      "studentCode": "26710395",
+      "submittedAt": "2026-11-15T03:13:26.629Z",
+      "createdAt": "2026-11-15T03:13:26.629Z",
+      "readBy": []
+    },
+    {
+      "id": "notif_sub_1794711983959_k32g",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1794705892122",
+      "assignmentTitle": "Bài tập về Tab",
+      "targetClass": "TIN HỌC ĐẠI CƯƠNG 2",
+      "subject": "Tin Học Đại Cương",
+      "studentId": "u_26711249",
+      "studentName": "Nguyễn Duy Anh Khoa",
+      "studentCode": "26711249",
+      "submittedAt": "2026-11-15T03:06:23.959Z",
+      "createdAt": "2026-11-15T03:06:23.959Z",
+      "readBy": [
+        "u_26711203"
+      ]
+    },
+    {
+      "id": "notif_sub_1794711983024_bepr",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1794705892122",
+      "assignmentTitle": "Bài tập về Tab",
+      "targetClass": "TIN HỌC ĐẠI CƯƠNG 2",
+      "subject": "Tin Học Đại Cương",
+      "studentId": "u_26710112",
+      "studentName": "Ninh Trường Đăng",
+      "studentCode": "26710112",
+      "submittedAt": "2026-11-15T03:06:23.024Z",
+      "createdAt": "2026-11-15T03:06:23.024Z",
+      "readBy": []
+    },
+    {
+      "id": "notif_sub_1794711945867_zpzh",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1794705892122",
+      "assignmentTitle": "Bài tập về Tab",
+      "targetClass": "TIN HỌC ĐẠI CƯƠNG 2",
+      "subject": "Tin Học Đại Cương",
+      "studentId": "u_26710592",
+      "studentName": "Triệu Quốc Đồng",
+      "studentCode": "26710592",
+      "submittedAt": "2026-11-15T03:05:45.867Z",
+      "createdAt": "2026-11-15T03:05:45.867Z",
+      "readBy": []
+    },
+    {
+      "id": "notif_sub_1794711676335_x6er",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1794705892122",
+      "assignmentTitle": "Bài tập về Tab",
+      "targetClass": "TIN HỌC ĐẠI CƯƠNG 2",
+      "subject": "Tin Học Đại Cương",
+      "studentId": "u_26710112",
+      "studentName": "Ninh Trường Đăng",
+      "studentCode": "26710112",
+      "submittedAt": "2026-11-15T03:01:16.335Z",
+      "createdAt": "2026-11-15T03:01:16.335Z",
+      "readBy": []
+    },
+    {
+      "id": "notif_sub_1794711675430_5fbv",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1794705892122",
+      "assignmentTitle": "Bài tập về Tab",
+      "targetClass": "TIN HỌC ĐẠI CƯƠNG 2",
+      "subject": "Tin Học Đại Cương",
+      "studentId": "u_26710112",
+      "studentName": "Ninh Trường Đăng",
+      "studentCode": "26710112",
+      "submittedAt": "2026-11-15T03:01:15.430Z",
+      "createdAt": "2026-11-15T03:01:15.430Z",
+      "readBy": []
+    },
+    {
+      "id": "notif_sub_1794711283102_v67o",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1794705892122",
+      "assignmentTitle": "Bài tập về Tab",
+      "targetClass": "TIN HỌC ĐẠI CƯƠNG 2",
+      "subject": "Tin Học Đại Cương",
+      "studentId": "u_26710226",
+      "studentName": "Ngô Văn Thao",
+      "studentCode": "26710226",
+      "submittedAt": "2026-11-15T02:54:43.102Z",
+      "createdAt": "2026-11-15T02:54:43.102Z",
+      "readBy": [
+        "u_26710927"
+      ]
+    },
+    {
+      "id": "notif_sub_1794711228487_e0jl",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1794705892122",
+      "assignmentTitle": "Bài tập về Tab",
+      "targetClass": "TIN HỌC ĐẠI CƯƠNG 2",
+      "subject": "Tin Học Đại Cương",
+      "studentId": "u_26710921",
+      "studentName": "Phạm Gia Bảo",
+      "studentCode": "26710921",
+      "submittedAt": "2026-11-15T02:53:48.487Z",
+      "createdAt": "2026-11-15T02:53:48.487Z",
+      "readBy": [
+        "u_26710927",
+        "u_26710921"
+      ]
+    },
+    {
+      "id": "notif_sub_1794711215587_21rp",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1794705892122",
+      "assignmentTitle": "Bài tập về Tab",
+      "targetClass": "TIN HỌC ĐẠI CƯƠNG 2",
+      "subject": "Tin Học Đại Cương",
+      "studentId": "u_26710927",
+      "studentName": "Phan Thanh Tùng",
+      "studentCode": "26710927",
+      "submittedAt": "2026-11-15T02:53:35.587Z",
+      "createdAt": "2026-11-15T02:53:35.587Z",
+      "readBy": [
+        "u_26710927"
+      ]
+    },
+    {
+      "id": "notif_sub_1794711206457_x3im",
+      "type": "STUDENT_SUBMITTED",
+      "assignmentId": "asm_1794705892122",
+      "assignmentTitle": "Bài tập về Tab",
+      "targetClass": "TIN HỌC ĐẠI CƯƠNG 2",
+      "subject": "Tin Học Đại Cương",
+      "studentId": "u_26711066",
+      "studentName": "Phạm Quốc Cường",
+      "studentCode": "26711066",
+      "submittedAt": "2026-11-15T02:53:26.457Z",
+      "createdAt": "2026-11-15T02:53:26.457Z",
+      "readBy": [
+        "u_26710927"
+      ]
+    },
+    {
+      "id": "notif_1794705892122",
+      "type": "NEW_ASSIGNMENT",
+      "assignmentId": "asm_1794705892122",
+      "title": "Bài tập về Tab",
+      "description": "Bài số 12,13,14",
+      "targetClass": "TIN HỌC ĐẠI CƯƠNG 2",
+      "subject": "Tin Học Đại Cương",
+      "dueDate": "2026-11-19T20:00",
+      "teacherName": "Thầy Nguyễn Công Danh",
+      "teacherId": "u_teacher_danh",
+      "createdAt": "2026-11-15T01:24:52.122Z",
+      "readBy": [
+        "u_26710886",
+        "u_26710395",
+        "u_26710927"
+      ]
+    },
+    {
       "id": "notif_sub_1794388630285_kfsi",
       "type": "STUDENT_SUBMITTED",
       "assignmentId": "asm_1794388048302",
@@ -3795,1596 +4158,6 @@
       "submittedAt": "2026-11-11T09:09:24.370Z",
       "createdAt": "2026-11-11T09:09:24.370Z",
       "readBy": []
-    },
-    {
-      "id": "notif_sub_1794388162695_poen",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1794388048302",
-      "assignmentTitle": "Nộp Menu Highland",
-      "targetClass": "T15TK02",
-      "subject": "Thiết kế minh họa với Corel Draw",
-      "studentId": "u_student_T15TK0232",
-      "studentName": "Nguyễn Thị Phương Uyên",
-      "studentCode": "T15TK0232",
-      "submittedAt": "2026-11-11T09:09:22.695Z",
-      "createdAt": "2026-11-11T09:09:22.695Z",
-      "readBy": []
-    },
-    {
-      "id": "notif_sub_1794388162669_23bn",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1794388048302",
-      "assignmentTitle": "Nộp Menu Highland",
-      "targetClass": "T15TK02",
-      "subject": "Thiết kế minh họa với Corel Draw",
-      "studentId": "u_student_T15TK0209",
-      "studentName": "Đoàn Anh Huy",
-      "studentCode": "T15TK0209",
-      "submittedAt": "2026-11-11T09:09:22.669Z",
-      "createdAt": "2026-11-11T09:09:22.669Z",
-      "readBy": []
-    },
-    {
-      "id": "notif_sub_1794388140047_w3ba",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1794388048302",
-      "assignmentTitle": "Nộp Menu Highland",
-      "targetClass": "T15TK02",
-      "subject": "Thiết kế minh họa với Corel Draw",
-      "studentId": "u_student_T15TK0224",
-      "studentName": "Phạm Ngọc Nhi",
-      "studentCode": "T15TK0224",
-      "submittedAt": "2026-11-11T09:09:00.047Z",
-      "createdAt": "2026-11-11T09:09:00.047Z",
-      "readBy": []
-    },
-    {
-      "id": "notif_sub_1794388138996_o9fv",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1794388048302",
-      "assignmentTitle": "Nộp Menu Highland",
-      "targetClass": "T15TK02",
-      "subject": "Thiết kế minh họa với Corel Draw",
-      "studentId": "u_student_T15TK0224",
-      "studentName": "Phạm Ngọc Nhi",
-      "studentCode": "T15TK0224",
-      "submittedAt": "2026-11-11T09:08:58.996Z",
-      "createdAt": "2026-11-11T09:08:58.996Z",
-      "readBy": []
-    },
-    {
-      "id": "notif_sub_1794388133793_95tk",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1794388048302",
-      "assignmentTitle": "Nộp Menu Highland",
-      "targetClass": "T15TK02",
-      "subject": "Thiết kế minh họa với Corel Draw",
-      "studentId": "u_student_T15TK0218",
-      "studentName": "Nguyễn Trần Diệu Linh",
-      "studentCode": "T15TK0218",
-      "submittedAt": "2026-11-11T09:08:53.793Z",
-      "createdAt": "2026-11-11T09:08:53.793Z",
-      "readBy": []
-    },
-    {
-      "id": "notif_sub_1794388128591_ore0",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1794388048302",
-      "assignmentTitle": "Nộp Menu Highland",
-      "targetClass": "T15TK02",
-      "subject": "Thiết kế minh họa với Corel Draw",
-      "studentId": "u_student_T15TK0218",
-      "studentName": "Nguyễn Trần Diệu Linh",
-      "studentCode": "T15TK0218",
-      "submittedAt": "2026-11-11T09:08:48.591Z",
-      "createdAt": "2026-11-11T09:08:48.591Z",
-      "readBy": []
-    },
-    {
-      "id": "notif_sub_1794388124433_91cc",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1794388048302",
-      "assignmentTitle": "Nộp Menu Highland",
-      "targetClass": "T15TK02",
-      "subject": "Thiết kế minh họa với Corel Draw",
-      "studentId": "u_student_T15TK0218",
-      "studentName": "Nguyễn Trần Diệu Linh",
-      "studentCode": "T15TK0218",
-      "submittedAt": "2026-11-11T09:08:44.433Z",
-      "createdAt": "2026-11-11T09:08:44.433Z",
-      "readBy": []
-    },
-    {
-      "id": "notif_1794388048303",
-      "type": "NEW_ASSIGNMENT",
-      "assignmentId": "asm_1794388048302",
-      "title": "Nộp Menu Highland",
-      "description": "nộp file nén",
-      "targetClass": "T15TK02",
-      "subject": "Thiết kế minh họa với Corel Draw",
-      "dueDate": "2026-11-11T16:17",
-      "teacherName": "Thầy Nguyễn Công Danh",
-      "teacherId": "u_teacher_danh",
-      "createdAt": "2026-11-11T09:07:28.303Z",
-      "readBy": []
-    },
-    {
-      "id": "notif_1794368519882",
-      "type": "NEW_ASSIGNMENT",
-      "assignmentId": "asm_1794368519881",
-      "title": "Chuyển động bập bênh",
-      "description": "123",
-      "targetClass": "C08TK01",
-      "subject": "Xử Lý Kỹ Xảo với After Effects",
-      "dueDate": "2026-11-18T07:45",
-      "teacherName": "Thầy Nguyễn Công Danh",
-      "teacherId": "u_teacher_danh",
-      "createdAt": "2026-11-11T03:41:59.882Z",
-      "readBy": []
-    },
-    {
-      "id": "notif_sub_1794315590078_ties",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1794308665754",
-      "assignmentTitle": "BÀI KIỂM TRA MS WORD",
-      "targetClass": "TIN HỌC ĐẠI CƯƠNG",
-      "subject": "Tin Học Đại Cương",
-      "studentId": "u_26710574",
-      "studentName": "Trần Trung Thuận",
-      "studentCode": "26710574",
-      "submittedAt": "2026-11-10T12:59:50.078Z",
-      "createdAt": "2026-11-10T12:59:50.078Z",
-      "readBy": [
-        "u_26710897"
-      ]
-    },
-    {
-      "id": "notif_sub_1794315561265_7wav",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1794308665754",
-      "assignmentTitle": "BÀI KIỂM TRA MS WORD",
-      "targetClass": "TIN HỌC ĐẠI CƯƠNG",
-      "subject": "Tin Học Đại Cương",
-      "studentId": "u_26710656",
-      "studentName": "Đỗ Trọng Nghĩa",
-      "studentCode": "26710656",
-      "submittedAt": "2026-11-10T12:59:21.265Z",
-      "createdAt": "2026-11-10T12:59:21.265Z",
-      "readBy": [
-        "u_26710897"
-      ]
-    },
-    {
-      "id": "notif_sub_1794315518438_bo92",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1794308665754",
-      "assignmentTitle": "BÀI KIỂM TRA MS WORD",
-      "targetClass": "TIN HỌC ĐẠI CƯƠNG",
-      "subject": "Tin Học Đại Cương",
-      "studentId": "u_26710175",
-      "studentName": "Lê Nguyễn Minh Trí",
-      "studentCode": "26710175",
-      "submittedAt": "2026-11-10T12:58:38.438Z",
-      "createdAt": "2026-11-10T12:58:38.438Z",
-      "readBy": [
-        "u_26710897"
-      ]
-    },
-    {
-      "id": "notif_sub_1794315502959_zkqs",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1794308665754",
-      "assignmentTitle": "BÀI KIỂM TRA MS WORD",
-      "targetClass": "TIN HỌC ĐẠI CƯƠNG",
-      "subject": "Tin Học Đại Cương",
-      "studentId": "u_26710897",
-      "studentName": "Trần Hoàng Nam",
-      "studentCode": "26710897",
-      "submittedAt": "2026-11-10T12:58:22.959Z",
-      "createdAt": "2026-11-10T12:58:22.959Z",
-      "readBy": [
-        "u_26710897"
-      ]
-    },
-    {
-      "id": "notif_sub_1794315480522_zo2r",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1794308665754",
-      "assignmentTitle": "BÀI KIỂM TRA MS WORD",
-      "targetClass": "TIN HỌC ĐẠI CƯƠNG",
-      "subject": "Tin Học Đại Cương",
-      "studentId": "u_26710697",
-      "studentName": "Nguyễn Minh Quân",
-      "studentCode": "26710697",
-      "submittedAt": "2026-11-10T12:58:00.522Z",
-      "createdAt": "2026-11-10T12:58:00.522Z",
-      "readBy": [
-        "u_26710897"
-      ]
-    },
-    {
-      "id": "notif_sub_1794315451728_jizh",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1794308665754",
-      "assignmentTitle": "BÀI KIỂM TRA MS WORD",
-      "targetClass": "TIN HỌC ĐẠI CƯƠNG",
-      "subject": "Tin Học Đại Cương",
-      "studentId": "u_26710100",
-      "studentName": "Lê Duy Quang",
-      "studentCode": "26710100",
-      "submittedAt": "2026-11-10T12:57:31.728Z",
-      "createdAt": "2026-11-10T12:57:31.728Z",
-      "readBy": [
-        "u_26710897"
-      ]
-    },
-    {
-      "id": "notif_sub_1794315440101_dtn3",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1794308665754",
-      "assignmentTitle": "BÀI KIỂM TRA MS WORD",
-      "targetClass": "TIN HỌC ĐẠI CƯƠNG",
-      "subject": "Tin Học Đại Cương",
-      "studentId": "u_26710910",
-      "studentName": "Trịnh Gia Bảo",
-      "studentCode": "26710910",
-      "submittedAt": "2026-11-10T12:57:20.101Z",
-      "createdAt": "2026-11-10T12:57:20.101Z",
-      "readBy": [
-        "u_26710897"
-      ]
-    },
-    {
-      "id": "notif_sub_1794315428562_zge8",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1794308665754",
-      "assignmentTitle": "BÀI KIỂM TRA MS WORD",
-      "targetClass": "TIN HỌC ĐẠI CƯƠNG",
-      "subject": "Tin Học Đại Cương",
-      "studentId": "u_26710101",
-      "studentName": "Đinh Quang",
-      "studentCode": "26710101",
-      "submittedAt": "2026-11-10T12:57:08.562Z",
-      "createdAt": "2026-11-10T12:57:08.562Z",
-      "readBy": [
-        "u_26710897"
-      ]
-    },
-    {
-      "id": "notif_sub_1794315389778_o8s0",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1794308665754",
-      "assignmentTitle": "BÀI KIỂM TRA MS WORD",
-      "targetClass": "TIN HỌC ĐẠI CƯƠNG",
-      "subject": "Tin Học Đại Cương",
-      "studentId": "u_26710412",
-      "studentName": "Nguyễn Thành Tâm",
-      "studentCode": "26710412",
-      "submittedAt": "2026-11-10T12:56:29.777Z",
-      "createdAt": "2026-11-10T12:56:29.777Z",
-      "readBy": [
-        "u_26710897"
-      ]
-    },
-    {
-      "id": "notif_sub_1794315389195_dvtn",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1794308665754",
-      "assignmentTitle": "BÀI KIỂM TRA MS WORD",
-      "targetClass": "TIN HỌC ĐẠI CƯƠNG",
-      "subject": "Tin Học Đại Cương",
-      "studentId": "u_26710412",
-      "studentName": "Nguyễn Thành Tâm",
-      "studentCode": "26710412",
-      "submittedAt": "2026-11-10T12:56:29.195Z",
-      "createdAt": "2026-11-10T12:56:29.195Z",
-      "readBy": [
-        "u_26710897"
-      ]
-    },
-    {
-      "id": "notif_sub_1794315388991_y7gg",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1794308665754",
-      "assignmentTitle": "BÀI KIỂM TRA MS WORD",
-      "targetClass": "TIN HỌC ĐẠI CƯƠNG",
-      "subject": "Tin Học Đại Cương",
-      "studentId": "u_26710412",
-      "studentName": "Nguyễn Thành Tâm",
-      "studentCode": "26710412",
-      "submittedAt": "2026-11-10T12:56:28.991Z",
-      "createdAt": "2026-11-10T12:56:28.991Z",
-      "readBy": [
-        "u_26710897"
-      ]
-    },
-    {
-      "id": "notif_sub_1794315387887_2oky",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1794308665754",
-      "assignmentTitle": "BÀI KIỂM TRA MS WORD",
-      "targetClass": "TIN HỌC ĐẠI CƯƠNG",
-      "subject": "Tin Học Đại Cương",
-      "studentId": "u_26710412",
-      "studentName": "Nguyễn Thành Tâm",
-      "studentCode": "26710412",
-      "submittedAt": "2026-11-10T12:56:27.887Z",
-      "createdAt": "2026-11-10T12:56:27.887Z",
-      "readBy": [
-        "u_26710897"
-      ]
-    },
-    {
-      "id": "notif_sub_1794315386518_vhze",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1794308665754",
-      "assignmentTitle": "BÀI KIỂM TRA MS WORD",
-      "targetClass": "TIN HỌC ĐẠI CƯƠNG",
-      "subject": "Tin Học Đại Cương",
-      "studentId": "u_26710412",
-      "studentName": "Nguyễn Thành Tâm",
-      "studentCode": "26710412",
-      "submittedAt": "2026-11-10T12:56:26.518Z",
-      "createdAt": "2026-11-10T12:56:26.518Z",
-      "readBy": [
-        "u_26710897"
-      ]
-    },
-    {
-      "id": "notif_sub_1794315375381_cqzc",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1794308665754",
-      "assignmentTitle": "BÀI KIỂM TRA MS WORD",
-      "targetClass": "TIN HỌC ĐẠI CƯƠNG",
-      "subject": "Tin Học Đại Cương",
-      "studentId": "u_26710526",
-      "studentName": "Đỗ Nguyễn Mạnh Quân",
-      "studentCode": "26710526",
-      "submittedAt": "2026-11-10T12:56:15.381Z",
-      "createdAt": "2026-11-10T12:56:15.381Z",
-      "readBy": [
-        "u_26710897"
-      ]
-    },
-    {
-      "id": "notif_sub_1794315350447_jjk4",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1794308665754",
-      "assignmentTitle": "BÀI KIỂM TRA MS WORD",
-      "targetClass": "TIN HỌC ĐẠI CƯƠNG",
-      "subject": "Tin Học Đại Cương",
-      "studentId": "u_26710428",
-      "studentName": "Dương Công Thuận Phát",
-      "studentCode": "26710428",
-      "submittedAt": "2026-11-10T12:55:50.447Z",
-      "createdAt": "2026-11-10T12:55:50.447Z",
-      "readBy": [
-        "u_26710897"
-      ]
-    },
-    {
-      "id": "notif_sub_1794315346626_vxfd",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1794308665754",
-      "assignmentTitle": "BÀI KIỂM TRA MS WORD",
-      "targetClass": "TIN HỌC ĐẠI CƯƠNG",
-      "subject": "Tin Học Đại Cương",
-      "studentId": "u_26710685",
-      "studentName": "Huỳnh Khánh Nguyên",
-      "studentCode": "26710685",
-      "submittedAt": "2026-11-10T12:55:46.626Z",
-      "createdAt": "2026-11-10T12:55:46.626Z",
-      "readBy": [
-        "u_26710897"
-      ]
-    },
-    {
-      "id": "notif_sub_1794315338773_pzw2",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1794308665754",
-      "assignmentTitle": "BÀI KIỂM TRA MS WORD",
-      "targetClass": "TIN HỌC ĐẠI CƯƠNG",
-      "subject": "Tin Học Đại Cương",
-      "studentId": "u_26710832",
-      "studentName": "Đỗ Văn Bảo",
-      "studentCode": "26710832",
-      "submittedAt": "2026-11-10T12:55:38.773Z",
-      "createdAt": "2026-11-10T12:55:38.773Z",
-      "readBy": [
-        "u_26710897"
-      ]
-    },
-    {
-      "id": "notif_sub_1794315303610_c8zy",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1794308665754",
-      "assignmentTitle": "BÀI KIỂM TRA MS WORD",
-      "targetClass": "TIN HỌC ĐẠI CƯƠNG",
-      "subject": "Tin Học Đại Cương",
-      "studentId": "u_26710267",
-      "studentName": "Trương Đức Thịnh",
-      "studentCode": "26710267",
-      "submittedAt": "2026-11-10T12:55:03.610Z",
-      "createdAt": "2026-11-10T12:55:03.610Z",
-      "readBy": [
-        "u_26710053",
-        "u_26710897"
-      ]
-    },
-    {
-      "id": "notif_sub_1794315302948_hbvw",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1794308665754",
-      "assignmentTitle": "BÀI KIỂM TRA MS WORD",
-      "targetClass": "TIN HỌC ĐẠI CƯƠNG",
-      "subject": "Tin Học Đại Cương",
-      "studentId": "u_26710267",
-      "studentName": "Trương Đức Thịnh",
-      "studentCode": "26710267",
-      "submittedAt": "2026-11-10T12:55:02.948Z",
-      "createdAt": "2026-11-10T12:55:02.948Z",
-      "readBy": [
-        "u_26710053",
-        "u_26710897"
-      ]
-    },
-    {
-      "id": "notif_sub_1794315290312_s022",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1794308665754",
-      "assignmentTitle": "BÀI KIỂM TRA MS WORD",
-      "targetClass": "TIN HỌC ĐẠI CƯƠNG",
-      "subject": "Tin Học Đại Cương",
-      "studentId": "u_26710451",
-      "studentName": "Phan Nhựt Trung",
-      "studentCode": "26710451",
-      "submittedAt": "2026-11-10T12:54:50.312Z",
-      "createdAt": "2026-11-10T12:54:50.312Z",
-      "readBy": [
-        "u_26710053",
-        "u_26710897"
-      ]
-    },
-    {
-      "id": "notif_sub_1794315288860_pb58",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1794308665754",
-      "assignmentTitle": "BÀI KIỂM TRA MS WORD",
-      "targetClass": "TIN HỌC ĐẠI CƯƠNG",
-      "subject": "Tin Học Đại Cương",
-      "studentId": "u_26710249",
-      "studentName": "Nguyễn Thiên Bảo",
-      "studentCode": "26710249",
-      "submittedAt": "2026-11-10T12:54:48.860Z",
-      "createdAt": "2026-11-10T12:54:48.860Z",
-      "readBy": [
-        "u_26710053",
-        "u_26710897"
-      ]
-    },
-    {
-      "id": "notif_sub_1794315271181_di1w",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1794308665754",
-      "assignmentTitle": "BÀI KIỂM TRA MS WORD",
-      "targetClass": "TIN HỌC ĐẠI CƯƠNG",
-      "subject": "Tin Học Đại Cương",
-      "studentId": "u_26710240",
-      "studentName": "Nguyễn Đức Toàn",
-      "studentCode": "26710240",
-      "submittedAt": "2026-11-10T12:54:31.181Z",
-      "createdAt": "2026-11-10T12:54:31.181Z",
-      "readBy": [
-        "u_26710053",
-        "u_26710897"
-      ]
-    },
-    {
-      "id": "notif_sub_1794315265253_irg7",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1794308665754",
-      "assignmentTitle": "BÀI KIỂM TRA MS WORD",
-      "targetClass": "TIN HỌC ĐẠI CƯƠNG",
-      "subject": "Tin Học Đại Cương",
-      "studentId": "u_26710507",
-      "studentName": "Phạm Nguyễn Anh Tú",
-      "studentCode": "26710507",
-      "submittedAt": "2026-11-10T12:54:25.253Z",
-      "createdAt": "2026-11-10T12:54:25.253Z",
-      "readBy": [
-        "u_26710053",
-        "u_26710897"
-      ]
-    },
-    {
-      "id": "notif_sub_1794315246268_65ll",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1794308665754",
-      "assignmentTitle": "BÀI KIỂM TRA MS WORD",
-      "targetClass": "TIN HỌC ĐẠI CƯƠNG",
-      "subject": "Tin Học Đại Cương",
-      "studentId": "u_26710466",
-      "studentName": "Lê Văn Phúc",
-      "studentCode": "26710466",
-      "submittedAt": "2026-11-10T12:54:06.268Z",
-      "createdAt": "2026-11-10T12:54:06.268Z",
-      "readBy": [
-        "u_26710053",
-        "u_26710897"
-      ]
-    },
-    {
-      "id": "notif_sub_1794315235829_xpk1",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1794308665754",
-      "assignmentTitle": "BÀI KIỂM TRA MS WORD",
-      "targetClass": "TIN HỌC ĐẠI CƯƠNG",
-      "subject": "Tin Học Đại Cương",
-      "studentId": "u_26710053",
-      "studentName": "Phạm Ngọc Thái",
-      "studentCode": "26710053",
-      "submittedAt": "2026-11-10T12:53:55.829Z",
-      "createdAt": "2026-11-10T12:53:55.829Z",
-      "readBy": [
-        "u_26710053",
-        "u_26710897"
-      ]
-    },
-    {
-      "id": "notif_sub_1794315234292_cqpg",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1794308665754",
-      "assignmentTitle": "BÀI KIỂM TRA MS WORD",
-      "targetClass": "TIN HỌC ĐẠI CƯƠNG",
-      "subject": "Tin Học Đại Cương",
-      "studentId": "u_26710053",
-      "studentName": "Phạm Ngọc Thái",
-      "studentCode": "26710053",
-      "submittedAt": "2026-11-10T12:53:54.292Z",
-      "createdAt": "2026-11-10T12:53:54.292Z",
-      "readBy": [
-        "u_26710053",
-        "u_26710897"
-      ]
-    },
-    {
-      "id": "notif_sub_1794315233921_gd52",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1794308665754",
-      "assignmentTitle": "BÀI KIỂM TRA MS WORD",
-      "targetClass": "TIN HỌC ĐẠI CƯƠNG",
-      "subject": "Tin Học Đại Cương",
-      "studentId": "u_26711149",
-      "studentName": "Phạm Minh Phát",
-      "studentCode": "26711149",
-      "submittedAt": "2026-11-10T12:53:53.921Z",
-      "createdAt": "2026-11-10T12:53:53.921Z",
-      "readBy": [
-        "u_26710053",
-        "u_26710897"
-      ]
-    },
-    {
-      "id": "notif_sub_1794315227450_ir7k",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1794308665754",
-      "assignmentTitle": "BÀI KIỂM TRA MS WORD",
-      "targetClass": "TIN HỌC ĐẠI CƯƠNG",
-      "subject": "Tin Học Đại Cương",
-      "studentId": "u_26710111",
-      "studentName": "Nguyễn Trọng Phúc",
-      "studentCode": "26710111",
-      "submittedAt": "2026-11-10T12:53:47.450Z",
-      "createdAt": "2026-11-10T12:53:47.450Z",
-      "readBy": [
-        "u_26710053",
-        "u_26710897"
-      ]
-    },
-    {
-      "id": "notif_sub_1794315029959_t0jo",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1793877081018",
-      "assignmentTitle": "Bài tập về chia cột - tạo dropcap - tạo bảng",
-      "targetClass": "TIN HỌC ĐẠI CƯƠNG",
-      "subject": "Tin Học Đại Cương",
-      "studentId": "u_26710480",
-      "studentName": "Nguyễn Đức Vượng",
-      "studentCode": "26710480",
-      "submittedAt": "2026-11-10T12:50:29.959Z",
-      "createdAt": "2026-11-10T12:50:29.959Z",
-      "readBy": [
-        "u_26710053",
-        "u_26710897"
-      ]
-    },
-    {
-      "id": "notif_sub_1794315029150_wyhx",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1793877081018",
-      "assignmentTitle": "Bài tập về chia cột - tạo dropcap - tạo bảng",
-      "targetClass": "TIN HỌC ĐẠI CƯƠNG",
-      "subject": "Tin Học Đại Cương",
-      "studentId": "u_26710480",
-      "studentName": "Nguyễn Đức Vượng",
-      "studentCode": "26710480",
-      "submittedAt": "2026-11-10T12:50:29.150Z",
-      "createdAt": "2026-11-10T12:50:29.150Z",
-      "readBy": [
-        "u_26710053",
-        "u_26710897"
-      ]
-    },
-    {
-      "id": "notif_sub_1794314891468_shgq",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1794308665754",
-      "assignmentTitle": "BÀI KIỂM TRA MS WORD",
-      "targetClass": "TIN HỌC ĐẠI CƯƠNG",
-      "subject": "Tin Học Đại Cương",
-      "studentId": "u_26710308",
-      "studentName": "Nguyễn Phúc Sang",
-      "studentCode": "26710308",
-      "submittedAt": "2026-11-10T12:48:11.468Z",
-      "createdAt": "2026-11-10T12:48:11.468Z",
-      "readBy": [
-        "u_26710053",
-        "u_26710897"
-      ]
-    },
-    {
-      "id": "notif_sub_1794314871682_z422",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1794308665754",
-      "assignmentTitle": "BÀI KIỂM TRA MS WORD",
-      "targetClass": "TIN HỌC ĐẠI CƯƠNG",
-      "subject": "Tin Học Đại Cương",
-      "studentId": "u_26710396",
-      "studentName": "Nguyễn Hồng Thắng",
-      "studentCode": "26710396",
-      "submittedAt": "2026-11-10T12:47:51.682Z",
-      "createdAt": "2026-11-10T12:47:51.682Z",
-      "readBy": [
-        "u_26710053",
-        "u_26710897"
-      ]
-    },
-    {
-      "id": "notif_sub_1794314698013_f9uu",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1794308665754",
-      "assignmentTitle": "BÀI KIỂM TRA MS WORD",
-      "targetClass": "TIN HỌC ĐẠI CƯƠNG",
-      "subject": "Tin Học Đại Cương",
-      "studentId": "u_26710480",
-      "studentName": "Nguyễn Đức Vượng",
-      "studentCode": "26710480",
-      "submittedAt": "2026-11-10T12:44:58.013Z",
-      "createdAt": "2026-11-10T12:44:58.013Z",
-      "readBy": [
-        "u_26710053",
-        "u_26710897"
-      ]
-    },
-    {
-      "id": "notif_sub_1794314400978_lexi",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1794308665754",
-      "assignmentTitle": "BÀI KIỂM TRA MS WORD",
-      "targetClass": "TIN HỌC ĐẠI CƯƠNG",
-      "subject": "Tin Học Đại Cương",
-      "studentId": "u_26710214",
-      "studentName": "Nguyễn Đặng Quốc Việt",
-      "studentCode": "26710214",
-      "submittedAt": "2026-11-10T12:40:00.978Z",
-      "createdAt": "2026-11-10T12:40:00.978Z",
-      "readBy": [
-        "u_26710053",
-        "u_26710897"
-      ]
-    },
-    {
-      "id": "notif_sub_1794313781988_okjy",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1794308665754",
-      "assignmentTitle": "BÀI KIỂM TRA MS WORD",
-      "targetClass": "TIN HỌC ĐẠI CƯƠNG",
-      "subject": "Tin Học Đại Cương",
-      "studentId": "u_26710287",
-      "studentName": "Đào Ngọc Minh Nhật",
-      "studentCode": "26710287",
-      "submittedAt": "2026-11-10T12:29:41.988Z",
-      "createdAt": "2026-11-10T12:29:41.988Z",
-      "readBy": [
-        "u_26710053",
-        "u_26710897"
-      ]
-    },
-    {
-      "id": "notif_sub_1794313769934_cpph",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1794308665754",
-      "assignmentTitle": "BÀI KIỂM TRA MS WORD",
-      "targetClass": "TIN HỌC ĐẠI CƯƠNG",
-      "subject": "Tin Học Đại Cương",
-      "studentId": "u_26710498",
-      "studentName": "Nguyễn Hoàng Huy Triệu",
-      "studentCode": "26710498",
-      "submittedAt": "2026-11-10T12:29:29.934Z",
-      "createdAt": "2026-11-10T12:29:29.934Z",
-      "readBy": [
-        "u_26710053",
-        "u_26710897"
-      ]
-    },
-    {
-      "id": "notif_sub_1794313769103_tvao",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1794308665754",
-      "assignmentTitle": "BÀI KIỂM TRA MS WORD",
-      "targetClass": "TIN HỌC ĐẠI CƯƠNG",
-      "subject": "Tin Học Đại Cương",
-      "studentId": "u_26710498",
-      "studentName": "Nguyễn Hoàng Huy Triệu",
-      "studentCode": "26710498",
-      "submittedAt": "2026-11-10T12:29:29.103Z",
-      "createdAt": "2026-11-10T12:29:29.103Z",
-      "readBy": [
-        "u_26710053",
-        "u_26710897"
-      ]
-    },
-    {
-      "id": "notif_sub_1794313754762_17nx",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1794308665754",
-      "assignmentTitle": "BÀI KIỂM TRA MS WORD",
-      "targetClass": "TIN HỌC ĐẠI CƯƠNG",
-      "subject": "Tin Học Đại Cương",
-      "studentId": "u_26710844",
-      "studentName": "Trương Duy Minh Trí",
-      "studentCode": "26710844",
-      "submittedAt": "2026-11-10T12:29:14.762Z",
-      "createdAt": "2026-11-10T12:29:14.762Z",
-      "readBy": [
-        "u_26710053",
-        "u_26710897"
-      ]
-    },
-    {
-      "id": "notif_sub_1794313633237_6cup",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1794308665754",
-      "assignmentTitle": "BÀI KIỂM TRA MS WORD",
-      "targetClass": "TIN HỌC ĐẠI CƯƠNG",
-      "subject": "Tin Học Đại Cương",
-      "studentId": "u_26710709",
-      "studentName": "Trần Trung Tài",
-      "studentCode": "26710709",
-      "submittedAt": "2026-11-10T12:27:13.237Z",
-      "createdAt": "2026-11-10T12:27:13.237Z",
-      "readBy": [
-        "u_26710053",
-        "u_26710897"
-      ]
-    },
-    {
-      "id": "notif_sub_1794313632420_5i7t",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1794308665754",
-      "assignmentTitle": "BÀI KIỂM TRA MS WORD",
-      "targetClass": "TIN HỌC ĐẠI CƯƠNG",
-      "subject": "Tin Học Đại Cương",
-      "studentId": "u_26710727",
-      "studentName": "Trần Lê Quốc Vũ",
-      "studentCode": "26710727",
-      "submittedAt": "2026-11-10T12:27:12.420Z",
-      "createdAt": "2026-11-10T12:27:12.420Z",
-      "readBy": [
-        "u_26710053",
-        "u_26710897"
-      ]
-    },
-    {
-      "id": "notif_sub_1794313632369_t3ms",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1794308665754",
-      "assignmentTitle": "BÀI KIỂM TRA MS WORD",
-      "targetClass": "TIN HỌC ĐẠI CƯƠNG",
-      "subject": "Tin Học Đại Cương",
-      "studentId": "u_26710709",
-      "studentName": "Trần Trung Tài",
-      "studentCode": "26710709",
-      "submittedAt": "2026-11-10T12:27:12.369Z",
-      "createdAt": "2026-11-10T12:27:12.369Z",
-      "readBy": [
-        "u_26710053",
-        "u_26710897"
-      ]
-    },
-    {
-      "id": "notif_sub_1794313620418_4hpn",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1794308665754",
-      "assignmentTitle": "BÀI KIỂM TRA MS WORD",
-      "targetClass": "TIN HỌC ĐẠI CƯƠNG",
-      "subject": "Tin Học Đại Cương",
-      "studentId": "u_26710506",
-      "studentName": "Nguyễn Phước Hoàn Thanh",
-      "studentCode": "26710506",
-      "submittedAt": "2026-11-10T12:27:00.418Z",
-      "createdAt": "2026-11-10T12:27:00.418Z",
-      "readBy": [
-        "u_26710053",
-        "u_26710897"
-      ]
-    },
-    {
-      "id": "notif_sub_1794313619630_nu4i",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1794308665754",
-      "assignmentTitle": "BÀI KIỂM TRA MS WORD",
-      "targetClass": "TIN HỌC ĐẠI CƯƠNG",
-      "subject": "Tin Học Đại Cương",
-      "studentId": "u_26710506",
-      "studentName": "Nguyễn Phước Hoàn Thanh",
-      "studentCode": "26710506",
-      "submittedAt": "2026-11-10T12:26:59.630Z",
-      "createdAt": "2026-11-10T12:26:59.630Z",
-      "readBy": [
-        "u_26710053",
-        "u_26710897"
-      ]
-    },
-    {
-      "id": "notif_sub_1794313618670_ycbk",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1794308665754",
-      "assignmentTitle": "BÀI KIỂM TRA MS WORD",
-      "targetClass": "TIN HỌC ĐẠI CƯƠNG",
-      "subject": "Tin Học Đại Cương",
-      "studentId": "u_26710506",
-      "studentName": "Nguyễn Phước Hoàn Thanh",
-      "studentCode": "26710506",
-      "submittedAt": "2026-11-10T12:26:58.670Z",
-      "createdAt": "2026-11-10T12:26:58.670Z",
-      "readBy": [
-        "u_26710053",
-        "u_26710897"
-      ]
-    },
-    {
-      "id": "notif_1794308665757",
-      "type": "NEW_ASSIGNMENT",
-      "assignmentId": "asm_1794308665754",
-      "title": "BÀI KIỂM TRA MS WORD",
-      "description": "THỰC HIỆN PHẦN MS WORD THEO YÊU CẦU CỦA ĐỀ BÀI",
-      "targetClass": "TIN HỌC ĐẠI CƯƠNG",
-      "subject": "Tin Học Đại Cương",
-      "dueDate": "2026-11-10T19:00",
-      "teacherName": "Thầy Nguyễn Công Danh",
-      "teacherId": "u_teacher_danh",
-      "createdAt": "2026-11-10T11:04:25.757Z",
-      "readBy": [
-        "u_26710053",
-        "u_26710897"
-      ]
-    },
-    {
-      "id": "notif_sub_1794297186515_7w3v",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1793769990154",
-      "assignmentTitle": "Tạo kỹ xảo cho banner",
-      "targetClass": "C08TK01",
-      "subject": "Xử Lý Kỹ Xảo với After Effects",
-      "studentId": "u_C08TK0104",
-      "studentName": "Nguyễn Hải Đăng",
-      "studentCode": "C08TK0104",
-      "submittedAt": "2026-11-10T07:53:06.515Z",
-      "createdAt": "2026-11-10T07:53:06.515Z",
-      "readBy": []
-    },
-    {
-      "id": "notif_sub_1794296444925_iz4q",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1794273861164",
-      "assignmentTitle": "BÀI THI KẾT THÚC MÔN CATALOG - NHÓM 1 - 10.11.2026",
-      "targetClass": "T14TK01",
-      "subject": "Thiết Kế Catalog",
-      "studentId": "u_T14TK0131",
-      "studentName": "Nguyễn Ngọc Tường Vy",
-      "studentCode": "T14TK0131",
-      "submittedAt": "2026-11-10T07:40:44.925Z",
-      "createdAt": "2026-11-10T07:40:44.925Z",
-      "readBy": []
-    },
-    {
-      "id": "notif_sub_1794296071219_gple",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1794273861164",
-      "assignmentTitle": "BÀI THI KẾT THÚC MÔN CATALOG - NHÓM 1 - 10.11.2026",
-      "targetClass": "T14TK01",
-      "subject": "Thiết Kế Catalog",
-      "studentId": "u_T14TK0103",
-      "studentName": "Nguyễn Hoàng Gia Ân",
-      "studentCode": "T14TK0103",
-      "submittedAt": "2026-11-10T07:34:31.219Z",
-      "createdAt": "2026-11-10T07:34:31.219Z",
-      "readBy": []
-    },
-    {
-      "id": "notif_sub_1794296065820_nrkq",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1794273861164",
-      "assignmentTitle": "BÀI THI KẾT THÚC MÔN CATALOG - NHÓM 1 - 10.11.2026",
-      "targetClass": "T14TK01",
-      "subject": "Thiết Kế Catalog",
-      "studentId": "u_T14TK0102",
-      "studentName": "Vũ Hoàng Minh Anh",
-      "studentCode": "T14TK0102",
-      "submittedAt": "2026-11-10T07:34:25.820Z",
-      "createdAt": "2026-11-10T07:34:25.820Z",
-      "readBy": []
-    },
-    {
-      "id": "notif_sub_1794296032608_3o99",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1794273861164",
-      "assignmentTitle": "BÀI THI KẾT THÚC MÔN CATALOG - NHÓM 1 - 10.11.2026",
-      "targetClass": "T14TK01",
-      "subject": "Thiết Kế Catalog",
-      "studentId": "u_T14TK0111",
-      "studentName": "Nguyễn Đăng Vinh Hiển",
-      "studentCode": "T14TK0111",
-      "submittedAt": "2026-11-10T07:33:52.608Z",
-      "createdAt": "2026-11-10T07:33:52.608Z",
-      "readBy": []
-    },
-    {
-      "id": "notif_sub_1794295912322_10hj",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1794273861164",
-      "assignmentTitle": "BÀI THI KẾT THÚC MÔN CATALOG - NHÓM 1 - 10.11.2026",
-      "targetClass": "T14TK01",
-      "subject": "Thiết Kế Catalog",
-      "studentId": "u_T14TK0101",
-      "studentName": "Lê Thị Vân Anh",
-      "studentCode": "T14TK0101",
-      "submittedAt": "2026-11-10T07:31:52.322Z",
-      "createdAt": "2026-11-10T07:31:52.322Z",
-      "readBy": []
-    },
-    {
-      "id": "notif_sub_1794295866422_xo0z",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1794273861164",
-      "assignmentTitle": "BÀI THI KẾT THÚC MÔN CATALOG - NHÓM 1 - 10.11.2026",
-      "targetClass": "T14TK01",
-      "subject": "Thiết Kế Catalog",
-      "studentId": "u_T14TK0118",
-      "studentName": "Nguyễn Nhật Linh",
-      "studentCode": "T14TK0118",
-      "submittedAt": "2026-11-10T07:31:06.422Z",
-      "createdAt": "2026-11-10T07:31:06.422Z",
-      "readBy": []
-    },
-    {
-      "id": "notif_sub_1794295842720_x2f5",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1794273861164",
-      "assignmentTitle": "BÀI THI KẾT THÚC MÔN CATALOG - NHÓM 1 - 10.11.2026",
-      "targetClass": "T14TK01",
-      "subject": "Thiết Kế Catalog",
-      "studentId": "u_T14TK0127",
-      "studentName": "Nguyễn Hoàng Thảo Quyên",
-      "studentCode": "T14TK0127",
-      "submittedAt": "2026-11-10T07:30:42.720Z",
-      "createdAt": "2026-11-10T07:30:42.720Z",
-      "readBy": []
-    },
-    {
-      "id": "notif_sub_1794295830126_ws3i",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1794273861164",
-      "assignmentTitle": "BÀI THI KẾT THÚC MÔN CATALOG - NHÓM 1 - 10.11.2026",
-      "targetClass": "T14TK01",
-      "subject": "Thiết Kế Catalog",
-      "studentId": "u_T14TK0119",
-      "studentName": "Đặng Quang Minh",
-      "studentCode": "T14TK0119",
-      "submittedAt": "2026-11-10T07:30:30.126Z",
-      "createdAt": "2026-11-10T07:30:30.126Z",
-      "readBy": []
-    },
-    {
-      "id": "notif_sub_1794295826995_0fho",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1794273861164",
-      "assignmentTitle": "BÀI THI KẾT THÚC MÔN CATALOG - NHÓM 1 - 10.11.2026",
-      "targetClass": "T14TK01",
-      "subject": "Thiết Kế Catalog",
-      "studentId": "u_T14TK0131",
-      "studentName": "Nguyễn Ngọc Tường Vy",
-      "studentCode": "T14TK0131",
-      "submittedAt": "2026-11-10T07:30:26.995Z",
-      "createdAt": "2026-11-10T07:30:26.995Z",
-      "readBy": []
-    },
-    {
-      "id": "notif_sub_1794295824825_42ar",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1794273861164",
-      "assignmentTitle": "BÀI THI KẾT THÚC MÔN CATALOG - NHÓM 1 - 10.11.2026",
-      "targetClass": "T14TK01",
-      "subject": "Thiết Kế Catalog",
-      "studentId": "u_T14TK0127",
-      "studentName": "Nguyễn Hoàng Thảo Quyên",
-      "studentCode": "T14TK0127",
-      "submittedAt": "2026-11-10T07:30:24.825Z",
-      "createdAt": "2026-11-10T07:30:24.825Z",
-      "readBy": []
-    },
-    {
-      "id": "notif_sub_1794295767856_lr7t",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1794273861164",
-      "assignmentTitle": "BÀI THI KẾT THÚC MÔN CATALOG - NHÓM 1 - 10.11.2026",
-      "targetClass": "T14TK01",
-      "subject": "Thiết Kế Catalog",
-      "studentId": "u_T14TK0121",
-      "studentName": "Võ Trần Thúy Ngân",
-      "studentCode": "T14TK0121",
-      "submittedAt": "2026-11-10T07:29:27.856Z",
-      "createdAt": "2026-11-10T07:29:27.856Z",
-      "readBy": []
-    },
-    {
-      "id": "notif_sub_1794295758267_5cre",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1794273861164",
-      "assignmentTitle": "BÀI THI KẾT THÚC MÔN CATALOG - NHÓM 1 - 10.11.2026",
-      "targetClass": "T14TK01",
-      "subject": "Thiết Kế Catalog",
-      "studentId": "u_T14TK0112",
-      "studentName": "Mai Nhật Hoàng",
-      "studentCode": "T14TK0112",
-      "submittedAt": "2026-11-10T07:29:18.267Z",
-      "createdAt": "2026-11-10T07:29:18.267Z",
-      "readBy": []
-    },
-    {
-      "id": "notif_sub_1794295757281_0sba",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1794273861164",
-      "assignmentTitle": "BÀI THI KẾT THÚC MÔN CATALOG - NHÓM 1 - 10.11.2026",
-      "targetClass": "T14TK01",
-      "subject": "Thiết Kế Catalog",
-      "studentId": "u_T14TK0112",
-      "studentName": "Mai Nhật Hoàng",
-      "studentCode": "T14TK0112",
-      "submittedAt": "2026-11-10T07:29:17.281Z",
-      "createdAt": "2026-11-10T07:29:17.281Z",
-      "readBy": []
-    },
-    {
-      "id": "notif_sub_1794295743615_bgdl",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1794273861164",
-      "assignmentTitle": "BÀI THI KẾT THÚC MÔN CATALOG - NHÓM 1 - 10.11.2026",
-      "targetClass": "T14TK01",
-      "subject": "Thiết Kế Catalog",
-      "studentId": "u_T14TK0123",
-      "studentName": "Phạm Thị Hương Ngọc",
-      "studentCode": "T14TK0123",
-      "submittedAt": "2026-11-10T07:29:03.614Z",
-      "createdAt": "2026-11-10T07:29:03.614Z",
-      "readBy": []
-    },
-    {
-      "id": "notif_sub_1794295727420_20c2",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1794273861164",
-      "assignmentTitle": "BÀI THI KẾT THÚC MÔN CATALOG - NHÓM 1 - 10.11.2026",
-      "targetClass": "T14TK01",
-      "subject": "Thiết Kế Catalog",
-      "studentId": "u_T14TK0110",
-      "studentName": "Bùi Thanh Hiền",
-      "studentCode": "T14TK0110",
-      "submittedAt": "2026-11-10T07:28:47.420Z",
-      "createdAt": "2026-11-10T07:28:47.420Z",
-      "readBy": []
-    },
-    {
-      "id": "notif_sub_1794295721921_xpxo",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1794273861164",
-      "assignmentTitle": "BÀI THI KẾT THÚC MÔN CATALOG - NHÓM 1 - 10.11.2026",
-      "targetClass": "T14TK01",
-      "subject": "Thiết Kế Catalog",
-      "studentId": "u_T14TK0110",
-      "studentName": "Bùi Thanh Hiền",
-      "studentCode": "T14TK0110",
-      "submittedAt": "2026-11-10T07:28:41.921Z",
-      "createdAt": "2026-11-10T07:28:41.921Z",
-      "readBy": []
-    },
-    {
-      "id": "notif_sub_1794295705312_wluq",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1794273861164",
-      "assignmentTitle": "BÀI THI KẾT THÚC MÔN CATALOG - NHÓM 1 - 10.11.2026",
-      "targetClass": "T14TK01",
-      "subject": "Thiết Kế Catalog",
-      "studentId": "u_T14TK0109",
-      "studentName": "Vũ Ngọc Thanh Hằng",
-      "studentCode": "T14TK0109",
-      "submittedAt": "2026-11-10T07:28:25.311Z",
-      "createdAt": "2026-11-10T07:28:25.311Z",
-      "readBy": []
-    },
-    {
-      "id": "notif_sub_1794276117668_ejef",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1794273861164",
-      "assignmentTitle": "BÀI THI KẾT THÚC MÔN CATALOG - NHÓM 1 - 10.11.2026",
-      "targetClass": "T14TK01",
-      "subject": "Thiết Kế Catalog",
-      "studentId": "u_T14TK0114",
-      "studentName": "Võ Tuấn Khang",
-      "studentCode": "T14TK0114",
-      "submittedAt": "2026-11-10T02:01:57.668Z",
-      "createdAt": "2026-11-10T02:01:57.668Z",
-      "readBy": [
-        "u_T14TK0121"
-      ]
-    },
-    {
-      "id": "notif_sub_1794276097472_b08k",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1794273861164",
-      "assignmentTitle": "BÀI THI KẾT THÚC MÔN CATALOG - NHÓM 1 - 10.11.2026",
-      "targetClass": "T14TK01",
-      "subject": "Thiết Kế Catalog",
-      "studentId": "u_T14TK0117",
-      "studentName": "Ngô Trúc Linh",
-      "studentCode": "T14TK0117",
-      "submittedAt": "2026-11-10T02:01:37.472Z",
-      "createdAt": "2026-11-10T02:01:37.472Z",
-      "readBy": [
-        "u_T14TK0121"
-      ]
-    },
-    {
-      "id": "notif_sub_1794276096579_ymaq",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1794273861164",
-      "assignmentTitle": "BÀI THI KẾT THÚC MÔN CATALOG - NHÓM 1 - 10.11.2026",
-      "targetClass": "T14TK01",
-      "subject": "Thiết Kế Catalog",
-      "studentId": "u_T14TK0117",
-      "studentName": "Ngô Trúc Linh",
-      "studentCode": "T14TK0117",
-      "submittedAt": "2026-11-10T02:01:36.579Z",
-      "createdAt": "2026-11-10T02:01:36.579Z",
-      "readBy": [
-        "u_T14TK0121"
-      ]
-    },
-    {
-      "id": "notif_sub_1794276092081_ftv4",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1794273861164",
-      "assignmentTitle": "BÀI THI KẾT THÚC MÔN CATALOG - NHÓM 1 - 10.11.2026",
-      "targetClass": "T14TK01",
-      "subject": "Thiết Kế Catalog",
-      "studentId": "u_T14TK0117",
-      "studentName": "Ngô Trúc Linh",
-      "studentCode": "T14TK0117",
-      "submittedAt": "2026-11-10T02:01:32.081Z",
-      "createdAt": "2026-11-10T02:01:32.081Z",
-      "readBy": [
-        "u_T14TK0121"
-      ]
-    },
-    {
-      "id": "notif_sub_1794276091269_u6hh",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1794273861164",
-      "assignmentTitle": "BÀI THI KẾT THÚC MÔN CATALOG - NHÓM 1 - 10.11.2026",
-      "targetClass": "T14TK01",
-      "subject": "Thiết Kế Catalog",
-      "studentId": "u_T14TK0117",
-      "studentName": "Ngô Trúc Linh",
-      "studentCode": "T14TK0117",
-      "submittedAt": "2026-11-10T02:01:31.269Z",
-      "createdAt": "2026-11-10T02:01:31.269Z",
-      "readBy": [
-        "u_T14TK0121"
-      ]
-    },
-    {
-      "id": "notif_sub_1794276090268_toed",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1794273861164",
-      "assignmentTitle": "BÀI THI KẾT THÚC MÔN CATALOG - NHÓM 1 - 10.11.2026",
-      "targetClass": "T14TK01",
-      "subject": "Thiết Kế Catalog",
-      "studentId": "u_T14TK0117",
-      "studentName": "Ngô Trúc Linh",
-      "studentCode": "T14TK0117",
-      "submittedAt": "2026-11-10T02:01:30.268Z",
-      "createdAt": "2026-11-10T02:01:30.268Z",
-      "readBy": [
-        "u_T14TK0121"
-      ]
-    },
-    {
-      "id": "notif_sub_1794276088374_6o7f",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1794273861164",
-      "assignmentTitle": "BÀI THI KẾT THÚC MÔN CATALOG - NHÓM 1 - 10.11.2026",
-      "targetClass": "T14TK01",
-      "subject": "Thiết Kế Catalog",
-      "studentId": "u_T14TK0117",
-      "studentName": "Ngô Trúc Linh",
-      "studentCode": "T14TK0117",
-      "submittedAt": "2026-11-10T02:01:28.374Z",
-      "createdAt": "2026-11-10T02:01:28.374Z",
-      "readBy": [
-        "u_T14TK0121"
-      ]
-    },
-    {
-      "id": "notif_sub_1794276075075_tscq",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1794273861164",
-      "assignmentTitle": "BÀI THI KẾT THÚC MÔN CATALOG - NHÓM 1 - 10.11.2026",
-      "targetClass": "T14TK01",
-      "subject": "Thiết Kế Catalog",
-      "studentId": "u_T14TK0117",
-      "studentName": "Ngô Trúc Linh",
-      "studentCode": "T14TK0117",
-      "submittedAt": "2026-11-10T02:01:15.075Z",
-      "createdAt": "2026-11-10T02:01:15.075Z",
-      "readBy": [
-        "u_T14TK0121"
-      ]
-    },
-    {
-      "id": "notif_sub_1794276073738_4bbn",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1794273861164",
-      "assignmentTitle": "BÀI THI KẾT THÚC MÔN CATALOG - NHÓM 1 - 10.11.2026",
-      "targetClass": "T14TK01",
-      "subject": "Thiết Kế Catalog",
-      "studentId": "u_T14TK0117",
-      "studentName": "Ngô Trúc Linh",
-      "studentCode": "T14TK0117",
-      "submittedAt": "2026-11-10T02:01:13.738Z",
-      "createdAt": "2026-11-10T02:01:13.738Z",
-      "readBy": [
-        "u_T14TK0121"
-      ]
-    },
-    {
-      "id": "notif_sub_1794276065163_zgsl",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1794273861164",
-      "assignmentTitle": "BÀI THI KẾT THÚC MÔN CATALOG - NHÓM 1 - 10.11.2026",
-      "targetClass": "T14TK01",
-      "subject": "Thiết Kế Catalog",
-      "studentId": "u_T14TK0117",
-      "studentName": "Ngô Trúc Linh",
-      "studentCode": "T14TK0117",
-      "submittedAt": "2026-11-10T02:01:05.163Z",
-      "createdAt": "2026-11-10T02:01:05.163Z",
-      "readBy": [
-        "u_T14TK0121"
-      ]
-    },
-    {
-      "id": "notif_sub_1794275973040_bq25",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1794273861164",
-      "assignmentTitle": "BÀI THI KẾT THÚC MÔN CATALOG - NHÓM 1 - 10.11.2026",
-      "targetClass": "T14TK01",
-      "subject": "Thiết Kế Catalog",
-      "studentId": "u_T14TK0125",
-      "studentName": "Nguyễn Thị Quỳnh Nhi",
-      "studentCode": "T14TK0125",
-      "submittedAt": "2026-11-10T01:59:33.040Z",
-      "createdAt": "2026-11-10T01:59:33.040Z",
-      "readBy": [
-        "u_T14TK0121"
-      ]
-    },
-    {
-      "id": "notif_sub_1794275971035_0bqg",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1794273861164",
-      "assignmentTitle": "BÀI THI KẾT THÚC MÔN CATALOG - NHÓM 1 - 10.11.2026",
-      "targetClass": "T14TK01",
-      "subject": "Thiết Kế Catalog",
-      "studentId": "u_T14TK0125",
-      "studentName": "Nguyễn Thị Quỳnh Nhi",
-      "studentCode": "T14TK0125",
-      "submittedAt": "2026-11-10T01:59:31.035Z",
-      "createdAt": "2026-11-10T01:59:31.035Z",
-      "readBy": [
-        "u_T14TK0121"
-      ]
-    },
-    {
-      "id": "notif_sub_1794275945063_0pj5",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1794273861164",
-      "assignmentTitle": "BÀI THI KẾT THÚC MÔN CATALOG - NHÓM 1 - 10.11.2026",
-      "targetClass": "T14TK01",
-      "subject": "Thiết Kế Catalog",
-      "studentId": "u_T14TK0132",
-      "studentName": "Trần Lê Thanh Vy",
-      "studentCode": "T14TK0132",
-      "submittedAt": "2026-11-10T01:59:05.063Z",
-      "createdAt": "2026-11-10T01:59:05.063Z",
-      "readBy": [
-        "u_T14TK0121"
-      ]
-    },
-    {
-      "id": "notif_sub_1794275944077_qoro",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1794273861164",
-      "assignmentTitle": "BÀI THI KẾT THÚC MÔN CATALOG - NHÓM 1 - 10.11.2026",
-      "targetClass": "T14TK01",
-      "subject": "Thiết Kế Catalog",
-      "studentId": "u_T14TK0132",
-      "studentName": "Trần Lê Thanh Vy",
-      "studentCode": "T14TK0132",
-      "submittedAt": "2026-11-10T01:59:04.077Z",
-      "createdAt": "2026-11-10T01:59:04.077Z",
-      "readBy": [
-        "u_T14TK0121"
-      ]
-    },
-    {
-      "id": "notif_sub_1794275903571_j0s6",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1794273861164",
-      "assignmentTitle": "BÀI THI KẾT THÚC MÔN CATALOG - NHÓM 1 - 10.11.2026",
-      "targetClass": "T14TK01",
-      "subject": "Thiết Kế Catalog",
-      "studentId": "u_T14TK0122",
-      "studentName": "Đoàn Kim Ngọc",
-      "studentCode": "T14TK0122",
-      "submittedAt": "2026-11-10T01:58:23.571Z",
-      "createdAt": "2026-11-10T01:58:23.571Z",
-      "readBy": [
-        "u_T14TK0121"
-      ]
-    },
-    {
-      "id": "notif_sub_1794275903381_fmma",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1794273861164",
-      "assignmentTitle": "BÀI THI KẾT THÚC MÔN CATALOG - NHÓM 1 - 10.11.2026",
-      "targetClass": "T14TK01",
-      "subject": "Thiết Kế Catalog",
-      "studentId": "u_T14TK0122",
-      "studentName": "Đoàn Kim Ngọc",
-      "studentCode": "T14TK0122",
-      "submittedAt": "2026-11-10T01:58:23.380Z",
-      "createdAt": "2026-11-10T01:58:23.380Z",
-      "readBy": [
-        "u_T14TK0121"
-      ]
-    },
-    {
-      "id": "notif_sub_1794275903069_np9e",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1794273861164",
-      "assignmentTitle": "BÀI THI KẾT THÚC MÔN CATALOG - NHÓM 1 - 10.11.2026",
-      "targetClass": "T14TK01",
-      "subject": "Thiết Kế Catalog",
-      "studentId": "u_T14TK0122",
-      "studentName": "Đoàn Kim Ngọc",
-      "studentCode": "T14TK0122",
-      "submittedAt": "2026-11-10T01:58:23.069Z",
-      "createdAt": "2026-11-10T01:58:23.069Z",
-      "readBy": [
-        "u_T14TK0121"
-      ]
-    },
-    {
-      "id": "notif_sub_1794275901970_vs06",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1794273861164",
-      "assignmentTitle": "BÀI THI KẾT THÚC MÔN CATALOG - NHÓM 1 - 10.11.2026",
-      "targetClass": "T14TK01",
-      "subject": "Thiết Kế Catalog",
-      "studentId": "u_T14TK0122",
-      "studentName": "Đoàn Kim Ngọc",
-      "studentCode": "T14TK0122",
-      "submittedAt": "2026-11-10T01:58:21.970Z",
-      "createdAt": "2026-11-10T01:58:21.970Z",
-      "readBy": [
-        "u_T14TK0121"
-      ]
-    },
-    {
-      "id": "notif_sub_1794275901863_5kcb",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1794273861164",
-      "assignmentTitle": "BÀI THI KẾT THÚC MÔN CATALOG - NHÓM 1 - 10.11.2026",
-      "targetClass": "T14TK01",
-      "subject": "Thiết Kế Catalog",
-      "studentId": "u_T14TK0122",
-      "studentName": "Đoàn Kim Ngọc",
-      "studentCode": "T14TK0122",
-      "submittedAt": "2026-11-10T01:58:21.863Z",
-      "createdAt": "2026-11-10T01:58:21.863Z",
-      "readBy": [
-        "u_T14TK0121"
-      ]
-    },
-    {
-      "id": "notif_sub_1794275901367_pl2t",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1794273861164",
-      "assignmentTitle": "BÀI THI KẾT THÚC MÔN CATALOG - NHÓM 1 - 10.11.2026",
-      "targetClass": "T14TK01",
-      "subject": "Thiết Kế Catalog",
-      "studentId": "u_T14TK0122",
-      "studentName": "Đoàn Kim Ngọc",
-      "studentCode": "T14TK0122",
-      "submittedAt": "2026-11-10T01:58:21.367Z",
-      "createdAt": "2026-11-10T01:58:21.367Z",
-      "readBy": [
-        "u_T14TK0121"
-      ]
-    },
-    {
-      "id": "notif_sub_1794275894976_v3rm",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1794273861164",
-      "assignmentTitle": "BÀI THI KẾT THÚC MÔN CATALOG - NHÓM 1 - 10.11.2026",
-      "targetClass": "T14TK01",
-      "subject": "Thiết Kế Catalog",
-      "studentId": "u_T14TK0122",
-      "studentName": "Đoàn Kim Ngọc",
-      "studentCode": "T14TK0122",
-      "submittedAt": "2026-11-10T01:58:14.975Z",
-      "createdAt": "2026-11-10T01:58:14.975Z",
-      "readBy": [
-        "u_T14TK0121"
-      ]
-    },
-    {
-      "id": "notif_sub_1794275891828_qgsd",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1794273861164",
-      "assignmentTitle": "BÀI THI KẾT THÚC MÔN CATALOG - NHÓM 1 - 10.11.2026",
-      "targetClass": "T14TK01",
-      "subject": "Thiết Kế Catalog",
-      "studentId": "u_T14TK0122",
-      "studentName": "Đoàn Kim Ngọc",
-      "studentCode": "T14TK0122",
-      "submittedAt": "2026-11-10T01:58:11.828Z",
-      "createdAt": "2026-11-10T01:58:11.828Z",
-      "readBy": [
-        "u_T14TK0121"
-      ]
-    },
-    {
-      "id": "notif_sub_1794275805283_ftxe",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1794273861164",
-      "assignmentTitle": "BÀI THI KẾT THÚC MÔN CATALOG - NHÓM 1 - 10.11.2026",
-      "targetClass": "T14TK01",
-      "subject": "Thiết Kế Catalog",
-      "studentId": "u_T14TK0129",
-      "studentName": "Nguyễn Anh Thi",
-      "studentCode": "T14TK0129",
-      "submittedAt": "2026-11-10T01:56:45.283Z",
-      "createdAt": "2026-11-10T01:56:45.283Z",
-      "readBy": [
-        "u_T14TK0121"
-      ]
-    },
-    {
-      "id": "notif_sub_1794275649673_hjch",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1794273861164",
-      "assignmentTitle": "BÀI THI KẾT THÚC MÔN CATALOG - NHÓM 1 - 10.11.2026",
-      "targetClass": "T14TK01",
-      "subject": "Thiết Kế Catalog",
-      "studentId": "u_T14TK0105",
-      "studentName": "Phạm Gia Bảo",
-      "studentCode": "T14TK0105",
-      "submittedAt": "2026-11-10T01:54:09.673Z",
-      "createdAt": "2026-11-10T01:54:09.673Z",
-      "readBy": [
-        "u_T14TK0121"
-      ]
-    },
-    {
-      "id": "notif_sub_1794275622680_z807",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1794273861164",
-      "assignmentTitle": "BÀI THI KẾT THÚC MÔN CATALOG - NHÓM 1 - 10.11.2026",
-      "targetClass": "T14TK01",
-      "subject": "Thiết Kế Catalog",
-      "studentId": "u_T14TK0130",
-      "studentName": "Trương Nguyễn Bảo Trân",
-      "studentCode": "T14TK0130",
-      "submittedAt": "2026-11-10T01:53:42.680Z",
-      "createdAt": "2026-11-10T01:53:42.680Z",
-      "readBy": [
-        "u_T14TK0121"
-      ]
-    },
-    {
-      "id": "notif_sub_1794275592531_hvud",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1794273861164",
-      "assignmentTitle": "BÀI THI KẾT THÚC MÔN CATALOG - NHÓM 1 - 10.11.2026",
-      "targetClass": "T14TK01",
-      "subject": "Thiết Kế Catalog",
-      "studentId": "u_T14TK0104",
-      "studentName": "Trần Thụ Ân",
-      "studentCode": "T14TK0104",
-      "submittedAt": "2026-11-10T01:53:12.531Z",
-      "createdAt": "2026-11-10T01:53:12.531Z",
-      "readBy": [
-        "u_T14TK0121"
-      ]
-    },
-    {
-      "id": "notif_sub_1794275586399_gblf",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1794273861164",
-      "assignmentTitle": "BÀI THI KẾT THÚC MÔN CATALOG - NHÓM 1 - 10.11.2026",
-      "targetClass": "T14TK01",
-      "subject": "Thiết Kế Catalog",
-      "studentId": "u_T14TK0104",
-      "studentName": "Trần Thụ Ân",
-      "studentCode": "T14TK0104",
-      "submittedAt": "2026-11-10T01:53:06.399Z",
-      "createdAt": "2026-11-10T01:53:06.399Z",
-      "readBy": [
-        "u_T14TK0121"
-      ]
-    },
-    {
-      "id": "notif_sub_1794275575865_u4w6",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1794273861164",
-      "assignmentTitle": "BÀI THI KẾT THÚC MÔN CATALOG - NHÓM 1 - 10.11.2026",
-      "targetClass": "T14TK01",
-      "subject": "Thiết Kế Catalog",
-      "studentId": "u_T14TK0104",
-      "studentName": "Trần Thụ Ân",
-      "studentCode": "T14TK0104",
-      "submittedAt": "2026-11-10T01:52:55.865Z",
-      "createdAt": "2026-11-10T01:52:55.865Z",
-      "readBy": [
-        "u_T14TK0121"
-      ]
-    },
-    {
-      "id": "notif_sub_1794275515296_a36s",
-      "type": "STUDENT_SUBMITTED",
-      "assignmentId": "asm_1794273861164",
-      "assignmentTitle": "BÀI THI KẾT THÚC MÔN CATALOG - NHÓM 1 - 10.11.2026",
-      "targetClass": "T14TK01",
-      "subject": "Thiết Kế Catalog",
-      "studentId": "u_T14TK0113",
-      "studentName": "Nguyễn Đăng Khoa",
-      "studentCode": "T14TK0113",
-      "submittedAt": "2026-11-10T01:51:55.296Z",
-      "createdAt": "2026-11-10T01:51:55.296Z",
-      "readBy": [
-        "u_T14TK0121"
-      ]
     }
   ],
   "subjects": [
@@ -5491,6 +4264,15 @@
       "teacherEmail": "josepdanh@gmail.com",
       "isCompleted": false,
       "createdAt": "2026-11-15T01:21:49.497Z"
+    },
+    {
+      "id": "subj_1794705892122",
+      "name": "Tin Học Đại Cương",
+      "className": "TIN HỌC ĐẠI CƯƠNG 2",
+      "teacherId": "u_teacher_danh",
+      "teacherName": "Thầy Nguyễn Công Danh",
+      "isCompleted": false,
+      "createdAt": "2026-11-15T01:24:52.122Z"
     }
   ],
   "submissions": [
@@ -9866,9 +8648,329 @@
       "grade": null,
       "feedback": null,
       "gradedAt": null
+    },
+    {
+      "id": "sub_1794711206457",
+      "assignmentId": "asm_1794705892122",
+      "studentId": "u_26711066",
+      "studentName": "26711066",
+      "content": "",
+      "link": "",
+      "file": {
+        "filename": "1794711204886_26711066___Phạm_QuốcCường___Bài_12__13__14.docx",
+        "originalName": "26711066 - Phạm QuốcCường - Bài 12, 13, 14.docx",
+        "size": 38743,
+        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1794711206/educlass_submissions/TIN%20H%E1%BB%8CC%20%C4%90%E1%BA%A0I%20C%C6%AF%C6%A0NG%202/Tin%20H%E1%BB%8Dc%20%C4%90%E1%BA%A1i%20C%C6%B0%C6%A1ng/B%C3%A0i%20t%E1%BA%ADp%20v%E1%BB%81%20Tab/tzdohjoemikqrzusndir",
+        "storageKey": "educlass_submissions/TIN HỌC ĐẠI CƯƠNG 2/Tin Học Đại Cương/Bài tập về Tab/tzdohjoemikqrzusndir",
+        "provider": "cloudinary"
+      },
+      "submittedAt": "2026-11-15T02:53:26.457Z",
+      "grade": null,
+      "feedback": null,
+      "gradedAt": null
+    },
+    {
+      "id": "sub_1794711215587",
+      "assignmentId": "asm_1794705892122",
+      "studentId": "u_26710927",
+      "studentName": "26710927",
+      "content": "Em nộp bài ạ",
+      "link": "",
+      "file": {
+        "filename": "1794715105801_BỘ_GIÁO_DỤC_VÀ_ĐÀO_TẠO.docx",
+        "originalName": "BỘ GIÁO DỤC VÀ ĐÀO TẠO.docx",
+        "size": 34419,
+        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1794715106/educlass_submissions/TIN%20H%E1%BB%8CC%20%C4%90%E1%BA%A0I%20C%C6%AF%C6%A0NG%202/Tin%20H%E1%BB%8Dc%20%C4%90%E1%BA%A1i%20C%C6%B0%C6%A1ng/B%C3%A0i%20t%E1%BA%ADp%20v%E1%BB%81%20Tab/folb70ct1klwlgi2ndou",
+        "storageKey": "educlass_submissions/TIN HỌC ĐẠI CƯƠNG 2/Tin Học Đại Cương/Bài tập về Tab/folb70ct1klwlgi2ndou",
+        "provider": "cloudinary"
+      },
+      "submittedAt": "2026-11-15T03:58:27.200Z",
+      "grade": null,
+      "feedback": null,
+      "gradedAt": null
+    },
+    {
+      "id": "sub_1794711228487",
+      "assignmentId": "asm_1794705892122",
+      "studentId": "u_26710921",
+      "studentName": "26710921",
+      "content": "",
+      "link": "",
+      "file": {
+        "filename": "1794711226637_Phạm_Gia_Bảo_26710921_bài_tập_12_13_14.docx",
+        "originalName": "Phạm Gia Bảo 26710921 bài tập 12,13,14.docx",
+        "size": 29786,
+        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1794711228/educlass_submissions/TIN%20H%E1%BB%8CC%20%C4%90%E1%BA%A0I%20C%C6%AF%C6%A0NG%202/Tin%20H%E1%BB%8Dc%20%C4%90%E1%BA%A1i%20C%C6%B0%C6%A1ng/B%C3%A0i%20t%E1%BA%ADp%20v%E1%BB%81%20Tab/wzoyajxbmpuhzq3hah7t",
+        "storageKey": "educlass_submissions/TIN HỌC ĐẠI CƯƠNG 2/Tin Học Đại Cương/Bài tập về Tab/wzoyajxbmpuhzq3hah7t",
+        "provider": "cloudinary"
+      },
+      "submittedAt": "2026-11-15T02:53:48.487Z",
+      "grade": null,
+      "feedback": null,
+      "gradedAt": null
+    },
+    {
+      "id": "sub_1794711283102",
+      "assignmentId": "asm_1794705892122",
+      "studentId": "u_26710226",
+      "studentName": "26710226",
+      "content": "",
+      "link": "",
+      "file": {
+        "filename": "1794715548878_TIN_HỌC_1.docx",
+        "originalName": "TIN HỌC 1.docx",
+        "size": 34419,
+        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1794715550/educlass_submissions/TIN%20H%E1%BB%8CC%20%C4%90%E1%BA%A0I%20C%C6%AF%C6%A0NG%202/Tin%20H%E1%BB%8Dc%20%C4%90%E1%BA%A1i%20C%C6%B0%C6%A1ng/B%C3%A0i%20t%E1%BA%ADp%20v%E1%BB%81%20Tab/oywdhqihyqviz3njygpy",
+        "storageKey": "educlass_submissions/TIN HỌC ĐẠI CƯƠNG 2/Tin Học Đại Cương/Bài tập về Tab/oywdhqihyqviz3njygpy",
+        "provider": "cloudinary"
+      },
+      "submittedAt": "2026-11-15T04:05:50.551Z",
+      "grade": null,
+      "feedback": null,
+      "gradedAt": null
+    },
+    {
+      "id": "sub_1794711675430",
+      "assignmentId": "asm_1794705892122",
+      "studentId": "u_26710112",
+      "studentName": "26710112",
+      "content": "",
+      "link": "",
+      "file": {
+        "filename": "1794711981250_26710112_ninh_trường_đăng_bt12_13_14.docx",
+        "originalName": "26710112-ninh trường đăng-bt12,13,14.docx",
+        "size": 30797,
+        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1794711982/educlass_submissions/TIN%20H%E1%BB%8CC%20%C4%90%E1%BA%A0I%20C%C6%AF%C6%A0NG%202/Tin%20H%E1%BB%8Dc%20%C4%90%E1%BA%A1i%20C%C6%B0%C6%A1ng/B%C3%A0i%20t%E1%BA%ADp%20v%E1%BB%81%20Tab/x0etag5fqcw9qazfwvtr",
+        "storageKey": "educlass_submissions/TIN HỌC ĐẠI CƯƠNG 2/Tin Học Đại Cương/Bài tập về Tab/x0etag5fqcw9qazfwvtr",
+        "provider": "cloudinary"
+      },
+      "submittedAt": "2026-11-15T03:06:23.024Z",
+      "grade": null,
+      "feedback": null,
+      "gradedAt": null
+    },
+    {
+      "id": "sub_1794711676335",
+      "assignmentId": "asm_1794705892122",
+      "studentId": "u_26710112",
+      "studentName": "26710112",
+      "content": "",
+      "link": "",
+      "file": {
+        "filename": "1794711674908_26710112_ninh_trường_đăng_bt12_13_14.docx",
+        "originalName": "26710112-ninh trường đăng-bt12,13,14.docx",
+        "size": 28887,
+        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1794711675/educlass_submissions/TIN%20H%E1%BB%8CC%20%C4%90%E1%BA%A0I%20C%C6%AF%C6%A0NG%202/Tin%20H%E1%BB%8Dc%20%C4%90%E1%BA%A1i%20C%C6%B0%C6%A1ng/B%C3%A0i%20t%E1%BA%ADp%20v%E1%BB%81%20Tab/cdo8u1tctnfqwf9x4xon",
+        "storageKey": "educlass_submissions/TIN HỌC ĐẠI CƯƠNG 2/Tin Học Đại Cương/Bài tập về Tab/cdo8u1tctnfqwf9x4xon",
+        "provider": "cloudinary"
+      },
+      "submittedAt": "2026-11-15T03:01:16.335Z",
+      "grade": null,
+      "feedback": null,
+      "gradedAt": null
+    },
+    {
+      "id": "sub_1794711945867",
+      "assignmentId": "asm_1794705892122",
+      "studentId": "u_26710592",
+      "studentName": "26710592",
+      "content": "",
+      "link": "",
+      "file": {
+        "filename": "1794712819571_bài_12_13_14.docx",
+        "originalName": "bài 12,13,14.docx",
+        "size": 32724,
+        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1794712821/educlass_submissions/TIN%20H%E1%BB%8CC%20%C4%90%E1%BA%A0I%20C%C6%AF%C6%A0NG%202/Tin%20H%E1%BB%8Dc%20%C4%90%E1%BA%A1i%20C%C6%B0%C6%A1ng/B%C3%A0i%20t%E1%BA%ADp%20v%E1%BB%81%20Tab/gixudq33wzqukaxo4rt3",
+        "storageKey": "educlass_submissions/TIN HỌC ĐẠI CƯƠNG 2/Tin Học Đại Cương/Bài tập về Tab/gixudq33wzqukaxo4rt3",
+        "provider": "cloudinary"
+      },
+      "submittedAt": "2026-11-15T03:20:22.323Z",
+      "grade": null,
+      "feedback": null,
+      "gradedAt": null
+    },
+    {
+      "id": "sub_1794711983959",
+      "assignmentId": "asm_1794705892122",
+      "studentId": "u_26711249",
+      "studentName": "26711249",
+      "content": "",
+      "link": "",
+      "file": {
+        "filename": "1794711983169_26711249_Nguyễn_Duy_Anh_Khoa__Bài_Tin_học_Tab.docx",
+        "originalName": "26711249_Nguyễn Duy Anh Khoa_ Bài Tin học Tab.docx",
+        "size": 29449,
+        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1794711983/educlass_submissions/TIN%20H%E1%BB%8CC%20%C4%90%E1%BA%A0I%20C%C6%AF%C6%A0NG%202/Tin%20H%E1%BB%8Dc%20%C4%90%E1%BA%A1i%20C%C6%B0%C6%A1ng/B%C3%A0i%20t%E1%BA%ADp%20v%E1%BB%81%20Tab/vpntpnudbgho9zfgtflr",
+        "storageKey": "educlass_submissions/TIN HỌC ĐẠI CƯƠNG 2/Tin Học Đại Cương/Bài tập về Tab/vpntpnudbgho9zfgtflr",
+        "provider": "cloudinary"
+      },
+      "submittedAt": "2026-11-15T03:06:23.959Z",
+      "grade": null,
+      "feedback": null,
+      "gradedAt": null
+    },
+    {
+      "id": "sub_1794712406629",
+      "assignmentId": "asm_1794705892122",
+      "studentId": "u_26710395",
+      "studentName": "26710395",
+      "content": "",
+      "link": "",
+      "file": {
+        "filename": "1794712404920_BÀI_TẬP_TIN_HỌC.docx",
+        "originalName": "BÀI TẬP TIN HỌC.docx",
+        "size": 27011,
+        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1794712406/educlass_submissions/TIN%20H%E1%BB%8CC%20%C4%90%E1%BA%A0I%20C%C6%AF%C6%A0NG%202/Tin%20H%E1%BB%8Dc%20%C4%90%E1%BA%A1i%20C%C6%B0%C6%A1ng/B%C3%A0i%20t%E1%BA%ADp%20v%E1%BB%81%20Tab/dkfljj4d5cbzajqhejkr",
+        "storageKey": "educlass_submissions/TIN HỌC ĐẠI CƯƠNG 2/Tin Học Đại Cương/Bài tập về Tab/dkfljj4d5cbzajqhejkr",
+        "provider": "cloudinary"
+      },
+      "submittedAt": "2026-11-15T03:13:26.629Z",
+      "grade": null,
+      "feedback": null,
+      "gradedAt": null
+    },
+    {
+      "id": "sub_1794712538457",
+      "assignmentId": "asm_1794705892122",
+      "studentId": "u_26711203",
+      "studentName": "26711203",
+      "content": "",
+      "link": "",
+      "file": {
+        "filename": "1794712791941_nopbai121314.zip",
+        "originalName": "nopbai121314.zip",
+        "size": 122986,
+        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1794712793/educlass_submissions/TIN%20H%E1%BB%8CC%20%C4%90%E1%BA%A0I%20C%C6%AF%C6%A0NG%202/Tin%20H%E1%BB%8Dc%20%C4%90%E1%BA%A1i%20C%C6%B0%C6%A1ng/B%C3%A0i%20t%E1%BA%ADp%20v%E1%BB%81%20Tab/1794712791941_nopbai121314_rbtb6a.zip",
+        "storageKey": "educlass_submissions/TIN HỌC ĐẠI CƯƠNG 2/Tin Học Đại Cương/Bài tập về Tab/1794712791941_nopbai121314_rbtb6a.zip",
+        "provider": "cloudinary"
+      },
+      "submittedAt": "2026-11-15T03:19:54.220Z",
+      "grade": null,
+      "feedback": null,
+      "gradedAt": null
+    },
+    {
+      "id": "sub_1794713795624",
+      "assignmentId": "asm_1794705892122",
+      "studentId": "u_26710671",
+      "studentName": "26710671",
+      "content": "",
+      "link": "",
+      "file": {
+        "filename": "1794713794118_26710671_bài_12_13_14.docx",
+        "originalName": "26710671-bài 12,13,14.docx",
+        "size": 32744,
+        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1794713795/educlass_submissions/TIN%20H%E1%BB%8CC%20%C4%90%E1%BA%A0I%20C%C6%AF%C6%A0NG%202/Tin%20H%E1%BB%8Dc%20%C4%90%E1%BA%A1i%20C%C6%B0%C6%A1ng/B%C3%A0i%20t%E1%BA%ADp%20v%E1%BB%81%20Tab/wwl91ea7hyor2an5ngdp",
+        "storageKey": "educlass_submissions/TIN HỌC ĐẠI CƯƠNG 2/Tin Học Đại Cương/Bài tập về Tab/wwl91ea7hyor2an5ngdp",
+        "provider": "cloudinary"
+      },
+      "submittedAt": "2026-11-15T03:36:35.624Z",
+      "grade": null,
+      "feedback": null,
+      "gradedAt": null
+    },
+    {
+      "id": "sub_1794714620413",
+      "assignmentId": "asm_1794705892122",
+      "studentId": "u_26711146",
+      "studentName": "26711146",
+      "content": "bài 12,13,14",
+      "link": "",
+      "file": {
+        "filename": "1794714618660_bai_12_13_14.docx",
+        "originalName": "bai 12,13,14.docx",
+        "size": 22661,
+        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1794714619/educlass_submissions/TIN%20H%E1%BB%8CC%20%C4%90%E1%BA%A0I%20C%C6%AF%C6%A0NG%202/Tin%20H%E1%BB%8Dc%20%C4%90%E1%BA%A1i%20C%C6%B0%C6%A1ng/B%C3%A0i%20t%E1%BA%ADp%20v%E1%BB%81%20Tab/1794714618660_bai_12_13_14_njxvnt.docx",
+        "storageKey": "educlass_submissions/TIN HỌC ĐẠI CƯƠNG 2/Tin Học Đại Cương/Bài tập về Tab/1794714618660_bai_12_13_14_njxvnt.docx",
+        "provider": "cloudinary"
+      },
+      "submittedAt": "2026-11-15T03:50:20.413Z",
+      "grade": null,
+      "feedback": null,
+      "gradedAt": null
+    },
+    {
+      "id": "sub_1794721951976",
+      "assignmentId": "asm_1794705892122",
+      "studentId": "u_26710137",
+      "studentName": "26710137",
+      "content": "",
+      "link": "",
+      "file": {
+        "filename": "1794721950371_Bài_12_13_14_HoangMinhDuc_26710137.docx",
+        "originalName": "Bài 12,13,14 HoangMinhDuc_26710137.docx",
+        "size": 35016,
+        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1794721951/educlass_submissions/TIN%20H%E1%BB%8CC%20%C4%90%E1%BA%A0I%20C%C6%AF%C6%A0NG%202/Tin%20H%E1%BB%8Dc%20%C4%90%E1%BA%A1i%20C%C6%B0%C6%A1ng/B%C3%A0i%20t%E1%BA%ADp%20v%E1%BB%81%20Tab/zo4okq3rmncxmdeefvev",
+        "storageKey": "educlass_submissions/TIN HỌC ĐẠI CƯƠNG 2/Tin Học Đại Cương/Bài tập về Tab/zo4okq3rmncxmdeefvev",
+        "provider": "cloudinary"
+      },
+      "submittedAt": "2026-11-15T05:52:31.976Z",
+      "grade": null,
+      "feedback": null,
+      "gradedAt": null
+    },
+    {
+      "id": "sub_1794722266983",
+      "assignmentId": "asm_1794705892122",
+      "studentId": "u_26711179",
+      "studentName": "26711179",
+      "content": "",
+      "link": "",
+      "file": {
+        "filename": "1794722264596_Bài_thực_hành_Đinh_Gia_Trường_26711179.zip",
+        "originalName": "Bài thực hành_Đinh Gia Trường_26711179.zip",
+        "size": 78495,
+        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1794722266/educlass_submissions/TIN%20H%E1%BB%8CC%20%C4%90%E1%BA%A0I%20C%C6%AF%C6%A0NG%202/Tin%20H%E1%BB%8Dc%20%C4%90%E1%BA%A1i%20C%C6%B0%C6%A1ng/B%C3%A0i%20t%E1%BA%ADp%20v%E1%BB%81%20Tab/qd8auozemvrkit51rtba",
+        "storageKey": "educlass_submissions/TIN HỌC ĐẠI CƯƠNG 2/Tin Học Đại Cương/Bài tập về Tab/qd8auozemvrkit51rtba",
+        "provider": "cloudinary"
+      },
+      "submittedAt": "2026-11-15T05:57:46.983Z",
+      "grade": null,
+      "feedback": null,
+      "gradedAt": null
+    },
+    {
+      "id": "sub_1794723799251",
+      "assignmentId": "asm_1794705892122",
+      "studentId": "u_26DH1515",
+      "studentName": "26DH1515",
+      "content": "",
+      "link": "",
+      "file": {
+        "filename": "1794723797450_Bùi_Đức_Sơn___MSSV_26dh1515.docx",
+        "originalName": "Bùi Đức Sơn - MSSV 26dh1515.docx",
+        "size": 56495,
+        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1794723798/educlass_submissions/TIN%20H%E1%BB%8CC%20%C4%90%E1%BA%A0I%20C%C6%AF%C6%A0NG%202/Tin%20H%E1%BB%8Dc%20%C4%90%E1%BA%A1i%20C%C6%B0%C6%A1ng/B%C3%A0i%20t%E1%BA%ADp%20v%E1%BB%81%20Tab/szqaevjeaukyjasrkp1k",
+        "storageKey": "educlass_submissions/TIN HỌC ĐẠI CƯƠNG 2/Tin Học Đại Cương/Bài tập về Tab/szqaevjeaukyjasrkp1k",
+        "provider": "cloudinary"
+      },
+      "submittedAt": "2026-11-15T06:23:19.251Z",
+      "grade": null,
+      "feedback": null,
+      "gradedAt": null
+    },
+    {
+      "id": "sub_1794723800781",
+      "assignmentId": "asm_1794705892122",
+      "studentId": "u_26DH1515",
+      "studentName": "26DH1515",
+      "content": "",
+      "link": "",
+      "file": {
+        "filename": "1794723799131_Bùi_Đức_Sơn___MSSV_26dh1515.docx",
+        "originalName": "Bùi Đức Sơn - MSSV 26dh1515.docx",
+        "size": 56495,
+        "url": "https://res.cloudinary.com/riddonyi/raw/upload/v1794723800/educlass_submissions/TIN%20H%E1%BB%8CC%20%C4%90%E1%BA%A0I%20C%C6%AF%C6%A0NG%202/Tin%20H%E1%BB%8Dc%20%C4%90%E1%BA%A1i%20C%C6%B0%C6%A1ng/B%C3%A0i%20t%E1%BA%ADp%20v%E1%BB%81%20Tab/hpsw8mkrhoadybxlorgt",
+        "storageKey": "educlass_submissions/TIN HỌC ĐẠI CƯƠNG 2/Tin Học Đại Cương/Bài tập về Tab/hpsw8mkrhoadybxlorgt",
+        "provider": "cloudinary"
+      },
+      "submittedAt": "2026-11-15T06:23:20.781Z",
+      "grade": null,
+      "feedback": null,
+      "gradedAt": null
     }
   ],
-  "updatedAt": "2026-11-15T01:21:49.499Z",
+  "updatedAt": "2026-11-15T06:23:20.792Z",
   "users": [
     {
       "id": "u_teacher_danh",
@@ -13476,6 +12578,7 @@
         "T15TH01",
         "T15TH02",
         "TIN HỌC ĐẠI CƯƠNG",
+        "TIN HỌC ĐẠI CƯƠNG 1",
         "TIN HỌC ĐẠI CƯƠNG 2"
       ]
     },
