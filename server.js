@@ -3506,23 +3506,10 @@ app.get('/api/download/:filename', async (req, res) => {
   const fileSource = await resolveFileSource(filename, db);
 
   if (fileSource) {
-    // 2. File trên Cloudflare R2 -> Stream trực tiếp với header attachment
-    if (fileSource.type === 'r2' && fileSource.r2Key && r2Client) {
-      try {
-        const cmd = new GetObjectCommand({
-          Bucket: R2_BUCKET_NAME,
-          Key: fileSource.r2Key
-        });
-        const r2Res = await r2Client.send(cmd);
-        res.set({
-          'Content-Type': r2Res.ContentType || 'application/octet-stream',
-          'Content-Length': r2Res.ContentLength,
-          'Content-Disposition': `attachment; filename="${encodeURIComponent(downloadName)}"`
-        });
-        return r2Res.Body.pipe(res);
-      } catch (r2Err) {
-        console.error('[Download R2 Error]:', r2Err.message);
-      }
+    // 2. File trên Cloudflare R2 -> Chuyển hướng trực tiếp sang R2 Public URL (Tiết kiệm 100% băng thông máy chủ)
+    if (fileSource.type === 'r2' && fileSource.r2Key) {
+      const publicUrl = `${R2_PUBLIC_DOMAIN.replace(/\/$/, '')}/${encodeURI(fileSource.r2Key)}`;
+      return res.redirect(publicUrl);
     }
 
     // 3. File trên Cloudinary -> Chuyển hướng sang Signed Private URL bảo mật
@@ -3597,48 +3584,14 @@ app.get('/api/download-submission/:id', async (req, res) => {
     }
   }
 
-  // 2. Stream từ Cloudflare R2
+  // 2. Chuyển hướng trực tiếp sang Cloudflare R2 URL (Tiết kiệm 100% băng thông máy chủ)
   if (sub.file.provider === 'r2' || (sub.file.url && sub.file.url.includes('r2.dev'))) {
-    let r2Key = sub.file.storageKey || (sub.file.url ? decodeURIComponent(sub.file.url.replace(/^.*r2\.dev\//, '')) : null);
-    if (r2Key && r2Client) {
-      try {
-        let cmd = new GetObjectCommand({
-          Bucket: R2_BUCKET_NAME,
-          Key: r2Key
-        });
-        let r2Res;
-        try {
-          r2Res = await r2Client.send(cmd);
-        } catch (r2Err) {
-          // Auto-heal R2 key by student code
-          const student = (db.users || []).find(u => u.id === sub.studentId);
-          const sCode = student ? (student.studentCode || student.username) : '';
-          if (sCode) {
-            const listCmd = new ListObjectsV2Command({
-              Bucket: R2_BUCKET_NAME,
-              Prefix: `educlass_submissions/`
-            });
-            const listRes = await r2Client.send(listCmd);
-            const foundObj = (listRes.Contents || []).find(o => o.Key && o.Key.toUpperCase().includes(sCode.toUpperCase()));
-            if (foundObj) {
-              r2Key = foundObj.Key;
-              cmd = new GetObjectCommand({ Bucket: R2_BUCKET_NAME, Key: r2Key });
-              r2Res = await r2Client.send(cmd);
-            }
-          }
-          if (!r2Res) throw r2Err;
-        }
-
-        const asciiName = downloadName.replace(/[^\x20-\x7E]/g, '_');
-        res.set({
-          'Content-Type': r2Res.ContentType || 'application/octet-stream',
-          'Content-Length': r2Res.ContentLength,
-          'Content-Disposition': `attachment; filename="${asciiName}"; filename*=UTF-8''${encodeURIComponent(downloadName)}`
-        });
-        return r2Res.Body.pipe(res);
-      } catch (err) {
-        console.error('[Download Sub R2 Error]:', err.message);
-      }
+    if (sub.file.url) {
+      return res.redirect(sub.file.url);
+    }
+    const r2Key = sub.file.storageKey || (sub.file.url ? decodeURIComponent(sub.file.url.replace(/^.*r2\.dev\//, '')) : null);
+    if (r2Key) {
+      return res.redirect(`${R2_PUBLIC_DOMAIN.replace(/\/$/, '')}/${encodeURI(r2Key)}`);
     }
   }
 
