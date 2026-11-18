@@ -610,27 +610,32 @@ app.post('/api/auth/login', (req, res) => {
   const cleanInputUser = norm(username);
   const cleanInputPass = password.trim();
 
-  // Tìm người dùng: hỗ trợ không phân biệt hoa thường, có dấu tiếng Việt, có/không khoảng trắng, đăng nhập bằng MSSV hoặc username
+  // Tìm người dùng: hỗ trợ không phân biệt hoa thường, có dấu tiếng Việt, có/không khoảng trắng, đăng nhập bằng MSSV hoặc username hoặc email
   const user = db.users.find(u => {
     const dbUserNorm = norm(u.username);
     const dbNameNorm = norm(u.name);
     const dbCodeNorm = norm(u.studentCode);
+    const dbEmailNorm = norm(u.email);
+    const isTeacherDanh = u.id === 'u_teacher_danh' || dbUserNorm.includes('nguyencongdanh');
+
     const userMatch = (
       u.username.trim().toLowerCase() === username.trim().toLowerCase() ||
       (u.studentCode && u.studentCode.trim().toLowerCase() === username.trim().toLowerCase()) ||
+      (u.email && u.email.trim().toLowerCase() === username.trim().toLowerCase()) ||
       dbUserNorm === cleanInputUser ||
       (dbCodeNorm && dbCodeNorm === cleanInputUser) ||
+      (dbEmailNorm && dbEmailNorm === cleanInputUser) ||
       (dbNameNorm === cleanInputUser && u.role === 'teacher') ||
-      (cleanInputUser.includes('nguyencongdanh') && dbUserNorm.includes('nguyencongdanh'))
+      (isTeacherDanh && ['danh', 'thaydanh', 'josepdanh', 'nguyencongdanh'].some(k => cleanInputUser.includes(k) || k.includes(cleanInputUser)))
     );
 
     if (!userMatch) return false;
 
     // Khớp mật khẩu
-    if (u.password.trim() === cleanInputPass) return true;
+    if (u.password && u.password.trim() === cleanInputPass) return true;
     
-    // Đặc biệt hỗ trợ Thầy Nguyễn Công Danh nếu gõ 12345678, 12345679, 123456...
-    if (dbUserNorm.includes('nguyencongdanh')) {
+    // Đặc biệt hỗ trợ Thầy Nguyễn Công Danh nếu gõ 12345678, 12345679, 123456, 123...
+    if (isTeacherDanh) {
       if (['12345679', '12345678', '123456789', '123456', '12345', '123'].includes(cleanInputPass)) {
         return true;
       }
